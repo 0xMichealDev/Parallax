@@ -1,0 +1,15 @@
+/* Decorative atmosphere stays behind page content and never intercepts taps. */
+.earth-atmosphere{position:fixed;inset:0;height:100svh;z-index:-2;overflow:hidden;pointer-events:none;contain:layout paint}
+.earth-cloud{position:absolute;inset:15% -20% -25%;opacity:.32;filter:blur(28px);background:radial-gradient(ellipse at 64% 47%,#c8e7ff66,transparent 19%),radial-gradient(ellipse at 78% 58%,#edf7ff77,transparent 16%),radial-gradient(ellipse at 46% 72%,#8bc9f955,transparent 22%),radial-gradient(ellipse at 85% 80%,#a7d8ff66,transparent 24%);animation:earth-cloud-flow 48s ease-in-out infinite alternate}
+.earth-cloud-far{inset:0 -20% -15%;opacity:.24;filter:blur(38px);background:radial-gradient(ellipse at 80% 28%,#b9dfff77,transparent 18%),radial-gradient(ellipse at 56% 56%,#c0bdff55,transparent 24%),radial-gradient(ellipse at 94% 60%,#e4efff88,transparent 21%);animation:earth-cloud-return 65s ease-in-out infinite alternate}
+.meteor-field{position:absolute;inset:0;overflow:hidden}
+.meteor{position:absolute;left:55%;top:3%;width:160px;height:1px;opacity:0;background:linear-gradient(90deg,transparent,#a4d9ff88 65%,#fff);border-radius:100%;transform:rotate(145deg);animation:earth-meteor 15s linear infinite;animation-delay:2s}
+.meteor::after{content:"";position:absolute;right:0;top:-1px;width:3px;height:3px;border-radius:50%;background:#effaff;box-shadow:0 0 7px 2px #b6e1ff99}
+.meteor:nth-child(2){left:85%;top:12%;width:120px;animation-duration:21s;animation-delay:8s}
+.meteor:nth-child(3){left:38%;top:18%;width:100px;animation-duration:27s;animation-delay:15s}
+@keyframes earth-cloud-flow{from{transform:translate(-5%,3%) scale(1)}to{transform:translate(6%,-4%) scale(1.08)}}
+@keyframes earth-cloud-return{from{transform:translate(5%,-3%) scale(1.05)}to{transform:translate(-5%,4%) scale(1)}}
+@keyframes earth-meteor{0%{opacity:0;transform:translate(0,0) rotate(145deg)}1%{opacity:.85}6%{opacity:0;transform:translate(-360px,252px) rotate(145deg)}100%{opacity:0;transform:translate(-360px,252px) rotate(145deg)}}
+body.motion-paused .earth-cloud,body.motion-paused .meteor{animation-play-state:paused}
+@media(max-width:700px){.earth-cloud{opacity:.24;filter:blur(20px)}.earth-cloud-far{opacity:.18}.meteor{width:100px}.meteor:nth-child(3){display:none}}
+@media(prefers-reduced-motion:reduce){.earth-cloud{animation:none}.meteor{display:none;animation:none}}
