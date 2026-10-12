@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const destinations=[
- {name:'Earthbound',tag:'00 / THE DEPARTURE',mode:'surface',description:'Your journey starts under an open sky. Look around, choose a distant world, and leave the horizon behind.',credit:'Artistic night sky · destinations and distances are not to scale.'},
+ {name:'Earthbound',tag:'00 / THE DEPARTURE',mode:'surface',description:'An Arizona-inspired desert. The last light slips behind the mountains. Look around, then leave the horizon behind.',credit:'AI-created landscape · an imagined Arizona twilight.'},
  {name:'Earth',tag:'01 / OUR HOME WORLD',mode:'planet',body:0,description:'An ocean world wrapped in clouds. Drag to turn the globe and watch daylight give way to the city lights.',credit:'Textures: Solar System Scope · CC BY 4.0 · lighting adapted.',url:'https://www.solarsystemscope.com/textures/'},
  {name:'Mars',tag:'02 / THE RED PLANET',mode:'planet',body:1,description:'Cross the sunlit edge of a rust-colored world. Turn the planet to explore its rendered terrain and polar caps.',credit:'Artistic 3D rendering · not a mapped surface or live observation.'},
  {name:'Jupiter',tag:'03 / THE GAS GIANT',mode:'planet',body:2,description:'Cloud belts wrap around a giant world. Follow the bands through light and shadow.',credit:'Artistic 3D rendering · cloud features are illustrative.'},
@@ -21,22 +21,44 @@ const dialog=document.createElement('dialog');dialog.id='universe';dialog.setAtt
 const q=s=>dialog.querySelector(s),stage=q('#u-stage'),canvas=q('#u-canvas'),ctx=canvas.getContext('2d'),img=q('#u-image'),reduce=matchMedia('(prefers-reduced-motion: reduce)');let selected=0,yaw=0,pitch=0,zoom=1,panX=0,panY=0,frame=0,last=0,clock=0,touring=false,tourTime=0,moving=!reduce.matches,returnFocus,pointers=new Map(),pinch=0;let globeHome=null,globeCanvas=null,flight=null,cameraX=0,cameraY=0,streaming=false,sound=null;const flightCanvas=q("#u-flight"),fx=flightCanvas.getContext("2d");
 function attachGlobe(){const c=document.querySelector(".earth-globe");if(c&&c.parentElement!==stage){globeHome=c.parentElement;globeCanvas=c;stage.prepend(c)}}
 document.addEventListener("globe-ready",()=>{if(dialog.open){attachGlobe();go(selected)}});
-// Stable star positions make the sky continuous as the observer turns.
-let seed=29;const random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};const stars=Array.from({length:1600},()=>({x:random(),y:random(),r:random(),b:random()}));
+// Stable particles for deep-space depth effects.
+let seed=29;const random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
+// Keep the landscape on the canvas so liftoff captures the exact view.
+const desert=new Image();let desertState='loading';
+function surfaceStatus(){return desertState==='ready'?'Drag to look around · scroll or pinch to zoom':desertState==='error'?'The desert image could not load. Reopen Earthbound to retry.':'Loading the desert horizon…'}
+function loadDesert(){desertState='loading';desert.decoding='async';desert.src='/assets/earthbound-arizona.png'}
+desert.onload=()=>{desertState='ready';if(dialog.open&&dialog.dataset.mode==='surface'){draw();if(selected===0&&!flight&&!touring)status(surfaceStatus())}};
+desert.onerror=()=>{desertState='error';if(dialog.open&&selected===0){draw();status(surfaceStatus())}};
+loadDesert();
 routeOrder.forEach((i,order)=>{const d=destinations[i];const b=document.createElement('button');b.dataset.destination=i;b.innerHTML=`<span>${String(order).padStart(2,'0')} / ${d.mode==='deep'?'DEEP SPACE':i===0?'START HERE':'PLANET'}</span>${d.name}`;b.setAttribute('aria-pressed','false');b.onclick=()=>{stopTour();go(i)};q('.u-route').append(b)});
 [[2,22,35],[3,68,24],[4,82,45],[6,45,20]].forEach(([i,x,y])=>{const b=document.createElement('button');b.textContent=destinations[i].name;b.style.left=x+'%';b.style.top=y+'%';b.onclick=()=>{stopTour();go(i)};q('.u-beacons').append(b)});
 function status(s){q('#u-status').textContent=s}
 function sync(){const d=destinations[selected];if(d.mode==='planet')window.parallaxGlobe?.set({cameraX,cameraY,explore:1,bodyType:d.body??0,yaw,pitch,zoom:d.body===3?zoom*.65:zoom,viewMode:0});window.parallaxGlobe?.pause(!moving||d.mode!=='planet');img.style.transform=`translate(${panX}px,${panY}px) scale(${zoom}) rotate(${d.mode==='deep'&&depthEnabled?Math.max(-1.5,Math.min(1.5,panX/300)):0}deg)`;drawDepth(0);q('#u-zoom').value=zoom;draw()}
-function arrive(i){cameraX=cameraY=0;selected=(i+destinations.length)%destinations.length;const d=destinations[selected];yaw=pitch=panX=panY=0;zoom=1;dialog.dataset.mode=d.mode;q('#u-title').textContent=d.name;q('#u-now').textContent=d.name;q('#u-broadcast-credit').textContent=d.credit;renderDiscoveries();q('#u-tag').textContent=d.tag;q('#u-description').textContent=d.description;q('#u-credit').textContent=d.credit;const source=d.url||(d.image?'https://images.nasa.gov/details/'+d.image:'');q('#u-source').hidden=!source;if(source)q('#u-source').href=source;q('.u-beacons').hidden=d.mode!=='surface';q('.u-route').querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-pressed',String(Number(b.dataset.destination)===selected)));if(d.mode==='deep'){img.src='/assets/gallery/'+d.image+'.jpg';img.alt=d.description;status('Loading telescope imagery…')}else status(touring?'Guided tour · next destination after 18 seconds in orbit':'');if(d.mode==='planet'&&!window.parallaxGlobe){dialog.dataset.mode='surface';status('3D view unavailable on this browser. Deep-space images and the Earthbound sky are still available.')}sync();refreshMap();tourTime=0}
+function arrive(i){cameraX=cameraY=0;selected=(i+destinations.length)%destinations.length;const d=destinations[selected];yaw=pitch=panX=panY=0;zoom=1;dialog.dataset.mode=d.mode;q('#u-title').textContent=d.name;q('#u-now').textContent=d.name;q('#u-broadcast-credit').textContent=d.credit;renderDiscoveries();q('#u-tag').textContent=d.tag;q('#u-description').textContent=d.description;q('#u-credit').textContent=d.credit;const source=d.url||(d.image?'https://images.nasa.gov/details/'+d.image:'');q('#u-source').hidden=!source;if(source)q('#u-source').href=source;q('.u-beacons').hidden=d.mode!=='surface';q('.u-route').querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-pressed',String(Number(b.dataset.destination)===selected)));if(d.mode==='deep'){img.src='/assets/gallery/'+d.image+'.jpg';img.alt=d.description;status('Loading telescope imagery…')}else{if(d.mode==='surface'&&desertState==='error')loadDesert();status(touring?'Guided tour · next destination after 18 seconds in orbit':d.mode==='surface'?surfaceStatus():'')}if(d.mode==='planet'&&!window.parallaxGlobe){dialog.dataset.mode='surface';status('3D view unavailable on this browser. Deep-space images and the Earthbound desert are still available.')}sync();refreshMap();tourTime=0}
 img.onload=()=>{if(destinations[selected].mode==='deep')status(touring?'Guided tour · pan and zoom the real imagery':'Telescope image · drag to pan, scroll or pinch to zoom')};img.onerror=()=>status('This image could not load. Choose another destination or open the image source.');
 function resize(){const ratio=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(innerWidth*ratio);canvas.height=Math.round(innerHeight*ratio);ctx.setTransform(ratio,0,0,ratio,0,0);flightCanvas.width=canvas.width;flightCanvas.height=canvas.height;fx.setTransform(ratio,0,0,ratio,0,0);draw()}
-function draw(){if(!dialog.open||dialog.dataset.mode==='planet')return;const w=innerWidth,h=innerHeight;ctx.fillStyle='#020611';ctx.fillRect(0,0,w,h);if(dialog.dataset.mode==='deep')return;const horizon=h*.77+pitch*h*.12;const glow=ctx.createRadialGradient(w*.55,horizon,0,w*.55,horizon,w*.8);glow.addColorStop(0,'#174858');glow.addColorStop(.25,'#101c36');glow.addColorStop(.65,'#060b1c');glow.addColorStop(1,'#01040c');ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);
-// Dust-like starlight sweeps diagonally across the panoramic night sky.
-for(const s of stars){const x=((s.x+yaw*.2+clock*.0005)%1+1)%1*w,y=s.y*h*.78+pitch*h*.12;if(y>horizon)continue;const band=Math.exp(-Math.pow((y/h-(.64-x/w*.48))/.09,2));ctx.globalAlpha=.18+s.b*.65;ctx.fillStyle=band>.4?'#c5ddff':'#8094b5';ctx.beginPath();ctx.arc(x,y,(s.r>.98?1.6:.35+s.r*.7)*zoom,0,Math.PI*2);ctx.fill();if(band>.1){ctx.globalAlpha=band*.025;ctx.beginPath();ctx.arc(x,y,8+s.r*20,0,Math.PI*2);ctx.fill()}}ctx.globalAlpha=1;
-for(let layer=0;layer<3;layer++){ctx.beginPath();ctx.moveTo(0,h);for(let x=0;x<=w+8;x+=8){const t=x/w+yaw*.07;const mountain=Math.sin(t*19+layer)*.025+Math.sin(t*43+1)*.018+Math.sin(t*83)*.007;ctx.lineTo(x,horizon+(layer*.055+mountain)*h)}ctx.lineTo(w,h);ctx.closePath();ctx.fillStyle=['#0b1827','#07101c','#030912'][layer];ctx.fill()}
+function draw(){
+ if(!dialog.open||dialog.dataset.mode==='planet')return;
+ const w=innerWidth,h=innerHeight;
+ ctx.fillStyle='#020611';ctx.fillRect(0,0,w,h);
+ if(dialog.dataset.mode==='deep')return;
+ if(desertState!=='ready'){
+  const sky=ctx.createLinearGradient(0,0,0,h);
+  sky.addColorStop(0,'#050c1d');sky.addColorStop(.5,'#172135');sky.addColorStop(.61,'#493438');sky.addColorStop(.7,'#0b1520');sky.addColorStop(1,'#040a10');
+  ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);return;
+ }
+ // A little overscan leaves room to look around without exposing canvas edges.
+ // Cover the viewport in both portrait and landscape; favor the warm horizon.
+ const scale=Math.max(w/desert.naturalWidth,h/desert.naturalHeight)*(1.04+(zoom-.65)*.5);
+ const width=desert.naturalWidth*scale,height=desert.naturalHeight*scale;
+ const minX=w-width,minY=h-height;
+ panX=Math.max(minX*.38,Math.min(-minX*.62,panX));
+ panY=Math.max(minY*.5,Math.min(-minY*.5,panY));
+ ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+ ctx.drawImage(desert,minX*.62+panX,minY*.5+panY,width,height);
 }
 function stopTour(){streaming=false;dialog.classList.remove('u-streaming');touring=false;tourTime=0;q('#u-tour').textContent='Start guided tour ▷';q('#u-tour').setAttribute('aria-pressed','false')}
-function tick(t){if(!dialog.open)return;const dt=last?Math.min((t-last)/1000,.1):0;last=t;if(!document.hidden){if(flight)updateFlight(dt);else if(flyby)updateFlyby(dt);else{if(moving&&!reduce.matches){clock+=dt;if(dialog.dataset.mode==='surface')draw();if(touring&&dialog.dataset.mode==='planet'){yaw+=dt*.007;pitch=Math.sin(clock*.08)*.12;sync()}if(touring&&dialog.dataset.mode==='deep'){zoom=Math.min(1.22,zoom+dt*.007);panX=Math.sin(clock*.05)*innerWidth*.025;sync()}}if(touring){tourTime+=dt;if(moving&&!reduce.matches&&!flybyPlayed&&(selected===1||selected===4)&&tourTime>=6)startFlyby();else if(tourTime>=18)go(routeOrder[(routeOrder.indexOf(selected)+1)%routeOrder.length])}}drawDepth(dt);}frame=requestAnimationFrame(tick)}
+function tick(t){if(!dialog.open)return;const dt=last?Math.min((t-last)/1000,.1):0;last=t;if(!document.hidden){if(flight)updateFlight(dt);else if(flyby)updateFlyby(dt);else{if(moving&&!reduce.matches){clock+=dt;if(touring&&dialog.dataset.mode==='planet'){yaw+=dt*.007;pitch=Math.sin(clock*.08)*.12;sync()}if(touring&&dialog.dataset.mode==='deep'){zoom=Math.min(1.22,zoom+dt*.007);panX=Math.sin(clock*.05)*innerWidth*.025;sync()}}if(touring){tourTime+=dt;if(moving&&!reduce.matches&&!flybyPlayed&&(selected===1||selected===4)&&tourTime>=6)startFlyby();else if(tourTime>=18)go(routeOrder[(routeOrder.indexOf(selected)+1)%routeOrder.length])}}drawDepth(dt);}frame=requestAnimationFrame(tick)}
 
 const entry=document.querySelector('#explore-earth');const entryLabel=()=>{entry.disabled=false;entry.textContent='◎ Explore the universe ↗';entry.setAttribute('aria-controls','universe')};entryLabel();document.addEventListener('globe-ready',entryLabel);document.addEventListener('globe-unavailable',entryLabel);
 function openUniverse(destination=0){returnFocus=document.activeElement;document.body.classList.add('exploring-earth');dialog.showModal();attachGlobe();moving=!reduce.matches&&!document.body.classList.contains('motion-paused');motionLabel();resize();cancelFlight();arrive(destination);last=0;frame=requestAnimationFrame(tick);stage.focus()}
