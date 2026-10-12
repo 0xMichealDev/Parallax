@@ -31,17 +31,21 @@ desert.onload=()=>{desertState='ready';if(dialog.open&&dialog.dataset.mode==='su
 desert.onerror=()=>{desertState='error';if(dialog.open&&selected===0){draw();status(surfaceStatus())}};
 loadDesert();
 // Earthbound movement is separate from orbital camera controls.
-let groundView=null,groundAttempted=false,walking=false,campExperience=null,campFrame=0;
+let groundView=null,groundAttempted=false,walking=false,campExperience=null,campFrame=0,pendingWalk=false;
 const walkKeys=new Set(),walkTouches=new Map();
 function stopWalkingInput(){groundView?.brake?.();walkKeys.clear();walkTouches.clear();q('.u-walk-pad').querySelectorAll('button').forEach(b=>b.classList.remove('is-held'))}
 function releaseMouse(){if(document.pointerLockElement===stage)document.exitPointerLock?.()}
 function leaveWalk(){walking=false;groundView?.setWalking(false);stopWalkingInput();releaseMouse();dialog.classList.remove('u-walking')}
+function ensureGround(){
+ if(!groundAttempted){groundAttempted=true;groundView=window.ParallaxDesert?.create(stage,()=>{groundView=null;leaveWalk();dialog.classList.remove('u-ground-ready');q('#u-walk').hidden=true;status(surfaceStatus());draw()},()=>{if(dialog.open&&selected===0){prepareGround();status(surfaceStatus());draw()}})||null}
+}
 function prepareGround(){
  if(selected!==0){leaveWalk();dialog.classList.remove('u-ground-ready');q('#u-walk').hidden=true;return}
- if(!groundAttempted){groundAttempted=true;groundView=window.ParallaxDesert?.create(stage,()=>{groundView=null;leaveWalk();dialog.classList.remove('u-ground-ready');q('#u-walk').hidden=true;status(surfaceStatus());draw()},()=>{if(dialog.open&&selected===0){prepareGround();status(surfaceStatus());draw()}})||null}
+ ensureGround();
  dialog.classList.toggle('u-ground-ready',!!groundView?.ready);q('#u-walk').hidden=!groundView?.ready;
  if(groundView){q('#u-credit').textContent=destinations[0].credit;stage.setAttribute('aria-label','360 degree desert. Drag or use arrow keys to look around. W A S D to walk, Shift to move faster. F changes flashlight mode, Q equips or stows it. Plus and minus zoom.');}
  else q('#u-credit').textContent='AI-created landscape · 3D walking unavailable on this device.';
+ if(pendingWalk&&groundView?.ready){pendingWalk=false;startWalk();}
 }
 function startWalk(){if(!groundView?.ready||selected!==0)return;stopTour();cancelFlight();walking=true;groundView.setWalking(true);stopWalkingInput();dialog.classList.remove('u-cinema');dialog.classList.add('u-walking');stage.focus();walkReadout();draw()}
 function walkReadout(){if(!groundView)return;const s=groundView.state;const bearing=Math.round((s.yaw*180/Math.PI+360)%360);q('#u-walk-readout').textContent=(groundView.driving?'ROVER '+groundView.driving+' / ':'')+String(bearing).padStart(3,'0')+'° / '+Math.round(Math.hypot(s.x,s.z))+' M FROM START';q('.u-walk-pad span').textContent=groundView.driving?'DRIVE':'WALK';const message=s.edge?'You’ve reached the edge of the walking area. Turn back toward the valley.':'';if(q('#u-walk-notice').textContent!==message)q('#u-walk-notice').textContent=message;}
@@ -112,10 +116,14 @@ function tick(t){if(!dialog.open)return;const dt=last?Math.min((t-last)/1000,.1)
 
 const entry=document.querySelector('#explore-earth');const entryLabel=()=>{entry.disabled=false;entry.textContent='◎ Explore the universe ↗';entry.setAttribute('aria-controls','universe')};entryLabel();document.addEventListener('globe-ready',entryLabel);document.addEventListener('globe-unavailable',entryLabel);
 function openUniverse(destination=0){returnFocus=document.activeElement;document.body.classList.add('exploring-earth');dialog.showModal();attachGlobe();moving=!reduce.matches&&!document.body.classList.contains('motion-paused');motionLabel();resize();cancelFlight();arrive(destination);last=0;frame=requestAnimationFrame(tick);stage.focus()}
-entry.onclick=()=>openUniverse();window.parallaxUniverse={open(name){const i=destinations.findIndex(d=>d.name===name);if(dialog.open){stopTour();go(Math.max(0,i));}else openUniverse(Math.max(0,i));}};
+entry.onclick=()=>openUniverse();window.parallaxUniverse={
+ open(name,options={}){const i=destinations.findIndex(d=>d.name===name);pendingWalk=!!options.walk&&i===0;if(dialog.open){stopTour();go(Math.max(0,i));}else openUniverse(Math.max(0,i));},
+ borrowWorld(host){if(dialog.open)return null;ensureGround();if(groundView)host.append(groundView.canvas);return groundView;},
+ releaseWorld(){if(groundView){stage.append(groundView.canvas);groundView.render(1,null);}}
+};
 q('#u-projects').onclick=()=>{const d=destinations[selected];dialog.close();document.dispatchEvent(new CustomEvent('parallax:browse-planet',{detail:d.mode==='planet'?d.name.toLowerCase():''}));};q('#u-blackhole').onclick=()=>{dialog.close();window.openParallaxBlackHole?.();};
 
-q('#u-close').onclick=()=>dialog.close();dialog.addEventListener('close',()=>{campExperience?.close();leaveWalk();cancelAnimationFrame(frame);cancelFlight();sound?.mute();q("#u-audio").textContent="Sound off";q("#u-audio").setAttribute("aria-pressed","false");stopTour();pointers.clear();if(globeCanvas&&globeHome)globeHome.prepend(globeCanvas);document.body.classList.remove('exploring-earth');dialog.classList.remove('u-cinema');mapPanel.hidden=true;q('#u-map-toggle').setAttribute('aria-expanded','false');window.parallaxGlobe?.set({cameraX:0,cameraY:0,bodyType:0,explore:0,yaw:0,pitch:0,zoom:1,viewMode:0});window.parallaxGlobe?.pause(false);if(document.fullscreenElement===dialog)document.exitFullscreen().catch(()=>{});returnFocus?.focus()});
+q('#u-close').onclick=()=>dialog.close();dialog.addEventListener('close',()=>{pendingWalk=false;campExperience?.close();leaveWalk();cancelAnimationFrame(frame);cancelFlight();sound?.mute();q("#u-audio").textContent="Sound off";q("#u-audio").setAttribute("aria-pressed","false");stopTour();pointers.clear();if(globeCanvas&&globeHome)globeHome.prepend(globeCanvas);document.body.classList.remove('exploring-earth');dialog.classList.remove('u-cinema');mapPanel.hidden=true;q('#u-map-toggle').setAttribute('aria-expanded','false');window.parallaxGlobe?.set({cameraX:0,cameraY:0,bodyType:0,explore:0,yaw:0,pitch:0,zoom:1,viewMode:0});window.parallaxGlobe?.pause(false);if(document.fullscreenElement===dialog)document.exitFullscreen().catch(()=>{});returnFocus?.focus()});
 q('#u-home').onclick=()=>{stopTour();go(0)};q('#u-tour').onclick=()=>{if(touring){stopTour();status('Tour stopped. Choose your next destination.');return;}touring=true;tourTime=0;q('#u-tour').textContent=touring?'Stop guided tour Ⅱ':'Start guided tour ▷';q('#u-tour').setAttribute('aria-pressed',String(touring));status(touring?'Guided tour · next destination after 18 seconds in orbit':'Tour paused. Choose your next destination.');};
 function motionLabel(){q('#u-motion').textContent=moving?'Pause motion':'Resume motion';q('#u-motion').setAttribute('aria-pressed',String(moving))}q('#u-motion').onclick=()=>{moving=!moving;if(!moving&&flyby){cancelFlyby();sync()}if(!moving&&flight){const target=flight.to;cancelFlight();arrive(target)}if(reduce.matches&&moving){moving=false;status('Automatic motion is disabled by your reduced-motion preference. Drag to explore.')}motionLabel();sync()};
 function cinema(){dialog.classList.toggle('u-cinema')}q('#u-cinematic').onclick=cinema;q('#u-restore').onclick=cinema;q('#u-fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(dialog.requestFullscreen)await dialog.requestFullscreen();else status('Use your browser’s full-screen option for a larger view.')}catch{status('Fullscreen is unavailable here. The explorer already fills this window.')}};

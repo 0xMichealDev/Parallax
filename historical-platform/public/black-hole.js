@@ -47,7 +47,7 @@
       new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;if(visible)resize();}).observe(canvas);new ResizeObserver(resize).observe(canvas);
       canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();lost=true;canvas.classList.remove('black-hole-ready');});
       instances.push({draw,resize});
-      function frame(t){if(lost)return;const delta=previous?Math.min((t-previous)/1000,.1):0;previous=t;if(visible&&!document.hidden&&ready&&!paused&&!document.body.classList.contains('motion-paused')){elapsed+=delta;if(t-lastDraw>33){draw();lastDraw=t;}}requestAnimationFrame(frame);}requestAnimationFrame(frame);
+      function frame(t){if(lost)return;const delta=previous?Math.min((t-previous)/1000,.1):0;previous=t;if(visible&&!document.hidden&&ready&&(!paused||canvas.closest('#after-dark'))&&!document.body.classList.contains('motion-paused')&&(!document.body.classList.contains('after-dark-active')||canvas.closest('#after-dark'))&&!canvas.closest('.ad-paused')){elapsed+=delta;if(t-lastDraw>33){draw();lastDraw=t;}}requestAnimationFrame(frame);}requestAnimationFrame(frame);
     }catch{canvas.classList.remove('black-hole-ready');}
   }
 })();
