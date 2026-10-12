@@ -8,7 +8,7 @@
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();fallback()});
  const vertex=`attribute vec2 position;void main(){gl_Position=vec4(position,0.,1.);}`;
  const fragment=`precision highp float;
- uniform float explore;uniform float zoom;uniform float yaw;uniform float pitch;uniform float viewMode;uniform vec2 resolution;uniform float time;uniform sampler2D dayMap;uniform sampler2D nightMap;uniform sampler2D cloudMap;
+ uniform float bodyType;uniform float explore;uniform float zoom;uniform float yaw;uniform float pitch;uniform float viewMode;uniform vec2 resolution;uniform float time;uniform sampler2D dayMap;uniform sampler2D nightMap;uniform sampler2D cloudMap;
  const float PI=3.14159265359;
  vec2 uvFor(vec3 n,float spin){return vec2(fract(atan(n.x,n.z)/(2.*PI)+.5+spin),acos(clamp(n.y,-1.,1.))/PI);}
  float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
@@ -38,6 +38,21 @@
  }else{
  float glow=exp(-(sqrt(rr)-1.)*160.);col+=vec3(.06,.23,.48)*glow*.4;
  }
+ if(bodyType>.5){
+ col=vec3(.003,.007,.013)+vec3(.55,.68,.85)*star*spot*.65;
+ if(rr<1.){
+ vec3 n=vec3(xy,sqrt(1.-rr));vec3 rotated=vec3(n.x,n.y*cos(pitch)-n.z*sin(pitch),n.y*sin(pitch)+n.z*cos(pitch));vec2 uv=uvFor(rotated,time/180.+yaw);
+ float bands=sin(uv.y*95.+sin(uv.x*30.)*.7)+.35*sin(uv.y*220.+sin(uv.x*60.));
+ float terrain=sin(uv.x*47.+sin(uv.y*23.)*3.)*sin(uv.y*37.+sin(uv.x*21.));
+ vec3 surface=vec3(.3);
+ if(bodyType<1.5){surface=mix(vec3(.24,.09,.045),vec3(.75,.34,.16),.55+.3*terrain);surface=mix(surface,vec3(.82,.78,.68),smoothstep(.94,.99,abs(rotated.y)));}
+ else if(bodyType<2.5){surface=mix(vec3(.47,.27,.15),vec3(.89,.79,.63),.5+.23*bands);vec2 storm=vec2((fract(uv.x+.5)-.5)*7.,(uv.y-.6)*25.);surface=mix(surface,vec3(.61,.23,.10),1.-smoothstep(.3,1.,length(storm)));}
+ else if(bodyType<3.5){surface=mix(vec3(.51,.40,.22),vec3(.90,.80,.56),.55+.12*bands);}
+ else{surface=mix(vec3(.025,.10,.36),vec3(.16,.43,.77),.55+.10*bands);}
+ float sun=max(dot(n,normalize(vec3(.8,.4,.9))),0.);col=surface*(.08+.95*sun);col+=vec3(.05,.12,.22)*pow(1.-n.z,5.)*.4;
+ }
+ if(bodyType>2.5&&bodyType<3.5){vec2 rxy=vec2(xy.x*.94+xy.y*.342,-xy.x*.342+xy.y*.94);float ring=length(vec2(rxy.x,rxy.y/.32));if(ring>1.25&&ring<2.05&&(rr>1.||rxy.y<0.)){float lane=.6+.15*sin(ring*140.)+.12*sin(ring*390.);if(ring>1.73&&ring<1.80)lane*=.15;col=mix(col,vec3(.72,.63,.46)*lane,.88);}}
+ }
  gl_FragColor=vec4(col,1.);
  }`;
  try{
@@ -49,7 +64,7 @@
  const quality=innerWidth<700?'2k':'8k';Promise.all([load(quality+'_earth_daymap.jpg',0,'dayMap'),load(quality+'_earth_nightmap.jpg',1,'nightMap'),load(quality+'_earth_clouds.jpg',2,'cloudMap')]).then(()=>{
  if(stopped)return;host.prepend(canvas);let elapsed=0,last=0,drawn=0;const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const resize=()=>{const ratio=Math.min(devicePixelRatio||1,1.75),w=Math.round(innerWidth*ratio),h=Math.round(innerHeight*ratio);if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h)}gl.uniform2f(size,w,h)};
- const settings={explore:0,zoom:1,yaw:0,pitch:0,viewMode:0};let explorePaused=false;const uniforms=Object.fromEntries(Object.keys(settings).map(k=>[k,gl.getUniformLocation(program,k)]));const draw=()=>{resize();for(const [k,v] of Object.entries(settings))gl.uniform1f(uniforms[k],v);gl.uniform1f(clock,elapsed);gl.drawArrays(gl.TRIANGLES,0,6)};draw();if(gl.getError()!==gl.NO_ERROR){fallback();return}document.body.classList.add('globe-ready');window.parallaxGlobe={set(values){for(const k of Object.keys(settings))if(Number.isFinite(values[k]))settings[k]=values[k];draw()},pause(value){explorePaused=value},capture(){draw();const output=document.createElement('canvas');output.width=canvas.width;output.height=canvas.height;output.getContext('2d').drawImage(canvas,0,0);return output}};document.dispatchEvent(new Event('globe-ready'));
+ const settings={bodyType:0,explore:0,zoom:1,yaw:0,pitch:0,viewMode:0};let explorePaused=false;const uniforms=Object.fromEntries(Object.keys(settings).map(k=>[k,gl.getUniformLocation(program,k)]));const draw=()=>{resize();for(const [k,v] of Object.entries(settings))gl.uniform1f(uniforms[k],v);gl.uniform1f(clock,elapsed);gl.drawArrays(gl.TRIANGLES,0,6)};draw();if(gl.getError()!==gl.NO_ERROR){fallback();return}document.body.classList.add('globe-ready');window.parallaxGlobe={set(values){for(const k of Object.keys(settings))if(Number.isFinite(values[k]))settings[k]=values[k];draw()},pause(value){explorePaused=value},capture(){draw();const output=document.createElement('canvas');output.width=canvas.width;output.height=canvas.height;output.getContext('2d').drawImage(canvas,0,0);return output}};document.dispatchEvent(new Event('globe-ready'));
  function frame(t){if(stopped)return;const delta=last?Math.min((t-last)/1000,.1):0;last=t;if(!explorePaused&&!document.hidden&&!reduced.matches&&!document.body.classList.contains('motion-paused')){elapsed+=delta;if(t-drawn>33){draw();drawn=t}}raf=requestAnimationFrame(frame)}
  addEventListener('resize',draw);raf=requestAnimationFrame(frame);
  }).catch(fallback);
