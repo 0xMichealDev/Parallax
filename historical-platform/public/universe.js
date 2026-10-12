@@ -33,7 +33,7 @@ loadDesert();
 // Earthbound movement is separate from orbital camera controls.
 let groundView=null,groundAttempted=false,walking=false,campExperience=null,campFrame=0;
 const walkKeys=new Set(),walkTouches=new Map();
-function stopWalkingInput(){walkKeys.clear();walkTouches.clear();q('.u-walk-pad').querySelectorAll('button').forEach(b=>b.classList.remove('is-held'))}
+function stopWalkingInput(){groundView?.brake?.();walkKeys.clear();walkTouches.clear();q('.u-walk-pad').querySelectorAll('button').forEach(b=>b.classList.remove('is-held'))}
 function releaseMouse(){if(document.pointerLockElement===stage)document.exitPointerLock?.()}
 function leaveWalk(){walking=false;groundView?.setWalking(false);stopWalkingInput();releaseMouse();dialog.classList.remove('u-walking')}
 function prepareGround(){
@@ -44,13 +44,14 @@ function prepareGround(){
  else q('#u-credit').textContent='AI-created landscape · 3D walking unavailable on this device.';
 }
 function startWalk(){if(!groundView?.ready||selected!==0)return;stopTour();cancelFlight();walking=true;groundView.setWalking(true);stopWalkingInput();dialog.classList.remove('u-cinema');dialog.classList.add('u-walking');stage.focus();walkReadout();draw()}
-function walkReadout(){if(!groundView)return;const s=groundView.state;const bearing=Math.round((s.yaw*180/Math.PI+360)%360);q('#u-walk-readout').textContent=String(bearing).padStart(3,'0')+'° / '+Math.round(Math.hypot(s.x,s.z))+' M FROM START';const message=s.edge?'You’ve reached the edge of the walking area. Turn back toward the valley.':'';if(q('#u-walk-notice').textContent!==message)q('#u-walk-notice').textContent=message;}
+function walkReadout(){if(!groundView)return;const s=groundView.state;const bearing=Math.round((s.yaw*180/Math.PI+360)%360);q('#u-walk-readout').textContent=(groundView.driving?'ROVER '+groundView.driving+' / ':'')+String(bearing).padStart(3,'0')+'° / '+Math.round(Math.hypot(s.x,s.z))+' M FROM START';q('.u-walk-pad span').textContent=groundView.driving?'DRIVE':'WALK';const message=s.edge?'You’ve reached the edge of the walking area. Turn back toward the valley.':'';if(q('#u-walk-notice').textContent!==message)q('#u-walk-notice').textContent=message;}
 function walkTick(dt){
  if(!walking||selected!==0||!groundView||!mapPanel.hidden||flight||campExperience?.blocking)return;
  let forward=Number(walkKeys.has('KeyW'))-Number(walkKeys.has('KeyS')),side=Number(walkKeys.has('KeyD'))-Number(walkKeys.has('KeyA'));
  for(const direction of walkTouches.values()){if(direction==='forward')forward++;if(direction==='back')forward--;if(direction==='right')side++;if(direction==='left')side--;}
  const turn=Number(walkKeys.has('ArrowRight'))-Number(walkKeys.has('ArrowLeft')),tilt=Number(walkKeys.has('ArrowUp'))-Number(walkKeys.has('ArrowDown'));
  if(turn||tilt)groundView.turn(turn*dt*1.2,tilt*dt*.9);
+ if(groundView.driving&&walkKeys.has('Space')){groundView.brake();forward=side=0;}
  const moved=groundView.move(forward,side,dt,walkKeys.has('ShiftLeft')||walkKeys.has('ShiftRight'));
  if(moved||turn||tilt){draw();walkReadout()}
 }
@@ -64,6 +65,7 @@ document.addEventListener('pointerlockerror',()=>{if(walking)q('#u-walk-notice')
 document.addEventListener('mousemove',e=>{if(walking&&groundView&&document.pointerLockElement===stage){groundView.turn(e.movementX*.0025,-e.movementY*.0025);draw();walkReadout()}});
 dialog.addEventListener('keydown',e=>{
  if(campExperience?.blocking||!groundView||selected!==0||!mapPanel.hidden||['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;
+ if(e.code==='Space'&&walking&&groundView.driving){e.preventDefault();walkKeys.add('Space');groundView.brake();return;}
  if(!['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.code))return;
  if(!walking&&!['KeyW','KeyA','KeyS','KeyD'].includes(e.code))return;
  e.preventDefault();e.stopPropagation();if(!walking)startWalk();walkKeys.add(e.code);

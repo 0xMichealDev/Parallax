@@ -30,7 +30,8 @@
   const CRASH={x:65,z:-69,radius:5.8};
   const PATHS=[
     {id:'camp',name:'Camp junction',width:1.9,points:[[-7,-3],[-4,-1],[0,0],[6,-3]]},
-    {id:'west',name:'Western ridge trail',width:1.9,points:[[-7,-3],[-10,-12],[-15,-21],[-21,-25],[-27,-34],[-38,-40],[-47,-48]]},
+    {id:'west',name:'Western ridge trail',width:3.4,points:[[-7,-3],[-10,-12],[-15,-21],[-21,-25],[-27,-34],[-38,-40],[-47,-48]]},
+    {id:'rover-road',name:'Rover service road',width:4.8,points:[[12,-4],[6,-3],[0,0],[-7,-3],[-15,-8],[-23,-16],[-32,-29],[-45,-39],[-47,-43],[-47,-48],[-48,-54]]},
     {id:'east',name:'Meteorite trail',width:1.8,points:[[6,-3],[9,-11],[13,-18],[15,-25],[18,-31],[24,-34],[34,-39],[45,-45]]},
     {id:'wash',name:'Creek loop',width:1.9,points:[[6,-3],[15,0],[24,3],[30,7],[34,18],[40,22]]},
     {id:'loop',name:'Eastern return',width:1.65,points:[[40,22],[46,11],[42,-3],[29,-14],[15,-25]]},
@@ -167,8 +168,11 @@
     attribute vec3 position; attribute vec3 normal; attribute vec2 material;
     uniform vec3 eye; uniform vec3 right; uniform vec3 up; uniform vec3 forward;
     uniform float aspect; uniform float lens;
+    uniform float objectMode;uniform vec3 objectOrigin;uniform vec4 objectPose;
     varying vec3 point; varying vec3 norm; varying vec2 kind;
-    void main(){vec3 p=position-eye;float depth=dot(p,forward);point=position;norm=normal;kind=material;
+    void main(){point=position;norm=normal;kind=material;
+      if(objectMode>.5){point=vec3(position.x*objectPose.x-position.z*objectPose.y,position.y,position.x*objectPose.y+position.z*objectPose.x);point.y+=point.x*objectPose.z+point.z*objectPose.w;point+=objectOrigin;norm=vec3(normal.x*objectPose.x-normal.z*objectPose.y,normal.y,normal.x*objectPose.y+normal.z*objectPose.x);norm.x-=objectPose.z*norm.y;norm.z-=objectPose.w*norm.y;norm=normalize(norm);}
+      vec3 p=point-eye;float depth=dot(p,forward);
       gl_Position=vec4(dot(p,right)/(aspect*lens),dot(p,up)/lens,1.000025*depth-.10000125,depth);}
   `;
   const meshFragment = `#extension GL_OES_standard_derivatives : enable\n` + common + `
@@ -260,11 +264,18 @@
       }
       if(kind.x>30.5&&kind.x<31.5)base=vec3(.32,.34,.34)*(.8+grain*.2);
       if(kind.x>32.5&&kind.x<33.5){float ribs=.82+.18*sin((abs(n.z)>.5?point.x:point.z)*16.);base=vec3(.24,.28,.31)*ribs;}
-      if(kind.x>33.5&&kind.x<34.5){float tile=.88+.12*step(.08,fract(point.y*2.2))*step(.08,fract((point.x+point.z)*2.8));base=vec3(.070,.082,.094)*tile;}
+      if(kind.x>33.5&&kind.x<34.5){vec2 tileUV=vec2((point.x+point.z)*3.8,point.y*2.8);tileUV.x+=mod(floor(tileUV.y),2.)*.5;float tile=smoothstep(.015,.06,min(min(fract(tileUV.x),1.-fract(tileUV.x)),min(fract(tileUV.y),1.-fract(tileUV.y))));float weld=smoothstep(.01,.035,abs(fract(point.y/2.)-.5));base=vec3(.073,.085,.098)*(.72+tile*.28)*(.65+.35*weld);}
       if(kind.x>34.5&&kind.x<35.5)base=vec3(.42,.47,.49);
       if(kind.x>35.5&&kind.x<36.5)base=vec3(.025,.11,.14);
       if(kind.x>36.5&&kind.x<37.5)base=vec3(.83,.89,.94);
       if(kind.x>37.5&&kind.x<38.5)base=vec3(.68,.49,.12);
+      if(kind.x>38.5&&kind.x<39.5)base=vec3(.53,.57,.59)*(.95+.05*sin(point.y*510.));
+      if(kind.x>39.5&&kind.x<40.5)base=vec3(.025,.061,.08);
+      if(kind.x>40.5&&kind.x<41.5)base=vec3(.055,.085,.12);
+      if(kind.x>41.5&&kind.x<42.5)base=vec3(.94,.37,.055);
+      if(kind.x>42.5&&kind.x<43.5)base=vec3(.57,.35,.23);
+      if(kind.x>43.5&&kind.x<44.5)base=vec3(.7,.04,.02);
+      if(kind.x>44.5&&kind.x<45.5)base=vec3(.70,.73,.66);
       float light=max(dot(n,normalize(vec3(.32,.20,-1.))),0.);
       float hemisphere=.5+.5*n.y;
       vec3 illumination=mix(vec3(.035,.035,.038),vec3(.095,.115,.16),hemisphere)+light*vec3(.09,.055,.022);
@@ -295,6 +306,10 @@
       if(kind.x>33.5&&kind.x<35.5){float finish=kind.x<34.5?.26:1.;color+=vec3(.09,.12,.15)*campusGlow*pow(1.-max(0.,dot(n,view)),2.)*finish;color+=vec3(.2,.25,.29)*pow(max(0.,dot(n,normalize(view+vec3(.4,.1,1.)))),22.)*campusGlow*finish;}
       if(kind.x>35.5&&kind.x<36.5)color+=vec3(.01,.14,.20)*campusLights;
       if(kind.x>36.5&&kind.x<37.5)color+=vec3(.8,.93,1.)*campusLights;
+      if(kind.x>38.5){color+=pow(base,vec3(2.2))*vec3(.13,.17,.23);}
+      if(kind.x>38.5&&kind.x<40.5){float rim=pow(1.-max(0.,dot(n,view)),3.);color+=vec3(.12,.17,.23)*rim;vec3 reflection=sky(reflect(-view,n));color+=reflection*(kind.x<39.5?.28:.65);color+=lampTint*flashlight(point)*pow(max(0.,dot(reflect(-normalize(flashlightPosition-point),n),view)),55.)*.6;}
+      if(kind.x>43.5&&kind.x<44.5)color+=vec3(.65,.018,.003);
+      if(kind.x>44.5&&kind.x<45.5)color+=vec3(.28,.32,.23)*flashlight(point);
       color=pow(color,vec3(1./2.2));
       float fog=1.-exp(-dist*.00085);vec3 haze=sky(normalize(vec3(point.x-eye.x,.025,point.z-eye.z)))*.68;
       color=mix(color,haze,clamp(fog,0.,.86));
@@ -586,6 +601,8 @@
       obstacles.push({x,z,radius:6.05});occluders.push({x,z,radius:6.1,height:2.5,strength:.85});
       for(let i=0;i<13;i++){const a=i/13*TAU,cx=x+Math.cos(a)*8.5,cz=z+Math.sin(a)*8;if(pathClearance(cx,cz)>1.4&&Math.hypot(cx-58,cz+61)>3)rock(cx,cz,.25+rand()*.40,true);}
     }
+    // The field radio sits on a hard case beside the camp junction.
+    {const x=0,z=-3.4,y=ground(x,z);cylinder([x,y,z],[x,y+.42,z],.34,21,4);cylinder([x,y+.42,z],[x,y+.63,z],.23,8,4);cylinder([x+.17,y+.61,z],[x+.17,y+1.05,z],.012,35,8);quad([x-.13,y+.46,z+.19],[x+.10,y+.46,z+.19],[x+.10,y+.55,z+.19],[x-.13,y+.55,z+.19],36);obstacles.push({x,z,radius:.38});}
     // A walkable fan-made launch campus; rockets are custom black display vehicles.
     {const y=ground(CAMPUS.x,CAMPUS.z);
       function box(x,z,w,d,h,k,base=y){const a=[x-w/2,base,z-d/2],b=[x+w/2,base,z-d/2],c=[x+w/2,base,z+d/2],e=[x-w/2,base,z+d/2],top=p=>[p[0],p[1]+h,p[2]];quad(a,b,top(b),top(a),k);quad(b,c,top(c),top(b),k);quad(c,e,top(e),top(c),k);quad(e,a,top(a),top(e),k);quad(top(a),top(b),top(c),top(e),k);}
@@ -594,6 +611,21 @@
       for(let x=-138;x<-124;x+=2.8)box(x,-81.82,2.1,.06,1.5,36,y+10.5);
       quad([-140,y+5,-81.75],[-122,y+5,-81.75],[-122,y+11,-81.75],[-140,y+11,-81.75],32);
       building(-88,-90,10,13,5.5);for(let x=-91;x<-84;x+=2)box(x,-83.46,1.4,.08,1.5,36,y+2.7);
+      // Structural frames, roof equipment, conduits and a lit pedestrian entrance.
+      for(const x of [-141.2,-121]){box(x,-94,.28,24.8,14.4,35);box(x,-94,.42,25,.25,35,y+14.4);for(let z=-105;z<-81;z+=4)box(x,z,.34,.26,13.5,35);}
+      box(-131,-94,20.7,24.8,.25,35,y+14);box(-131,-81.68,20.4,.12,.22,37,y+12.2);
+      for(let z=-102;z<-85;z+=5){box(-131,z,3.5,2.8,1.2,33,y+14.3);for(let j=0;j<8;j++)box(-131,z-1+j*.29,3.2,.05,.03,10,y+15.51);}
+      for(let x=-139;x<-122;x+=2.1){box(x,-81.8,.06,.13,4.8,35);box(x,-106.3,.12,.3,14,35);}
+      for(let j=0;j<9;j++)box(-131,-81.78,15,.06,.028,35,y+.4+j*.48);
+      for(const x of [-141.4,-120.7]){cylinder([x,y+.3,-81.8],[x,y+13.8,-81.8],.075,35,10);for(let j=0;j<7;j++)cylinder([x,y+j*2,-81.8],[x,y+j*2+.08,-81.8],.115,35,10);}
+      box(-88,-90,10.5,13.5,.26,35,y+5.5);box(-86,-88,3.2,3,1.1,33,y+5.76);box(-91,-93,2.3,2.3,.12,20,y+5.77);
+      cylinder([-92,y+5.6,-94],[-92,y+9.7,-94],.055,35,10);for(let j=0;j<4;j++)cylinder([-93,y+7+j*.7,-94],[-91,y+7+j*.7,-94],.026,35,8);
+      box(-93.08,-91,.10,1.4,2.4,40);box(-94,-91,1.8,2.3,.16,35,y+2.45);box(-94,-91,1.8,2.3,.035,37,y+2.40);
+      // Service crates and a receiver pedestal give mission interactions physical anchors.
+      box(-115,-83,1.1,.75,.7,35);box(-115,-83,1.16,.80,.10,36,y+.7);for(const x of [-115.4,-114.6])box(x,-83,.045,.85,.78,10);
+      obstacles.push({x:-115,z:-83,radius:.65});box(-101,-96,.60,.5,1.0,35);box(-101,-96,.66,.55,.1,36,y+1.0);obstacles.push({x:-101,z:-96,radius:.42});
+      for(const [x,z] of [[-137,-78],[-134.5,-78],[-120,-112]]){box(x,z,1.5,1.1,1,33);for(const dx of [-.6,.6])box(x+dx,z,.065,1.16,1.02,35);obstacles.push({x,z,radius:.9});}
+      for(let x=-117;x<-107;x+=3){box(x,-85,.06,6,.025,38,y+.026);}box(-112,-88,10,.06,.026,38,y+.026);
       // Pad foundations and black rocket silhouettes with distinct fins, interstages and engine bells.
       function rocket(x,z,r,h,starship){
         cylinder([x,y+.12,z],[x,y+1.1,z],r*2.1,31,48);cylinder([x,y+1.1,z],[x,y+2.5,z],r*1.25,35,32);
@@ -603,7 +635,9 @@
         for(let i=0;i<4;i++){const a=i/4*TAU+.25,dx=Math.cos(a),dz=Math.sin(a),t=[-dz,0,dx];if(starship){for(const level of [.25,.83]){const tall=level<.5?h*.16:h*.09;quad([x+dx*r,y+h*level,z+dz*r],[x+dx*r*2.15,y+h*level-tall*.35,z+dz*r*2.15],[x+dx*r*1.95,y+h*level+tall*.5,z+dz*r*1.95],[x+dx*r,y+h*level+tall,z+dz*r],34);}}
           else{cylinder([x+dx*r,y+8,z+dz*r],[x+dx*r*1.9,y+2,z+dz*r*1.9],.09,35,10);quad([x+dx*r+t[0]*.7,y+h*.60,z+dz*r+t[2]*.7],[x+dx*r*1.9+t[0]*.7,y+h*.60,z+dz*r*1.9+t[2]*.7],[x+dx*r*1.9-t[0]*.7,y+h*.60,z+dz*r*1.9-t[2]*.7],[x+dx*r-t[0]*.7,y+h*.60,z+dz*r-t[2]*.7],35);}
         }
-        for(let i=0;i<7;i++){const a=i/6*TAU,rr=i===6?0:r*.62;cylinder([x+Math.cos(a)*rr,y+1.5,z+Math.sin(a)*rr],[x+Math.cos(a)*rr,y+2.9,z+Math.sin(a)*rr],r*.22,10,16);}
+        for(let i=0;i<7;i++){const a=i/6*TAU,rr=i===6?0:r*.62,ex=x+Math.cos(a)*rr,ez=z+Math.sin(a)*rr;const profile=[[r*.23,1.45],[r*.20,1.7],[r*.115,2.25],[r*.09,2.55]];for(let j=0;j<profile.length-1;j++)for(let k=0;k<20;k++){const aa=k/20*TAU,bb=(k+1)/20*TAU,[ra,ha]=profile[j],[rb,hb]=profile[j+1];quad([ex+Math.cos(aa)*ra,y+ha,ez+Math.sin(aa)*ra],[ex+Math.cos(bb)*ra,y+ha,ez+Math.sin(bb)*ra],[ex+Math.cos(bb)*rb,y+hb,ez+Math.sin(bb)*rb],[ex+Math.cos(aa)*rb,y+hb,ez+Math.sin(aa)*rb],35);}cylinder([ex,y+2.5,ez],[ex,y+3.2,ez],r*.095,35,12);}
+        for(let i=0;i<4;i++){const a=i/4*TAU+.25,dx=Math.cos(a),dz=Math.sin(a);cylinder([x+dx*r*1.015,y+4,z+dz*r*1.015],[x+dx*r*1.015,y+h*.63,z+dz*r*1.015],.035,35,8);for(const level of starship?[.25,.83]:[.60]){cylinder([x+dx*r*1.04,y+h*level,z+dz*r*1.04],[x+dx*r*1.04,y+h*(level+.045),z+dz*r*1.04],r*.075,35,12);}}
+        for(let j=0;j<6;j++){const a=j/6*TAU;box(x+Math.cos(a)*r*.9,z+Math.sin(a)*r*.9,.18,.18,.34,35,y+h*.68);}
         obstacles.push({x,z,radius:r*2.2});occluders.push({x,z,radius:r*2.2,height:h,strength:.8});
       }
       rocket(-110,-120,3.0,69,true);rocket(-90,-120,1.35,43,false);
@@ -637,12 +671,14 @@
     const gl=canvas.getContext('webgl',{alpha:false,antialias:true,powerPreference:'low-power'});
     if(!gl)return null;gl.getExtension('OES_standard_derivatives');
     let alive=true,currentZoom=1,ready=false,worker=null;const state=camera(),camp={fireOn:true,lanternOn:true,tentOpen:true,night:true,flashlightOn:true,redLight:false,hands:true,satellitesOn:true,binoculars:false,fireBoost:0,ufoAwake:false,campusLights:true};let time=4,onFoot=false,handVisible=true,swayEnabled=true;
+    const Life=window.ParallaxLife,life=Life?.create();const lifeBuffers=new Map();
     function program(v,f){const p=gl.createProgram();for(const [type,src] of [[gl.VERTEX_SHADER,v],[gl.FRAGMENT_SHADER,f]]){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));gl.attachShader(p,s);gl.deleteShader(s);}gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p;}
     try{
       const sky=program(skyVertex,skyFragment),mesh=program(meshVertex,meshFragment),fire=program(fireVertex,fireFragment),embers=program(emberVertex,emberFragment),hand=program(handVertex,meshFragment);let world={vertices:new Float32Array(0),obstacles:[]};
+
       const skyBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,skyBuffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
       const meshBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);
-      const info=p=>({p,position:gl.getAttribLocation(p,'position'),normal:gl.getAttribLocation(p,'normal'),material:gl.getAttribLocation(p,'material'),uniform:Object.fromEntries(['eye','right','up','forward','aspect','lens','time','fireOn','lanternOn','tentOpen','firePosition','lanternPosition','night','flashlightOn','redLight','flashlightPosition','flashlightDirection','handSway','pixelAngle','satellitesOn','fireBoost','ufoAwake','campusLights'].map(n=>[n,gl.getUniformLocation(p,n)]))});
+      const info=p=>({p,position:gl.getAttribLocation(p,'position'),normal:gl.getAttribLocation(p,'normal'),material:gl.getAttribLocation(p,'material'),uniform:Object.fromEntries(['eye','right','up','forward','aspect','lens','time','fireOn','lanternOn','tentOpen','firePosition','lanternPosition','night','flashlightOn','redLight','flashlightPosition','flashlightDirection','handSway','pixelAngle','satellitesOn','fireBoost','ufoAwake','campusLights','objectMode','objectOrigin','objectPose'].map(n=>[n,gl.getUniformLocation(p,n)]))});
       const skyInfo=info(sky),meshInfo=info(mesh),fireInfo=info(fire),emberInfo=info(embers),handInfo=info(hand);
       const handVertices=handGeometry(),handBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,handBuffer);gl.bufferData(gl.ARRAY_BUFFER,handVertices,gl.STATIC_DRAW);
       const emberBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,emberBuffer);gl.bufferData(gl.ARRAY_BUFFER,Float32Array.from({length:28},(_,i)=>i),gl.STATIC_DRAW);host.append(canvas);
@@ -695,48 +731,67 @@
       canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();alive=false;worker?.terminate();canvas.remove();onFailure?.();});
       function acceptWorld(result){if(!alive)return;world=result;gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,shadeTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.shadeSize,world.shadeSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.shade);gl.activeTexture(gl.TEXTURE7);gl.bindTexture(gl.TEXTURE_2D,trailTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.trailSize,world.trailSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.trailMask);ready=true;worker?.terminate();worker=null;onReady?.();}
       // Construct geometry off the UI thread; keep the landscape visible while it loads.
-      try{worker=new Worker('/desert-world.js?v=35');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
+      try{worker=new Worker('/desert-world.js?v=36');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
       catch{setTimeout(()=>acceptWorld(geometry()),0)}
+      function cameraEye(){
+        const base=[state.x,ground(state.x,state.z)+(state.seated?1.03:1.72),state.z];if(!life?.driving)return base;
+        // A chase camera retreats only as far as the clear space behind the vehicle.
+        const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw);let retreat=7.2;
+        for(let d=1;d<=7.2;d+=.3){const x=state.x-sy*d,z=state.z+cy*d;if(world.obstacles.some(o=>Math.hypot(x-o.x,z-o.z)<o.radius+.35)){retreat=Math.max(.5,d-.5);break;}}
+        const x=state.x-sy*retreat,z=state.z+cy*retreat;return [x,Math.max(base[1]+2.3,ground(x,z)+1.4),z];
+      }
       function render(zoom=1){
         if(!alive||!ready)return;currentZoom=zoom;
         const ratio=Math.min(devicePixelRatio||1,innerWidth<700?1.25:1.5,Math.sqrt(2400000/(innerWidth*innerHeight))),w=Math.round(innerWidth*ratio),h=Math.round(innerHeight*ratio);
         if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
         gl.viewport(0,0,w,h);gl.clearColor(.015,.025,.05,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
         const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw),sp=Math.sin(state.pitch),cp=Math.cos(state.pitch);
-        const eye=[state.x,ground(state.x,state.z)+(state.seated?1.03:1.72),state.z],right=[cy,0,sy],up=[-sy*sp,cp,cy*sp],forward=[sy*cp,sp,-cy*cp];
+        const eye=cameraEye(),right=[cy,0,sy],up=[-sy*sp,cp,cy*sp],forward=[sy*cp,sp,-cy*cp];
         const lens=viewLens(zoom,camp.binoculars);
         const sway=swayEnabled&&onFoot?[Math.sin(state.distance*3.7)*.008,Math.cos(state.distance*7.4)*.006]:[0,0];
-        const flashlightPosition=eye.map((v,i)=>v+right[i]*(.263+sway[0]-Math.max(0,1-w/h)*.33)+up[i]*(-.24+sway[1])+forward[i]*.89);
-        const flashlightDirection=forward.map((v,i)=>v*.990+up[i]*.05+right[i]*-.129),fl=Math.hypot(...flashlightDirection);for(let i=0;i<3;i++)flashlightDirection[i]/=fl;
-        function uniforms(i){gl.useProgram(i.p);gl.uniform3fv(i.uniform.eye,eye);gl.uniform3fv(i.uniform.right,right);gl.uniform3fv(i.uniform.up,up);gl.uniform3fv(i.uniform.forward,forward);gl.uniform1f(i.uniform.aspect,w/h);gl.uniform1f(i.uniform.lens,lens);gl.uniform1f(i.uniform.night,Number(camp.night));gl.uniform1f(i.uniform.time,time);gl.uniform1f(i.uniform.pixelAngle,2*lens/h);gl.uniform1f(i.uniform.satellitesOn,Number(camp.satellitesOn));gl.uniform2fv(i.uniform.handSway,sway);gl.uniform1f(i.uniform.flashlightOn,Number(onFoot&&camp.hands&&camp.flashlightOn&&!camp.binoculars));gl.uniform1f(i.uniform.redLight,Number(camp.redLight));gl.uniform3fv(i.uniform.flashlightPosition,flashlightPosition);gl.uniform3fv(i.uniform.flashlightDirection,flashlightDirection);gl.uniform1f(i.uniform.fireOn,Number(camp.fireOn));gl.uniform1f(i.uniform.fireBoost,camp.fireBoost);gl.uniform1f(i.uniform.ufoAwake,Number(camp.ufoAwake));gl.uniform1f(i.uniform.campusLights,Number(camp.campusLights));gl.uniform1f(i.uniform.lanternOn,Number(camp.lanternOn));gl.uniform1f(i.uniform.tentOpen,Number(camp.tentOpen));gl.uniform3fv(i.uniform.firePosition,CAMP.fire);gl.uniform3fv(i.uniform.lanternPosition,[-4.25,CAMP.tent[1]+.47,-9.22]);}
+        let flashlightPosition=eye.map((v,i)=>v+right[i]*(.263+sway[0]-Math.max(0,1-w/h)*.33)+up[i]*(-.24+sway[1])+forward[i]*.89);
+        let flashlightDirection=forward.map((v,i)=>v*.990+up[i]*.05+right[i]*-.129),fl=Math.hypot(...flashlightDirection);for(let i=0;i<3;i++)flashlightDirection[i]/=fl;
+        if(life?.driving){const v=Life.active(life);flashlightPosition=[v.x+Math.sin(v.yaw)*2.8,ground(v.x,v.z)+.9,v.z-Math.cos(v.yaw)*2.8];flashlightDirection=[Math.sin(v.yaw),-.035,-Math.cos(v.yaw)];}
+        function uniforms(i){gl.useProgram(i.p);gl.uniform3fv(i.uniform.eye,eye);gl.uniform3fv(i.uniform.right,right);gl.uniform3fv(i.uniform.up,up);gl.uniform3fv(i.uniform.forward,forward);gl.uniform1f(i.uniform.aspect,w/h);gl.uniform1f(i.uniform.lens,lens);gl.uniform1f(i.uniform.night,Number(camp.night));gl.uniform1f(i.uniform.time,time);gl.uniform1f(i.uniform.pixelAngle,2*lens/h);gl.uniform1f(i.uniform.satellitesOn,Number(camp.satellitesOn));gl.uniform2fv(i.uniform.handSway,sway);gl.uniform1f(i.uniform.flashlightOn,Number(onFoot&&(life?.driving||camp.hands&&camp.flashlightOn&&!camp.binoculars)));gl.uniform1f(i.uniform.redLight,Number(!life?.driving&&camp.redLight));gl.uniform3fv(i.uniform.flashlightPosition,flashlightPosition);gl.uniform3fv(i.uniform.flashlightDirection,flashlightDirection);gl.uniform1f(i.uniform.fireOn,Number(camp.fireOn));gl.uniform1f(i.uniform.fireBoost,camp.fireBoost);gl.uniform1f(i.uniform.ufoAwake,Number(camp.ufoAwake));gl.uniform1f(i.uniform.campusLights,Number(camp.campusLights));gl.uniform1f(i.uniform.lanternOn,Number(camp.lanternOn));gl.uniform1f(i.uniform.tentOpen,Number(camp.tentOpen));gl.uniform3fv(i.uniform.firePosition,CAMP.fire);gl.uniform3fv(i.uniform.lanternPosition,[-4.25,CAMP.tent[1]+.47,-9.22]);}
         gl.disable(gl.DEPTH_TEST);uniforms(skyInfo);gl.bindBuffer(gl.ARRAY_BUFFER,skyBuffer);
         for(let i=0;i<3;i++)gl.disableVertexAttribArray(i);
         gl.enableVertexAttribArray(skyInfo.position);gl.vertexAttribPointer(skyInfo.position,2,gl.FLOAT,false,0,0);gl.drawArrays(gl.TRIANGLES,0,6);
-        gl.enable(gl.DEPTH_TEST);uniforms(meshInfo);gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);
+        gl.enable(gl.DEPTH_TEST);uniforms(meshInfo);gl.uniform1f(meshInfo.uniform.objectMode,0);gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);
         for(const [loc,size,offset]of [[meshInfo.position,3,0],[meshInfo.normal,3,12],[meshInfo.material,2,24]]){gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);}
         gl.drawArrays(gl.TRIANGLES,0,world.vertices.length/8);
+        if(life){gl.uniform1f(meshInfo.uniform.objectMode,1);for(const model of Life.models(life,ground)){
+          let buffer=lifeBuffers.get(model.key);if(!buffer){buffer=gl.createBuffer();lifeBuffers.set(model.key,buffer);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,model.vertices,gl.STATIC_DRAW);}else gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+          gl.uniform3f(meshInfo.uniform.objectOrigin,model.x,model.y,model.z);gl.uniform4f(meshInfo.uniform.objectPose,Math.cos(model.yaw),Math.sin(model.yaw),model.sx,model.sz);
+          for(const [loc,size,offset]of [[meshInfo.position,3,0],[meshInfo.normal,3,12],[meshInfo.material,2,24]])gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);gl.drawArrays(gl.TRIANGLES,0,model.vertices.length/8);
+        }gl.uniform1f(meshInfo.uniform.objectMode,0);}
         if(camp.fireOn&&Math.hypot(state.x,state.z+8)<100){
           gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);
           uniforms(fireInfo);gl.bindBuffer(gl.ARRAY_BUFFER,skyBuffer);for(let i=0;i<3;i++)gl.disableVertexAttribArray(i);gl.enableVertexAttribArray(fireInfo.position);gl.vertexAttribPointer(fireInfo.position,2,gl.FLOAT,false,0,0);gl.drawArrays(gl.TRIANGLES,0,6);
           uniforms(emberInfo);gl.bindBuffer(gl.ARRAY_BUFFER,emberBuffer);for(let i=0;i<3;i++)gl.disableVertexAttribArray(i);gl.enableVertexAttribArray(emberInfo.position);gl.vertexAttribPointer(emberInfo.position,1,gl.FLOAT,false,0,0);gl.drawArrays(gl.POINTS,0,28);
           gl.depthMask(true);gl.disable(gl.BLEND);
         }
-        if(onFoot&&camp.hands&&handVisible&&!camp.binoculars){gl.clear(gl.DEPTH_BUFFER_BIT);uniforms(handInfo);gl.bindBuffer(gl.ARRAY_BUFFER,handBuffer);for(const [loc,size,offset] of [[handInfo.position,3,0],[handInfo.normal,3,12],[handInfo.material,2,24]]){gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);}gl.drawArrays(gl.TRIANGLES,0,handVertices.length/8);}
+        if(onFoot&&!life?.driving&&camp.hands&&handVisible&&!camp.binoculars){gl.clear(gl.DEPTH_BUFFER_BIT);uniforms(handInfo);gl.bindBuffer(gl.ARRAY_BUFFER,handBuffer);for(const [loc,size,offset] of [[handInfo.position,3,0],[handInfo.normal,3,12],[handInfo.material,2,24]]){gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);}gl.drawArrays(gl.TRIANGLES,0,handVertices.length/8);}
       }
-      return {canvas,state,camp,points:CAMP,trail:TRAIL,paths:PATHS,routeTo:place=>trailRoute(state,place),terrainHeight:ground,render,
-        setWalking(value){onFoot=value;if(!value)camp.binoculars=false;},setHandVisible(value){handVisible=value;},setMotion(value){swayEnabled=value;},
+      return {canvas,state,camp,life,points:CAMP,
+        get driving(){return life?.driving||null;},get speed(){return life?Life.active(life)?.speed||0:0;},
+        nearestRover(){return life?Life.nearestVehicle(life,state):null;},
+        enterRover(id){if(!life||!Life.enter(life,state,id))return false;camp.binoculars=false;render(currentZoom);return true;},
+        exitRover(){const ok=life&&Life.exit(life,state,world.obstacles);if(ok)render(currentZoom);return ok;},
+        brake(){if(life)Life.brake(life);},
+        recallRovers(){if(!life)return;life.driving=null;for(let i=0;i<life.vehicles.length;i++)Object.assign(life.vehicles[i],Life.SPAWNS[i],{speed:0,wheel:0});Object.assign(state,camera());render(currentZoom);},trail:TRAIL,paths:PATHS,routeTo:place=>trailRoute(state,place),terrainHeight:ground,render,
+        setWalking(value){onFoot=value;if(!value){camp.binoculars=false;if(life)Life.brake(life);}},setHandVisible(value){handVisible=value;},setMotion(value){swayEnabled=value;},
         satellitePoints(){return [0,1,2].map(i=>satelliteDirection(time,i).map((v,j)=>v*1000+(j===0?state.x:j===1?ground(state.x,state.z)+1.72:state.z)));},
         watchSky(){camp.night=true;state.yaw=0;state.pitch=.61;render(currentZoom);},
         setCamp(patch){Object.assign(camp,patch);render(currentZoom);},
         stoke(){camp.fireOn=true;camp.fireBoost=1;render(currentZoom);},
-        tick(dt){const step=Math.min(Math.max(0,dt),.1);time+=step;camp.fireBoost=Math.max(0,camp.fireBoost-step/18);return camp.satellitesOn||camp.fireOn&&Math.hypot(state.x,state.z+8)<75;},
-        project(point){const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw),sp=Math.sin(state.pitch),cp=Math.cos(state.pitch),p=[point[0]-state.x,point[1]-ground(state.x,state.z)-(state.seated?1.03:1.72),point[2]-state.z];const d=p[0]*sy*cp+p[1]*sp-p[2]*cy*cp,lens=viewLens(currentZoom,camp.binoculars);return {x:innerWidth/2+(p[0]*cy+p[2]*sy)/d/lens*innerHeight/2,y:innerHeight/2-(-p[0]*sy*sp+p[1]*cp+p[2]*cy*sp)/d/lens*innerHeight/2,depth:d,distance:Math.hypot(...p)};},
-        visit(place){const positions={fire:[0,-5.15,0,-.14],tent:[-4.5,-6.25,0,.03],telescope:[3.5,-10.6,0,.13],camp:[0,-2.8,0,.025]};const p=positions[place]||positions.camp;Object.assign(state,{x:p[0],z:p[1],yaw:p[2],pitch:p[3],edge:false,seated:place==='fire'});render(currentZoom);},
+        tick(dt){const step=Math.min(Math.max(0,dt),.1);time+=step;if(life)Life.crewTick(life,step,state);camp.fireBoost=Math.max(0,camp.fireBoost-step/18);return !!life||camp.satellitesOn||camp.fireOn&&Math.hypot(state.x,state.z+8)<75;},
+        project(point){const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw),sp=Math.sin(state.pitch),cp=Math.cos(state.pitch),eye=cameraEye(),p=point.map((v,i)=>v-eye[i]);const d=p[0]*sy*cp+p[1]*sp-p[2]*cy*cp,lens=viewLens(currentZoom,camp.binoculars);return {x:innerWidth/2+(p[0]*cy+p[2]*sy)/d/lens*innerHeight/2,y:innerHeight/2-(-p[0]*sy*sp+p[1]*cp+p[2]*cy*sp)/d/lens*innerHeight/2,depth:d,distance:Math.hypot(...p)};},
+        visit(place){if(life){Life.brake(life);life.driving=null;}const positions={fire:[0,-5.15,0,-.14],tent:[-4.5,-6.25,0,.03],telescope:[3.5,-10.6,0,.13],camp:[0,-2.8,0,.025]};const p=positions[place]||positions.camp;Object.assign(state,{x:p[0],z:p[1],yaw:p[2],pitch:p[3],edge:false,seated:place==='fire'});render(currentZoom);},
         get ready(){return ready;},
         look(dx,dy){state.yaw=(state.yaw-dx*(camp.binoculars?.0012:.0035))%TAU;state.pitch=clamp(state.pitch+dy*(camp.binoculars?.001:.003),-1.4,1.4);},
         turn(yaw,pitch){state.yaw=(state.yaw+yaw)%TAU;state.pitch=clamp(state.pitch+pitch,-1.4,1.4);},
-        move:(forward,side,dt,fast)=>ready&&move(state,forward,side,dt,fast,world.obstacles),
-        reset(){Object.assign(state,camera());}
+        move:(forward,side,dt,fast)=>ready&&(life?.driving?Life.drive(life,state,forward,side,dt,world.obstacles,ground):move(state,forward,side,dt,fast,life?world.obstacles.concat(life.vehicles.flatMap(v=>Life.circles(v,.98)),life.crew.map(p=>({x:p.x,z:p.z,radius:.28}))):world.obstacles)),
+        reset(){if(life){Life.brake(life);life.driving=null;}Object.assign(state,camera());}
       };
     }catch(error){canvas.remove();gl.getExtension('WEBGL_lose_context')?.loseContext();console.warn('Desert view unavailable:',error.message);return null;}
   }
