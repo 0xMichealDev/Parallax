@@ -29,6 +29,7 @@
     const a = height(bx, bz), b = height(bx + STEP, bz), c = height(bx, bz + STEP), d = height(bx + STEP, bz + STEP);
     return u + v <= 1 ? a + u * (b - a) + v * (c - a) : d + (1 - u) * (c - d) + (1 - v) * (b - d);
   }
+  function viewLens(zoom,binoculars){return Math.tan((binoculars?20:clamp(68/Math.sqrt(Math.max(.65,zoom)),45,84))*Math.PI/360);}
   function camera() { return { x: 0, z: 0, yaw: 0, pitch: .025, distance: 0, edge: false, seated: false }; }
   function move(state, forward, side, dt, fast, obstacles) {
     const length = Math.hypot(forward, side); if (!length) { state.edge = false; return false; }
@@ -60,9 +61,16 @@
       float seam=smoothstep(.975,1.,abs(uv.x-.5)*2.);
       vec3 edge=(texture2D(panoramaMap,vec2(.001,uv.y)).rgb+texture2D(panoramaMap,vec2(.999,uv.y)).rgb)*.5;
       vec3 twilight=mix(c,edge,seam);
-      vec3 nocturne=texture2D(nightMap,uv).rgb;
-      vec3 nightEdge=(texture2D(nightMap,vec2(.001,uv.y)).rgb+texture2D(nightMap,vec2(.999,uv.y)).rgb)*.5;
-      return mix(twilight,pow(max(mix(nocturne,nightEdge,seam),vec3(0.)),vec3(1.08))*1.04,night*nightReady);
+      // All-sky photography in a rotated celestial frame; horizon atmosphere is separate.
+      vec3 gal=vec3(d.x,.819152*d.y+.573576*d.z,-.573576*d.y+.819152*d.z);
+      gal.xy=mat2(.913545,-.406737,.406737,.913545)*gal.xy;
+      vec2 starUV=vec2(atan(gal.x,-gal.z)/6.2831853+.5,acos(clamp(gal.y,-1.,1.))/3.14159265);
+      vec3 photo=texture2D(nightMap,starUV).rgb;
+      float extinction=smoothstep(-.035,.20,d.y);
+      vec3 nocturne=pow(max(photo,vec3(0.)),vec3(1.05))*.88*extinction;
+      nocturne+=mix(vec3(.028,.035,.048),vec3(.006,.010,.021),smoothstep(0.,.42,max(d.y,0.)));
+      nocturne+=vec3(.018,.008,.003)*exp(-max(d.y,0.)*24.);
+      return mix(twilight,nocturne,night*nightReady);
     }
     vec3 sky(vec3 d){
       float h=max(d.y,0.); float sunset=pow(max(dot(normalize(d.xz),normalize(vec2(.35,-1.))),0.),12.);
@@ -96,6 +104,15 @@
         float core=exp(-angular*angular*.7),halo=exp(-angular*angular*.075)*.1;
         col+=vec3(.91,.95,1.)*(core+halo)*step(0.,dot(d,sat))*smoothstep(.1,.25,alt)*(.8+night*.5);
       }}
+      if(night>.5&&d.y>.15){
+        float cycle=floor(time/19.),age=fract(time/19.)*19.;
+        float az=sin(cycle*7.13)*1.8+age*.27,alt=.72-age*.13;
+        vec3 head=vec3(sin(az)*cos(alt),sin(alt),-cos(az)*cos(alt));
+        vec3 tail=vec3(sin(az-.10)*cos(alt+.05),sin(alt+.05),-cos(az-.10)*cos(alt+.05));
+        vec3 trail=head-tail;float along=clamp(dot(d-tail,trail)/dot(trail,trail),0.,1.);
+        float width=length(d-mix(tail,head,along))/max(pixelAngle,.0001);
+        col+=vec3(.67,.79,1.)*exp(-width*width*.9)*along*smoothstep(0.,.12,age)*(1.-smoothstep(.6,1.,age));
+      }
       gl_FragColor=vec4(col,1.);
     }
   `;
@@ -110,20 +127,13 @@
   `;
   const meshFragment = `#extension GL_OES_standard_derivatives : enable\n` + common + `
     varying vec3 point; varying vec3 norm; varying vec2 kind;
-    uniform float flashlightOn,redLight;uniform vec3 flashlightPosition,flashlightDirection;
+    uniform float flashlightOn,redLight,fireBoost;uniform vec3 flashlightPosition,flashlightDirection;
     uniform sampler2D clothMap; uniform float time; uniform float fireOn; uniform float lanternOn; uniform float tentOpen; uniform vec3 firePosition; uniform vec3 lanternPosition;
-    uniform sampler2D groundMap; uniform sampler2D shadeMap; uniform sampler2D plantMap; uniform float plantReady; uniform float textured;
-    vec3 groundSample(vec2 p){
-      vec2 tile=floor(p*.15),blend=fract(p*.15);blend=blend*blend*(3.-2.*blend);
-      vec2 a=vec2(hash(tile),hash(tile+37.));
-      vec2 b=vec2(hash(tile+vec2(1,0)),hash(tile+vec2(38,37)));
-      vec2 c=vec2(hash(tile+vec2(0,1)),hash(tile+vec2(37,38)));
-      vec2 d=vec2(hash(tile+vec2(1,1)),hash(tile+38.));
-      return mix(mix(texture2D(groundMap,p+a).rgb,texture2D(groundMap,p+b).rgb,blend.x),mix(texture2D(groundMap,p+c).rgb,texture2D(groundMap,p+d).rgb,blend.x),blend.y);
-    }
-    float flashlight(vec3 point){vec3 p=point-flashlightPosition;float distance=length(p),angle=dot(normalize(p),flashlightDirection);return flashlightOn*smoothstep(.885,.965,angle)*(1.-smoothstep(23.,40.,distance))*8./(1.+distance*distance*.06);}
+    uniform sampler2D groundNormal; uniform sampler2D groundMap; uniform sampler2D shadeMap; uniform sampler2D plantMap; uniform float plantReady; uniform float textured;
+    vec3 groundSample(vec2 p){return texture2D(groundMap,p).rgb;}
+    float flashlight(vec3 point){vec3 p=point-flashlightPosition;float distance=length(p),angle=dot(normalize(p),flashlightDirection);return flashlightOn*smoothstep(.885,.965,angle)*(1.-smoothstep(23.,40.,distance))*5.5/(1.+distance*distance*.07);}
     void main(){
-      if(kind.x>3.5&&kind.x<4.5&&panoramaReady>.5)discard;
+      if(kind.x>3.5&&kind.x<4.5&&panoramaReady>.5&&night<.5)discard;
       if(kind.x>14.5&&kind.x<15.5&&tentOpen>.5)discard;
       float dist=length(point-eye);
       if(kind.x>5.5&&kind.x<6.5){
@@ -136,19 +146,18 @@
       vec3 n=normalize(norm),view=normalize(eye-point);
       float macro=noise(point.xz*.036),grain=noise(point.xz*4.7),detail=noise(point.xz*34.);
       vec3 base=mix(vec3(.31,.265,.205),vec3(.46,.37,.27),macro);
-      vec3 groundColor=groundSample(point.xz*.27);
+      vec3 groundColor=groundSample(point.xz*.40);
       float wash=exp(-pow((point.x-sin(point.z*.014)*11.)/6.,2.));
       base=mix(base,groundColor,textured)*(.73+macro*.3);
       base=mix(base,vec3(.36,.285,.20)*(.8+grain*.2),wash*.26);
-      n=normalize(n+vec3((grain-.5)*.12,0.,(detail-.5)*.09));
-      #ifdef GL_OES_standard_derivatives
       if(kind.x<.5){
-        float elevation=dot(groundColor,vec3(.25,.5,.25));vec3 dx=dFdx(point),dy=dFdy(point);
-        vec3 cx=cross(dy,n),cy=cross(n,dx);float det=dot(dx,cx);
-        vec3 gradient=sign(det)*(dFdx(elevation)*cx+dFdy(elevation)*cy)/max(abs(det),.00001);
-        n=normalize(n-gradient*.075*(1.-smoothstep(12.,45.,dist)));
+        // A scanned tangent-space normal preserves pebble relief under moving light.
+        vec3 bump=texture2D(groundNormal,point.xz*.40).xyz*2.-1.;
+        vec3 tangent=normalize(vec3(n.y,-n.x,0.)),bitangent=normalize(cross(tangent,n));
+        float strength=.72*(1.-smoothstep(18.,65.,dist));
+        n=normalize(n*max(.25,bump.z)+strength*(tangent*bump.x-bitangent*bump.y));
+        base*=.90+.10*noise(point.xz*.11);
       }
-      #endif
       if(kind.x>.5&&kind.x<1.5){
         vec3 weights=abs(n);weights/=weights.x+weights.y+weights.z;
         float stone=dot(texture2D(groundMap,point.zy*.7).rgb,vec3(.33))*weights.x+dot(texture2D(groundMap,point.xz*.7).rgb,vec3(.33))*weights.y+dot(texture2D(groundMap,point.xy*.7).rgb,vec3(.33))*weights.z;
@@ -187,7 +196,7 @@
       vec3 lampTint=mix(vec3(1.,.92,.76),vec3(1.,.065,.015),redLight);
       illumination+=lampTint*flashlight(point)*max(.15,dot(n,normalize(flashlightPosition-point)));
       vec3 toFire=firePosition+vec3(0,.7,0)-point;
-      float flicker=.9+.065*sin(time*9.)+.045*sin(time*17.3+1.);
+      float flicker=(1.+fireBoost*.5)*(.9+.065*sin(time*9.)+.045*sin(time*17.3+1.));
       illumination+=vec3(2.3,.71,.14)*fireOn*flicker*max(.12,dot(n,normalize(toFire)))/(1.+dot(toFire,toFire)*.26);
       vec3 toLantern=lanternPosition-point;
       illumination+=vec3(1.3,.7,.2)*lanternOn*max(.08,dot(n,normalize(toLantern)))/(1.+dot(toLantern,toLantern)*3.);
@@ -214,14 +223,14 @@
     gl_Position=vec4(dot(p,right)/(aspect*lens),dot(p,up)/lens,1.000025*d-.10000125,d);}
   `;
   const fireFragment = common + `
-    uniform vec3 firePosition;uniform float time,fireOn;varying vec3 worldPoint;
+    uniform vec3 firePosition;uniform float time,fireOn,fireBoost;varying vec3 worldPoint;
     float field(vec3 p){return noise(p.xz*3.+vec2(p.y*1.5,-time*1.1))*.62+noise(p.xz*7.+vec2(p.y*3.,-time*2.3))*.38;}
     void main(){
       if(fireOn<.5)discard;
       vec3 ray=normalize(worldPoint-eye),sum=vec3(0.);float alpha=0.;
       for(int i=0;i<28;i++){
         vec3 p=worldPoint-firePosition+ray*(float(i)/27.-.5)*2.4;
-        float h=p.y,rad=length(p.xz+vec2(sin(h*4.-time*2.),cos(h*3.+time))*h*.10);
+        float h=p.y/(1.+fireBoost*.30),rad=length(p.xz+vec2(sin(h*4.-time*2.),cos(h*3.+time))*h*.10);
         float taper=max(.02,.5*(1.-h/1.65));float n=field(p);
         float shape=taper-rad+(n-.5)*.44;
         for(int j=0;j<3;j++){float a=float(j)*2.094;vec2 bend=vec2(cos(a+time*.3),sin(a+time*.3))*(.27-h*.08)+vec2(sin(h*7.-time*3.+a),cos(h*5.-time*2.+a))*h*.07;
@@ -237,10 +246,10 @@
   `;
   const emberVertex = `
     precision highp float;attribute float position;
-    uniform vec3 eye,right,up,forward,firePosition;uniform float aspect,lens,time,fireOn;
+    uniform vec3 eye,right,up,forward,firePosition;uniform float aspect,lens,time,fireOn,fireBoost;
     varying float fade;
     void main(){float phase=fract(position*.618+time*(.13+fract(position*.37)*.12));float a=position*2.399+phase*2.;
-    vec3 world=firePosition+vec3(sin(a)*(.08+phase*.6),.3+phase*2.8,cos(a)*(.08+phase*.6));
+    vec3 world=firePosition+vec3(sin(a)*(.08+phase*.6),.3+phase*(2.8+fireBoost*1.7),cos(a)*(.08+phase*.6));
     vec3 p=world-eye;float d=dot(p,forward);fade=sin(phase*3.14159)*fireOn;
     gl_Position=vec4(dot(p,right)/(aspect*lens),dot(p,up)/lens,1.000025*d-.10000125,d);gl_PointSize=clamp(24./max(d,1.),1.,4.);}
   `;
@@ -341,7 +350,7 @@
     for(let i=0;i<75;i++){const angle=rand()*TAU,r=28+rand()*245;cactus(Math.sin(angle)*r,Math.cos(angle)*r,.4+rand()*1.35);}
     function rock(x,z,r,force=false){
       if(!force&&(Math.hypot(x,z+10)<8||TRAIL.some(p=>Math.hypot(x-p.x,z-p.z)<2.5)))return;
-      const y=ground(x,z)-r*.2,tone=rand(),rotation=rand()*TAU,stretch=.7+rand()*.8,sides=r>.45?10:6,rows=r>.45?5:3;
+      const y=ground(x,z)-r*.2,tone=rand(),rotation=rand()*TAU,stretch=.7+rand()*.8,sides=r>.45?14:7,rows=r>.45?7:3;
       const points=[],ns=[];
       for(let j=0;j<=rows;j++){
         const lat=-.25+(Math.PI*.5+.25)*j/rows,ring=[],normal=[];
@@ -465,13 +474,13 @@
     const canvas=document.createElement('canvas');canvas.id='u-desert';canvas.setAttribute('aria-hidden','true');
     const gl=canvas.getContext('webgl',{alpha:false,antialias:true,powerPreference:'low-power'});
     if(!gl)return null;gl.getExtension('OES_standard_derivatives');
-    let alive=true,currentZoom=1,ready=false,worker=null;const state=camera(),camp={fireOn:true,lanternOn:true,tentOpen:true,night:true,flashlightOn:true,redLight:false,hands:true,satellitesOn:true};let time=4,onFoot=false,handVisible=true,swayEnabled=true;
+    let alive=true,currentZoom=1,ready=false,worker=null;const state=camera(),camp={fireOn:true,lanternOn:true,tentOpen:true,night:true,flashlightOn:true,redLight:false,hands:true,satellitesOn:true,binoculars:false,fireBoost:0};let time=4,onFoot=false,handVisible=true,swayEnabled=true;
     function program(v,f){const p=gl.createProgram();for(const [type,src] of [[gl.VERTEX_SHADER,v],[gl.FRAGMENT_SHADER,f]]){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));gl.attachShader(p,s);gl.deleteShader(s);}gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p;}
     try{
       const sky=program(skyVertex,skyFragment),mesh=program(meshVertex,meshFragment),fire=program(fireVertex,fireFragment),embers=program(emberVertex,emberFragment),hand=program(handVertex,meshFragment);let world={vertices:new Float32Array(0),obstacles:[]};
       const skyBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,skyBuffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
       const meshBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);
-      const info=p=>({p,position:gl.getAttribLocation(p,'position'),normal:gl.getAttribLocation(p,'normal'),material:gl.getAttribLocation(p,'material'),uniform:Object.fromEntries(['eye','right','up','forward','aspect','lens','time','fireOn','lanternOn','tentOpen','firePosition','lanternPosition','night','flashlightOn','redLight','flashlightPosition','flashlightDirection','handSway','pixelAngle','satellitesOn'].map(n=>[n,gl.getUniformLocation(p,n)]))});
+      const info=p=>({p,position:gl.getAttribLocation(p,'position'),normal:gl.getAttribLocation(p,'normal'),material:gl.getAttribLocation(p,'material'),uniform:Object.fromEntries(['eye','right','up','forward','aspect','lens','time','fireOn','lanternOn','tentOpen','firePosition','lanternPosition','night','flashlightOn','redLight','flashlightPosition','flashlightDirection','handSway','pixelAngle','satellitesOn','fireBoost'].map(n=>[n,gl.getUniformLocation(p,n)]))});
       const skyInfo=info(sky),meshInfo=info(mesh),fireInfo=info(fire),emberInfo=info(embers),handInfo=info(hand);
       const handVertices=handGeometry(),handBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,handBuffer);gl.bufferData(gl.ARRAY_BUFFER,handVertices,gl.STATIC_DRAW);
       const emberBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,emberBuffer);gl.bufferData(gl.ARRAY_BUFFER,Float32Array.from({length:28},(_,i)=>i),gl.STATIC_DRAW);host.append(canvas);
@@ -494,7 +503,7 @@
       };panoramaImage.src='/assets/desert-twilight-panorama.png';
       const nightTexture=gl.createTexture();gl.activeTexture(gl.TEXTURE5);gl.bindTexture(gl.TEXTURE_2D,nightTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([3,5,10,255]));gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
       for(const p of [sky,mesh,hand]){gl.useProgram(p);gl.uniform1i(gl.getUniformLocation(p,'nightMap'),5);gl.uniform1f(gl.getUniformLocation(p,'nightReady'),0);}
-      const nightImage=new Image();nightImage.onload=()=>{if(!alive)return;const tile=document.createElement('canvas');tile.width=Math.min(4096,gl.getParameter(gl.MAX_TEXTURE_SIZE),Math.pow(2,Math.ceil(Math.log2(nightImage.width))));tile.height=tile.width/2;tile.getContext('2d').drawImage(nightImage,0,0,tile.width,tile.height);gl.activeTexture(gl.TEXTURE5);gl.bindTexture(gl.TEXTURE_2D,nightTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tile);gl.generateMipmap(gl.TEXTURE_2D);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);for(const p of [sky,mesh,hand]){gl.useProgram(p);gl.uniform1f(gl.getUniformLocation(p,'nightReady'),1);}if(host.closest('dialog')?.open)render(currentZoom);};nightImage.src='/assets/desert-milkyway-panorama.png';
+      const nightImage=new Image();nightImage.onload=()=>{if(!alive)return;const tile=document.createElement('canvas');tile.width=Math.min(4096,gl.getParameter(gl.MAX_TEXTURE_SIZE),Math.pow(2,Math.ceil(Math.log2(nightImage.width))));tile.height=tile.width/2;tile.getContext('2d').drawImage(nightImage,0,0,tile.width,tile.height);gl.activeTexture(gl.TEXTURE5);gl.bindTexture(gl.TEXTURE_2D,nightTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tile);gl.generateMipmap(gl.TEXTURE_2D);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);for(const p of [sky,mesh,hand]){gl.useProgram(p);gl.uniform1f(gl.getUniformLocation(p,'nightReady'),1);}if(host.closest('dialog')?.open)render(currentZoom);};nightImage.src='/assets/eso-milkyway.jpg';
       const plantTexture=gl.createTexture();gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,plantTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([0,0,0,0]));
       gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
       gl.useProgram(mesh);gl.uniform1i(gl.getUniformLocation(mesh,'plantMap'),3);gl.uniform1f(gl.getUniformLocation(mesh,'plantReady'),0);
@@ -507,17 +516,20 @@
       gl.useProgram(mesh);gl.uniform1i(gl.getUniformLocation(mesh,'clothMap'),4);
       const clothImage=new Image();clothImage.onload=()=>{if(!alive)return;const tile=document.createElement('canvas');tile.width=tile.height=1024;tile.getContext('2d').drawImage(clothImage,0,0,1024,1024);gl.activeTexture(gl.TEXTURE4);gl.bindTexture(gl.TEXTURE_2D,clothTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tile);gl.generateMipmap(gl.TEXTURE_2D);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);if(host.closest('dialog')?.open)render(currentZoom);};clothImage.src='/assets/camp-canvas.png';
       const groundImage=new Image();groundImage.onload=()=>{
-        if(!alive)return;const tile=document.createElement('canvas');tile.width=tile.height=1024;tile.getContext('2d').drawImage(groundImage,0,0,1024,1024);
+        if(!alive)return;const tile=document.createElement('canvas');tile.width=tile.height=2048;tile.getContext('2d').drawImage(groundImage,0,0,2048,2048);
         gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tile);gl.generateMipmap(gl.TEXTURE_2D);
         gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);
         const anisotropy=gl.getExtension('EXT_texture_filter_anisotropic');if(anisotropy)gl.texParameterf(gl.TEXTURE_2D,anisotropy.TEXTURE_MAX_ANISOTROPY_EXT,Math.min(8,gl.getParameter(anisotropy.MAX_TEXTURE_MAX_ANISOTROPY_EXT)));
         gl.useProgram(mesh);gl.uniform1f(textureFlag,1);if(host.closest('dialog')?.open)render(currentZoom);
-      };groundImage.src='/assets/desert-ground-texture.png';
+      };groundImage.src='/assets/gravelly-sand-diff.jpg';
+      const normalTexture=gl.createTexture();gl.activeTexture(gl.TEXTURE6);gl.bindTexture(gl.TEXTURE_2D,normalTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([128,128,255,255]));gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+      for(const p of [mesh,hand]){gl.useProgram(p);gl.uniform1i(gl.getUniformLocation(p,'groundNormal'),6);}
+      const normalImage=new Image();normalImage.onload=()=>{if(!alive)return;gl.activeTexture(gl.TEXTURE6);gl.bindTexture(gl.TEXTURE_2D,normalTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,normalImage);gl.generateMipmap(gl.TEXTURE_2D);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);const ext=gl.getExtension('EXT_texture_filter_anisotropic');if(ext)gl.texParameterf(gl.TEXTURE_2D,ext.TEXTURE_MAX_ANISOTROPY_EXT,Math.min(8,gl.getParameter(ext.MAX_TEXTURE_MAX_ANISOTROPY_EXT)));if(host.closest('dialog')?.open)render(currentZoom);};normalImage.src='/assets/gravelly-sand-nor_gl.jpg';
       gl.useProgram(hand);for(const [name,unit] of [['groundMap',0],['panoramaMap',1],['shadeMap',2],['plantMap',3],['clothMap',4],['nightMap',5]])gl.uniform1i(gl.getUniformLocation(hand,name),unit);gl.uniform1f(gl.getUniformLocation(hand,'textured'),1);
       canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();alive=false;worker?.terminate();canvas.remove();onFailure?.();});
       function acceptWorld(result){if(!alive)return;world=result;gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,shadeTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.shadeSize,world.shadeSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.shade);ready=true;worker?.terminate();worker=null;onReady?.();}
       // Construct geometry off the UI thread; keep the landscape visible while it loads.
-      try{worker=new Worker('/desert-world.js?v=33');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
+      try{worker=new Worker('/desert-world.js?v=34');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
       catch{setTimeout(()=>acceptWorld(geometry()),0)}
       function render(zoom=1){
         if(!alive||!ready)return;currentZoom=zoom;
@@ -526,11 +538,11 @@
         gl.viewport(0,0,w,h);gl.clearColor(.015,.025,.05,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
         const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw),sp=Math.sin(state.pitch),cp=Math.cos(state.pitch);
         const eye=[state.x,ground(state.x,state.z)+(state.seated?1.03:1.72),state.z],right=[cy,0,sy],up=[-sy*sp,cp,cy*sp],forward=[sy*cp,sp,-cy*cp];
-        const lens=Math.tan(clamp(68/Math.sqrt(Math.max(.65,zoom)),45,84)*Math.PI/360);
+        const lens=viewLens(zoom,camp.binoculars);
         const sway=swayEnabled&&onFoot?[Math.sin(state.distance*3.7)*.008,Math.cos(state.distance*7.4)*.006]:[0,0];
         const flashlightPosition=eye.map((v,i)=>v+right[i]*(.263+sway[0]-Math.max(0,1-w/h)*.33)+up[i]*(-.24+sway[1])+forward[i]*.89);
         const flashlightDirection=forward.map((v,i)=>v*.990+up[i]*.05+right[i]*-.129),fl=Math.hypot(...flashlightDirection);for(let i=0;i<3;i++)flashlightDirection[i]/=fl;
-        function uniforms(i){gl.useProgram(i.p);gl.uniform3fv(i.uniform.eye,eye);gl.uniform3fv(i.uniform.right,right);gl.uniform3fv(i.uniform.up,up);gl.uniform3fv(i.uniform.forward,forward);gl.uniform1f(i.uniform.aspect,w/h);gl.uniform1f(i.uniform.lens,lens);gl.uniform1f(i.uniform.night,Number(camp.night));gl.uniform1f(i.uniform.time,time);gl.uniform1f(i.uniform.pixelAngle,2*lens/h);gl.uniform1f(i.uniform.satellitesOn,Number(camp.satellitesOn));gl.uniform2fv(i.uniform.handSway,sway);gl.uniform1f(i.uniform.flashlightOn,Number(onFoot&&camp.hands&&camp.flashlightOn));gl.uniform1f(i.uniform.redLight,Number(camp.redLight));gl.uniform3fv(i.uniform.flashlightPosition,flashlightPosition);gl.uniform3fv(i.uniform.flashlightDirection,flashlightDirection);gl.uniform1f(i.uniform.fireOn,Number(camp.fireOn));gl.uniform1f(i.uniform.lanternOn,Number(camp.lanternOn));gl.uniform1f(i.uniform.tentOpen,Number(camp.tentOpen));gl.uniform3fv(i.uniform.firePosition,CAMP.fire);gl.uniform3fv(i.uniform.lanternPosition,[-4.25,CAMP.tent[1]+.47,-9.22]);}
+        function uniforms(i){gl.useProgram(i.p);gl.uniform3fv(i.uniform.eye,eye);gl.uniform3fv(i.uniform.right,right);gl.uniform3fv(i.uniform.up,up);gl.uniform3fv(i.uniform.forward,forward);gl.uniform1f(i.uniform.aspect,w/h);gl.uniform1f(i.uniform.lens,lens);gl.uniform1f(i.uniform.night,Number(camp.night));gl.uniform1f(i.uniform.time,time);gl.uniform1f(i.uniform.pixelAngle,2*lens/h);gl.uniform1f(i.uniform.satellitesOn,Number(camp.satellitesOn));gl.uniform2fv(i.uniform.handSway,sway);gl.uniform1f(i.uniform.flashlightOn,Number(onFoot&&camp.hands&&camp.flashlightOn&&!camp.binoculars));gl.uniform1f(i.uniform.redLight,Number(camp.redLight));gl.uniform3fv(i.uniform.flashlightPosition,flashlightPosition);gl.uniform3fv(i.uniform.flashlightDirection,flashlightDirection);gl.uniform1f(i.uniform.fireOn,Number(camp.fireOn));gl.uniform1f(i.uniform.fireBoost,camp.fireBoost);gl.uniform1f(i.uniform.lanternOn,Number(camp.lanternOn));gl.uniform1f(i.uniform.tentOpen,Number(camp.tentOpen));gl.uniform3fv(i.uniform.firePosition,CAMP.fire);gl.uniform3fv(i.uniform.lanternPosition,[-4.25,CAMP.tent[1]+.47,-9.22]);}
         gl.disable(gl.DEPTH_TEST);uniforms(skyInfo);gl.bindBuffer(gl.ARRAY_BUFFER,skyBuffer);
         for(let i=0;i<3;i++)gl.disableVertexAttribArray(i);
         gl.enableVertexAttribArray(skyInfo.position);gl.vertexAttribPointer(skyInfo.position,2,gl.FLOAT,false,0,0);gl.drawArrays(gl.TRIANGLES,0,6);
@@ -543,18 +555,19 @@
           uniforms(emberInfo);gl.bindBuffer(gl.ARRAY_BUFFER,emberBuffer);for(let i=0;i<3;i++)gl.disableVertexAttribArray(i);gl.enableVertexAttribArray(emberInfo.position);gl.vertexAttribPointer(emberInfo.position,1,gl.FLOAT,false,0,0);gl.drawArrays(gl.POINTS,0,28);
           gl.depthMask(true);gl.disable(gl.BLEND);
         }
-        if(onFoot&&camp.hands&&handVisible){gl.clear(gl.DEPTH_BUFFER_BIT);uniforms(handInfo);gl.bindBuffer(gl.ARRAY_BUFFER,handBuffer);for(const [loc,size,offset] of [[handInfo.position,3,0],[handInfo.normal,3,12],[handInfo.material,2,24]]){gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);}gl.drawArrays(gl.TRIANGLES,0,handVertices.length/8);}
+        if(onFoot&&camp.hands&&handVisible&&!camp.binoculars){gl.clear(gl.DEPTH_BUFFER_BIT);uniforms(handInfo);gl.bindBuffer(gl.ARRAY_BUFFER,handBuffer);for(const [loc,size,offset] of [[handInfo.position,3,0],[handInfo.normal,3,12],[handInfo.material,2,24]]){gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);}gl.drawArrays(gl.TRIANGLES,0,handVertices.length/8);}
       }
       return {canvas,state,camp,points:CAMP,trail:TRAIL,terrainHeight:ground,render,
-        setWalking(value){onFoot=value;},setHandVisible(value){handVisible=value;},setMotion(value){swayEnabled=value;},
+        setWalking(value){onFoot=value;if(!value)camp.binoculars=false;},setHandVisible(value){handVisible=value;},setMotion(value){swayEnabled=value;},
         satellitePoints(){return [0,1,2].map(i=>satelliteDirection(time,i).map((v,j)=>v*1000+(j===0?state.x:j===1?ground(state.x,state.z)+1.72:state.z)));},
         watchSky(){camp.night=true;state.yaw=0;state.pitch=.61;render(currentZoom);},
         setCamp(patch){Object.assign(camp,patch);render(currentZoom);},
-        tick(dt){time+=Math.min(dt,.1);return camp.satellitesOn||camp.fireOn&&Math.hypot(state.x,state.z+8)<75;},
-        project(point){const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw),sp=Math.sin(state.pitch),cp=Math.cos(state.pitch),p=[point[0]-state.x,point[1]-ground(state.x,state.z)-(state.seated?1.03:1.72),point[2]-state.z];const d=p[0]*sy*cp+p[1]*sp-p[2]*cy*cp,lens=Math.tan(clamp(68/Math.sqrt(Math.max(.65,currentZoom)),45,84)*Math.PI/360);return {x:innerWidth/2+(p[0]*cy+p[2]*sy)/d/lens*innerHeight/2,y:innerHeight/2-(-p[0]*sy*sp+p[1]*cp+p[2]*cy*sp)/d/lens*innerHeight/2,depth:d,distance:Math.hypot(...p)};},
+        stoke(){camp.fireOn=true;camp.fireBoost=1;render(currentZoom);},
+        tick(dt){const step=Math.min(Math.max(0,dt),.1);time+=step;camp.fireBoost=Math.max(0,camp.fireBoost-step/18);return camp.satellitesOn||camp.fireOn&&Math.hypot(state.x,state.z+8)<75;},
+        project(point){const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw),sp=Math.sin(state.pitch),cp=Math.cos(state.pitch),p=[point[0]-state.x,point[1]-ground(state.x,state.z)-(state.seated?1.03:1.72),point[2]-state.z];const d=p[0]*sy*cp+p[1]*sp-p[2]*cy*cp,lens=viewLens(currentZoom,camp.binoculars);return {x:innerWidth/2+(p[0]*cy+p[2]*sy)/d/lens*innerHeight/2,y:innerHeight/2-(-p[0]*sy*sp+p[1]*cp+p[2]*cy*sp)/d/lens*innerHeight/2,depth:d,distance:Math.hypot(...p)};},
         visit(place){const positions={fire:[0,-5.15,0,-.14],tent:[-4.5,-6.25,0,.03],telescope:[3.5,-10.6,0,.13],camp:[0,-2.8,0,.025]};const p=positions[place]||positions.camp;Object.assign(state,{x:p[0],z:p[1],yaw:p[2],pitch:p[3],edge:false,seated:place==='fire'});render(currentZoom);},
         get ready(){return ready;},
-        look(dx,dy){state.yaw=(state.yaw-dx*.0035)%TAU;state.pitch=clamp(state.pitch+dy*.003,-1.4,1.4);},
+        look(dx,dy){state.yaw=(state.yaw-dx*(camp.binoculars?.0012:.0035))%TAU;state.pitch=clamp(state.pitch+dy*(camp.binoculars?.001:.003),-1.4,1.4);},
         turn(yaw,pitch){state.yaw=(state.yaw+yaw)%TAU;state.pitch=clamp(state.pitch+pitch,-1.4,1.4);},
         move:(forward,side,dt,fast)=>ready&&move(state,forward,side,dt,fast,world.obstacles),
         reset(){Object.assign(state,camera());}
@@ -564,5 +577,5 @@
   if(typeof window!=='undefined')window.ParallaxDesert={create};
   else if(typeof self!=='undefined')self.onmessage=()=>{const world=geometry();self.postMessage(world,[world.vertices.buffer,world.shade.buffer]);};
   // Pure movement and terrain helpers also support non-browser regression checks.
-  if(typeof module!=='undefined'&&module.exports)module.exports={ground,height,move,camera,geometry,handGeometry,CAMP,TRAIL,satelliteDirection,shaders:{skyVertex,skyFragment,meshVertex,meshFragment,fireVertex,fireFragment,emberVertex,emberFragment,handVertex}};
+  if(typeof module!=='undefined'&&module.exports)module.exports={viewLens,ground,height,move,camera,geometry,handGeometry,CAMP,TRAIL,satelliteDirection,shaders:{skyVertex,skyFragment,meshVertex,meshFragment,fireVertex,fireFragment,emberVertex,emberFragment,handVertex}};
 })();
