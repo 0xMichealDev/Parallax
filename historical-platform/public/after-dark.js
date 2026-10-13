@@ -21,7 +21,7 @@
     </footer><p id="ad-status" role="status"></p>`;
   document.body.append(dialog);
   const q=s=>dialog.querySelector(s),worldHost=q('.ad-world'),holeHost=q('.ad-singularity'),buttons=[];
-  let enabled=read('parallax.after-dark.auto')!=='off';
+  let enabled=read('parallax.after-dark.auto')==='on';
   let ground=null,hole=null,holeHome=null,returnFocus=null,last=0,drawn=0,raf=0,paused=false,dirty=true,closed=true,loadingSince=0,autoTimer=0,savedAt=0,clean=false,unavailable=false;
   const current=()=>D.SHOTS[playback.chapter];
   const worldShot=()=>current().id!=='singularity';
