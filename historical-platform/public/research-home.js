@@ -12,9 +12,9 @@
   };
   (async()=>{try{const state=await api('status');signedIn=state.signedIn;
     if(!signedIn)return;
-    $('home-research-submit').textContent='Create passport ↗';$('home-research-note').textContent='Saved privately to your account';$('home-account').textContent='Open all reports ↗';$('home-account').href='/control#vault';
+    $('home-research-submit').textContent='Create passport ↗';$('home-research-note').textContent='Private until you choose to share';$('home-account').textContent='Open all reports ↗';$('home-account').href='/control#vault';
     const {reports}=await api('reports');
     $('home-recent-heading').textContent=reports.length?'Pick up your research.':'Your first passport awaits.';
-    $('home-recent-list').innerHTML=reports.length?reports.slice(0,3).map(r=>`<a class="home-report-item" href="/control?report=${encodeURIComponent(r.id)}"><strong>Project Passport ↗</strong><code>${escape(r.address.slice(0,8)+'…'+r.address.slice(-6))}</code><small>${escape(new Date(r.createdAt).toLocaleString())}</small></a>`).join(''):'<p>Research a token to start your history. Save another snapshot later to see what changed.</p>';
+    $('home-recent-list').innerHTML=reports.length?reports.slice(0,3).map(r=>`<a class="home-report-item" href="/control?report=${encodeURIComponent(r.id)}"><strong>${escape(r.name||r.symbol||'Project Passport')} ↗</strong><code>${escape(r.address.slice(0,8)+'…'+r.address.slice(-6))}</code><small>${escape(new Date(r.createdAt).toLocaleString())}</small></a>`).join(''):'<p>Research a token to start your history. Save another snapshot later to see what changed.</p>';
   }catch{$('home-recent-list').textContent='Open Mission Control to check your saved research.';}})();
 })();
