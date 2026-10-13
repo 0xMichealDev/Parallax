@@ -36,6 +36,9 @@
       const t=this.ctx.currentTime;if(this.ctx.state!=='running'||t<this.nextStep)return;this.nextStep=t+.16;
       const source=this.ctx.createBufferSource(),gain=this.ctx.createGain();source.buffer=this.stepBuffer;source.playbackRate.value=.88+Math.random()*.22;gain.gain.value=.42;source.connect(gain);gain.connect(this.master);source.onended=()=>{source.disconnect();gain.disconnect();};source.start();
     }
+    ping(strength){
+      if(this.ctx.state!=='running')return;const t=this.ctx.currentTime,osc=this.ctx.createOscillator(),gain=this.ctx.createGain();osc.type='sine';osc.frequency.value=420+clamp(strength)*780;gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.035,t+.008);gain.gain.exponentialRampToValueAtTime(.0001,t+.10);osc.connect(gain);gain.connect(this.master);osc.onended=()=>{osc.disconnect();gain.disconnect();};osc.start(t);osc.stop(t+.12);
+    }
     suspend(){this.level(0,0);this.riverLevel(0);this.ctx.suspend().catch(()=>{});}
   }
   window.ParallaxCampSound=CampSound;

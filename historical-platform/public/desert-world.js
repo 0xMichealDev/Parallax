@@ -58,8 +58,9 @@
     {id:'east',name:'Meteorite trail',width:1.8,points:[[6,-3],[9,-11],[13,-18],[15,-25],[18,-31],[24,-34],[34,-39],[45,-45]]},
     {id:'wash',name:'Riverbank trail',width:2.0,points:[[6,-3],[15,0],[24,3],[28,10],[28,18],[31,22],[37,22],[43,22],[47,22]]},
     {id:'loop',name:'River return trail',width:1.8,points:[[24,3],[21,-5],[21,-14],[15,-25]]},
-    {id:'launch-road',name:'Launch campus access road',width:3.4,points:[[-47,-48],[-48,-54],[-59,-58],[-70,-64],[-82,-76],[-95,-84],[-104,-92],[-104,-103]]},
+    {id:'launch-road',name:'Launch campus access road',width:3.4,points:[[-47,-48],[-48,-54],[-59,-58],[-70,-64],[-82,-76],[-99,-79],[-104,-92],[-104,-103]]},
     {id:'campus-loop',name:'Launch forecourt',width:4.2,points:[[-104,-92],[-117,-92],[-117,-109],[-105,-110],[-97,-109],[-97,-96],[-104,-92]]},
+    {id:'research-lab',name:'Research lab access',width:1.6,points:[[-104,-92],[-101,-84],[-96,-80],[-88,-80],[-88,-84],[-88,-89],[-88,-93]]},
     {id:'boarding',name:'Crew boarding path',width:2.6,points:[[-105,-110],[-105,-113]]},
     {id:'river-walk',name:'Lower river trail',width:1.6,points:[[47,22],...Array.from({length:13},(_,i)=>{const z=31+i*11;return [riverX(z)+riverWidth(z)+4.5,z];})]},
     {id:'signal',name:'Unmarked spur',width:1.25,hidden:true,points:[[45,-45],[48,-51],[53,-54],[56,-58],[58,-61]]}
@@ -199,7 +200,7 @@
     uniform float objectMode;uniform vec3 objectOrigin;uniform vec4 objectPose;
     varying vec3 point; varying vec3 norm; varying vec2 kind; varying vec3 surfacePoint;
     void main(){surfacePoint=position;point=position;norm=normal;kind=material;
-      if(material.x>59.5)point.y+=launchHeight;
+      if(material.x>59.5&&material.x<64.5)point.y+=launchHeight;
       if(material.x>52.5&&material.x<53.5)point.y+=.012*sin(position.z*2.1-time*2.3)+.008*sin(position.x*3.7+position.z*.9-time*1.7);
       if(material.x>53.5&&material.x<54.5)point.x+=sin(time*1.3+position.x*.7+position.z*.3)*.045*(1.-normal.y);
       if(objectMode>.5){point=vec3(position.x*objectPose.x-position.z*objectPose.y,position.y,position.x*objectPose.y+position.z*objectPose.x);point.y+=point.x*objectPose.z+point.z*objectPose.w;point+=objectOrigin;norm=vec3(normal.x*objectPose.x-normal.z*objectPose.y,normal.y,normal.x*objectPose.y+normal.z*objectPose.x);norm.x-=objectPose.z*norm.y;norm.z-=objectPose.w*norm.y;norm=normalize(norm);}
@@ -209,6 +210,7 @@
   const meshFragment = `#extension GL_OES_standard_derivatives : enable\n` + common + `
     varying vec3 point; varying vec3 norm; varying vec2 kind; varying vec3 surfacePoint;
     uniform vec4 roverShadowA,roverShadowB;
+    uniform float scannerStrength,scanProgress,artifactInstalled;
     uniform float flashlightOn,redLight,fireBoost,ufoAwake,campusLights,cabinMode,liftMode,launchHeight;uniform vec3 flashlightPosition,flashlightDirection;
     uniform sampler2D clothMap; uniform float time; uniform float fireOn; uniform float lanternOn; uniform float tentOpen; uniform vec3 firePosition; uniform vec3 lanternPosition;
     uniform sampler2D trailMap; uniform sampler2D groundNormal; uniform sampler2D groundMap; uniform sampler2D shadeMap; uniform sampler2D plantMap; uniform float plantReady; uniform float textured;
@@ -220,8 +222,18 @@
     float roverShade(vec4 vehicle){if(dot(vehicle.zw,vehicle.zw)<.5)return 0.;vec2 d=point.xz-vehicle.xy;vec2 p=vec2(dot(d,vec2(vehicle.w,vehicle.z)),dot(d,vec2(-vehicle.z,vehicle.w)));return exp(-pow(p.x/1.03,4.)-pow(p.y/2.71,4.))*.70;}
     float flashlight(vec3 point){vec3 p=point-flashlightPosition;float distance=length(p),angle=dot(normalize(p),flashlightDirection);return flashlightOn*smoothstep(.885,.965,angle)*(1.-smoothstep(23.,40.,distance))*5.5/(1.+distance*distance*.07);}
     void main(){
+      if(kind.x>69.5&&kind.x<70.5){
+        vec2 uv=(surfacePoint.xy-vec2(.215,-.355))/vec2(.205,.245),p=(uv-.5)*2.;float r=length(p),ring=pow(.5+.5*cos(r*23.),22.)*.12;
+        float sweep=pow(max(0.,cos(atan(p.y,p.x)-time*1.7)),28.)*(1.-smoothstep(.6,1.,r));
+        float trace=1.-smoothstep(.015,.042,abs(p.y-sin(p.x*14.+time*4.)*(.04+scannerStrength*.25)));
+        vec3 c=vec3(.006,.022,.027)+vec3(.05,.64,.49)*(ring+sweep*.32+trace*.30);if(uv.y<.055&&uv.x<scanProgress)c+=vec3(.2,1.,.75);
+        gl_FragColor=vec4(c,1.);return;
+      }
+      if(kind.x>70.5&&kind.x<71.5){if(artifactInstalled<.5)discard;gl_FragColor=vec4(vec3(.12,.65,.85)*(.7+.2*sin(time*1.4))+abs(normalize(norm))*.14,1.);return;}
+      if(kind.x>71.5&&kind.x<72.5){vec3 glow=vec3(.17,.64,.64);if(point.z< -95.&&point.y>${(ground(-88,-90)+1.2).toFixed(6)}){vec2 p=point.xy*12.;float wave=1.-smoothstep(.07,.19,abs(fract(p.y*.15)-(.5+.12*sin(p.x*1.3+time))));float grid=step(.95,fract(p.x))+step(.95,fract(p.y));glow=vec3(.005,.04,.06)+vec3(.10,.65,.52)*(grid*.10+wave*.6);}gl_FragColor=vec4(glow,1.);return;}
+      if(kind.x>72.5&&kind.x<73.5){vec2 uv=vec2(clamp((point.x+90.2)/4.4,0.,1.),1.-clamp((point.y-${(ground(-88,-90)+3.1).toFixed(6)})/.95,0.,1.));gl_FragColor=vec4(texture2D(clothMap,vec2(.5+uv.x*.5,(600.+uv.y*220.)/2048.)).rgb,1.);return;}
       if(kind.x>59.5&&kind.x<63.5&&cabinMode<.5)discard;
-      if(kind.x>63.5&&liftMode<.5)discard;
+      if(kind.x>63.5&&kind.x<64.5&&liftMode<.5)discard;
       if(cabinMode>.5&&kind.x<59.5&&length(point.xz-vec2(-110.,-120.))<6.6&&point.y>${(ground(-110,-120)+45).toFixed(6)})discard;
       if(kind.x>3.5&&kind.x<4.5&&panoramaReady>.5&&night<.5)discard;
       if(kind.x>14.5&&kind.x<15.5&&tentOpen>.5)discard;
@@ -382,6 +394,8 @@
       float alienPulse=.72+.10*sin(time*1.3);vec3 toWreck=vec3(65.,${(ground(65,-69)+1.1).toFixed(6)},-69.)-point;
       illumination+=vec3(.04,.85,1.1)*(0.22+ufoAwake*.65)*alienPulse*max(.1,dot(n,normalize(toWreck)))/(1.+dot(toWreck,toWreck)*.17);
       float campusGlow=campusLights*(1.-smoothstep(34.,70.,length(point.xz-vec2(-111.,-106.))));
+      float labLight=(1.-smoothstep(4.5,5.5,abs(point.x+88.)))*(1.-smoothstep(6.,7.,abs(point.z+90.)))*(1.-smoothstep(${(ground(-88,-90)+4.5).toFixed(6)},${(ground(-88,-90)+5.5).toFixed(6)},point.y));
+      illumination+=vec3(.15,.23,.26)*labLight;
       illumination+=vec3(.10,.13,.17)*campusGlow*(.25+.75*max(n.y,0.));
       for(int j=0;j<6;j++){float f=float(j);vec3 lightPos=vec3(j==0?-143.:j==1?-119.:j==2?-79.:j==3?-79.:j==4?-143.:-110.,${(ground(-111,-106)+7.5).toFixed(6)},j==0||j==1?-79.:j==2?-81.:j==3?-107.:j==4?-109.:-137.);vec3 l=lightPos-point;illumination+=vec3(1.25,.97,.68)*campusLights*max(.08,dot(n,normalize(l)))*15./(1.+dot(l,l)*.32);}
       if(kind.x>59.5&&kind.x<63.5)illumination=vec3(.25,.31,.35)+max(0.,dot(n,normalize(vec3(.15,1.,.3))))*.35;
@@ -473,15 +487,27 @@
     void main(){surfacePoint=position;vec3 local=position+vec3(handSway,0.);local.x-=max(0.,1.-aspect)*.33;float depth=-local.z;point=eye+right*local.x+up*local.y-forward*local.z;norm=normalize(right*normal.x+up*normal.y-forward*normal.z);kind=material;
     gl_Position=vec4(local.x/(aspect*lens),local.y/lens,1.000025*depth-.10000125,depth);}
   `;
-  function handGeometry(){
+  function handGeometry(scanner=false){
     const data=[];
     const vertex=(p,n,k)=>data.push(...p,...n,k,.5);
     function tri(a,b,c,na,nb,nc,k){vertex(a,na,k);vertex(b,nb,k);vertex(c,nc,k);}
     function sphere(center,size,k){const rows=12,sides=20;const point=(i,j)=>{const lat=-Math.PI/2+i/rows*Math.PI,a=j/sides*TAU,n=[Math.cos(lat)*Math.cos(a),Math.sin(lat),Math.cos(lat)*Math.sin(a)];return {p:center.map((v,t)=>v+n[t]*size[t]),n};};for(let i=0;i<rows;i++)for(let j=0;j<sides;j++){const a=point(i,j),b=point(i+1,j),c=point(i,j+1),d=point(i+1,j+1);tri(a.p,b.p,c.p,a.n,b.n,c.n,k);tri(c.p,b.p,d.p,c.n,b.n,d.n,k);}}
     function cylinder(a,b,r,k,sides=24){let d=b.map((v,i)=>v-a[i]),len=Math.hypot(...d);d=d.map(v=>v/len);let u=[d[1],-d[0],0];if(Math.hypot(...u)<.001)u=[1,0,0];len=Math.hypot(...u);u=u.map(v=>v/len);const v=[d[1]*u[2]-d[2]*u[1],d[2]*u[0]-d[0]*u[2],d[0]*u[1]-d[1]*u[0]];const n=i=>u.map((x,j)=>x*Math.cos(i/sides*TAU)+v[j]*Math.sin(i/sides*TAU));for(let i=0;i<sides;i++){const na=n(i),nb=n(i+1),pa=a.map((x,j)=>x+na[j]*r),pb=a.map((x,j)=>x+nb[j]*r),pc=b.map((x,j)=>x+na[j]*r),pd=b.map((x,j)=>x+nb[j]*r);tri(pa,pc,pb,na,na,nb,k);tri(pb,pc,pd,nb,na,nb,k);tri(a,pb,pa,d.map(x=>-x),d.map(x=>-x),d.map(x=>-x),k);tri(b,pc,pd,d,d,d,k);}}
     // A canvas sleeve and a fitted tan field glove gripping a metal flashlight.
-    cylinder([.57,-.66,-.24],[.35,-.36,-.49],.082,17);sphere([.35,-.36,-.49],[.087,.084,.091],17);
-    cylinder([.36,-.39,-.46],[.32,-.30,-.57],.066,17);sphere([.316,-.275,-.60],[.063,.052,.089],16);
+    if(scanner){cylinder([.64,-.66,-.24],[.47,-.43,-.56],.080,17);sphere([.47,-.40,-.58],[.074,.072,.065],17);sphere([.47,-.335,-.62],[.052,.084,.045],16);}
+    else{cylinder([.57,-.66,-.24],[.35,-.36,-.49],.082,17);sphere([.35,-.36,-.49],[.087,.084,.091],17);cylinder([.36,-.39,-.46],[.32,-.30,-.57],.066,17);sphere([.316,-.275,-.60],[.063,.052,.089],16);}
+    if(scanner){
+      function quad(a,b,c,d,k){const ab=b.map((v,i)=>v-a[i]),ac=c.map((v,i)=>v-a[i]);let n=[ab[1]*ac[2]-ab[2]*ac[1],ab[2]*ac[0]-ab[0]*ac[2],ab[0]*ac[1]-ab[1]*ac[0]],l=Math.hypot(...n);n=n.map(v=>v/l);tri(a,b,c,n,n,n,k);tri(a,c,d,n,n,n,k);}
+      function box(x,y,z,w,h,d,k){const a=[x-w/2,y-h/2,z+d/2],b=[x+w/2,y-h/2,z+d/2],c=[x+w/2,y+h/2,z+d/2],e=[x-w/2,y+h/2,z+d/2],back=p=>[p[0],p[1],p[2]-d];quad(a,b,c,e,k);quad(back(b),back(a),back(e),back(c),k);quad(a,e,back(e),back(a),k);quad(b,back(b),back(c),c,k);quad(e,c,back(c),back(e),k);}
+      box(.317,-.25,-.61,.27,.38,.07,21);box(.317,-.233,-.565,.235,.29,.025,8);
+      quad([.215,-.355,-.546],[.42,-.355,-.546],[.42,-.11,-.546],[.215,-.11,-.546],70);
+      for(const x of [.22,.414])for(const y of [-.42,-.08])sphere([x,y,-.56],[.012,.012,.008],35);
+      for(const x of [.25,.31,.37])box(x,-.405,-.559,.03,.016,.018,35);
+      cylinder([.22,-.075,-.63],[.20,.09,-.64],.011,35,12);sphere([.20,.09,-.64],[.014,.018,.014],8);
+      for(let i=0;i<4;i++){const yy=-.37+i*.038;cylinder([.40,yy,-.63],[.456,yy+.01,-.58],.018,16,12);sphere([.452,yy+.01,-.58],[.02,.02,.023],16);}
+      cylinder([.45,-.38,-.59],[.416,-.32,-.535],.022,16,14);
+      return new Float32Array(data);
+    }
     const rear=[.315,-.26,-.49],front=[.263,-.24,-.89],axis=front.map((v,i)=>v-rear[i]),at=t=>rear.map((v,i)=>v+axis[i]*t);
     cylinder(rear,at(.8),.042,21);cylinder(at(.73),at(.93),.065,8);cylinder(at(.88),front,.073,21);cylinder(front,at(1.015),.061,18);
     for(let i=0;i<8;i++)cylinder(at(.10+i*.065),at(.115+i*.065),.044,8,24);
@@ -685,6 +711,7 @@
     }
     // Low stakes at bends make the paths readable in the dark without a glowing runway.
     for(const route of ROUTES)for(let i=8;i<route.points.length;i+=13){const p=route.points[i],prev=route.points[i-1],dx=p[0]-prev[0],dz=p[1]-prev[1],length=Math.hypot(dx,dz),side=route.width/2+.36,x=p[0]-dz/length*side,z=p[1]+dx/length*side,y=ground(x,z);
+      if(x>-93.3&&x<-82.7&&z>-96.8&&z<-83.2)continue;
       cylinder([x,y,z],[x+(route.hidden?.18:0),y+(route.hidden?.3:.46),z],.025,8,8);if(!route.hidden)cylinder([x,y+.38,z],[x,y+.44,z],.038,22,8);
     }
     // A sandstone arch is open underneath so visitors can walk through it.
@@ -757,7 +784,35 @@
       building(-131,-94,20,24,14);box(-131,-81.92,15,.10,8.2,34); // Large integration hangar door.
       for(let x=-138;x<-124;x+=2.8)box(x,-81.82,2.1,.06,1.5,36,y+10.5);
       quad([-140,y+5,-81.75],[-122,y+5,-81.75],[-122,y+11,-81.75],[-140,y+11,-81.75],32);
-      building(-88,-90,10,13,5.5);for(let x=-91;x<-84;x+=2)box(x,-83.46,1.4,.08,1.5,36,y+2.7);
+      // Research lab: an open doorway and a furnished, fully walkable interior.
+      const wall=(x,z,w,d,h,base=y)=>{box(x,z,w,d,h,33,base);if(base>y+.2)return;const long=Math.max(w,d);for(let t=-long/2+.12;t<long/2;t+=.28)obstacles.push({x:x+(w>d?t:0),z:z+(d>=w?t:0),radius:.20});};
+      wall(-93,-90,.24,13,4.5);wall(-83,-90,.24,13,4.5);wall(-88,-96.5,10,.24,4.5);
+      wall(-91.175,-83.5,3.65,.24,4.5);wall(-84.825,-83.5,3.65,.24,4.5);wall(-88,-83.5,2.7,.24,1.55,y+2.95);
+      box(-88,-90,9.8,12.8,.04,31,y+.012);box(-88,-90,10.5,13.5,.22,35,y+4.5);
+      // Ceiling underside and emergency strips remain lit during the campus outage.
+      quad([-92.9,y+4.5,-96.4],[-82.9,y+4.5,-96.4],[-82.9,y+4.5,-83.4],[-92.9,y+4.5,-83.4],33);
+      for(const x of [-89.35,-86.65]){box(x,-83.33,.09,.13,2.98,72);box(x,-83.33,.18,.19,.12,35,y+3.0);}
+      for(const x of [-88.77,-87.23]){cylinder([x,y,-82.2],[x,y+.82,-82.2],.07,35,10);cylinder([x,y+.65,-82.2],[x,y+.80,-82.2],.075,72,10);obstacles.push({x,z:-82.2,radius:.09});}
+      for(const x of [-92.6,-83.4]){box(x,-90,.09,11,.07,72,y+.14);for(const z of [-86,-90,-94])box(x,z,.08,1,.65,72,y+2.5);}
+      for(let z=-83;z>-93;z-=.75)box(-88,z,.06,.23,.009,72,y+.06);
+      quad([-90.2,y+3.1,-83.32],[-85.8,y+3.1,-83.32],[-85.8,y+4.05,-83.32],[-90.2,y+4.05,-83.32],73);
+      // Rear briefing console with three inset displays, keyboard and service cabinetry.
+      box(-88,-95.15,5.8,1.0,1.03,35);obstacles.push({x:-89.8,z:-95.15,radius:.55},{x:-88,z:-95.15,radius:.55},{x:-86.2,z:-95.15,radius:.55});
+      for(const x of [-89.8,-88,-86.2]){box(x,-95.4,1.36,.16,.86,8,y+1.14);box(x,-95.29,1.2,.03,.69,72,y+1.22);for(let j=0;j<5;j++)box(x-.44+j*.2,-94.76,.13,.23,.025,8,y+1.055);}
+      for(const x of [-90.5,-85.5])box(x,-94.59,.05,.06,.75,10,y+.16);
+      // Eastern power router and battery racks; the center aisle stays clear.
+      box(-83.6,-89, .65,3.0,1.8,35);for(const z of [-90,-88])obstacles.push({x:-83.6,z,radius:.4});
+      for(let row=0;row<3;row++)for(let col=0;col<3;col++)box(-83.97,-89.6+col*.38,.045,.22,.19,72,y+.70+row*.30);
+      // Western specimen cradle. The recovered fragment appears only after delivery.
+      box(-91.45,-90,1.55,2.5,.92,35);obstacles.push({x:-91.45,z:-90.65,radius:.7},{x:-91.45,z:-89.35,radius:.7});
+      cylinder([-91.45,y+.93,-90],[-91.45,y+1.03,-90],.52,8,32);cylinder([-91.45,y+1.03,-90],[-91.45,y+1.065,-90],.47,72,32);
+      for(const dx of [-.62,.62])cylinder([-91.45+dx,y+.94,-90],[-91.45+dx,y+2.0,-90],.035,35,10);
+      for(let i=0;i<6;i++){const a=i/6*TAU,b=(i+1)/6*TAU,top=[-91.45,y+1.90,-90],bottom=[-91.45,y+1.15,-90],pa=[-91.45+Math.cos(a)*.32,y+1.50,-90+Math.sin(a)*.32],pb=[-91.45+Math.cos(b)*.32,y+1.50,-90+Math.sin(b)*.32];tri(top,pa,pb,71);tri(bottom,pb,pa,71);}
+      // Shelves, labeled equipment shapes, ventilation slats and roof hardware.
+      for(const level of [.7,1.5,2.3]){box(-92.5,-86.7,.6,2.0,.09,35,y+level);for(const z of [-87.3,-86.6,-86])box(-92.45,z,.32,.35,.3,level>2?72:8,y+level+.09);}
+      for(let i=0;i<12;i++)box(-90.8+i*.48,-96.31,.3,.025,.035,10,y+3.5);
+      box(-86,-88,3.2,3,1.1,33,y+4.76);box(-91,-93,2.3,2.3,.12,20,y+4.77);
+
       // Structural frames, roof equipment, conduits and a lit pedestrian entrance.
       for(const x of [-141.2,-121]){box(x,-94,.28,24.8,14.4,35);box(x,-94,.42,25,.25,35,y+14.4);for(let z=-105;z<-81;z+=4)box(x,z,.34,.26,13.5,35);}
       box(-131,-94,20.7,24.8,.25,35,y+14);box(-131,-81.68,20.4,.12,.22,37,y+12.2);
@@ -765,9 +820,10 @@
       for(let x=-139;x<-122;x+=2.1){box(x,-81.8,.06,.13,4.8,35);box(x,-106.3,.12,.3,14,35);}
       for(let j=0;j<9;j++)box(-131,-81.78,15,.06,.028,35,y+.4+j*.48);
       for(const x of [-141.4,-120.7]){cylinder([x,y+.3,-81.8],[x,y+13.8,-81.8],.075,35,10);for(let j=0;j<7;j++)cylinder([x,y+j*2,-81.8],[x,y+j*2+.08,-81.8],.115,35,10);}
-      box(-88,-90,10.5,13.5,.26,35,y+5.5);box(-86,-88,3.2,3,1.1,33,y+5.76);box(-91,-93,2.3,2.3,.12,20,y+5.77);
+
+      box(-92,-94,.45,.45,.94,35,y+4.68);
       cylinder([-92,y+5.6,-94],[-92,y+9.7,-94],.055,35,10);for(let j=0;j<4;j++)cylinder([-93,y+7+j*.7,-94],[-91,y+7+j*.7,-94],.026,35,8);
-      box(-93.08,-91,.10,1.4,2.4,40);box(-94,-91,1.8,2.3,.16,35,y+2.45);box(-94,-91,1.8,2.3,.035,37,y+2.40);
+
       // Service crates and a receiver pedestal give mission interactions physical anchors.
       box(-115,-83,1.1,.75,.7,35);box(-115,-83,1.16,.80,.10,36,y+.7);for(const x of [-115.4,-114.6])box(x,-83,.045,.85,.78,10);
       obstacles.push({x:-115,z:-83,radius:.65});box(-101,-96,.60,.5,1.0,35);box(-101,-96,.66,.55,.1,36,y+1.0);obstacles.push({x:-101,z:-96,radius:.42});
@@ -849,7 +905,7 @@
     const canvas=document.createElement('canvas');canvas.id='u-desert';canvas.setAttribute('aria-hidden','true');
     const gl=canvas.getContext('webgl',{alpha:false,antialias:true,powerPreference:'low-power'});
     if(!gl)return null;gl.getExtension('OES_standard_derivatives');
-    let alive=true,currentZoom=1,currentShot=null,ready=false,worker=null;const state=camera(),camp={fireOn:true,lanternOn:true,tentOpen:true,night:true,flashlightOn:true,redLight:false,hands:true,satellitesOn:true,binoculars:false,fireBoost:0,ufoAwake:false,campusLights:true};let time=4,onFoot=false,handVisible=true,swayEnabled=true;
+    let alive=true,currentZoom=1,currentShot=null,ready=false,worker=null;const state=camera(),camp={fireOn:true,lanternOn:true,tentOpen:true,night:true,flashlightOn:true,redLight:false,hands:true,satellitesOn:true,binoculars:false,fireBoost:0,ufoAwake:false,campusLights:true,scanner:false,scannerStrength:0,scanProgress:0,artifactInstalled:false};let time=4,onFoot=false,handVisible=true,swayEnabled=true;
     const Life=window.ParallaxLife,life=Life?.create(),Rocket=window.ParallaxRocket,flight=Rocket?.create();const lifeBuffers=new Map();
     function program(v,f){const p=gl.createProgram();for(const [type,src] of [[gl.VERTEX_SHADER,v],[gl.FRAGMENT_SHADER,f]]){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));gl.attachShader(p,s);gl.deleteShader(s);}gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));return p;}
     try{
@@ -857,8 +913,9 @@
 
       const skyBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,skyBuffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
       const meshBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);
-      const info=p=>({p,position:gl.getAttribLocation(p,'position'),normal:gl.getAttribLocation(p,'normal'),material:gl.getAttribLocation(p,'material'),uniform:Object.fromEntries(['eye','right','up','forward','aspect','lens','time','fireOn','lanternOn','tentOpen','firePosition','lanternPosition','night','flashlightOn','redLight','flashlightPosition','flashlightDirection','handSway','pixelAngle','satellitesOn','fireBoost','ufoAwake','campusLights','objectMode','objectOrigin','objectPose','roverShadowA','roverShadowB','cabinMode','liftMode','launchHeight'].map(n=>[n,gl.getUniformLocation(p,n)]))});
+      const info=p=>({p,position:gl.getAttribLocation(p,'position'),normal:gl.getAttribLocation(p,'normal'),material:gl.getAttribLocation(p,'material'),uniform:Object.fromEntries(['eye','right','up','forward','aspect','lens','time','fireOn','lanternOn','tentOpen','firePosition','lanternPosition','night','flashlightOn','redLight','flashlightPosition','flashlightDirection','handSway','pixelAngle','satellitesOn','fireBoost','ufoAwake','campusLights','objectMode','objectOrigin','objectPose','roverShadowA','roverShadowB','cabinMode','liftMode','launchHeight','scannerStrength','scanProgress','artifactInstalled'].map(n=>[n,gl.getUniformLocation(p,n)]))});
       const skyInfo=info(sky),meshInfo=info(mesh),fireInfo=info(fire),emberInfo=info(embers),handInfo=info(hand);
+      const scannerVertices=handGeometry(true),scannerBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,scannerBuffer);gl.bufferData(gl.ARRAY_BUFFER,scannerVertices,gl.STATIC_DRAW);
       const handVertices=handGeometry(),handBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,handBuffer);gl.bufferData(gl.ARRAY_BUFFER,handVertices,gl.STATIC_DRAW);
       const emberBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,emberBuffer);gl.bufferData(gl.ARRAY_BUFFER,Float32Array.from({length:28},(_,i)=>i),gl.STATIC_DRAW);host.append(canvas);
       const texture=gl.createTexture();gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
@@ -893,7 +950,7 @@
       gl.useProgram(mesh);gl.uniform1i(gl.getUniformLocation(mesh,'clothMap'),4);
       const clothAtlas=document.createElement('canvas');clothAtlas.width=2048;clothAtlas.height=2048;const atlasCtx=clothAtlas.getContext('2d');atlasCtx.fillStyle='#aa9169';atlasCtx.fillRect(0,0,1024,2048);
       function uploadAtlas(){if(!alive)return;gl.activeTexture(gl.TEXTURE4);gl.bindTexture(gl.TEXTURE_2D,clothTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,clothAtlas);gl.generateMipmap(gl.TEXTURE_2D);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);if(canvas.closest('dialog')?.open)render(currentZoom,currentShot);}
-      function paintSign(logo){atlasCtx.save();atlasCtx.translate(1024,0);atlasCtx.fillStyle='#091119';atlasCtx.fillRect(0,0,1024,2048);atlasCtx.scale(1,1.5);atlasCtx.strokeStyle='#758590';atlasCtx.lineWidth=2;atlasCtx.strokeRect(12,12,1000,317);atlasCtx.fillStyle='#e5edf2';if(logo){atlasCtx.filter='invert(1)';atlasCtx.drawImage(logo,72,61,880,110);atlasCtx.filter='none';}else{atlasCtx.font='italic 110px sans-serif';atlasCtx.fillText('SPACEX',100,156);}atlasCtx.font='27px monospace';atlasCtx.fillText('DESERT LAUNCH CAMPUS',188,238);atlasCtx.fillStyle='#94aab6';atlasCtx.font='18px monospace';atlasCtx.fillText('PARALLAX / FAN-BUILT EXPERIENCE',183,282);atlasCtx.restore();uploadAtlas();}
+      function paintSign(logo){atlasCtx.save();atlasCtx.translate(1024,0);atlasCtx.fillStyle='#091119';atlasCtx.fillRect(0,0,1024,2048);atlasCtx.scale(1,1.5);atlasCtx.strokeStyle='#758590';atlasCtx.lineWidth=2;atlasCtx.strokeRect(12,12,1000,317);atlasCtx.fillStyle='#e5edf2';if(logo){atlasCtx.filter='invert(1)';atlasCtx.drawImage(logo,72,61,880,110);atlasCtx.filter='none';}else{atlasCtx.font='italic 110px sans-serif';atlasCtx.fillText('SPACEX',100,156);}atlasCtx.font='27px monospace';atlasCtx.fillText('DESERT LAUNCH CAMPUS',188,238);atlasCtx.fillStyle='#94aab6';atlasCtx.font='18px monospace';atlasCtx.fillText('PARALLAX / FAN-BUILT EXPERIENCE',183,282);atlasCtx.restore();atlasCtx.fillStyle='#091b25';atlasCtx.fillRect(1024,600,1024,220);atlasCtx.fillStyle='#b8fff0';atlasCtx.font='bold 66px sans-serif';atlasCtx.fillText('RESEARCH LAB',1110,698);atlasCtx.font='29px monospace';atlasCtx.fillText('PARALLAX / FIELD SCIENCE',1120,763);uploadAtlas();}
       const clothImage=new Image();clothImage.onload=()=>{atlasCtx.drawImage(clothImage,0,0,1024,1024);uploadAtlas();};clothImage.src='/assets/camp-canvas.png';const barkImage=new Image();barkImage.onload=()=>{atlasCtx.drawImage(barkImage,0,1024,1024,1024);uploadAtlas();};barkImage.src='/assets/log-bark.jpg';paintSign();const logoImage=new Image();logoImage.onload=()=>paintSign(logoImage);logoImage.src='/assets/spacex-logo.svg';
       const groundImage=new Image();groundImage.onload=()=>{
         if(!alive)return;const tile=document.createElement('canvas');tile.width=tile.height=2048;tile.getContext('2d').drawImage(groundImage,0,0,2048,2048);
@@ -910,7 +967,7 @@
       canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();alive=false;worker?.terminate();canvas.remove();onFailure?.();});
       function acceptWorld(result){if(!alive)return;world=result;gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,shadeTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.shadeSize,world.shadeSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.shade);gl.activeTexture(gl.TEXTURE7);gl.bindTexture(gl.TEXTURE_2D,trailTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.trailSize,world.trailSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.trailMask);ready=true;worker?.terminate();worker=null;onReady?.();}
       // Construct geometry off the UI thread; keep the landscape visible while it loads.
-      try{worker=new Worker('/desert-world.js?v=41');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
+      try{worker=new Worker('/desert-world.js?v=43');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
       catch{setTimeout(()=>acceptWorld(geometry()),0)}
       function cameraEye(){
         const base=[state.x,walkingGround(state.x,state.z)+(state.seated?1.03:1.72),state.z];if(flight&&flight.mode!=='ground'){base[1]=ground(-110,-120)+(flight.mode==='lift'?flight.rise:54+flight.rise)+1.62;return base;}if(!life?.driving)return base;
@@ -932,7 +989,7 @@
         let flashlightPosition=eye.map((v,i)=>v+right[i]*(.263+sway[0]-Math.max(0,1-w/h)*.33)+up[i]*(-.24+sway[1])+forward[i]*.89);
         let flashlightDirection=forward.map((v,i)=>v*.990+up[i]*.05+right[i]*-.129),fl=Math.hypot(...flashlightDirection);for(let i=0;i<3;i++)flashlightDirection[i]/=fl;
         if(life?.driving){const v=Life.active(life);flashlightPosition=[v.x+Math.sin(v.yaw)*2.8,ground(v.x,v.z)+.9,v.z-Math.cos(v.yaw)*2.8];flashlightDirection=[Math.sin(v.yaw),-.035,-Math.cos(v.yaw)];}
-        function uniforms(i){gl.useProgram(i.p);gl.uniform1f(i.uniform.liftMode,Number(!shot&&flight?.mode==='lift'));gl.uniform1f(i.uniform.cabinMode,Number(!shot&&flight&&['cabin','launch','orbit'].includes(flight.mode)));gl.uniform1f(i.uniform.launchHeight,shot?0:flight?.rise||0);if(life)life.vehicles.forEach((v,j)=>gl.uniform4f(i.uniform[j===0?"roverShadowA":"roverShadowB"],v.x,v.z,Math.sin(v.yaw),Math.cos(v.yaw)));gl.uniform3fv(i.uniform.eye,eye);gl.uniform3fv(i.uniform.right,right);gl.uniform3fv(i.uniform.up,up);gl.uniform3fv(i.uniform.forward,forward);gl.uniform1f(i.uniform.aspect,w/h);gl.uniform1f(i.uniform.lens,lens);gl.uniform1f(i.uniform.night,Number(!!shot||camp.night));gl.uniform1f(i.uniform.time,time);gl.uniform1f(i.uniform.pixelAngle,2*lens/h);gl.uniform1f(i.uniform.satellitesOn,Number(!!shot||camp.satellitesOn));gl.uniform2fv(i.uniform.handSway,sway);gl.uniform1f(i.uniform.flashlightOn,Number(!shot&&(!flight||flight.mode==='ground')&&onFoot&&(life?.driving||camp.hands&&camp.flashlightOn&&!camp.binoculars)));gl.uniform1f(i.uniform.redLight,Number(!life?.driving&&camp.redLight));gl.uniform3fv(i.uniform.flashlightPosition,flashlightPosition);gl.uniform3fv(i.uniform.flashlightDirection,flashlightDirection);gl.uniform1f(i.uniform.fireOn,Number(!!shot||camp.fireOn));gl.uniform1f(i.uniform.fireBoost,camp.fireBoost);gl.uniform1f(i.uniform.ufoAwake,Number(shot?shot.signal:camp.ufoAwake));gl.uniform1f(i.uniform.campusLights,Number(!!shot||camp.campusLights));gl.uniform1f(i.uniform.lanternOn,Number(!!shot||camp.lanternOn));gl.uniform1f(i.uniform.tentOpen,Number(camp.tentOpen));gl.uniform3fv(i.uniform.firePosition,CAMP.fire);gl.uniform3fv(i.uniform.lanternPosition,[-4.25,CAMP.tent[1]+.47,-9.22]);}
+        function uniforms(i){gl.useProgram(i.p);gl.uniform1f(i.uniform.scannerStrength,camp.scannerStrength||0);gl.uniform1f(i.uniform.scanProgress,camp.scanProgress||0);gl.uniform1f(i.uniform.artifactInstalled,Number(!!camp.artifactInstalled));gl.uniform1f(i.uniform.liftMode,Number(!shot&&flight?.mode==='lift'));gl.uniform1f(i.uniform.cabinMode,Number(!shot&&flight&&['cabin','launch','orbit'].includes(flight.mode)));gl.uniform1f(i.uniform.launchHeight,shot?0:flight?.rise||0);if(life)life.vehicles.forEach((v,j)=>gl.uniform4f(i.uniform[j===0?"roverShadowA":"roverShadowB"],v.x,v.z,Math.sin(v.yaw),Math.cos(v.yaw)));gl.uniform3fv(i.uniform.eye,eye);gl.uniform3fv(i.uniform.right,right);gl.uniform3fv(i.uniform.up,up);gl.uniform3fv(i.uniform.forward,forward);gl.uniform1f(i.uniform.aspect,w/h);gl.uniform1f(i.uniform.lens,lens);gl.uniform1f(i.uniform.night,Number(!!shot||camp.night));gl.uniform1f(i.uniform.time,time);gl.uniform1f(i.uniform.pixelAngle,2*lens/h);gl.uniform1f(i.uniform.satellitesOn,Number(!!shot||camp.satellitesOn));gl.uniform2fv(i.uniform.handSway,sway);gl.uniform1f(i.uniform.flashlightOn,Number(!shot&&(!flight||flight.mode==='ground')&&onFoot&&(life?.driving||camp.hands&&camp.flashlightOn&&!camp.binoculars&&!camp.scanner)));gl.uniform1f(i.uniform.redLight,Number(!life?.driving&&camp.redLight));gl.uniform3fv(i.uniform.flashlightPosition,flashlightPosition);gl.uniform3fv(i.uniform.flashlightDirection,flashlightDirection);gl.uniform1f(i.uniform.fireOn,Number(!!shot||camp.fireOn));gl.uniform1f(i.uniform.fireBoost,camp.fireBoost);gl.uniform1f(i.uniform.ufoAwake,Number(shot?shot.signal:camp.ufoAwake));gl.uniform1f(i.uniform.campusLights,Number(!!shot||camp.campusLights));gl.uniform1f(i.uniform.lanternOn,Number(!!shot||camp.lanternOn));gl.uniform1f(i.uniform.tentOpen,Number(camp.tentOpen));gl.uniform3fv(i.uniform.firePosition,CAMP.fire);gl.uniform3fv(i.uniform.lanternPosition,[-4.25,CAMP.tent[1]+.47,-9.22]);}
         gl.disable(gl.DEPTH_TEST);uniforms(skyInfo);gl.bindBuffer(gl.ARRAY_BUFFER,skyBuffer);
         for(let i=0;i<3;i++)gl.disableVertexAttribArray(i);
         gl.enableVertexAttribArray(skyInfo.position);gl.vertexAttribPointer(skyInfo.position,2,gl.FLOAT,false,0,0);gl.drawArrays(gl.TRIANGLES,0,6);
@@ -950,7 +1007,7 @@
           uniforms(emberInfo);gl.bindBuffer(gl.ARRAY_BUFFER,emberBuffer);for(let i=0;i<3;i++)gl.disableVertexAttribArray(i);gl.enableVertexAttribArray(emberInfo.position);gl.vertexAttribPointer(emberInfo.position,1,gl.FLOAT,false,0,0);gl.drawArrays(gl.POINTS,0,28);
           gl.depthMask(true);gl.disable(gl.BLEND);
         }
-        if(!shot&&(!flight||flight.mode==='ground')&&onFoot&&!life?.driving&&camp.hands&&handVisible&&!camp.binoculars){gl.clear(gl.DEPTH_BUFFER_BIT);uniforms(handInfo);gl.bindBuffer(gl.ARRAY_BUFFER,handBuffer);for(const [loc,size,offset] of [[handInfo.position,3,0],[handInfo.normal,3,12],[handInfo.material,2,24]]){gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);}gl.drawArrays(gl.TRIANGLES,0,handVertices.length/8);}
+        if(!shot&&(!flight||flight.mode==='ground')&&onFoot&&!life?.driving&&camp.hands&&handVisible&&!camp.binoculars){gl.clear(gl.DEPTH_BUFFER_BIT);uniforms(handInfo);gl.bindBuffer(gl.ARRAY_BUFFER,camp.scanner?scannerBuffer:handBuffer);for(const [loc,size,offset] of [[handInfo.position,3,0],[handInfo.normal,3,12],[handInfo.material,2,24]]){gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);}gl.drawArrays(gl.TRIANGLES,0,(camp.scanner?scannerVertices:handVertices).length/8);}
       }
       return {canvas,state,camp,life,flight,points:CAMP,boarding:BOARDING,
         boardRocket(){if(!Rocket||!Rocket.board(flight,state,life?.driving))return false;camp.binoculars=false;Object.assign(state,{x:BOARDING.x,z:BOARDING.z,yaw:2.20,pitch:-.10,seated:false});return true;},
