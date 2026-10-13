@@ -11,28 +11,30 @@
     return a + (b - a) * x + (c - a) * z * (1 - x) + (d - b) * x * z;
   }
   function naturalHeight(x, z) {
-    return (noise(x * .014 + 3, z * .014 + 7) - .5) * 6 +
-      (noise(x * .047, z * .047) - .5) * 1.5 + (noise(x * .16, z * .16) - .5) * .3 - .4 * Math.exp(-Math.pow((x-Math.sin(z*.014)*11)/7,2))+
-      8*Math.exp(-Math.pow(x/55,2)-Math.pow((z+8)/52,2))+
-      (22+noise(x*.08,z*.09)*6)*Math.exp(-Math.pow((x+64)/15,4)-Math.pow((z-14)/28,4))+
-      (15+noise(x*.09,z*.11)*4)*Math.exp(-Math.pow((x+18)/26,4)-Math.pow((z-55)/13,4))+
-      (19+noise(x*.09,z*.08)*5)*Math.exp(-Math.pow((x-101)/19,4)-Math.pow((z+23)/27,4));
+    return (noise(x * .014 + 3, z * .014 + 7) - .5) * 4 +
+      (noise(x * .047, z * .047) - .5) * 1.0 + (noise(x * .16, z * .16) - .5) * .3 - .4 * Math.exp(-Math.pow((x-Math.sin(z*.014)*11)/7,2))+
+      3.0*Math.exp(-Math.pow(x/65,2)-Math.pow((z+8)/62,2))+
+      (4.8+noise(x*.042,z*.051)*2.2)*Math.exp(-Math.pow((x+64)/28,2)-Math.pow((z-14)/43,2))+
+      (3.2+noise(x*.053,z*.046)*1.8)*Math.exp(-Math.pow((x+18)/37,2)-Math.pow((z-55)/26,2))+
+      (4.2+noise(x*.041,z*.058)*2.0)*Math.exp(-Math.pow((x-101)/31,2)-Math.pow((z+23)/40,2));
   }
   const CAMPUS={x:-111,z:-106,width:68,depth:66};
   const campElevation=naturalHeight(0,-10),campusElevation=naturalHeight(CAMPUS.x,CAMPUS.z),springElevation=naturalHeight(37,22);
   const terrainGrid=new Map();
-  const RIVER={start:-6,end:132,bridgeZ:22,bridgeX:37};
-  const riverX=z=>37+Math.sin((z-22)*.030)*5+Math.sin((z-22)*.087)*.7;
-  const riverWidth=z=>3.1+.35*Math.sin(z*.11);
-  const waterHeight=z=>springElevation-.75-(z-22)*.018;
+  const RIVER={start:-6,end:328,bridgeZ:22,bridgeX:37};
+  const smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
+  const riverX=z=>37+Math.sin((z-22)*.022)*10+Math.sin((z-22)*.060)*2+smooth(70,240,z)*Math.sin((z-70)*.013)*20+smooth(22,50,z)*Math.sin((z-22)*.048)*6;
+  const riverWidth=z=>3.35+.60*Math.sin(z*.052)+.45*Math.sin(z*.14)+smooth(45,170,z)*2.6+2.2*Math.exp(-Math.pow((z-93)/18,2));
+  const bankWidth=(z,side)=>riverWidth(z)+(.24*Math.sin(z*.77+side*2)+.16*Math.sin(z*1.71+side))*(1-Math.exp(-Math.pow((z-22)/5,2)));
+  const waterHeight=z=>springElevation-.88-(z-22)*.004-2.15*smooth(22,110,z);
   function riverDistance(x,z){return Math.hypot(x-riverX(clamp(z,RIVER.start,RIVER.end)),Math.max(RIVER.start-z,0,z-RIVER.end));}
   function height(x,z){const key=x%3===0&&z%3===0?x+','+z:null;if(key!==null&&terrainGrid.has(key))return terrainGrid.get(key);const t=clamp((Math.hypot(x,z+10)-7)/6,0,1),desert=campElevation+(naturalHeight(x,z)-campElevation)*t*t*(3-2*t);const edge=Math.max(Math.abs(x-CAMPUS.x)-CAMPUS.width/2,Math.abs(z-CAMPUS.z)-CAMPUS.depth/2),blend=clamp(edge/9,0,1);let y=campusElevation+(desert-campusElevation)*blend*blend*(3-2*blend);
-    const d=riverDistance(x,z),bank=clamp((d-2.9)/5.4,0,1),bed=waterHeight(clamp(z,RIVER.start,RIVER.end))-.85+Math.max(0,d-2)*.17;
+    const d=riverDistance(x,z),rz=clamp(z,RIVER.start,RIVER.end),width=bankWidth(rz,x<riverX(rz)?-1:1),bank=clamp((d-width)/5.5,0,1),bed=waterHeight(rz)-1.05+Math.pow(Math.min(1,d/width),2.6)*1.10;
     const result=bed+(y-bed)*bank*bank*(3-2*bank);if(key!==null)terrainGrid.set(key,result);return result;
   }
   function onBridge(x,z){return Math.abs(z-RIVER.bridgeZ)<1.85&&Math.abs(x-RIVER.bridgeX)<8.5;}
   function walkingGround(x,z){const y=ground(x,z);if(!onBridge(x,z))return y;const t=clamp((8.5-Math.abs(x-RIVER.bridgeX))/2.5,0,1);return y*(1-t)+(waterHeight(22)+1.6)*t+.055;}
-  function canWalk(x,z){return onBridge(x,z)||riverDistance(x,z)>riverWidth(z)+.1||ground(x,z)>waterHeight(z)-.15;}
+  function canWalk(x,z){return onBridge(x,z)||riverDistance(x,z)>riverWidth(z)+2.1||ground(x,z)>waterHeight(z)-.15;}
   walkingGround.canTraverse=canWalk;
   const BOARDING={x:-105,z:-113,name:'Starship boarding lift',deck:54};
 
@@ -42,7 +44,7 @@
     {id:'meteorite',name:'Meteorite field study',x:19,z:-26,note:'An imagined meteorite specimen rests beside a small survey marker. Walk around its dark, pitted surface and try the flashlight from different angles.'},
     {id:'station',name:'Remote survey station',x:26,z:8,note:'A small solar-powered field station watches over the valley. From here, the fire becomes a warm point of light guiding you back to camp.'},
     {id:'arch',name:'Sandstone arch',x:-47,z:-48,note:'A worn sandstone arch frames the stars. The western trail passes beneath it before climbing toward the launch campus.'},
-    {id:'wash',name:'Riverbend footbridge',x:47,z:22,note:'Moving water, polished stones and a timber footbridge connect the two banks. Cross on foot and follow the greenery upstream to the spring.'},
+    {id:'wash',name:'Riverbend footbridge',x:47,z:22,note:'Moving water, polished stones and a timber footbridge connect the two banks. Cross on foot and follow the bank trail beside widening pools and a longer winding river.'},
     {id:'campus',name:'SpaceX launch campus',x:-104,z:-92,note:'A fan-built launch campus with black rockets, working crew and an illuminated tank farm. Follow the forecourt to the Starship boarding lift at the south side of the tall rocket. Ride up, enter the cabin and choose your planet. This fictional experience is not an official SpaceX location.'},
     {id:'crash',name:'The silent visitor',x:58,z:-61,hidden:true,note:'A half-buried craft lies beyond the broken trail. Scorched soil, torn alloy, and an instrument that still answers. PARALLAX field record: origin unknown. A fictional Easter egg.'}
   ];
@@ -57,6 +59,7 @@
     {id:'launch-road',name:'Launch campus access road',width:3.4,points:[[-47,-48],[-48,-54],[-59,-58],[-70,-64],[-82,-76],[-95,-84],[-104,-92],[-104,-103]]},
     {id:'campus-loop',name:'Launch forecourt',width:4.2,points:[[-104,-92],[-117,-92],[-117,-109],[-105,-110],[-97,-109],[-97,-96],[-104,-92]]},
     {id:'boarding',name:'Crew boarding path',width:2.6,points:[[-105,-110],[-105,-113]]},
+    {id:'river-walk',name:'Lower river trail',width:1.6,points:[[47,22],...Array.from({length:13},(_,i)=>{const z=31+i*11;return [riverX(z)+riverWidth(z)+4.5,z];})]},
     {id:'signal',name:'Unmarked spur',width:1.25,hidden:true,points:[[45,-45],[48,-51],[53,-54],[56,-58],[58,-61]]}
   ];
   function samplePath(path){const result=[];for(let i=0;i<path.points.length-1;i++){
@@ -195,6 +198,7 @@
     varying vec3 point; varying vec3 norm; varying vec2 kind; varying vec3 surfacePoint;
     void main(){surfacePoint=position;point=position;norm=normal;kind=material;
       if(material.x>59.5)point.y+=launchHeight;
+      if(material.x>52.5&&material.x<53.5)point.y+=.012*sin(position.z*2.1-time*2.3)+.008*sin(position.x*3.7+position.z*.9-time*1.7);
       if(material.x>53.5&&material.x<54.5)point.x+=sin(time*1.3+position.x*.7+position.z*.3)*.045*(1.-normal.y);
       if(objectMode>.5){point=vec3(position.x*objectPose.x-position.z*objectPose.y,position.y,position.x*objectPose.y+position.z*objectPose.x);point.y+=point.x*objectPose.z+point.z*objectPose.w;point+=objectOrigin;norm=vec3(normal.x*objectPose.x-normal.z*objectPose.y,normal.y,normal.x*objectPose.y+normal.z*objectPose.x);norm.x-=objectPose.z*norm.y;norm.z-=objectPose.w*norm.y;norm=normalize(norm);}
       vec3 p=point-eye;float depth=dot(p,forward);
@@ -208,6 +212,9 @@
     uniform sampler2D trailMap; uniform sampler2D groundNormal; uniform sampler2D groundMap; uniform sampler2D shadeMap; uniform sampler2D plantMap; uniform float plantReady; uniform float textured;
     ${woodCoordinates}
     vec3 groundSample(vec2 p){return texture2D(groundMap,p).rgb;}
+    float waterNoise(vec2 p){return noise(p)*.72+noise(p*2.43+13.7)*.28;}
+    float riverCenter(float z){return 37.+sin((z-22.)*.022)*10.+sin((z-22.)*.060)*2.+smoothstep(70.,240.,z)*sin((z-70.)*.013)*20.+smoothstep(22.,50.,z)*sin((z-22.)*.048)*6.;}
+    float riverHalfWidth(float z){return 3.35+.60*sin(z*.052)+.45*sin(z*.14)+smoothstep(45.,170.,z)*2.6+2.2*exp(-pow((z-93.)/18.,2.));}
     float roverShade(vec4 vehicle){if(dot(vehicle.zw,vehicle.zw)<.5)return 0.;vec2 d=point.xz-vehicle.xy;vec2 p=vec2(dot(d,vec2(vehicle.w,vehicle.z)),dot(d,vec2(-vehicle.z,vehicle.w)));return exp(-pow(p.x/1.03,4.)-pow(p.y/2.71,4.))*.70;}
     float flashlight(vec3 point){vec3 p=point-flashlightPosition;float distance=length(p),angle=dot(normalize(p),flashlightDirection);return flashlightOn*smoothstep(.885,.965,angle)*(1.-smoothstep(23.,40.,distance))*5.5/(1.+distance*distance*.07);}
     void main(){
@@ -228,18 +235,26 @@
       }
       vec3 n=normalize(norm),view=normalize(eye-point);float woodEmber=0.;
       if(kind.x>52.5&&kind.x<53.5){
-        vec2 flow=point.xz*vec2(2.8,.85)+vec2(sin(point.z*.12)*.2,-time*.62);
-        float waves=sin(flow.y*4.+sin(flow.x*2.))*sin(flow.x*5.-time*.4);
-        vec3 wn=normalize(vec3(sin(flow.x*3.+flow.y*2.)*.055,.99,cos(flow.y*5.+flow.x)*.085));
-        vec3 reflected=sky(reflect(-view,wn));float fresnel=.13+.87*pow(1.-max(0.,dot(wn,view)),3.);
-        float center=37.+sin((point.z-22.)*.030)*5.+sin((point.z-22.)*.087)*.7;
-        float width=3.1+.35*sin(point.z*.11),edge=abs(point.x-center)/width;
-        float foam=smoothstep(.73,.99,edge)*smoothstep(.61,.90,noise(flow*3.));
-        float streak=smoothstep(.74,.91,noise(vec2(flow.x*3.,flow.y*14.)))*smoothstep(.45,.72,noise(flow*2.));
-        vec3 water=mix(vec3(.012,.040,.039),reflected*.85,fresnel)+vec3(.05,.09,.085)*(waves*.08+.1);
-        water+=vec3(.17,.24,.24)*(foam*.45+streak*.25);
-        water+=vec3(.23,.27,.29)*pow(max(0.,dot(wn,normalize(view+vec3(-.3,.2,-.8)))),150.)*.7;
-        water+=vec3(.12,.10,.065)*flashlight(point)*.13;
+        float center=riverCenter(point.z),width=riverHalfWidth(point.z),crossRiver=point.x-center,edge=clamp(abs(crossRiver)/width,0.,1.);
+        float current=.55+.8*(1.-edge*edge);vec2 flow=vec2(crossRiver,point.z-time*current);
+        vec2 rippleUV=flow*vec2(2.3,3.8);float wave=waterNoise(rippleUV);
+        float dx=waterNoise(rippleUV+vec2(.16,0.))-wave,dz=waterNoise(rippleUV+vec2(0.,.16))-wave;
+        vec3 wn=normalize(vec3(dx*.75,1.,dz*.80));
+        vec3 reflected=max(sky(reflect(-view,wn)),vec3(.045,.061,.075));float fresnel=.045+.955*pow(1.-max(0.,dot(wn,view)),4.);
+        vec3 pebbles=groundSample(point.xz*.65+wn.xz*.14)*vec3(.15,.19,.20);
+        float shallow=pow(edge,4.);vec3 bottom=mix(vec3(.015,.033,.039),pebbles,shallow*.50);
+        vec3 water=mix(bottom,reflected*.92,fresnel);
+        water+=vec3(.045,.065,.078)*smoothstep(.68,.88,wave)*(.3+.7*fresnel);
+        // Broken foam collects at the bank and trails downstream from protruding river stones.
+        float foam=smoothstep(.80,.99,edge)*smoothstep(.60,.82,noise(flow*vec2(2.,4.)));
+        float rockIndex=floor((point.z-8.)/26.),rz=8.+rockIndex*26.,rx=riverCenter(rz)+sin(rockIndex*2.4)*riverHalfWidth(rz)*.55;
+        vec2 wake=point.xz-vec2(rx,rz);float ripple=sin(length(wake*vec2(1.,.65))*13.-time*4.);
+        float wakeMask=exp(-pow((abs(wake.x)-.5-max(0.,wake.y)*.16)/.32,2.))*smoothstep(.05,.7,wake.y)*(1.-smoothstep(2.,4.5,wake.y));
+        float froth=wakeMask*smoothstep(.42,.76,noise(flow*6.))*max(0.,ripple);
+        water+=vec3(.19,.23,.22)*(foam*.45+froth*.62);
+        float glint=pow(max(0.,dot(wn,normalize(view+vec3(-.3,.22,-.8)))),100.);
+        water+=vec3(.26,.30,.32)*glint*.50;
+        water+=vec3(.15,.15,.11)*flashlight(point)*(.08+shallow*.08);
         gl_FragColor=vec4(water,1.);return;
       }
       float macro=noise(point.xz*.036),grain=noise(point.xz*4.7),detail=noise(point.xz*34.);
@@ -259,8 +274,13 @@
         float paved=1.-smoothstep(0.,1.,max(abs(point.x+111.)-34.,abs(point.z+106.)-33.));float joints=max(1.-smoothstep(.02,.06,abs(fract(point.x*.16)-.5)),1.-smoothstep(.02,.06,abs(fract(point.z*.16)-.5)));
         base=mix(base,vec3(.30,.32,.32)*(.94+noise(point.xz*30.)*.12)*(1.-joints*.1),paved);n=normalize(mix(n,normalize(norm),paved*.8));
         float scour=1.-smoothstep(.75,1.2,length((point.xz-vec2(65.,-69.))/vec2(8.,6.))+(noise(point.xz*2.)-.5)*.14);base=mix(base,vec3(.075,.060,.043)*(.7+grain*.6),scour*.86);
-        float slope=1.-smoothstep(.50,.86,normalize(norm).y),strata=.80+.13*sin(point.y*3.4+noise(point.xz*.28)*3.);
-        base=mix(base,vec3(.44,.29,.18)*strata*(.7+.6*groundSample(point.xy*.4).r),slope);
+        float slope=1.-smoothstep(.58,.95,normalize(norm).y);
+        float erosion=.74+.18*noise(point.xz*.65+point.y*.21)+.08*noise(point.xz*2.3);
+        vec3 rocky=groundSample(point.xy*.46)*vec3(1.10,.91,.76)*erosion;
+        base=mix(base,rocky,slope*.68);
+        float bankDistance=abs(point.x-riverCenter(point.z)),shore=1.-smoothstep(riverHalfWidth(point.z)-.3,riverHalfWidth(point.z)+2.2,bankDistance);
+        shore*=smoothstep(-9.,-4.,point.z)*(1.-smoothstep(326.,330.,point.z));
+        base*=1.-shore*.34;
       }
       if(kind.x>.5&&kind.x<1.5){
         vec3 weights=abs(n);weights/=weights.x+weights.y+weights.z;
@@ -501,7 +521,7 @@
       const radius=740+layer*480,segments=480,rows=16;
       function vertex(i,j){const angle=i/segments*TAU,t=j/rows;
         const rugged=noise(Math.cos(angle)*8+layer*13,Math.sin(angle)*8+layer*7);
-        const peak=22+layer*28+Math.pow(rugged,1.6)*(85+layer*30);
+        const peak=12+layer*15+Math.pow(rugged,1.5)*(43+layer*19);
         const r=radius+t*400;const y=-4+Math.sin(t*Math.PI)*peak*(.89+.11*noise(Math.cos(angle)*55+t*4,Math.sin(angle)*55+t*3));
         return [Math.sin(angle)*r,y,Math.cos(angle)*r];}
       for(let i=0;i<segments;i++)for(let j=0;j<rows;j++){
@@ -539,10 +559,10 @@
     }
     cactus(-8,-18,1.35);cactus(13,-31,1.5);cactus(-18,12,1.1);
     for(let i=0;i<75;i++){const angle=rand()*TAU,r=28+rand()*245;cactus(Math.sin(angle)*r,Math.cos(angle)*r,.4+rand()*1.35);}
-    function rock(x,z,r,force=false){
+    function rock(x,z,r,force=false,waterStone=false){
       if(!force&&(riverDistance(x,z)<4.5||onBridge(x,z)))return;
       if(!force&&(Math.hypot(x,z+10)<8||Math.max(Math.abs(x-CAMPUS.x)-CAMPUS.width/2,Math.abs(z-CAMPUS.z)-CAMPUS.depth/2)<2||pathClearance(x,z)<r+.6||Math.hypot(x-CRASH.x,z-CRASH.z)<11||TRAIL.some(p=>Math.hypot(x-p.x,z-p.z)<4)))return;
-      const y=ground(x,z)-r*.2,tone=rand(),rotation=rand()*TAU,stretch=.7+rand()*.8,sides=r>.45?14:7,rows=r>.45?7:3;
+      const y=waterStone?waterHeight(z)-r*.25:ground(x,z)-r*.2,tone=waterStone?.18:rand(),rotation=rand()*TAU,stretch=.7+rand()*.8,sides=r>.45?14:7,rows=r>.45?7:3;
       const points=[],ns=[];
       for(let j=0;j<=rows;j++){
         const lat=-.25+(Math.PI*.5+.25)*j/rows,ring=[],normal=[];
@@ -673,15 +693,21 @@
       for(let j=0;j<segments;j++)for(let k=0;k<sides;k++){const n=(k+1)%sides;tri(rings[j][k],rings[j+1][k],rings[j][n],1,.9,false,[normals[j][k],normals[j+1][k],normals[j][n]]);tri(rings[j][n],rings[j+1][k],rings[j+1][n],1,.9,false,[normals[j][n],normals[j+1][k],normals[j+1][n]]);}
       for(const side of [-1,1]){rock(x+side*3.4,z,1.2,true);obstacles.push({x:x+side*3.4,z,radius:1.15});occluders.push({x:x+side*2.5,z,radius:1.8,height:4,strength:.7});}
     }
-    // Rounded wash stones and banks form a distinct, low crossing on the eastern loop.
-    // A continuous river follows a carved channel; its reflective material animates downstream.
-    for(let z=RIVER.start;z<RIVER.end;z+=.75){
-      const at=(z,side)=>{const cap=Math.min(1,Math.sqrt(Math.max(.01,(z-RIVER.start)/3)),Math.sqrt(Math.max(.01,(RIVER.end-z)/3)));return [riverX(z)+side*riverWidth(z)*cap,waterHeight(z),z];};
-      quad(at(z,-1),at(z,1),at(Math.min(RIVER.end,z+.75),1),at(Math.min(RIVER.end,z+.75),-1),53);
+    // A long river with asymmetric banks, wider pools and small riffles around exposed stones.
+    // Several strips across its width give the moving surface enough geometry at close range.
+    for(let z=RIVER.start;z<RIVER.end;z+=.8){
+      const at=(z,t)=>{const cap=Math.min(1,Math.sqrt(Math.max(.001,(z-RIVER.start)/4)),Math.sqrt(Math.max(.001,(RIVER.end-z)/4))),side=t<0?-1:1;return [riverX(z)+t*(bankWidth(z,side)+2.0)*cap,waterHeight(z),z];};
+      for(let j=0;j<6;j++){const t=-1+j/3,tt=t+1/3,next=Math.min(RIVER.end,z+.8);quad(at(z,t),at(z,tt),at(next,tt),at(next,t),53);}
     }
-    for(let i=0;i<95;i++){const z=RIVER.start+2+i*1.38;for(const side of [-1,1]){const x=riverX(z)+side*(3.4+rand()*2.4);if(pathClearance(x,z)>1.1&&!onBridge(x,z)){rock(x,z,.18+rand()*.65,true);shrub(x+side*(.8+rand()*1.6),z+.7,.45+rand()*.55,true);}}}
+    for(let i=0;i<195;i++){const z=RIVER.start+2+i*1.68;for(const side of [-1,1]){const x=riverX(z)+side*(bankWidth(z,side)+.1+rand()*2.8);if(pathClearance(x,z)>.8&&!onBridge(x,z)){
+      rock(x,z,.15+Math.pow(rand(),1.5)*.72,true);
+      if(rand()<.61)shrub(x+side*(.7+rand()*1.6),z+.7,.27+rand()*.57,true);
+      // Small gravel clusters break the clean cut between mud, stone and water.
+      if(i%3===0)for(let k=0;k<4;k++)rock(x+(rand()-.5)*1.5,z+(rand()-.5)*2,.035+rand()*.10,true);
+    }}}
+    for(let i=0;i<13;i++){const z=8+i*26,x=riverX(z)+Math.sin(i*2.4)*riverWidth(z)*.55;if(z<RIVER.end-4)rock(x,z,.78+.30*Math.sin(i*1.9+1),true,true);}
     // River willows: bending trunks, branching limbs and overlapping leaf cutouts.
-    for(let i=0;i<18;i++){const z=1+i*6.9,side=i%2?1:-1,x=riverX(z)+side*(7+rand()*2);if(pathClearance(x,z)<2.6)continue;const y=ground(x,z),h=3.4+rand()*2.3;
+    for(let i=0;i<34;i++){const z=2+i*9.2+(rand()-.5)*7,side=rand()>.5?1:-1,x=riverX(z)+side*(riverWidth(z)+3.3+rand()*3.2);if(pathClearance(x,z)<2.6)continue;const y=ground(x,z),h=2.6+rand()*2.0;
       cylinder([x,y,z],[x+.28,y+h*.76,z+.13],.14,55,12);
       for(let j=0;j<5;j++){const a=j/5*TAU,dx=Math.cos(a)*1.25,dz=Math.sin(a)*1.25;cylinder([x+.12,y+h*.42,z],[x+dx,y+h*(.75+rand()*.15),z+dz],.055,55,10);
         for(let k=0;k<3;k++){const angle=k*Math.PI/3+.2,ww=1.5+rand()*.6,cx=x+dx*.7,cz=z+dz*.7,cy=y+h*.58,ax=Math.cos(angle)*ww,az=Math.sin(angle)*ww;
@@ -878,7 +904,7 @@
       canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();alive=false;worker?.terminate();canvas.remove();onFailure?.();});
       function acceptWorld(result){if(!alive)return;world=result;gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,shadeTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.shadeSize,world.shadeSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.shade);gl.activeTexture(gl.TEXTURE7);gl.bindTexture(gl.TEXTURE_2D,trailTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.trailSize,world.trailSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.trailMask);ready=true;worker?.terminate();worker=null;onReady?.();}
       // Construct geometry off the UI thread; keep the landscape visible while it loads.
-      try{worker=new Worker('/desert-world.js?v=39');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
+      try{worker=new Worker('/desert-world.js?v=40');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
       catch{setTimeout(()=>acceptWorld(geometry()),0)}
       function cameraEye(){
         const base=[state.x,walkingGround(state.x,state.z)+(state.seated?1.03:1.72),state.z];if(flight&&flight.mode!=='ground'){base[1]=ground(-110,-120)+(flight.mode==='lift'?flight.rise:54+flight.rise)+1.62;return base;}if(!life?.driving)return base;
