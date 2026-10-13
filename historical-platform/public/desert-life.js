@@ -15,7 +15,7 @@
   const active=life=>life.vehicles.find(v=>v.id===life.driving);
   function crewTick(life,dt,player){life.clock+=dt;for(const p of life.crew){p.walking=false;if(Math.hypot(p.x-player.x,p.z-player.z)<4.5){p.yaw=Math.atan2(player.x-p.x,p.z-player.z);continue;}if(p.route.length===1)continue;if(p.pause>0){p.pause-=dt;continue;}if(Math.hypot(p.x-player.x,p.z-player.z)<2.8||life.vehicles.some(v=>Math.hypot(p.x-v.x,p.z-v.z)<4))continue;const target=p.route[p.next],dx=target[0]-p.x,dz=target[1]-p.z,d=Math.hypot(dx,dz);if(d<.15){p.next=(p.next+1)%p.route.length;p.pause=3.5;continue;}const step=Math.min(d,dt*.82);p.x+=dx/d*step;p.z+=dz/d*step;p.yaw=Math.atan2(dx,-dz);p.phase+=step*5.5;p.walking=true;}}
   function circles(v,r=1.03){return [-1.81,0,1.81].map(t=>({x:v.x+Math.sin(v.yaw)*t,z:v.z-Math.cos(v.yaw)*t,radius:r}));}
-  function blocked(v,obstacles,ground){const cc=circles(v);if(cc.some(p=>Math.hypot(p.x,p.z)>207.8||obstacles.some(o=>Math.hypot(p.x-o.x,p.z-o.z)<p.radius+o.radius)))return true;return Math.abs(ground(cc[0].x,cc[0].z)-ground(cc[2].x,cc[2].z))>2.1;}
+  function blocked(v,obstacles,ground){const cc=circles(v);if(ground.canTraverse&&cc.some(p=>!ground.canTraverse(p.x,p.z)))return true;if(cc.some(p=>Math.hypot(p.x,p.z)>207.8||obstacles.some(o=>Math.hypot(p.x-o.x,p.z-o.z)<p.radius+o.radius)))return true;return Math.abs(ground(cc[0].x,cc[0].z)-ground(cc[2].x,cc[2].z))>2.1;}
   function drive(life,state,forward,side,dt,obstacles,ground){const v=active(life);if(!v)return false;dt=clamp(dt,0,.05);v.steer=(v.steer||0)+(clamp(side,-1,1)*.40-(v.steer||0))*Math.min(1,dt*8);const target=clamp(forward,-1,1)*(forward<0?4:12),accel=forward?5:8;v.speed+=clamp(target-v.speed,-accel*dt,accel*dt);if(Math.abs(v.speed)<.01)v.speed=0;const count=Math.max(1,Math.ceil(Math.abs(v.speed)*dt/.15));let moved=false;const solids=obstacles.concat(life.vehicles.filter(c=>c!==v).flatMap(c=>circles(c)),life.crew.map(p=>({x:p.x,z:p.z,radius:.5})));
     for(let i=0;i<count;i++){const step=dt/count,turn=clamp(side,-1,1)*v.speed*.13*step,old={x:v.x,z:v.z,yaw:v.yaw};v.yaw+=turn;v.x+=Math.sin(v.yaw)*v.speed*step;v.z-=Math.cos(v.yaw)*v.speed*step;if(blocked(v,solids,ground)){Object.assign(v,old);v.speed=0;break;}const distance=Math.hypot(v.x-old.x,v.z-old.z);life.travel+=distance;state.distance+=distance;v.wheel+=Math.sign(v.speed)*distance/.445;state.yaw+=turn;moved=moved||distance>0;}
     state.x=v.x;state.z=v.z;state.seated=false;state.edge=Math.hypot(v.x,v.z)>204;return moved;
@@ -114,16 +114,137 @@
     for(let i=0;i<7;i++){const a=i/7*TAU+spin,da=TAU/7;panel(b,[radial(.085,a+.04,cap+side*.008),radial(.278,a+.045),radial(.293,a+da*.69),radial(.109,a+da*.84,cap+side*.008)],48,[side,0,0]);panel(b,[radial(.13,a+.06,cap+side*.012),radial(.291,a+.07,cap+side*.003),radial(.292,a+.095,cap+side*.003),radial(.128,a+.095,cap+side*.012)],47,[side,0,0]);}
     b.tube([cap,0,0],[cap+side*.014,0,0],.096,47,7);for(let i=0;i<6;i++){const a=i/6*TAU+spin;b.tube(radial(.060,a,cap+side*.015),radial(.060,a,cap+side*.019),.008,48,6);}
   }
+/* Drop-in mesh asset. Uses only builder.tri; coordinates are metres, facing -Z.
+ * Call crewBody(b, person, stableCrewIndex, simulationClock) after b.at().
+ * Material 57 uses tone (0..1) for a natural skin-colour range.
+ */
+function crewBody(b,p,index,clock){
+  const TAU=Math.PI*2,walk=!!p.walking,phase=p.phase||0,work=p.work||'inspect';
+  const gait=walk?Math.sin(phase):0,bob=walk?Math.cos(phase*2)*.011:Math.sin(clock*1.4+index)*.003;
+  const lean=!walk&&work==='repair'?.24:walk?.018:0;
+  const height=[1,.982,1.018,.966,1.027,.995][index%6]||1;
+  const skin=[.69,.37,.53,.82,.42,.62][index%6]||.55;
+  const pos=v=>[v[0],(v[1]+bob)*height,v[2]-Math.max(0,v[1]-.9)*lean];
+  const normal=(n,v)=>{const q=[n[0],(n[1]+(v[1]>.9?lean*n[2]:0))/height,n[2]],l=Math.hypot(...q)||1;return q.map(t=>t/l);};
+  const tri=(a,c,d,k,t=.5,ns)=>{const u=c.map((v,i)=>v-a[i]),v=d.map((q,i)=>q-a[i]),cross=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];if(ns&&cross.reduce((s,v,i)=>s+v*ns[0][i],0)<0){[c,d]=[d,c];ns=[ns[0],ns[2],ns[1]];}b.tri(pos(a),pos(c),pos(d),k,t,ns&&ns.map((n,i)=>normal(n,[a,c,d][i])));};
+  const unit=v=>{const l=Math.hypot(...v)||1;return v.map(q=>q/l);};
+  const cross=(a,c)=>[a[1]*c[2]-a[2]*c[1],a[2]*c[0]-a[0]*c[2],a[0]*c[1]-a[1]*c[0]];
+  const mix=(a,c,t)=>a.map((v,i)=>v+(c[i]-v)*t);
+  function surface(center,radius,k,t=.5,cols=10,rows=6,start=0,end=Math.PI){
+    if(Math.max(...radius)<.055){cols=Math.min(cols,6);rows=Math.min(rows,3);}
+    else if(Math.max(...radius)<.12){cols=Math.min(cols,10);rows=Math.min(rows,5);}
+    const point=(a,c)=>center.map((v,i)=>v+radius[i]*[Math.sin(a)*Math.cos(c),Math.cos(a),Math.sin(a)*Math.sin(c)][i]);
+    const n=(a,c)=>unit([Math.sin(a)*Math.cos(c)/radius[0],Math.cos(a)/radius[1],Math.sin(a)*Math.sin(c)/radius[2]]);
+    for(let i=0;i<rows;i++)for(let j=0;j<cols;j++){const a=start+(end-start)*i/rows,aa=start+(end-start)*(i+1)/rows,c=j/cols*TAU,cc=(j+1)/cols*TAU,A=point(a,c),B=point(aa,c),C=point(aa,cc),D=point(a,cc);tri(A,B,C,k,t,[n(a,c),n(aa,c),n(aa,cc)]);tri(A,C,D,k,t,[n(a,c),n(aa,cc),n(a,cc)]);}
+  }
+  // Smooth tapered garment/limb profiles; capped ends overlap at anatomical joints.
+  function limb(a,c,r1,r2,k,t=.5,sides=8){
+    const dir=unit(c.map((v,i)=>v-a[i])),u=unit(cross(Math.abs(dir[1])>.85?[1,0,0]:[0,1,0],dir)),v=cross(dir,u),len=Math.hypot(...c.map((q,i)=>q-a[i]));
+    const rings=r1<.03?[[0,r1],[1,r2]]:[[0,r1*.76],[.36,r1*.86+r2*.14],[1,r2*.78]];
+    const pt=(ring,ang)=>{const [s,r]=ring,cen=mix(a,c,s);return cen.map((q,i)=>q+r*(u[i]*Math.cos(ang)+v[i]*Math.sin(ang)));};
+    for(let i=0;i<rings.length-1;i++)for(let j=0;j<sides;j++){
+      const ang=j/sides*TAU,next=(j+1)/sides*TAU,slope=(rings[i+1][1]-rings[i][1])/((rings[i+1][0]-rings[i][0])*len),n=q=>unit(dir.map((x,k)=>u[k]*Math.cos(q)+v[k]*Math.sin(q)-x*slope));
+      const A=pt(rings[i],ang),B=pt(rings[i],next),C=pt(rings[i+1],next),D=pt(rings[i+1],ang);tri(A,B,C,k,t,[n(ang),n(next),n(next)]);tri(A,C,D,k,t,[n(ang),n(next),n(ang)]);
+      if(i===0&&r1<.03)tri(a,B,A,k,t,[dir.map(v=>-v),dir.map(v=>-v),dir.map(v=>-v)]);
+      if(i===rings.length-2&&r1<.03)tri(c,D,C,k,t,[dir,dir,dir]);
+    }
+  }
+  function box(x,y,z,w,h,d,k,t=.5){
+    const points=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]].map(p=>[x+p[0]*w/2,y+p[1]*h/2,z+p[2]*d/2]);
+    for(const [face,n]of [[[0,1,2,3],[0,0,-1]],[[1,5,6,2],[1,0,0]],[[5,4,7,6],[0,0,1]],[[4,0,3,7],[-1,0,0]],[[3,2,6,7],[0,1,0]],[[4,5,1,0],[0,-1,0]]]){const[a,c,d,e]=face.map(i=>points[i]);tri(a,c,d,k,t,[n,n,n]);tri(a,d,e,k,t,[n,n,n]);}
+  }
+  // Contoured jacket and vest. Broad shoulders taper into a narrower waist.
+  function torso(material,offset,start=0,end=TAU,tone=.5){
+    const rings=[[.925,.145,.105],[1.00,.155,.116],[1.17,.178,.126],[1.34,.206,.130],[1.405,.204,.116],[1.43,.128,.099]],sides=end-start<TAU-.1?8:12;
+    for(let i=0;i<rings.length-1;i++)for(let j=0;j<sides;j++){
+      const a=start+(end-start)*j/sides,c=start+(end-start)*(j+1)/sides,point=(r,q)=>[Math.cos(q)*(r[1]+offset),r[0],Math.sin(q)*(r[2]+offset)],N=q=>unit([Math.cos(q),.04,Math.sin(q)*1.25]);
+      const A=point(rings[i],a),B=point(rings[i],c),C=point(rings[i+1],c),D=point(rings[i+1],a);tri(A,B,C,material,tone,[N(a),N(c),N(c)]);tri(A,C,D,material,tone,[N(a),N(c),N(a)]);
+    }
+  }
+  torso(41,0);torso(42,.006,.08,Math.PI-.08);torso(42,.006,Math.PI+.08,TAU-.08);
+  function vestPoint(x,y,side){const r=y<1.17?[.155+(y-1)/.17*.023,.116+(y-1)/.17*.010]:[.178+(y-1.17)/.17*.028,.126+(y-1.17)/.17*.004];return [x,y,side*(Math.sqrt(Math.max(.01,1-x*x/(r[0]*r[0])))*r[1]+.009)];}
+  function stripe(x,y,w,h,side){const A=vestPoint(x-w/2,y-h/2,side),B=vestPoint(x+w/2,y-h/2,side),C=vestPoint(x+w/2,y+h/2,side),D=vestPoint(x-w/2,y+h/2,side),n=[0,0,side];tri(A,B,C,45,.5,[n,n,n]);tri(A,C,D,45,.5,[n,n,n]);}
+  for(const y of [1.015,1.12])for(const side of [-1,1])for(let j=0;j<8;j++)stripe(-.125+j*.0357,y,.037,.022,side);
+  // Zipper, open collar, shoulder straps, chest/waist reflectors and breast pockets.
+  box(0,1.174,-.135,.013,.41,.010,10);
+  for(const s of [-1,1]){
+    limb([s*.054,1.44,-.073],[s*.032,1.357,-.136],.018,.014,41,.5,6);
+    stripe(s*.122,1.326,.025,.155,-1);
+    stripe(s*.115,1.285,.026,.190,1);
+    box(s*.107,1.22,-.146,.073,.067,.014,41);box(s*.107,1.247,-.157,.074,.014,.005,45);
+  }
+  box(.078,1.318,-.148,.065,.029,.006,9);box(.078,1.318,-.153,.043,.007,.003,41);
+  // Pelvis, duty belt, fabric cargo pockets, buckle and compact tool holster.
+  surface([0,.928,0],[.153,.104,.113],41,.5,12,5);
+  box(0,.948,-.105,.281,.038,.022,10);box(0,.948,.105,.281,.038,.020,10);box(0,.948,-.124,.039,.028,.012,35);
+  box(.170,.924,.012,.047,.099,.066,10);limb([.18,.95,.025],[.18,1.08,.025],.015,.015,35,.5,6);
+  box(-.166,.916,.025,.047,.088,.070,41);box(-.191,.927,.025,.009,.029,.052,45);
+  // Legs use forward-bending knees and staggered foot lift rather than straight tubes.
+  for(const s of [-1,1]){
+    const step=s*gait,footZ=walk?-step*.245:s*.015,footLift=walk?Math.max(0,Math.cos(phase+(s<0?Math.PI:0)))*.052:0;
+    const hip=[s*.104,.946,0],knee=[s*.112,.550,footZ*.49-.045-(work==='repair'&&!walk?.025:0)],ankle=[s*.115,.165+footLift,footZ];
+    limb(hip,knee,.091,.073,41);surface(knee,[.076,.080,.076],41,.5,10,4);limb(knee,ankle,.071,.050,41);
+    box(s*.187,.763,footZ*.23,.025,.129,.104,41);box(s*.203,.814,footZ*.23,.013,.022,.112,10);
+    // Cloth folds at knee and trouser cuff, plus a small reflective ankle strip.
+    limb([s*.11-.051,.542,knee[2]-.059],[s*.11+.051,.542,knee[2]-.059],.006,.006,10,.5,6);
+    limb([s*.115,.175+footLift,footZ],[s*.115,.203+footLift,footZ],.053,.053,45,.5,10);
+    surface([s*.115,.087+footLift,footZ-.047],[.077,.069,.143],10,.5,12,5);
+    box(s*.115,.036+footLift,footZ-.043,.143,.026,.237,10);surface([s*.115,.094+footLift,footZ-.127],[.072,.038,.065],10,.5,8,4);
+    for(let lace=0;lace<3;lace++)limb([s*.115-.039,.132+footLift,footZ-.034-lace*.021],[s*.115+.039,.132+footLift,footZ-.041-lace*.021],.0035,.0035,41,.5,5);
+  }
+  // Neck is human-sized and tucked inside a structured collar.
+  limb([0,1.408,0],[0,1.524,0],.050,.049,57,skin,12);
+  // Facial anatomy with smooth shading: jaw, cheeks, nose, ears and recessed eyes.
+  surface([0,1.634,0],[.097,.137,.094],57,skin,14,8);
+  surface([0,1.554,-.016],[.074,.053,.071],57,skin,10,5);
+  surface([0,1.631,-.097],[.018,.032,.026],57,skin,8,5);
+  surface([0,1.614,-.115],[.021,.014,.017],57,skin,8,4);
+  for(const s of [-1,1]){
+    surface([s*.097,1.631,.004],[.017,.032,.019],57,skin,8,5);
+    surface([s*.039,1.656,-.087],[.017,.007,.005],58,.5,8,4);
+    surface([s*.039,1.656,-.094],[.006,.0055,.0035],59,.5,6,4);
+    limb([s*.021,1.671,-.091],[s*.059,1.672,-.082],.005,.004,10,.5,6);
+  }
+  limb([-.022,1.595,-.098],[.022,1.595,-.098],.003,.003,10,.5,6);
+  // Low-profile hard hat with brim, crown ribs and headlamp; no oversized toy helmet.
+  surface([0,1.715,.003],[.109,.097,.110],index%3===0?9:38,.5,12,5,0,Math.PI/2);
+  surface([0,1.711,-.008],[.125,.014,.132],index%3===0?9:38,.5,12,4);
+  for(const s of [-1,1])limb([s*.034,1.728,-.098],[s*.027,1.801,-.007],.009,.009,index%3===0?9:38,.5,7);
+  box(0,1.727,-.119,.058,.029,.022,10);box(0,1.728,-.132,.038,.015,.003,45);
+  // Wrist/hand poses. Tablet and radio users now have distinct arm positions.
+  let hands=[];
+  for(const s of [-1,1]){
+    const shoulder=[s*.210,1.376,.002];let elbow,hand;
+    if(walk){elbow=[s*.249,1.096,s*gait*.11];hand=[s*.232,.852,s*gait*.19-.025];}
+    else if(work==='radio'&&s<0){elbow=[s*.280,1.145,-.12];hand=[s*.105,1.497,-.122];}
+    else if(work==='radio'){elbow=[s*.251,1.096,-.015];hand=[s*.232,.852,-.02];}
+    else if(work==='inspect'){elbow=[s*.254,1.105,-.075];hand=s<0?[s*.245,.857,-.067]:[.16,1.081,-.264];}
+    else{elbow=[s*.267,1.137,-.095];hand=[s*.131,1.180+Math.sin(clock*1.6+index+s)*.008,-.325];}
+    limb(shoulder,elbow,.071,.052,41);surface(elbow,[.054,.056,.054],41,.5,8,4);limb(elbow,hand,.053,.037,41);
+    const cuff=mix(hand,elbow,.12);limb(cuff,mix(hand,elbow,.23),.046,.049,45,.5,10);
+    // Palm plus separated curled fingers and a thumb. Work gloves use dark fabric.
+    const gloves=work==='repair'||work==='inspect',material=gloves?10:57,tone=gloves?.5:skin;
+    const palm=[hand[0],hand[1]-.012,hand[2]-.013];surface(palm,[.038,.050,.024],material,tone,8,5);
+    for(let finger=0;finger<4;finger++){const x=palm[0]-.025+finger*.016,len=[.043,.052,.049,.037][finger];limb([x,palm[1]-.027,palm[2]-.004],[x,palm[1]-.027-len*.7,palm[2]-.014],.0068,.0056,material,tone,5);limb([x,palm[1]-.027-len*.7,palm[2]-.014],[x,palm[1]-.027-len,palm[2]+.001],.0056,.0048,material,tone,5);}
+    limb([palm[0]-s*.029,palm[1]+.012,palm[2]],[palm[0]-s*.045,palm[1]-.018,palm[2]-.020],.010,.007,material,tone,6);
+    hands.push(hand);
+  }
+  // Radio, lapel mic, shoulder patch and work-specific hand tools.
+  box(-.084,1.324,-.151,.033,.057,.026,10);limb([-.086,1.35,-.148],[-.087,1.407,-.141],.004,.004,10,.5,5);
+  box(.247,1.330,-.012,.009,.052,.050,45);
+  if(!walk&&work==='radio'){
+    const h=hands[0];box(h[0],h[1],h[2]-.032,.042,.091,.024,10);box(h[0],h[1]+.012,h[2]-.046,.026,.019,.004,36);limb([h[0]-.014,h[1]+.045,h[2]-.031],[h[0]-.014,h[1]+.120,h[2]-.031],.0035,.003,10,.5,5);
+  }else if(!walk&&(work==='tablet'||work==='repair')){
+    box(0,1.182,-.341,.224,.019,.150,10);box(0,1.194,-.341,.196,.004,.124,36);for(let row=0;row<3;row++)box(-.033,1.197,-.37+row*.026,.095-row*.017,.002,.007,45);
+  }else if(!walk&&work==='inspect'){
+    const h=hands[1];limb([h[0],h[1]-.035,h[2]-.014],[h[0],h[1]+.087,h[2]-.014],.018,.023,10,.5,10);surface([h[0],h[1]+.089,h[2]-.014],[.021,.009,.021],45,.5,8,4);
+  }
+}
+if(typeof module!=='undefined')module.exports={crewBody};
+
   function geometry(life,ground){const b=builder(),{box,quad,tube,ball}=b;
     for(const v of life.vehicles){const pose=truckPose(v,ground);b.at(v.x,pose.y,v.z,v.yaw,pose.sx,pose.sz);truckBody(b);for(const side of [-1,1])for(const front of [true,false]){const p=wheelPose(v,side,front,pose);b.at(p.x,p.y,p.z,p.yaw,pose.sx,pose.sz);truckWheel(b,v.wheel,side);}}
-    life.crew.forEach((p,i)=>{b.at(p.x,ground(p.x,p.z),p.z,p.yaw);const work=!p.walking,phase=p.phase,swing=p.walking?Math.sin(phase)*.28:0,lean=work&&p.work==='repair'?.27:0;
-      ball(0,1.09,-lean,.235,.285,.15,42);box(0,.91,-lean-.145,.38,.032,.023,45);box(0,1.20,-lean-.133,.38,.034,.023,45);box(0,.91,-lean+.145,.38,.032,.023,45);box(0,1.20,-lean+.133,.38,.034,.023,45); // reflective work vest
-      for(const s of [-1,1]){const hip=[s*.105,.90,-lean*.4],knee=[s*.12,.48,s*swing*.50],ankle=[s*.13,.14,-s*swing];tube(hip,knee,.095,41,10);tube(knee,ankle,.072,41,10);box(s*.13,.035,ankle[2]-.065,.17,.15,.29,10);
-        const shoulder=[s*.25,1.22,-lean],elbow=work?[s*.30,1.01,-.22-lean]:[s*.27,.96,-s*swing],hand=work?[s*.13,1.15+Math.sin(life.clock*2+i)*.024,-.43-lean]:[s*.27,.74,-s*swing*1.2];tube(shoulder,elbow,.073,41);tube(elbow,hand,.06,41);ball(...hand,.067,.085,.063,43);
-      }
-      tube([0,1.29,-lean],[0,1.40,-lean],.065,43);ball(0,1.49,-lean,.13,.17,.12,43);ball(0,1.61,-lean,.16,.11,.15,i%3===0?9:38);tube([0,1.60,-lean],[0,1.625,-lean],.18,i%3===0?9:38,16);
-      box(0,1.49,-.117-lean,.21,.052,.018,40);if(work){box(0,1.095,-.44-lean,.25,.028,.19,35);box(0,1.125,-.44-lean,.20,.008,.14,36);}box(-.13,1.24,-.125-lean,.065,.075,.026,10);
-    });return new Float32Array(b.data);
+    life.crew.forEach((p,i)=>{b.at(p.x,ground(p.x,p.z),p.z,p.yaw);crewBody(b,p,i,life.clock);});return new Float32Array(b.data);
   }
   // Cache local poses; the GPU handles world transforms instead of rebuilding all meshes each frame.
   const modelCache=new Map();
@@ -131,7 +252,7 @@
     for(const v of life.vehicles){const pose=truckPose(v,ground);commands.push({key:'truck-body',vertices:cached('truck-body',()=>{const b=builder();truckBody(b);return new Float32Array(b.data);}),x:v.x,y:pose.y,z:v.z,yaw:v.yaw,sx:pose.sx,sz:pose.sz});
       for(const side of [-1,1])for(const front of [true,false]){const frame=((Math.floor(v.wheel/TAU*16)%16)+16)%16,key='truck-wheel-'+side+'-'+frame,p=wheelPose(v,side,front,pose);commands.push({key,vertices:cached(key,()=>{const b=builder();truckWheel(b,frame/16*TAU,side);return new Float32Array(b.data);}),...p,sx:pose.sx,sz:pose.sz});}
     }
-    for(const p of life.crew){const frame=p.walking?((Math.floor(p.phase/TAU*12)%12)+12)%12:Math.floor(life.clock*2)%4,key=(p.walking?'walk':p.work)+'-'+frame;commands.push({key,vertices:cached(key,()=>geometry({vehicles:[],crew:[{...p,x:0,z:0,yaw:0,phase:frame/12*TAU}],clock:frame*.5},()=>0)),x:p.x,y:ground(p.x,p.z),z:p.z,yaw:p.yaw,sx:0,sz:0});}return commands;
+    for(const [i,p] of life.crew.entries()){const frame=p.walking?((Math.floor(p.phase/TAU*12)%12)+12)%12:Math.floor(life.clock*2)%4,key='crew-'+i+'-'+(p.walking?'walk':p.work)+'-'+frame;commands.push({key,vertices:cached(key,()=>{const b=builder();crewBody(b,{...p,phase:frame/12*TAU},i,frame*.5);return new Float32Array(b.data);}),x:p.x,y:ground(p.x,p.z),z:p.z,yaw:p.yaw,sx:0,sz:0});}return commands;
   }
   const api={SPAWNS,CREW,create,active,crewTick,circles,blocked,drive,nearestVehicle,enter,exit,brake,builder,geometry,models,TRUCK};
   if(typeof window!=='undefined')window.ParallaxLife=api;if(typeof module!=='undefined')module.exports=api;
