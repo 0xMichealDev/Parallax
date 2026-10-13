@@ -21,14 +21,16 @@
   const CAMPUS={x:-111,z:-106,width:68,depth:66};
   const campElevation=naturalHeight(0,-10),campusElevation=naturalHeight(CAMPUS.x,CAMPUS.z),springElevation=naturalHeight(37,22);
   const terrainGrid=new Map();
-  const RIVER={start:-6,end:328,bridgeZ:22,bridgeX:37};
+  const RIVER={start:-328,end:328,bridgeZ:22,bridgeX:37};
   const smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
-  const riverX=z=>37+Math.sin((z-22)*.022)*10+Math.sin((z-22)*.060)*2+smooth(70,240,z)*Math.sin((z-70)*.013)*20+smooth(22,50,z)*Math.sin((z-22)*.048)*6;
+  const riverX=z=>37+Math.sin((z-22)*.022)*10+Math.sin((z-22)*.060)*2+smooth(70,240,z)*Math.sin((z-70)*.013)*20+smooth(22,50,z)*Math.sin((z-22)*.048)*6+smooth(0,70,-z)*75;
   const riverWidth=z=>3.35+.60*Math.sin(z*.052)+.45*Math.sin(z*.14)+smooth(45,170,z)*2.6+2.2*Math.exp(-Math.pow((z-93)/18,2));
   const bankWidth=(z,side)=>riverWidth(z)+(.24*Math.sin(z*.77+side*2)+.16*Math.sin(z*1.71+side))*(1-Math.exp(-Math.pow((z-22)/5,2)));
   const waterHeight=z=>springElevation-.88-(z-22)*.004-2.15*smooth(22,110,z);
   function riverDistance(x,z){return Math.hypot(x-riverX(clamp(z,RIVER.start,RIVER.end)),Math.max(RIVER.start-z,0,z-RIVER.end));}
   function height(x,z){const key=x%3===0&&z%3===0?x+','+z:null;if(key!==null&&terrainGrid.has(key))return terrainGrid.get(key);const t=clamp((Math.hypot(x,z+10)-7)/6,0,1),desert=campElevation+(naturalHeight(x,z)-campElevation)*t*t*(3-2*t);const edge=Math.max(Math.abs(x-CAMPUS.x)-CAMPUS.width/2,Math.abs(z-CAMPUS.z)-CAMPUS.depth/2),blend=clamp(edge/9,0,1);let y=campusElevation+(desert-campusElevation)*blend*blend*(3-2*blend);
+    // A broad, low upstream watershed supports the channel as it winds beyond the walking boundary.
+    y+=smooth(35,105,-z)*Math.max(0,waterHeight(z)+.8-y)*Math.exp(-Math.pow((x-riverX(z))/42,2));
     const d=riverDistance(x,z),rz=clamp(z,RIVER.start,RIVER.end),width=bankWidth(rz,x<riverX(rz)?-1:1),bank=clamp((d-width)/5.5,0,1),bed=waterHeight(rz)-1.05+Math.pow(Math.min(1,d/width),2.6)*1.10;
     const result=bed+(y-bed)*bank*bank*(3-2*bank);if(key!==null)terrainGrid.set(key,result);return result;
   }
@@ -55,7 +57,7 @@
     {id:'rover-road',name:'Rover service road',width:4.8,points:[[12,-4],[6,-3],[0,0],[-7,-3],[-15,-8],[-23,-16],[-32,-29],[-45,-39],[-47,-43],[-47,-48],[-48,-54]]},
     {id:'east',name:'Meteorite trail',width:1.8,points:[[6,-3],[9,-11],[13,-18],[15,-25],[18,-31],[24,-34],[34,-39],[45,-45]]},
     {id:'wash',name:'Riverbank trail',width:2.0,points:[[6,-3],[15,0],[24,3],[28,10],[28,18],[31,22],[37,22],[43,22],[47,22]]},
-    {id:'loop',name:'Spring return trail',width:1.8,points:[[47,22],[49,11],[46,0],[40,-13],[29,-14],[15,-25]]},
+    {id:'loop',name:'River return trail',width:1.8,points:[[24,3],[21,-5],[21,-14],[15,-25]]},
     {id:'launch-road',name:'Launch campus access road',width:3.4,points:[[-47,-48],[-48,-54],[-59,-58],[-70,-64],[-82,-76],[-95,-84],[-104,-92],[-104,-103]]},
     {id:'campus-loop',name:'Launch forecourt',width:4.2,points:[[-104,-92],[-117,-92],[-117,-109],[-105,-110],[-97,-109],[-97,-96],[-104,-92]]},
     {id:'boarding',name:'Crew boarding path',width:2.6,points:[[-105,-110],[-105,-113]]},
@@ -213,7 +215,7 @@
     ${woodCoordinates}
     vec3 groundSample(vec2 p){return texture2D(groundMap,p).rgb;}
     float waterNoise(vec2 p){return noise(p)*.72+noise(p*2.43+13.7)*.28;}
-    float riverCenter(float z){return 37.+sin((z-22.)*.022)*10.+sin((z-22.)*.060)*2.+smoothstep(70.,240.,z)*sin((z-70.)*.013)*20.+smoothstep(22.,50.,z)*sin((z-22.)*.048)*6.;}
+    float riverCenter(float z){return 37.+sin((z-22.)*.022)*10.+sin((z-22.)*.060)*2.+smoothstep(70.,240.,z)*sin((z-70.)*.013)*20.+smoothstep(22.,50.,z)*sin((z-22.)*.048)*6.+smoothstep(0.,70.,-z)*75.;}
     float riverHalfWidth(float z){return 3.35+.60*sin(z*.052)+.45*sin(z*.14)+smoothstep(45.,170.,z)*2.6+2.2*exp(-pow((z-93.)/18.,2.));}
     float roverShade(vec4 vehicle){if(dot(vehicle.zw,vehicle.zw)<.5)return 0.;vec2 d=point.xz-vehicle.xy;vec2 p=vec2(dot(d,vec2(vehicle.w,vehicle.z)),dot(d,vec2(-vehicle.z,vehicle.w)));return exp(-pow(p.x/1.03,4.)-pow(p.y/2.71,4.))*.70;}
     float flashlight(vec3 point){vec3 p=point-flashlightPosition;float distance=length(p),angle=dot(normalize(p),flashlightDirection);return flashlightOn*smoothstep(.885,.965,angle)*(1.-smoothstep(23.,40.,distance))*5.5/(1.+distance*distance*.07);}
@@ -279,7 +281,7 @@
         vec3 rocky=groundSample(point.xy*.46)*vec3(1.10,.91,.76)*erosion;
         base=mix(base,rocky,slope*.68);
         float bankDistance=abs(point.x-riverCenter(point.z)),shore=1.-smoothstep(riverHalfWidth(point.z)-.3,riverHalfWidth(point.z)+2.2,bankDistance);
-        shore*=smoothstep(-9.,-4.,point.z)*(1.-smoothstep(326.,330.,point.z));
+        shore*=smoothstep(${(RIVER.start-3).toFixed(1)},${(RIVER.start+2).toFixed(1)},point.z)*(1.-smoothstep(326.,330.,point.z));
         base*=1.-shore*.34;
       }
       if(kind.x>.5&&kind.x<1.5){
@@ -699,13 +701,17 @@
       const at=(z,t)=>{const cap=Math.min(1,Math.sqrt(Math.max(.001,(z-RIVER.start)/4)),Math.sqrt(Math.max(.001,(RIVER.end-z)/4))),side=t<0?-1:1;return [riverX(z)+t*(bankWidth(z,side)+2.0)*cap,waterHeight(z),z];};
       for(let j=0;j<6;j++){const t=-1+j/3,tt=t+1/3,next=Math.min(RIVER.end,z+.8);quad(at(z,t),at(z,tt),at(next,tt),at(next,t),53);}
     }
-    for(let i=0;i<195;i++){const z=RIVER.start+2+i*1.68;for(const side of [-1,1]){const x=riverX(z)+side*(bankWidth(z,side)+.1+rand()*2.8);if(pathClearance(x,z)>.8&&!onBridge(x,z)){
+    for(let i=0;i<195;i++){const z=-4+i*1.68;for(const side of [-1,1]){const x=riverX(z)+side*(bankWidth(z,side)+.1+rand()*2.8);if(pathClearance(x,z)>.8&&!onBridge(x,z)){
       rock(x,z,.15+Math.pow(rand(),1.5)*.72,true);
       if(rand()<.61)shrub(x+side*(.7+rand()*1.6),z+.7,.27+rand()*.57,true);
       // Small gravel clusters break the clean cut between mud, stone and water.
       if(i%3===0)for(let k=0;k<4;k++)rock(x+(rand()-.5)*1.5,z+(rand()-.5)*2,.035+rand()*.10,true);
     }}}
     for(let i=0;i<13;i++){const z=8+i*26,x=riverX(z)+Math.sin(i*2.4)*riverWidth(z)*.55;if(z<RIVER.end-4)rock(x,z,.78+.30*Math.sin(i*1.9+1),true,true);}
+    // The upstream reach keeps flowing around an eastern bend, well beyond the playable valley.
+    for(let z=-12;z>RIVER.start+12;z-=3.8){for(const side of [-1,1]){const x=riverX(z)+side*(bankWidth(z,side)+.5+rand()*2.2);if(pathClearance(x,z)>1.2){rock(x,z,.22+rand()*.70,true);if(rand()<.38)shrub(x+side*1.3,z,.4+rand()*.45,true);}}}
+    // A low rock outcrop conceals the remote mesh endpoint; the near-camp dirt cap is gone.
+    {const z=RIVER.start+4,x=riverX(z);rock(x,z,5.8,true,true);rock(x-4.1,z-1.5,4.2,true,true);rock(x+4.4,z-2,4.6,true,true);}
     // River willows: bending trunks, branching limbs and overlapping leaf cutouts.
     for(let i=0;i<34;i++){const z=2+i*9.2+(rand()-.5)*7,side=rand()>.5?1:-1,x=riverX(z)+side*(riverWidth(z)+3.3+rand()*3.2);if(pathClearance(x,z)<2.6)continue;const y=ground(x,z),h=2.6+rand()*2.0;
       cylinder([x,y,z],[x+.28,y+h*.76,z+.13],.14,55,12);
@@ -904,7 +910,7 @@
       canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();alive=false;worker?.terminate();canvas.remove();onFailure?.();});
       function acceptWorld(result){if(!alive)return;world=result;gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,shadeTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.shadeSize,world.shadeSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.shade);gl.activeTexture(gl.TEXTURE7);gl.bindTexture(gl.TEXTURE_2D,trailTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.trailSize,world.trailSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.trailMask);ready=true;worker?.terminate();worker=null;onReady?.();}
       // Construct geometry off the UI thread; keep the landscape visible while it loads.
-      try{worker=new Worker('/desert-world.js?v=40');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
+      try{worker=new Worker('/desert-world.js?v=41');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
       catch{setTimeout(()=>acceptWorld(geometry()),0)}
       function cameraEye(){
         const base=[state.x,walkingGround(state.x,state.z)+(state.seated?1.03:1.72),state.z];if(flight&&flight.mode!=='ground'){base[1]=ground(-110,-120)+(flight.mode==='lift'?flight.rise:54+flight.rise)+1.62;return base;}if(!life?.driving)return base;
