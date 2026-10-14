@@ -1,8 +1,8 @@
 (()=>{'use strict';
 const privacyKey='parallax-project-analytics-off',browserKey='parallax-project-browser-v1',sessionsKey='parallax-project-sessions-v1';
-let active=null,memoryBrowser=null,memorySessions={},privacyButton=null;
+let active=null,memoryBrowser=null,memorySessions={},privacyButton=null,memoryOptOut=null;
 const blocked=()=>navigator.doNotTrack==='1'||navigator.globalPrivacyControl===true;
-function optedOut(){try{return localStorage.getItem(privacyKey)==='1'}catch{return false}}
+function optedOut(){if(memoryOptOut!==null)return memoryOptOut;try{return localStorage.getItem(privacyKey)==='1'}catch{return false}}
 function random(){return crypto.randomUUID();}
 function browser(){
  const now=Date.now();try{let b=JSON.parse(localStorage.getItem(browserKey)||'null');if(!b||typeof b.id!=='string'||!/^[a-f0-9-]{36}$/i.test(b.id)||!Number.isFinite(b.created)||now-b.created>90*86400000){b={id:random(),created:now};localStorage.setItem(browserKey,JSON.stringify(b));}return b.id;}catch{if(!memoryBrowser)memoryBrowser=random();return memoryBrowser;}
@@ -23,7 +23,7 @@ function privacyUI(){
  if(!privacyButton)return;privacyButton.textContent=blocked()?'Project analytics disabled by browser privacy settings':optedOut()?'Project analytics off · Enable':'Project analytics on · Disable';privacyButton.disabled=blocked();privacyButton.setAttribute('aria-pressed',String(!blocked()&&!optedOut()));
 }
 function makePrivacy(){
- if(privacyButton)return;const box=document.createElement('div');box.className='project-privacy';privacyButton=document.createElement('button');privacyButton.type='button';privacyButton.onclick=()=>{try{const off=!optedOut();localStorage.setItem(privacyKey,off?'1':'0');if(off){localStorage.removeItem(browserKey);localStorage.removeItem(sessionsKey);memoryBrowser=null;memorySessions={};}privacyUI();if(!off)record('visit');}catch{privacyButton.textContent='Your browser could not save this preference.';}};
+ if(privacyButton)return;const box=document.createElement('div');box.className='project-privacy';privacyButton=document.createElement('button');privacyButton.type='button';privacyButton.onclick=()=>{const off=!optedOut();memoryOptOut=off;let saved=true;if(off){memoryBrowser=null;memorySessions={};}try{localStorage.setItem(privacyKey,off?'1':'0');if(off){localStorage.removeItem(browserKey);localStorage.removeItem(sessionsKey);}}catch{saved=false;}privacyUI();if(!saved)privacyButton.textContent=off?'Project analytics off for this page · Enable':'Project analytics on for this page · Disable';if(!off)record('visit');};
  const note=document.createElement('span');note.textContent='First-party visit and website-click counts help this creator understand their audience. Browser identifiers stay separate from your wallet.';box.append(privacyButton,note);(document.querySelector('main')||document.body).append(box);privacyUI();
 }
 async function feed(id){
