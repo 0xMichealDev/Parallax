@@ -33,7 +33,7 @@
     q('#atlas-claim-details').hidden=!m;
     if(m){q('#atlas-contract').textContent=m.contractAddress;q('#atlas-wallet').textContent=m.wallet;}
     const actions=q('#atlas-project-links');actions.replaceChildren();
-    if(m){actions.append(link('Project profile ↗','/mission/'+encodeURIComponent(m.id)+'#observatory'),link('View token ↗','https://solscan.io/token/'+encodeURIComponent(m.contractAddress)),link('Chart ↗','https://dexscreener.com/solana/'+encodeURIComponent(m.contractAddress)));if(m.url){try{const u=new URL(m.url);if(['https:','http:'].includes(u.protocol))actions.append(link('Project website ↗',u.href))}catch{}}}
+    if(m){const inspect=node('button','atlas-link','Market & on-chain ↗');inspect.type='button';inspect.onclick=()=>document.dispatchEvent(new CustomEvent('parallax:inspect-token',{detail:m.contractAddress}));actions.append(inspect);actions.append(link('Project profile ↗','/mission/'+encodeURIComponent(m.id)+'#observatory'),link('View token ↗','https://solscan.io/token/'+encodeURIComponent(m.contractAddress)),link('Chart ↗','https://dexscreener.com/solana/'+encodeURIComponent(m.contractAddress)));if(m.url){try{const u=new URL(m.url);if(['https:','http:'].includes(u.protocol))actions.append(link('Project website ↗',u.href))}catch{}}}
     q('#atlas-explore').textContent='Explore '+p.name+' in 3D ↗';q('#atlas-explore').onclick=()=>{stop();window.parallaxUniverse?.open(p.name)};
     q('#atlas-prev').disabled=busy||claims.length<2;q('#atlas-next').disabled=busy||(claims.length<2&&nextOffset===null);q('#atlas-cycle').disabled=busy||(claims.length<2&&nextOffset===null);
     q('#atlas-more').hidden=nextOffset===null;q('#atlas-more').disabled=busy;
