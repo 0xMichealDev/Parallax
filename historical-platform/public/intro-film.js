@@ -1,0 +1,37 @@
+(() => {
+  'use strict';
+  const chapters = window.ParallaxFilmChapters, policy = window.ParallaxTourPolicy;
+  const entry = document.getElementById('guided-tour-play');
+  if (!entry || !chapters?.length || !policy) return;
+  const read=(s,k)=>{try{return s.getItem(k)}catch{return null}}, write=(s,k,v)=>{try{s.setItem(k,v)}catch{}};
+  const AUTO='parallax.guided-tour.auto.v1', SEEN='parallax.intro-film.seen.v63';
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  let enabled=read(localStorage,AUTO)!=='off',seen=read(sessionStorage,SEEN)==='yes',idleTimer,returnFocus,opened=false,index=-1,sequence=0;
+  const dialog=document.createElement('dialog');dialog.id='parallax-film';dialog.setAttribute('aria-labelledby','film-title');
+  dialog.innerHTML=`<div class="film-shell"><header class="film-header"><div><span class="film-brand">◎ PARALLAX</span><span class="film-edition">THE PRODUCT FILM / OCTOBER 2026</span></div><button id="film-close" type="button" aria-label="Close introduction">Back to site ×</button></header><div class="film-screen"><video id="film-video" controls playsinline preload="none" poster="/assets/intro-film/poster.jpg" aria-label="PARALLAX introduction: current features and roadmap"><track kind="captions" src="/assets/intro-film/captions.vtt" srclang="en" label="English" default></video></div><div class="film-body"><div class="film-current"><div><p id="film-stage"></p><h2 id="film-title"></h2></div><a id="film-action"></a></div><div class="film-chapters" role="group" aria-label="Jump to a film chapter"></div><div class="film-options"><button id="film-sound" type="button" aria-pressed="false">Enable sound</button><a class="film-download" href="/assets/intro-film/parallax-introduction.mp4" download="PARALLAX-Introduction.mp4">Download video ↓</a><a href="/roadmap">Full roadmap ↗</a><button type="button" data-tour-auto aria-pressed="true">Idle tour on</button></div><p id="film-status" role="status"></p><details id="film-transcript"><summary>Read the introduction</summary><div class="film-transcript-body"></div></details><p class="film-note">Actual site captures and cinematic concept visuals. Roadmap items are proposed priorities, not release-date commitments. Market data shown is a recorded snapshot.</p></div></div>`;
+  document.body.append(dialog);
+  const q=s=>dialog.querySelector(s),video=q('#film-video'),buttons=[];
+  const autoButtons=[...document.querySelectorAll('[data-tour-auto]')];
+  function prefs(){autoButtons.forEach(b=>{b.textContent='Idle tour '+(enabled?'on':'off');b.setAttribute('aria-pressed',String(enabled))});q('#film-sound').textContent=video.muted?'Enable sound':'Sound on';q('#film-sound').setAttribute('aria-pressed',String(!video.muted));}
+  function chapter(){const t=video.currentTime||0;const i=Math.max(0,chapters.findLastIndex(c=>t>=c.start));if(i===index)return;index=i;const c=chapters[i];q('#film-stage').textContent=c.status;q('#film-title').textContent=c.title;q('#film-action').textContent=c.action+' ↗';q('#film-action').href=c.href;buttons.forEach((b,j)=>b.setAttribute('aria-pressed',String(i===j)));}
+  function eligible(){return policy.eligible({enabled,seen,hidden:document.hidden,focused:document.hasFocus(),nearTop:scrollY<180,editing:!!document.activeElement?.closest('input,textarea,select,[contenteditable]:not([contenteditable="false"]),[role="textbox"]'),modal:!!document.querySelector('dialog[open],[aria-modal="true"]'),reduced:reduced.matches,motionPaused:document.body.classList.contains('motion-paused'),mediaPlaying:[...document.querySelectorAll('audio,video')].some(m=>!m.paused&&!m.ended)});}
+  function arm(){clearTimeout(idleTimer);if(location.pathname==='/'&&!opened&&enabled&&!seen)idleTimer=setTimeout(()=>{if(eligible())open(true);else arm()},policy.IDLE_MS);}
+  function play(){const request=++sequence;video.play().catch(()=>{if(opened&&request===sequence)q('#film-status').textContent='Tap Play in the video to begin. You can also read the introduction below.'});}
+  function open(automatic=false){if(opened||document.querySelector('dialog[open],[aria-modal="true"]'))return;returnFocus=document.activeElement;opened=true;seen=true;write(sessionStorage,SEEN,'yes');clearTimeout(idleTimer);dialog.showModal();document.body.classList.add('intro-film-active');video.muted=automatic;video.src='/assets/intro-film/parallax-introduction.mp4';index=-1;chapter();prefs();q('#film-status').textContent=automatic?'Playing quietly. Enable sound for narration and music.':'Use the chapters to explore the tools and the roadmap.';q('#film-close').focus({preventScroll:true});play();}
+  function cleanup(){if(!opened)return;opened=false;sequence++;video.pause();video.removeAttribute('src');video.load();document.body.classList.remove('intro-film-active');returnFocus?.focus({preventScroll:true});}
+  function close(){dialog.close();cleanup();}
+  chapters.forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.textContent=String(i+1).padStart(2,'0')+' '+c.label;b.setAttribute('aria-label','Jump to '+c.label);b.onclick=()=>{if(video.readyState<1){q('#film-status').textContent='The film is loading. Try the chapter again in a moment.';return;}video.currentTime=c.start;chapter();play()};q('.film-chapters').append(b);buttons.push(b);const section=document.createElement('section'),title=document.createElement('h3'),body=document.createElement('p');title.textContent=c.label+' — '+c.status;body.textContent=c.voice;section.append(title,body);q('.film-transcript-body').append(section)});
+  autoButtons.forEach(b=>b.onclick=()=>{enabled=!enabled;if(enabled){seen=false;write(sessionStorage,SEEN,'no')}write(localStorage,AUTO,enabled?'on':'off');prefs();arm()});
+  entry.onclick=()=>open(false);const top=document.getElementById('tour-play-top');if(top)top.onclick=()=>open(false);
+  q('#film-close').onclick=close;q('#film-action').onclick=close;q('#film-sound').onclick=()=>{video.muted=!video.muted;prefs();if(video.paused)play()};
+  video.addEventListener('timeupdate',chapter);video.addEventListener('volumechange',prefs);video.addEventListener('loadedmetadata',chapter);
+  video.addEventListener('playing',()=>{if(!opened||document.hidden){video.pause();return;}q('#film-status').textContent=video.muted?'Playing quietly · Enable sound to listen.':'Narration and music playing.'});
+  video.addEventListener('ended',()=>{q('#film-status').textContent='Thanks for being part of PARALLAX. Replay, explore a chapter, or return to the site.'});
+  video.addEventListener('error',()=>{if(opened)q('#film-status').textContent='The video could not load. Retry with Play, download the video, or read the full introduction below.'});
+  q('#film-transcript').addEventListener('toggle',()=>{if(q('#film-transcript').open)video.pause()});
+  dialog.addEventListener('cancel',e=>{e.preventDefault();close()});dialog.addEventListener('close',cleanup);
+  for(const name of ['pointerdown','pointermove','keydown','scroll','touchstart','input','focusin'])document.addEventListener(name,()=>{if(!opened)arm()},{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearTimeout(idleTimer);video.pause()}else arm()});
+  addEventListener('blur',()=>{clearTimeout(idleTimer);video.pause()});addEventListener('focus',arm);addEventListener('pagehide',()=>{if(opened)close();clearTimeout(idleTimer)});addEventListener('pageshow',arm);reduced.addEventListener('change',arm);
+  window.parallaxGuidedTour={open:()=>open(false)};prefs();arm();
+})();
