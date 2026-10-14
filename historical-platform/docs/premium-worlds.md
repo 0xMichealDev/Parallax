@@ -4,7 +4,7 @@ The storefront is `/premium`. It offers three cinematic backgrounds, a brand acc
 
 ## Activation
 
-Checkout is closed by default. Configure these native Sites runtime variables only after the owner supplies the price and receiving wallet:
+Checkout is closed by default when configuration is absent. The owner approved activation on October 14, 2026 at **600,000 PRLX per published project, one-time**, received by **5ZeA2mx6MotvFgpF8ZyGHSAVLZAqGuNK5aj8udFwtLC3**. Configure these native Sites runtime variables:
 
 | Variable | Required value |
 | --- | --- |
@@ -14,7 +14,11 @@ Checkout is closed by default. Configure these native Sites runtime variables on
 
 Deploy a saved version after updating runtime variables. The existing `SOLANA_RPC_URL` and optional fallback are reused. The official mint is fixed in code: `8B2G4oiTKZKbSVTKPAP7Cfe6zAsEtrySCYcX9M2kpump`. Invoice creation checks the mainnet genesis and mint program/decimals. Token-2022 is not supported by this version.
 
-Do not infer a receiving wallet from other projects or connected visitor wallets. No merchant wallet or price was configured when this implementation was prepared. No live transfer has been made during development.
+Do not infer a receiving wallet from other projects or connected visitor wallets. The approved runtime values are `PRLX_CHECKOUT_ENABLED=true`, `PRLX_PREMIUM_PRICE=600000` and the receiving wallet above. No live transfer has been made during development.
+
+## Development fund
+
+Premium Worlds proceeds are designated for PARALLAX project development and future updates. Checkout sends the full invoice amount directly to the owner-designated receiving wallet; network fees are separate. The storefront links that wallet on Solscan and explains that it is managed by the project owner. This designation does not introduce a smart-contract pool, spending enforcement, automated allocation or public expense accounting. Do not present the wallet balance as premium revenue: it can include unrelated transfers.
 
 ## Behavior
 
@@ -32,7 +36,7 @@ Do not infer a receiving wallet from other projects or connected visitor wallets
 
 `node tests/premium-client.mjs` exercises the real client with fixtures, including closed checkout, safe creator text, preview-only controls, explicit wallet submission, duplicate-click handling without storage, and restored paid access.
 
-The existing Studio, wallet API and creator-dashboard checks remain required. Browser/physical iPhone and an actual Phantom transaction remain unverified. Before promoting paid checkout, complete a real-device purchase using an explicitly approved amount and wallet, then check the receipt and public premium look. Never use development fixtures as production purchases.
+The existing Studio, wallet API and creator-dashboard checks remain required. Browser/physical iPhone and an actual Phantom transaction remain unverified. Follow up with a real-device purchase using an explicitly approved amount and wallet, then check the receipt and public premium look. Never use development fixtures as production purchases.
 
 ## Protocol references
 
