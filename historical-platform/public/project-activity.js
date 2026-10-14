@@ -33,7 +33,7 @@ async function feed(id){
  for(const update of data.updates){const article=document.createElement('article'),time=document.createElement('time'),heading=document.createElement('h3'),body=document.createElement('p');time.dateTime=new Date(update.createdAt).toISOString();time.textContent=new Date(update.createdAt).toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});heading.textContent=update.title;body.textContent=update.body;article.append(time,heading,body);section.append(article);}
  }catch{const note=document.createElement('p');note.textContent='Project updates could not load. Refresh to try again.';section.append(note);}
 }
-function start(id,owner=false){const path=location.pathname.match(/^\/(world|mission)\/([^/]+)\/?$/);if(!path||path[2]!==id||active)return;active={id,owner,entry:path[1]};feed(id);makePrivacy();record('visit');}
+function start(id,owner=false){const path=location.pathname.match(/^\/(world|mission)\/([^/]+)\/?$/);if(!path||path[2]!==id||active)return;active={id,owner,entry:path[1]};feed(id);window.ParallaxProjectResearch?.load(id);makePrivacy();record('visit');}
 document.addEventListener('click',e=>{const a=e.target?.closest?.('a[data-project-website]');if(a&&active&&(!a.dataset.projectId||a.dataset.projectId===active.id))record('click');});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)record('visit')});
 window.ParallaxProjectMetrics={start};
