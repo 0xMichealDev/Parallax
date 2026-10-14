@@ -1,12 +1,12 @@
 /* Local flight sequence. No wallet action, purchase, or network request. */
 (() => {
   'use strict';
-  const PLANETS=['Mercury','Venus','Earth','Mars','Jupiter','Saturn','Uranus','Neptune'];
+  const PLANETS=typeof solarSystemWorlds!=='undefined'?solarSystemWorlds.map(w=>w.name):['Mercury','Venus','Earth','Moon','Mars','Jupiter','Europa','Saturn','Uranus','Neptune','Pluto'];
   const BOARDING={x:-105,z:-113,deck:54};
   const create=()=>({mode:'ground',elapsed:0,rise:0,planet:'Mars'});
   function board(f,p,driving){if(f.mode!=='ground'||driving||Math.hypot(p.x-BOARDING.x,p.z-BOARDING.z)>3.3)return false;Object.assign(f,{mode:'lift',elapsed:0,rise:0});return true;}
   function launch(f,planet){if(f.mode!=='cabin'||!PLANETS.includes(planet))return false;Object.assign(f,{mode:'launch',elapsed:0,rise:0,planet});return true;}
-  function tick(f,dt){dt=Math.min(.1,Math.max(0,dt));if(f.mode!=='lift'&&f.mode!=='launch')return false;f.elapsed+=dt;
+  function tick(f,dt){dt=Number.isFinite(dt)?Math.min(.1,Math.max(0,dt)):0;if(f.mode!=='lift'&&f.mode!=='launch')return false;f.elapsed+=dt;
     if(f.mode==='lift'){const p=Math.min(1,f.elapsed/5);f.rise=54*p*p*(3-2*p);if(p===1)Object.assign(f,{mode:'cabin',elapsed:0,rise:0});}
     else{const p=Math.min(1,Math.max(0,(f.elapsed-3)/8));f.rise=1200*p*p;if(p===1)f.mode='orbit';}
     return true;

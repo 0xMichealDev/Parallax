@@ -1,23 +1,14 @@
 (() => {
   'use strict';
   const renderMissionProfile=typeof window.render==='function'?window.render:()=>{};
-  const planets = [
-    {id:'mercury',name:'Mercury',kind:'ROCKY WORLD',map:'2k_mercury.jpg',color:'#acb3c1'},
-    {id:'venus',name:'Venus',kind:'CLOUD-COVERED WORLD',map:'2k_venus_atmosphere.jpg',color:'#e9bf88'},
-    {id:'earth',name:'Earth',kind:'OUR HOME WORLD',map:'2k_earth_daymap.jpg',color:'#72b9ff'},
-    {id:'mars',name:'Mars',kind:'THE RED PLANET',map:'2k_mars.jpg',color:'#e69c7b'},
-    {id:'jupiter',name:'Jupiter',kind:'GAS GIANT',map:'2k_jupiter.jpg',color:'#e0b48f'},
-    {id:'saturn',name:'Saturn',kind:'THE RINGED WORLD',map:'2k_saturn.jpg',color:'#dfcda5'},
-    {id:'uranus',name:'Uranus',kind:'ICE GIANT',map:'2k_uranus.jpg',color:'#91d6db'},
-    {id:'neptune',name:'Neptune',kind:'ICE GIANT',map:'2k_neptune.jpg',color:'#6d99f5'}
-  ];
+  const planets = solarSystemWorlds;
   const root=document.querySelector('#project-atlas');if(!root)return;
   const q=s=>root.querySelector(s),dialog=document.querySelector('#claim-planet-dialog'),dq=s=>dialog.querySelector(s);
   let claims=[],index=0,filter='',total=0,nextOffset=null,requestId=0,busy=false,timer=0,active=false,owned=[],myClaims=[],focusReturn=null;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
   async function request(path,body){const res=await fetch(path,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)});let value;try{value=await res.json()}catch{throw Error('The project directory could not be reached. Please try again.')}if(!res.ok)throw Error(value.error||'Unable to load projects.');return value}
-  const planetFor=id=>planets.find(p=>p.id===id)||planets[2];
+  const planetFor=id=>planets.find(p=>p.id===id)||planets.find(p=>p.id==='earth');
   function styleOrb(e,p){e.dataset.planet=p.id;e.style.setProperty('--planet-map',`url('/assets/globe/${p.map}')`);e.style.setProperty('--planet-color',p.color)}
   function link(text,href){const a=node('a','atlas-link',text);a.href=href;if(href.startsWith('https://')||href.startsWith('http://')){a.target='_blank';a.rel='noopener noreferrer'}return a}
   function stop(){clearInterval(timer);timer=0;active=false;q('#atlas-cycle').textContent='Cycle projects ▷';q('#atlas-cycle').setAttribute('aria-pressed','false')}
@@ -29,7 +20,7 @@
     q('#atlas-position').textContent=m?`${index+1} / ${total} PROJECT${total===1?'':'S'}`:'OPEN FOR DISCOVERY';
     q('#atlas-project-name').textContent=m?m.name:filter?`Make ${p.name} your project’s home.`:'A solar system of projects.';
     q('#atlas-project-ticker').textContent=m?'$'+m.ticker:'YOUR TICKER. YOUR ORBIT.';
-    q('#atlas-project-description').textContent=m?m.description:'Claim a project spot on a real solar-system planet. Visitors can discover your ticker, open your profile, and keep exploring the next project.';
+    q('#atlas-project-description').textContent=m?m.description:'Claim a project spot on a solar-system world. Visitors can discover your ticker, open your profile, and keep exploring the next project.';
     q('#atlas-claim-details').hidden=!m;
     if(m){q('#atlas-contract').textContent=m.contractAddress;q('#atlas-wallet').textContent=m.wallet;}
     const actions=q('#atlas-project-links');actions.replaceChildren();
@@ -48,7 +39,7 @@
     catch(e){if(id!==requestId)return;if(!append){claims=[];index=0;total=0;nextOffset=null}stop();q('#atlas-status').textContent=e.message;}
     finally{if(id===requestId){busy=false;render()}}
   }
-  planets.forEach((p,i)=>{const b=node('button','atlas-planet-button');b.type='button';b.dataset.planet=p.id;b.setAttribute('aria-pressed','false');const orb=node('span','atlas-orb atlas-small-orb');styleOrb(orb,p);orb.setAttribute('aria-hidden','true');const label=node('span','atlas-planet-label',p.name),count=node('small','', 'Loading…');count.dataset.count=p.id;b.append(node('span','atlas-planet-number',String(i+1).padStart(2,'0')),orb,label,count);b.onclick=()=>{stop();filter=p.id;load()};q('#atlas-planets').append(b);const option=node('option','',p.name);option.value=p.id;dq('#claim-planet').append(option)});
+  planets.forEach((p,i)=>{const b=node('button','atlas-planet-button');b.type='button';b.title=p.name+' · '+p.kind;b.dataset.planet=p.id;b.setAttribute('aria-pressed','false');const orb=node('span','atlas-orb atlas-small-orb');styleOrb(orb,p);orb.setAttribute('aria-hidden','true');const label=node('span','atlas-planet-label',p.name),count=node('small','', 'Loading…');count.dataset.count=p.id;b.append(node('span','atlas-planet-number',p.kind.toUpperCase()),orb,label,count);b.onclick=()=>{stop();filter=p.id;load()};q('#atlas-planets').append(b);const option=node('option','',p.name);option.value=p.id;dq('#claim-planet').append(option)});
   q('#atlas-all').onclick=()=>{stop();filter='';load()};q('#atlas-prev').onclick=()=>{stop();step(-1)};q('#atlas-next').onclick=()=>{stop();step(1)};q('#atlas-more').onclick=()=>{stop();load(true)};
   q('#atlas-cycle').onclick=()=>{if(active)stop();else{start();q('#atlas-cycle').blur()}};
   q('#atlas-refresh').onclick=()=>{stop();load()};let searchTimer;q('#atlas-search').oninput=()=>{stop();clearTimeout(searchTimer);searchTimer=setTimeout(()=>load(),300)};
