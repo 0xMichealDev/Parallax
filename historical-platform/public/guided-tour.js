@@ -25,7 +25,7 @@
     <footer class="pt-footer"><div class="pt-chapters" role="group" aria-label="Choose a tour chapter"></div><div class="pt-progress"><progress id="pt-progress" value="0" max="100" aria-label="Tour progress"></progress><output id="pt-time"></output></div>
     <div class="pt-controls"><div class="pt-playback"><button type="button" id="pt-prev" aria-label="Previous chapter">←</button><button type="button" id="pt-pause">Pause</button><button type="button" id="pt-next" aria-label="Next chapter">→</button></div><div class="pt-options"><button type="button" id="pt-voice" aria-pressed="false">Enable voiceover</button><button type="button" id="pt-music" aria-pressed="true">Music on</button><button type="button" id="pt-cc" aria-pressed="true" aria-label="Show captions">CC</button><button type="button" data-tour-auto aria-pressed="true">Idle tour on</button></div></div>
     <div class="pt-meta"><p id="pt-status" role="status"></p><details id="pt-transcript"><summary>Read this chapter</summary><p id="pt-transcript-text"></p></details></div></footer>
-    <audio id="pt-audio" preload="none"></audio><audio id="pt-bed" preload="none" loop></audio></div>`;
+    <audio id="pt-audio" preload="metadata" playsinline controls aria-label="Chapter voiceover player"></audio><audio id="pt-bed" preload="none" loop></audio></div>`;
   document.body.append(dialog);
   const q = s => dialog.querySelector(s), voice = q('#pt-audio'), music = q('#pt-bed');
   const autoButtons = [...document.querySelectorAll('[data-tour-auto]')];
@@ -50,7 +50,7 @@
   }
   function eligible() {
     return policy.eligible({enabled, seen, hidden: document.hidden, focused: document.hasFocus(),
-      nearTop: scrollY < 180, editing: !!document.activeElement?.closest('input,textarea,select,[contenteditable]:not([contenteditable="false"]),[role="textbox"]'),
+      nearTop: scrollY < Math.max(180, document.querySelector('.research-home')?.offsetHeight || 0), editing: !!document.activeElement?.closest('input,textarea,select,[contenteditable]:not([contenteditable="false"]),[role="textbox"]'),
       modal: !!document.querySelector('dialog[open],[aria-modal="true"]'), reduced: reduced.matches,
       motionPaused: document.body.classList.contains('motion-paused'),
       mediaPlaying: [...document.querySelectorAll('audio,video')].some(a => !a.paused && !a.ended)});
@@ -134,7 +134,7 @@
     if (opened || document.querySelector('dialog[open],[aria-modal="true"]')) return;
     returnFocus = document.activeElement; markSeen(); clearTimeout(idleTimer);
     opened = true; paused = false; ended = false;
-    if (!automatic) { voiceOn = true; write(localStorage, SOUND, 'on'); }
+    voiceOn = !automatic; if (!automatic) write(localStorage, SOUND, 'on');
     dialog.showModal(); document.body.classList.add('guided-tour-active');
     q('#pt-transcript').open = false;
     showChapter(0);
@@ -157,8 +157,9 @@
     button.onclick = () => { const wasEnded = ended; if (wasEnded) paused = false; showChapter(i); };
     q('.pt-chapters').append(button); buttons.push(button);
   });
-  autoButtons.forEach(b => { b.onclick = () => { enabled = !enabled; write(localStorage, AUTO, enabled ? 'on' : 'off'); preferences(); arm(); }; });
+  autoButtons.forEach(b => { b.onclick = () => { enabled = !enabled; if(enabled){seen=false;write(sessionStorage, SEEN, 'no');} write(localStorage, AUTO, enabled ? 'on' : 'off'); preferences(); arm(); }; });
   entry.onclick = () => open(false);
+  const topEntry=document.querySelector('#tour-play-top');if(topEntry)topEntry.onclick=()=>open(false);
   q('#pt-close').onclick = close;
   q('#pt-prev').onclick = () => showChapter(index - 1);
   q('#pt-next').onclick = () => showChapter(index + 1);
@@ -181,6 +182,7 @@
       if (target) { target.setAttribute('tabindex', '-1'); target.focus({preventScroll: true}); }
     }
   };
+  voice.addEventListener('playing',()=>{if(!opened)return;clearTimeout(loadTimer);audioReady=true;voiceOn=true;paused=false;last=performance.now();status('Voiceover playing.');preferences();});
   voice.addEventListener('ended', () => { if (opened && voiceOn && !paused && audioReady) advance(); });
   voice.addEventListener('error', () => { if (opened && voiceOn) quietFallback('This audio chapter could not load. Captions are continuing; you can retry voiceover.'); });
   dialog.addEventListener('cancel', event => { event.preventDefault(); close(); });
