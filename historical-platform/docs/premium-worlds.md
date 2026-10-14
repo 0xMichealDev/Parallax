@@ -1,6 +1,6 @@
 # Premium Worlds v1
 
-The storefront is `/premium`. It offers three cinematic backgrounds, a brand accent, companion moons, and matching artwork in the existing Studio. Base creation and publishing remain free.
+The storefront is `/premium`. It offers three cinematic backgrounds, volcanic/glacial/bioluminescent materials, signature halo/double-halo/stardust rings, three lighting directions, atmospheric glow, a brand accent, companion moons, and matching artwork in the existing Studio. Base creation and publishing remain free.
 
 ## Activation
 
@@ -44,3 +44,11 @@ The existing Studio, wallet API and creator-dashboard checks remain required. Br
 - [Solana Pay transfer requests](https://docs.solanapay.com/spec)
 - [Solana transaction verification](https://solana.com/docs/payments/accept-payments/verification-tools)
 - [getTransaction](https://solana.com/docs/rpc/http/gettransaction)
+
+## Visual collection update
+
+The shared WebGL renderer provides correctly mapped textured spheres, surface lighting, ocean highlights, Earth night lights, moving clouds, atmosphere and depth-correct rings for free Studio worlds. It is used by Premium previews, saved public worlds and Studio PNG exports. Existing premium receipts unlock the expanded material controls without a second purchase. Legacy three-field styles still validate and retain their original surface/rings. New style fields are optional and enum-validated on the server.
+
+Drag rotates the globe. Motion honors reduced-motion preferences and pauses when hidden. Browsers without WebGL keep the earlier renderer and show a notice about limited previews. Free previews never publish or submit payments; unpaid exports use the free design.
+
+Native GLES compilation/render checks verify the actual shader. Browser layout and physical iPhone performance remain unverified in this environment.

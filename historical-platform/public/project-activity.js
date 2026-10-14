@@ -2,7 +2,7 @@
 const privacyKey='parallax-project-analytics-off',browserKey='parallax-project-browser-v1',sessionsKey='parallax-project-sessions-v1';
 let active=null,memoryBrowser=null,memorySessions={},privacyButton=null,memoryOptOut=null;
 const blocked=()=>navigator.doNotTrack==='1'||navigator.globalPrivacyControl===true;
-function optedOut(){if(memoryOptOut!==null)return memoryOptOut;try{return localStorage.getItem(privacyKey)==='1'}catch{return false}}
+function optedOut(){if(memoryOptOut!==null)return memoryOptOut;try{return (localStorage.getItem(privacyKey)==='1'||localStorage.getItem('parallax-site-analytics-off')==='1')}catch{return false}}
 function random(){return crypto.randomUUID();}
 function browser(){
  const now=Date.now();try{let b=JSON.parse(localStorage.getItem(browserKey)||'null');if(!b||typeof b.id!=='string'||!/^[a-f0-9-]{36}$/i.test(b.id)||!Number.isFinite(b.created)||now-b.created>90*86400000){b={id:random(),created:now};localStorage.setItem(browserKey,JSON.stringify(b));}return b.id;}catch{if(!memoryBrowser)memoryBrowser=random();return memoryBrowser;}
