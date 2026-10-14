@@ -79,7 +79,7 @@ window.ParallaxTourChapters = [
     ],
     "image": "earth",
     "alt": "The Earth artwork used on the Parallax website",
-    "href": "/#explore",
+    "href": "/explore#explore",
     "action": "Explore the universe",
     "voice": "Back on the homepage, Explore the Universe opens the immersive side of Parallax. Discover its worlds, browse the project atlas and space gallery, or settle into the After Dark cinematic journey. These experiences give the community a place to explore while the research tools continue to grow. Take your time, and follow the sections that interest you.",
     "duration": 22.755556
@@ -96,7 +96,7 @@ window.ParallaxTourChapters = [
     ],
     "image": "creator.jpg",
     "alt": "Parallax launch simulator with hypothetical pool inputs and example simulation outputs",
-    "href": "/#observatory",
+    "href": "/studio",
     "action": "Open the creative tools",
     "voice": "The creative tools let you shape a world and plan a mission. The launch simulator helps you explore hypothetical scenarios, and the creator toolkit helps organize your next steps. These are planning tools. They do not place trades or deploy a token for you. Any external launch happens separately, through the linked platform.",
     "duration": 21.130159
@@ -113,7 +113,7 @@ window.ParallaxTourChapters = [
     ],
     "image": "overview.jpg",
     "alt": "Mission Control overview showing the research workspace and its product tools",
-    "href": "/#roadmap",
+    "href": "/explore#roadmap",
     "action": "Read the roadmap",
     "voice": "What comes next? We’re continuing to refine the research experience, improve wallet monitoring, and complete the setup and testing for Telegram alerts. Onchain report fingerprints are also on the roadmap; they are not live today. We’ll share progress as the work is ready. Your feedback helps us decide what needs attention and what will make Parallax more useful.",
     "duration": 23.127075
@@ -130,7 +130,7 @@ window.ParallaxTourChapters = [
     ],
     "image": "earth",
     "alt": "Earth above the horizon in the Parallax website artwork",
-    "href": "/#mission",
+    "href": "/explore#mission",
     "action": "Explore the mission",
     "voice": "And finally, a personal thank-you. To everyone who has visited, shared the project, tested a feature, or offered feedback: I appreciate your support. You’re helping make this possible. There is more work ahead, and I’m excited to keep building, learning, and sharing the journey with you. Thank you for being part of Parallax.",
     "duration": 21.873197
