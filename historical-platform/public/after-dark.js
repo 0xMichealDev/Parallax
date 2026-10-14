@@ -30,7 +30,7 @@
   function persist(){write(SAVE,JSON.stringify(D.snapshot(playback)));}
   function preferenceLabel(){preference.setAttribute('aria-pressed',String(enabled));preference.textContent='Auto showcase '+(enabled?'on':'off');preference.title=enabled?'Resumes after 20 seconds of inactivity at the top of the page.':'Automatic showcase is disabled.';}
   function eligible(){return D.eligible({enabled,reduced:reduced.matches,paused:document.body.classList.contains('motion-paused'),hidden:document.hidden,modal:!!document.querySelector('dialog[open]'),nearHero:scrollY<Math.min(180,hero.clientHeight*.2),editing:!!document.activeElement?.closest('input,textarea,select,[contenteditable="true"]'),focused:document.hasFocus()});}
-  function arm(){clearTimeout(autoTimer);if(!closed||!enabled)return;autoTimer=setTimeout(()=>{if(eligible()&&!(playback.ended&&!loop))open(true);else arm();},20000);}
+  function arm(){clearTimeout(autoTimer);if(!closed||!enabled||window.parallaxGuidedTour)return;autoTimer=setTimeout(()=>{if(eligible()&&!(playback.ended&&!loop))open(true);else arm();},20000);}
   preference.onclick=()=>{enabled=!enabled;write('parallax.after-dark.auto',enabled?'on':'off');preferenceLabel();arm();};preferenceLabel();
   D.SHOTS.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML=`<span class="ad-track"><i></i></span><span class="ad-chapter-label"><b>0${i+1}</b> ${s.name}</span>`;b.setAttribute('aria-label','Chapter '+(i+1)+': '+s.name);b.title=s.name;b.onclick=()=>change(i,true);q('.ad-chapters').append(b);buttons.push(b);});
   function labels(){
