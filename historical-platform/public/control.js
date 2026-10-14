@@ -1,6 +1,9 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
+  const research = window.ParallaxResearch;
+  let sessionReady, sessionError = '', reportEpoch = 0, refreshAt = 0, refreshTimer = 0, comparisonPeers = [];
+  const working = new WeakSet();
   const escape = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const shorten = v => String(v).slice(0,7)+'…'+String(v).slice(-6);
   const date = v => v ? new Date(v).toLocaleString() : 'Time unavailable';
@@ -8,17 +11,20 @@
   let session = {signedIn:false,aiEnabled:false}, currentReport = null, savedReports = [], currentComparison = null, comparisonEpoch = 0, walletEpoch = 0, telegram = {configured:false,connected:false,monitoringConfigured:false};
   function status(id,text,error=false){$(id).textContent=text;$(id).classList.toggle('error',error);}
   async function api(action,body){
-    let r;try{r=await fetch('/api/control/'+action,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body),signal:AbortSignal.timeout(35000)});}catch(err){throw new Error(err.name==='TimeoutError'?'The request timed out. Check the current state before trying again.':'Unable to reach PARALLAX. Check your connection and try again.');}
-    let data;try{data=await r.json();}catch{throw new Error(r.status===401?'Your sign-in expired. Sign in again to use your saved tools.':'The service returned an unreadable response. Please retry shortly.');}
-    if(!r.ok)throw new Error(data.error||'Request failed. Please retry.');return data;
+    try{return await research.request('/api/control/'+action,body);}
+    catch(error){if(error.status===401){session.signedIn=false;$('sign-in-note').hidden=false;const link=$('session-link');link.textContent='Sign in with ChatGPT ↗';link.href='/signin-with-chatgpt?return_to='+encodeURIComponent(location.pathname+location.search+location.hash);}throw error;}
   }
-  function requireSignIn(target){if(session.signedIn)return true;status(target,'Sign in using the button at the top to use this tool.',true);$('sign-in-note').hidden=false;return false;}
+  async function requireSignIn(target){
+    await sessionReady;
+    if(session.signedIn)return true;
+    status(target,sessionError||'Sign in using the button at the top to use this tool.',true);$('sign-in-note').hidden=false;return false;
+  }
   function tab(id){document.querySelectorAll('[data-tab]').forEach(b=>{const selected=b.dataset.tab===id;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;$(b.dataset.tab).hidden=!selected;});history.replaceState({},'','#'+id);}
   document.querySelectorAll('[data-tab]').forEach((b,i,all)=>{b.onclick=()=>tab(b.dataset.tab);b.onkeydown=e=>{let index;if(e.key==='ArrowRight')index=(i+1)%all.length;else if(e.key==='ArrowLeft')index=(i+all.length-1)%all.length;else if(e.key==='Home')index=0;else if(e.key==='End')index=all.length-1;else return;e.preventDefault();tab(all[index].dataset.tab);all[index].focus();};});
   if(['passport','compare','wallet','vault','verify'].includes(location.hash.slice(1)))tab(location.hash.slice(1));
-  async function busy(button,fn){if(!button)return fn();const previous=button.textContent;button.disabled=true;button.textContent='Working…';try{await fn();}finally{button.disabled=false;button.textContent=previous;}}
+  async function busy(button,fn){if(!button)return fn();if(working.has(button))return;working.add(button);const previous=button.textContent;button.disabled=true;button.textContent='Working…';try{await fn();}finally{working.delete(button);button.disabled=false;button.textContent=previous;if(button.id==='compare-submit')button.disabled=!$('compare-before').value||!$('compare-after').value;updateRefresh();}}
   function metric(label,value,source){return `<div class="metric"><label>${escape(label)}</label><strong>${escape(value)}</strong><small>${escape(source)}</small></div>`;}
-  function renderReport(report){currentReport=report;const p=JSON.parse(report.payload),m=p.market,c=p.chain;
+  function renderReport(report){currentReport=report;refreshAt=Date.now()+(report.retryAfterSeconds??Math.max(0,Math.ceil((Date.parse(report.createdAt)+60000-Date.now())/1000)))*1000;clearInterval(refreshTimer);refreshTimer=setInterval(updateRefresh,1000);const p=JSON.parse(report.payload),m=p.market,c=p.chain;
     $('passport-empty').hidden=true;$('report-view').hidden=false;
     $('report-view').innerHTML=`<div class="report-heading"><div><span class="eyebrow">PROJECT PASSPORT / SOLANA MAINNET</span><h3>${escape(m?.name||'Solana token')} ${m?.symbol?'· '+escape(m.symbol):''}</h3><p class="address">${escape(p.address)}</p><p class="fine">Collected ${escape(date(p.fetchedAt))}${c?.slot?' · Confirmed slot '+escape(c.slot):''}</p></div><span class="pill">${c&&m?'Both sources retrieved':'Partial snapshot'}</span></div>
       <div id="previous-snapshot" class="snapshot-followup" role="status">Checking your earlier research…</div><div class="metrics">${metric('Token supply',c?.supply===null||!c?'Unavailable':Number(c.supply).toLocaleString(undefined,{maximumFractionDigits:6}),'Solana [S1] · Display rounded')}${metric('Indexed price',money(m?.priceUsd),'DEX Screener [S2]')}${metric('Pair liquidity',money(m?.liquidityUsd),'DEX Screener [S2]')}${metric('24h pair volume',money(m?.volume24hUsd),'DEX Screener [S2]')}</div>
@@ -31,6 +37,7 @@
     $('export-report').onclick=()=>{const out={format:'parallax.passport.export.v1',reportId:report.id,sha256:report.sha256,payload:report.payload,aiSummary:currentReport.summary||null};const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='PARALLAX-Passport-'+p.address.slice(0,8)+'-'+report.id.slice(0,8)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);};
     $('summarize-report').onclick=e=>busy(e.currentTarget,async()=>{status('summary-status','Summarizing the collected evidence…');try{const data=await api('summary',{id:report.id});if(currentReport?.id!==report.id)return;currentReport.summary=data.summary;renderSummary(data.summary);status('summary-status','Summary saved.');}catch(err){if(currentReport?.id===report.id)status('summary-status',err.message,true);}});
     if(report.summary)renderSummary(report.summary);
+    updateRefresh();
   }
   async function loadPrevious(report){try{const {comparison}=await api('report/previous?id='+encodeURIComponent(report.id));if(currentReport?.id!==report.id)return;
     const view=$('previous-snapshot');
@@ -47,11 +54,18 @@
   }
   function renderSummary(s){$('summary-view').hidden=false;$('summary-view').innerHTML='<h4>AI-assisted research summary</h4><p>'+escape(s.text)+'</p><div class="fine">Generated '+escape(date(s.generatedAt))+' · Review against the linked sources above.</div>';}
   $('use-prlx').onclick=()=>{$('mint').value='8B2G4oiTKZKbSVTKPAP7Cfe6zAsEtrySCYcX9M2kpump';$('mint').focus();};
-  $('passport-form').onsubmit=e=>{e.preventDefault();if(!requireSignIn('passport-status'))return;busy(e.submitter,async()=>{status('passport-status','Collecting Solana account state and indexed market data…');try{const report=await api('passport',{address:$('mint').value.trim()});renderReport(report);status('passport-status',report.cached?'Opened the snapshot collected within the last minute.':'Passport created and saved to your account.');loadReports();}catch(err){status('passport-status',err.message,true);}});};
-  async function loadReports(){if(!session.signedIn)return;try{const {reports}=await api('reports');savedReports=reports;fillComparisonOptions();$('reports-list').innerHTML=reports.length?reports.map(r=>`<div class="saved-row"><div><strong>${escape(r.name||r.symbol||'Solana Project Passport')}</strong><p class="address">${escape(r.address)}</p><span class="fine">${escape(date(r.createdAt))}</span></div><div class="actions"><button class="button small" data-report="${escape(r.id)}">Open report ↗</button><button class="text-button" data-delete="${escape(r.id)}">Delete</button></div></div>`).join(''):'<div class="empty"><h3>No reports yet.</h3><p>Create a Project Passport to start your research history.</p></div>';
-      document.querySelectorAll('[data-report]').forEach(b=>b.onclick=()=>busy(b,async()=>{try{const r=await api('report?id='+encodeURIComponent(b.dataset.report));tab('passport');renderReport(r);$('mint').value=r.address;status('passport-status','Saved snapshot opened. Create a passport again to collect a newer snapshot.');$('passport').scrollIntoView({block:'start'});}catch(err){status('vault-status',err.message,true);}}));
+  function updateRefresh(){
+    const button=$('refresh-this-report');if(!button||!currentReport)return;
+    const seconds=Math.max(0,Math.ceil((refreshAt-Date.now())/1000));
+    button.disabled=seconds>0;button.textContent=seconds?'New snapshot in '+seconds+'s':'Collect newer snapshot +';
+    if(!seconds)clearInterval(refreshTimer);
+  }
+  $('passport-form').onsubmit=async e=>{e.preventDefault();if(!await requireSignIn('passport-status'))return;busy(e.submitter,async()=>{const epoch=++reportEpoch;status('passport-status','Collecting Solana account state and indexed market data…');try{const report=await api('passport',{address:$('mint').value.trim()});if(epoch!==reportEpoch)return;renderReport(report);status('passport-status',report.cached?'This is the saved snapshot from the last minute. A new scan is available in '+report.retryAfterSeconds+' seconds.':'Passport created and saved. Missing source data is marked in the report.');loadReports();}catch(err){if(epoch===reportEpoch)status('passport-status',err.message,true);}});};
+  async function loadReports(){if(!session.signedIn)return;try{const {reports}=await api('reports');savedReports=reports;comparisonPeers=[];fillComparisonOptions();const peers=loadComparisonPeers();$('reports-list').innerHTML=reports.length?reports.map(r=>`<div class="saved-row"><div><strong>${escape(r.name||r.symbol||'Solana Project Passport')}</strong><p class="address">${escape(r.address)}</p><span class="fine">${escape(date(r.createdAt))}</span></div><div class="actions"><button class="button small" data-report="${escape(r.id)}">Open report ↗</button><button class="text-button" data-delete="${escape(r.id)}">Delete</button></div></div>`).join(''):'<div class="empty"><h3>No reports yet.</h3><p>Create a Project Passport to start your research history.</p></div>';
+      document.querySelectorAll('[data-report]').forEach(b=>b.onclick=()=>busy(b,async()=>{try{const epoch=++reportEpoch;const r=await api('report?id='+encodeURIComponent(b.dataset.report));if(epoch!==reportEpoch)return;tab('passport');renderReport(r);$('mint').value=r.address;status('passport-status','Saved snapshot opened. Create a passport again to collect a newer snapshot.');$('passport').scrollIntoView({block:'start'});}catch(err){status('vault-status',err.message,true);}}));
       document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>{if(!confirm('Delete this saved report from your account? Downloaded copies will remain.'))return;busy(b,async()=>{try{await api('report/delete',{id:b.dataset.delete});if(currentComparison&&[currentComparison.before.id,currentComparison.after.id].includes(b.dataset.delete))invalidateComparison();if(currentReport?.id===b.dataset.delete){currentReport=null;$('report-view').hidden=true;$('passport-empty').hidden=false;}await loadReports();status('vault-status','Report deleted.');}catch(err){status('vault-status',err.message,true);}});});
-    }catch(err){status('vault-status',err.message,true);}}
+    await peers;
+    }catch(err){status('vault-status',err.message,true);status('compare-status','Saved snapshots could not be loaded. '+err.message,true);$('compare-hint').textContent='Use Refresh saved snapshots to try again.';}}
   $('reload-reports').onclick=e=>busy(e.currentTarget,loadReports);
   function monitoringStatus(config){
     $('monitoring-state').textContent=config.monitoringConfigured?'Automatic alerts: available only for covered wallets with an enabled rule.':'Automatic alerts are not active. You can inspect and save wallets; the project monitoring service still needs to be connected.';
@@ -59,7 +73,7 @@
   }
   $('check-wallet-sources').onclick=e=>busy(e.currentTarget,async()=>{
     status('wallet-source-status','Checking data sources…');
-    try{const d=await api('source-status');const available=d.balance==='available'&&d.transactions==='available';status('wallet-source-status','SOL balances: '+d.balance+' · Transaction history: '+d.transactions+' · Token market data: '+d.market+'. Checked '+date(d.checkedAt)+'. Results are reused for up to one minute.',!available||d.market!=='available');monitoringStatus({...session,monitoringConfigured:d.monitoringConfigured});}
+    try{const d=await api('source-status');const available=d.balance==='available'&&d.transactions==='available';status('wallet-source-status','SOL balances: '+d.balance+' · Transaction history: '+d.transactions+' · Token market data: '+d.market+' · Passport mint data: '+d.passport+'. Checked '+date(d.checkedAt)+'. Results are reused for up to one minute.',!available||d.market!=='available'||d.passport!=='available');monitoringStatus({...session,monitoringConfigured:d.monitoringConfigured});}
     catch(err){status('wallet-source-status',err.message,true);}
   });
   async function inspectWallet(address){
@@ -81,8 +95,8 @@
     }
   }
   $('wallet-address').addEventListener('input',()=>{walletEpoch++;$('wallet-view').hidden=true;status('wallet-status','');});
-  $('wallet-form').onsubmit=e=>{e.preventDefault();if(!requireSignIn('wallet-status'))return;busy(e.submitter,async()=>{try{await inspectWallet($('wallet-address').value.trim());}catch(err){status('wallet-status',err.message,true);}});};
-  $('save-wallet').onclick=e=>{if(!requireSignIn('wallet-status')||!$('wallet-address').reportValidity())return;busy(e.currentTarget,async()=>{try{await api('watchlist/add',{address:$('wallet-address').value.trim(),label:$('wallet-label').value});status('wallet-status','Wallet saved. Saving does not enable automatic monitoring or alerts.');await loadWatchlist();}catch(err){status('wallet-status',err.message,true);}});};
+  $('wallet-form').onsubmit=async e=>{e.preventDefault();if(!await requireSignIn('wallet-status'))return;busy(e.submitter,async()=>{try{await inspectWallet($('wallet-address').value.trim());}catch(err){status('wallet-status',err.message,true);}});};
+  $('save-wallet').onclick=async e=>{if(!await requireSignIn('wallet-status')||!$('wallet-address').reportValidity())return;busy(e.currentTarget,async()=>{try{await api('watchlist/add',{address:$('wallet-address').value.trim(),label:$('wallet-label').value});status('wallet-status','Wallet saved. Saving does not enable automatic monitoring or alerts.');await loadWatchlist();}catch(err){status('wallet-status',err.message,true);}});};
   async function loadTelegram(){
     if(!session.signedIn)return;
     try{telegram=await api('telegram');monitoringStatus({...telegram,telegramConfigured:telegram.configured});$('telegram-release-state').textContent=telegram.configured&&telegram.monitoringConfigured?'Opt-in beta':'Setup required';$('telegram-connect').disabled=!telegram.configured||telegram.connected;$('telegram-connect').textContent=telegram.connected?'Telegram connected':'Connect my Telegram';$('telegram-disconnect').hidden=!telegram.connected;$('telegram-test').disabled=!telegram.configured||!telegram.connected;
@@ -93,10 +107,10 @@
     }catch(err){status('telegram-status',err.message,true);}
   }
   $('telegram-channel-refresh').onclick=e=>busy(e.currentTarget,async()=>{await loadTelegram();await loadWatchlist();status('telegram-channel-status',telegram.channel?.ready?'Channel posting permission confirmed.':'Channel posting permission is not confirmed yet.',!telegram.channel?.ready);});
-  $('telegram-channel-test').onclick=e=>{if(!requireSignIn('telegram-channel-status'))return;busy(e.currentTarget,async()=>{status('telegram-channel-status','Sending one public test to '+telegram.channel.title+'…');try{const result=await api('telegram/channel-test',{confirmed:true});const messages={sent:'Telegram accepted the channel test. Check '+telegram.channel.title+'.',failed:'Telegram rejected the channel test. Check the bot’s Post Messages permission.','delivery-uncertain':'Delivery could not be confirmed. Check the channel before trying again; no automatic retry was made.'};status('telegram-channel-status',messages[result.status]||'Unable to verify channel delivery.',result.status!=='sent');}catch(err){status('telegram-channel-status',err.message,true);}});};
-  $('telegram-connect').onclick=e=>{if(!requireSignIn('telegram-status'))return;busy(e.currentTarget,async()=>{try{const result=await api('telegram/connect',{});const link=$('telegram-open');link.href=result.url;link.hidden=false;status('telegram-status','Open Telegram, press Start, then return here and check connection. The link expires in 10 minutes.');}catch(err){status('telegram-status',err.message,true);}});};
+  $('telegram-channel-test').onclick=async e=>{if(!await requireSignIn('telegram-channel-status'))return;busy(e.currentTarget,async()=>{status('telegram-channel-status','Sending one public test to '+telegram.channel.title+'…');try{const result=await api('telegram/channel-test',{confirmed:true});const messages={sent:'Telegram accepted the channel test. Check '+telegram.channel.title+'.',failed:'Telegram rejected the channel test. Check the bot’s Post Messages permission.','delivery-uncertain':'Delivery could not be confirmed. Check the channel before trying again; no automatic retry was made.'};status('telegram-channel-status',messages[result.status]||'Unable to verify channel delivery.',result.status!=='sent');}catch(err){status('telegram-channel-status',err.message,true);}});};
+  $('telegram-connect').onclick=async e=>{if(!await requireSignIn('telegram-status'))return;busy(e.currentTarget,async()=>{try{const result=await api('telegram/connect',{});const link=$('telegram-open');link.href=result.url;link.hidden=false;status('telegram-status','Open Telegram, press Start, then return here and check connection. The link expires in 10 minutes.');}catch(err){status('telegram-status',err.message,true);}});};
   $('telegram-refresh').onclick=e=>busy(e.currentTarget,async()=>{await loadTelegram();await loadWatchlist();if(telegram.connected){$('telegram-open').hidden=true;status('telegram-status','Connected. Alerts remain off until you enable a covered wallet rule.');}});
-  $('telegram-test').onclick=e=>{if(!requireSignIn('telegram-status'))return;busy(e.currentTarget,async()=>{status('telegram-status','Sending one test alert to your private Telegram…');try{const result=await api('telegram/test',{confirmed:true});const messages={sent:'Telegram accepted your test alert. Check your private bot chat. Wallet monitoring and alert rules are unchanged.',failed:'Telegram rejected the test alert. Check that the bot is unblocked, reconnect, and try again.','delivery-uncertain':'Delivery could not be confirmed. Check your Telegram before trying again; no automatic retry was made.'};status('telegram-status',messages[result.status]||'Unable to verify delivery.',result.status!=='sent');}catch(err){status('telegram-status',err.message+' If the request timed out, check Telegram before trying again.',true);}});};
+  $('telegram-test').onclick=async e=>{if(!await requireSignIn('telegram-status'))return;busy(e.currentTarget,async()=>{status('telegram-status','Sending one test alert to your private Telegram…');try{const result=await api('telegram/test',{confirmed:true});const messages={sent:'Telegram accepted your test alert. Check your private bot chat. Wallet monitoring and alert rules are unchanged.',failed:'Telegram rejected the test alert. Check that the bot is unblocked, reconnect, and try again.','delivery-uncertain':'Delivery could not be confirmed. Check your Telegram before trying again; no automatic retry was made.'};status('telegram-status',messages[result.status]||'Unable to verify delivery.',result.status!=='sent');}catch(err){status('telegram-status',err.message+' If the request timed out, check Telegram before trying again.',true);}});};
   $('telegram-disconnect').onclick=e=>busy(e.currentTarget,async()=>{try{await api('telegram/disconnect',{});await loadTelegram();await loadWatchlist();$('telegram-open').hidden=true;status('telegram-status','Disconnected. Your private wallet alerts are paused.');}catch(err){status('telegram-status',err.message,true);}});
   const destinationReady=destination=>destination==='channel'?!!telegram.channel?.ready:telegram.connected;
   async function loadWatchlist(){if(!session.signedIn)return;try{
@@ -126,17 +140,24 @@
     const first=$('compare-before'),second=$('compare-after'),previous=preferredId||first.value,secondPrevious=second.value;
     first.innerHTML=savedReports.length?savedReports.map(r=>`<option value="${escape(r.id)}">${escape(shorten(r.address))} · ${escape(date(r.createdAt))}</option>`).join(''):'<option value="">No saved passports yet</option>';
     if(savedReports.some(r=>r.id===previous))first.value=previous;
-    const selected=savedReports.find(r=>r.id===first.value),others=selected?savedReports.filter(r=>r.address===selected.address&&r.id!==selected.id):[];
+    const selected=savedReports.find(r=>r.id===first.value),others=selected?[...new Map([...savedReports,...comparisonPeers].map(r=>[r.id,r])).values()].filter(r=>r.address===selected.address&&r.id!==selected.id):[];
     second.innerHTML=others.length?others.map(r=>`<option value="${escape(r.id)}">${escape(date(r.createdAt))} · ${escape(shorten(r.address))}</option>`).join(''):'<option value="">Save another snapshot of this token</option>';
     if(others.some(r=>r.id===secondPrevious))second.value=secondPrevious;
     $('compare-submit').disabled=!others.length;
     $('compare-hint').textContent=others.length?'Comparing your saved evidence uses no new source requests. AI explanations share the daily limit with passport summaries.':'You need two saved snapshots of the same token. Collect another after at least 60 seconds; recent passport requests reuse the same snapshot.';
   }
+  async function loadComparisonPeers(){
+    const selected=savedReports.find(r=>r.id===$('compare-before').value);if(!selected){status('compare-status','No saved passports yet. Create your first passport to begin.');return;}
+    const epoch=comparisonEpoch;
+    try{const {reports}=await api('reports?address='+encodeURIComponent(selected.address));if(epoch!==comparisonEpoch||$('compare-before').value!==selected.id)return;comparisonPeers=reports;fillComparisonOptions(selected.id);status('compare-status',reports.length>1?'Saved snapshots loaded. Choose two scans to compare.':'Your baseline is ready. Collect a newer snapshot after the one-minute cooldown.');}
+    catch(error){if(epoch===comparisonEpoch)status('compare-status','Unable to load earlier snapshots for this token. '+error.message,true);}
+  }
+  $('reload-comparisons').onclick=async e=>{if(!await requireSignIn('compare-status'))return;busy(e.currentTarget,async()=>{invalidateComparison();status('compare-status','Refreshing your saved snapshots…');await loadReports();});};
   function chooseComparison(report){
     if(!savedReports.some(r=>r.id===report.id))savedReports.unshift({id:report.id,address:report.address,createdAt:report.createdAt});
-    invalidateComparison();fillComparisonOptions(report.id);tab('compare');status('compare-status','Choose a second snapshot, then compare the collected evidence.');$('compare').scrollIntoView({block:'start'});
+    invalidateComparison();fillComparisonOptions(report.id);loadComparisonPeers();tab('compare');status('compare-status','Choose a second snapshot, then compare the collected evidence.');$('compare').scrollIntoView({block:'start'});
   }
-  $('compare-before').onchange=()=>{invalidateComparison();fillComparisonOptions();status('compare-status','');};
+  $('compare-before').onchange=()=>{invalidateComparison();fillComparisonOptions();loadComparisonPeers();status('compare-status','');};
   $('compare-after').onchange=()=>{invalidateComparison();status('compare-status','');};
   $('compare-new').onclick=()=>{const selected=savedReports.find(r=>r.id===$('compare-before').value);if(selected)$('mint').value=selected.address;tab('passport');status('passport-status','Create another snapshot of this token. Requests within 60 seconds reuse the recent passport.');$('mint').focus();};
   function renderComparison(data){
@@ -153,13 +174,40 @@
     if(data.summary)renderComparisonSummary(data.summary);
   }
   function renderComparisonSummary(summary){$('comparison-summary').hidden=false;$('comparison-summary').innerHTML='<h4>AI explanation of the observed changes</h4><p>'+escape(summary.text)+'</p><div class="fine">Generated '+escape(date(summary.generatedAt))+' · Review against the comparison and source references above.</div>';}
-  $('compare-form').onsubmit=e=>{e.preventDefault();if(!requireSignIn('compare-status'))return;invalidateComparison();const epoch=comparisonEpoch;busy(e.submitter,async()=>{status('compare-status','Comparing your saved source data…');try{const data=await api('compare?before='+encodeURIComponent($('compare-before').value)+'&after='+encodeURIComponent($('compare-after').value));if(epoch!==comparisonEpoch)return;renderComparison(data);status('compare-status','Comparison ready. These are saved snapshots, not a continuously monitored feed.');}catch(err){if(epoch===comparisonEpoch)status('compare-status',err.message,true);}});};
+  $('compare-form').onsubmit=async e=>{e.preventDefault();if(!await requireSignIn('compare-status'))return;invalidateComparison();const epoch=comparisonEpoch;busy(e.submitter,async()=>{status('compare-status','Comparing your saved source data…');try{const data=await api('compare?before='+encodeURIComponent($('compare-before').value)+'&after='+encodeURIComponent($('compare-after').value));if(epoch!==comparisonEpoch)return;renderComparison(data);status('compare-status','Comparison ready. These are saved snapshots, not a continuously monitored feed.');}catch(err){if(epoch===comparisonEpoch)status('compare-status',err.message,true);}});};
 
-  async function hash(s){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s))),x=>x.toString(16).padStart(2,'0')).join('');}
-  $('verify-form').onsubmit=e=>{e.preventDefault();if(!requireSignIn('verify-status'))return;busy(e.submitter,async()=>{try{const file=$('report-file').files[0];if(!file||file.size>200000)throw new Error('Choose a PARALLAX JSON export smaller than 200 KB.');let d;try{d=JSON.parse(await file.text());}catch{throw new Error('This file is not valid JSON.');}if(d.format!=='parallax.passport.export.v1'||typeof d.payload!=='string'||typeof d.reportId!=='string'||d.reportId.length>64||typeof d.sha256!=='string')throw new Error('This file is not a supported PARALLAX passport export.');const digest=await hash(d.payload);if(digest!==d.sha256)throw new Error('Mismatch: the source payload or declared fingerprint has changed.');const original=await api('report?id='+encodeURIComponent(d.reportId));if(digest!==original.sha256)throw new Error('Mismatch: this payload does not match the report saved in your account.');status('verify-status','Match confirmed. The source payload is unchanged from your saved passport ('+date(original.createdAt)+'). This is a file-integrity check, not blockchain verification.');}catch(err){status('verify-status',err.message,true);}});};
+  $('verify-open-reports').onclick=()=>{tab('vault');};
+  $('check-passport-sources').onclick=e=>busy(e.currentTarget,async()=>{status('passport-status','Checking token and market connections…');try{const data=await api('source-status');status('passport-status','Token data: '+data.passport+' · Market data: '+data.market+'. Checked '+date(data.checkedAt)+'. This checks the connection; it does not create a passport.',data.passport!=='available'||data.market!=='available');}catch(error){status('passport-status',error.message,true);}});
+  $('verify-form').onsubmit=e=>{e.preventDefault();return busy(e.submitter,async()=>{
+    status('verify-status','Checking the file in your browser…');
+    try{
+      const file=$('report-file').files[0];if(!file||file.size>1000000)throw new Error('Choose a PARALLAX passport JSON export smaller than 1 MB.');
+      const data=research.parseExport(await file.text()),digest=await research.verifyExport(data);
+      status('verify-status','File integrity matched. Checking your saved original…');
+      await sessionReady;
+      if(!session.signedIn){status('verify-status','File integrity matched its declared fingerprint. Sign in with the account that created this export to verify the saved original. The saved-original check has not passed yet.');$('sign-in-note').hidden=false;return;}
+      let original;
+      try{original=await api('report?id='+encodeURIComponent(data.reportId));}
+      catch(error){status('verify-status',error.status===404?'File integrity matched, but this report is not available in your account. Use the account that created it; a deleted report cannot be matched. The saved-original check has not passed.':'File integrity matched, but the saved-original check could not finish. '+error.message,true);return;}
+      if(digest!==original.sha256)throw new Error('Mismatch: this file does not match the original report saved in your account.');
+      status('verify-status','Both checks passed: file integrity and your saved original ('+date(original.createdAt)+'). This verifies the source payload, not token safety or a blockchain record.');
+    }catch(error){status('verify-status',error.message,true);}
+  });};
   const entryParams=new URLSearchParams(location.search),entryMint=entryParams.get('mint'),entryReport=entryParams.get('report');
   if(entryMint&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(entryMint)){$('mint').value=entryMint;tab('passport');}
   const returnPath=location.pathname+location.search+location.hash;
   document.querySelectorAll('a[href^="/signin-with-chatgpt"]').forEach(link=>link.href='/signin-with-chatgpt?return_to='+encodeURIComponent(returnPath));
-  (async()=>{try{session=await api('status');monitoringStatus(session);$('ai-state').textContent=session.aiEnabled?'Available':'Awaiting API credits';$('ai-state').classList.toggle('pending',!session.aiEnabled);$('sign-in-note').hidden=session.signedIn;if(session.signedIn){$('session-link').textContent='Sign out';$('session-link').href='/signout-with-chatgpt?return_to=%2Fcontrol';await Promise.all([loadReports(),(async()=>{await loadTelegram();await loadWatchlist();})()]);if(entryReport&&entryReport.length<=64){try{const report=await api('report?id='+encodeURIComponent(entryReport));tab('passport');renderReport(report);$('mint').value=report.address;status('passport-status','Your saved passport is ready.');}catch(err){status('passport-status',err.message,true);}}}}catch{status('passport-status','Unable to check your account. Refresh this page and try again.',true);$('ai-state').textContent='Status unavailable';}})();
+  sessionReady=(async()=>{
+    try{session=await api('status');monitoringStatus(session);$('ai-state').textContent=session.aiEnabled?'Available':'Awaiting API credits';$('ai-state').classList.toggle('pending',!session.aiEnabled);$('sign-in-note').hidden=session.signedIn;
+      if(session.signedIn){$('session-link').textContent='Sign out';$('session-link').href='/signout-with-chatgpt?return_to=%2Fcontrol';}
+      else{$('compare-hint').textContent='Sign in to load your saved snapshots, or create your first Project Passport.';}
+    }catch(error){sessionError='Unable to check your account. '+error.message;status('passport-status',sessionError,true);status('compare-status',sessionError,true);$('ai-state').textContent='Status unavailable';}
+  })();
+  sessionReady.then(()=>{
+    if(!session.signedIn)return;
+    loadReports();
+    // Notifications cannot delay research or a directly opened saved passport.
+    (async()=>{await loadTelegram();await loadWatchlist();})();
+    if(entryReport&&entryReport.length<=64){const epoch=++reportEpoch;(async()=>{try{const report=await api('report?id='+encodeURIComponent(entryReport));if(epoch!==reportEpoch)return;tab('passport');renderReport(report);$('mint').value=report.address;status('passport-status','Your saved passport is ready.');}catch(error){if(epoch===reportEpoch)status('passport-status',error.message,true);}})();}
+  });
 })();

@@ -182,7 +182,10 @@
       if (target) { target.setAttribute('tabindex', '-1'); target.focus({preventScroll: true}); }
     }
   };
-  voice.addEventListener('playing',()=>{if(!opened)return;clearTimeout(loadTimer);audioReady=true;voiceOn=true;paused=false;last=performance.now();status('Voiceover playing.');preferences();});
+  voice.addEventListener('playing',()=>{if(!opened||document.hidden){voice.pause();music.pause();return;}clearTimeout(loadTimer);audioReady=true;voiceOn=true;paused=false;last=performance.now();status('Voiceover playing.');preferences();if(musicOn)music.play().catch(()=>{});});
+  // The visible native player is also a control surface on iPhone.
+  voice.addEventListener('pause',()=>{if(opened&&voiceOn&&audioReady&&!paused&&voice.paused&&!voice.ended)setPaused(true);});
+  voice.addEventListener('seeked',()=>{if(opened&&voiceOn){elapsed=voice.currentTime;draw();}});
   voice.addEventListener('ended', () => { if (opened && voiceOn && !paused && audioReady) advance(); });
   voice.addEventListener('error', () => { if (opened && voiceOn) quietFallback('This audio chapter could not load. Captions are continuing; you can retry voiceover.'); });
   dialog.addEventListener('cancel', event => { event.preventDefault(); close(); });
