@@ -1,0 +1,53 @@
+/* Dashboard layout controls; no impact on transaction or research forms. */
+.premium-dashboard .dashboard-heading-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.premium-dashboard .layout-customize{display:inline-flex;align-items:center;gap:8px;min-height:44px;border:1px solid #b6d6e52b;border-radius:7px;background:#14212b;color:#d6e5ed;padding:10px 14px;font:11px/1.5 Inter,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.premium-dashboard .layout-customize svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5}
+.premium-dashboard .layout-customize:hover{border-color:#b6e9d687;background:#18302f}
+.premium-dashboard .layout-summary{font:10px/1.7 Inter,system-ui,sans-serif;color:#8aa5b4;margin:-8px 0 23px;min-height:17px}
+.premium-dashboard #dashboard-panels{display:flow-root}
+.premium-dashboard [data-dashboard-panel][hidden]{display:none!important}
+.premium-dashboard [data-dashboard-panel].dashboard-panel-pinned{outline:1px solid #b3ead52e;outline-offset:5px;border-radius:15px}
+.premium-dashboard .layout-dialog{box-sizing:border-box;width:min(680px,calc(100vw - 32px));max-height:calc(100dvh - 40px);margin:auto;padding:28px;border:1px solid #b8d6df30;border-radius:19px;background:linear-gradient(145deg,#13232e,#0b151f 50%);color:#e5f1f6;box-shadow:0 35px 130px #000a;overflow:auto;font:12px/1.6 Inter,system-ui,sans-serif;overscroll-behavior:contain;scrollbar-color:#3b5866 #0b151f;scrollbar-width:thin}
+.premium-dashboard .layout-dialog::backdrop{background:#02080dc7;backdrop-filter:blur(8px)}
+.premium-dashboard .layout-dialog *{box-sizing:border-box}
+.premium-dashboard .layout-dialog [hidden]{display:none!important}
+.premium-dashboard .layout-dialog-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.premium-dashboard .layout-dialog-header .eyebrow{font:8px/1.7 ui-monospace,monospace;letter-spacing:.17em;color:#a1c7bd;margin:0 0 8px}
+.premium-dashboard .layout-dialog h2{font-size:26px;font-weight:450;line-height:1.2;letter-spacing:-.8px;margin:0}
+.premium-dashboard .layout-dialog button{font:11px/1.5 Inter,system-ui,sans-serif;cursor:pointer;min-height:44px;border-radius:7px;color:#c8dce6;border:1px solid #bdd7e326;background:#14232e;padding:10px 13px;box-shadow:none}
+.premium-dashboard .layout-dialog button:hover:not(:disabled){border-color:#bae6d477;background:#1d3339}
+.premium-dashboard .layout-dialog button:disabled{opacity:.4;cursor:not-allowed}
+.premium-dashboard .layout-dialog #layout-close{flex:none;width:44px;padding:0;font-size:17px;background:#d9eff807}
+.premium-dashboard .layout-intro{color:#96b0c0;line-height:1.8;margin:18px 0}
+.premium-dashboard .layout-storage{border-left:2px solid #8ecbb3;padding:11px 14px;background:#a6e4c909;font-size:11px;color:#a9c7cd;margin:0 0 7px;border-radius:0 6px 6px 0}
+.premium-dashboard .layout-signin{display:inline-flex;align-items:center;min-height:44px;font-size:11px;color:#b5e6d4;text-decoration:none}
+.premium-dashboard .layout-density{display:flex;gap:12px;flex-wrap:wrap;border:0;margin:20px 0 24px;padding:0}
+.premium-dashboard .layout-density legend{font-size:11px;color:#b9d1df;margin-bottom:9px;padding:0}
+.premium-dashboard .layout-density label{display:flex;align-items:center;gap:9px;min-height:44px;padding:10px 14px;border:1px solid #c1deeb21;border-radius:7px;font-size:11px;color:#b3c9d5;cursor:pointer;background:#101e28}
+.premium-dashboard .layout-density label:has(input:checked){color:#d6f7ea;border-color:#a6e4c957;background:#a6e4c90b}
+.premium-dashboard .layout-dialog input{accent-color:#b3e8d3;min-height:0;padding:0;margin:0;width:16px;height:16px;flex:none;cursor:pointer}
+.premium-dashboard .layout-list-head{display:flex;justify-content:space-between;gap:12px;color:#8da9ba;font:9px/1.5 ui-monospace,monospace;letter-spacing:.05em;padding:0 0 11px}
+.premium-dashboard .layout-panel-list{list-style:none;padding:0;margin:0;border-top:1px solid #c2dce91c}
+.premium-dashboard .layout-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;margin:0;border-bottom:1px solid #c2dce91c;min-width:0}
+.premium-dashboard .layout-row-label{min-width:0;flex:1}.premium-dashboard .layout-row-label strong{display:block;font-size:12px;line-height:1.5;font-weight:500;color:#dceaf1}.premium-dashboard .layout-row-label small{display:block;font-size:9px;color:#7f9eae;margin-top:4px;line-height:1.5}
+.premium-dashboard .layout-row-actions{display:flex;align-items:center;gap:6px;flex:none}
+.premium-dashboard .layout-show{display:flex;align-items:center;gap:6px;min-height:44px;padding:7px 5px;color:#9fb8c5;font-size:10px;cursor:pointer}
+.premium-dashboard .layout-row-button{padding:8px!important;min-width:44px;white-space:nowrap}
+.premium-dashboard .layout-row-button[data-layout-action=pin]{width:55px;font-size:10px}
+.premium-dashboard .layout-row-button[data-layout-action=up],.premium-dashboard .layout-row-button[data-layout-action=down]{font-size:18px}
+.premium-dashboard .layout-row-button[aria-pressed=true]{background:#a6e4c916;border-color:#a6e4c95c;color:#c5f5e0}
+.premium-dashboard .layout-status{min-height:20px;font-size:11px;line-height:1.7;color:#aac4cc;margin:17px 0 12px}
+.premium-dashboard .layout-reload{margin:0 0 15px}
+.premium-dashboard .layout-dialog-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:17px;border-top:1px solid #c2dce91c}
+.premium-dashboard .layout-dialog-footer>div{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.premium-dashboard .layout-dialog .layout-reset{color:#8eafbe;background:none;border-color:transparent;padding-left:0}
+.premium-dashboard .layout-dialog .layout-save{color:#0c2b23;background:#b4e7d2;border-color:#b4e7d2;font-weight:600}
+.premium-dashboard .layout-dialog .layout-save:hover:not(:disabled){background:#c6f4df;color:#0c2b23}
+.premium-dashboard :is(.layout-dialog,.layout-customize) :focus-visible,.premium-dashboard .layout-customize:focus-visible{outline:2px solid #c6f4df;outline-offset:3px}
+.premium-dashboard[data-dashboard-density=compact] #dashboard-panels>[data-dashboard-panel]{margin-top:18px;margin-bottom:18px}
+.premium-dashboard[data-dashboard-density=compact] #dashboard-panels .path-copy{padding-top:17px;padding-bottom:17px}
+.premium-dashboard[data-dashboard-density=compact] #dashboard-panels :is(.briefing-entry,.discovery-compact){padding:20px}
+.premium-dashboard[data-dashboard-density=compact] #dashboard-panels :is(.home-premium,.home-examples,.eco-teaser,.site-growth,.summit,.platform-release){padding-top:24px;padding-bottom:24px}
+@media(max-width:1100px){.premium-dashboard .dashboard-heading{align-items:flex-start}.premium-dashboard .dashboard-heading-actions{flex-direction:column;align-items:flex-end}.premium-dashboard .dashboard-heading-actions>*{width:100%;justify-content:center}}
+@media(max-width:760px){.premium-dashboard .dashboard-heading-actions{flex-direction:row;align-items:center;justify-content:flex-start;width:100%;margin-top:16px}.premium-dashboard .dashboard-heading-actions>*{width:auto;flex:1}.premium-dashboard .layout-summary{font-size:10px;margin-top:0}.premium-dashboard .layout-dialog{padding:22px 18px;width:calc(100vw - 20px);max-height:calc(100dvh - 24px);border-radius:16px}.premium-dashboard .layout-dialog h2{font-size:23px}.premium-dashboard .layout-row{align-items:flex-start;flex-wrap:wrap;gap:8px;padding:14px 0}.premium-dashboard .layout-row-label{flex-basis:100%}.premium-dashboard .layout-row-label strong{font-size:13px}.premium-dashboard .layout-row-label small{font-size:10px}.premium-dashboard .layout-row-actions{width:100%;gap:8px}.premium-dashboard .layout-show{margin-right:auto;font-size:12px}.premium-dashboard .layout-row-button[data-layout-action=pin]{width:66px;font-size:11px}.premium-dashboard .layout-dialog-footer{flex-wrap:wrap}.premium-dashboard .layout-dialog-footer>div{flex:1}.premium-dashboard .layout-dialog .layout-save{min-width:130px}.premium-dashboard .layout-list-head>span:last-child{display:none}}
+@media(prefers-reduced-motion:reduce){.premium-dashboard .layout-dialog::backdrop{backdrop-filter:none}}
