@@ -6,8 +6,8 @@ const numeric=n=>typeof n==='number'&&Number.isFinite(n),usd=(n,compact=false)=>
 const fmt=n=>numeric(n)?new Intl.NumberFormat('en-US',{maximumSignificantDigits:7}).format(n):'Unavailable',percent=n=>numeric(n)?(n>0?'+':'')+n.toFixed(2)+'%':'—',direction=n=>numeric(n)?n<0?'down':'up':'';
 const time=n=>new Date(n).toLocaleString(),short=a=>a.slice(0,5)+'…'+a.slice(-5),link=(label,url)=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`;
 const status=(id,text,error=false)=>{$(id).textContent=text;$(id).classList.toggle('error',error);};
-let mode='trending',feed=[],feedSeq=0,feedLoading=false,feedLoadedAt=0,mint='',snapshot=null,selectionSeq=0,replaySeq=0,replay=null,replayRows=[],step=0,playTimer=null,swapSide='buy',swapActive=false,swapLoading=false,pluginPromise=null,swapGeneration=0,alive=true;
-async function api(path,body){const r=await fetch(path,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(25000)});let d;try{d=await r.json();}catch{throw Error('The service returned an unreadable response. Please retry.');}if(!r.ok){const e=Error(d.error||'Request failed. Please retry.');e.status=r.status;throw e;}return d;}
+let mode='trending',feed=[],feedSeq=0,feedLoading=false,feedLoadedAt=0,mint='',snapshot=null,selectionSeq=0,replaySeq=0,replay=null,replayRows=[],step=0,playTimer=null,swapSide='buy',swapActive=false,swapLoading=false,pluginPromise=null,swapGeneration=0,swapRenderCancel=null,chartContext=null,chartRetryTimer=null,feedRetryAt=0,diagnosticsSent=0,alive=true;
+async function api(path,body){const r=await fetch(path,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(25000)});let d;try{d=await r.json();}catch{throw Error('The service returned an unreadable response. Please retry.');}if(!r.ok){const e=Error(d.error||'Request failed. Please retry.');e.status=r.status;e.retryAfterSeconds=Number(d.retryAfterSeconds)||0;throw e;}return d;}
 function renderFeed(){
  const needle=$('feed-filter').value.trim().toLowerCase(),sort=$('feed-sort').value;
  const rows=feed.filter(p=>(p.name+' '+p.symbol+' '+p.mint).toLowerCase().includes(needle)).slice();
@@ -15,10 +15,9 @@ function renderFeed(){
  $('feed-list').innerHTML=rows.length?rows.map(p=>`<button class="feed-card ${p.mint===mint?'active':''}" type="button" data-mint="${esc(p.mint)}" aria-pressed="${p.mint===mint}" aria-label="Inspect ${esc(p.symbol)} ${esc(p.mint)}"><span class="feed-top"><strong>${esc(p.symbol||'TOKEN')}</strong><span>${usd(p.priceUsd)}</span></span><span class="feed-name">${esc(p.pair)}</span><span class="feed-bottom"><span>VOL ${usd(p.volume24hUsd,true)} · LIQ ${usd(p.liquidityUsd,true)}</span><span class="${direction(p.change24h)}">${percent(p.change24h)} / 24h</span></span><span class="feed-bottom"><span>${esc(p.dex)}</span><span>${esc(short(p.mint))}</span></span></button>`).join(''):'<p class="muted">No matching pools in this feed.</p>';
  $('feed-list').querySelectorAll('[data-mint]').forEach(b=>b.addEventListener('click',()=>selectToken(b.dataset.mint,true)));
 }
-async function loadFeed(){const id=++feedSeq;feedLoading=true;$('feed-refresh').disabled=true;status('feed-status','Updating the '+(mode==='new'?'new-pool':'trending')+' feed…');try{const d=await api('/api/terminal/discovery?mode='+mode);if(!alive||id!==feedSeq)return;feed=Array.isArray(d.pools)?d.pools:[];feedLoadedAt=Date.now();renderFeed();status('feed-status',`${feed.length} pools · ${time(d.fetchedAt)} · ${d.cached?'cached snapshot':'retrieved'}`);}catch(e){if(alive&&id===feedSeq)status('feed-status',e.message+(feed.length?' Previous results are retained and may be stale.':''),true);}finally{if(id===feedSeq){feedLoading=false;$('feed-refresh').disabled=false;}}}
+async function loadFeed(){if(Date.now()<feedRetryAt){status('feed-status','The provider is cooling down. Retry after '+time(feedRetryAt)+'.',true);return;}const id=++feedSeq;feedLoading=true;$('feed-refresh').disabled=true;status('feed-status','Updating the '+(mode==='new'?'new-pool':'trending')+' feed…');try{const d=await api('/api/terminal/discovery?mode='+mode);if(!alive||id!==feedSeq)return;feed=Array.isArray(d.pools)?d.pools:[];feedLoadedAt=Date.now();feedRetryAt=d.retryAfterSeconds?Date.now()+d.retryAfterSeconds*1000:0;renderFeed();status('feed-status',`${feed.length} pools · ${time(d.fetchedAt)} · ${d.stale?'older snapshot — refresh unavailable':d.cached?'cached snapshot':'retrieved'}`,!!d.stale);}catch(e){if(alive&&id===feedSeq){feedRetryAt=e.retryAfterSeconds?Date.now()+e.retryAfterSeconds*1000:0;status('feed-status',e.message+(feedRetryAt?' Retry after '+time(feedRetryAt)+'.':'')+(feed.length?' Previous results are retained and may be stale.':''),true);}}finally{if(id===feedSeq){feedLoading=false;$('feed-refresh').disabled=false;}}}
 const metric=(label,value,cls='')=>`<div class="metric"><span>${esc(label)}</span><strong class="${cls}">${esc(value)}</strong></div>`;
 function swapLabels(){const name=snapshot?.market?.symbol||short(mint||'Select a token');$('swap-input-label').textContent=swapSide==='buy'?'SOL':name;$('swap-output-label').textContent=swapSide==='buy'?name:'SOL';
- $('jupiter-external').href=valid(mint)?`https://jup.ag/swap/${swapSide==='buy'?SOL:mint}-${swapSide==='buy'?mint:SOL}`:'https://jup.ag/';
  $('swap-open').disabled=!valid(mint)||mint===SOL||swapActive||swapLoading;
  document.querySelectorAll('[data-side]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.side===swapSide));b.disabled=swapActive||swapLoading;});
 }
@@ -33,6 +32,7 @@ function renderToken(p){snapshot=p;const m=p.market,c=p.chain;$('token-name').te
 async function selectToken(value,navigate=false){
  value=String(value||'').trim();if(!valid(value)){status('terminal-message','Paste a complete Solana token contract address.',true);return;}
  if((swapActive||swapLoading)&&value!==mint){status('terminal-message','Close the swap form before selecting a different token.',true);return;}
+ clearTimeout(chartRetryTimer);chartContext=null;$('chart-retry').hidden=true;
  const changed=value!==mint,id=++selectionSeq;mint=value;snapshot=null;$('token-input').value=value;$('token-address').textContent=value;$('copy-address').disabled=false;$('token-refresh').disabled=true;$('analytics-load').disabled=true;
  $('replay-signin').href='/signin-with-chatgpt?return_to='+encodeURIComponent('/terminal?token='+value+'#wallet-replay');
  $('token-name').textContent='Loading token…';$('token-symbol').textContent=short(value);$('token-metrics').replaceChildren();$('token-links').replaceChildren();$('concentration').replaceChildren();$('chain-facts').innerHTML='<p class="muted">Retrieving confirmed chain observations…</p>';$('token-gaps').replaceChildren();status('analytics-status','');status('token-status','Retrieving market data and confirmed token state…');status('terminal-message','Inspecting '+short(value)+'.');
@@ -53,16 +53,61 @@ function plot(points,{candles=false,label='',currency='USD',selected=-1}={}){
  else{points.forEach((p,i)=>{s+=`<g><title>${esc(p.side.toUpperCase()+' · '+time(p.time*1000)+' · '+fmt(p.price)+' '+currency)}</title>${selected===i?`<line x1="${x(p.time)}" y1="${T}" x2="${x(p.time)}" y2="${H-B}" stroke="#55796d"/>`:''}<circle data-point="${i}" cx="${x(p.time)}" cy="${y(p.price)}" r="${selected===i?7:4}" fill="${p.side==='buy'?'#9ae8d3':'#ff9da9'}" stroke="${selected===i?'#ffffff':'none'}"/></g>`;});}
  s+=`<text x="${L}" y="${H-8}" fill="#94a6b8" font-size="11">${esc(time(first*1000))}</text><text x="${W-R}" y="${H-8}" text-anchor="end" fill="#94a6b8" font-size="11">${esc(time(last*1000))}</text></svg>`;return s;
 }
-async function loadChart(pool,token,id){status('chart-status','Loading 15-minute candles for the selected research pool…');try{const d=await api('/api/terminal/chart?pool='+encodeURIComponent(pool)+'&mint='+encodeURIComponent(token));if(!alive||id!==selectionSeq)return;if(d.pool!==pool||d.mint!==token)throw Error('Chart does not match the selected pool.');$('market-chart').innerHTML=plot(d.candles,{candles:true,label:'Selected pool 15-minute USD candlesticks'});status('chart-status',`${d.pair} · ${d.candles.length} candles · Retrieved ${time(d.fetchedAt)}`);$('chart-note').innerHTML=`GeckoTerminal · Pool ${esc(short(pool))}. Last candle may be incomplete. `+link('Inspect source','https://www.geckoterminal.com/solana/pools/'+pool);}catch(e){if(alive&&id===selectionSeq){status('chart-status',e.message,true);$('market-chart').innerHTML='<div class="empty-chart"><p>Chart unavailable. Token evidence remains available above.</p></div>';}}}
+function chartRetry(seconds=0){
+ clearTimeout(chartRetryTimer);$('chart-retry').hidden=false;$('chart-retry').disabled=seconds>0;$('chart-retry').textContent=seconds>0?'Waiting for provider…':'Refresh chart';
+ if(seconds>0){const context=chartContext;chartRetryTimer=setTimeout(()=>{if(alive&&chartContext===context){$('chart-retry').disabled=false;$('chart-retry').textContent='Retry chart';}},Math.min(seconds*1000,2147483647));}
+}
+async function loadChart(pool,token,id){
+ chartContext={pool,token,id};$('chart-retry').hidden=false;$('chart-retry').disabled=true;status('chart-status','Loading 15-minute candles for the selected research pool…');
+ try{const d=await api('/api/terminal/chart?pool='+encodeURIComponent(pool)+'&mint='+encodeURIComponent(token));if(!alive||id!==selectionSeq)return;if(d.pool!==pool||d.mint!==token)throw Error('Chart does not match the selected pool.');
+  $('market-chart').innerHTML=plot(d.candles,{candles:true,label:'Selected pool 15-minute USD candlesticks'});status('chart-status',`${d.pair} · ${d.candles.length} candles · Retrieved ${time(d.fetchedAt)}${d.stale?' · Older snapshot; refresh unavailable.':''}`,!!d.stale);
+  $('chart-note').innerHTML=`GeckoTerminal · Pool ${esc(short(pool))}. Last candle may be incomplete. `+link('Inspect source','https://www.geckoterminal.com/solana/pools/'+pool);chartRetry(d.retryAfterSeconds||0);
+ }catch(e){if(alive&&id===selectionSeq){status('chart-status',e.message+(e.retryAfterSeconds?' Retry after '+time(Date.now()+e.retryAfterSeconds*1000)+'.':''),true);$('market-chart').innerHTML='<div class="empty-chart"><p>Chart unavailable. Token evidence remains available above.</p></div>';chartRetry(e.retryAfterSeconds||0);}}
+}
 async function analytics(){const token=mint,id=selectionSeq;$('analytics-load').disabled=true;status('analytics-status','Loading largest token accounts…');try{const d=await api('/api/analytics?address='+encodeURIComponent(token));if(!alive||id!==selectionSeq)return;if(d.address!==token)throw Error('Analytics did not match the token.');const h=d.holders;if(!h){status('analytics-status','Concentration data is unavailable. Please retry.',true);return;}const pct=n=>numeric(n)?n.toFixed(2)+'%':'Unavailable';$('concentration').innerHTML='<p class="footnote">Largest token accounts, not unique holders. Pool vaults, lockers and exchange accounts are included. Percentages use total minted supply.</p><div class="metrics">'+metric('Largest account',pct(h.top1Percent))+metric('Top 5 accounts',pct(h.top5Percent))+metric('Top 10 accounts',pct(h.top10Percent))+'</div><div class="table-scroll" tabindex="0" role="region" aria-label="Largest token accounts"><table><thead><tr><th>Rank</th><th>Account</th><th>Supply share</th></tr></thead><tbody>'+h.rows.slice(0,10).map((r,i)=>`<tr><td>${i+1}</td><td>${valid(r.address)?link(short(r.address),'https://solscan.io/account/'+r.address):'Unavailable'}</td><td>${pct(r.sharePercent)}</td></tr>`).join('')+'</tbody></table></div>';status('analytics-status','Retrieved '+time(d.fetchedAt)+'. '+(h.inconsistent?'Account totals are inconsistent; percentages withheld.':'Account and supply slots may differ.'));}catch(e){if(alive&&id===selectionSeq)status('analytics-status',e.message,true);}finally{if(id===selectionSeq)$('analytics-load').disabled=false;}}
-function loadPlugin(){if(window.Jupiter?.init)return Promise.resolve();if(pluginPromise)return pluginPromise;pluginPromise=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='https://plugin.jup.ag/plugin-v1.js';s.async=true;const timer=setTimeout(()=>fail(),20000);function fail(){clearTimeout(timer);s.remove();pluginPromise=null;reject(Error('Jupiter’s form could not load. Use the official Jupiter link below.'));}s.onerror=fail;s.onload=()=>{clearTimeout(timer);if(window.Jupiter?.init)resolve();else fail();};document.head.append(s);});return pluginPromise;}
-async function openSwap(){if(!valid(mint)||mint===SOL||swapActive||swapLoading)return;const token=mint,side=swapSide,generation=++swapGeneration;swapLoading=true;swapLabels();status('swap-status','Loading Jupiter’s official wallet and swap interface…');try{await loadPlugin();if(!alive||generation!==swapGeneration||token!==mint)return;swapActive=true;swapLoading=false;$('jupiter-plugin').hidden=false;$('swap-close').hidden=false;$('swap-open').hidden=true;document.querySelector('.swap-preview').hidden=true;
- window.Jupiter.init({displayMode:'integrated',integratedTargetId:'jupiter-plugin',containerStyles:{height:'560px',width:'100%'},localStoragePrefix:'parallax-terminal-jupiter',autoConnect:false,formProps:{initialInputMint:side==='buy'?SOL:token,initialOutputMint:side==='buy'?token:SOL},
- onSuccess:({txid})=>{if(!alive||generation!==swapGeneration)return;status('swap-status','Jupiter reported a completed swap. Inspect the transaction to confirm its final status.');if(sig(txid))$('swap-status').insertAdjacentHTML('beforeend',' '+link('View transaction','https://solscan.io/tx/'+txid));},
- onSwapError:()=>{if(alive&&generation===swapGeneration)status('swap-status','The swap was not confirmed by Jupiter. Check your wallet and transaction history before retrying.',true);}});
- status('swap-status','Jupiter is open. The form can change its token pair; review both addresses, amounts, costs, and wallet approval carefully.');swapLabels();
- }catch(e){if(alive&&generation===swapGeneration){closeSwap();status('swap-status',e.message,true);}}finally{if(generation===swapGeneration){swapLoading=false;swapLabels();}}}
-function closeSwap(){swapGeneration++;swapActive=false;swapLoading=false;try{window.Jupiter?.close();}catch{}$('jupiter-plugin').hidden=true;$('swap-close').hidden=true;$('swap-open').hidden=false;document.querySelector('.swap-preview').hidden=false;swapLabels();status('swap-status','Swap form closed. Closing the form does not cancel any transaction already sent to your wallet or network.');}
+function swapDiagnostic(phase){
+ if(!alive||diagnosticsSent++>=10)return;
+ fetch('/api/terminal/diagnostic',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phase}),keepalive:true}).catch(()=>{});
+}
+function loadPlugin(){
+ if(window.Jupiter?.init)return Promise.resolve();if(pluginPromise)return pluginPromise;
+ pluginPromise=new Promise((resolve,reject)=>{
+  const script=document.createElement('script');script.src='https://plugin.jup.ag/plugin-v1.js';script.async=true;script.setAttribute('data-preload','');let settled=false;
+  const timer=setTimeout(()=>fail('script-timeout'),20000);
+  function fail(phase){if(settled)return;settled=true;clearTimeout(timer);script.remove();pluginPromise=null;swapDiagnostic(phase);reject(Error('The in-page swap service could not load. Tap Retry swap form to try again here.'));}
+  script.onerror=()=>fail('script-error');script.onload=()=>{if(window.Jupiter?.init){settled=true;clearTimeout(timer);resolve();}else fail('script-error');};document.head.append(script);
+ });return pluginPromise;
+}
+function waitForSwapForm(){
+ return new Promise(resolve=>{
+  const target=$('jupiter-plugin');let finished=false;
+  const observer=new MutationObserver(check),timer=setTimeout(()=>{swapDiagnostic('render-timeout');finish(false);},20000);
+  function finish(ready){if(finished)return;finished=true;clearTimeout(timer);observer.disconnect();swapRenderCancel=null;resolve(ready);}
+  function check(){if(target.querySelector('button,input'))finish(true);}
+  swapRenderCancel=()=>finish(false);observer.observe(target,{childList:true,subtree:true});check();
+ });
+}
+async function openSwap(){
+ if(!valid(mint)||mint===SOL||swapActive||swapLoading)return;
+ const token=mint,side=swapSide,generation=++swapGeneration;swapLoading=true;swapLabels();$('swap-open').hidden=true;$('swap-close').hidden=false;$('swap-close').textContent='Cancel loading';status('swap-status','Loading the swap form inside PARALLAX…');
+ try{
+  await loadPlugin();if(!alive||generation!==swapGeneration||token!==mint)return;
+  $('jupiter-plugin').hidden=false;$('jupiter-plugin').setAttribute('aria-busy','true');document.querySelector('.swap-preview').hidden=true;
+  try{window.Jupiter.init({displayMode:'integrated',integratedTargetId:'jupiter-plugin',containerStyles:{height:'560px',width:'100%'},branding:{name:'PARALLAX',logoUri:location.origin+'/favicon.svg'},localStoragePrefix:'parallax-terminal-jupiter',autoConnect:false,enableWalletPassthrough:false,formProps:{initialInputMint:side==='buy'?SOL:token,initialOutputMint:side==='buy'?token:SOL},
+   onSuccess:({txid})=>{if(!alive||generation!==swapGeneration)return;status('swap-status','Jupiter reported a completed swap. Inspect the transaction to confirm its final status.');if(sig(txid))$('swap-status').insertAdjacentHTML('beforeend',' '+link('View transaction','https://solscan.io/tx/'+txid));},
+   onSwapError:()=>{if(alive&&generation===swapGeneration)status('swap-status','The swap was not confirmed by Jupiter. Check your wallet and transaction history before retrying.',true);}});
+  }catch{swapDiagnostic('init-error');throw Error('The in-page swap form could not start. Tap Retry swap form.');}
+  const ready=await waitForSwapForm();if(!alive||generation!==swapGeneration)return;
+  if(!ready)throw Error('The swap form did not finish loading. Tap Retry swap form to try again here.');
+  swapActive=true;swapLoading=false;$('jupiter-plugin').setAttribute('aria-busy','false');$('swap-close').textContent='Close swap form';swapDiagnostic('form-ready');
+  status('swap-status','Swap form ready inside PARALLAX. Connect your wallet below. Review both token addresses, amounts, costs, and wallet approval before signing.');swapLabels();
+ }catch(e){if(alive&&generation===swapGeneration){closeSwap();$('swap-open').textContent='Retry swap form';status('swap-status',e.message,true);}}
+ finally{if(generation===swapGeneration){swapLoading=false;swapLabels();}}
+}
+function closeSwap(){
+ swapGeneration++;swapActive=false;swapLoading=false;swapRenderCancel?.();try{window.Jupiter?.close();}catch{}
+ $('jupiter-plugin').replaceChildren();$('jupiter-plugin').hidden=true;$('jupiter-plugin').setAttribute('aria-busy','false');$('swap-close').hidden=true;$('swap-open').hidden=false;$('swap-open').textContent='Open swap form';document.querySelector('.swap-preview').hidden=false;swapLabels();status('swap-status','Swap form closed. Closing the form does not cancel any transaction already sent to your wallet or network.');
+}
 function stopPlay(){clearInterval(playTimer);playTimer=null;$('replay-play').textContent='Play replay';}
 function clearReplay(){replaySeq++;stopPlay();replay=null;replayRows=[];step=0;$('replay-result').hidden=true;$('replay-rows').replaceChildren();$('replay-chart').replaceChildren();$('replay-selected').replaceChildren();['replay-summary','replay-coverage','replay-pricing','replay-step-label','replay-quote'].forEach(id=>$(id).replaceChildren());$('replay-step').value='0';$('replay-step').max='0';$('replay-load').disabled=false;status('replay-status','Load supported swaps for the selected token. Up to 20 requests per day (UTC).');}
 function showStep(n){if(!replayRows.length)return;step=Math.min(Math.max(0,n),replayRows.length-1);const t=replayRows[step];$('replay-step').value=String(step);$('replay-step-label').textContent=`${step+1} / ${replayRows.length}`;$('replay-selected').innerHTML=`<strong class="${t.side==='buy'?'up':'down'}">${esc(t.side.toUpperCase())}</strong> · ${esc(t.tokenAmount)} tokens for ${esc(t.quoteAmount)} ${esc(t.quoteSymbol)} · ${esc(time(t.time*1000))}`+link('Inspect transaction','https://solscan.io/tx/'+t.signature);
@@ -76,12 +121,13 @@ document.querySelectorAll('[data-side]').forEach(b=>b.onclick=()=>{if(swapActive
 $('feed-filter').addEventListener('input',renderFeed);$('feed-sort').addEventListener('change',renderFeed);$('feed-refresh').onclick=loadFeed;
 $('token-search').onsubmit=e=>{e.preventDefault();selectToken($('token-input').value,true);};$('token-refresh').onclick=()=>selectToken(mint);$('analytics-load').onclick=analytics;
 $('copy-address').onclick=async()=>{try{await navigator.clipboard.writeText(mint);status('terminal-message','Token address copied.');}catch{status('terminal-message','Copy is unavailable. Select the contract address above to copy it.');}};
+$('chart-retry').onclick=()=>{if(chartContext&&!$('chart-retry').disabled)loadChart(chartContext.pool,chartContext.token,chartContext.id);};
 $('swap-open').onclick=openSwap;$('swap-close').onclick=closeSwap;$('replay-form').onsubmit=loadReplay;$('replay-quote').onchange=renderReplayQuote;$('replay-step').oninput=()=>{stopPlay();showStep(Number($('replay-step').value));};
 $('replay-play').onclick=()=>{if(playTimer){stopPlay();return;}if(matchMedia('(prefers-reduced-motion:reduce)').matches){showStep((step+1)%replayRows.length);return;}if(step>=replayRows.length-1)showStep(0);$('replay-play').textContent='Pause replay';playTimer=setInterval(()=>{if(!alive||document.hidden||step>=replayRows.length-1){stopPlay();return;}showStep(step+1);},1000);};
 $('replay-export').onclick=()=>{if(!replay)return;const blob=new Blob([JSON.stringify(replay,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='parallax-wallet-replay.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
-setInterval(()=>{if(alive&&!document.hidden&&!feedLoading&&Date.now()-feedLoadedAt>60000)loadFeed();},15000);
+setInterval(()=>{if(alive&&!document.hidden&&!feedLoading&&Date.now()>=feedRetryAt&&Date.now()-feedLoadedAt>60000)loadFeed();},15000);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPlay();});
-addEventListener('pagehide',()=>{alive=false;selectionSeq++;feedSeq++;clearReplay();$('replay-wallet').value='';closeSwap();});
+addEventListener('pagehide',()=>{alive=false;selectionSeq++;feedSeq++;clearTimeout(chartRetryTimer);clearReplay();$('replay-wallet').value='';closeSwap();});
 addEventListener('pageshow',e=>{if(e.persisted){alive=true;feedLoading=false;loadFeed();if(mint)selectToken(mint);}});
 api('/api/terminal/status').then(d=>{if(!alive)return;if(!d.signedIn)$('replay-signin').hidden=false;if(!d.replayConfigured)status('replay-status','Wallet replay’s data connection is awaiting configuration.');}).catch(()=>{});
 loadFeed();const initial=new URLSearchParams(location.search).get('token');selectToken(valid(initial)?initial:PRLX);
