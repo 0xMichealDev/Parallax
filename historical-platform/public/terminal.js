@@ -2,7 +2,7 @@
 const $=id=>document.getElementById(id),SOL='So11111111111111111111111111111111111111112',PRLX='8B2G4oiTKZKbSVTKPAP7Cfe6zAsEtrySCYcX9M2kpump';
 const valid=v=>typeof v==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(v),sig=v=>typeof v==='string'&&/^[1-9A-HJ-NP-Za-km-z]{64,90}$/.test(v);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const numeric=n=>typeof n==='number'&&Number.isFinite(n),usd=(n,compact=false)=>numeric(n)?new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',notation:compact?'compact':'standard',maximumFractionDigits:compact?2:n>=1?2:9}).format(n):'Unavailable';
+const numeric=n=>typeof n==='number'&&Number.isFinite(n),usd=(n,compact=false)=>numeric(n)?n!==0&&Math.abs(n)<1e-8?(n<0?'-$':'$')+Math.abs(n).toExponential(3):new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',notation:compact?'compact':'standard',maximumFractionDigits:compact?2:n>=1?2:9}).format(n):'Unavailable';
 const fmt=n=>numeric(n)?new Intl.NumberFormat('en-US',{maximumSignificantDigits:7}).format(n):'Unavailable',percent=n=>numeric(n)?(n>0?'+':'')+n.toFixed(2)+'%':'—',direction=n=>numeric(n)?n<0?'down':'up':'';
 const time=n=>new Date(n).toLocaleString(),short=a=>a.slice(0,5)+'…'+a.slice(-5),link=(label,url)=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`;
 const status=(id,text,error=false)=>{$(id).textContent=text;$(id).classList.toggle('error',error);};
@@ -34,6 +34,7 @@ async function selectToken(value,navigate=false){
  value=String(value||'').trim();if(!valid(value)){status('terminal-message','Paste a complete Solana token contract address.',true);return;}
  if((swapActive||swapLoading)&&value!==mint){status('terminal-message','Close the swap form before selecting a different token.',true);return;}
  const changed=value!==mint,id=++selectionSeq;mint=value;snapshot=null;$('token-input').value=value;$('token-address').textContent=value;$('copy-address').disabled=false;$('token-refresh').disabled=true;$('analytics-load').disabled=true;
+ $('replay-signin').href='/signin-with-chatgpt?return_to='+encodeURIComponent('/terminal?token='+value+'#wallet-replay');
  $('token-name').textContent='Loading token…';$('token-symbol').textContent=short(value);$('token-metrics').replaceChildren();$('token-links').replaceChildren();$('concentration').replaceChildren();$('chain-facts').innerHTML='<p class="muted">Retrieving confirmed chain observations…</p>';$('token-gaps').replaceChildren();status('analytics-status','');status('token-status','Retrieving market data and confirmed token state…');status('terminal-message','Inspecting '+short(value)+'.');
  $('market-chart').innerHTML='<div class="empty-chart"><span>⌁</span><p>Retrieving the selected pool…</p></div>';status('chart-status','Awaiting a matching indexed pool.');$('chart-note').textContent='Up to 96 OHLCV candles. Missing periods are not filled with invented prices.';
  if(changed)clearReplay();renderFeed();swapLabels();
