@@ -60,7 +60,7 @@
       if(!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)){status('Enter a valid Solana token contract address.',true);return;}
       if(projects.some(p=>p.address===address)){status('You already follow this project. Your original baseline is unchanged.');return;}
       working=true;controls();status(pendingReport?'Saving your baseline…':'Collecting source data for your baseline…');
-      try{if(!pendingReport)pendingReport=await api('passport',{address});await api('following/add',{id:pendingReport.id});pendingReport=null;form.reset();if(await load())status('Project followed. Your baseline is saved; future scans will not replace it.');}
+      try{if(!pendingReport)pendingReport=await api('passport',{address});await api('following/add',{id:pendingReport.id});pendingReport=null;form.reset();if(await load()){status('Project followed. Your baseline is saved; future scans will not replace it.');window.dispatchEvent?.(new Event('parallax:research-following-changed'));}}
       catch(error){fail(error);if(error.status!==401&&pendingReport)status('The Passport is saved, but the project could not be followed. '+error.message+' Retry saving this baseline below.',true);}
       finally{working=false;controls();}
     };
@@ -74,7 +74,7 @@
       if(action==='refresh'){const result=await api('passport',{address:p.address});message=result.cached?'Reused your recent snapshot. A new scan is available in '+result.retryAfterSeconds+' seconds.':'New snapshot saved. Compare it with your baseline to review the evidence.';}
       else if(action==='baseline'){await api('following/baseline',{address:p.address,id:p.latest.id,confirmed:true});message='Baseline updated. Your earlier reports remain saved.';}
       else if(action==='remove'){await api('following/remove',{address:p.address});message='Project unfollowed. Your saved Passports remain in My reports.';}
-      if(await load())status(message);
+      if(await load()){status(message);if(action==='remove')window.dispatchEvent?.(new Event('parallax:research-following-changed'));}
     }catch(error){fail(error);}
     finally{working=false;controls();}
   };

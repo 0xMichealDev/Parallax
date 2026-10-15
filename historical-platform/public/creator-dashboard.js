@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id),api=window.ParallaxResearch.request,fmt=n=>Number(n||0).toLocaleString();
-let data=null,epoch=0,updateEpoch=0,session={signedIn:false,wallet:null},publishing=false;
+let data=null,epoch=0,session={signedIn:false,wallet:null};
 const status=(id,text,error=false)=>{const el=$(id);el.textContent=text;el.dataset.error=String(error)};
 function node(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
 function link(text,href,cls='creator-button'){const a=node('a',cls,text);a.href=href;return a;}
@@ -37,7 +37,7 @@ function render(){
  chart(data.daily);$('creator-daily-rows').replaceChildren(...data.daily.map(d=>{const r=node('tr');for(const v of [d.day,fmt(d.visits),fmt(d.returningVisits),fmt(d.clicks)])r.append(node('td','',v));return r;}));
  const projects=data.projects.filter(p=>!data.selectedId||p.id===data.selectedId);$('creator-projects').replaceChildren(...projects.map(projectCard));
  if(!data.projects.length){const empty=node('div','creator-empty');empty.append(node('h3','','Your first world is waiting.'),node('p','','Publish a world in Creator Studio, then return here to manage it and see its activity. Browser drafts remain in Studio.'),link('Create your first world ↗','/studio','creator-button primary'));$('creator-projects').append(empty);}
- $('creator-update-form').querySelectorAll('input,textarea,select,button').forEach(e=>e.disabled=!data.projects.length);loadUpdates();
+ $('creator-update-form').querySelectorAll('input,textarea,select,button').forEach(e=>e.disabled=!data.projects.length);window.ParallaxUpdateEditor?.sync(data.projects);
 }
 async function load(){
  const id=++epoch;$('creator-refresh').disabled=true;$('creator-export').disabled=true;$('creator-projects').setAttribute('aria-busy','true');status('creator-status','Loading project activity…');
@@ -47,14 +47,6 @@ async function load(){
 }
 $('creator-filter').onchange=load;$('creator-range').onchange=load;$('creator-refresh').onclick=load;
 $('creator-export').onclick=()=>{if(!data)return;const lines=['date_utc,visits,returning_visits,website_clicks',...data.daily.map(d=>[d.day,d.visits,d.returningVisits,d.clicks].join(','))];const url=URL.createObjectURL(new Blob([lines.join('\r\n')],{type:'text/csv;charset=utf-8'})),a=node('a');a.href=url;a.download='parallax-activity-'+data.days+'-days.csv';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);};
-async function loadUpdates(){
- const id=$('creator-update-project').value,token=++updateEpoch,host=$('creator-update-list');host.replaceChildren(node('p','creator-help',id?'Loading updates…':'Choose a world to see its updates.'));if(!id)return;
- try{const result=await api('/api/creator/updates?project='+encodeURIComponent(id));if(token!==updateEpoch)return;host.replaceChildren();if(!result.updates.length)host.append(node('p','creator-help','No updates yet. Share the first milestone for this world.'));
- for(const item of result.updates){const row=node('article','creator-update-item'),time=node('time','',new Date(item.createdAt).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}));time.dateTime=new Date(item.createdAt).toISOString();row.append(time,node('h3','',item.title),node('p','',item.body));const remove=node('button','creator-text-button','Remove update');remove.type='button';remove.onclick=async()=>{if(!confirm('Remove this public update? This cannot be undone.'))return;remove.disabled=true;try{await api('/api/creator/delete-update',{projectId:id,id:item.id});status('creator-update-status','Update removed.');if($('creator-update-project').value===id)loadUpdates();}catch(e){status('creator-update-status',e.message,true);remove.disabled=false;}};row.append(remove);host.append(row);}}
- catch(e){if(token===updateEpoch)host.replaceChildren(node('p','creator-help',e.message));}
-}
-$('creator-update-project').onchange=()=>{status('creator-update-status','');loadUpdates();};$('creator-update-body').oninput=()=>{$('creator-update-characters').textContent=$('creator-update-body').value.length+' / 800';};
-$('creator-update-form').onsubmit=async e=>{e.preventDefault();if(publishing||!e.currentTarget.reportValidity())return;publishing=true;$('creator-publish-update').disabled=true;const id=$('creator-update-project').value,title=$('creator-update-title').value,body=$('creator-update-body').value;status('creator-update-status','Publishing your update…');try{await api('/api/creator/updates',{projectId:id,title,body});if($('creator-update-project').value===id&&$('creator-update-title').value===title&&$('creator-update-body').value===body){$('creator-update-title').value='';$('creator-update-body').value='';$('creator-update-characters').textContent='0 / 800';}status('creator-update-status','Published. The update is now visible on your world page.');loadUpdates();}catch(err){status('creator-update-status',err.message,true);}finally{publishing=false;$('creator-publish-update').disabled=false;}};
 $('creator-verify').onclick=async()=>{const provider=window.phantom?.solana;if(!provider?.isPhantom){status('creator-wallet-status','On iPhone, open parallaxlaunch.live/creator in Phantom’s browser and sign in there. On desktop, use the Phantom extension.');return;}$('creator-verify').disabled=true;try{const connected=await provider.connect(),challenge=await api('/api/wallet/challenge',{wallet:connected.publicKey.toString()}),signed=await provider.signMessage(new TextEncoder().encode(challenge.message),'utf8');session.wallet=(await api('/api/wallet/verify',{signature:Array.from(signed.signature)})).wallet;status('creator-wallet-status','Wallet verified: '+session.wallet.slice(0,5)+'…'+session.wallet.slice(-5)+'. You can publish updates for its projects.');}catch(e){status('creator-wallet-status',e.code===4001?'Verification cancelled. No transaction was requested.':e.message,true);}finally{$('creator-verify').disabled=false;}};
 load();
 })();
