@@ -11,7 +11,7 @@
   let session = {signedIn:false,aiEnabled:false}, currentReport = null, savedReports = [], currentComparison = null, comparisonEpoch = 0, walletEpoch = 0, telegram = {configured:false,connected:false,monitoringConfigured:false};
   function status(id,text,error=false){$(id).textContent=text;$(id).classList.toggle('error',error);}
   async function api(action,body){
-    try{return await research.request('/api/control/'+action,body);}
+    try{const result=await research.request('/api/control/'+action,body);if(['passport','following/add'].includes(action))window.ParallaxDiscovery?.sync();return result;}
     catch(error){if(error.status===401){session.signedIn=false;$('sign-in-note').hidden=false;const link=$('session-link');link.textContent='Sign in with ChatGPT ↗';link.href='/signin-with-chatgpt?return_to='+encodeURIComponent(location.pathname+location.search+location.hash);}throw error;}
   }
   async function requireSignIn(target){
@@ -163,6 +163,7 @@
   $('compare-after').onchange=()=>{invalidateComparison();status('compare-status','');};
   $('compare-new').onclick=()=>{const selected=savedReports.find(r=>r.id===$('compare-before').value);if(selected)$('mint').value=selected.address;tab('passport');status('passport-status','Create another snapshot of this token. Requests within 60 seconds reuse the recent passport.');$('mint').focus();};
   function renderComparison(data){
+    window.ParallaxDiscovery?.comparison(data.before.id,data.after.id);
     currentComparison=data;fillComparisonOptions(data.before.id);const c=data.comparison;
     $('comparison-empty').hidden=true;$('comparison-view').hidden=false;
     function timing(r,label){return `<div class="comparison-time"><span class="eyebrow">${label}</span><strong>${escape(date(r.collectedAt))}</strong><span class="fine">${r.slot?'Confirmed slot '+escape(r.slot):'Chain slot unavailable'}</span><p class="address">Report ${escape(r.id)}</p><p class="address">Pool: ${escape(r.pairAddress||'Unavailable')}</p><a href="/control?report=${encodeURIComponent(r.id)}">Open original passport ↗</a></div>`;}

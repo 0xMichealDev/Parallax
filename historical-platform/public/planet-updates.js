@@ -45,7 +45,7 @@
     function renderFollow(state){follow.replaceChildren();if(!state?.signedIn){const a=link('Sign in to follow this planet ↗','/signin-with-chatgpt?return_to='+encodeURIComponent(location.pathname+location.search+'#project-update-feed'));a.target='_top';follow.append(a);return;}
       const b=el('button','planet-update-button',state.direct?'Unfollow planet':'Follow planet');b.type='button';b.setAttribute('aria-pressed',String(state.direct));follow.append(b,link('Open followed updates ↗','/following#followed-updates','planet-update-source'));
       if(state.research)follow.append(el('p','planet-update-note','Also included through your saved token research. Manage that follow in Saved projects.'));
-      b.onclick=async()=>{b.disabled=true;try{await request(state.direct?'unfollow-world':'follow-world',{projectId});await load(false);}catch(e){message(e.message||'Could not save this follow. Retry.',true);b.disabled=false;}};
+      b.onclick=async()=>{b.disabled=true;try{await request(state.direct?'unfollow-world':'follow-world',{projectId});if(!state.direct)window.ParallaxDiscovery?.sync();await load(false);}catch(e){message(e.message||'Could not save this follow. Retry.',true);b.disabled=false;}};
     }
     function renderWorlds(worlds){manage.replaceChildren();manage.hidden=!worlds.length;if(!worlds.length)return;manage.append(el('summary','',worlds.length+' followed planet'+(worlds.length===1?'':'s')+' · Manage'));
       const rows=el('div','planet-follow-rows');for(const p of worlds){const row=el('div','planet-follow-row');row.append(link(p.name+' ↗','/world/'+encodeURIComponent(p.id),'planet-update-source'));
