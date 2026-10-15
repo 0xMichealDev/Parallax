@@ -52,3 +52,9 @@ The shared WebGL renderer provides correctly mapped textured spheres, surface li
 Drag rotates the globe. Motion honors reduced-motion preferences and pauses when hidden. Browsers without WebGL keep the earlier renderer and show a notice about limited previews. Free previews never publish or submit payments; unpaid exports use the free design.
 
 Native GLES compilation/render checks verify the actual shader. Browser layout and physical iPhone performance remain unverified in this environment.
+
+## Interrupted wallet responses
+
+Version 78 writes the submitted-payment guard before asking the wallet to sign and send. An interrupted response keeps the invoice guarded against a second submission. Known user cancellation (4001) clears the guard; uncertain responses require payment verification or signature recovery before retrying. Tests cover uncertain response → recovery and explicit cancellation → fresh attempt. Actual iPhone approval and onchain transfer remain unverified; fixtures do not complete that device check.
+
+The public `/development` report summarizes confirmed receipts and a separately published expense ledger without exposing customer invoices.

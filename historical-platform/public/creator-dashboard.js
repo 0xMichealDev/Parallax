@@ -27,6 +27,7 @@ function projectCard(p){
  const footer=node('div','creator-project-link'),view=link('Open public page ↗','/world/'+encodeURIComponent(p.id),'');view.target='_blank';view.rel='noopener';const stats=node('button','creator-text-button','View activity');stats.type='button';stats.onclick=()=>{$('creator-filter').value=p.id;load();$('creator-activity-title').scrollIntoView({block:'start',behavior:'auto'});};footer.append(view,stats);card.append(footer);return card;
 }
 function render(){
+ window.ParallaxCreatorPerformance?.render(data);
  $('creator-signin').hidden=true;$('creator-workspace').hidden=false;
  fillSelect($('creator-filter'),data.projects,'All my worlds');$('creator-filter').value=data.selectedId;
  fillSelect($('creator-update-project'),data.projects,'Choose a published world');if(!$('creator-update-project').value&&data.projects.length===1)$('creator-update-project').value=data.projects[0].id;

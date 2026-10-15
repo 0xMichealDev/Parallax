@@ -4,6 +4,15 @@ let active=null,memoryBrowser=null,memorySessions={},privacyButton=null,memoryOp
 const blocked=()=>navigator.doNotTrack==='1'||navigator.globalPrivacyControl===true;
 function optedOut(){if(memoryOptOut!==null)return memoryOptOut;try{return (localStorage.getItem(privacyKey)==='1'||localStorage.getItem('parallax-site-analytics-off')==='1')}catch{return false}}
 function random(){return crypto.randomUUID();}
+function attribution(){
+ let source='direct',campaign='';
+ try{const url=new URL(location.href),tag=(url.searchParams.get('utm_source')||'').toLowerCase(),name=url.searchParams.get('utm_campaign')||'';
+  if(/^[a-z0-9][a-z0-9_-]{0,47}$/.test(name))campaign=name;
+  if(tag)source=['x','telegram','discord','website','livestream','other'].includes(tag)?tag:'other';
+  else if(document.referrer){const ref=new URL(document.referrer),host=ref.hostname.replace(/^www\./,'');source=ref.origin===url.origin?'internal':['x.com','twitter.com','t.co'].includes(host)?'x':['t.me','telegram.org'].includes(host)?'telegram':['discord.com','discord.gg'].includes(host)?'discord':'other';}
+ }catch{}
+ return {source,campaign};
+}
 function browser(){
  const now=Date.now();try{let b=JSON.parse(localStorage.getItem(browserKey)||'null');if(!b||typeof b.id!=='string'||!/^[a-f0-9-]{36}$/i.test(b.id)||!Number.isFinite(b.created)||now-b.created>90*86400000){b={id:random(),created:now};localStorage.setItem(browserKey,JSON.stringify(b));}return b.id;}catch{if(!memoryBrowser)memoryBrowser=random();return memoryBrowser;}
 }
@@ -17,7 +26,7 @@ function session(id){
 }
 function record(kind){
  if(!active||active.owner||blocked()||optedOut()||document.hidden||!crypto?.randomUUID)return;
- try{const body={projectId:active.id,entry:active.entry,visitorId:browser(),sessionId:session(active.id),kind,...(kind==='click'?{eventId:random()}:{})};fetch('/api/creator/track',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),keepalive:true}).catch(()=>{});}catch{}
+ try{const body={projectId:active.id,entry:active.entry,...active.attribution,visitorId:browser(),sessionId:session(active.id),kind,...(kind==='click'?{eventId:random()}:{})};fetch('/api/creator/track',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),keepalive:true}).catch(()=>{});}catch{}
 }
 function privacyUI(){
  if(!privacyButton)return;privacyButton.textContent=blocked()?'Project analytics disabled by browser privacy settings':optedOut()?'Project analytics off · Enable':'Project analytics on · Disable';privacyButton.disabled=blocked();privacyButton.setAttribute('aria-pressed',String(!blocked()&&!optedOut()));
@@ -33,7 +42,7 @@ async function feed(id){
  for(const update of data.updates){const article=document.createElement('article'),time=document.createElement('time'),heading=document.createElement('h3'),body=document.createElement('p');time.dateTime=new Date(update.createdAt).toISOString();time.textContent=new Date(update.createdAt).toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});heading.textContent=update.title;body.textContent=update.body;article.append(time,heading,body);section.append(article);}
  }catch{const note=document.createElement('p');note.textContent='Project updates could not load. Refresh to try again.';section.append(note);}
 }
-function start(id,owner=false){const path=location.pathname.match(/^\/(world|mission)\/([^/]+)\/?$/);if(!path||path[2]!==id||active)return;active={id,owner,entry:path[1]};feed(id);window.ParallaxProjectResearch?.load(id);makePrivacy();record('visit');}
+function start(id,owner=false){const path=location.pathname.match(/^\/(world|mission)\/([^/]+)\/?$/);if(!path||path[2]!==id||active)return;active={id,owner,entry:path[1],attribution:attribution()};feed(id);window.ParallaxProjectResearch?.load(id);makePrivacy();record('visit');}
 document.addEventListener('click',e=>{const a=e.target?.closest?.('a[data-project-website]');if(a&&active&&(!a.dataset.projectId||a.dataset.projectId===active.id))record('click');});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)record('visit')});
 window.ParallaxProjectMetrics={start};
