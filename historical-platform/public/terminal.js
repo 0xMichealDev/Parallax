@@ -18,6 +18,10 @@ function renderFeed(){
 async function loadFeed(){if(Date.now()<feedRetryAt){status('feed-status','The provider is cooling down. Retry after '+time(feedRetryAt)+'.',true);return;}const id=++feedSeq;feedLoading=true;$('feed-refresh').disabled=true;status('feed-status','Updating the '+(mode==='new'?'new-pool':'trending')+' feed…');try{const d=await api('/api/terminal/discovery?mode='+mode);if(!alive||id!==feedSeq)return;feed=Array.isArray(d.pools)?d.pools:[];feedLoadedAt=Date.now();feedRetryAt=d.retryAfterSeconds?Date.now()+d.retryAfterSeconds*1000:0;renderFeed();status('feed-status',`${feed.length} pools · ${time(d.fetchedAt)} · ${d.stale?'older snapshot — refresh unavailable':d.cached?'cached snapshot':'retrieved'}`,!!d.stale);}catch(e){if(alive&&id===feedSeq){feedRetryAt=e.retryAfterSeconds?Date.now()+e.retryAfterSeconds*1000:0;status('feed-status',e.message+(feedRetryAt?' Retry after '+time(feedRetryAt)+'.':'')+(feed.length?' Previous results are retained and may be stale.':''),true);}}finally{if(id===feedSeq){feedLoading=false;$('feed-refresh').disabled=false;}}}
 const metric=(label,value,cls='')=>`<div class="metric"><span>${esc(label)}</span><strong class="${cls}">${esc(value)}</strong></div>`;
 function swapLabels(){const name=snapshot?.market?.symbol||short(mint||'Select a token');$('swap-input-label').textContent=swapSide==='buy'?'SOL':name;$('swap-output-label').textContent=swapSide==='buy'?name:'SOL';
+ const phantomAvailable=!!(window.phantom?.solana?.isPhantom||window.solana?.isPhantom);
+ $('phantom-open').hidden=phantomAvailable;$('phantom-help-text').textContent=phantomAvailable?'Phantom is available in this browser. Connect using the swap form below.':'On iPhone, open PARALLAX in Phantom’s browser, then connect using the swap form.';
+ $('phantom-open').href='https://phantom.com/ul/browse/'+encodeURIComponent(location.origin+'/terminal'+(valid(mint)?'?token='+mint+'&side='+swapSide:'')+'#trade-panel')+'?ref='+encodeURIComponent(location.origin);
+ $('phantom-manual').hidden=phantomAvailable;
  $('swap-open').disabled=!valid(mint)||mint===SOL||swapActive||swapLoading;
  document.querySelectorAll('[data-side]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.side===swapSide));b.disabled=swapActive||swapLoading;});
 }
@@ -78,14 +82,21 @@ function loadPlugin(){
   script.onerror=()=>fail('script-error');script.onload=()=>{if(window.Jupiter?.init){settled=true;clearTimeout(timer);resolve();}else fail('script-error');};document.head.append(script);
  });return pluginPromise;
 }
-function waitForSwapForm(){
- return new Promise(resolve=>{
-  const target=$('jupiter-plugin');let finished=false;
-  const observer=new MutationObserver(check),timer=setTimeout(()=>{swapDiagnostic('render-timeout');finish(false);},20000);
-  function finish(ready){if(finished)return;finished=true;clearTimeout(timer);observer.disconnect();swapRenderCancel=null;resolve(ready);}
-  function check(){if(target.querySelector('button,input'))finish(true);}
-  swapRenderCancel=()=>finish(false);observer.observe(target,{childList:true,subtree:true});check();
- });
+function watchSwapForm(onReady,onSlow){
+ const target=$('jupiter-plugin'),observers=new Map();let finished=false;
+ const poll=setInterval(check,250),timer=setTimeout(()=>{if(finished)return;clearInterval(poll);swapDiagnostic('render-timeout');onSlow();},20000);
+ function cancel(){if(finished)return;finished=true;clearTimeout(timer);clearInterval(poll);observers.forEach(o=>o.disconnect());observers.clear();}
+ function ready(){if(finished)return;cancel();onReady();}
+ function inspect(root){
+  if(finished)return;
+  if(!observers.has(root)){const observer=new MutationObserver(check);observers.set(root,observer);observer.observe(root,{childList:true,subtree:true});}
+  if(root.querySelector('button,input')){ready();return;}
+  // DOM queries and observers do not cross the plugin's open shadow boundaries.
+  if(root.shadowRoot)inspect(root.shadowRoot);
+  for(const element of root.querySelectorAll('*'))if(element.shadowRoot)inspect(element.shadowRoot);
+ }
+ function check(){if(!finished)inspect(target);}
+ return {ready,cancel,check};
 }
 async function openSwap(){
  if(!valid(mint)||mint===SOL||swapActive||swapLoading)return;
@@ -93,19 +104,27 @@ async function openSwap(){
  try{
   await loadPlugin();if(!alive||generation!==swapGeneration||token!==mint)return;
   $('jupiter-plugin').hidden=false;$('jupiter-plugin').setAttribute('aria-busy','true');document.querySelector('.swap-preview').hidden=true;
+  const watcher=watchSwapForm(()=>{
+   if(!alive||generation!==swapGeneration)return;
+   swapActive=true;swapLoading=false;$('jupiter-plugin').setAttribute('aria-busy','false');$('swap-close').textContent='Close swap form';swapDiagnostic('form-ready');
+   status('swap-status','Swap form ready inside PARALLAX. Review the wallet connection, both token addresses, amounts, costs, and approval before signing.');swapLabels();
+  },()=>{
+   if(!alive||generation!==swapGeneration)return;
+   // Never tear down a usable wallet form because our readiness check timed out.
+   $('jupiter-plugin').setAttribute('aria-busy','false');
+   status('swap-status','The service has not reported readiness yet. If the form is visible, continue there. If it is blank, close it and reopen it.',true);
+  });swapRenderCancel=watcher.cancel;
   try{window.Jupiter.init({displayMode:'integrated',integratedTargetId:'jupiter-plugin',containerStyles:{height:'560px',width:'100%'},branding:{name:'PARALLAX',logoUri:location.origin+'/favicon.svg'},localStoragePrefix:'parallax-terminal-jupiter',autoConnect:false,enableWalletPassthrough:false,formProps:{initialInputMint:side==='buy'?SOL:token,initialOutputMint:side==='buy'?token:SOL},
-   onSuccess:({txid})=>{if(!alive||generation!==swapGeneration)return;status('swap-status','Jupiter reported a completed swap. Inspect the transaction to confirm its final status.');if(sig(txid))$('swap-status').insertAdjacentHTML('beforeend',' '+link('View transaction','https://solscan.io/tx/'+txid));},
-   onSwapError:()=>{if(alive&&generation===swapGeneration)status('swap-status','The swap was not confirmed by Jupiter. Check your wallet and transaction history before retrying.',true);}});
+   onFormUpdate:watcher.ready,onScreenUpdate:watcher.ready,
+   onSuccess:({txid})=>{if(!alive||generation!==swapGeneration)return;watcher.ready();status('swap-status','Jupiter reported a completed swap. Inspect the transaction to confirm its final status.');if(sig(txid))$('swap-status').insertAdjacentHTML('beforeend',' '+link('View transaction','https://solscan.io/tx/'+txid));},
+   onSwapError:()=>{if(alive&&generation===swapGeneration){watcher.ready();status('swap-status','The swap was not confirmed by Jupiter. Check your wallet and transaction history before retrying.',true);}}});
   }catch{swapDiagnostic('init-error');throw Error('The in-page swap form could not start. Tap Retry swap form.');}
-  const ready=await waitForSwapForm();if(!alive||generation!==swapGeneration)return;
-  if(!ready)throw Error('The swap form did not finish loading. Tap Retry swap form to try again here.');
-  swapActive=true;swapLoading=false;$('jupiter-plugin').setAttribute('aria-busy','false');$('swap-close').textContent='Close swap form';swapDiagnostic('form-ready');
-  status('swap-status','Swap form ready inside PARALLAX. Connect your wallet below. Review both token addresses, amounts, costs, and wallet approval before signing.');swapLabels();
+  swapActive=true;swapLoading=false;$('swap-close').textContent='Close swap form';watcher.check();swapLabels();
  }catch(e){if(alive&&generation===swapGeneration){closeSwap();$('swap-open').textContent='Retry swap form';status('swap-status',e.message,true);}}
  finally{if(generation===swapGeneration){swapLoading=false;swapLabels();}}
 }
 function closeSwap(){
- swapGeneration++;swapActive=false;swapLoading=false;swapRenderCancel?.();try{window.Jupiter?.close();}catch{}
+ swapGeneration++;swapActive=false;swapLoading=false;swapRenderCancel?.();swapRenderCancel=null;try{window.Jupiter?.close();}catch{}
  $('jupiter-plugin').replaceChildren();$('jupiter-plugin').hidden=true;$('jupiter-plugin').setAttribute('aria-busy','false');$('swap-close').hidden=true;$('swap-open').hidden=false;$('swap-open').textContent='Open swap form';document.querySelector('.swap-preview').hidden=false;swapLabels();status('swap-status','Swap form closed. Closing the form does not cancel any transaction already sent to your wallet or network.');
 }
 function stopPlay(){clearInterval(playTimer);playTimer=null;$('replay-play').textContent='Play replay';}
@@ -130,5 +149,5 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPlay();
 addEventListener('pagehide',()=>{alive=false;selectionSeq++;feedSeq++;clearTimeout(chartRetryTimer);clearReplay();$('replay-wallet').value='';closeSwap();});
 addEventListener('pageshow',e=>{if(e.persisted){alive=true;feedLoading=false;loadFeed();if(mint)selectToken(mint);}});
 api('/api/terminal/status').then(d=>{if(!alive)return;if(!d.signedIn)$('replay-signin').hidden=false;if(!d.replayConfigured)status('replay-status','Wallet replay’s data connection is awaiting configuration.');}).catch(()=>{});
-loadFeed();const initial=new URLSearchParams(location.search).get('token');selectToken(valid(initial)?initial:PRLX);
+loadFeed();const params=new URLSearchParams(location.search),initial=params.get('token');if(params.get('side')==='sell')swapSide='sell';selectToken(valid(initial)?initial:PRLX);
 })();
