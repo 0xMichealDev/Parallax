@@ -31,7 +31,9 @@ body.workspace-shell .tool-directory small{font-size:12px;color:#9fadb5}
 
 /* The overview has its own canvas; tool pages retain their functional layouts. */
 body.premium-dashboard{--dash-bg:#090e12;--dash-panel:#10191e;color:#f0f5f3;background:radial-gradient(ellipse at 80% 0,#274b3e19,transparent 38%),#090e12}
-body.premium-dashboard #main,body.premium-dashboard .site-footer,body.premium-dashboard .home-art-credits{max-width:1616px;margin-left:calc(var(--sidebar-width) + 32px);margin-right:32px;width:auto}
+/* Share excess width equally inside the workspace, after accounting for its sidebar. */
+body.premium-dashboard #main,body.premium-dashboard .site-footer,body.premium-dashboard .home-art-credits{max-width:1616px;margin-left:calc(var(--sidebar-width) + max(32px,calc((100% - var(--sidebar-width) - 1616px)/2)));margin-right:max(32px,calc((100% - var(--sidebar-width) - 1616px)/2));width:auto}
+@media(min-width:1904px){body.premium-dashboard .workspace-header{padding-left:calc((100% - var(--sidebar-width) - 1616px)/2);padding-right:calc((100% - var(--sidebar-width) - 1616px)/2)}}
 body.premium-dashboard #main{padding-top:33px}
 body.premium-dashboard .dashboard-heading{margin-bottom:13px;align-items:center;gap:20px}
 body.premium-dashboard .dashboard-heading .eyebrow{font:9px/1.6 ui-monospace,monospace;letter-spacing:.17em;color:#96b5a8;margin:0 0 10px}
