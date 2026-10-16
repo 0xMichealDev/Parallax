@@ -149,6 +149,6 @@ setInterval(()=>{if(alive&&!document.hidden&&!feedLoading&&Date.now()>=feedRetry
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPlay();});
 addEventListener('pagehide',()=>{alive=false;selectionSeq++;feedSeq++;clearTimeout(chartRetryTimer);clearReplay();$('replay-wallet').value='';closeSwap();});
 addEventListener('pageshow',e=>{if(e.persisted){alive=true;feedLoading=false;loadFeed();if(mint)selectToken(mint);}});
-api('/api/terminal/status').then(d=>{if(!alive)return;if(!d.signedIn)$('replay-signin').hidden=false;if(!d.replayConfigured)status('replay-status','Wallet replay’s data connection is awaiting configuration.');}).catch(()=>{});
+api('/api/terminal/status').then(d=>{if(!alive)return;if(d.marketProvider)marketSource(d.marketProvider);if(!d.signedIn)$('replay-signin').hidden=false;if(!d.replayConfigured)status('replay-status','Wallet replay’s data connection is awaiting configuration.');}).catch(()=>{});
 loadFeed();const params=new URLSearchParams(location.search),initial=params.get('token');if(params.get('side')==='sell')swapSide='sell';selectToken(valid(initial)?initial:PRLX);
 })();

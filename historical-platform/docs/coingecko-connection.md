@@ -4,7 +4,9 @@ Production charts and Terminal discovery use CoinGecko's paid API when the priva
 `COINGECKO_API_KEY` runtime setting is present. Basic and other paid tiers use
 `https://pro-api.coingecko.com/api/v3/onchain/networks/solana` and the
 `x-cg-pro-api-key` header. The key must never be committed, sent to the browser,
-included in URLs, or copied into logs. Redirects are rejected. Configure and rotate
+included in URLs, or copied into logs. Redirects use `manual` and reject 3xx
+responses explicitly: the deployed Workers runtime does not accept `error` mode.
+Configure and rotate
 the secret through Sites runtime environment settings, then redeploy to apply it.
 
 With no key, the existing free GeckoTerminal connection remains available. A
@@ -27,8 +29,11 @@ No overage billing settings are changed. Chart subscriptions do not alter Jupite
 Helius, DEX Screener, wallet approvals, or token-launch behavior.
 
 Validation: `node scripts/test-terminal.mjs`, `node scripts/test-terminal-ui.mjs`,
+`node scripts/test-terminal-worker.mjs`,
 and TypeScript/build checks. Provider fixtures cover header isolation, redaction,
 pool matching, shared caching, cooldowns, and the actual-request budget.
+The Workers-runtime test also exercises the actual service fetch options; transport
+failures and genuine timeouts have separate, sanitized messages.
 
 Official references:
 - https://docs.coingecko.com/reference/authentication
