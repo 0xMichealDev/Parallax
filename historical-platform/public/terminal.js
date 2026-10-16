@@ -6,8 +6,23 @@ const numeric=n=>typeof n==='number'&&Number.isFinite(n),usd=(n,compact=false)=>
 const fmt=n=>numeric(n)?new Intl.NumberFormat('en-US',{maximumSignificantDigits:7}).format(n):'Unavailable',percent=n=>numeric(n)?(n>0?'+':'')+n.toFixed(2)+'%':'—',direction=n=>numeric(n)?n<0?'down':'up':'';
 const time=n=>new Date(n).toLocaleString(),short=a=>a.slice(0,5)+'…'+a.slice(-5),link=(label,url)=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`;
 const status=(id,text,error=false)=>{$(id).textContent=text;$(id).classList.toggle('error',error);};
-let mode='trending',feed=[],feedSeq=0,feedLoading=false,feedLoadedAt=0,mint='',snapshot=null,selectionSeq=0,replaySeq=0,replay=null,replayRows=[],step=0,playTimer=null,swapSide='buy',swapActive=false,swapLoading=false,pluginPromise=null,swapGeneration=0,swapRenderCancel=null,chartContext=null,chartRetryTimer=null,feedRetryAt=0,diagnosticsSent=0,alive=true;
-async function api(path,body){const r=await fetch(path,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(25000)});let d;try{d=await r.json();}catch{throw Error('The service returned an unreadable response. Please retry.');}if(!r.ok){const e=Error(d.error||'Request failed. Please retry.');e.status=r.status;e.retryAfterSeconds=Number(d.retryAfterSeconds)||0;throw e;}return d;}
+let mode='trending',feed=[],feedSeq=0,feedLoading=false,feedNextRefreshAt=0,feedData=null,feedFailed=false,mint='',snapshot=null,selectionSeq=0,replaySeq=0,replay=null,replayRows=[],step=0,playTimer=null,swapSide='buy',swapActive=false,swapLoading=false,pluginPromise=null,swapGeneration=0,swapRenderCancel=null,chartContext=null,chartData=null,chartFailed=false,chartRequestSeq=0,chartRetryTimer=null,feedRetryAt=0,diagnosticsSent=0,alive=true;
+const readRequests=new Map();
+function api(path,body){
+ // Share only concurrent reads. Wallet actions and other POSTs always remain separate.
+ if(!body&&readRequests.has(path))return readRequests.get(path);
+ const task=(async()=>{const r=await fetch(path,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(25000)});let d;try{d=await r.json();}catch{throw Error('The service returned an unreadable response. Please retry.');}if(!r.ok){const e=Error(d.error||'Request failed. Please retry.');e.status=r.status;e.retryAfterSeconds=Number(d.retryAfterSeconds)||0;throw e;}return d;})();
+ if(!body){readRequests.set(path,task);const clear=()=>{if(readRequests.get(path)===task)readRequests.delete(path);};task.then(clear,clear);}return task;
+}
+function freshness(id,data,failed=false){
+ const node=$(id);if(!data){node.textContent='';node.dataset.state='empty';return;}
+ const observed=Date.parse(data.fetchedAt),expires=Date.parse(data.freshUntil),age=Number.isFinite(observed)?Math.max(0,Math.floor((Date.now()-observed)/1000)):null;
+ const old=failed||data.stale||Number.isFinite(expires)&&Date.now()>=expires;
+ node.dataset.state=old?'stale':'ready';
+ const ageText=age===null?'Time unavailable':age<60?'less than a minute ago':age<3600?Math.floor(age/60)+' min ago':Math.floor(age/3600)+' hr ago';
+ node.textContent=(old?'Older snapshot':data.cached?'Cached snapshot':'Retrieved snapshot')+' · '+ageText+(age!==null?' · Retrieved '+time(observed):'')+(old?' · Refresh needed':'');
+}
+function refreshDataStates(){freshness('feed-freshness',feedData,feedFailed);freshness('chart-freshness',chartData,chartFailed);$('feed-refresh').disabled=feedLoading||Date.now()<feedRetryAt;$('feed-list').setAttribute('aria-busy',String(feedLoading));}
 function renderFeed(){
  const needle=$('feed-filter').value.trim().toLowerCase(),sort=$('feed-sort').value;
  const rows=feed.filter(p=>(p.name+' '+p.symbol+' '+p.mint).toLowerCase().includes(needle)).slice();
@@ -16,7 +31,19 @@ function renderFeed(){
  $('feed-list').querySelectorAll('[data-mint]').forEach(b=>b.addEventListener('click',()=>selectToken(b.dataset.mint,true)));
 }
 function marketSource(source){const paid=source==='CoinGecko';$('feed-source').textContent='Data by '+(paid?'CoinGecko':'GeckoTerminal')+' ↗';$('feed-source').href=paid?'https://www.coingecko.com/en/api':'https://www.geckoterminal.com/solana/pools';}
-async function loadFeed(){if(Date.now()<feedRetryAt){status('feed-status','The provider is cooling down. Retry after '+time(feedRetryAt)+'.',true);return;}const id=++feedSeq;feedLoading=true;$('feed-refresh').disabled=true;status('feed-status','Updating the '+(mode==='new'?'new-pool':'trending')+' feed…');try{const d=await api('/api/terminal/discovery?mode='+mode);if(!alive||id!==feedSeq)return;marketSource(d.source);feed=Array.isArray(d.pools)?d.pools:[];feedLoadedAt=Date.now();feedRetryAt=d.retryAfterSeconds?Date.now()+d.retryAfterSeconds*1000:0;renderFeed();status('feed-status',`${feed.length} pools · ${time(d.fetchedAt)} · ${d.stale?'older snapshot — refresh unavailable':d.cached?'cached snapshot':'retrieved'}`,!!d.stale);}catch(e){if(alive&&id===feedSeq){feedRetryAt=e.retryAfterSeconds?Date.now()+e.retryAfterSeconds*1000:0;status('feed-status',e.message+(feedRetryAt?' Retry after '+time(feedRetryAt)+'.':'')+(feed.length?' Previous results are retained and may be stale.':''),true);}}finally{if(id===feedSeq){feedLoading=false;$('feed-refresh').disabled=false;}}}
+async function loadFeed(){
+ if(Date.now()<feedRetryAt){status('feed-status','Refresh is paused. Retry after '+time(feedRetryAt)+'.',true);refreshDataStates();return;}
+ const id=++feedSeq,requestedMode=mode;feedLoading=true;refreshDataStates();status('feed-status','Updating the '+(mode==='new'?'new-pool':'trending')+' feed…');
+ if(!feedData)$('feed-list').innerHTML='<p class="muted">Loading indexed pools…</p>';
+ try{const d=await api('/api/terminal/discovery?mode='+requestedMode);if(!alive||id!==feedSeq||mode!==requestedMode)return;
+  if(d.mode&&d.mode!==requestedMode||!Array.isArray(d.pools))throw Error('The discovery response did not match this feed. Please retry.');
+  marketSource(d.source);feed=d.pools;feedData=d;feedFailed=false;feedRetryAt=d.retryAfterSeconds?Date.now()+d.retryAfterSeconds*1000:0;
+  feedNextRefreshAt=Date.now()+Math.max(1,numeric(d.refreshAfterSeconds)?d.refreshAfterSeconds:60)*1000;renderFeed();
+  status('feed-status',`${feed.length} pools · ${d.stale?'Refresh unavailable. Showing the last saved results.':'Refreshes automatically while this tab is visible.'}`+(feedRetryAt?' Retry after '+time(feedRetryAt)+'.':''),!!d.stale);
+ }catch(e){if(alive&&id===feedSeq&&mode===requestedMode){feedFailed=true;feedRetryAt=Date.now()+Math.max(15,e.retryAfterSeconds||60)*1000;feedNextRefreshAt=feedRetryAt;
+  status('feed-status',e.message+' Retry after '+time(feedRetryAt)+'.'+(feedData?' Previous results are retained and may be stale.':''),true);if(!feedData)$('feed-list').innerHTML='<p class="muted">The feed is unavailable. Please retry when the cooldown ends.</p>';
+ }}finally{if(id===feedSeq){feedLoading=false;refreshDataStates();}}
+}
 const metric=(label,value,cls='')=>`<div class="metric"><span>${esc(label)}</span><strong class="${cls}">${esc(value)}</strong></div>`;
 function swapLabels(){const name=snapshot?.market?.symbol||short(mint||'Select a token');$('swap-input-label').textContent=swapSide==='buy'?'SOL':name;$('swap-output-label').textContent=swapSide==='buy'?name:'SOL';
  const phantomAvailable=!!(window.phantom?.solana?.isPhantom||window.solana?.isPhantom);
@@ -37,7 +64,7 @@ function renderToken(p){snapshot=p;const m=p.market,c=p.chain;$('token-name').te
 async function selectToken(value,navigate=false){
  value=String(value||'').trim();if(!valid(value)){status('terminal-message','Paste a complete Solana token contract address.',true);return;}
  if((swapActive||swapLoading)&&value!==mint){status('terminal-message','Close the swap form before selecting a different token.',true);return;}
- clearTimeout(chartRetryTimer);chartContext=null;$('chart-retry').hidden=true;
+ clearTimeout(chartRetryTimer);chartContext=null;chartData=null;chartFailed=false;chartRequestSeq++;$('market-chart').setAttribute('aria-busy','false');freshness('chart-freshness',null);$('chart-retry').hidden=true;
  const changed=value!==mint,id=++selectionSeq;mint=value;snapshot=null;$('token-input').value=value;$('token-address').textContent=value;$('copy-address').disabled=false;$('token-refresh').disabled=true;$('analytics-load').disabled=true;
  $('replay-signin').href='/signin-with-chatgpt?return_to='+encodeURIComponent('/terminal?token='+value+'#wallet-replay');
  $('token-name').textContent='Loading token…';$('token-symbol').textContent=short(value);$('token-metrics').replaceChildren();$('token-links').replaceChildren();$('concentration').replaceChildren();$('chain-facts').innerHTML='<p class="muted">Retrieving confirmed chain observations…</p>';$('token-gaps').replaceChildren();status('analytics-status','');status('token-status','Retrieving market data and confirmed token state…');status('terminal-message','Inspecting '+short(value)+'.');
@@ -63,11 +90,13 @@ function chartRetry(seconds=0){
  if(seconds>0){const context=chartContext;chartRetryTimer=setTimeout(()=>{if(alive&&chartContext===context){$('chart-retry').disabled=false;$('chart-retry').textContent='Retry chart';}},Math.min(seconds*1000,2147483647));}
 }
 async function loadChart(pool,token,id){
- chartContext={pool,token,id};$('chart-retry').hidden=false;$('chart-retry').disabled=true;status('chart-status','Loading 15-minute candles for the selected research pool…');
- try{const d=await api('/api/terminal/chart?pool='+encodeURIComponent(pool)+'&mint='+encodeURIComponent(token));if(!alive||id!==selectionSeq)return;if(d.pool!==pool||d.mint!==token)throw Error('Chart does not match the selected pool.');
-  $('market-chart').innerHTML=plot(d.candles,{candles:true,label:'Selected pool 15-minute USD candlesticks'});status('chart-status',`${d.pair} · ${d.candles.length} candles · Retrieved ${time(d.fetchedAt)}${d.stale?' · Older snapshot; refresh unavailable.':''}`,!!d.stale);
+ clearTimeout(chartRetryTimer);const requestId=++chartRequestSeq;
+ chartContext={pool,token,id};$('market-chart').setAttribute('aria-busy','true');$('chart-retry').hidden=false;$('chart-retry').disabled=true;status('chart-status',chartData?'Refreshing candles. The previous chart remains visible…':'Loading 15-minute candles for the selected research pool…');
+ try{const d=await api('/api/terminal/chart?pool='+encodeURIComponent(pool)+'&mint='+encodeURIComponent(token));if(!alive||id!==selectionSeq||requestId!==chartRequestSeq)return;if(d.pool!==pool||d.mint!==token||!Array.isArray(d.candles))throw Error('Chart does not match the selected pool.');
+  chartData=d;chartFailed=false;$('market-chart').innerHTML=plot(d.candles,{candles:true,label:'Selected pool 15-minute USD candlesticks'});status('chart-status',`${d.pair} · ${d.candles.length} candles${d.stale?' · Older snapshot; refresh unavailable.':''}`,!!d.stale);
   $('chart-note').innerHTML=`${d.source==='CoinGecko'?'CoinGecko':'GeckoTerminal'} · Pool ${esc(short(pool))}. Last candle may be incomplete. `+link('Inspect source','https://www.geckoterminal.com/solana/pools/'+pool);chartRetry(d.retryAfterSeconds||0);
- }catch(e){if(alive&&id===selectionSeq){status('chart-status',e.message+(e.retryAfterSeconds?' Retry after '+time(Date.now()+e.retryAfterSeconds*1000)+'.':''),true);$('market-chart').innerHTML='<div class="empty-chart"><p>Chart unavailable. Token evidence remains available above.</p></div>';chartRetry(e.retryAfterSeconds||0);}}
+ }catch(e){if(alive&&id===selectionSeq&&requestId===chartRequestSeq){chartFailed=true;status('chart-status',e.message+(e.retryAfterSeconds?' Retry after '+time(Date.now()+e.retryAfterSeconds*1000)+'.':'')+(chartData?' Previous chart retained; prices may be stale.':''),true);if(!chartData)$('market-chart').innerHTML='<div class="empty-chart"><p>Chart unavailable. Token evidence remains available above.</p></div>';chartRetry(e.retryAfterSeconds||0);}}
+ finally{if(alive&&id===selectionSeq&&requestId===chartRequestSeq){$('market-chart').setAttribute('aria-busy','false');freshness('chart-freshness',chartData,chartFailed);}}
 }
 async function analytics(){const token=mint,id=selectionSeq;$('analytics-load').disabled=true;status('analytics-status','Loading largest token accounts…');try{const d=await api('/api/analytics?address='+encodeURIComponent(token));if(!alive||id!==selectionSeq)return;if(d.address!==token)throw Error('Analytics did not match the token.');const h=d.holders;if(!h){status('analytics-status','Concentration data is unavailable. Please retry.',true);return;}const pct=n=>numeric(n)?n.toFixed(2)+'%':'Unavailable';$('concentration').innerHTML='<p class="footnote">Largest token accounts, not unique holders. Pool vaults, lockers and exchange accounts are included. Percentages use total minted supply.</p><div class="metrics">'+metric('Largest account',pct(h.top1Percent))+metric('Top 5 accounts',pct(h.top5Percent))+metric('Top 10 accounts',pct(h.top10Percent))+'</div><div class="table-scroll" tabindex="0" role="region" aria-label="Largest token accounts"><table><thead><tr><th>Rank</th><th>Account</th><th>Supply share</th></tr></thead><tbody>'+h.rows.slice(0,10).map((r,i)=>`<tr><td>${i+1}</td><td>${valid(r.address)?link(short(r.address),'https://solscan.io/account/'+r.address):'Unavailable'}</td><td>${pct(r.sharePercent)}</td></tr>`).join('')+'</tbody></table></div>';status('analytics-status','Retrieved '+time(d.fetchedAt)+'. '+(h.inconsistent?'Account totals are inconsistent; percentages withheld.':'Account and supply slots may differ.'));}catch(e){if(alive&&id===selectionSeq)status('analytics-status',e.message,true);}finally{if(id===selectionSeq)$('analytics-load').disabled=false;}}
 function swapDiagnostic(phase){
@@ -139,7 +168,7 @@ async function loadReplay(e){e.preventDefault();const wallet=$('replay-wallet').
  const identity=d.identity,identityText=identity?.status==='resolved'?`${identity.handle} · Ownership checked ${time(identity.checkedAt)}`:identity?.status==='not-set'?'No currently owned Primary SolHandle is set.':identity?.status==='unavailable'?'SolHandle lookup unavailable. Using the entered wallet address.':'Wallet address';
  $('replay-identity').innerHTML=`<strong>${esc(identityText)}</strong><p class="address">${esc(d.wallet)}</p>${link('View wallet','https://solscan.io/account/'+d.wallet)}`;$('replay-identity').hidden=false;
 status('replay-status',`${d.trades.length} supported swaps for this token from ${d.scanned} decoded records · Retrieved ${time(d.fetchedAt)}. ${d.unsupported} unsupported records excluded.`);if(!d.trades.length){status('replay-status','No supported swaps for this token in the latest '+d.scanned+' decoded swap records. This does not prove the wallet never traded it.');return;}$('replay-result').hidden=false;$('replay-quote').innerHTML=[...new Map(d.trades.map(t=>[t.quoteMint,t.quoteSymbol]))].map(([value,name])=>`<option value="${esc(value)}">${esc(name)} per token</option>`).join('');$('replay-coverage').textContent=d.coverage;$('replay-pricing').textContent=d.pricing;renderReplayQuote();}catch(e){if(alive&&id===replaySeq){status('replay-status',e.message,true);$('replay-signin').hidden=e.status!==401;}}finally{if(id===replaySeq)$('replay-load').disabled=false;}}
-document.querySelectorAll('[data-feed]').forEach(b=>b.onclick=()=>{if(b.dataset.feed===mode)return;mode=b.dataset.feed;feed=[];renderFeed();document.querySelectorAll('[data-feed]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));loadFeed();});
+document.querySelectorAll('[data-feed]').forEach(b=>b.onclick=()=>{if(b.dataset.feed===mode)return;mode=b.dataset.feed;feedSeq++;feedLoading=false;feed=[];feedData=null;feedFailed=false;feedNextRefreshAt=0;renderFeed();refreshDataStates();document.querySelectorAll('[data-feed]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));loadFeed();});
 document.querySelectorAll('[data-side]').forEach(b=>b.onclick=()=>{if(swapActive||swapLoading)return;swapSide=b.dataset.side;swapLabels();});
 $('feed-filter').addEventListener('input',renderFeed);$('feed-sort').addEventListener('change',renderFeed);$('feed-refresh').onclick=loadFeed;
 $('token-search').onsubmit=e=>{e.preventDefault();selectToken($('token-input').value,true);};$('token-refresh').onclick=()=>selectToken(mint);$('analytics-load').onclick=analytics;
@@ -148,9 +177,10 @@ $('chart-retry').onclick=()=>{if(chartContext&&!$('chart-retry').disabled)loadCh
 $('swap-open').onclick=openSwap;$('swap-close').onclick=closeSwap;$('replay-form').onsubmit=loadReplay;$('replay-wallet').addEventListener('input',clearReplay);$('replay-quote').onchange=renderReplayQuote;$('replay-step').oninput=()=>{stopPlay();showStep(Number($('replay-step').value));};
 $('replay-play').onclick=()=>{if(playTimer){stopPlay();return;}if(matchMedia('(prefers-reduced-motion:reduce)').matches){showStep((step+1)%replayRows.length);return;}if(step>=replayRows.length-1)showStep(0);$('replay-play').textContent='Pause replay';playTimer=setInterval(()=>{if(!alive||document.hidden||step>=replayRows.length-1){stopPlay();return;}showStep(step+1);},1000);};
 $('replay-export').onclick=()=>{if(!replay)return;const blob=new Blob([JSON.stringify(replay,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='parallax-wallet-replay.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
-setInterval(()=>{if(alive&&!document.hidden&&!feedLoading&&Date.now()>=feedRetryAt&&Date.now()-feedLoadedAt>60000)loadFeed();},15000);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPlay();});
-addEventListener('pagehide',()=>{alive=false;selectionSeq++;feedSeq++;clearTimeout(chartRetryTimer);clearReplay();$('replay-wallet').value='';closeSwap();});
+function refreshVisibleData(){if(!alive||document.hidden)return;refreshDataStates();if(!feedLoading&&Date.now()>=feedRetryAt&&Date.now()>=feedNextRefreshAt)loadFeed();}
+setInterval(refreshVisibleData,15000);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPlay();else refreshVisibleData();});
+addEventListener('pagehide',()=>{alive=false;selectionSeq++;feedSeq++;chartRequestSeq++;readRequests.clear();clearTimeout(chartRetryTimer);clearReplay();$('replay-wallet').value='';closeSwap();});
 addEventListener('pageshow',e=>{if(e.persisted){alive=true;feedLoading=false;loadFeed();if(mint)selectToken(mint);}});
 api('/api/terminal/status').then(d=>{if(!alive)return;if(d.marketProvider)marketSource(d.marketProvider);if(!d.signedIn)$('replay-signin').hidden=false;if(!d.replayConfigured)status('replay-status','Wallet replay’s data connection is awaiting configuration.');}).catch(()=>{});
 loadFeed();const params=new URLSearchParams(location.search),initial=params.get('token');if(params.get('side')==='sell')swapSide='sell';selectToken(valid(initial)?initial:PRLX);

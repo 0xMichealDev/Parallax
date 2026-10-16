@@ -20,6 +20,21 @@ Upstream 429 responses retain their Retry-After cooldown across endpoints.
 Recent stale chart/feed snapshots retain their observation timestamp and warning.
 Stale pool identities are not reused to validate a selected token.
 
+Terminal responses expose `freshUntil` and the remaining `refreshAfterSeconds`
+without extending the original cache expiration. Discovery polls when that window
+expires while visible, pauses in hidden tabs, and rechecks on return. Concurrent
+identical browser GETs share one request; POST actions are never coalesced. This
+supplements the existing in-isolate server coalescing, not a cross-isolate lock.
+Failed discovery requests back off for at least a minute unless the provider
+specifies another cooldown. Daily allowance exhaustion waits until the UTC reset.
+
+Chart refreshes keep the last valid chart for the same selection on failure,
+clearly label it as an older snapshot, and retain its retrieval timestamp. Changing
+tokens clears that chart. Retrieval age and expiration labels update as time
+passes; a successful cache read is not presented as newly retrieved market data.
+These labels describe when PARALLAX retrieved data, not a guarantee that the
+provider's prices are real time. Successful zero-candle responses remain empty.
+
 The paid connection is capped at 3,000 upstream attempts per UTC day. Cache hits
 do not count; pool verification and candle retrieval each count. This allows at
 most 93,000 requests per 31 UTC days through this integration, leaving some space
