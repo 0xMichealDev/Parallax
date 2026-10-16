@@ -4,3 +4,5 @@
 .chart-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px}.chart-actions button{font-size:11px;min-height:36px;padding:6px 10px}#jupiter-plugin[aria-busy=true]{background:#0b141e}
 
 .mobile-wallet-help{display:none;border:1px solid #35534f;border-radius:10px;background:#102326;padding:15px;margin:0 0 18px;font-size:12px}.mobile-wallet-help strong{color:var(--mint)}.mobile-wallet-help p{margin:8px 0;color:#b7cbd1;line-height:1.6}.mobile-wallet-help a{display:block;padding:12px 14px;border-radius:8px;background:#233e44;color:#d3fff0;text-align:center;font-weight:650;min-height:44px}.mobile-wallet-help #phantom-manual{font-size:11px;margin-bottom:0}.mobile-wallet-help span{overflow-wrap:anywhere}@media(max-width:760px){.mobile-wallet-help{display:block}}
+
+.solhandle-result{margin:14px 0;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:12px}.solhandle-result strong{color:var(--mint)}.solhandle-result .address{font-family:ui-monospace,monospace;overflow-wrap:anywhere;margin:8px 0}.solhandle-result a{text-decoration:underline;text-underline-offset:3px}

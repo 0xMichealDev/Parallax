@@ -81,23 +81,29 @@
     const epoch=++walletEpoch;
     status('wallet-status','Fetching a fresh read-only wallet snapshot…');
     $('wallet-view').hidden=true;
+    delete $('wallet-address').dataset.resolvedAddress;
+    delete $('wallet-address').dataset.resolvedInput;
     try{
       const d=await api('wallet',{address});if(epoch!==walletEpoch)return;
       const balance=typeof d.sol==='number'&&Number.isFinite(d.sol)?d.sol.toLocaleString(undefined,{maximumFractionDigits:9})+' SOL':'SOL balance unavailable';
       const historyUnavailable=d.availability?.transactions==='unavailable';
-      $('wallet-view').innerHTML=`<div class="report-heading"><div><span class="eyebrow">${d.partial?'PARTIAL WALLET SNAPSHOT':'WALLET SNAPSHOT'}</span><h3>${escape(balance)}</h3><p class="address">${escape(d.address)}</p><p class="fine">Collected ${escape(date(d.fetchedAt))}${d.slot!==null?' · Balance slot '+escape(d.slot):''}</p></div><a class="button small" href="https://solscan.io/account/${escape(d.address)}" target="_blank" rel="noopener noreferrer">View account ↗</a></div>${(d.gaps||[]).map(g=>'<p class="status error">'+escape(g)+'</p>').join('')}<h4>Recent transaction references</h4>${historyUnavailable?'<p class="muted">History could not be retrieved. Inspect again to retry.</p>':d.transactions.length?d.transactions.map(t=>`<div class="transaction"><a href="https://solscan.io/tx/${escape(t.signature)}" target="_blank" rel="noopener noreferrer">${escape(shorten(t.signature))} ↗</a><span>${t.failed?'Failed':'Succeeded'} · ${escape(t.confirmation)}</span><small>${escape(date(t.time))}</small></div>`).join(''):'<p class="muted">No recent signatures were returned by this provider. Older activity may be outside its history coverage.</p>'}<p class="fine">These transactions reference the address. This does not identify a trade direction, profit, or the wallet owner.</p>`;
+      $('wallet-address').dataset.resolvedAddress=d.address;
+      $('wallet-address').dataset.resolvedInput=address;
+      const identity=d.identity;
+      const identityText=identity?.status==='resolved'?`${identity.handle} · ${identity.lookup==='primary'?'Primary SolHandle':'SolHandle'} · Ownership checked ${date(identity.checkedAt)}`:identity?.status==='not-set'?'No currently owned Primary SolHandle is set for this address.':identity?.status==='unavailable'?'SolHandle lookup is unavailable. This snapshot uses the address you entered.':'';
+      $('wallet-view').innerHTML=`<div class="report-heading"><div><span class="eyebrow">${d.partial?'PARTIAL WALLET SNAPSHOT':'WALLET SNAPSHOT'}</span><h3>${escape(balance)}</h3><p class="address">${escape(d.address)}</p>${identityText?`<p class="fine">${escape(identityText)}</p>`:''}<p class="fine">Collected ${escape(date(d.fetchedAt))}${d.slot!==null?' · Balance slot '+escape(d.slot):''}</p></div><a class="button small" href="https://solscan.io/account/${escape(d.address)}" target="_blank" rel="noopener noreferrer">View account ↗</a></div>${(d.gaps||[]).map(g=>'<p class="status error">'+escape(g)+'</p>').join('')}<h4>Recent transaction references</h4>${historyUnavailable?'<p class="muted">History could not be retrieved. Inspect again to retry.</p>':d.transactions.length?d.transactions.map(t=>`<div class="transaction"><a href="https://solscan.io/tx/${escape(t.signature)}" target="_blank" rel="noopener noreferrer">${escape(shorten(t.signature))} ↗</a><span>${t.failed?'Failed':'Succeeded'} · ${escape(t.confirmation)}</span><small>${escape(date(t.time))}</small></div>`).join(''):'<p class="muted">No recent signatures were returned by this provider. Older activity may be outside its history coverage.</p>'}<p class="fine">These transactions reference the address. This does not identify a trade direction, profit, or the wallet owner.</p>`;
       $('wallet-view').hidden=false;
       status('wallet-status',d.partial?'Partial snapshot loaded. Inspect again to retry the missing data.':'Snapshot updated. Inspect again to refresh.',!!d.partial);
     }catch(err){
       if(epoch!==walletEpoch)return;
       status('wallet-status',err.message,true);
-      $('wallet-view').innerHTML=`<h3>Snapshot unavailable</h3><p class="address">${escape(address)}</p><p>Try Inspect wallet again, or view the public account in the explorer.</p><a class="button small" href="https://solscan.io/account/${encodeURIComponent(address)}" target="_blank" rel="noopener noreferrer">View account on Solscan ↗</a>`;
+      $('wallet-view').innerHTML=`<h3>Snapshot unavailable</h3><p class="address">${escape(address)}</p><p>Try Inspect wallet again or enter a known wallet address.</p>${/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address)?`<a class="button small" href="https://solscan.io/account/${encodeURIComponent(address)}" target="_blank" rel="noopener noreferrer">View account on Solscan ↗</a>`:''}`;
       $('wallet-view').hidden=false;
     }
   }
-  $('wallet-address').addEventListener('input',()=>{walletEpoch++;$('wallet-view').hidden=true;status('wallet-status','');});
+  $('wallet-address').addEventListener('input',()=>{walletEpoch++;delete $('wallet-address').dataset.resolvedAddress;delete $('wallet-address').dataset.resolvedInput;$('wallet-view').hidden=true;status('wallet-status','');});
   $('wallet-form').onsubmit=async e=>{e.preventDefault();if(!await requireSignIn('wallet-status'))return;busy(e.submitter,async()=>{try{await inspectWallet($('wallet-address').value.trim());}catch(err){status('wallet-status',err.message,true);}});};
-  $('save-wallet').onclick=async e=>{if(!await requireSignIn('wallet-status')||!$('wallet-address').reportValidity())return;busy(e.currentTarget,async()=>{try{await api('watchlist/add',{address:$('wallet-address').value.trim(),label:$('wallet-label').value});status('wallet-status','Wallet saved. Saving does not enable automatic monitoring or alerts.');await loadWatchlist();}catch(err){status('wallet-status',err.message,true);}});};
+  $('save-wallet').onclick=async e=>{if(!await requireSignIn('wallet-status')||!$('wallet-address').reportValidity())return;busy(e.currentTarget,async()=>{try{const input=$('wallet-address'),address=input.value.trim();const saved=await api('watchlist/add',{address,label:$('wallet-label').value,expectedAddress:input.dataset.resolvedInput===address?input.dataset.resolvedAddress:undefined});status('wallet-status','Saved wallet '+saved.address+'. This watch follows the address. Monitoring and alerts stay off until enabled.');await loadWatchlist();}catch(err){status('wallet-status',err.message,true);}});};
   let telegramEpoch=0,pairingExpiresAt=0,connectionRefreshRunning=false;
   function syncTelegramActions(){
     $('telegram-connect').disabled=!telegram.configured||telegram.connected||working.has($('telegram-connect'));
