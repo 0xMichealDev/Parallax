@@ -53,7 +53,8 @@ function swapLabels(){const name=snapshot?.market?.symbol||short(mint||'Select a
  $('swap-open').disabled=!valid(mint)||mint===SOL||swapActive||swapLoading;
  document.querySelectorAll('[data-side]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.side===swapSide));b.disabled=swapActive||swapLoading;});
 }
-function renderToken(p){snapshot=p;const m=p.market,c=p.chain;$('token-name').textContent=m?.name||'Solana token';$('token-symbol').textContent=m?.symbol?'$'+m.symbol:'Onchain snapshot';
+function selectionChanged(){window.dispatchEvent?.(new Event('parallax:terminal-selection'));}
+function renderToken(p){snapshot=p;selectionChanged();const m=p.market,c=p.chain;$('token-name').textContent=m?.name||'Solana token';$('token-symbol').textContent=m?.symbol?'$'+m.symbol:'Onchain snapshot';
  $('token-metrics').innerHTML=metric('Price / USD',usd(m?.priceUsd))+metric('Market cap',usd(m?.marketCapUsd,true))+metric('FDV',usd(m?.fdvUsd,true))+metric('Pool liquidity',usd(m?.liquidityUsd,true))+metric('24h pool volume',usd(m?.volume24hUsd,true))+metric('24h change',percent(m?.change24hPercent),direction(m?.change24hPercent));
  status('token-status',(m&&c?'Sources retrieved':'Partial data')+' · '+time(p.fetchedAt)+'. Market figures use DEX Screener’s highest-liquidity indexed base-token pool.');
  $('token-links').innerHTML=`<a href="/markets?address=${encodeURIComponent(mint)}#market-observatory">Project research ↗</a><a href="/control?mint=${encodeURIComponent(mint)}">Save a Passport ↗</a>`+link('Token explorer','https://solscan.io/token/'+mint)+(valid(m?.pairAddress)?link('Pool on DEX Screener','https://dexscreener.com/solana/'+m.pairAddress):'');
@@ -65,7 +66,7 @@ async function selectToken(value,navigate=false){
  value=String(value||'').trim();if(!valid(value)){status('terminal-message','Paste a complete Solana token contract address.',true);return;}
  if((swapActive||swapLoading)&&value!==mint){status('terminal-message','Close the swap form before selecting a different token.',true);return;}
  clearTimeout(chartRetryTimer);chartContext=null;chartData=null;chartFailed=false;chartRequestSeq++;$('market-chart').setAttribute('aria-busy','false');freshness('chart-freshness',null);$('chart-retry').hidden=true;
- const changed=value!==mint,id=++selectionSeq;mint=value;snapshot=null;$('token-input').value=value;$('token-address').textContent=value;$('copy-address').disabled=false;$('token-refresh').disabled=true;$('analytics-load').disabled=true;
+ const changed=value!==mint,id=++selectionSeq;mint=value;snapshot=null;selectionChanged();$('token-input').value=value;$('token-address').textContent=value;$('copy-address').disabled=false;$('token-refresh').disabled=true;$('analytics-load').disabled=true;
  $('replay-signin').href='/signin-with-chatgpt?return_to='+encodeURIComponent('/terminal?token='+value+'#wallet-replay');
  $('token-name').textContent='Loading token…';$('token-symbol').textContent=short(value);$('token-metrics').replaceChildren();$('token-links').replaceChildren();$('concentration').replaceChildren();$('chain-facts').innerHTML='<p class="muted">Retrieving confirmed chain observations…</p>';$('token-gaps').replaceChildren();status('analytics-status','');status('token-status','Retrieving market data and confirmed token state…');status('terminal-message','Inspecting '+short(value)+'.');
  $('market-chart').innerHTML='<div class="empty-chart"><span>⌁</span><p>Retrieving the selected pool…</p></div>';status('chart-status','Awaiting a matching indexed pool.');$('chart-note').textContent='Up to 96 OHLCV candles. Missing periods are not filled with invented prices.';
@@ -183,5 +184,6 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPlay();
 addEventListener('pagehide',()=>{alive=false;selectionSeq++;feedSeq++;chartRequestSeq++;readRequests.clear();clearTimeout(chartRetryTimer);clearReplay();$('replay-wallet').value='';closeSwap();});
 addEventListener('pageshow',e=>{if(e.persisted){alive=true;feedLoading=false;loadFeed();if(mint)selectToken(mint);}});
 api('/api/terminal/status').then(d=>{if(!alive)return;if(d.marketProvider)marketSource(d.marketProvider);if(!d.signedIn)$('replay-signin').hidden=false;if(!d.replayConfigured)status('replay-status','Wallet replay’s data connection is awaiting configuration.');}).catch(()=>{});
+window.ParallaxTerminal={selectToken:value=>selectToken(value,true),getSelection:()=>({mint,ready:!!snapshot})};
 loadFeed();const params=new URLSearchParams(location.search),initial=params.get('token');if(params.get('side')==='sell')swapSide='sell';selectToken(valid(initial)?initial:PRLX);
 })();
