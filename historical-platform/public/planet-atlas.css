@@ -42,3 +42,13 @@
 @media(max-width:1050px){.atlas-tour-copy{flex-basis:55%}.atlas-camera-tools{gap:10px 20px}}
 @media(max-width:760px){.planet-atlas-page .atlas-showcase-open{font-size:9px;padding:7px 9px;gap:6px}.atlas-stage-top p{max-width:190px}.atlas-stage-top .atlas-eyebrow{font-size:8px}.atlas-camera-tools{padding:14px 18px;justify-content:center}.atlas-camera-tools>p{text-align:center;line-height:1.6}.atlas-tour-strip{padding:18px}.atlas-tour-copy{flex-basis:100%}.atlas-tour-actions{width:100%}.planet-atlas-page .atlas-tour-actions>button{flex:1;min-height:42px}.atlas-showcase-bar{padding:max(15px,env(safe-area-inset-top)) 18px 15px;gap:8px}.atlas-showcase-bar h2{font-size:19px}.atlas-showcase-bar .atlas-eyebrow{font-size:7px}.planet-atlas-page .atlas-showcase-bar button{font-size:10px;padding:9px 11px;gap:9px}.atlas-showcase-dialog .atlas-stage-top{padding:13px 18px}.atlas-showcase-dialog .atlas-scene{height:40dvh;min-height:310px}.atlas-showcase-dialog .atlas-closeup-title{bottom:36px}.atlas-showcase-dialog .atlas-closeup-title strong{font-size:35px}.atlas-showcase-dialog .atlas-closeup-title>span{font-size:8px}.atlas-showcase-dialog .atlas-scene-controls{padding:12px}.atlas-showcase-dialog .atlas-camera-tools{padding:13px 18px}.atlas-showcase-dialog .atlas-tour-strip{padding:18px}.atlas-showcase-footer{flex-wrap:wrap;padding:18px}.atlas-showcase-footer>span:last-child{display:none}.atlas-showcase-footer>button{flex:1}.atlas-showcase-footer>span:first-child{width:100%}.atlas-viewfinder>span,.atlas-viewfinder>b{font-size:5px}}
 @media(prefers-reduced-motion:reduce){.atlas-tour-track>span{animation:none!important}}
+
+/* Surface refinement: calmer framing keeps attention on the worlds. */
+.atlas-closeup{background:radial-gradient(ellipse at 50% 48%,#253f4d18,transparent 64%)}
+.atlas-viewfinder{border-color:#aec5c706}.atlas-viewfinder>span,.atlas-viewfinder>b{opacity:.6}
+.atlas-texture-sphere{box-shadow:inset -8px -5px 18px #0007,0 0 12px var(--glow,#73b5da20)}
+.atlas-texture-sphere:is([data-planet=mercury],[data-planet=moon],[data-planet=europa],[data-planet=pluto]){box-shadow:inset -8px -5px 18px #0007}
+.atlas-texture-sphere[data-planet=pluto]{background-size:100% 100%,200% 165%;background-position:center,45% top}
+.atlas-inspector-planet{margin:10px 0 6px}
+.planet-atlas-page .atlas-world-card{background:#0d171d;border-color:#bad8cc16;transition:background .2s,border-color .2s}
+.planet-atlas-page .atlas-world-card:hover{background:#16272b;border-color:#bad8cc50}
