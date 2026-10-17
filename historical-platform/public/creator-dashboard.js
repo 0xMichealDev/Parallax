@@ -23,7 +23,7 @@ function projectCard(p){
  const names=node('div');names.append(node('h3','',p.name),node('div','creator-project-kicker','$'+p.ticker+' / PUBLISHED'));top.append(orb,names);card.append(top,node('p','creator-project-description',p.description));
  const metrics=node('div','creator-project-metrics');for(const [label,value]of [['Visits',p.stats.visits],['Browsers (est.)',p.stats.browsers],['Website clicks',p.stats.clicks]]){const m=node('div');m.append(node('strong','',fmt(value)),node('span','',label));metrics.append(m);}card.append(metrics);
  const base='/studio?project='+encodeURIComponent(p.id),actions=node('div','creator-project-actions');actions.append(link('Edit world ↗',base),link('Launch kit ↗',base+'&step=4'),link('Premium Worlds ↗','/premium?project='+encodeURIComponent(p.id)),link('Research panel ↗','/utility?project='+encodeURIComponent(p.id)+'#workspace'));
- const share=node('button','creator-text-button','Copy link');share.type='button';share.onclick=()=>copy(location.origin+'/world/'+p.id);actions.append(share);card.append(actions);
+ const share=node('button','creator-text-button','Copy link');share.type='button';share.onclick=()=>copy('https://parallaxlaunch.live/world/'+p.id);actions.append(share);card.append(actions);
  const footer=node('div','creator-project-link'),view=link('Open public page ↗','/world/'+encodeURIComponent(p.id),'');view.target='_blank';view.rel='noopener';const stats=node('button','creator-text-button','View activity');stats.type='button';stats.onclick=()=>{$('creator-filter').value=p.id;load();$('creator-activity-title').scrollIntoView({block:'start',behavior:'auto'});};footer.append(view,stats);card.append(footer);return card;
 }
 function render(){
