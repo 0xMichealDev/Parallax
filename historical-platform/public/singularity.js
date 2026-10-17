@@ -14,7 +14,7 @@
  function paint(){
   if(!ctx)return;const bounds=stage.getBoundingClientRect(),w=bounds.width,h=bounds.height;if(!w||!h)return;
   const ratio=Math.min(devicePixelRatio||1,w<700?1.5:1.75,1600/w),pw=Math.round(w*ratio),ph=Math.round(h*ratio);if(canvas.width!==pw||canvas.height!==ph){canvas.width=pw;canvas.height=ph;}ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,w,h);ctx.fillStyle='#03060b';ctx.fillRect(0,0,w,h);
-  const mobile=w<700,cx=w*(mobile?.51:.65),cy=h*(mobile?.31:.43),r=Math.min(w*(mobile?.255:.19),h*.225)*zoom,color=renderer.palettes[mode].accent;
+  const mobile=w<700,cx=w*(mobile?.51:.65),cy=h*(mobile?.31:.43),r=Math.min(w*(mobile?.21:.16),h*.19)*zoom,color=renderer.palettes[mode].accent;
   const haze=ctx.createRadialGradient(cx,cy,r*.6,cx,cy,r*4);haze.addColorStop(0,color+'12');haze.addColorStop(.5,color+'07');haze.addColorStop(1,color+'00');ctx.fillStyle=haze;ctx.fillRect(0,0,w,h);
   for(let i=0;i<300;i++){
    let x=random(i+1)*w,y=random(i+501)*h;const dx=x-cx,dy=y-cy,dist=Math.hypot(dx,dy),lens=Math.exp(-Math.pow((dist-r*1.6)/(r*1.5),2))*.055;
@@ -24,7 +24,7 @@
   // Sparse orbiting dust gives depth without covering the event horizon with interface graphics.
   for(let i=0;i<30;i++){const a=i*2.39996+time*.035/(1+i*.04),rr=r*(1.8+random(i+1500)*1.8),x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr*.3;ctx.fillStyle=color+'36';ctx.beginPath();ctx.arc(x,y,.45+random(i+1900),0,Math.PI*2);ctx.fill();}
   renderState=renderer.draw(ctx,cx,cy,r,time,{mode,angle,energy:1.1,quality:Math.min(w<700?960:1600,r*6*ratio)})||'illustrated';
-  stage.classList.add('sg-ready');motionLabel();const text=renderState==='live'?'Moving light · artistic visualization':renderState==='loading'?'Preparing the Singularity…':'Illustrated view · enhanced effects unavailable';if($('sg-graphics').textContent!==text)$('sg-graphics').textContent=text;
+  stage.classList.add('sg-ready');motionLabel();const text=renderState==='live'?'3D horizon · orbit to explore':renderState==='loading'?'Preparing the Singularity…':'Illustrated view · enhanced effects unavailable';if($('sg-graphics').textContent!==text)$('sg-graphics').textContent=text;
  }
  function frame(now){frameId=0;if(!available())return;const elapsed=last?Math.min((now-last)/1000,.1):0;if(!last||now-last>=33||dirty){last=now;
    const ease=media.matches?1:1-Math.exp(-elapsed*3.2);zoom+=(targetZoom-zoom)*ease;angle+=(targetAngle-angle)*ease;if(!paused&&renderState==='live')time+=elapsed;paint();dirty=false;
