@@ -10,8 +10,9 @@
  const emit=(name,detail)=>window.dispatchEvent(new CustomEvent(name,{detail}));
  function fallback(c,p,r,mid){const color=p.style?.accent||planetPalette[decodePlanet(p.color).index][1],g=c.createRadialGradient(mid-r*.4,mid-r*.4,0,mid,mid,r);g.addColorStop(0,p.style?.surface==='obsidian'?'#4b4535':color);g.addColorStop(.45,p.style?.surface==='obsidian'?'#111318':color+'99');g.addColorStop(1,'#03060c');c.fillStyle=g;c.beginPath();c.arc(mid,mid,r,0,Math.PI*2);c.fill();if(p.style?.rings||decodePlanet(p.color).rings!=='none'){c.strokeStyle=color;c.lineWidth=r*.025;for(const k of p.style?.rings==='double'?[1.5,1.7]:[1.55]){c.beginPath();c.ellipse(mid,mid,r*k,r*.37,-.3,0,Math.PI*2);c.stroke()}}}
  function sprite(p,animate=false){let item=sprites.get(p.id);const size=p.id===selected?(bounds().w<700?640:1024):256;if(item&&item.width===size&&!animate){sprites.delete(p.id);sprites.set(p.id,item);return item}if(!item)item=document.createElement('canvas');if(item.width!==size||item.height!==size)item.width=item.height=size;const c=item.getContext('2d');if(!c)return null;c.clearRect(0,0,size,size);const r=size*.23,t=animate?phase:2,mid=size/2;
-  if(!window.ParallaxPlanetRenderer?.draw(c,mid,mid,r,p.color,t,p.style||{lighting:'studio',optics:'atlas'}))fallback(c,p,r,mid);
-  window.ParallaxPremiumScene?.foreground(c,size,size,p.style,t,mid,mid,r,{frame:false});
+  if(p.renderKind==='singularity'){window.ParallaxSingularity?.draw(c,mid,mid,size*.19,t,{quality:size});}
+  else if(!window.ParallaxPlanetRenderer?.draw(c,mid,mid,r,p.color,t,p.style||{lighting:'studio',optics:'atlas'}))fallback(c,p,r,mid);
+  if(p.renderKind!=='singularity')window.ParallaxPremiumScene?.foreground(c,size,size,p.style,t,mid,mid,r,{frame:false});
   sprites.delete(p.id);sprites.set(p.id,item);while(sprites.size>32)sprites.delete(sprites.keys().next().value);return item;
  }
  function random(n){const v=Math.sin(n*127.1+311.7)*43758.5453;return v-Math.floor(v)}
@@ -49,7 +50,7 @@
  function end(e){pointers.delete(e.pointerId);if(pointers.size)beginGesture();else gesture=null;setTimeout(()=>{moved=false},0)}root.addEventListener('pointerup',end);root.addEventListener('pointercancel',end);root.addEventListener('lostpointercapture',end);
  root.addEventListener('wheel',e=>{e.preventDefault();setTarget({distance:target.distance*Math.exp(core.clamp(e.deltaY,-100,100)*.003)})},{passive:false});
  root.addEventListener('keydown',e=>{if(e.target!==root)return;const action={ArrowLeft:'universe-left',ArrowRight:'universe-right',ArrowUp:'universe-up',ArrowDown:'universe-down','+':'universe-zoom-in','=':'universe-zoom-in','-':'universe-zoom-out',Home:'universe-home'}[e.key];if(action){e.preventDefault();$(action).click()}});
- document.addEventListener('visibilitychange',sync);media.addEventListener('change',()=>{paused=media.matches;motion();sync()});window.addEventListener('parallax:planet-texture',()=>{sprites.clear();sync()});
+ document.addEventListener('visibilitychange',sync);media.addEventListener('change',()=>{paused=media.matches;motion();sync()});window.addEventListener('parallax:planet-texture',()=>{sprites.clear();sync()});window.addEventListener('parallax:singularity-ready',()=>{sprites.clear();sync()});
  if(typeof ResizeObserver==='function')new ResizeObserver(sync).observe(root);else window.addEventListener('resize',sync);
  if(typeof IntersectionObserver==='function')new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync()},{rootMargin:'100px'}).observe(root);
  for(const id of ['universe-profile-dialog','atlas-claim-dialog','dashboard-command'])$(id)?.addEventListener('close',sync);window.addEventListener('parallax:atlas-claim-open',sync);
