@@ -12,7 +12,7 @@ const solarSystemWorlds=[
  {id:'saturn',name:'Saturn',kind:'Ringed gas giant',body:3,map:'2k_saturn.jpg',index:6,surface:'gas',color:'#dfcda5'},
  {id:'uranus',name:'Uranus',kind:'Ice giant',body:7,map:'2k_uranus.jpg',index:17,surface:'gas',color:'#91d6db'},
  {id:'neptune',name:'Neptune',kind:'Ice giant',body:4,map:'2k_neptune.jpg',index:18,surface:'gas',color:'#6d99f5'},
- {id:'pluto',name:'Pluto',kind:'Dwarf planet',body:10,map:'1k_pluto.jpg',index:23,surface:'rocky',color:'#debda3',description:'Travel beyond Neptune to Pluto. Explore a New Horizons color mosaic, including its bright, heart-shaped region. Unobserved areas remain blank in the source map.',credit:'Texture: NASA/JHUAPL/SwRI · New Horizons color mosaic; resampled with rendered lighting.',url:'https://www.nasa.gov/image-article/pluto-global-color-map/'}
+ {id:'pluto',name:'Pluto',kind:'Dwarf planet',body:10,map:'1k_pluto.jpg',index:23,surface:'rocky',color:'#debda3',description:'Travel beyond Neptune to Pluto. Explore a New Horizons color mosaic, including its bright, heart-shaped region. Rendered previews blend unobserved areas into artist-completed terrain.',credit:'Texture: NASA/JHUAPL/SwRI · New Horizons color mosaic; rendered lighting and artist-completed unmapped terrain.',url:'https://www.nasa.gov/image-article/pluto-global-color-map/'}
 ].map(world=>({...world,credit:world.credit||'Maps: Solar System Scope / INOVE · CC BY 4.0 · enhanced color, lighting and artist-filled gaps.',url:world.url||'https://www.solarsystemscope.com/textures/'}));
 const realPlanetMaps=Object.fromEntries(solarSystemWorlds.map(w=>[w.id,w.map]));
 const legacyPlanetColors=['violet','cyan','rose','ocean','ember','emerald','gold','lunar','void'];
