@@ -14,7 +14,7 @@
  }
  function planetLink(id){return '/planets'+(worldIds.includes(id)?'?planet='+id:'')}
  function safeWebsite(value){try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:null}catch{return null}}
- function validClaim(m){return m&&typeof m.id==='string'&&m.id.length>0&&m.id.length<=64&&['name','ticker','description','wallet','contractAddress'].every(k=>typeof m[k]==='string')&&worldIds.includes(m.planet)&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(m.contractAddress)}
+ function validClaim(m){return m&&typeof m.id==='string'&&m.id.length>0&&m.id.length<=64&&['name','ticker','description','wallet'].every(k=>typeof m[k]==='string')&&worldIds.includes(m.planet)&&(m.contractAddress==null||m.contractAddress===''||(typeof m.contractAddress==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(m.contractAddress)))}
  function directory(data){
   if(!data||!Array.isArray(data.claims)||!data.claims.every(validClaim)||!Number.isSafeInteger(data.total)||data.total<0||!Array.isArray(data.counts)||(data.nextOffset!==null&&(!Number.isSafeInteger(data.nextOffset)||data.nextOffset<1)))throw Error('The project directory returned incomplete data. Please retry.');
   const counts=Object.fromEntries(worldIds.map(id=>[id,0]));
