@@ -20,5 +20,6 @@
  window.addEventListener('parallax:atlas-claim-open',()=>{stopTour();closeShowcase()});
  document.addEventListener('visibilitychange',schedule);window.addEventListener('pagehide',()=>{clear();stopTour()});media.addEventListener('change',schedule);
  if(typeof IntersectionObserver==='function')new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;schedule()},{rootMargin:'60px'}).observe(stage);
+ window.addEventListener('parallax:atlas-mode',e=>{if(e.detail!=='solar'){stopTour();closeShowcase()}});
  window.ParallaxAtlasDirector={openShowcase,closeShowcase,stopTour};
 })();

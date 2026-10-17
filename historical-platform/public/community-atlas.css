@@ -1,0 +1,89 @@
+.planet-atlas-page [hidden]{display:none!important}
+.atlas-mode-bar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 18px;padding:0 0 18px;border-bottom:1px solid #b6d8c520}
+.atlas-mode-bar>p{font:10px ui-monospace,monospace;color:#8daba2}
+.universe{--world-accent:#b5dfcd;position:relative}
+.universe-sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.universe-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.universe-toolbar form{display:flex;flex:1;gap:8px;max-width:620px;min-width:180px}
+.universe-toolbar input{flex:1;width:100%;background:#0c181f}
+.universe-sector-label{margin-left:auto}
+.universe-workspace{display:grid;grid-template-columns:minmax(0,1fr) 310px;border:1px solid #b6d8c52a;border-radius:16px;overflow:hidden;background:#080f17}
+.universe-map-column{min-width:0}
+.universe-stage{position:relative;isolation:isolate;min-height:440px;height:clamp(460px,62vh,760px);background:radial-gradient(ellipse at 45% 45%,#1a353733,#080e16 80%);overflow:hidden;touch-action:none;cursor:grab;outline-offset:-5px!important}
+.universe-stage:active{cursor:grabbing}
+#universe-canvas,#universe-hit-targets{position:absolute;inset:0;width:100%;height:100%}
+#universe-canvas{z-index:0;pointer-events:none}
+#universe-hit-targets{z-index:1;pointer-events:none;overflow:hidden}
+.universe-stage-label{position:absolute;top:24px;left:25px;right:100px;z-index:2;display:flex;flex-direction:column;gap:7px;pointer-events:none}
+.universe-stage-label>.atlas-eyebrow{font-size:9px;color:#a6c5b8;letter-spacing:.16em}
+#universe-location{font:8px/1.7 ui-monospace,monospace;letter-spacing:.11em;color:#738f91;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.universe-crosshair{position:absolute;top:50%;left:50%;color:#cadfd21a;pointer-events:none;z-index:0;font:30px ui-monospace,monospace}
+.universe-flight-instructions{position:absolute;bottom:18px;left:20px;right:20px;text-align:center;z-index:2;pointer-events:none;font:9px/1.8 ui-monospace,monospace;color:#91aaa9;text-shadow:0 2px 4px #000}
+.planet-atlas-page .universe-expand{position:absolute;right:18px;top:17px;z-index:3;font-size:10px;background:#0b161de8;border-color:#c5decc29;padding:7px 10px}
+.planet-atlas-page .universe-world{position:absolute;left:0;top:0;pointer-events:auto;min-height:44px;background:none;border:0;border-radius:50%;padding:0;will-change:transform;color:#dbe8e1;cursor:pointer;outline-offset:5px!important}
+.planet-atlas-page .universe-world:hover{background:radial-gradient(circle,transparent 40%,#b3d5c60b 65%,transparent 70%);border:0}
+.planet-atlas-page .universe-world:focus-visible{outline:2px solid var(--world-accent);background:#0b141133}
+.universe-world-label{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;max-width:190px;min-width:90px;gap:4px;text-shadow:0 2px 7px #000,0 2px 12px #000;pointer-events:none}
+.universe-world-label strong{font-size:12px;font-weight:500;letter-spacing:.06em;max-width:190px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.universe-world-label small{font:9px ui-monospace,monospace;color:var(--world-accent)}
+.universe-world[aria-pressed=true] .universe-world-label strong{color:var(--world-accent)}
+.universe-flight-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-top:1px solid #acc8bd1b;background:#0c171d}
+.universe-camera-buttons,.universe-flight-actions{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.planet-atlas-page .universe-camera-buttons button{width:34px;padding:4px;min-height:36px;font-size:17px;background:#afccba06;border-color:#afccba1c}
+.planet-atlas-page .universe-flight-actions button{font-size:10px;padding:8px 10px;min-height:36px;background:none;border-color:transparent}
+.planet-atlas-page .universe-flight-actions button:hover{background:#afccba10}
+.universe-profile{min-width:0;padding:23px;border-left:1px solid #b6d8c521;background:radial-gradient(ellipse at 90% 0%,#9f875c10,transparent 60%),#101a20;display:flex;align-items:flex-start;flex-direction:column}
+.universe-profile-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%;margin-bottom:22px}
+.universe-profile-top .atlas-eyebrow{font-size:8px;color:#879d9a}
+#universe-provenance{font:8px ui-monospace,monospace;color:var(--world-accent);border:1px solid #a8c2ad2e;padding:5px 7px;border-radius:4px;letter-spacing:.07em}
+.universe-project-art{width:100%;padding:7px;border:1px solid #cbb47725;border-radius:8px;background:#070b0f;margin-bottom:25px;overflow:hidden}
+.universe-project-art img{display:block;width:100%;max-height:185px;object-fit:contain}
+#universe-project-sector{font-size:8px;letter-spacing:.12em;color:#8da8a4;margin:0 0 9px}
+.universe-profile h2{font-size:clamp(28px,2.8vw,42px);font-weight:450;line-height:1.12;letter-spacing:-.045em;margin:0;overflow-wrap:anywhere;max-width:100%}
+#universe-project-ticker{font:12px ui-monospace,monospace;color:var(--world-accent);margin:12px 0 0;overflow-wrap:anywhere;max-width:100%}
+#universe-project-about{font-size:13px;line-height:1.85;color:#9fb4ba;margin:20px 0 25px;overflow-wrap:anywhere;max-width:100%;white-space:pre-line}
+.universe-project-actions{display:flex;flex-direction:column;width:100%;gap:8px}
+.planet-atlas-page .universe-project-actions>.atlas-primary{background:var(--world-accent);color:#0b1613;justify-content:space-between;text-decoration:none;display:flex;padding:13px 17px;border:0;border-radius:7px;font-size:12px;font-weight:650}
+.planet-atlas-page .universe-project-actions>button{font-size:10px;background:none;border-color:#b3cbb826;min-height:38px}
+.universe-project-socials{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px}
+.universe-project-socials a{font-size:11px;color:#c3d8ca;min-height:32px;display:flex;align-items:center;text-decoration:none}
+.universe-project-token{border-top:1px solid #acc8bd22;padding-top:15px;margin-top:14px;width:100%;display:flex;gap:8px;flex-wrap:wrap}
+.universe-project-token>span{display:block;width:100%;font-size:8px}
+.universe-project-token code{font:10px/1.8 ui-monospace,monospace;color:#a5b9b8;word-break:break-all;flex-basis:100%}
+.universe-project-token a{font-size:10px;align-self:center;color:#c9dacf}
+.planet-atlas-page .universe-project-token button{font-size:10px;min-height:34px;padding:7px 9px;background:none}
+.universe-project-note{font-size:10px;line-height:1.8;color:#849d9e;margin-top:24px!important;padding-top:15px;border-top:1px solid #b8d4c418;width:100%}
+#universe-feedback{font-size:11px;line-height:1.7;color:#b7d5c6;overflow-wrap:anywhere;max-width:100%;margin-top:10px}
+.universe-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px 2px 10px;font:10px/1.8 ui-monospace,monospace;color:#9bb6ac}
+.universe-footer>div:first-child{display:flex;flex-direction:column;gap:5px}
+.universe-footer>div:last-child{display:flex;gap:8px;flex-wrap:wrap}
+#universe-status{color:#bbac90;font:11px/1.7 system-ui,sans-serif}
+.planet-atlas-page .universe-footer button{font-size:10px;min-height:36px;padding:8px 11px;background:#b8d4c408}
+.universe-empty{padding:28px;border:1px dashed #b4cbbb44;text-align:center;border-radius:12px;color:#a3beb8;font-size:13px}
+.universe-disclosure{font-size:10px;line-height:1.8;color:#748f98;margin:9px 0 20px!important;max-width:900px}
+.universe-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:14px;padding:20px;max-height:800px;min-height:400px;overflow:auto}
+.universe-card{border:1px solid #bdd8c320;background:linear-gradient(140deg,#16272a,#0d171e);border-radius:11px;padding:18px;min-width:0}
+.universe-card-image{background:#05090e;border-radius:5px;overflow:hidden;margin-bottom:12px}
+.universe-card-image img{width:100%;height:100px;object-fit:contain;display:block}
+.universe-card-heading{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.universe-card-heading>div{min-width:0}
+.universe-card-orb{width:65px;height:65px;flex:none;margin:-5px -4px -5px -10px}
+.universe-card h3{font-size:19px;font-weight:500;letter-spacing:-.025em;overflow-wrap:anywhere}
+.universe-card-heading span{display:block;font:9px/1.8 ui-monospace,monospace;color:#a1c7b5;overflow-wrap:anywhere}
+.universe-card>p{font-size:12px;line-height:1.8;color:#94abb3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin:10px 0 15px}
+.universe-card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 13px}
+.planet-atlas-page .universe-card-actions button{font-size:10px;padding:8px 10px;min-height:36px;background:#badbc70c}
+.universe-card-actions a{font-size:10px;color:#bed4c6;text-decoration:none;min-height:36px;display:flex;align-items:center}
+.universe-card>small{display:block;font-size:9px;color:#6f9394;margin-top:12px}
+.universe-expanded{position:fixed;inset:0;z-index:1000;background:#070e15;overflow:auto;padding:max(18px,env(safe-area-inset-top)) 24px max(18px,env(safe-area-inset-bottom));height:100dvh}
+.universe-is-expanded{overflow:hidden}
+.universe-expanded .universe-workspace{grid-template-columns:minmax(0,1fr) 340px}
+.universe-expanded .universe-stage{height:calc(100dvh - 210px);min-height:400px}
+.universe-expanded .universe-list{max-height:calc(100dvh - 180px)}
+.universe-expanded .universe-profile{max-height:calc(100dvh - 160px);overflow:auto}
+.universe-expanded .universe-disclosure{display:none}
+@media(min-width:1700px){.universe-workspace{grid-template-columns:minmax(0,1fr) 355px}.universe-profile{padding:30px}.universe-project-art img{max-height:240px}}
+@media(max-width:1250px){.universe-workspace{grid-template-columns:minmax(0,1fr) 275px}.universe-profile{padding:20px}.universe-flight-bar{flex-wrap:wrap;justify-content:center;gap:5px}.universe-toolbar{flex-wrap:wrap}.universe-toolbar form{max-width:none}.universe-toolbar .atlas-segment{margin-left:auto}.universe-list{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:900px){.universe-workspace,.universe-expanded .universe-workspace{grid-template-columns:minmax(0,1fr)}.universe-profile{border-left:0;border-top:1px solid #bdd8c322;padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:25px;align-items:start}.universe-profile-top{grid-column:1/-1;margin-bottom:18px}.universe-project-art{grid-column:1;grid-row:2/7;margin:0;align-self:center}.universe-profile>h2,.universe-profile>#universe-project-sector,.universe-profile>#universe-project-ticker,.universe-profile>#universe-project-about,.universe-project-actions{grid-column:2}.universe-profile h2{font-size:32px}.universe-project-socials,.universe-project-token,.universe-project-note,#universe-feedback{grid-column:1/-1}.universe-profile>#universe-project-about{margin:14px 0 18px}.universe-list{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none}.universe-stage{height:520px}.universe-flight-bar{justify-content:space-between}.universe-expanded .universe-profile{max-height:none}.universe-expanded .universe-stage{height:65dvh;min-height:360px}.universe-expanded{padding:14px}.universe-expanded .universe-list{max-height:none}}
+@media(max-width:600px){.atlas-mode-bar{align-items:flex-start;flex-direction:column;gap:12px}.atlas-mode-bar>p{font-size:9px}.universe-toolbar{gap:9px}.universe-toolbar form{flex-basis:100%}.universe-toolbar input{font-size:16px}.universe-sector-label{margin-left:0;min-width:0;flex:1}.universe-sector-label select{width:100%;font-size:12px;padding:8px}.universe-toolbar .atlas-segment button{padding:9px 12px;font-size:10px}.universe-stage{height:420px;min-height:360px}.universe-stage-label{left:18px;top:21px;right:100px}.universe-stage-label>.atlas-eyebrow{font-size:7px}#universe-location{font-size:6px}.universe-flight-instructions{font-size:8px;bottom:15px;left:12px;right:12px}.universe-flight-bar{justify-content:center;padding:11px;gap:7px}.universe-camera-buttons{gap:7px}.planet-atlas-page .universe-camera-buttons button{width:39px;min-height:40px}.universe-flight-actions{justify-content:center;width:100%}.planet-atlas-page .universe-flight-actions button{min-height:40px}.universe-profile{display:flex;padding:22px}.universe-profile-top{margin-bottom:18px}.universe-project-art{max-width:100%;margin:0 0 24px}.universe-project-art img{max-height:200px}.universe-profile h2{font-size:36px}.universe-profile>#universe-project-about{font-size:13px;margin:16px 0 24px}.universe-profile>#universe-project-sector{font-size:8px}.universe-footer{align-items:flex-start;flex-direction:column;gap:10px}.universe-list{grid-template-columns:minmax(0,1fr);padding:14px}.universe-disclosure{font-size:9px}.universe-expanded{padding:12px}.universe-expanded .universe-stage{height:55dvh}.universe-expanded .universe-footer{padding-bottom:25px}.universe-world-label strong{font-size:11px;max-width:140px}.universe-expanded .universe-toolbar{padding-right:0}}
+@media(prefers-reduced-motion:reduce){.universe *{transition:none!important;scroll-behavior:auto!important}}

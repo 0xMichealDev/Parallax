@@ -4,7 +4,8 @@
  const core=window.ParallaxAtlasCore,worlds=solarSystemWorlds,media=matchMedia('(prefers-reduced-motion: reduce)');
  const background=$('orbit-canvas'),ctx=background.getContext('2d'),buttons=new Map();
  let selected='earth',view=matchMedia('(max-width:600px)').matches?'closeup':'system',paused=media.matches,visible=true,hovered=false,focused=false,time=0,last=0,raf=0,dirty=true,spriteTimer=0,lighting='studio',zoom=1,rotation=0,drag=null;
- const blocked=()=>!!($('atlas-claim-dialog')?.open||$('dashboard-command')?.open);
+ let modeActive=!$('solar-atlas')?.hidden;
+ const blocked=()=>!modeActive||!!($('atlas-claim-dialog')?.open||$('dashboard-command')?.open);
  const sizes={mercury:18,venus:25,earth:29,moon:13,mars:23,jupiter:41,europa:13,saturn:32,uranus:29,neptune:28,pluto:18};
  const node=(tag,cls)=>{const n=document.createElement(tag);n.className=cls;return n};
  function texture(n,p){n.dataset.planet=p.id;n.style.setProperty('--texture',`url('/assets/globe/${p.map}')`);n.style.setProperty('--glow',p.color+'35')}
@@ -37,5 +38,6 @@
  if(typeof ResizeObserver==='function')new ResizeObserver(resize).observe(root);else window.addEventListener('resize',resize);
  if(typeof IntersectionObserver==='function')new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;dirty=true;sync()},{rootMargin:'80px'}).observe($('atlas-scene'));
  for(const id of ['atlas-claim-dialog','dashboard-command'])$(id)?.addEventListener('close',()=>{dirty=true;sync()});
+ window.addEventListener('parallax:atlas-mode',e=>{modeActive=e.detail==='solar';dirty=true;sync()});
  window.ParallaxAtlasScene={select,setView,resize};setView(view);motion();sprites();select(selected);
 })();
