@@ -52,3 +52,5 @@
 .atlas-inspector-planet{margin:10px 0 6px}
 .planet-atlas-page .atlas-world-card{background:#0d171d;border-color:#bad8cc16;transition:background .2s,border-color .2s}
 .planet-atlas-page .atlas-world-card:hover{background:#16272b;border-color:#bad8cc50}
+
+.atlas-curated-feature{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:16px 20px;border:1px solid #d7b36736;border-radius:10px;background:#181611}.atlas-curated-feature a{color:#e0bf7e;font-size:14px;text-decoration:none}.atlas-curated-feature a:hover{text-decoration:underline}.atlas-curated-feature span{font-size:11px;color:#a79b83}

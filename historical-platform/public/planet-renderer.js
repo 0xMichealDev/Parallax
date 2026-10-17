@@ -36,7 +36,8 @@ void main(){
   if(uMaterial<.5){if(uNatural<.5)base=mix(base,base*uAccent*1.8,.17);if(uSurface<.5){float ocean=smoothstep(.025,.13,tex.b-max(tex.r,tex.g)*.7);spec=pow(max(0.,dot(reflect(-uLight,n),vec3(0,0,1))),48.)*ocean*.55;emission=pow(texture2D(uNight,uv).rgb,vec3(1.3))*vec3(1.,.68,.32)*(1.-day)*uHasNight*.8;}}
   if(uMaterial>.5&&uMaterial<1.5){float land=fbm(material*5.);float cracks=1.-smoothstep(.014,.065,abs(fbm(material*12.+land*4.)-.49));base=mix(vec3(.018,.012,.02),vec3(.17,.065,.025),land);emission=mix(vec3(1.,.11,.008),vec3(1.,.55,.08),cracks)*pow(cracks,2.)*(1.2+.15*sin(uTime+land*20.));}
   if(uMaterial>1.5&&uMaterial<2.5){float ice=fbm(material*6.);float seams=1.-smoothstep(.01,.055,abs(fbm(material*18.)-.51));base=mix(vec3(.025,.13,.25),vec3(.62,.82,.87),smoothstep(.3,.65,ice));base*=1.-seams*.5;emission=vec3(.05,.55,1.)*seams*.24;spec=pow(max(0.,dot(reflect(-uLight,n),vec3(0,0,1))),65.)*.75;}
-  if(uMaterial>2.5){float islands=fbm(material*4.8);float coast=1.-smoothstep(.005,.045,abs(islands-.52));float cells=pow(noise(material*180.),14.);base=mix(vec3(.005,.025,.06),vec3(.01,.15,.12),smoothstep(.48,.55,islands));emission=(vec3(.06,1.,.64)*coast*.7+vec3(.25,.5,1.)*cells*.8)*(1.-day*.5);spec=pow(max(0.,dot(reflect(-uLight,n),vec3(0,0,1))),42.)*.3;}
+  if(uMaterial>2.5&&uMaterial<3.5){float islands=fbm(material*4.8);float coast=1.-smoothstep(.005,.045,abs(islands-.52));float cells=pow(noise(material*180.),14.);base=mix(vec3(.005,.025,.06),vec3(.01,.15,.12),smoothstep(.48,.55,islands));emission=(vec3(.06,1.,.64)*coast*.7+vec3(.25,.5,1.)*cells*.8)*(1.-day*.5);spec=pow(max(0.,dot(reflect(-uLight,n),vec3(0,0,1))),42.)*.3;}
+  if(uMaterial>3.5){float stone=fbm(material*9.);float grain=fbm(material*80.);float veins=1.-smoothstep(.006,.025,abs(fbm(material*11.+stone*2.)-.5));base=mix(vec3(.002,.003,.005),vec3(.021,.024,.029),stone)*(.75+.4*grain);vec3 gold=pow(uAccent,vec3(2.2));base=mix(base,gold*.22,veins*.55);emission=gold*veins*.26;spec=pow(max(0.,dot(reflect(-uLight,n),vec3(0,0,1))),85.)*.25;}
   // Ecosystem palettes are opt-in. Existing creator materials retain their original colors.
   if(uBrandEnabled>.5){
    vec3 primary=pow(uBrandPrimary,vec3(2.2)),secondary=pow(uBrandSecondary,vec3(2.2));
@@ -76,7 +77,7 @@ function draw(ctx,cx,cy,r,design,time,premium,options={}){
  try{
   const d=decodePlanet(design),s=premium||{},isSolar=design?.startsWith('solar-');
   const palette=s.palette,branded=!!palette&&['primary','secondary','ring'].every(key=>typeof palette[key]==='string'&&/^#[a-f0-9]{6}$/i.test(palette[key]));
-  const original=!['volcanic','glacial','biolume'].includes(s.surface);
+  const original=!['volcanic','glacial','biolume','obsidian'].includes(s.surface);
   // Natural worlds use the same complete surface in every renderer consumer.
   // Studio's display profile is transient; it never enters saved Premium styles.
   const natural=isSolar&&original&&!branded&&!s.accent;
@@ -98,7 +99,7 @@ function draw(ctx,cx,cy,r,design,time,premium,options={}){
   gl.uniform1f(uniforms.uAir,refined?(isSolar?air[design.slice(6)]??.1:{earth:1,gas:.35,rocky:.08}[d.surface]):1);
   gl.uniform1f(uniforms.uPluto,original&&design==='solar-pluto'?1:0);gl.uniform1f(uniforms.uPixel,4.1/size);
   const rings=s.rings&&s.rings!=='inherit'?{halo:3,double:4,dust:5}[s.rings]:({none:0,thin:1,wide:2}[d.rings]);
-  for(const [u,v] of [['uTime',time],['uSurface',d.surface==='earth'?0:d.surface==='gas'?2:1],['uMaterial',{volcanic:1,glacial:2,biolume:3}[s.surface]||0],['uRings',rings||0],['uWeather',d.weather==='clouds'?1:0],['uAtmosphere',s.atmosphere==='ion'?2:s.atmosphere==='vivid'?1:0],['uHasMap',hasMap?1:0],['uHasCloud',hasCloud?1:0],['uHasNight',hasNight?1:0]])gl.uniform1f(uniforms[u],v);
+  for(const [u,v] of [['uTime',time],['uSurface',d.surface==='earth'?0:d.surface==='gas'?2:1],['uMaterial',{volcanic:1,glacial:2,biolume:3,obsidian:4}[s.surface]||0],['uRings',rings||0],['uWeather',s.surface==='obsidian'?0:d.weather==='clouds'?1:0],['uAtmosphere',s.atmosphere==='ion'?2:s.atmosphere==='vivid'?1:0],['uHasMap',hasMap?1:0],['uHasCloud',hasCloud?1:0],['uHasNight',hasNight?1:0]])gl.uniform1f(uniforms[u],v);
   gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.drawArrays(gl.TRIANGLES,0,6);
   ctx.drawImage(canvas,0,canvas.height-size,size,size,cx-r*2.05,cy-r*2.05,r*4.1,r*4.1);return true;
  }catch{failed=true;gl=null;return false;}
