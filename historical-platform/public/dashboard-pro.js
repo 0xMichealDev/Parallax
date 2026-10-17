@@ -33,7 +33,7 @@
   if (dialog && input && close && status && directory && empty && typeof dialog.showModal === 'function') {
     triggers.forEach(button => {
       button.hidden = false;
-      button.addEventListener('click', () => open(button));
+      button.addEventListener('click', event => { event.preventDefault(); open(button); });
     });
     close.addEventListener('click', () => dialog.close());
     dialog.addEventListener('close', () => { if (opener?.isConnected) opener.focus({ preventScroll: true }); });
@@ -69,6 +69,23 @@
       }
     });
   }
+  // Keep direct Wallet Watch / walking links in sync with hash navigation.
+  function markCurrentDestination() {
+    const current = location.pathname + location.hash;
+    for (const selector of ['.dashboard-sidebar', '.mobile-dock']) {
+      const nav = document.querySelector(selector);
+      if (!nav) continue;
+      const items = [...nav.querySelectorAll('a[href]')];
+      const exact = items.find(link => link.getAttribute('href') === current);
+      if (!exact) continue;
+      items.forEach(link => link.removeAttribute('aria-current'));
+      exact.setAttribute('aria-current', 'page');
+      const group = exact.closest('details');
+      if (group) group.open = true;
+    }
+  }
+  markCurrentDestination();
+  window.addEventListener('hashchange', markCurrentDestination);
   const group = document.querySelector('.dashboard-filters');
   const controls = group ? [...group.querySelectorAll('[data-tool-filter]')] : [];
   const cards = [...document.querySelectorAll('[data-tool-group]')];
