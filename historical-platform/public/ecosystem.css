@@ -4,3 +4,15 @@
 @media(max-width:1000px){.eco-destinations a{padding:15px 10px;gap:5px}.eco-destinations img{width:42px;height:42px}.eco-destinations strong{font-size:14px}.eco-destinations small{font-size:7px;letter-spacing:.5px}.eco-arrow{display:none}.eco-info{padding:26px 22px}.eco-facts>div{grid-template-columns:1fr;gap:5px}.eco-view-top,.eco-view-bottom{padding-left:20px;padding-right:20px}.eco-render-help{padding-left:20px;padding-right:20px}.eco-teaser{width:90%;padding:24px;gap:20px}}
 @media(max-width:700px){.eco{margin:34px auto 44px;width:calc(100% - 32px);scroll-margin-top:15px}.eco-heading{display:block;margin-bottom:24px}.eco h2{font-size:43px;letter-spacing:-1.8px}.eco-intro{max-width:none;margin-top:20px}.eco-intro p{font-size:13px}.eco-destinations{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.eco-destinations a{padding:12px;min-height:80px;gap:8px}.eco-destinations img{width:48px;height:48px}.eco-destinations strong{font-size:15px}.eco-destinations small{font-size:7px}.eco-workspace{grid-template-columns:1fr;border-radius:16px}.eco-view{border-right:0;border-bottom:1px solid #ffffff16}.eco-stage{max-height:440px}.eco-view-top{padding:19px 20px 0}.eco-view-bottom{padding:0 20px 3px}.eco-render-help{padding-bottom:16px}.eco-info{padding:25px 22px}.eco-info h3{font-size:42px;margin-top:18px}.eco-facts>div{grid-template-columns:90px 1fr;gap:12px}.eco-info-top{font-size:9px}.eco-actions .eco-button{flex:1}.eco-footer{align-items:flex-start;flex-direction:column;gap:15px}.eco-footer .eco-button{width:100%}.eco-teaser{width:calc(100% - 32px);grid-template-columns:1fr;padding:23px 20px;margin-bottom:35px;gap:14px}.eco-teaser h2{font-size:28px}.eco-teaser-worlds a{padding:7px 2px}.eco-teaser-worlds strong{font-size:10px}.eco-teaser-worlds{gap:6px}}
 @media(prefers-reduced-motion:reduce){.eco *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Atlas destinations keep the original world design in a quieter, dedicated page. */
+.ecosystem-project-page{background:#05090e;color:#edf4fb}
+.eco-standalone{max-width:1380px;margin-top:32px}
+.eco-back{display:inline-flex;align-items:center;min-height:44px;color:#aab9c6;text-decoration:none;font-size:12px;margin-bottom:26px}
+.eco-back:hover{color:#fff}
+.eco-standalone h1{font-size:clamp(48px,7vw,84px);font-weight:450;line-height:1;letter-spacing:-3px;margin:0}
+.eco-standalone .eco-intro p{font-size:20px;color:var(--eco-accent);margin-bottom:8px}
+.eco-standalone .eco-workspace{background:#080f17;border-color:#ffffff12;border-radius:12px}
+.eco-standalone .eco-view{background:radial-gradient(ellipse at 50% 43%,color-mix(in srgb,var(--eco-secondary) 6%,transparent),transparent 67%),#050b12}
+.eco-standalone .eco-stage:before,.eco-standalone .eco-stage:after,.eco-standalone .eco-stage-grid{display:none}
+@media(max-width:700px){.eco-standalone{margin-top:20px}.eco-back{margin-bottom:18px}.eco-standalone h1{font-size:54px;letter-spacing:-2px}.eco-standalone .eco-intro{margin-top:18px}}

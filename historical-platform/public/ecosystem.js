@@ -2,6 +2,7 @@
 (() => {
  'use strict';
  const root=document.getElementById('ecosystem');if(!root)return;
+ const standalone=root.dataset.standalone==='true';
  const $=id=>document.getElementById(id);
  let worlds;try{worlds=JSON.parse($('ecosystem-data').textContent);}catch{return;}
  if(!Array.isArray(worlds)||!worlds.length)return;
@@ -55,7 +56,7 @@
   link.addEventListener('click',event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||event.button>0)return;event.preventDefault();select(link.dataset.ecoSelect,{historyMode:'push'});});
   link.addEventListener('keydown',event=>{let i;if(event.key==='ArrowRight')i=(index+1)%links.length;else if(event.key==='ArrowLeft')i=(index+links.length-1)%links.length;else if(event.key==='Home')i=0;else if(event.key==='End')i=links.length-1;else return;event.preventDefault();links[i].focus();select(links[i].dataset.ecoSelect,{historyMode:'replace'});});
  });
- window.addEventListener('popstate',()=>select(new URL(location.href).searchParams.get('ecosystem')||worlds[0].id));
+ window.addEventListener('popstate',()=>select(standalone?root.dataset.world:new URL(location.href).searchParams.get('ecosystem')||worlds[0].id));
  fallback.addEventListener('error',()=>stage.classList.add('eco-image-error'));fallback.addEventListener('load',()=>stage.classList.remove('eco-image-error'));
  motion.addEventListener('click',()=>{playing=!playing;reconcile();});reset.addEventListener('click',()=>{phase=6.4;draw();});
  canvas.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home'].includes(event.key)||!isReady())return;event.preventDefault();phase=event.key==='Home'?6.4:phase+(event.key==='ArrowRight'?1:-1);draw();});
@@ -67,7 +68,7 @@
  for(const event of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(event,()=>{drag=null;});
  const share=$('eco-share');share.hidden=false;
  share.addEventListener('click',async()=>{if(sharing)return;sharing=true;share.disabled=true;const current=selected,stamp=revision;
-  const url=new URL('/explore',location.origin);url.searchParams.set('ecosystem',current.id);url.hash='ecosystem';
+  const url=new URL(standalone?'/projects/'+current.id:'/explore','https://parallaxlaunch.live');if(!standalone){url.searchParams.set('ecosystem',current.id);url.hash='ecosystem';}
   const manual=()=>{if(stamp!==revision)return;$('eco-share-fallback').hidden=false;$('eco-share-url').value=url.href;$('eco-share-url').focus();$('eco-share-url').select();status('Select and copy this link to share the planet.');};
   try{if(navigator.share){try{await navigator.share({title:current.name+' — PARALLAX ecosystem concept',text:current.name+', imagined as a planet. An unofficial educational concept by PARALLAX.',url:url.href});if(stamp===revision)status('Planet link shared.');}catch(error){if(error.name!=='AbortError')manual();}}
    else if(navigator.clipboard?.writeText){try{await navigator.clipboard.writeText(url.href);if(stamp===revision)status('Planet link copied.');}catch{manual();}}else manual();

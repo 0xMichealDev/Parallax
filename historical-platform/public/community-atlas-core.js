@@ -2,7 +2,7 @@
 (()=>{'use strict';
  const sectors={token:{name:'Coins & memes',x:230,y:10,z:0,color:'#d7b367'},community:{name:'Communities',x:-300,y:90,z:50,color:'#98d9bb'},tool:{name:'Tools & apps',x:0,y:-45,z:-380,color:'#8ab7e9'},infrastructure:{name:'Infrastructure',x:390,y:140,z:-400,color:'#b59de3'},creative:{name:'Creative worlds',x:-330,y:-110,z:-390,color:'#e9a3b9'}};
  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
- function safeURL(value,local=false){if(typeof value!=='string')return null;if(local&&/^\/(?:assets\/projects\/|world\/|projects\/)[A-Za-z0-9_./%-]+$/.test(value)&&!value.includes('..'))return value;try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:null}catch{return null}}
+ function safeURL(value,local=false){if(typeof value!=='string')return null;if(local&&/^\/(?:assets\/(?:projects|ecosystem)\/|world\/|projects\/)[A-Za-z0-9_./%-]+$/.test(value)&&!value.includes('..'))return value;try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:null}catch{return null}}
  function project(p){
   if(!p||!['id','name','ticker','description','color'].every(k=>typeof p[k]==='string')||!/^[A-Za-z0-9_-]{1,64}$/.test(p.id)||!['curated','community'].includes(p.provenance)||!/^\/(world|projects)\/[A-Za-z0-9_%-]+$/.test(p.href||''))throw Error('Project data is incomplete. Please refresh.');
   const profile=p.profile&&typeof p.profile==='object'&&!Array.isArray(p.profile)?p.profile:{};
