@@ -8,7 +8,8 @@ body.workspace-shell.dashboard-flight{background:#03080c;isolation:isolate}
 body.dashboard-flight :is(#main,.site-footer,.home-art-credits){position:relative;z-index:1}
 body.premium-dashboard.dashboard-flight .dashboard-heading-actions{flex-wrap:wrap}
 body.dashboard-flight .dashboard-flight-motion{min-height:44px;border:1px solid #bdd9d43d;border-radius:10px;background:#0b171de8;color:#c4d9d4;font:11px/1.5 system-ui,sans-serif;padding:10px 14px;white-space:nowrap;cursor:pointer}
-body.dashboard-flight .dashboard-flight-motion[hidden]{display:none}
+body.dashboard-flight .dashboard-flight-motion[hidden],body.dashboard-flight .dashboard-flight-status[hidden]{display:none}
+body.dashboard-flight .dashboard-flight-status{font:11px/1.5 system-ui,sans-serif;color:#b5d1c9}
 body.dashboard-flight .dashboard-flight-motion:disabled{color:#a1b7b3;cursor:default}
 body.dashboard-flight .dashboard-flight-motion:focus-visible{outline:2px solid #c6f4df;outline-offset:3px}
 body.premium-dashboard.dashboard-flight .dashboard-heading{ text-shadow:0 2px 16px #000 }

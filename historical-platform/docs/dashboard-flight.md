@@ -1,25 +1,21 @@
-# Homepage and custom dashboard flight
+# Dashboard scroll flight — v128
 
-The main homepage / and custom dashboard /?view=dashboard use a fixed, automatically playing ambient background. This replaces scroll scrubbing at the user's request in v125. Native page scrolling and all dashboard controls stay independent of the video. Atlas, authentication, layout persistence and wallet flows are unchanged.
+The approved silent 10-second flight remains on the homepage and custom dashboard. It stays fixed behind the cards; native page scroll maps to video time, scrolling upward reverses the flight, and a stationary page holds its frame. There is no autoplay, looping or intercepted wheel/touch scrolling.
 
-The approved Runway task is b0df2013-456c-401c-a13a-9e4f148704e1. No new footage was generated. The original 1920×1080, 24 fps, silent file has SHA-256 f79776108368e18fbcdbbbce5396c0f7202bbb2fd6d03ab9b5916785a7e8cb6a and duration 10.041667 seconds.
+## Media delivery fix
 
-## Durable media and quality
+A production check on October 18 returned HTTP 200 and all 14,323,975 bytes when requesting only bytes 0–2047 of the desktop MP4. The controller previously handed the remote MP4 URL directly to the media element and depended on its seeking/loading behavior.
 
-The Site serves video and WebP posters from public/assets/dashboard-flight/. No expiring external URL is used at runtime. The desktop file flight-original-1080-v125.mp4 is the original video remuxed for fast start without re-encoding. It is 11,239,055 bytes. FFprobe verified every encoded video packet matches the approved original. The full-resolution 1920×1080 poster is retained from v124.
+The controller now fetches the complete same-origin asset once and attaches a local Blob URL. Seeking no longer depends on the host honoring byte-range requests. The poster remains visible with “Preparing your flight…” during download; failed or invalid responses show a retry control. A 30-second load deadline aborts the download, and generation tracking prevents a stale completion from replacing a retry or fallback. Blob URLs are released when media fails. A completed seek with a missing event is recovered on the next scroll/update or the 12-second watchdog.
 
-Mobile keeps the smaller 960×540 file, 2,247,273 bytes. The source is selected once; resizing does not discard its buffer. Older assets remain for cached pages.
+Desktop retains flight-1920-v124.mp4 (1920×1080), mobile retains flight-960-v122.mp4 (960×540). Both are the approved original flight with frequent keyframes; no new footage or further re-encoding was introduced. All media and posters remain durable Site assets. The larger original remux and older files remain available to cached pages.
 
-## Playback and recovery
+## Preserved behavior
 
-The video plays silently at 0.75 speed and loops, giving roughly 13.4 seconds per journey. It stays fixed behind readable cards. No scroll, wheel or touch handlers, current-time writes, animation-frame loops or scroll observers control this video.
+Desktop easing, the longer desktop page, mobile composition and ordinary page controls are unchanged. home-living.js owns the saved motion choice. Paused motion, reduced motion, data saver and tab visibility remain respected; background loading never changes preferences or starts playback. Resize and page-cache return reconcile with the current scroll position.
 
-home-living.js still owns Pause/Resume and the stored motion preference. The background only reads that state. Saved pause, reduced motion, data saver and hidden tabs are respected. Returning to a visible tab or from the page cache resumes permitted motion without rewriting preferences.
+## Verification
 
-The first-frame poster appears immediately, including without JavaScript. Playback rejection exposes a Play background button for an explicit user gesture; it does not silently fight browser autoplay rules. Errors, unsupported media or a 30-second loading/buffering stall show the poster with Retry background. Recovery ignores stale playback promises. A reconnect can retry a failed load. A blocked or failed background never intercepts dashboard controls.
+Node regression checks cover whole-file HTTP delivery, buffered local media, delayed/failed/non-video downloads, timeout cancellation, stale completions, object URL cleanup, forward/reverse seeks, missing seek events, idle behavior, pause/reduced-motion/data-saver controls, mobile source retention, resize, tab visibility and page-cache restoration. Site-integrity checks and the production build are also required before publication.
 
-## Verification and limits
-
-tests/dashboard-flight.test.cjs exercises the real background and existing motion controllers together: automatic silent looping, no scroll dependency, saved pause, reduced motion, data saver, browser playback rejection, explicit retry, buffering stalls, stale promises, tab visibility, page restoration and mobile source retention. Existing motion and site-integrity checks cover preserved controls and both routes. FFprobe confirms original video packets, silence, dimensions and frame rate; MP4 inspection confirms fast start.
-
-Browser QA is unavailable in this managed environment. Direct production media checks were rejected by Cloudflare with error 1010 for this tool client, so they do not establish the cause of the user's browser failure. Actual browser autoplay, visual composition and device playback require an in-browser check.
+Browser QA is unavailable in this managed environment. Live HTTP delivery was inspected, but actual rendering, browser decoding and real-device scrolling still require an in-browser check. The initial flight waits for the full file to download (about 14.3 MB desktop or 2.25 MB mobile); the still poster is visible in the meantime.

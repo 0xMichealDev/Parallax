@@ -8,8 +8,10 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const compact = matchMedia('(max-width: 900px)');
   const retryButtons = [...document.querySelectorAll('[data-flight-retry]')];
+  const statuses = [...document.querySelectorAll('[data-flight-status]')];
   let active = true, started = false, failed = false, pending = false;
   let frame = 0, deadline = 0, lastTarget = NaN, lastTick = 0, selectedSrc = '';
+  let download = null, objectUrl = '', generation = 0;
   const motionAllowed = () => active && !document.hidden && !reduced.matches &&
     body.classList.contains('home-motion-running');
   const allowed = () => motionAllowed() && !failed;
@@ -18,6 +20,10 @@
     for (const button of retryButtons) {
       button.hidden = !failed || !motionAllowed();
       button.textContent = 'Retry background';
+    }
+    for (const status of statuses) {
+      status.hidden = !motionAllowed() || host.dataset.state === 'ready';
+      status.textContent = failed ? 'Flight unavailable. Please retry.' : 'Preparing your flight…';
     }
   }
   function clearDeadline() { clearTimeout(deadline); deadline = 0; }
@@ -34,19 +40,62 @@
     pending = false;
     lastTarget = NaN;
     host.dataset.state = 'fallback';
+    generation++;
+    download?.abort(); download = null;
     video.removeAttribute('src');
     video.load();
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
+    objectUrl = '';
     buttons();
+  }
+  function finishSeek() {
+    if (!pending || video.seeking || video.readyState < 2) return false;
+    pending = false;
+    lastTarget = video.currentTime;
+    clearDeadline();
+    paint();
+    return true;
   }
   function armDeadline() {
     if (!deadline && allowed() && (pending || video.readyState < 2)) {
-      deadline = setTimeout(fail, pending ? 12000 : 30000);
+      deadline = setTimeout(() => {
+        deadline = 0;
+        // Completion events may be lost after a background tab or mobile suspension.
+        if (finishSeek()) schedule();
+        else fail();
+      }, pending ? 12000 : 30000);
     }
   }
   function paint() {
     if (failed || video.readyState < 2 || pending) return;
     host.dataset.state = 'ready';
     clearDeadline();
+    buttons();
+  }
+  async function loadMedia() {
+    const request = ++generation;
+    download = new AbortController();
+    armDeadline();
+    try {
+      // The production asset host may ignore Range requests. A complete local Blob
+      // makes every frame seekable without depending on server-side byte ranges.
+      const response = await fetch(selectedSrc, { signal: download.signal, cache: 'force-cache' });
+      if (!response.ok) throw new Error('Flight download failed.');
+      const blob = await response.blob();
+      if (request !== generation) return;
+      if (!blob.size || !blob.type.startsWith('video/')) throw new Error('Invalid flight media.');
+      download = null;
+      objectUrl = URL.createObjectURL(blob);
+      video.src = objectUrl;
+      video.preload = 'auto';
+      video.muted = true; video.defaultMuted = true;
+      video.loop = false; video.autoplay = false; video.playsInline = true;
+      video.pause();
+      video.load();
+      clearDeadline(); armDeadline(); schedule();
+    } catch {
+      if (request === generation) fail();
+    }
   }
   function seek(time) {
     frame = 0;
@@ -76,30 +125,22 @@
     try { video.currentTime = next; } catch { fail(); }
   }
   function schedule() {
-    if (!allowed() || frame || pending) return;
+    if (!allowed() || frame) return;
+    finishSeek();
+    if (pending) return;
     frame = requestAnimationFrame(seek);
   }
   function sync() {
     buttons();
     if (!allowed()) { stopWork(); return; }
     // A browser can finish a seek while the page is frozen without delivering its event.
-    if (pending && !video.seeking && video.readyState >= 2) {
-      pending = false;
-      lastTarget = video.currentTime;
-      clearDeadline();
-      paint();
-    }
+    finishSeek();
     if (!started) {
       started = true;
       // Select once: rotating a phone must not discard a buffered journey.
       selectedSrc ||= compact.matches || navigator.connection?.saveData
         ? video.dataset.mobileSrc : video.dataset.desktopSrc;
-      video.src = selectedSrc;
-      video.preload = 'auto';
-      video.muted = true; video.defaultMuted = true;
-      video.loop = false; video.autoplay = false; video.playsInline = true;
-      video.pause();
-      video.load();
+      loadMedia();
     }
     if (pending || video.readyState < 2) armDeadline();
     schedule();
