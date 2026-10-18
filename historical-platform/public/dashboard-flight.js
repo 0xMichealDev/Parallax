@@ -6,14 +6,16 @@
   if (!host || !video || !document.body.classList.contains('dashboard-flight')) return;
   const body = document.body;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const compact = matchMedia('(max-width: 900px)');
   let active = true, started = false, failed = false, pending = false;
-  let frame = 0, deadline = 0, lastTarget = NaN;
+  let frame = 0, deadline = 0, lastTarget = NaN, lastTick = 0;
   const allowed = () => active && !failed && !document.hidden && !reduced.matches &&
     body.classList.contains('home-motion-running');
 
   function clearDeadline() { clearTimeout(deadline); deadline = 0; }
   function stopWork() {
     cancelAnimationFrame(frame); frame = 0;
+    lastTick = 0;
     clearDeadline();
     video.pause();
   }
@@ -33,7 +35,7 @@
     host.dataset.state = 'ready';
     clearDeadline();
   }
-  function seek() {
+  function seek(time) {
     frame = 0;
     if (!allowed()) return;
     const duration = video.duration;
@@ -45,14 +47,20 @@
     const progress = distance ? Math.max(0, Math.min(1, page.scrollTop / distance)) : 0;
     // Stop on the last decodable frame, including after a layout change or overscroll.
     const target = progress * Math.max(0, duration - 1 / 24);
-    if (Number.isFinite(lastTarget) && Math.abs(target - lastTarget) < 1 / 48) { paint(); return; }
+    if (Number.isFinite(lastTarget) && Math.abs(target - lastTarget) < .001) { lastTick = 0; paint(); return; }
     if (!Number.isFinite(lastTarget) && Math.abs(video.currentTime - target) < 1 / 48) {
       lastTarget = target; paint(); return;
     }
+    // Ease wheel/trackpad steps on desktop. Native scrolling itself stays immediate.
+    // Bound the elapsed time so a slow decode or restored tab cannot cause a large catch-up jump.
+    const elapsed = lastTick ? Math.min(50, Math.max(1, time - lastTick)) : 1000 / 60;
+    lastTick = time;
+    const next = !compact.matches && Number.isFinite(lastTarget) && Math.abs(target - lastTarget) > 1 / 24
+      ? lastTarget + (target - lastTarget) * (1 - Math.exp(-elapsed / 160)) : target;
     pending = true;
-    lastTarget = target;
+    lastTarget = next;
     clearDeadline(); armDeadline();
-    try { video.currentTime = target; } catch { fail(); }
+    try { video.currentTime = next; } catch { fail(); }
   }
   function schedule() {
     if (!allowed() || frame || pending) return;
@@ -63,7 +71,7 @@
     if (!started) {
       started = true;
       // Select once: rotating a phone must not discard a buffered journey.
-      video.src = matchMedia('(max-width: 900px)').matches || navigator.connection?.saveData
+      video.src = compact.matches || navigator.connection?.saveData
         ? video.dataset.mobileSrc : video.dataset.desktopSrc;
       video.preload = 'auto';
       video.muted = true;
