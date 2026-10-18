@@ -33,7 +33,7 @@ function privacyUI(){
 }
 function makePrivacy(){
  if(privacyButton)return;const box=document.createElement('div');box.className='project-privacy';privacyButton=document.createElement('button');privacyButton.type='button';privacyButton.onclick=()=>{const off=!optedOut();memoryOptOut=off;let saved=true;if(off){memoryBrowser=null;memorySessions={};}try{localStorage.setItem(privacyKey,off?'1':'0');if(off){localStorage.removeItem(browserKey);localStorage.removeItem(sessionsKey);}}catch{saved=false;}privacyUI();if(!saved)privacyButton.textContent=off?'Project analytics off for this page · Enable':'Project analytics on for this page · Disable';if(!off)record('visit');};
- const note=document.createElement('span');note.textContent='First-party visit and website-click counts help this creator understand their audience. Browser identifiers stay separate from your wallet.';box.append(privacyButton,note);(document.querySelector('main')||document.body).append(box);privacyUI();
+ const note=document.createElement('span');note.textContent='First-party visits and website clicks help this creator understand their audience. If the creator enables Most Explored, limited visit totals are also public. Browser identifiers stay separate from your wallet.';box.append(privacyButton,note);(document.querySelector('main')||document.body).append(box);privacyUI();
 }
 async function feed(id){
  let section=document.getElementById('project-update-feed');if(!section){section=document.createElement('section');section.id='project-update-feed';section.className='project-public-updates';section.setAttribute('aria-label','Project updates');(document.querySelector('#observatory')||document.querySelector('main')||document.body).append(section);}
