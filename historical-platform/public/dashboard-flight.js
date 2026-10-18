@@ -1,4 +1,4 @@
-/* The dashboard's approved flight follows native page scroll. No playback or scroll interception. */
+/* Fixed, silent ambient flight. Native playback is independent of page scrolling. */
 (() => {
   'use strict';
   const host = document.getElementById('dashboard-flight');
@@ -6,99 +6,110 @@
   if (!host || !video || !document.body.classList.contains('dashboard-flight')) return;
   const body = document.body;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const compact = matchMedia('(max-width: 900px)');
-  let active = true, started = false, failed = false, pending = false;
-  let frame = 0, deadline = 0, lastTarget = NaN, lastTick = 0;
-  const allowed = () => active && !failed && !document.hidden && !reduced.matches &&
+  const retryButtons = [...document.querySelectorAll('[data-flight-retry]')];
+  let active = true, started = false, failed = false, blocked = false, pendingPlay = false;
+  let deadline = 0, attempt = 0, wasAllowed = false, lastPlaybackTime = 0;
+  const allowed = () => active && !document.hidden && !reduced.matches &&
     body.classList.contains('home-motion-running');
 
+  function buttons() {
+    for (const button of retryButtons) {
+      button.hidden = !allowed() || !(failed || blocked);
+      button.textContent = failed ? 'Retry background' : 'Play background';
+    }
+  }
   function clearDeadline() { clearTimeout(deadline); deadline = 0; }
-  function stopWork() {
-    cancelAnimationFrame(frame); frame = 0;
-    lastTick = 0;
-    clearDeadline();
-    video.pause();
+  function stop() {
+    ++attempt; pendingPlay = false;
+    clearDeadline(); video.pause();
   }
   function fail() {
     if (failed) return;
-    failed = true;
-    stopWork();
-    host.dataset.state = 'fallback';
-    video.removeAttribute('src');
-    video.load();
+    failed = true; blocked = false;
+    stop(); host.dataset.state = 'fallback';
+    video.removeAttribute('src'); video.load();
+    buttons();
   }
   function armDeadline() {
-    if (!deadline && allowed()) deadline = setTimeout(fail, pending ? 8000 : 20000);
+    if (!deadline && allowed() && !failed && !blocked) {
+      lastPlaybackTime = video.currentTime;
+      deadline = setTimeout(fail, 30000);
+    }
   }
   function paint() {
-    if (failed || video.readyState < 2 || pending) return;
-    host.dataset.state = 'ready';
-    clearDeadline();
+    if (!failed && video.readyState >= 2) host.dataset.state = 'ready';
   }
-  function seek(time) {
-    frame = 0;
-    if (!allowed()) return;
-    const duration = video.duration;
-    if (!Number.isFinite(duration) || duration <= 0 || video.readyState < 1 || pending) {
-      armDeadline(); return;
-    }
-    const page = document.scrollingElement || document.documentElement;
-    const distance = Math.max(0, page.scrollHeight - page.clientHeight);
-    const progress = distance ? Math.max(0, Math.min(1, page.scrollTop / distance)) : 0;
-    // Stop on the last decodable frame, including after a layout change or overscroll.
-    const target = progress * Math.max(0, duration - 1 / 24);
-    if (Number.isFinite(lastTarget) && Math.abs(target - lastTarget) < .001) { lastTick = 0; paint(); return; }
-    if (!Number.isFinite(lastTarget) && Math.abs(video.currentTime - target) < 1 / 48) {
-      lastTarget = target; paint(); return;
-    }
-    // Ease wheel/trackpad steps on desktop. Native scrolling itself stays immediate.
-    // Bound the elapsed time so a slow decode or restored tab cannot cause a large catch-up jump.
-    const elapsed = lastTick ? Math.min(50, Math.max(1, time - lastTick)) : 1000 / 60;
-    lastTick = time;
-    const next = !compact.matches && Number.isFinite(lastTarget) && Math.abs(target - lastTarget) > 1 / 24
-      ? lastTarget + (target - lastTarget) * (1 - Math.exp(-elapsed / 160)) : target;
-    pending = true;
-    lastTarget = next;
-    clearDeadline(); armDeadline();
-    try { video.currentTime = next; } catch { fail(); }
+  function rejection(error) {
+    pendingPlay = false;
+    if (error?.name === 'NotSupportedError') { fail(); return; }
+    // A user gesture may be required by the browser. Never change the saved motion preference.
+    blocked = true; clearDeadline(); buttons();
   }
-  function schedule() {
-    if (!allowed() || frame || pending) return;
-    frame = requestAnimationFrame(seek);
+  function play() {
+    if (!allowed() || failed || blocked || pendingPlay || !video.paused) return;
+    const token = ++attempt;
+    pendingPlay = true; armDeadline();
+    try {
+      const result = video.play();
+      if (result?.then) result.then(() => {
+        if (token !== attempt) return;
+        pendingPlay = false;
+        if (!allowed()) { stop(); return; }
+        blocked = false; clearDeadline(); paint(); buttons();
+      }, error => { if (token === attempt && allowed()) rejection(error); });
+      else pendingPlay = false;
+    } catch (error) { if (token === attempt) rejection(error); }
   }
   function sync() {
-    if (!allowed()) { stopWork(); return; }
+    if (!allowed()) { wasAllowed = false; stop(); buttons(); return; }
+    if (!wasAllowed) blocked = false;
+    wasAllowed = true;
+    if (failed) { buttons(); return; }
     if (!started) {
       started = true;
-      // Select once: rotating a phone must not discard a buffered journey.
-      video.src = compact.matches || navigator.connection?.saveData
+      // Keep the selected buffer across resizing and phone rotation.
+      video.src = matchMedia('(max-width: 900px)').matches || navigator.connection?.saveData
         ? video.dataset.mobileSrc : video.dataset.desktopSrc;
       video.preload = 'auto';
-      video.muted = true;
+      video.muted = true; video.defaultMuted = true;
+      video.loop = true; video.playsInline = true;
+      video.defaultPlaybackRate = .75; video.playbackRate = .75;
       video.load();
     }
-    if (pending || video.readyState < 2) armDeadline();
-    schedule();
+    play(); buttons();
   }
-  video.addEventListener('loadedmetadata', schedule);
-  video.addEventListener('durationchange', schedule);
-  video.addEventListener('loadeddata', () => { paint(); schedule(); });
-  video.addEventListener('canplay', () => { paint(); schedule(); });
-  video.addEventListener('seeked', () => {
-    pending = false;
-    clearDeadline(); paint(); schedule();
+  function retry() {
+    if (!allowed()) return;
+    if (failed) { failed = false; started = false; host.dataset.state = 'poster'; }
+    blocked = false; sync();
+  }
+  retryButtons.forEach(button => button.addEventListener('click', retry));
+  video.addEventListener('loadeddata', () => { paint(); play(); });
+  video.addEventListener('canplay', () => { paint(); play(); });
+  video.addEventListener('playing', () => {
+    if (!allowed() || failed) { stop(); return; }
+    blocked = false; clearDeadline(); paint(); buttons();
   });
+  video.addEventListener('timeupdate', () => {
+    if (allowed() && !video.paused && !failed && video.currentTime !== lastPlaybackTime) {
+      lastPlaybackTime = video.currentTime; clearDeadline(); paint();
+    }
+  });
+  video.addEventListener('waiting', armDeadline);
+  video.addEventListener('stalled', armDeadline);
+  video.addEventListener('pause', () => {
+    if (allowed() && !failed && !pendingPlay && video.readyState >= 2) {
+      blocked = true; clearDeadline(); buttons();
+    }
+  });
+  video.addEventListener('ended', play);
   video.addEventListener('error', fail);
-  video.addEventListener('play', () => video.pause());
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule, { passive: true });
-  window.visualViewport?.addEventListener('resize', schedule, { passive: true });
   document.addEventListener('visibilitychange', sync);
   reduced.addEventListener('change', sync);
-  window.addEventListener('pagehide', () => { active = false; stopWork(); });
+  window.addEventListener('pagehide', () => { active = false; sync(); });
   window.addEventListener('pageshow', () => { active = true; sync(); });
-  // home-living owns all controls and the saved preference. This module only reads its state.
+  window.addEventListener('online', () => { if (failed) retry(); });
+  // home-living remains the sole owner of Pause/Resume and persistent settings.
   if (window.MutationObserver) new MutationObserver(sync).observe(body, { attributes: true, attributeFilter: ['class'] });
-  if (window.ResizeObserver) new ResizeObserver(schedule).observe(body);
   sync();
 })();
