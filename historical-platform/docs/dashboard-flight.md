@@ -4,7 +4,7 @@ The main homepage `/` and custom dashboard `/?view=dashboard` use the fixed back
 
 ## Durable media
 
-The Site serves both H.264 renditions and first-frame WebP posters from `public/assets/dashboard-flight/`. No signed external URL is used at runtime. The 1600×900 rendition is 5,933,596 bytes; the 960×540 rendition is 2,247,273 bytes. Both retain 24 fps, use a six-frame GOP (maximum keyframe gap 0.25 seconds), omit audio and B frames, and put `moov` before `mdat` for fast start. The mobile rendition is selected once at initialization; resizing does not discard buffered media.
+The Site serves both H.264 renditions and first-frame WebP posters from `public/assets/dashboard-flight/`. No signed external URL is used at runtime. The desktop rendition now retains the approved clip’s full 1920×1080 resolution, encoded at CRF 17, and is 14,323,975 bytes; the 960×540 mobile rendition is 2,247,273 bytes. The desktop poster is also full 1920×1080 at WebP quality 92. Older 900p assets remain available for previously cached pages. Both retain 24 fps, use a six-frame GOP (maximum keyframe gap 0.25 seconds), omit audio and B frames, and put `moov` before `mdat` for fast start. The mobile rendition is selected once at initialization; resizing does not discard buffered media.
 
 ## Interaction and accessibility
 
