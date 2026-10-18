@@ -1,0 +1,20 @@
+/* A visible, selectable token identity on both home views. */
+body .official-token{box-sizing:border-box;max-width:620px;min-width:0;margin:24px 0 0;padding:15px 17px 10px;border:1px solid #b8e8d638;border-radius:11px;background:#08151bea;scroll-margin-top:100px;text-shadow:none}
+body .official-token-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:11px}
+body .official-token-heading h2{font:500 12px/1.4 system-ui,sans-serif;letter-spacing:.01em;color:#cadbd5;margin:0}
+body .official-token-heading h2 span{color:#c5f5df;margin-left:3px}
+body .official-token-network{font:9px/1.4 ui-monospace,monospace;letter-spacing:.12em;color:#a6bdb4}
+body .official-token-row{display:flex;align-items:center;gap:14px}
+body .official-token-address{flex:1;min-width:0}
+body .official-token-address>span{display:block;font:10px/1.5 system-ui,sans-serif;color:#8ea9a5;margin-bottom:3px}
+body .official-token code{display:block;max-width:100%;font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:0;color:#e1eeea;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all}
+body .official-token button{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-height:44px;padding:9px 12px;border:1px solid #b9ead74d;border-radius:7px;background:#17352d;color:#d3f9e8;font:500 12px/1.4 system-ui,sans-serif;cursor:pointer}
+body .official-token button[hidden]{display:none}
+body .official-token button:hover{background:#214b3e;border-color:#b9ead78c}
+body .official-token button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+body .official-token :is(button,code):focus-visible{outline:2px solid #c4f4df;outline-offset:4px}
+body .official-token #copy-status{min-height:15px;margin:5px 0 0;color:#b1dac8;font:10px/1.5 system-ui,sans-serif}
+body.premium-dashboard .official-token{max-width:none;margin:0 0 24px}
+body.premium-dashboard .official-token-row{max-width:650px}
+body .official-token-return{display:inline-flex;align-items:center;min-height:44px;color:#bfe8d7}
+@media(max-width:480px){body .official-token{padding:13px 13px 9px}body .official-token-row{flex-wrap:wrap;gap:9px}body .official-token-address{flex-basis:100%}body .official-token code{font-size:12px}body .official-token button{min-height:44px;padding:9px 13px}body .official-token #copy-status{font-size:11px}}
