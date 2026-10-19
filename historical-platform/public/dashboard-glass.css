@@ -1,0 +1,23 @@
+/* Keep the scroll flight visible without fading text, controls, or artwork. */
+body.dashboard-flight { --dashboard-glass: rgb(7 17 24 / 50%); }
+body.home-hub.dashboard-flight :is(.story-hero, .story-content, .hub-intro) {
+  background: var(--dashboard-glass);
+}
+/* The content already has one 50% layer; avoid stacking darker panel fills. */
+body.home-hub.dashboard-flight .story-content :is(.story-console, .story-tracking-preview, .story-pro-entry, .story-token-identity, .hub-directory, .hub-footer, .story-console-foot) {
+  background: transparent;
+}
+body.home-hub.dashboard-flight :is(.story-hero-copy, .story-copy, .story-paths, .story-utility, .story-closing, .hub-section-heading) {
+  text-shadow: 0 1px 3px #000, 0 2px 16px #0008;
+}
+body.home-hub.dashboard-flight :is(.hub-tool, .hub-project-invite, .hub-return, .hub-project, .hub-section-heading) {
+  background: var(--dashboard-glass);
+}
+body.premium-dashboard.dashboard-flight :is(.dashboard-token-bar, .dashboard-utility, .dashboard-hero, .dashboard-disclosure, .home-market, .home-release-notes, .terminal-purpose, .following-home, .eco-teaser, .home-premium, .site-growth, .path-card, .example-card, .dashboard-return-grid .briefing-entry, .dashboard-return-grid .discovery-compact) {
+  background: var(--dashboard-glass);
+}
+body.premium-dashboard.dashboard-flight .dashboard-disclosure :is(.home-market, .home-release-notes, .terminal-purpose, .following-home, .eco-teaser, .home-premium, .site-growth, .path-card, .example-card) {
+  background: transparent;
+}
+body.premium-dashboard.dashboard-flight .dashboard-hero::after { background: none; }
+body.premium-dashboard.dashboard-flight .dashboard-arrival::before { background: var(--dashboard-glass); }
