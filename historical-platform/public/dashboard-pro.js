@@ -71,14 +71,24 @@
   }
   // Keep direct Wallet Watch / walking links in sync with hash navigation.
   function markCurrentDestination() {
-    const current = location.pathname + location.hash;
+    const current = location.pathname + (location.search || '') + location.hash;
     for (const selector of ['.dashboard-sidebar', '.mobile-dock']) {
       const nav = document.querySelector(selector);
       if (!nav) continue;
       const items = [...nav.querySelectorAll('a[href]')];
-      const exact = items.find(link => link.getAttribute('href') === current);
-      if (!exact) continue;
+      const exact = items.find(link => link.getAttribute('href') === current)
+        || items.find(link => link.getAttribute('href') === location.pathname + location.hash)
+        || items.find(link => link.getAttribute('href') === location.pathname)
+        || items.filter(link => {
+          const href = link.getAttribute('href');
+          return href !== '/' && !/[?#]/.test(href) && location.pathname.startsWith(href + '/');
+        }).sort((a,b) => b.getAttribute('href').length - a.getAttribute('href').length)[0];
       items.forEach(link => link.removeAttribute('aria-current'));
+      // Secondary destinations belong to All tools on the compact mobile dock.
+      if (!exact) {
+        if (selector === '.mobile-dock') nav.querySelector('[data-open-tools]')?.setAttribute('aria-current', 'page');
+        continue;
+      }
       exact.setAttribute('aria-current', 'page');
       const group = exact.closest('details');
       if (group) group.open = true;

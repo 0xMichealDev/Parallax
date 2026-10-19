@@ -1,10 +1,10 @@
 import {compareSnapshots} from './observatory-compare.js';
-export const KEY='parallax-observatory-v1',LIMIT=10;
+export const KEY='parallax-observatory-v1';
 export const addressOK=v=>typeof v==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(v);
 export function validSnapshot(s,address=s?.address){return !!s&&s.schema==='parallax.passport.v1'&&s.network==='solana-mainnet'&&addressOK(s.address)&&s.address===address&&Number.isFinite(Date.parse(s.fetchedAt))&&(!!s.chain||!!s.market);}
 export function readState(raw){
  const fallback={version:1,auto:true,items:[]};if(!raw)return fallback;
- try{const s=JSON.parse(raw);if(s.version!==1||!Array.isArray(s.items))throw Error();const seen=new Set();return {version:1,auto:s.auto!==false,items:s.items.filter(i=>{if(!validSnapshot(i?.latest,i?.address)||!validSnapshot(i?.reference,i?.address)||seen.has(i.address))return false;seen.add(i.address);return true;}).slice(0,LIMIT)};}catch{return fallback;}
+ try{const s=JSON.parse(raw);if(s.version!==1||!Array.isArray(s.items))throw Error();const seen=new Set();return {version:1,auto:s.auto!==false,items:s.items.filter(i=>{if(!validSnapshot(i?.latest,i?.address)||!validSnapshot(i?.reference,i?.address)||seen.has(i.address))return false;seen.add(i.address);return true;})};}catch{return fallback;}
 }
 export function updateSnapshot(item,s){
  if(!validSnapshot(s,item.address))throw Error('The source returned an invalid snapshot. Your previous evidence was kept.');

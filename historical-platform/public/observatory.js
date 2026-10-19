@@ -1,8 +1,8 @@
-import {KEY,LIMIT,addressOK,validSnapshot,readState,updateSnapshot,compareItem,safeSource,summary} from './observatory-core.js';
+import {KEY,addressOK,validSnapshot,readState,updateSnapshot,compareItem,safeSource,summary} from './observatory-core.js?v=137';
 const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const date=v=>new Date(v).toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}),enc=encodeURIComponent;
 const request=(path,body)=>window.ParallaxResearch.request(path,body),errors=new Map(),checked=new Map();
-let state,preview=null,busy=false,active=true,generation=0,loadError=false;
+let state,preview=null,busy=false,active=true,generation=0,loadError=false,visibleCount=20;
 try{state=readState(localStorage.getItem(KEY));}catch{state=readState(null);loadError=true;}
 function status(text,error=false){$('obs-status').textContent=text;$('obs-status').classList.toggle('error',error);}
 // Read again before every write so another tab's saved projects are preserved.
@@ -21,8 +21,10 @@ function card(item,isPreview=false){
  '<div class="obs-card-actions">'+(isPreview?'<button class="obs-button primary" data-action="follow">Follow this token</button>':'<button class="obs-button" data-action="refresh">Refresh ↻</button>'+(c?'<button class="obs-button primary" data-action="review">Mark reviewed</button>':''))+'<button class="obs-button" data-action="share">Share token ↗</button><a class="obs-button" href="/terminal?token='+enc(item.address)+'">Open research ↗</a></div><details><summary>Sources, evidence &amp; options</summary><div class="obs-source-row">'+sources(s)+'</div><p>Selected pool: '+esc(s.market?.pairAddress||'Unavailable')+'</p><p>'+esc((c?.warnings||['Two observations are needed for a comparison.']).join(' '))+'</p><p>'+esc((Array.isArray(s.gaps)?s.gaps:[]).join(' '))+'</p><div class="obs-card-actions"><button class="obs-button" data-action="download">Download evidence ↓</button>'+(!isPreview?'<button class="obs-button" data-action="account">Save to account ↗</button><button class="obs-button" data-action="remove">Unfollow</button>':'')+'</div></details></article>';
 }
 function render(){
- $('obs-count').textContent=state.items.length+' / '+LIMIT;$('obs-auto').checked=state.auto;
- $('obs-list').innerHTML=state.items.length?state.items.map(i=>card(i)).join(''):'<div class="obs-empty"><p class="obs-eyebrow">YOUR FIRST OBSERVATION STARTS HERE</p><h3>A watchlist with a memory.</h3><p>Paste a token address above. We’ll collect a starting snapshot so your next visit has something to compare.</p><button class="obs-button" data-action="try">Try the official PRLX token ↗</button></div>';
+ $('obs-count').textContent=state.items.length+' followed';$('obs-auto').checked=state.auto;
+ $('obs-list').innerHTML=state.items.length?state.items.slice(0,visibleCount).map(i=>card(i)).join(''):'<div class="obs-empty"><p class="obs-eyebrow">YOUR FIRST OBSERVATION STARTS HERE</p><h3>A watchlist with a memory.</h3><p>Paste a token address above. We’ll collect a starting snapshot so your next visit has something to compare.</p><button class="obs-button" data-action="try">Try the official PRLX token ↗</button></div>';
+ $('obs-more').hidden=visibleCount>=state.items.length;
+ $('obs-more').textContent='Show more tokens ('+Math.max(0,state.items.length-visibleCount)+' remaining)';
  $('obs-preview').hidden=!preview;$('obs-preview').innerHTML=preview?card({address:preview.address,reference:preview,latest:preview},true):'';
  controls();
 }
@@ -32,9 +34,8 @@ async function run(work){if(busy)return;busy=true;controls();try{await work();}c
 async function follow(address,supplied){
  if(!addressOK(address))throw Error('Paste a valid Solana token contract address.');
  if(state.items.some(i=>i.address===address)){status('You already follow this token. Your reference is unchanged.');return;}
- if(state.items.length>=LIMIT)throw Error('You can follow up to 10 tokens on this device. Unfollow one to make room.');
  status('Collecting your first observation…');const g=generation,s=supplied||await snapshot(address);if(!active||g!==generation)return;
- if(save(current=>{if(current.items.some(i=>i.address===address))return current;if(current.items.length>=LIMIT)throw Error();return {...current,items:[{address,reference:s,latest:s},...current.items]};})){
+ if(save(current=>{if(current.items.some(i=>i.address===address))return current;return {...current,items:[{address,reference:s,latest:s},...current.items]};})){
   window.dispatchEvent(new CustomEvent('parallax:observatory-activity',{detail:{kind:'follow'}}));errors.delete(address);preview=null;$('obs-form').reset();render();status('Token followed. Return here to compare a new observation with this starting point.');
  }
 }
@@ -63,6 +64,7 @@ async function account(item){
 }
 $('obs-form').onsubmit=e=>{e.preventDefault();run(()=>follow($('obs-address').value.trim()));};
 $('obs-refresh').onclick=()=>run(()=>refresh(state.items.map(i=>i.address)));
+$('obs-more').onclick=()=>{visibleCount+=20;render();status('Showing '+Math.min(visibleCount,state.items.length)+' of '+state.items.length+' followed tokens.');};
 $('obs-auto').onchange=e=>{if(save(s=>({...s,auto:e.target.checked})))status(e.target.checked?'Saved tokens will refresh when you reopen this page.':'Automatic refresh is off. Choose Refresh to collect new observations.');render();};
 async function action(e){const button=e.target.closest('button[data-action]');if(!button||busy)return;
  const a=button.dataset.action;if(a==='try'){$('obs-address').value='8B2G4oiTKZKbSVTKPAP7Cfe6zAsEtrySCYcX9M2kpump';$('obs-address').focus();status('Official PRLX address filled. Choose Follow token to start.');return;}
@@ -80,7 +82,7 @@ async function action(e){const button=e.target.closest('button[data-action]');if
  }
  if(a==='download'){
   const data={format:'parallax.observatory.evidence.v1',exportedAt:new Date().toISOString(),address,reference:item.reference,latest:item.latest,comparison:compareItem(item)};
-  const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='PARALLAX-'+address.slice(0,8)+'-evidence.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status('Evidence downloaded with collection times and original source links.');
+  const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='PARALLAX-'+address.slice(0,8)+'-evidence.json';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);status('Evidence downloaded with collection times and original source links.');
  }
 }
 $('obs-list').onclick=action;$('obs-preview').onclick=action;
