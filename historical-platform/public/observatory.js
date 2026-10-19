@@ -35,7 +35,7 @@ async function follow(address,supplied){
  if(state.items.length>=LIMIT)throw Error('You can follow up to 10 tokens on this device. Unfollow one to make room.');
  status('Collecting your first observation…');const g=generation,s=supplied||await snapshot(address);if(!active||g!==generation)return;
  if(save(current=>{if(current.items.some(i=>i.address===address))return current;if(current.items.length>=LIMIT)throw Error();return {...current,items:[{address,reference:s,latest:s},...current.items]};})){
-  errors.delete(address);preview=null;$('obs-form').reset();render();status('Token followed. Return here to compare a new observation with this starting point.');
+  window.dispatchEvent(new CustomEvent('parallax:observatory-activity',{detail:{kind:'follow'}}));errors.delete(address);preview=null;$('obs-form').reset();render();status('Token followed. Return here to compare a new observation with this starting point.');
  }
 }
 async function refresh(addresses){
@@ -72,7 +72,7 @@ async function action(e){const button=e.target.closest('button[data-action]');if
  if(a==='follow')return run(()=>follow(address,preview));
  if(a==='account')return run(()=>account(item));
  if(a==='review'){
-  if(save(s=>({...s,items:s.items.map(i=>i.address===address?{...i,reference:item.latest}:i)}))){render();status('Reviewed. Future changes will compare with the observation you just reviewed.');}
+  if(save(s=>({...s,items:s.items.map(i=>i.address===address?{...i,reference:item.latest}:i)}))){window.dispatchEvent(new CustomEvent('parallax:observatory-activity',{detail:{kind:'review'}}));render();status('Reviewed. Future changes will compare with the observation you just reviewed.');}
  }
  if(a==='remove'){
   if(!confirm('Unfollow this token and remove its snapshots from this device? Account-saved reports are kept.'))return;
