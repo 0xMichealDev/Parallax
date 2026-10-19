@@ -46,7 +46,7 @@ function controllerInput(enabled){
  const neutral=!x&&!y&&!rx&&!ry&&!buttons.some(Boolean);
  const wasArmed=padArmed;if(!enabled)padArmed=false;else if(neutral)padArmed=true;
  const edge=i=>buttons[i]&&!padButtons[i];
- const result=enabled&&wasArmed?{forward:-y,side:x,turn:rx,tilt:-ry,fast:!!buttons[10],brake:!!buttons[0]||!!buttons[1],jump:edge(0),interact:edge(2)}:empty;
+ const result=enabled&&wasArmed?{forward:-y,side:x,turn:rx,tilt:-ry,fast:!!buttons[10],brake:!!buttons[1],jump:edge(0),interact:edge(2)}:empty;
  padButtons=buttons;return result;
 }
 function stopWalkingInput(){padArmed=false;groundView?.brake?.();walkKeys.clear();walkTouches.clear();q('.u-walk-pad').querySelectorAll('button').forEach(b=>b.classList.remove('is-held'))}
@@ -68,17 +68,19 @@ function walkReadout(){if(!groundView)return;const s=groundView.state;const bear
 function walkTick(dt){
  const enabled=walking&&selected===0&&!!groundView&&mapPanel.hidden&&!flight&&!campExperience?.blocking&&!document.hidden&&(!document.hasFocus||document.hasFocus());
  const pad=controllerInput(enabled);
- q('#u-controller-status').textContent=padIndex===null?'Controller: connect, then press a button':'Controller connected · LS move · RS look · A/✕ jump · L3 run · X/□ interact';
- q('#u-walk-jump').disabled=!enabled||!!groundView?.driving||!!(groundView?.flight&&groundView.flight.mode!=='ground');
+ q('#u-controller-status').textContent=padIndex===null?'Controller: connect, then press a button':'Controller connected · LS move · RS look · A/✕ jump/flip · B/○ brake · L3 run · X/□ interact';
+ q('#u-walk-jump').querySelector('small').textContent=groundView?.driving?'FLIP':'JUMP';
+ q('#u-walk-jump').setAttribute('aria-label',groundView?.driving?'Cybertruck stunt jump and kickflip':'Jump');
+ q('#u-walk-jump').disabled=!enabled||!!groundView?.stunting||!!(groundView?.flight&&groundView.flight.mode!=='ground');
  if(!enabled)return;
  if(pad.interact){campExperience?.interact?.();if(campExperience?.blocking)return;}
- if(pad.jump&&!groundView.driving)groundView.jump();
+ if(pad.jump)groundView.jump();
  let forward=Number(walkKeys.has('KeyW'))-Number(walkKeys.has('KeyS')),side=Number(walkKeys.has('KeyD'))-Number(walkKeys.has('KeyA'));
  forward+=pad.forward;side+=pad.side;
  for(const direction of walkTouches.values()){if(direction==='forward')forward++;if(direction==='back')forward--;if(direction==='right')side++;if(direction==='left')side--;}
  const turn=Number(walkKeys.has('ArrowRight'))-Number(walkKeys.has('ArrowLeft'))+pad.turn,tilt=Number(walkKeys.has('ArrowUp'))-Number(walkKeys.has('ArrowDown'))+pad.tilt;
  if(turn||tilt)groundView.turn(turn*dt*1.2,tilt*dt*.9);
- if(groundView.driving&&(walkKeys.has('Space')||pad.brake)){groundView.brake();forward=side=0;}
+ if(groundView.driving&&(walkKeys.has('KeyB')||pad.brake)){groundView.brake();forward=side=0;}
  const moved=groundView.move(Math.max(-1,Math.min(1,forward)),Math.max(-1,Math.min(1,side)),dt,pad.fast||walkKeys.has('ShiftLeft')||walkKeys.has('ShiftRight'));
  const jumping=groundView.jumpTick(dt);
  if(moved||turn||tilt||jumping){draw();walkReadout()}
@@ -94,7 +96,8 @@ document.addEventListener('pointerlockerror',()=>{if(walking)q('#u-walk-notice')
 document.addEventListener('mousemove',e=>{if(walking&&groundView&&document.pointerLockElement===stage){groundView.turn(e.movementX*.0025,-e.movementY*.0025);draw();walkReadout()}});
 dialog.addEventListener('keydown',e=>{
  if(campExperience?.blocking||!groundView||selected!==0||!mapPanel.hidden||['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;
- if(e.code==='Space'&&walking&&!['BUTTON','A'].includes(e.target.tagName)){e.preventDefault();if(groundView.driving){walkKeys.add('Space');groundView.brake();}else if(!e.repeat)groundView.jump();return;}
+ if(e.code==='Space'&&walking&&!['BUTTON','A'].includes(e.target.tagName)){e.preventDefault();if(!e.repeat)groundView.jump();return;}
+ if(e.code==='KeyB'&&walking&&groundView.driving){e.preventDefault();walkKeys.add('KeyB');groundView.brake();return;}
  if(!['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.code))return;
  if(!walking&&!['KeyW','KeyA','KeyS','KeyD'].includes(e.code))return;
  e.preventDefault();e.stopPropagation();if(!walking)startWalk();walkKeys.add(e.code);

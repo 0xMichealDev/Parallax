@@ -208,13 +208,17 @@
     attribute vec3 position; attribute vec3 normal; attribute vec2 material;
     uniform vec3 eye; uniform vec3 right; uniform vec3 up; uniform vec3 forward;
     uniform float aspect; uniform float lens;uniform float time,launchHeight;
-    uniform float objectMode;uniform vec3 objectOrigin;uniform vec4 objectPose;
+    uniform float objectMode;uniform vec3 objectOrigin;uniform vec4 objectPose;uniform vec4 objectStunt;uniform vec3 objectAxis;
     varying vec3 point; varying vec3 norm; varying vec2 kind; varying vec3 surfacePoint;
     void main(){surfacePoint=position;point=position;norm=normal;kind=material;
       if(material.x>59.5&&material.x<64.5)point.y+=launchHeight;
       if(material.x>52.5&&material.x<53.5)point.y+=.012*sin(position.z*2.1-time*2.3)+.008*sin(position.x*3.7+position.z*.9-time*1.7);
       if(material.x>53.5&&material.x<54.5)point.x+=sin(time*1.3+position.x*.7+position.z*.3)*.045*(1.-normal.y);
-      if(objectMode>.5){point=vec3(position.x*objectPose.x-position.z*objectPose.y,position.y,position.x*objectPose.y+position.z*objectPose.x);point.y+=point.x*objectPose.z+point.z*objectPose.w;point+=objectOrigin;norm=vec3(normal.x*objectPose.x-normal.z*objectPose.y,normal.y,normal.x*objectPose.y+normal.z*objectPose.x);norm.x-=objectPose.z*norm.y;norm.z-=objectPose.w*norm.y;norm=normalize(norm);}
+      if(objectMode>.5){point=vec3(position.x*objectPose.x-position.z*objectPose.y,position.y,position.x*objectPose.y+position.z*objectPose.x);point.y+=point.x*objectPose.z+point.z*objectPose.w;point+=objectOrigin;norm=vec3(normal.x*objectPose.x-normal.z*objectPose.y,normal.y,normal.x*objectPose.y+normal.z*objectPose.x);norm.x-=objectPose.z*norm.y;norm.z-=objectPose.w*norm.y;norm=normalize(norm);
+        // Rotate the body and every wheel around one shared vehicle pivot.
+        float c=cos(objectStunt.w),s=sin(objectStunt.w);vec3 axis=objectAxis,offset=point-objectStunt.xyz;
+        point=objectStunt.xyz+offset*c+cross(axis,offset)*s+axis*dot(axis,offset)*(1.-c);
+        norm=normalize(norm*c+cross(axis,norm)*s+axis*dot(axis,norm)*(1.-c));}
       vec3 p=point-eye;float depth=dot(p,forward);
       gl_Position=vec4(dot(p,right)/(aspect*lens),dot(p,up)/lens,1.000025*depth-.10000125,depth);}
   `;
@@ -925,7 +929,7 @@
 
       const skyBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,skyBuffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
       const meshBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);
-      const info=p=>({p,position:gl.getAttribLocation(p,'position'),normal:gl.getAttribLocation(p,'normal'),material:gl.getAttribLocation(p,'material'),uniform:Object.fromEntries(['eye','right','up','forward','aspect','lens','time','fireOn','lanternOn','tentOpen','firePosition','lanternPosition','night','flashlightOn','redLight','flashlightPosition','flashlightDirection','handSway','pixelAngle','satellitesOn','fireBoost','ufoAwake','campusLights','objectMode','objectOrigin','objectPose','roverShadowA','roverShadowB','cabinMode','liftMode','launchHeight','scannerStrength','scanProgress','artifactInstalled'].map(n=>[n,gl.getUniformLocation(p,n)]))});
+      const info=p=>({p,position:gl.getAttribLocation(p,'position'),normal:gl.getAttribLocation(p,'normal'),material:gl.getAttribLocation(p,'material'),uniform:Object.fromEntries(['eye','right','up','forward','aspect','lens','time','fireOn','lanternOn','tentOpen','firePosition','lanternPosition','night','flashlightOn','redLight','flashlightPosition','flashlightDirection','handSway','pixelAngle','satellitesOn','fireBoost','ufoAwake','campusLights','objectMode','objectOrigin','objectPose','objectStunt','objectAxis','roverShadowA','roverShadowB','cabinMode','liftMode','launchHeight','scannerStrength','scanProgress','artifactInstalled'].map(n=>[n,gl.getUniformLocation(p,n)]))});
       const skyInfo=info(sky),meshInfo=info(mesh),fireInfo=info(fire),emberInfo=info(embers),handInfo=info(hand);
       const scannerVertices=handGeometry(true),scannerBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,scannerBuffer);gl.bufferData(gl.ARRAY_BUFFER,scannerVertices,gl.STATIC_DRAW);
       const handVertices=handGeometry(),handBuffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,handBuffer);gl.bufferData(gl.ARRAY_BUFFER,handVertices,gl.STATIC_DRAW);
@@ -979,14 +983,14 @@
       canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();alive=false;worker?.terminate();canvas.remove();onFailure?.();});
       function acceptWorld(result){if(!alive)return;world=result;gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,shadeTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.shadeSize,world.shadeSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.shade);gl.activeTexture(gl.TEXTURE7);gl.bindTexture(gl.TEXTURE_2D,trailTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.trailSize,world.trailSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.trailMask);ready=true;worker?.terminate();worker=null;onReady?.();}
       // Construct geometry off the UI thread; keep the landscape visible while it loads.
-      try{worker=new Worker('/desert-world.js?v=135');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
+      try{worker=new Worker('/desert-world.js?v=136');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
       catch{setTimeout(()=>acceptWorld(geometry()),0)}
       function cameraEye(){
         const base=[state.x,walkingGround(state.x,state.z)+(state.seated?1.03:1.72)+(state.jumpHeight||0),state.z];if(flight&&flight.mode!=='ground'){base[1]=ground(-110,-120)+(flight.mode==='lift'?flight.rise:54+flight.rise)+1.62;return base;}if(!life?.driving)return base;
         // A chase camera retreats only as far as the clear space behind the vehicle.
         const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw);let retreat=7.2;
         for(let d=1;d<=7.2;d+=.3){const x=state.x-sy*d,z=state.z+cy*d;if(world.obstacles.some(o=>Math.hypot(x-o.x,z-o.z)<o.radius+.35)){retreat=Math.max(.5,d-.5);break;}}
-        const x=state.x-sy*retreat,z=state.z+cy*retreat;return [x,Math.max(base[1]+2.3,ground(x,z)+1.4),z];
+        const x=state.x-sy*retreat,z=state.z+cy*retreat;return [x,Math.max(base[1]+2.3+Life.stuntPose(Life.active(life)).height,ground(x,z)+1.4),z];
       }
       function render(zoom=1,shot=null){
         if(!alive||!ready)return;currentZoom=zoom;currentShot=shot;
@@ -1000,7 +1004,7 @@
         const sway=!shot&&swayEnabled&&onFoot?[Math.sin(state.distance*3.7)*.008,Math.cos(state.distance*7.4)*.006]:[0,0];
         let flashlightPosition=eye.map((v,i)=>v+right[i]*(.263+sway[0]-Math.max(0,1-w/h)*.33)+up[i]*(-.24+sway[1])+forward[i]*.89);
         let flashlightDirection=forward.map((v,i)=>v*.990+up[i]*.05+right[i]*-.129),fl=Math.hypot(...flashlightDirection);for(let i=0;i<3;i++)flashlightDirection[i]/=fl;
-        if(life?.driving){const v=Life.active(life);flashlightPosition=[v.x+Math.sin(v.yaw)*2.8,ground(v.x,v.z)+.9,v.z-Math.cos(v.yaw)*2.8];flashlightDirection=[Math.sin(v.yaw),-.035,-Math.cos(v.yaw)];}
+        if(life?.driving){const v=Life.active(life);flashlightPosition=[v.x+Math.sin(v.yaw)*2.8,ground(v.x,v.z)+.9+Life.stuntPose(v).height,v.z-Math.cos(v.yaw)*2.8];flashlightDirection=[Math.sin(v.yaw),-.035,-Math.cos(v.yaw)];}
         function uniforms(i){gl.useProgram(i.p);gl.uniform1f(i.uniform.scannerStrength,camp.scannerStrength||0);gl.uniform1f(i.uniform.scanProgress,camp.scanProgress||0);gl.uniform1f(i.uniform.artifactInstalled,Number(!!camp.artifactInstalled));gl.uniform1f(i.uniform.liftMode,Number(!shot&&flight?.mode==='lift'));gl.uniform1f(i.uniform.cabinMode,Number(!shot&&flight&&['cabin','launch','orbit'].includes(flight.mode)));gl.uniform1f(i.uniform.launchHeight,shot?0:flight?.rise||0);if(life)life.vehicles.forEach((v,j)=>gl.uniform4f(i.uniform[j===0?"roverShadowA":"roverShadowB"],v.x,v.z,Math.sin(v.yaw),Math.cos(v.yaw)));gl.uniform3fv(i.uniform.eye,eye);gl.uniform3fv(i.uniform.right,right);gl.uniform3fv(i.uniform.up,up);gl.uniform3fv(i.uniform.forward,forward);gl.uniform1f(i.uniform.aspect,w/h);gl.uniform1f(i.uniform.lens,lens);gl.uniform1f(i.uniform.night,Number(!!shot||camp.night));gl.uniform1f(i.uniform.time,time);gl.uniform1f(i.uniform.pixelAngle,2*lens/h);gl.uniform1f(i.uniform.satellitesOn,Number(!!shot||camp.satellitesOn));gl.uniform2fv(i.uniform.handSway,sway);gl.uniform1f(i.uniform.flashlightOn,Number(!shot&&(!flight||flight.mode==='ground')&&onFoot&&(life?.driving||camp.hands&&camp.flashlightOn&&!camp.binoculars&&!camp.scanner)));gl.uniform1f(i.uniform.redLight,Number(!life?.driving&&camp.redLight));gl.uniform3fv(i.uniform.flashlightPosition,flashlightPosition);gl.uniform3fv(i.uniform.flashlightDirection,flashlightDirection);gl.uniform1f(i.uniform.fireOn,Number(!!shot||camp.fireOn));gl.uniform1f(i.uniform.fireBoost,camp.fireBoost);gl.uniform1f(i.uniform.ufoAwake,Number(shot?shot.signal:camp.ufoAwake));gl.uniform1f(i.uniform.campusLights,Number(!!shot||camp.campusLights));gl.uniform1f(i.uniform.lanternOn,Number(!!shot||camp.lanternOn));gl.uniform1f(i.uniform.tentOpen,Number(camp.tentOpen));gl.uniform3fv(i.uniform.firePosition,CAMP.fire);gl.uniform3fv(i.uniform.lanternPosition,[-4.25,CAMP.tent[1]+.47,-9.22]);}
         gl.disable(gl.DEPTH_TEST);uniforms(skyInfo);gl.bindBuffer(gl.ARRAY_BUFFER,skyBuffer);
         for(let i=0;i<3;i++)gl.disableVertexAttribArray(i);
@@ -1010,6 +1014,7 @@
         gl.drawArrays(gl.TRIANGLES,0,world.vertices.length/8);
         if(life){gl.uniform1f(meshInfo.uniform.objectMode,1);for(const model of Life.models(life,ground)){
           let buffer=lifeBuffers.get(model.key);if(!buffer){buffer=gl.createBuffer();lifeBuffers.set(model.key,buffer);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,model.vertices,gl.STATIC_DRAW);}else gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+          const pivot=model.pivot||[0,0,0];gl.uniform4f(meshInfo.uniform.objectStunt,...pivot,swayEnabled?(model.roll||0):0);gl.uniform3fv(meshInfo.uniform.objectAxis,model.axis||[0,0,1]);
           gl.uniform3f(meshInfo.uniform.objectOrigin,model.x,model.y,model.z);gl.uniform4f(meshInfo.uniform.objectPose,Math.cos(model.yaw),Math.sin(model.yaw),model.sx,model.sz);
           for(const [loc,size,offset]of [[meshInfo.position,3,0],[meshInfo.normal,3,12],[meshInfo.material,2,24]])gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);gl.drawArrays(gl.TRIANGLES,0,model.vertices.length/8);
         }gl.uniform1f(meshInfo.uniform.objectMode,0);}
@@ -1027,27 +1032,27 @@
         exitRocket(){if(flight)Rocket.exit(flight);Object.assign(state,{x:BOARDING.x,z:BOARDING.z+2,yaw:Math.PI,pitch:.03,seated:false});render();},
         flightTick(dt){if(!flight)return false;const old=flight.mode,moved=Rocket.tick(flight,dt);if(old==='lift'&&flight.mode==='cabin')Object.assign(state,{x:-110,z:-121.7,yaw:Math.PI,pitch:-.05,seated:false});return moved;},
         riverLevel(){const distance=riverDistance(state.x,state.z);return Math.max(0,1-distance/24)*.5;},
-        get driving(){return life?.driving||null;},get speed(){return life?Life.active(life)?.speed||0:0;},
+        get driving(){return life?.driving||null;},get stunting(){return !!(life&&Life.active(life)?.stunt);},get speed(){return life?Life.active(life)?.speed||0:0;},
         nearestRover(){return life?Life.nearestVehicle(life,state):null;},
         enterRover(id){if(flight&&flight.mode!=='ground')return false;if(!life||!Life.enter(life,state,id))return false;resetJump(state);camp.binoculars=false;render(currentZoom,currentShot);return true;},
         exitRover(){const ok=life&&Life.exit(life,state,world.obstacles);if(ok)render(currentZoom,currentShot);return ok;},
         brake(){if(life)Life.brake(life);},
-        recallRovers(){if(flight)Rocket.exit(flight);if(!life)return;life.driving=null;for(let i=0;i<life.vehicles.length;i++)Object.assign(life.vehicles[i],Life.SPAWNS[i],{speed:0,wheel:0,steer:0});Object.assign(state,camera());render(currentZoom,currentShot);},trail:TRAIL,paths:PATHS,routeTo:place=>trailRoute(state,place),terrainHeight:walkingGround,render,
-        setWalking(value){onFoot=value;if(!value){resetJump(state);camp.binoculars=false;if(life)Life.brake(life);}},setHandVisible(value){handVisible=value;},setMotion(value){swayEnabled=value;},
-        jump(){return ready&&onFoot&&!life?.driving&&(!flight||flight.mode==='ground')&&jump(state);},
-        jumpTick(dt){return jumpTick(state,dt);},
+        recallRovers(){if(flight)Rocket.exit(flight);if(!life)return;Life.cancelStunts(life);life.driving=null;for(let i=0;i<life.vehicles.length;i++)Object.assign(life.vehicles[i],Life.SPAWNS[i],{speed:0,wheel:0,steer:0});Object.assign(state,camera());render(currentZoom,currentShot);},trail:TRAIL,paths:PATHS,routeTo:place=>trailRoute(state,place),terrainHeight:walkingGround,render,
+        setWalking(value){onFoot=value;if(!value){resetJump(state);camp.binoculars=false;if(life){Life.brake(life);Life.cancelStunts(life);}}},setHandVisible(value){handVisible=value;},setMotion(value){swayEnabled=value;},
+        jump(){if(!ready||!onFoot||(flight&&flight.mode!=='ground'))return false;return life?.driving?Life.stuntJump(life):jump(state);},
+        jumpTick(dt){const vehicle=life&&Life.stuntTick(life,dt);return jumpTick(state,dt)||vehicle;},
         satellitePoints(){return [0,1,2].map(i=>satelliteDirection(time,i).map((v,j)=>v*1000+(j===0?state.x:j===1?ground(state.x,state.z)+1.72:state.z)));},
         watchSky(){camp.night=true;state.yaw=0;state.pitch=.61;render(currentZoom,currentShot);},
         setCamp(patch){Object.assign(camp,patch);render(currentZoom,currentShot);},
         stoke(){camp.fireOn=true;camp.fireBoost=1;render(currentZoom,currentShot);},
         tick(dt){const step=Math.min(Math.max(0,dt),.1);time+=step;if(life)Life.crewTick(life,step,state);camp.fireBoost=Math.max(0,camp.fireBoost-step/18);return !!life||camp.satellitesOn||camp.fireOn&&Math.hypot(state.x,state.z+8)<75;},
         project(point){const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw),sp=Math.sin(state.pitch),cp=Math.cos(state.pitch),eye=cameraEye(),p=point.map((v,i)=>v-eye[i]);const d=p[0]*sy*cp+p[1]*sp-p[2]*cy*cp,lens=viewLens(currentZoom,camp.binoculars);return {x:innerWidth/2+(p[0]*cy+p[2]*sy)/d/lens*innerHeight/2,y:innerHeight/2-(-p[0]*sy*sp+p[1]*cp+p[2]*cy*sp)/d/lens*innerHeight/2,depth:d,distance:Math.hypot(...p)};},
-        visit(place){resetJump(state);if(flight)Rocket.exit(flight);if(life){Life.brake(life);life.driving=null;}const positions={fire:[0,-5.15,0,-.14],tent:[-4.5,-6.25,0,.03],telescope:[3.5,-10.6,0,.13],camp:[0,-2.8,0,.025]};const p=positions[place]||positions.camp;Object.assign(state,{x:p[0],z:p[1],yaw:p[2],pitch:p[3],edge:false,seated:place==='fire'});render(currentZoom,currentShot);},
+        visit(place){resetJump(state);if(flight)Rocket.exit(flight);if(life){Life.brake(life);Life.cancelStunts(life);life.driving=null;}const positions={fire:[0,-5.15,0,-.14],tent:[-4.5,-6.25,0,.03],telescope:[3.5,-10.6,0,.13],camp:[0,-2.8,0,.025]};const p=positions[place]||positions.camp;Object.assign(state,{x:p[0],z:p[1],yaw:p[2],pitch:p[3],edge:false,seated:place==='fire'});render(currentZoom,currentShot);},
         get ready(){return ready;},
         look(dx,dy){state.yaw=(state.yaw-dx*(camp.binoculars?.0012:.0035))%TAU;state.pitch=clamp(state.pitch+dy*(camp.binoculars?.001:.003),-1.4,1.4);},
         turn(yaw,pitch){state.yaw=(state.yaw+yaw)%TAU;state.pitch=clamp(state.pitch+pitch,-1.4,1.4);},
         move:(forward,side,dt,fast)=>ready&&(flight&&flight.mode!=='ground'?(flight.mode==='cabin'&&Rocket.cabinMove(state,forward,side,dt)):life?.driving?Life.drive(life,state,forward,side,dt,world.obstacles,walkingGround):move(state,forward,side,dt,fast,life?world.obstacles.concat(life.vehicles.flatMap(v=>Life.circles(v,.98)),life.crew.map(p=>({x:p.x,z:p.z,radius:.28}))):world.obstacles)),
-        reset(){if(flight)Rocket.exit(flight);if(life){Life.brake(life);life.driving=null;}Object.assign(state,camera());}
+        reset(){if(flight)Rocket.exit(flight);if(life){Life.brake(life);Life.cancelStunts(life);life.driving=null;}Object.assign(state,camera());}
       };
     }catch(error){canvas.remove();gl.getExtension('WEBGL_lose_context')?.loseContext();console.warn('Desert view unavailable:',error.message);return null;}
   }

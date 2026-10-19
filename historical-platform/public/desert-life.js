@@ -13,6 +13,15 @@
   ];
   function create(){return {vehicles:SPAWNS.map(s=>({...s,speed:0,wheel:0,steer:0})),crew:CREW.map((s,i)=>({...s,x:s.route[0][0],z:s.route[0][1],yaw:i*.8,next:s.route.length>1?1:0,pause:i*.7,phase:i,walking:false})),driving:null,travel:0,clock:0};}
   const active=life=>life.vehicles.find(v=>v.id===life.driving);
+  const STUNT_SECONDS=1.6;
+  function stuntPose(v){
+    if(!v?.stunt)return {height:0,roll:0};
+    const p=clamp(v.stunt.time/STUNT_SECONDS,0,1),spin=clamp((p-.18)/.64,0,1);
+    return {height:16*p*(1-p),roll:TAU*spin*spin*(3-2*spin)};
+  }
+  function stuntJump(life){const v=active(life);if(!v||v.stunt||v.stuntCooldown>0)return false;v.stunt={time:0};return true;}
+  function stuntTick(life,dt){let changed=false;const step=clamp(dt,0,.1);for(const v of life.vehicles){v.stuntCooldown=Math.max(0,(v.stuntCooldown||0)-step);if(!v.stunt)continue;changed=true;v.stunt.time+=step;if(v.stunt.time>=STUNT_SECONDS){v.stunt=null;v.stuntCooldown=.45;}}return changed;}
+  function cancelStunts(life){for(const v of life.vehicles){v.stunt=null;v.stuntCooldown=0;}}
   function crewTick(life,dt,player){life.clock+=dt;for(const p of life.crew){p.walking=false;if(Math.hypot(p.x-player.x,p.z-player.z)<4.5){p.yaw=Math.atan2(player.x-p.x,p.z-player.z);continue;}if(p.route.length===1)continue;if(p.pause>0){p.pause-=dt;continue;}if(Math.hypot(p.x-player.x,p.z-player.z)<2.8||life.vehicles.some(v=>Math.hypot(p.x-v.x,p.z-v.z)<4))continue;const target=p.route[p.next],dx=target[0]-p.x,dz=target[1]-p.z,d=Math.hypot(dx,dz);if(d<.15){p.next=(p.next+1)%p.route.length;p.pause=3.5;continue;}const step=Math.min(d,dt*.82);p.x+=dx/d*step;p.z+=dz/d*step;p.yaw=Math.atan2(dx,-dz);p.phase+=step*5.5;p.walking=true;}}
   function circles(v,r=1.03){return [-1.81,0,1.81].map(t=>({x:v.x+Math.sin(v.yaw)*t,z:v.z-Math.cos(v.yaw)*t,radius:r}));}
   function blocked(v,obstacles,ground){const cc=circles(v);if(ground.canTraverse&&cc.some(p=>!ground.canTraverse(p.x,p.z)))return true;if(cc.some(p=>Math.hypot(p.x,p.z)>207.8||obstacles.some(o=>Math.hypot(p.x-o.x,p.z-o.z)<p.radius+o.radius)))return true;return Math.abs(ground(cc[0].x,cc[0].z)-ground(cc[2].x,cc[2].z))>2.1;}
@@ -22,7 +31,7 @@
   }
   function nearestVehicle(life,state){return life.vehicles.map(v=>({v,d:Math.hypot(v.x-state.x,v.z-state.z)})).sort((a,b)=>a.d-b.d)[0];}
   function enter(life,state,id){const v=life.vehicles.find(v=>v.id===id);if(!v||life.driving||Math.hypot(v.x-state.x,v.z-state.z)>4.5)return false;life.driving=id;v.speed=0;Object.assign(state,{x:v.x,z:v.z,yaw:v.yaw,pitch:-.16,seated:false});return true;}
-  function exit(life,state,obstacles){const v=active(life);if(!v)return false;v.speed=0;const others=obstacles.concat(life.vehicles.flatMap(c=>circles(c)),life.crew.map(p=>({x:p.x,z:p.z,radius:.5})));
+  function exit(life,state,obstacles){const v=active(life);if(!v||v.stunt)return false;v.speed=0;const others=obstacles.concat(life.vehicles.flatMap(c=>circles(c)),life.crew.map(p=>({x:p.x,z:p.z,radius:.5})));
     for(const radius of [2.05,3.3,4.5])for(const a of [-Math.PI/2,Math.PI/2,Math.PI,0]){const p={x:v.x+Math.sin(v.yaw+a)*radius,z:v.z-Math.cos(v.yaw+a)*radius};if(Math.hypot(p.x,p.z)>209||others.some(o=>Math.hypot(p.x-o.x,p.z-o.z)<o.radius+.4))continue;Object.assign(state,p,{pitch:.01});life.driving=null;return true;}return false;
   }
   function brake(life){const v=active(life);if(v)v.speed=0;}
@@ -38,7 +47,7 @@
   // Custom production-style model, referenced against Tesla's exterior and dimension diagrams:
   // tesla.com/ownersmanual/cybertruck/en_us/GUID-12A976DD-EB60-431B-AFF1-5A37E95006DB.html
   const TRUCK={length:5.683,width:2.032,height:1.854,wheelbase:3.635,track:1.772,frontAxle:-1.963,rearAxle:1.672,tireRadius:.445};
-  function truckPose(v,ground){return {y:ground(v.x,v.z),sx:(ground(v.x+1,v.z)-ground(v.x-1,v.z))/2,sz:(ground(v.x,v.z+1)-ground(v.x,v.z-1))/2};}
+  function truckPose(v,ground){return {y:ground(v.x,v.z)+stuntPose(v).height,sx:(ground(v.x+1,v.z)-ground(v.x-1,v.z))/2,sz:(ground(v.x,v.z+1)-ground(v.x,v.z-1))/2};}
   function wheelPose(v,side,front,pose){const x=side*TRUCK.track/2,z=front?TRUCK.frontAxle:TRUCK.rearAxle,dx=x*Math.cos(v.yaw)-z*Math.sin(v.yaw),dz=x*Math.sin(v.yaw)+z*Math.cos(v.yaw);return {x:v.x+dx,y:pose.y+TRUCK.tireRadius+dx*pose.sx+dz*pose.sz,z:v.z+dz,yaw:v.yaw+(v.steer||0)*(front?1:-.2)};}
   function panel(b,points,material,facing,tone=.5){const a=points[0],u=points[1].map((v,i)=>v-a[i]),v=points[2].map((v,i)=>v-a[i]),n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];if(n.reduce((s,v,i)=>s+v*facing[i],0)<0)points=points.slice().reverse();for(let i=1;i<points.length-1;i++)b.tri(points[0],points[i],points[i+1],material,tone);}
   function truckBox(b,x,y,z,w,h,d,k){const a=[x-w/2,y,z-d/2],c=[x+w/2,y,z+d/2],up=p=>[p[0],p[1]+h,p[2]],p=[c[0],y,a[2]],q=[a[0],y,c[2]];panel(b,[a,p,up(p),up(a)],k,[0,0,-1]);panel(b,[p,c,up(c),up(p)],k,[1,0,0]);panel(b,[c,q,up(q),up(c)],k,[0,0,1]);panel(b,[q,a,up(a),up(q)],k,[-1,0,0]);panel(b,[up(a),up(p),up(c),up(q)],k,[0,1,0]);panel(b,[a,p,c,q],k,[0,-1,0]);}
@@ -264,11 +273,11 @@ if(typeof module!=='undefined')module.exports={crewBody};
   // Cache local poses; the GPU handles world transforms instead of rebuilding all meshes each frame.
   const modelCache=new Map();
   function models(life,ground){const commands=[],cached=(key,make)=>{if(!modelCache.has(key))modelCache.set(key,make());return modelCache.get(key);};
-    for(const v of life.vehicles){const pose=truckPose(v,ground);commands.push({key:'truck-body',vertices:cached('truck-body',()=>{const b=builder();truckBody(b);return new Float32Array(b.data);}),x:v.x,y:pose.y,z:v.z,yaw:v.yaw,sx:pose.sx,sz:pose.sz});
-      for(const side of [-1,1])for(const front of [true,false]){const frame=((Math.floor(v.wheel/TAU*16)%16)+16)%16,key='truck-wheel-'+side+'-'+frame,p=wheelPose(v,side,front,pose);commands.push({key,vertices:cached(key,()=>{const b=builder();truckWheel(b,frame/16*TAU,side);return new Float32Array(b.data);}),...p,sx:pose.sx,sz:pose.sz});}
+    for(const v of life.vehicles){const pose=truckPose(v,ground),stunt={pivot:[v.x,pose.y+1,v.z],roll:stuntPose(v).roll,axis:[-Math.sin(v.yaw),0,Math.cos(v.yaw)]};commands.push({key:'truck-body',vertices:cached('truck-body',()=>{const b=builder();truckBody(b);return new Float32Array(b.data);}),x:v.x,y:pose.y,z:v.z,yaw:v.yaw,sx:pose.sx,sz:pose.sz,...stunt});
+      for(const side of [-1,1])for(const front of [true,false]){const frame=((Math.floor(v.wheel/TAU*16)%16)+16)%16,key='truck-wheel-'+side+'-'+frame,p=wheelPose(v,side,front,pose);commands.push({key,vertices:cached(key,()=>{const b=builder();truckWheel(b,frame/16*TAU,side);return new Float32Array(b.data);}),...p,sx:pose.sx,sz:pose.sz,...stunt});}
     }
     for(const [i,p] of life.crew.entries()){const frame=p.walking?((Math.floor(p.phase/TAU*12)%12)+12)%12:Math.floor(life.clock*2)%4,key='crew-'+i+'-'+(p.walking?'walk':p.work)+'-'+frame;commands.push({key,vertices:cached(key,()=>{const b=builder();crewBody(b,{...p,phase:frame/12*TAU},i,frame*.5);return new Float32Array(b.data);}),x:p.x,y:ground(p.x,p.z),z:p.z,yaw:p.yaw,sx:0,sz:0});}return commands;
   }
-  const api={SPAWNS,CREW,create,active,crewTick,circles,blocked,drive,nearestVehicle,enter,exit,brake,builder,geometry,models,TRUCK};
+  const api={SPAWNS,CREW,create,active,crewTick,circles,blocked,drive,nearestVehicle,enter,exit,brake,builder,geometry,models,TRUCK,stuntJump,stuntTick,stuntPose,cancelStunts};
   if(typeof window!=='undefined')window.ParallaxLife=api;if(typeof module!=='undefined')module.exports=api;
 })();
