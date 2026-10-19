@@ -56,6 +56,10 @@
       panel(b,[glass(1.155,-1.84),glass(1.79,-.47),glass(1.754,-.19),glass(1.216,-.19)],49,[side,0,0]);
       panel(b,[glass(1.219,-.115),glass(1.743,-.115),glass(1.639,.755),glass(1.244,.82)],49,[side,0,0]);
       // Door seams and black rockers. Cybertruck uses pillar buttons rather than handles.
+      // A crisp folded shoulder catches the sky along the uninterrupted steel belt.
+      for(const [a,c] of [[-1.25,-.15],[-.15,.96]]){
+        panel(b,[[side*(half+.006),belt(a)-.055,a],[side*(half+.006),belt(c)-.055,c],[side*(half-.014),belt(c),c],[side*(half-.014),belt(a),a]],39,[side,1,0],.62);
+      }
       for(const z of [-1.245,-.15,.965])tube([side*(half+.004),lower(z)+.014,z],[side*(half+.004),belt(z)-.015,z],.0048,47,5);
       for(const z of [-.16,.87])truckBox(b,side*(sideX(1.31)+.01),1.30,z,.008,.028,.020,47);
       panel(b,[[side*(half+.003),.455,-1.22],[side*(half+.003),.455,.94],[side*(half+.003),.59,.94],[side*(half+.003),.59,-1.22]],52,[side,0,0]);
@@ -88,8 +92,17 @@
     for(let z=.98;z<2.78;z+=.075)panel(b,[[-.9,coverY(z)+.002,z],[.9,coverY(z)+.002,z],[.9,coverY(z+.007)+.002,z+.007],[-.9,coverY(z+.007)+.002,z+.007]],46,[0,1,0]);
     for(const side of [-1,1]){panel(b,[[side*.90,1.668,.90],[side*sideX(1.672),1.672,.88],[side*half,1.25,rear],[side*.94,1.258,2.785]],39,[side,1,0]);panel(b,[sidePoint(side,belt(.96),.96),sidePoint(side,1.66,.96),sidePoint(side,1.25,rear)],39,[side,0,0]);}
     // Full-width lightbar at the hood edge and inset headlamps low in the bumper.
-    panel(b,[[-half,.56,front],[half,.56,front],[half,1.065,front],[-half,1.065,front]],39,[0,0,-1]);
-    truckBox(b,0,1.044,front-.010,2.012,.029,.017,37);truckBox(b,0,1.037,front-.001,2.032,.008,.024,47);
+    // Folded stainless nose: a broad flat face and chamfered corners, not a box.
+    panel(b,[[-.88,.61,front],[.88,.61,front],[.96,1.024,front],[-.96,1.024,front]],39,[0,0,-1]);
+    for(const side of [-1,1]){
+      panel(b,[[side*.88,.61,front],[side*.96,1.024,front],[side*half,1.024,front+.105],[side*half,.56,front+.15]],39,[side,0,-1]);
+      panel(b,[[side*.88,.61,front],[side*half,.56,front+.15],[side*.82,.49,front+.17]],47,[side,-1,-1]);
+      // Short wraparound ends join the full-width daytime light blade.
+      truckBox(b,side*1.004,1.046,front+.035,.024,.025,.11,37);
+    }
+    panel(b,[[-.88,.61,front],[.88,.61,front],[.82,.49,front+.17],[-.82,.49,front+.17]],47,[0,-1,-1]);
+    truckBox(b,0,1.030,front-.009,2.032,.052,.024,47);
+    truckBox(b,0,1.044,front-.025,2.012,.025,.012,37);
     truckBox(b,0,.46,front+.09,1.65,.13,.17,47);truckBox(b,0,.35,front+.18,1.43,.11,.22,46);
     for(const side of [-1,1]){truckBox(b,side*.867,.40,front+.076,.32,.23,.19,47);truckBox(b,side*.795,.62,front-.008,.33,.064,.022,46);truckBox(b,side*.795,.639,front-.023,.28,.022,.018,37);tube([side*.52,.42,front+.01],[side*.52,.38,front-.045],.018,48,10);}
     for(let i=0;i<6;i++)truckBox(b,0,.493+i*.021,front-.008,1.38,.006,.015,46);
@@ -110,6 +123,8 @@
     for(let i=0;i<32;i++)for(const band of [-1,0,1]){const a=i/32*TAU+spin+band*.025,da=.062,x=band*.062,rr=band===0?.449:.443,p=(xx,t)=>[xx,Math.sin(t)*rr,Math.cos(t)*rr];panel(b,[p(x-.025,a-da),p(x+.025,a-da+.023),p(x+.025,a+da),p(x-.025,a+da-.023)],47,[0,Math.sin(a),Math.cos(a)]);}
     // Seven broad aero sections and a recessed center cap match the production wheel silhouette.
     const cap=side*.167,radial=(r,a,x=cap)=>[x,Math.sin(a)*r,Math.cos(a)*r];
+    // Dark recessed barrel behind the seven angular covers prevents see-through rims.
+    for(let i=0;i<40;i++){const a=i/40*TAU,c=(i+1)/40*TAU;panel(b,[[cap-side*.018,0,0],radial(.304,a,cap-side*.018),radial(.304,c,cap-side*.018)],46,[side,0,0]);}
     for(let i=0;i<40;i++){const a=i/40*TAU,c=(i+1)/40*TAU;panel(b,[radial(.265,a),radial(.313,a),radial(.313,c),radial(.265,c)],48,[side,0,0]);}
     for(let i=0;i<7;i++){const a=i/7*TAU+spin,da=TAU/7;panel(b,[radial(.085,a+.04,cap+side*.008),radial(.278,a+.045),radial(.293,a+da*.69),radial(.109,a+da*.84,cap+side*.008)],48,[side,0,0]);panel(b,[radial(.13,a+.06,cap+side*.012),radial(.291,a+.07,cap+side*.003),radial(.292,a+.095,cap+side*.003),radial(.128,a+.095,cap+side*.012)],47,[side,0,0]);}
     b.tube([cap,0,0],[cap+side*.014,0,0],.096,47,7);for(let i=0;i<6;i++){const a=i/6*TAU+spin;b.tube(radial(.060,a,cap+side*.015),radial(.060,a,cap+side*.019),.008,48,6);}

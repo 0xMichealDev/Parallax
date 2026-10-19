@@ -103,7 +103,18 @@
     return u + v <= 1 ? a + u * (b - a) + v * (c - a) : d + (1 - u) * (c - d) + (1 - v) * (b - d);
   }
   function viewLens(zoom,binoculars){return Math.tan((binoculars?20:clamp(68/Math.sqrt(Math.max(.65,zoom)),45,84))*Math.PI/360);}
-  function camera() { return { x: 0, z: 0, yaw: 0, pitch: .025, distance: 0, edge: false, seated: false }; }
+  function camera() { return { x: 0, z: 0, yaw: 0, pitch: .025, distance: 0, edge: false, seated: false, jumpHeight:0, jumpVelocity:0 }; }
+  function resetJump(state){state.jumpHeight=0;state.jumpVelocity=0;}
+  function jump(state){if(state.jumpHeight>0||state.jumpVelocity>0)return false;state.seated=false;state.jumpVelocity=5.2;return true;}
+  // A grounded, single jump. Horizontal collisions still apply while airborne.
+  function jumpTick(state,dt){
+    if(!state.jumpHeight&&!state.jumpVelocity)return false;
+    const step=Math.min(.1,Math.max(0,dt));
+    state.jumpHeight=Math.max(0,(state.jumpHeight||0)+state.jumpVelocity*step-6.5*step*step);
+    state.jumpVelocity-=13*step;
+    if(!state.jumpHeight&&state.jumpVelocity<0)resetJump(state);
+    return true;
+  }
   function move(state, forward, side, dt, fast, obstacles) {
     const length = Math.hypot(forward, side); if (!length) { state.edge = false; return false; }
     state.seated=false;
@@ -351,7 +362,7 @@
       if(kind.x>35.5&&kind.x<36.5)base=vec3(.025,.11,.14);
       if(kind.x>36.5&&kind.x<37.5)base=vec3(.83,.89,.94);
       if(kind.x>37.5&&kind.x<38.5)base=vec3(.68,.49,.12);
-      if(kind.x>38.5&&kind.x<39.5){float brush=noise(vec2(surfacePoint.y*680.,surfacePoint.z*.9));base=vec3(.52,.55,.565)*(.985+brush*.03);}
+      if(kind.x>38.5&&kind.x<39.5){float brush=noise(vec2(surfacePoint.y*680.,surfacePoint.z*.9));base=vec3(.64,.66,.675)*(.985+brush*.03);}
       if(kind.x>39.5&&kind.x<40.5)base=vec3(.025,.061,.08);
       if(kind.x>40.5&&kind.x<41.5)base=vec3(.055,.085,.12);
       if(kind.x>41.5&&kind.x<42.5)base=vec3(.94,.37,.055);
@@ -425,8 +436,9 @@
       if(kind.x>38.5&&kind.x<39.5){
         vec3 reflected=reflect(-view,n);float facing=max(0.,dot(n,view)),fresnel=.28+.62*pow(1.-facing,5.);
         vec3 reflection=(sky(reflected)+sky(normalize(reflected+vec3(.08,.10,.06)))+sky(normalize(reflected-vec3(.08,.03,.06))))/3.;
-        color=color*.50+reflection*vec3(.69,.72,.74)*fresnel;
-        color+=vec3(.025,.034,.046)*(.3+.7*max(n.y,0.));
+        color=color*.68+reflection*vec3(.78,.81,.84)*fresnel;
+        // Broad sky fill keeps the folded steel readable in the twilight scene.
+        color+=vec3(.048,.058,.073)*(.45+.55*max(n.y,0.));
         vec3 toFlood=normalize(vec3(-119.,8.,-79.)-point);color+=vec3(.48,.54,.61)*campusGlow*pow(max(0.,dot(n,normalize(view+toFlood))),26.);
         color+=lampTint*flashlight(point)*pow(max(0.,dot(n,normalize(view+normalize(flashlightPosition-point)))),42.)*.32;
       }
@@ -967,10 +979,10 @@
       canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();alive=false;worker?.terminate();canvas.remove();onFailure?.();});
       function acceptWorld(result){if(!alive)return;world=result;gl.bindBuffer(gl.ARRAY_BUFFER,meshBuffer);gl.bufferData(gl.ARRAY_BUFFER,world.vertices,gl.STATIC_DRAW);gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,shadeTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.shadeSize,world.shadeSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.shade);gl.activeTexture(gl.TEXTURE7);gl.bindTexture(gl.TEXTURE_2D,trailTexture);gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,world.trailSize,world.trailSize,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,world.trailMask);ready=true;worker?.terminate();worker=null;onReady?.();}
       // Construct geometry off the UI thread; keep the landscape visible while it loads.
-      try{worker=new Worker('/desert-world.js?v=43');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
+      try{worker=new Worker('/desert-world.js?v=135');worker.onmessage=e=>acceptWorld(e.data);worker.onerror=()=>{worker.terminate();worker=null;setTimeout(()=>acceptWorld(geometry()),0)};worker.postMessage({build:true});}
       catch{setTimeout(()=>acceptWorld(geometry()),0)}
       function cameraEye(){
-        const base=[state.x,walkingGround(state.x,state.z)+(state.seated?1.03:1.72),state.z];if(flight&&flight.mode!=='ground'){base[1]=ground(-110,-120)+(flight.mode==='lift'?flight.rise:54+flight.rise)+1.62;return base;}if(!life?.driving)return base;
+        const base=[state.x,walkingGround(state.x,state.z)+(state.seated?1.03:1.72)+(state.jumpHeight||0),state.z];if(flight&&flight.mode!=='ground'){base[1]=ground(-110,-120)+(flight.mode==='lift'?flight.rise:54+flight.rise)+1.62;return base;}if(!life?.driving)return base;
         // A chase camera retreats only as far as the clear space behind the vehicle.
         const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw);let retreat=7.2;
         for(let d=1;d<=7.2;d+=.3){const x=state.x-sy*d,z=state.z+cy*d;if(world.obstacles.some(o=>Math.hypot(x-o.x,z-o.z)<o.radius+.35)){retreat=Math.max(.5,d-.5);break;}}
@@ -1010,25 +1022,27 @@
         if(!shot&&(!flight||flight.mode==='ground')&&onFoot&&!life?.driving&&camp.hands&&handVisible&&!camp.binoculars){gl.clear(gl.DEPTH_BUFFER_BIT);uniforms(handInfo);gl.bindBuffer(gl.ARRAY_BUFFER,camp.scanner?scannerBuffer:handBuffer);for(const [loc,size,offset] of [[handInfo.position,3,0],[handInfo.normal,3,12],[handInfo.material,2,24]]){gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,32,offset);}gl.drawArrays(gl.TRIANGLES,0,(camp.scanner?scannerVertices:handVertices).length/8);}
       }
       return {canvas,state,camp,life,flight,points:CAMP,boarding:BOARDING,
-        boardRocket(){if(!Rocket||!Rocket.board(flight,state,life?.driving))return false;camp.binoculars=false;Object.assign(state,{x:BOARDING.x,z:BOARDING.z,yaw:2.20,pitch:-.10,seated:false});return true;},
+        boardRocket(){if(!Rocket||!Rocket.board(flight,state,life?.driving))return false;resetJump(state);camp.binoculars=false;Object.assign(state,{x:BOARDING.x,z:BOARDING.z,yaw:2.20,pitch:-.10,seated:false});return true;},
         launchRocket(planet){return !!Rocket?.launch(flight,planet);},
         exitRocket(){if(flight)Rocket.exit(flight);Object.assign(state,{x:BOARDING.x,z:BOARDING.z+2,yaw:Math.PI,pitch:.03,seated:false});render();},
         flightTick(dt){if(!flight)return false;const old=flight.mode,moved=Rocket.tick(flight,dt);if(old==='lift'&&flight.mode==='cabin')Object.assign(state,{x:-110,z:-121.7,yaw:Math.PI,pitch:-.05,seated:false});return moved;},
         riverLevel(){const distance=riverDistance(state.x,state.z);return Math.max(0,1-distance/24)*.5;},
         get driving(){return life?.driving||null;},get speed(){return life?Life.active(life)?.speed||0:0;},
         nearestRover(){return life?Life.nearestVehicle(life,state):null;},
-        enterRover(id){if(flight&&flight.mode!=='ground')return false;if(!life||!Life.enter(life,state,id))return false;camp.binoculars=false;render(currentZoom,currentShot);return true;},
+        enterRover(id){if(flight&&flight.mode!=='ground')return false;if(!life||!Life.enter(life,state,id))return false;resetJump(state);camp.binoculars=false;render(currentZoom,currentShot);return true;},
         exitRover(){const ok=life&&Life.exit(life,state,world.obstacles);if(ok)render(currentZoom,currentShot);return ok;},
         brake(){if(life)Life.brake(life);},
         recallRovers(){if(flight)Rocket.exit(flight);if(!life)return;life.driving=null;for(let i=0;i<life.vehicles.length;i++)Object.assign(life.vehicles[i],Life.SPAWNS[i],{speed:0,wheel:0,steer:0});Object.assign(state,camera());render(currentZoom,currentShot);},trail:TRAIL,paths:PATHS,routeTo:place=>trailRoute(state,place),terrainHeight:walkingGround,render,
-        setWalking(value){onFoot=value;if(!value){camp.binoculars=false;if(life)Life.brake(life);}},setHandVisible(value){handVisible=value;},setMotion(value){swayEnabled=value;},
+        setWalking(value){onFoot=value;if(!value){resetJump(state);camp.binoculars=false;if(life)Life.brake(life);}},setHandVisible(value){handVisible=value;},setMotion(value){swayEnabled=value;},
+        jump(){return ready&&onFoot&&!life?.driving&&(!flight||flight.mode==='ground')&&jump(state);},
+        jumpTick(dt){return jumpTick(state,dt);},
         satellitePoints(){return [0,1,2].map(i=>satelliteDirection(time,i).map((v,j)=>v*1000+(j===0?state.x:j===1?ground(state.x,state.z)+1.72:state.z)));},
         watchSky(){camp.night=true;state.yaw=0;state.pitch=.61;render(currentZoom,currentShot);},
         setCamp(patch){Object.assign(camp,patch);render(currentZoom,currentShot);},
         stoke(){camp.fireOn=true;camp.fireBoost=1;render(currentZoom,currentShot);},
         tick(dt){const step=Math.min(Math.max(0,dt),.1);time+=step;if(life)Life.crewTick(life,step,state);camp.fireBoost=Math.max(0,camp.fireBoost-step/18);return !!life||camp.satellitesOn||camp.fireOn&&Math.hypot(state.x,state.z+8)<75;},
         project(point){const sy=Math.sin(state.yaw),cy=Math.cos(state.yaw),sp=Math.sin(state.pitch),cp=Math.cos(state.pitch),eye=cameraEye(),p=point.map((v,i)=>v-eye[i]);const d=p[0]*sy*cp+p[1]*sp-p[2]*cy*cp,lens=viewLens(currentZoom,camp.binoculars);return {x:innerWidth/2+(p[0]*cy+p[2]*sy)/d/lens*innerHeight/2,y:innerHeight/2-(-p[0]*sy*sp+p[1]*cp+p[2]*cy*sp)/d/lens*innerHeight/2,depth:d,distance:Math.hypot(...p)};},
-        visit(place){if(flight)Rocket.exit(flight);if(life){Life.brake(life);life.driving=null;}const positions={fire:[0,-5.15,0,-.14],tent:[-4.5,-6.25,0,.03],telescope:[3.5,-10.6,0,.13],camp:[0,-2.8,0,.025]};const p=positions[place]||positions.camp;Object.assign(state,{x:p[0],z:p[1],yaw:p[2],pitch:p[3],edge:false,seated:place==='fire'});render(currentZoom,currentShot);},
+        visit(place){resetJump(state);if(flight)Rocket.exit(flight);if(life){Life.brake(life);life.driving=null;}const positions={fire:[0,-5.15,0,-.14],tent:[-4.5,-6.25,0,.03],telescope:[3.5,-10.6,0,.13],camp:[0,-2.8,0,.025]};const p=positions[place]||positions.camp;Object.assign(state,{x:p[0],z:p[1],yaw:p[2],pitch:p[3],edge:false,seated:place==='fire'});render(currentZoom,currentShot);},
         get ready(){return ready;},
         look(dx,dy){state.yaw=(state.yaw-dx*(camp.binoculars?.0012:.0035))%TAU;state.pitch=clamp(state.pitch+dy*(camp.binoculars?.001:.003),-1.4,1.4);},
         turn(yaw,pitch){state.yaw=(state.yaw+yaw)%TAU;state.pitch=clamp(state.pitch+pitch,-1.4,1.4);},
@@ -1040,5 +1054,5 @@
   if(typeof window!=='undefined')window.ParallaxDesert={create};
   else if(typeof self!=='undefined')self.onmessage=()=>{const world=geometry();self.postMessage(world,[world.vertices.buffer,world.shade.buffer,world.trailMask.buffer]);};
   // Pure movement and terrain helpers also support non-browser regression checks.
-  if(typeof module!=='undefined'&&module.exports)module.exports={RIVER,BOARDING,riverX,riverWidth,riverDistance,waterHeight,walkingGround,onBridge,canWalk,CAMPUS,CRASH,PATHS,ROUTES,LOGS,trailRoute,pathClearance,bakeTrailMap,viewLens,ground,height,move,camera,geometry,handGeometry,CAMP,TRAIL,satelliteDirection,shaders:{skyVertex,skyFragment,meshVertex,meshFragment,fireVertex,fireFragment,emberVertex,emberFragment,handVertex}};
+  if(typeof module!=='undefined'&&module.exports)module.exports={RIVER,BOARDING,riverX,riverWidth,riverDistance,waterHeight,walkingGround,onBridge,canWalk,CAMPUS,CRASH,PATHS,ROUTES,LOGS,trailRoute,pathClearance,bakeTrailMap,viewLens,ground,height,move,camera,jump,jumpTick,resetJump,geometry,handGeometry,CAMP,TRAIL,satelliteDirection,shaders:{skyVertex,skyFragment,meshVertex,meshFragment,fireVertex,fireFragment,emberVertex,emberFragment,handVertex}};
 })();
