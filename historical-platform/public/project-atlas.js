@@ -23,7 +23,7 @@
     q('#atlas-project-ticker').textContent=m?tag(m):'YOUR TICKER. YOUR ORBIT.';
     q('#atlas-project-description').textContent=m?m.description:'Claim a project spot on a solar-system world. Visitors can discover your ticker, open your profile, and keep exploring the next project.';
     q('#atlas-claim-details').hidden=!m;q('#atlas-copy').hidden=!m?.contractAddress;
-    if(m){q('#atlas-contract').textContent=m.contractAddress||'No token address provided';q('#atlas-wallet').textContent=m.wallet;}
+    if(m){q('#atlas-contract').textContent=m.contractAddress||'No token address provided';q('#atlas-wallet').textContent=m.wallet;let creator=q('#atlas-creator-identity');if(!creator){creator=node('div');creator.id='atlas-creator-identity';q('#atlas-wallet').parentElement.after(creator);}creator.dataset.solhandleProject=m.id;}
     const actions=q('#atlas-project-links');actions.replaceChildren();
     if(m){actions.append(link('Project profile ↗','/world/'+encodeURIComponent(m.id)));if(m.contractAddress){const inspect=node('button','atlas-link','Market & on-chain ↗');inspect.type='button';inspect.onclick=()=>document.dispatchEvent(new CustomEvent('parallax:inspect-token',{detail:m.contractAddress}));actions.append(inspect);actions.append(link('View token ↗','https://solscan.io/token/'+encodeURIComponent(m.contractAddress)),link('Chart ↗','https://dexscreener.com/solana/'+encodeURIComponent(m.contractAddress)));}if(m.url){try{const u=new URL(m.url);if(['https:','http:'].includes(u.protocol))actions.append(link('Project website ↗',u.href))}catch{}}}
     q('#atlas-explore').textContent='Explore '+p.name+' in 3D ↗';q('#atlas-explore').onclick=()=>{stop();window.parallaxUniverse?.open(p.name)};
