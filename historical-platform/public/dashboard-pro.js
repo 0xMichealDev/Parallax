@@ -18,6 +18,9 @@
       link.hidden = !terms.every(term => haystack.includes(term));
       if (!link.hidden) count++;
     }
+    directory.querySelectorAll('.tool-category').forEach(category => {
+      category.hidden = ![...category.querySelectorAll('a')].some(link => !link.hidden);
+    });
     empty.hidden = count !== 0;
     status.textContent = count === 1 ? '1 tool found.' : count + ' tools found.';
     directory.scrollTop = 0;
@@ -28,7 +31,9 @@
     input.value = '';
     filter();
     dialog.showModal();
-    input.focus({ preventScroll: true });
+    // Keep the full directory visible on phones without summoning the keyboard.
+    if (window.matchMedia?.('(max-width:760px)').matches) close.focus({ preventScroll: true });
+    else input.focus({ preventScroll: true });
   }
   if (dialog && input && close && status && directory && empty && typeof dialog.showModal === 'function') {
     triggers.forEach(button => {
