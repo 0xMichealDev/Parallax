@@ -3,7 +3,7 @@
   'use strict';
   const main = document.querySelector('main');
   if (!main) return;
-  const compact = window.matchMedia('(max-width:760px)');
+  const compact = window.matchMedia('(max-width:900px), (hover:none) and (pointer:coarse) and (max-width:1100px)');
   document.querySelectorAll('[data-mobile-disclosure]').forEach(section => {
     if (compact.matches) section.open = false;
   });

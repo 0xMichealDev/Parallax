@@ -32,7 +32,7 @@
     filter();
     dialog.showModal();
     // Keep the full directory visible on phones without summoning the keyboard.
-    if (window.matchMedia?.('(max-width:760px)').matches) close.focus({ preventScroll: true });
+    if (window.matchMedia?.('(max-width:900px), (hover:none) and (pointer:coarse) and (max-width:1100px)').matches) close.focus({ preventScroll: true });
     else input.focus({ preventScroll: true });
   }
   if (dialog && input && close && status && directory && empty && typeof dialog.showModal === 'function') {
