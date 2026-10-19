@@ -6,5 +6,42 @@
 .materials{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:24px}.materials button{position:relative;min-width:0;min-height:129px;display:flex;align-items:flex-start;flex-direction:column;justify-content:flex-end;text-align:left;padding:13px;background:radial-gradient(ellipse at 80% 0,#293a514d,#080e18);overflow:hidden}.materials button[aria-pressed=true]{border-color:#9ce8d08f;background-color:#1b353d}.materials button[aria-pressed=true]:after{content:'✓';position:absolute;right:13px;top:13px;color:var(--accent)}.materials button>span:last-child{font-size:12px;font-weight:550}.materials small{display:block;font-size:10px;color:var(--muted);font-weight:400;margin-top:5px;line-height:1.5}.material-orb{position:absolute;width:48px;height:48px;top:12px;left:14px;border-radius:50%;box-shadow:inset -12px -6px 15px #010611,0 0 22px #7edae91c}.material-orb.original{background:#4c91ac url('/assets/globe/2k_earth_daymap.jpg') center/96px 48px}.material-orb.volcanic{background:repeating-conic-gradient(from 10deg,#281817 0deg 24deg,#ff682d 26deg,#3c231f 29deg 45deg);box-shadow:inset -13px -4px 16px #050405,0 0 22px #ff77342a}.material-orb.glacial{background:repeating-conic-gradient(from 35deg,#a9d5e6 0deg 32deg,#2b75aa 35deg,#d7eff6 38deg 58deg)}.material-orb.biolume{background:radial-gradient(ellipse at 35% 33%,#0c5b52 12%,#78f2c0 15%,#0a2b3d 19%,#103b3b 35%,#44b6b3 38%,#0a1528 42%);box-shadow:inset -14px -5px 15px #020711,0 0 20px #6ae4c91a}.control-title{font-size:9px;letter-spacing:.14em;color:var(--muted);margin:22px 0 12px}.preview-panel{align-self:start;border-bottom:1px solid var(--line)}.design-grid{align-items:start}.preview-buttons{display:grid;gap:7px;flex:none}.preview-buttons button{font-size:10px}.preview-buttons [aria-pressed=true]#compare-free{border-color:var(--accent)}#premium-canvas{touch-action:pan-y;cursor:grab}#premium-canvas:active{cursor:grabbing}.plan-comparison{padding:42px 0 8px}.plan-comparison h2{font-size:30px;font-weight:500;letter-spacing:-.04em;margin:0 0 12px}.plan-comparison>div>p:not(.eyebrow){font-size:13px;line-height:1.8;color:var(--muted)}.comparison-scroll{overflow-x:auto;margin-top:28px}.plan-comparison table{border-collapse:collapse;width:100%;min-width:570px;font-size:12px;text-align:left}.plan-comparison th,.plan-comparison td{padding:16px 18px;border-bottom:1px solid var(--line);line-height:1.7}.plan-comparison tbody th{font-weight:450;color:var(--muted);width:50%}.plan-comparison thead th{font-size:10px;letter-spacing:.04em}.plan-comparison td:last-child,.plan-comparison th:last-child{color:var(--accent);background:#9ce8d005}.plan-comparison td:nth-child(2){color:var(--muted)}@media(min-width:761px){.design-grid{overflow:visible}.preview-panel{position:sticky;top:20px;border-radius:16px 0 0 16px;overflow:hidden}}@media(max-width:760px){.preview-caption{gap:12px;padding:0 20px 24px}.preview-caption .preview-buttons{min-width:112px}.preview-caption .quiet{margin:0}.plan-comparison{padding-top:32px}.plan-comparison h2{font-size:27px}.materials button{min-height:132px}}
 
 .graphics-status{font-size:11px;line-height:1.7;color:#a8c7ce;padding:0 24px}.graphics-status:empty{display:none}
+/* Curated collections lead into the same editable, saved planet system. */
+.signature-collection{padding:15px 0 40px}
+.collection-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:24px}
+.collection-heading .eyebrow{font-size:9px;margin-bottom:12px}
+.collection-heading h2{font-size:32px;line-height:1.15;font-weight:450;letter-spacing:-.045em;margin:0}
+.collection-heading>p{font-size:12px;line-height:1.8;color:var(--muted);max-width:320px;margin:0}
+.signature-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.signature-grid button{display:flex;flex-direction:column;align-items:flex-start;position:relative;min-width:0;overflow:hidden;padding:0 18px 18px;gap:0;text-align:left;border-radius:10px;background:#0c1722}
+.signature-grid button[aria-pressed=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px #9ce8d04d}
+.signature-art{display:block;position:relative;width:calc(100% + 36px);height:160px;margin:0 -18px 18px;overflow:hidden;background:radial-gradient(ellipse at 50% 80%,#254a5050,transparent 70%),#08121d}
+.signature-art:before{content:'';position:absolute;left:calc(50% - 44px);top:31px;width:88px;height:88px;border-radius:50%;box-shadow:inset -23px -9px 28px #020812,0 0 22px #8cebd122;background:radial-gradient(ellipse at 35% 35%,#c7f5dc,#237e78 30%,#102b41 70%)}
+.signature-art:after{content:'';position:absolute;left:calc(50% - 76px);top:48px;width:150px;height:55px;border:1px solid #b0f2dd8c;border-radius:50%;transform:rotate(-24deg);box-shadow:0 0 0 5px #96dbca10}
+.signature-sovereign:before{background:repeating-conic-gradient(from 20deg,#b48f492b 0deg 15deg,#d6b16b 17deg,#101b23 19deg 80deg);box-shadow:inset -25px -8px 28px #000,0 0 20px #c49c4422}
+.signature-sovereign:after{border-color:#d7b367aa;box-shadow:0 0 0 5px #d7b36711}
+.signature-frontier:before{background:repeating-conic-gradient(from 35deg,#99d0e4 0deg 27deg,#26709d 30deg,#e1f3f7 33deg 58deg)}
+.signature-frontier:after{border:3px dotted #a8c2d477;box-shadow:none}
+.signature-ember:before{background:repeating-conic-gradient(from 10deg,#2f1815 0deg 24deg,#ff893d 26deg,#442523 29deg 45deg);box-shadow:inset -20px -8px 28px #030407,0 0 30px #ff883324}
+.signature-ember:after{border-color:#ffb07299;box-shadow:0 0 0 5px #ffb0720c}
+.signature-name{display:block;font-size:17px;font-weight:500;letter-spacing:-.03em;line-height:1.4}
+.signature-grid small{display:block;color:var(--muted);font-size:10px;line-height:1.7;margin:7px 0 20px}
+.signature-action{display:block;font-size:10px;line-height:1.6;color:var(--accent);margin-top:auto}
+.collection-note{font-size:11px;line-height:1.7;color:var(--muted);margin:15px 0 0}
+.premium-collection .design-grid{border-radius:12px;grid-template-columns:1.35fr 1fr}
+.premium-collection .controls{gap:18px 14px}
+.premium-collection .preview-panel canvas:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+.premium-collection .preview-panel .preview-caption{padding-top:10px}
+.premium-collection .materials{grid-template-columns:repeat(2,minmax(0,1fr))}
+.premium-collection .materials button{min-height:122px}
+.premium-collection .themes{grid-template-columns:repeat(3,minmax(0,1fr))}
+.premium-collection .themes button{flex-direction:column;align-items:flex-start;gap:8px;padding:12px 10px}
+.premium-collection .themes small,.premium-collection .themes button>span:last-child{display:none}
+.premium-collection .themes button>span:nth-child(2){font-size:11px}
+.premium-collection .theme-swatch{width:28px;height:28px}
+.premium-collection #checkout{scroll-margin-top:25px}
+@media(max-width:1050px){.signature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.premium-collection .design-grid{grid-template-columns:1.1fr 1fr}.collection-heading{align-items:flex-start;flex-direction:column;gap:15px}.collection-heading>p{max-width:520px}}
+@media(max-width:760px){.signature-collection{padding-bottom:28px}.signature-grid{gap:10px}.signature-art{height:140px}.signature-name{font-size:15px}.signature-grid button{padding-inline:14px}.signature-art{width:calc(100% + 28px);margin-inline:-14px}.signature-grid small{font-size:10px}.collection-heading h2{font-size:28px}.premium-collection .design-grid{display:block}.premium-collection .design-panel{padding:26px 20px}}
 
 @media(max-width:760px) and (min-height:650px){.preview-panel{position:sticky;top:0;z-index:4;box-shadow:0 12px 25px #03081255}.preview-caption{padding-bottom:16px}.preview-caption p:last-child{display:none}.preview-caption h2{font-size:20px}.preview-caption .eyebrow{margin-bottom:8px}.preview-panel canvas{max-height:260px;object-fit:contain}.preview-caption .quiet{min-height:34px;font-size:9px}.preview-panel .panel-head{padding:13px 20px}}
+.signature-art.signature-render{background:none;box-shadow:none;overflow:visible}.signature-art.signature-render:before,.signature-art.signature-render:after{display:none}.signature-render img{display:block;width:100%;height:100%;object-fit:contain}

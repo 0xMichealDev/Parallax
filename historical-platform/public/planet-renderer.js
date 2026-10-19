@@ -55,15 +55,27 @@ void main(){
  if(uRings>.5){
   vec3 rn=normalize(vec3(.22,.81,.43));float rz=-(rn.x*p.x+rn.y*p.y)/rn.z;float rad=length(vec3(p,rz));
   float outer=uRings<1.5?1.51:uRings<2.5?1.86:1.95;
-  float ring=smoothstep(1.24,1.27,rad)*(1.-smoothstep(outer-.025,outer,rad));
-  if(uRings>2.5&&uRings<3.5)ring*=1.-smoothstep(.015,.045,abs(rad-1.59));
-  else if(uRings>3.5&&uRings<4.5)ring*=1.-smoothstep(.018,.04,min(abs(rad-1.42),abs(rad-1.82)));
-  else ring*=.35+.65*pow(.5+.5*sin(rad*240.+sin(rad*83.)*2.),2.);
-  ring*=1.-(smoothstep(1.60,1.61,rad)*(1.-smoothstep(1.64,1.65,rad)));
-  if(uRings>4.5){ring*=.3+.7*noise(vec3(p*250.,rz*220.));}
+  float edge=max(.003,uPixel*1.5);
+  float ring=smoothstep(1.24-edge,1.24+edge,rad)*(1.-smoothstep(outer-edge,outer+edge,rad));
+  float fine=.58+.42*(.5+.5*sin(rad*170.))*max(.25,1.-uPixel*25.);
+  if(uRings>2.5&&uRings<3.5)ring=1.-smoothstep(.014,.014+edge,abs(rad-1.59));
+  else if(uRings>3.5&&uRings<4.5)ring=1.-smoothstep(.017,.017+edge,min(abs(rad-1.43),abs(rad-1.81)));
+  else if(uRings>5.5&&uRings<6.5){
+   float bands=min(min(abs(rad-1.38),abs(rad-1.47)),min(abs(rad-1.73),abs(rad-1.82)));
+   ring=(1.-smoothstep(.007,.007+edge,bands))*.85;
+  }else if(uRings>6.5){
+   float angle=atan(rz,p.x),sector=floor((angle+3.14159265)*66.);
+   float grain=hash(vec3(sector,floor(rad*52.),2.));
+   float rocks=smoothstep(.54,.8,grain)*(.4+.6*noise(vec3(p*135.,rz*135.)));
+   ring*=rocks*.75;
+  }else{
+   ring*=fine;
+   ring*=1.-(smoothstep(1.59-edge,1.59+edge,rad)*(1.-smoothstep(1.64-edge,1.64+edge,rad)));
+   if(uRings>4.5)ring*=.35+.65*noise(vec3(p*100.,rz*100.));
+  }
   if(rr<1.&&rz<z)ring=0.;
   vec3 rp=vec3(p,rz);float along=dot(rp,uLight);float shadow=along<0.&&dot(rp,rp)-along*along<1.?.13:1.;
-  vec3 ringCol=mix(vec3(.74,.69,.58),uAccent,.37)*shadow*(.7+.3*sin(rad*180.));if(uRings>2.5&&uRings<4.5)ringCol=uAccent*1.2;
+  vec3 ringCol=mix(vec3(.74,.69,.58),uAccent,.37)*shadow*(.7+.3*sin(rad*180.));if(uRings>2.5&&uRings<4.5)ringCol=mix(uAccent,vec3(1.),.16)*shadow;
   if(uBrandEnabled>.5)ringCol=uBrandRing*shadow*(.76+.24*sin(rad*180.));
   float ra=ring*(uRings>2.5?.92:.8);col=(col*alpha*(1.-ra)+ringCol*ra)/max(.0001,alpha*(1.-ra)+ra);alpha=alpha+(1.-alpha)*ra;
  }
@@ -98,7 +110,7 @@ function draw(ctx,cx,cy,r,design,time,premium,options={}){
   gl.uniform1f(uniforms.uRefined,refined?1:0);gl.uniform1f(uniforms.uNatural,natural?1:0);
   gl.uniform1f(uniforms.uAir,refined?(isSolar?air[design.slice(6)]??.1:{earth:1,gas:.35,rocky:.08}[d.surface]):1);
   gl.uniform1f(uniforms.uPluto,original&&design==='solar-pluto'?1:0);gl.uniform1f(uniforms.uPixel,4.1/size);
-  const rings=s.rings&&s.rings!=='inherit'?{halo:3,double:4,dust:5}[s.rings]:({none:0,thin:1,wide:2}[d.rings]);
+  const rings=s.rings&&s.rings!=='inherit'?{none:0,halo:3,double:4,dust:5,silk:6,asteroid:7}[s.rings]:({none:0,thin:1,wide:2}[d.rings]);
   for(const [u,v] of [['uTime',time],['uSurface',d.surface==='earth'?0:d.surface==='gas'?2:1],['uMaterial',{volcanic:1,glacial:2,biolume:3,obsidian:4}[s.surface]||0],['uRings',rings||0],['uWeather',s.surface==='obsidian'?0:d.weather==='clouds'?1:0],['uAtmosphere',s.atmosphere==='ion'?2:s.atmosphere==='vivid'?1:0],['uHasMap',hasMap?1:0],['uHasCloud',hasCloud?1:0],['uHasNight',hasNight?1:0]])gl.uniform1f(uniforms[u],v);
   gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.drawArrays(gl.TRIANGLES,0,6);
   ctx.drawImage(canvas,0,canvas.height-size,size,size,cx-r*2.05,cy-r*2.05,r*4.1,r*4.1);return true;
