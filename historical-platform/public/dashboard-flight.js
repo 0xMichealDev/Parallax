@@ -16,6 +16,20 @@
     body.classList.contains('home-motion-running');
   const allowed = () => motionAllowed() && !failed;
 
+  function chooseSource() {
+    const connection = navigator.connection;
+    if (connection?.saveData || /^(slow-2g|2g|3g)$/.test(connection?.effectiveType || '')) {
+      return video.dataset.saverSrc || video.dataset.mobileSrc;
+    }
+    // Only large/high-density desktop displays need the 4K download. Select once
+    // so resize/rotation never interrupts a buffered flight or downloads it twice.
+    const pixels = Math.max(window.innerWidth || 0, (window.innerHeight || 0) * 16 / 9) *
+      Math.min(window.devicePixelRatio || 1, 2);
+    if (!compact.matches && pixels > 2100 && video.dataset.highSrc &&
+        video.canPlayType?.('video/mp4; codecs="avc1.640033"')) return video.dataset.highSrc;
+    return compact.matches ? video.dataset.mobileSrc : video.dataset.desktopSrc;
+  }
+
   function buttons() {
     for (const button of retryButtons) {
       button.hidden = !failed || !motionAllowed();
@@ -35,6 +49,18 @@
   }
   function fail() {
     if (failed) return;
+    // A device can advertise 4K support but fail to decode it in practice. Recover
+    // once with the HD rendition, preserving the current scroll and saved motion.
+    if (selectedSrc && selectedSrc === video.dataset.highSrc) {
+      stopWork(); pending = false; lastTarget = NaN;
+      generation++; download?.abort(); download = null;
+      video.removeAttribute('src'); video.load();
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      objectUrl = '';
+      selectedSrc = video.dataset.desktopSrc;
+      host.dataset.state = 'poster';
+      loadMedia(); buttons(); return;
+    }
     failed = true;
     stopWork();
     pending = false;
@@ -138,8 +164,7 @@
     if (!started) {
       started = true;
       // Select once: rotating a phone must not discard a buffered journey.
-      selectedSrc ||= compact.matches || navigator.connection?.saveData
-        ? video.dataset.mobileSrc : video.dataset.desktopSrc;
+      selectedSrc ||= chooseSource();
       loadMedia();
     }
     if (pending || video.readyState < 2) armDeadline();
