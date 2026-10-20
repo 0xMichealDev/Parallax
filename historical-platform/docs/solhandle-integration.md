@@ -34,3 +34,12 @@ No outbound partner messages or payments were sent. Partner Mint has no minting 
 Historical verification: the prior release resolved `@solhandle` to `CZvu8vnzLKyfGmbpixypQcfW4iiw7em43utW4k6ordYP` on mainnet on October 16, 2026 UTC; it had no Primary Handle at that time. This is historical evidence, not a current ownership assertion. Primary references: https://solhandle.io/developers and https://www.npmjs.com/package/solhandle-sdk.
 
 Repository-wide TypeScript checking still reports the existing QRCode option mismatch in `app/growth-service.ts:33`; no new integration type errors were reported.
+
+
+## October 20 follow-up
+
+- Identity cards now invalidate on page background/pagehide and recheck on foreground/BFCache restoration. Response revisions prevent an older request from restoring an invalidated handle. Expiry is bounded from request start, so delayed responses do not extend freshness.
+- Passport expiry/loading retains every linked creator address. Wallet Watch and Terminal label lookup observations as historical and show a separate current identity card pinned to the inspected address. Saved watch labels are explicitly personal labels.
+- `scripts/test-solhandle-ui.mjs` exercises suspended-tab and late-response behavior, BFCache restoration, expiry, multi-creator address retention, deduplication and concurrency. The service suite now tests the actual project-update endpoint after transfer, including changed/expired proof denial.
+- `/parallax-solhandle-handoff.md`, linked from `/solhandle`, is the public partner handoff with layouts, endpoint contracts, current SDK version and remaining live checks. No outbound message was sent.
+- Live read at 2026-10-20T22:58:36.589Z resolved `@solhandle` through the production identity endpoint to the address recorded above. A dedicated PARALLAX SDK package has not been received. Real-transfer and signed Phantom/browser tests remain outstanding; no official SolHandle integration certification is claimed.
