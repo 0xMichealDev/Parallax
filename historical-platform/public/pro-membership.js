@@ -3,12 +3,12 @@ const badges=Array.from(document.querySelectorAll('[data-pro-member-badge]'));if
 let epoch=0,working=false,lastChecked=0,suppressed=false;
 function show(state,detail,title){
  if(state!=='active')window.ParallaxGold?.set(null);
- for(const badge of badges){badge.hidden=false;badge.dataset.state=state;badge.classList.toggle('is-active',state==='active');badge.title=title;badge.setAttribute('aria-label',title);const label=badge.querySelector('[data-pro-detail]');if(label)label.textContent=detail;badge.href=state==='signin'?'/signin-with-chatgpt?return_to=%2Fpro':'/pro';}
+ for(const badge of badges){badge.hidden=false;badge.dataset.state=state;badge.classList.toggle('is-active',state==='active');badge.title=title;badge.setAttribute('aria-label',title);const label=badge.querySelector('[data-pro-detail]');if(label)label.textContent=detail;const tier=badge.querySelector('[data-pro-label]');if(tier)tier.textContent=state==='active'?'GOLD':'PRO';badge.href=state==='signin'?'/signin-with-chatgpt?return_to=%2Fpro':'/pro';}
  document.body.classList.toggle('has-pro-membership',state==='active');
 }
 function set(value){
  window.ParallaxGold?.set(value);
- if(value?.eligible===true&&typeof value.wallet==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(value.wallet)){show('active','MEMBER','Verified Parallax Pro member · '+value.wallet.slice(0,6)+'…'+value.wallet.slice(-4)+' · Open your workspace');return;}
+ if(value?.eligible===true&&typeof value.wallet==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(value.wallet)){show('active','ACTIVE','Parallax Gold active · Verified Pro member · '+value.wallet.slice(0,6)+'…'+value.wallet.slice(-4)+' · Open your membership');return;}
  if(value?.eligible===false){show('holdings','Check','Parallax Pro · Holding requirement not met. Open Pro to review access.');return;}
  show('verify','Verify','Parallax Pro · Verify your wallet to check membership.');
 }

@@ -1,6 +1,7 @@
 (()=>{'use strict';
 const body=document.body,page=body.dataset.workspacePage;
 const main=document.querySelector('main');if(!main)return;
+const frame=document.createElement('div');frame.className='gold-site-frame';frame.hidden=true;frame.setAttribute('aria-hidden','true');body.append(frame);
 let active=false,firstName='',welcome=null,finishes=null,arrived=false;
 let finish='champagne';try{const saved=localStorage.getItem('parallax-gold-finish');if(['champagne','obsidian','warm'].includes(saved))finish=saved;}catch{}
 const labels={champagne:'Champagne',obsidian:'Obsidian',warm:'Warm gold'};
@@ -22,7 +23,7 @@ if(card){
 }
 function applyFinish(){body.dataset.goldFinish=finish;window.ParallaxGoldFinish=finish;finishes?.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.finish===finish)));}
 function session(value){firstName=typeof value?.firstName==='string'?value.firstName.slice(0,32):'';if(welcome)welcome.querySelector('[data-gold-greeting]').textContent=firstName?'Welcome back, '+firstName+'.':'Welcome back.';}
-function set(value){active=value?.eligible===true&&typeof value.wallet==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(value.wallet);if(welcome)welcome.hidden=!active;if(finishes)finishes.hidden=!active;body.classList.toggle('gold-member-active',active);
+function set(value){active=value?.eligible===true&&typeof value.wallet==='string'&&/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(value.wallet);frame.hidden=!active;if(welcome)welcome.hidden=!active;if(finishes)finishes.hidden=!active;body.classList.toggle('gold-member-active',active);
  if(hero)hero.innerHTML=active?'Your perspective.<br><em>Elevated.</em>':originalHero;
  if(lead)lead.textContent=active?'A workspace that feels like yours. Follow your wallets, research projects, and stay close to what changes.':originalLead;
  if(active&&!arrived){arrived=true;body.classList.add('gold-arrival');}
