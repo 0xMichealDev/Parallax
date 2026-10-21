@@ -1,0 +1,8 @@
+{
+  "sourceCommit": "7550ab3bedabeb06dea59e846fa2e57cf3a62735",
+  "released": "2026-10-21",
+  "files": {
+    "src/solhandle.mjs": "1245fdb7ee77427959668bc54935c488cbf5e4ad7981b3c355476109f4809e03",
+    "browser/solhandle-identity.js": "523332b96815125ed39b00bb50dc4860c0e75739f1f8fc9f18aa0cca7aa159a3"
+  }
+}
