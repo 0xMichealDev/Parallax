@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Product documentation
+    url: https://parallaxlaunch.live/docs
+    about: Read product guides, eligibility and integration boundaries.
+  - name: Security reporting guidance
+    url: https://github.com/0xMichealDev/Parallax/blob/main/SECURITY.md
+    about: Request a private reporting channel before sharing vulnerability details.

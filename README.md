@@ -1,47 +1,91 @@
-# PARALLAX — The Onchain Observatory
+<p align="center">
+  <img src="assets/parallax-banner.svg" alt="PARALLAX — The Onchain Observatory. Research with context. Build with evidence." width="100%">
+</p>
 
-Selected integration source and offline checks from PARALLAX, a Solana research and creator workspace.
+<p align="center">
+  <a href="https://parallaxlaunch.live"><strong>Open PARALLAX</strong></a> ·
+  <a href="https://parallaxlaunch.live/docs"><strong>Documentation</strong></a> ·
+  <a href="docs/ARCHITECTURE.md"><strong>Architecture</strong></a> ·
+  <a href="docs/ROADMAP.md"><strong>Roadmap</strong></a> ·
+  <a href="CHANGELOG.md"><strong>Changelog</strong></a>
+</p>
 
-[Website](https://parallaxlaunch.live) · [Documentation](https://parallaxlaunch.live/docs) · [SolHandle guide](https://parallaxlaunch.live/docs/solhandle)
+# Research with context. Build with evidence.
 
-Maintained by **Micheal**, [@0xMichealDev](https://x.com/0xMichealDev).
+PARALLAX is a Solana research and creator workspace. It brings project research, wallet activity and creator identity into one place, with source links and clear verification boundaries.
 
-## Scope
+This repository is the **PARALLAX developer kit**: selected integration source, executable tests and implementation notes. The hosted platform is available at [parallaxlaunch.live](https://parallaxlaunch.live). The full application is maintained separately.
 
-This source preview includes the production SolHandle resolver, the identity-card browser module, fixture tests and a read-only mainnet lookup example. It is not the full PARALLAX application or an official SolHandle SDK. It contains no project database, deployment credentials or account data.
+## The platform
 
-The resolver is transpiled from `app/solhandle-service.ts`; the browser module is copied from `public/solhandle-identity.js`. Both originate from PARALLAX source commit `7550ab3bedabeb06dea59e846fa2e57cf3a62735`. File hashes are recorded in `PROVENANCE.json`.
+| Workspace | Purpose | Guide |
+| --- | --- | --- |
+| **Project Passports** | Collect, save and compare token research snapshots with source context. | [Passports](https://parallaxlaunch.live/docs/passports) |
+| **Wallet Watch** | Inspect wallet activity and keep saved watches tied to exact addresses. | [Wallet Watch](https://parallaxlaunch.live/docs/wallet-watch) |
+| **Project Atlas** | Explore community project profiles and creator identities. | [Creator tools](https://parallaxlaunch.live/docs/creators) |
+| **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
+| **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-## Run
+## What you can inspect here
 
-Use Node.js 22.13 or newer:
+**Ownership resolution.** A read-only SolHandle adapter verifies official records and the current NFT owner through the official SDK. Reverse lookup displays only a valid Primary Handle; an explicit wallet address remains usable when identity enrichment is unavailable.
+
+**Identity lifecycle.** The browser module handles expiry, tab backgrounding, restored pages and delayed responses. A handle transfer cannot silently redirect an existing address-based watch.
+
+**Executable checks.** Fixture tests exercise ownership transfers, invalid records, missing handles, provider failures and browser request races. A provenance check verifies the two extracted production modules against their recorded hashes.
+
+| Directory | Contents |
+| --- | --- |
+| [`src/`](src/) | SolHandle resolver and input validation |
+| [`browser/`](browser/) | Identity-card rendering and refresh lifecycle |
+| [`examples/`](examples/) | Read-only mainnet lookup |
+| [`tests/`](tests/) | Offline resolver and simulated-browser checks |
+| [`docs/`](docs/) | Architecture, API contract, test coverage and roadmap |
+
+## Run the kit
+
+Use **Node.js 22.13 or newer** and npm.
 
 ```sh
-npm install
-npm test
+git clone https://github.com/0xMichealDev/Parallax.git
+cd Parallax
+npm ci --ignore-scripts
+npm run check
+```
+
+The check command validates source provenance and runs the offline test suite. No wallet, SOL, account credentials or RPC subscription is required for those checks.
+
+To try a live read:
+
+```sh
 node examples/lookup.mjs @solhandle
 ```
 
-Tests use fixture responses and require no RPC account, wallet connection or funds. The example reads mainnet and never signs transactions. Set `SOLANA_RPC_URL` in your local environment for a different RPC endpoint; keep credential-bearing URLs private. The public endpoint may rate-limit requests.
+The example reads Solana mainnet without signing transactions. It uses a public RPC endpoint by default; a local `SOLANA_RPC_URL` environment variable can select another provider. Never commit a credential-bearing RPC URL. See the [integration guide](docs/INTEGRATION.md) for the API contract and failure behavior.
 
-## Resolver contract
+## Three independent checks
 
-`resolveWalletQuery(input, readRpc, reverse = true)` accepts an address or `@handle`. Supply an asynchronous `readRpc(method, params)` that returns the JSON-RPC result value. The resolver allows account-read methods, bounds lookup time and uses SolHandle SDK 1.0.1 to check official records and current ownership.
+| Check | Establishes | Does not establish |
+| --- | --- | --- |
+| **Handle ownership** | A wallet currently owns the official handle asset. | Project permission or token legitimacy. |
+| **Wallet control** | A wallet signed a valid proof for an account. | A person's legal identity. |
+| **Project authorization** | An account and its required wallet proof may perform a specific operation. | Rights for a future owner of the handle. |
 
-Forward lookups return the current owner or a typed failure. Address input keeps the address usable when optional reverse resolution is unavailable. A stale Primary Handle cannot label the former owner after transfer. Always render the returned full address alongside the handle.
+This kit implements identity resolution and display. Wallet proofs and project authorization are enforced by the hosted application and are outside this source preview. Read the [architecture and trust boundaries](docs/ARCHITECTURE.md).
 
-## Browser module
+## Development status
 
-The module expects PARALLAX-compatible same-origin `/api/identity/` endpoints and response shapes. It is an integration reference, not a standalone widget service. Place it after your markup with `defer`, and add `data-solhandle-wallet="ADDRESS"`, `data-solhandle-project="PROFILE_ID"` or `data-solhandle-token="TOKEN_ADDRESS"` to a target element. Provide your own styling.
+The resolver and browser module are extracted from deployed PARALLAX source. [`PROVENANCE.json`](PROVENANCE.json) records their origin and SHA-256 hashes. Test scope and remaining real-device checks are documented in [Testing](docs/TESTING.md).
 
-Cards expire from request start, invalidate on background/BFCache events, reject old responses, retain known addresses and recheck on return. Requests are deduplicated and limited to two concurrent reads. Tests cover these lifecycle boundaries with a simulated DOM; they are not a real-device browser test.
+Joint partner SDK review, an authorized real NFT transfer and iPhone/Phantom signing validation remain outstanding for the broader integration. **Partner Mint is planned.** Track shipped work and future scope in the [roadmap](docs/ROADMAP.md).
 
-## Ownership and authorization
+## Contribute and report issues
 
-Handle ownership, wallet-signature verification and project permissions are independent checks. A handle transfer never authorizes access to its previous owner's project. The full application enforces account plus original-wallet authorization server-side. This selected kit contains identity resolution only; it does not implement an authorization service. Never trust a browser permission label as authorization.
+Use the issue templates for reproducible bugs and focused feature proposals. Read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a change. Suspected vulnerabilities belong in a private reporting channel described in [SECURITY.md](SECURITY.md).
 
-## Status and use
+Maintained by **Micheal** · [@0xMichealDev](https://x.com/0xMichealDev)  
+[Community](https://t.me/Parallaxcommunity) · [Project updates](https://t.me/parallaxliveupdates)
 
-This preview is published for inspection. No open-source license has been granted; `UNLICENSED` is intentional pending a license decision. Dependency licenses remain their own. Documentation or source availability is not an audit or a guarantee of token safety, returns or changes to external risk scores.
+## License and scope
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and [CHANGELOG.md](CHANGELOG.md).
+This is a source preview with **no open-source license granted**. The package is marked `UNLICENSED`; dependency licenses remain their own. Source availability and passing tests are not an independent security audit, a token endorsement or a promise of investment returns.

@@ -1,0 +1,25 @@
+name: Feature proposal
+description: Suggest a focused improvement to the integration or developer experience.
+title: "[Proposal]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: Who is affected, and what are they trying to accomplish?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the intended result and any relevant alternatives.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: How could we verify it?
+      description: Suggest observable success criteria, examples or test cases.
+    validations:
+      required: true

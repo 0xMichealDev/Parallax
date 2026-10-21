@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+<title id="title">PARALLAX — The Onchain Observatory</title>
+<desc id="desc">Research with context. Build with evidence. A dark observatory graphic with mint orbital lines.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#09121c"/><stop offset="1" stop-color="#101e27"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#85e1c0" stop-opacity=".16"/><stop offset="1" stop-color="#85e1c0" stop-opacity="0"/></radialGradient>
+ <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#b3e4d0" stroke-opacity=".045"/></pattern>
+</defs>
+<rect width="1280" height="360" rx="16" fill="url(#bg)"/>
+<rect width="1280" height="360" rx="16" fill="url(#grid)"/>
+<circle cx="1040" cy="180" r="245" fill="url(#halo)"/>
+<g fill="none" stroke="#a3ebcf">
+ <circle cx="1040" cy="180" r="110" opacity=".3"/>
+ <circle cx="1040" cy="180" r="151" opacity=".12"/>
+ <ellipse cx="1040" cy="180" rx="197" ry="59" transform="rotate(-32 1040 180)" opacity=".5"/>
+ <ellipse cx="1040" cy="180" rx="110" ry="35" transform="rotate(56 1040 180)" opacity=".2"/>
+ <path d="M1040 48V312M908 180H1172" stroke-dasharray="3 9" opacity=".2"/>
+</g>
+<circle cx="1040" cy="180" r="8" fill="#b6f4d8"/>
+<circle cx="1205" cy="80" r="4" fill="#b6f4d8"/>
+<circle cx="968" cy="97" r="3" fill="#b6f4d8"/>
+<path d="M64 63H96" stroke="#a3ebcf" stroke-width="3"/>
+<text x="110" y="68" fill="#a3ebcf" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="3">THE ONCHAIN OBSERVATORY</text>
+<text x="62" y="158" fill="#f0f5f3" font-family="Arial, Helvetica, sans-serif" font-size="70" font-weight="700" letter-spacing="8">PARALLAX</text>
+<text x="66" y="209" fill="#c1d0cc" font-family="Arial, Helvetica, sans-serif" font-size="23">Research with context. Build with evidence.</text>
+<path d="M66 256H714" stroke="#b3e4d0" stroke-opacity=".15"/>
+<text x="66" y="291" fill="#93a9a2" font-family="Arial, Helvetica, sans-serif" font-size="12" letter-spacing="2">SOLANA</text>
+<circle cx="152" cy="287" r="2" fill="#70b89d"/>
+<text x="171" y="291" fill="#93a9a2" font-family="Arial, Helvetica, sans-serif" font-size="12" letter-spacing="2">DEVELOPER RESOURCES</text>
+<circle cx="377" cy="287" r="2" fill="#70b89d"/>
+<text x="396" y="291" fill="#93a9a2" font-family="Arial, Helvetica, sans-serif" font-size="12" letter-spacing="2">SELECTED SOURCE</text>
+</svg>

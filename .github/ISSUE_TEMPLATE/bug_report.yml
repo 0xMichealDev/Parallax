@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible problem with the developer kit.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Use fixture data. Do not post credentials or vulnerability details; see SECURITY.md for private reporting."
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Include the kit version or commit SHA and Node.js version.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide a small reproduction that uses public or fixture data.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include a sanitized error message if available.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Checks already run
+      description: Include the result of npm run check and any relevant environment details.

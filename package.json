@@ -8,10 +8,20 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/verify-provenance.mjs && npm test"
   },
   "dependencies": {
     "@solana/web3.js": "1.99.0",
     "solhandle-sdk": "1.0.1"
+  },
+  "description": "Selected SolHandle integration source and offline checks from PARALLAX.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xMichealDev/Parallax.git"
+  },
+  "homepage": "https://parallaxlaunch.live/docs/developers",
+  "bugs": {
+    "url": "https://github.com/0xMichealDev/Parallax/issues"
   }
 }
