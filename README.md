@@ -79,7 +79,7 @@ This kit implements identity resolution and display. Wallet proofs and project a
 
 The original hosted application has **162 source commits and 158 saved site versions** through the recorded October 20, 2026 snapshot. A reviewed export retains **155 historical commits** covering browser code, styles and implementation notes, with their original dates and Codex attribution.
 
-**History import status: prepared.** See the [import receipt](docs/history/import-receipt.json) for execution status and the [development record](docs/DEVELOPMENT-HISTORY.md) for scope and the source-to-import mapping. This does not reassign historical work to a personal contribution calendar.
+**History import status: completed.** See the [import receipt](docs/history/import-receipt.json) for execution status and the [development record](docs/DEVELOPMENT-HISTORY.md) for scope and the source-to-import mapping. This does not reassign historical work to a personal contribution calendar.
 
 Read the [platform guides](docs/platform/README.md) for feature details and verification limits. The active developer kit remains in the root; the historical source archive is separate and is not a runnable full application.
 

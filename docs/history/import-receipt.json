@@ -1,1 +1,9 @@
-{"status":"prepared","imported_commit_count":0,"expected_import_count":155}
+{
+  "status": "imported",
+  "filtered_head": "e0aeecdc1c517dd49181bac7a28760ad148040d2",
+  "imported_commit_count": 155,
+  "bundle_sha256": "78b763b64945599ca918fbb964274a1779a59e8c0bf092f00ca62d4d1787b119",
+  "original_source_head": "c2b3bde25a0a1836ad37498c16919cdbaaa588ab",
+  "attribution": "Original Codex author and committer metadata retained; no personal contribution credit claimed.",
+  "validation": "Original dates, identities, messages and selected file blob hashes verified before upload; current developer-kit checks required before publication."
+}

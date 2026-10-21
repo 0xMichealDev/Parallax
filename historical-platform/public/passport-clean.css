@@ -1,0 +1,56 @@
+/* A focused entrance, then research details at the reader's pace. */
+body.passport-focused main>.hero,body.passport-focused main>details{display:none}
+body.passport-focused main{max-width:1160px}
+body.passport-focused .tabs{margin-top:24px;background:transparent;border:0;border-bottom:1px solid var(--edge);border-radius:0;padding:0 0 12px;display:flex;flex-wrap:wrap;gap:6px}
+body.passport-focused .tabs button{font-size:0;padding:10px 14px;border-radius:24px}
+body.passport-focused .tabs button span{font-size:12px;margin:0}
+body.passport-focused .tabs button[aria-selected=true]{background:#b2f4de14;box-shadow:inset 0 0 0 1px #b2f4de36}
+#passport{padding-bottom:32px}
+#passport .passport-intro{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:42px 0 32px}
+#passport .passport-intro h1{font-size:clamp(34px,4.5vw,58px);line-height:1.08;letter-spacing:-2px;margin:15px 0 18px}
+#passport .passport-intro h1 em{color:var(--cyan)}
+.passport-intro p:not(.eyebrow){font-size:15px;line-height:1.8;color:#a9b9c6}
+.passport-trust{font-size:11px;color:#b7cfc6}
+.passport-art{width:150px;height:190px;padding:18px 20px;border:1px solid #b2f4de50;border-radius:9px 20px 20px 9px;background:linear-gradient(145deg,#25423b,#101c24);transform:rotate(8deg);flex-shrink:0;margin:0 36px;box-shadow:8px 12px 40px #0003,inset 5px 0 #b2f4de12;color:#ceefe2}
+.passport-art>span{font-size:8px;letter-spacing:2px}.passport-art>div{font-size:43px;line-height:1.2;margin:12px 0;color:#b2f4de}
+.passport-art>b{font:500 11px/1.4 'Space Grotesk',sans-serif;letter-spacing:1.5px}.passport-art i{display:block;height:1px;background:#b2f4de35;margin-top:7px;width:80%}.passport-art i:last-child{width:55%}
+#passport .passport-search{padding:28px 32px;background:linear-gradient(120deg,#142622,#111820 75%);border:1px solid #b2f4de36;border-radius:20px}
+.passport-search-title{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.passport-step{display:grid;place-items:center;width:38px;height:38px;flex-shrink:0;border:1px solid #b2f4de35;border-radius:12px;font:12px 'Space Grotesk',sans-serif;color:var(--cyan)}
+#passport .passport-search h2{font-size:23px;letter-spacing:-.6px;margin:0 0 6px}.passport-search-title p{margin:0;font-size:13px;color:var(--muted)}
+#passport .passport-search input{min-height:54px;background:#080f13;font-size:15px;border-color:#445d55}
+#passport .passport-search .primary{min-height:54px;padding-inline:24px}
+.passport-search-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:12px;font-size:11px;color:var(--muted)}
+.passport-help{border-top:1px solid #b2f4de20;margin-top:18px}.passport-help summary{padding:16px 0 0;font-size:12px;color:#aebfba;cursor:pointer}.passport-help>div{font-size:12px;line-height:1.8;color:var(--muted);padding:6px 0}
+.passport-welcome{margin:35px 0 24px}.passport-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:22px}.passport-benefits>div{border-top:1px solid #b2f4de25;padding-top:20px}.passport-benefits span{font-size:9px;letter-spacing:1.5px;color:#94b8aa}.passport-benefits h3{font-size:19px;margin:12px 0}.passport-benefits p{font-size:13px;line-height:1.8;color:var(--muted)}
+#passport #report-view{padding:28px;border-color:#b2f4de32;background:#101b20}
+#report-view>.actions{margin:24px 0;gap:10px}
+#report-view .metrics{gap:12px;margin:24px 0}#report-view .metric{background:#091419;border-color:#b2f4de25;border-radius:12px}
+#report-view .snapshot-followup{padding:16px 18px;background:#b2f4de08;border-color:#b2f4de22}
+.passport-gaps{border-left:2px solid #dcbf81;padding:1px 16px;margin:20px 0;background:#dcbf8108}.passport-gaps h4{font-size:12px;color:#e5d0a5;margin:12px 0 4px}.passport-gaps ul{padding-left:18px;font-size:12px;color:#bfc7c7;line-height:1.8}
+.passport-report-detail{border:1px solid #b2f4de24;border-radius:12px;margin:12px 0;overflow:hidden}
+.passport-report-detail>summary{cursor:pointer;padding:18px 20px;font-size:14px;color:#d7e9e1;min-height:54px}
+.passport-report-detail>summary span{display:block;color:#98aca7;font-size:11px;margin:5px 0 0}
+.passport-detail-body{padding:8px 20px 22px}
+#report-view .passport-detail-body .sources{margin-top:0;border-top:0}
+#report-view .passport-detail-body .fingerprint{margin-top:0}
+#passport .status:empty{display:none}
+#passport summary:focus-visible{outline:2px solid var(--cyan);outline-offset:-4px;border-radius:10px}
+#passport button{min-height:44px}
+@media(max-width:700px){
+ .passport-art{display:none}
+ #passport .passport-intro{padding:28px 0 24px}
+ #passport .passport-intro h1{font-size:36px;letter-spacing:-1.5px}
+ #passport .passport-intro p:not(.eyebrow){font-size:14px}
+ #passport .passport-search{padding:22px 18px;border-radius:16px}
+ #passport .passport-search input{font-size:16px}
+ .passport-search-title{gap:12px;align-items:flex-start}
+ #passport .passport-search h2{font-size:22px}
+ .passport-search-foot{align-items:flex-start;flex-direction:column;gap:0}
+ .passport-benefits{grid-template-columns:1fr;gap:14px}.passport-benefits>div{padding-top:16px}.passport-benefits p{margin:6px 0}
+ #passport #report-view{padding:18px}
+ #report-view>.actions{display:grid;grid-template-columns:1fr}
+ .passport-report-detail>summary{padding:16px}
+ .passport-detail-body{padding:4px 16px 18px}
+ body.passport-focused .tabs{gap:3px;margin-top:12px}body.passport-focused .tabs button{padding:9px 10px}body.passport-focused .tabs button span{font-size:11px}
+}

@@ -12,7 +12,7 @@ Recorded October 20, 2026. This retrospective describes the separate hosted appl
 
 ## Historical source import
 
-**History import status: prepared.** The [receipt](history/import-receipt.json) records completion. A filtered export contains 155 genuine historical revisions across 209 selected browser-code, stylesheet and implementation-note paths. Seven source revisions had no changes within the exported paths. One browser file was excluded across all revisions because it contained personal identifying text.
+**History import status: completed.** The [receipt](history/import-receipt.json) records completion. A filtered export contains 155 genuine historical revisions across 209 selected browser-code, stylesheet and implementation-note paths. Seven source revisions had no changes within the exported paths. One browser file was excluded across all revisions because it contained personal identifying text.
 
 The imported branch preserves original author, committer, both timestamps, commit messages and selected file bytes. Paths are prefixed with `historical-platform/`; filtering changes commit IDs. The [import manifest](history/import-manifest.json) maps all 162 original revisions to imported revisions or omission reasons. No commits have been fabricated for inactive days and no author attribution has been reassigned.
 

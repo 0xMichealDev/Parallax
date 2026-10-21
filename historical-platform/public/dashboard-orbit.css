@@ -1,0 +1,198 @@
+/* Custom dashboard only. The flight controller and saved layout schema are unchanged. */
+body.premium-dashboard.dashboard-flight{--orbit-ink:#eef8f2;--orbit-muted:#adbfbd;--orbit-mint:#c6f2da;--orbit-line:#b8dfd32e}
+body.premium-dashboard.dashboard-flight .dashboard-token-bar{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:5px 26px;max-width:none;margin:0 0 22px;padding:16px 22px 8px;border:1px solid #b8dfd326;border-radius:16px;background:#0b1218eb;box-shadow:none;position:relative}
+body.premium-dashboard .dashboard-token-identity{display:flex;align-items:center;gap:15px;min-width:0}
+body.premium-dashboard .dashboard-token-emblem{display:grid;place-items:center;flex:none;width:44px;height:44px;border:1px solid #bde4cf4a;border-radius:50%;background:radial-gradient(circle at 28% 20%,#91bca044,#173328 60%);box-shadow:inset 0 0 20px #b6dfb609,0 0 24px #b8e5bd0d}
+body.premium-dashboard .dashboard-token-emblem svg{width:35px;height:35px;stroke:#d9f8e4;stroke-width:1;fill:none}
+body.premium-dashboard .dashboard-token-identity p{font:8px/1.5 ui-monospace,monospace;letter-spacing:.13em;color:#a8c8b8;margin:0 0 5px}
+body.premium-dashboard .dashboard-token-identity h2{font:550 29px/1.15 Inter,system-ui,sans-serif;letter-spacing:-.05em;color:#f0fff4;margin:0;display:flex;align-items:center;gap:13px}
+body.premium-dashboard .dashboard-token-identity .official-token-network{font:8px/1.5 ui-monospace,monospace;letter-spacing:.1em;color:#c7dfd5;border:1px solid #b4dfcc38;border-radius:4px;padding:4px 6px}
+body.premium-dashboard .dashboard-token-contract{min-width:0;padding-left:28px;border-left:1px solid #a7d4bf24}
+body.premium-dashboard .dashboard-token-bar .official-token-row{max-width:none;gap:20px}
+body.premium-dashboard .dashboard-token-bar .official-token-address>span{color:#abc0ba;font-size:10px;margin-bottom:6px}
+body.premium-dashboard .dashboard-token-bar code{font-size:13px;line-height:1.7;overflow-wrap:anywhere;word-break:normal;white-space:normal;text-overflow:clip;overflow:visible;color:#e6f8ee}
+body.premium-dashboard .dashboard-token-bar #copy-ca{background:#c6f2da;color:#123025;border-color:#c6f2da;border-radius:8px;min-height:44px;padding:11px 15px;font-size:11px;box-shadow:0 3px 12px #0002}
+body.premium-dashboard .dashboard-token-bar #copy-ca:hover{background:#e0ffec}
+body.premium-dashboard .dashboard-token-bar #copy-status{font-size:10px;margin:4px 0 0;min-height:15px}
+body.premium-dashboard .dashboard-token-links{grid-column:2;display:flex;gap:9px 22px;flex-wrap:wrap;padding:0 0 0 28px}
+body.premium-dashboard .dashboard-token-links a{min-height:36px;display:inline-flex;align-items:center;gap:13px;font-size:11px;color:#c1d9ce}
+body.premium-dashboard .dashboard-token-links a:first-child{color:#e0f4e6}
+body.premium-dashboard .dashboard-token-links a span{color:#9dbdaa}
+body.premium-dashboard .dashboard-token-links a:hover{color:#fff}
+/* An open arrival area leaves the planet visible, with contrast beneath the copy. */
+body.premium-dashboard.dashboard-flight .dashboard-arrival{display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,.6fr);gap:28px 42px;align-items:center;position:relative;min-height:440px;padding:30px 10px 24px;margin:0 0 34px;isolation:isolate}
+body.premium-dashboard .dashboard-arrival:before{content:'';position:absolute;z-index:-1;inset:0 -10px;background:linear-gradient(90deg,#061014d9, #06101477 42%,transparent 78%);pointer-events:none;border-radius:20px}
+body.premium-dashboard .dashboard-arrival-copy>.eyebrow{font:9px/1.6 ui-monospace,monospace;letter-spacing:.17em;color:#c1dfd2;display:flex;align-items:center;gap:10px;margin:0 0 22px}
+body.premium-dashboard .dashboard-arrival-copy>.eyebrow span{height:5px;width:5px;background:#c6f2da;border-radius:50%;box-shadow:0 0 12px #9bd9b777}
+body.premium-dashboard .dashboard-arrival h1{font:450 clamp(43px,4.5vw,68px)/1.04 Inter,system-ui,sans-serif;letter-spacing:-.055em;margin:0;color:var(--orbit-ink);text-shadow:0 4px 30px #0008}
+body.premium-dashboard .dashboard-arrival h1 em{font-style:normal;color:#c6f2da}
+body.premium-dashboard .dashboard-arrival-copy>p:not(.eyebrow){font-size:14px;line-height:1.85;max-width:440px;margin:22px 0 0;color:#c3d3d0}
+body.premium-dashboard .dashboard-shortcuts{display:flex;gap:8px 22px;flex-wrap:wrap;margin-top:23px}
+body.premium-dashboard .dashboard-shortcuts a{display:inline-flex;align-items:center;gap:14px;min-height:44px;font-size:11px;color:#d5e9df;border-bottom:1px solid #b5deca39}
+body.premium-dashboard .dashboard-shortcuts a:first-child{color:#e9fff0}
+body.premium-dashboard .dashboard-shortcuts a:hover{border-color:#c6f2da;color:#fff}
+body.premium-dashboard .dashboard-flight-marker{align-self:end;justify-self:end;display:grid;justify-items:end;gap:12px;padding:22px 4px 20px;color:#e1f5eb;opacity:.86;text-shadow:0 2px 8px #000}
+body.premium-dashboard .dashboard-flight-marker small{font:7px/1.7 ui-monospace,monospace;letter-spacing:.12em}
+body.premium-dashboard .dashboard-arrival .dashboard-heading-actions{grid-column:1/-1;justify-content:flex-start;gap:10px;border-top:1px solid #bedccb26;padding-top:18px;min-width:0}
+body.premium-dashboard .dashboard-arrival .dashboard-heading-actions :is(button,a){margin:0;font-size:11px;min-height:44px;border-color:#bedccb36;border-radius:8px;background:#09171c88;color:#c6dcd3;padding:10px 14px}
+body.premium-dashboard .dashboard-arrival .dashboard-heading-actions .layout-customize{border-color:#bedccb36;color:#d4e6db;background:#09171c88}
+body.premium-dashboard .dashboard-arrival .dashboard-heading-actions a{margin-left:auto}
+/* Three distinct illustrations, presenting the current Premium Worlds benefits. */
+body.premium-dashboard .dashboard-utility{margin:0 0 42px;scroll-margin-top:30px}
+body.premium-dashboard .dashboard-utility-heading{padding:0 4px;margin-bottom:22px}
+body.premium-dashboard .dashboard-utility .eyebrow{font:9px/1.6 ui-monospace,monospace;letter-spacing:.14em;color:#b8d8c6;margin:0 0 12px}
+body.premium-dashboard .dashboard-utility h2{font:450 clamp(27px,2.6vw,36px)/1.15 Inter,system-ui,sans-serif;letter-spacing:-.04em;color:#eef9f2;margin:0;text-shadow:0 2px 14px #000}
+body.premium-dashboard .dashboard-utility-description{font-size:13px;line-height:1.8;color:#c4d3cd;max-width:610px;margin:12px 0 0;text-shadow:0 2px 10px #000}
+body.premium-dashboard .dashboard-utility-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+body.premium-dashboard .utility-showcase-card{min-width:0;display:flex;flex-direction:column;border:1px solid #b4d9cc26;border-radius:16px;overflow:hidden;background:transparent;box-shadow:none;transition:border-color .2s,box-shadow .2s}
+body.premium-dashboard .utility-showcase-card:focus-within{border-color:#c6f2da}
+body.premium-dashboard .utility-showcase-studio{background:transparent}
+body.premium-dashboard .utility-showcase-research{background:transparent}
+body.premium-dashboard .utility-showcase-copy{padding:20px 20px 10px;display:flex;flex-direction:column;flex:1}
+body.premium-dashboard .utility-showcase-copy h3{font:500 clamp(19px,1.6vw,23px)/1.25 Inter,system-ui,sans-serif;letter-spacing:-.04em;color:#effaf3;margin:0 0 13px}
+body.premium-dashboard .utility-showcase-copy>p{font-size:13px;line-height:1.7;color:#b7c9c3;margin:0 0 16px;flex:1}
+body.premium-dashboard .utility-showcase-copy>a{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:49px;border-top:1px solid #c0ddce24;color:#d4eddf;font-size:11px;padding:11px 0}
+body.premium-dashboard .utility-showcase-copy>a>span{display:grid;place-items:center;border:1px solid #b6ddc63b;width:29px;height:29px;flex:none;border-radius:50%;color:#d1e8d8;font-size:16px;transition:background .2s}
+body.premium-dashboard .utility-showcase-copy>a:hover>span{background:#c6f2da;color:#123025}
+body.premium-dashboard .dashboard-utility-footer{display:flex;justify-content:space-between;align-items:center;gap:12px 24px;padding:8px 4px;margin-top:5px}
+body.premium-dashboard .dashboard-utility-footer p{font-size:11px;line-height:1.8;color:#b5c8be;margin:0}
+body.premium-dashboard .dashboard-utility-footer a{font-size:11px;display:inline-flex;align-items:center;gap:20px;min-height:44px;color:#dbeedd;flex:none}
+/* Tie the existing tools into the new surface language without changing their behavior. */
+body.premium-dashboard.dashboard-flight :is(.home-market,.home-release-notes,.following-home,.eco-teaser,.home-premium,.site-growth,.path-card,.example-card){border-color:#bcdbcf22;box-shadow:none;background-image:none}
+body.premium-dashboard.dashboard-flight .dashboard-hero{border-color:#b7ddca4a;border-radius:18px}
+body.premium-dashboard.dashboard-flight .layout-summary{color:#bad1c8;margin:0 0 16px;font-size:10px}
+body.premium-dashboard .dashboard-utility :is(a,button):focus-visible,body.premium-dashboard .dashboard-token-bar :is(a,button,code):focus-visible,body.premium-dashboard .dashboard-shortcuts a:focus-visible{outline:2px solid #d1f8de;outline-offset:4px}
+@media(max-width:1180px) and (min-width:761px){
+ body.premium-dashboard .dashboard-utility-grid{grid-template-columns:1fr;gap:15px}
+ body.premium-dashboard .utility-showcase-card{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(0,1.1fr)}
+ body.premium-dashboard .dashboard-utility-heading{align-items:flex-start}
+ body.premium-dashboard .dashboard-token-bar{gap:6px 22px;padding:16px 22px 8px}
+ body.premium-dashboard .dashboard-token-identity h2{font-size:25px;gap:8px}
+ body.premium-dashboard .dashboard-token-emblem{width:43px;height:43px}
+ body.premium-dashboard .dashboard-token-emblem svg{width:34px;height:34px}
+ body.premium-dashboard .dashboard-token-contract{padding-left:20px}
+ body.premium-dashboard .dashboard-token-bar .official-token-row{flex-wrap:wrap;gap:8px}
+ body.premium-dashboard .dashboard-token-bar .official-token-address{flex-basis:100%}
+ body.premium-dashboard .dashboard-flight-marker{max-width:220px;text-align:right}
+}
+@media(max-width:760px){
+ body.premium-dashboard.dashboard-flight .dashboard-token-bar{grid-template-columns:minmax(0,1fr);padding:16px 18px 8px;gap:10px;margin-bottom:10px;border-radius:14px}
+ body.premium-dashboard .dashboard-token-contract{padding:12px 0 0;border-left:0;border-top:1px solid #b5dfce20}
+ body.premium-dashboard .dashboard-token-identity h2{font-size:28px}
+ body.premium-dashboard .dashboard-token-emblem{width:46px;height:46px}
+ body.premium-dashboard .dashboard-token-emblem svg{width:36px;height:36px}
+ body.premium-dashboard .dashboard-token-bar .official-token-row{flex-wrap:wrap;gap:12px}
+ body.premium-dashboard .dashboard-token-bar .official-token-address{flex-basis:100%}
+ body.premium-dashboard .dashboard-token-bar code{font-size:13px}
+ body.premium-dashboard .dashboard-token-bar #copy-ca{min-height:44px}
+ body.premium-dashboard .dashboard-token-links{grid-column:1;gap:5px 22px;padding:0}
+ body.premium-dashboard .dashboard-token-links a{min-height:44px;font-size:11px;gap:9px}
+ body.premium-dashboard.dashboard-flight .dashboard-arrival{grid-template-columns:minmax(0,1fr);gap:23px;min-height:0;padding:33px 5px 22px;margin-bottom:20px}
+ body.premium-dashboard .dashboard-arrival h1{font-size:clamp(40px,10vw,62px);letter-spacing:-.055em}
+ body.premium-dashboard .dashboard-arrival-copy>.eyebrow{font-size:8px;letter-spacing:.1em;margin-bottom:20px}
+ body.premium-dashboard .dashboard-arrival-copy>p:not(.eyebrow){font-size:13px;margin-top:18px;max-width:none}
+ body.premium-dashboard .dashboard-shortcuts{gap:5px 20px;margin-top:17px}
+ body.premium-dashboard .dashboard-shortcuts a{font-size:11px;gap:12px}
+ body.premium-dashboard .dashboard-flight-marker{justify-self:stretch;justify-items:start;min-height:70px;align-content:end;gap:7px;padding:0 0 0 3px}
+ body.premium-dashboard .dashboard-arrival .dashboard-heading-actions{padding-top:15px;gap:9px;flex-direction:row;justify-content:flex-start}
+ body.premium-dashboard .dashboard-arrival .dashboard-heading-actions :is(button,a){flex:0 1 auto;font-size:10px;min-height:44px;padding:10px 12px;width:auto}
+ body.premium-dashboard .dashboard-arrival .dashboard-heading-actions a{margin-left:0}
+ body.premium-dashboard .dashboard-utility{margin-bottom:29px}
+ body.premium-dashboard .dashboard-utility-heading{padding:0 4px;margin-bottom:18px}
+ body.premium-dashboard .dashboard-utility h2{font-size:28px;letter-spacing:-.045em}
+ body.premium-dashboard .dashboard-utility-grid{grid-template-columns:minmax(0,1fr);gap:17px}
+ body.premium-dashboard .utility-showcase-copy{padding:20px 20px 10px}
+ body.premium-dashboard .utility-showcase-copy h3{font-size:22px}
+ body.premium-dashboard .utility-showcase-copy>p{font-size:13px;line-height:1.75;margin-bottom:15px}
+ body.premium-dashboard .utility-showcase-copy>a{font-size:12px;min-height:49px}
+ body.premium-dashboard .dashboard-utility-footer{align-items:flex-start;flex-direction:column;padding:10px 4px;gap:0}
+ body.premium-dashboard .dashboard-utility-footer p{font-size:12px}
+ body.premium-dashboard .dashboard-utility-footer a{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){body.premium-dashboard .utility-showcase-card,body.premium-dashboard .utility-showcase-copy>a>span{transition:none}}
+
+/* Editorial dashboard: quiet surfaces, clear tasks, detail on demand. */
+body.premium-dashboard.dashboard-flight .dashboard-utility{padding:28px;background:#0b141af2;border:1px solid #b8d8cc24;border-radius:14px;margin-bottom:48px}
+body.premium-dashboard .dashboard-utility-heading{padding:0;margin-bottom:26px}
+body.premium-dashboard .dashboard-utility h2{font-size:30px;font-weight:450}
+body.premium-dashboard .dashboard-utility-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+body.premium-dashboard .utility-showcase-card{display:flex;flex-direction:column;border:0;border-radius:0;padding:0 24px;box-shadow:none;min-width:0}
+body.premium-dashboard .utility-showcase-card:first-child{padding-left:0}
+body.premium-dashboard .utility-showcase-card:last-child{padding-right:0}
+body.premium-dashboard .utility-showcase-card+.utility-showcase-card{border-left:1px solid #bbdbd126}
+body.premium-dashboard .utility-miniature{width:80px;height:60px;object-fit:cover;border-radius:8px;display:block;margin-bottom:18px;opacity:.9}
+body.premium-dashboard .utility-showcase-copy{padding:0;flex:1}
+body.premium-dashboard .utility-showcase-copy h3{font-size:18px;line-height:1.35;letter-spacing:-.025em;margin-bottom:10px}
+body.premium-dashboard .utility-showcase-copy>p{font-size:12px;line-height:1.8;margin:0 0 12px}
+body.premium-dashboard .utility-showcase-copy>a{font-size:11px;border:0;min-height:44px;padding:8px 0}
+body.premium-dashboard .utility-showcase-copy>a>span{border:0;width:20px;height:20px;font-size:16px;background:none}
+body.premium-dashboard .dashboard-utility-footer{margin-top:22px;padding:14px 0 0;border-top:1px solid #bbdbd120}
+body.premium-dashboard .dashboard-utility-footer p{max-width:520px}
+body.premium-dashboard.dashboard-flight .dashboard-hero{min-height:320px;background:#0b141af2;border-radius:12px;box-shadow:none}
+body.premium-dashboard.dashboard-flight .dashboard-hero:after{display:none}
+body.premium-dashboard .dashboard-hero .hero-copy{padding:32px;max-width:none;width:100%}
+body.premium-dashboard .dashboard-hero h2{font-size:32px;font-weight:450;line-height:1.2;margin:15px 0}
+body.premium-dashboard .dashboard-hero .hero-description{max-width:430px;font-size:13px}
+body.premium-dashboard .dashboard-hero :is(.hero-location,.hero-bottom){display:none}
+body.premium-dashboard .dashboard-hero .hero-actions{margin-top:18px}
+body.premium-dashboard .dashboard-top-grid{gap:16px;margin-bottom:42px}
+body.premium-dashboard .dashboard-overview-detail{grid-column:1/-1}
+body.premium-dashboard .destination-heading h2{font-size:28px}
+body.premium-dashboard .destination-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+body.premium-dashboard.dashboard-flight .path-card{display:grid;grid-template-columns:76px minmax(0,1fr);align-items:start;gap:20px;padding:24px;background:#0b141af2;transform:none;border:1px solid #b8d8cc24;border-radius:12px;box-shadow:none}
+body.premium-dashboard .path-card .path-art{height:76px;min-height:0;width:76px;border:0;border-radius:10px;overflow:hidden}
+body.premium-dashboard .path-card .path-art>:not(.path-image){display:none}
+body.premium-dashboard .path-card .path-art:after{display:none}
+body.premium-dashboard .path-card .path-image{object-position:center;transform:none}
+body.premium-dashboard .path-card .path-copy{padding:0;min-width:0}
+body.premium-dashboard .path-card .path-kicker{display:none}
+body.premium-dashboard .path-card .path-copy h3{font-size:20px;font-weight:500;margin:0 0 10px}
+body.premium-dashboard .path-card .path-description{font-size:12px;line-height:1.8;margin:0 0 12px}
+body.premium-dashboard .path-card .path-cta{min-height:32px;padding:0;border:0;font-size:11px}
+body.premium-dashboard .path-card .path-arrow{border:0;background:none}
+body.premium-dashboard .destination-deck{margin-bottom:42px}
+body.premium-dashboard .dashboard-disclosure{border:1px solid #b8d8cc22;border-radius:10px;background:#0b141af2;margin:0 0 10px;min-width:0;scroll-margin-top:24px}
+body.premium-dashboard .dashboard-disclosure>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 24px;cursor:pointer;min-height:74px;color:#e1ece7}
+body.premium-dashboard .dashboard-disclosure>summary::-webkit-details-marker{display:none}
+body.premium-dashboard .dashboard-disclosure>summary strong{font:450 15px/1.5 Inter,system-ui,sans-serif;display:block;letter-spacing:-.01em}
+body.premium-dashboard .dashboard-disclosure>summary small{font:11px/1.7 Inter,system-ui,sans-serif;display:block;color:#98ada8;margin-top:3px}
+body.premium-dashboard .disclosure-plus{position:relative;width:14px;height:14px;flex:none;color:#aec8bc}
+body.premium-dashboard .disclosure-plus:before,body.premium-dashboard .disclosure-plus:after{content:'';position:absolute;background:currentColor;left:0;right:0;top:6px;height:1px}
+body.premium-dashboard .disclosure-plus:after{transform:rotate(90deg)}
+body.premium-dashboard .dashboard-disclosure[open]>.dashboard-disclosure-content{border-top:1px solid #b8d8cc18;padding:20px}
+body.premium-dashboard .dashboard-disclosure[open]>summary .disclosure-plus:after{display:none}
+body.premium-dashboard .dashboard-disclosure-content> :is(section,div){width:100%;max-width:none;margin:0}
+body.premium-dashboard .dashboard-disclosure>summary:hover{background:#c6f2da05;border-radius:10px}
+body.premium-dashboard .dashboard-disclosure>summary:focus-visible{outline:2px solid #c6f2da;outline-offset:3px;border-radius:10px}
+body.premium-dashboard .dashboard-overview-detail>summary{min-height:60px;padding:17px 24px}
+body.premium-dashboard .dashboard-overview-detail{margin:0}
+body.premium-dashboard.dashboard-flight .project-strip{background:transparent;border-radius:0;border:0;border-top:1px solid #b8d8cc26;padding:36px 0;margin-top:40px}
+body.premium-dashboard.dashboard-flight .home-community{background:transparent;border-radius:0;padding:20px 0}
+body.premium-dashboard.dashboard-flight .site-footer{background:transparent;border-radius:0;padding:24px 0}
+@media(max-width:1100px){
+ body.premium-dashboard .dashboard-utility-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ body.premium-dashboard .utility-showcase-card{padding:0 16px}
+ body.premium-dashboard .utility-showcase-copy h3{font-size:17px}
+ body.premium-dashboard .destination-cards{grid-template-columns:1fr}
+ body.premium-dashboard .dashboard-top-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+ body.premium-dashboard.dashboard-flight .dashboard-utility{padding:22px;margin-bottom:34px}
+ body.premium-dashboard .dashboard-utility h2{font-size:27px}
+ body.premium-dashboard .dashboard-utility-grid{grid-template-columns:1fr}
+ body.premium-dashboard .utility-showcase-card,body.premium-dashboard .utility-showcase-card:first-child,body.premium-dashboard .utility-showcase-card:last-child{display:grid;grid-template-columns:62px minmax(0,1fr);gap:16px;padding:20px 0}
+ body.premium-dashboard .utility-showcase-card:first-child{padding-top:0}
+ body.premium-dashboard .utility-showcase-card+.utility-showcase-card{border-left:0;border-top:1px solid #bbdbd120}
+ body.premium-dashboard .utility-miniature{width:62px;height:62px;margin:0}
+ body.premium-dashboard .utility-showcase-copy h3{font-size:17px;margin-bottom:7px}
+ body.premium-dashboard .utility-showcase-copy>p{font-size:12px;margin-bottom:4px}
+ body.premium-dashboard .dashboard-utility-footer{margin-top:0;padding-top:16px}
+ body.premium-dashboard .dashboard-utility-footer p{font-size:11px}
+ body.premium-dashboard .dashboard-hero .hero-copy{padding:25px}
+ body.premium-dashboard .dashboard-hero h2{font-size:29px}
+ body.premium-dashboard.dashboard-flight .path-card{grid-template-columns:58px minmax(0,1fr);gap:16px;padding:22px}
+ body.premium-dashboard .path-card .path-art{width:58px;height:58px}
+ body.premium-dashboard .path-card .path-copy h3{font-size:20px}
+ body.premium-dashboard .dashboard-disclosure>summary{padding:20px;gap:12px}
+ body.premium-dashboard .dashboard-disclosure[open]>.dashboard-disclosure-content{padding:12px}
+}

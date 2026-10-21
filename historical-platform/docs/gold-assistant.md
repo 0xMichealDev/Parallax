@@ -1,0 +1,15 @@
+# Gold research assistant
+
+Route: `/assistant`. Entry points: Pro membership, shared sidebar/tool search, and each private Project Passport.
+
+New AI generation requires authenticated account identity, an unexpired server-verified wallet ownership proof and a fresh on-chain balance check for at least 100,000 official PRLX. No client wallet, balance or Gold flag authorizes a request. Existing AI Passport and comparison generation now use the same Gold gate. Existing saved summaries and private conversation history remain readable without active membership; exporting/deleting history does not consume AI usage.
+
+Uses the existing secret `OPENAI_API_KEY`, `OPENAI_MODEL` (currently configured as `gpt-5.4-mini`) and `AI_RESEARCH_ENABLED`. Responses are requested with `store:false`, at most 900 output tokens and a 25-second timeout. No key is exposed to the browser. No live API call is made by opening a page, creating a chat or refreshing history.
+
+The shared allowance across assistant, Passport summaries and change explanations is 20 generation attempts/account/UTC day and 300/site/UTC day. Failed attempts can consume quota. Request counts bound usage, not a dollar-denominated billing ceiling. Context is bounded to two saved reports, a 400-character focus, the last six completed exchanges, a 1,200-character question and 55,000 total input characters. At most 20 chats/account and 30 attempts/chat. A 60-second database lease prevents concurrent generation in a chat. A persisted request ID prevents duplicate submissions from calling AI again; no automatic provider retry.
+
+Snapshot IDs and ownership are resolved server-side. A two-report conversation requires the same token/network, with source order normalized and differences computed by `compareSnapshots`. Pool changes and missing evidence cannot become computed changes. Snapshots are historical, not refreshed by the assistant. The model receives only the selected evidence, research focus and limited conversation history; it has no tools, secret access or write authority. The UI renders plain text, never model HTML. Citation IDs are checked against retrieved sources, and source URLs are constructed server-side. These checks verify reference availability, not the factual accuracy of every generated sentence.
+
+Chats and turns are private D1 records scoped to the authenticated account. Deleting a chat cascades its turns. A response finishing after deletion cannot restore it. Deleting a source Passport leaves past answers intact but prevents further generation using that source. Personal chats are not included in public Passport sharing.
+
+Validation: `node tests/gold-assistant.mjs`, `node tests/gold-assistant-ui.mjs`, `node tests/research-repair.mjs`, `node scripts/test-control.mjs`, production build. AI and RPC responses in automated tests are fixtures. A signed-in Gold member must verify the first real model response on the deployed site; production secret values are not available locally. Managed browser QA is skipped when the control-browser skill is unavailable.
