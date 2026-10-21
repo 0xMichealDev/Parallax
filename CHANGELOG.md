@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Prepared a filtered import of 155 original browser-code, stylesheet and implementation-note commits, preserving original dates and Codex attribution. See the import receipt for completion status.
+
 - Published a retrospective of 162 original application-source commits and their mapping to 158 saved site versions; these are metadata records, not imported GitHub commits.
 - Added ten hosted-platform guide snapshots covering research, membership, identity, creator tools, transparency and release status, with original validation limits.
 

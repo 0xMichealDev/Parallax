@@ -1,0 +1,41 @@
+name: Import original platform history
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/import-platform-history.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: import-original-platform-history
+  cancel-in-progress: false
+jobs:
+  import:
+    if: github.repository == '0xMichealDev/Parallax' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the approved import
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Verify and merge the filtered historical branch
+        run: python3 scripts/import-platform-history.py
+      - name: Check the current developer kit
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run check
+      - name: Finish the import and remove the one-time importer
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -r -- history-import/parts
+          git rm -- .github/workflows/import-platform-history.yml scripts/import-platform-history.py
+          git add -- historical-platform docs/history/import-receipt.json docs/DEVELOPMENT-HISTORY.md README.md CHANGELOG.md
+          git commit -m 'Import 155 original platform development commits with preserved dates and attribution'
+          git push origin HEAD:main

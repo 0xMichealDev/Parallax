@@ -10,11 +10,19 @@ Recorded October 20, 2026. This retrospective describes the separate hosted appl
 | Saved site versions, numbered 1–158 | 158 |
 | Distinct source revisions referenced by those saved versions | 158 |
 
-The public developer kit began later. Its GitHub commit counter measures this repository's own history. Publishing this record does not add the application commits to that counter. The original source has been inspected; it has not been copied into this repository or rewritten into artificial backdated commits.
+## Historical source import
+
+**History import status: prepared.** The [receipt](history/import-receipt.json) records completion. A filtered export contains 155 genuine historical revisions across 209 selected browser-code, stylesheet and implementation-note paths. Seven source revisions had no changes within the exported paths. One browser file was excluded across all revisions because it contained personal identifying text.
+
+The imported branch preserves original author, committer, both timestamps, commit messages and selected file bytes. Paths are prefixed with `historical-platform/`; filtering changes commit IDs. The [import manifest](history/import-manifest.json) maps all 162 original revisions to imported revisions or omission reasons. No commits have been fabricated for inactive days and no author attribution has been reassigned.
+
+The original author is Codex. Repository history does not guarantee credit on a personal contribution calendar. The repository total also includes developer-kit and import commits, so it should not be advertised as a count of distinct features.
+
+The original source remains unchanged. Backend services, private account data, media, page shells and deployment configuration are not included. The historical archive is a selected-source preview, not a runnable replacement for the hosted application.
 
 The [complete history ledger](history/source-history.json) records every reachable source commit, its original committer timestamp and parents, the corresponding saved version when present, and the changed-file count. Four source commits have no saved-version reference in the retrieved history. Saved versions are not necessarily successful deployments. File counts include assets and generated files, so they are not productivity scores.
 
-Original source revisions are provenance references in a separate repository, not public GitHub commit links. This metadata export supports reconciliation by a maintainer with source access; it is not independently reproducible from this selected-source kit alone. It omits author identities, private hostnames, credentials and source file contents.
+Original source revisions are provenance references in the separate application repository. Filtered revision IDs in the import manifest identify the public imported history after completion. A maintainer with source access can reconcile the two; the complete private application history is not published. The earlier metadata ledger remains as the record of all 162 source revisions.
 
 ## Activity by day
 
