@@ -75,6 +75,10 @@ The example reads Solana mainnet without signing transactions. It uses a public 
 
 This kit implements identity resolution and display. Wallet proofs and project authorization are enforced by the hosted application and are outside this source preview. Read the [architecture and trust boundaries](docs/ARCHITECTURE.md).
 
+## Development history
+
+The hosted application has **162 source commits and 158 saved site versions** through the recorded October 20, 2026 snapshot. Those belong to the separate application repository; this developer kit has its own GitHub history. Read the [complete development record](docs/DEVELOPMENT-HISTORY.md), [machine-readable source history](docs/history/source-history.json), and [platform guides](docs/platform/README.md) for feature details and verification limits.
+
 ## Development status
 
 The resolver and browser module are extracted from deployed PARALLAX source. [`PROVENANCE.json`](PROVENANCE.json) records their origin and SHA-256 hashes. Test scope and remaining real-device checks are documented in [Testing](docs/TESTING.md).

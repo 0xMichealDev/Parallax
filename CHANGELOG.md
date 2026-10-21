@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Published a retrospective of 162 original application-source commits and their mapping to 158 saved site versions; these are metadata records, not imported GitHub commits.
+- Added ten hosted-platform guide snapshots covering research, membership, identity, creator tools, transparency and release status, with original validation limits.
+
 - Added PARALLAX repository branding, a product overview and a guide to the included source.
 - Added architecture, integration, testing and roadmap documentation.
 - Added a dependency lockfile, provenance verification and CI checks on Node 22 and 24.
