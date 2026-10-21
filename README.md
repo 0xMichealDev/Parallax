@@ -12,6 +12,8 @@
 
 # Research with context. Build with evidence.
 
+[![Integration checks](https://github.com/0xMichealDev/Parallax/actions/workflows/ci.yml/badge.svg)](https://github.com/0xMichealDev/Parallax/actions/workflows/ci.yml)
+
 PARALLAX is a Solana research and creator workspace. It brings project research, wallet activity and creator identity into one place, with source links and clear verification boundaries.
 
 This repository is the **PARALLAX developer kit**: selected integration source, executable tests and implementation notes. The hosted platform is available at [parallaxlaunch.live](https://parallaxlaunch.live). The full application is maintained separately.
