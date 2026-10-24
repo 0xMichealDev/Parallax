@@ -28,3 +28,9 @@ Partner Mint inside PARALLAX, expanded Gold research tools and further AI Missio
 ## Propose a change
 
 Open a focused feature proposal describing the user problem, intended behavior and how it could be verified. Review [CONTRIBUTING.md](../CONTRIBUTING.md) before implementation. Track completed changes in [CHANGELOG.md](../CHANGELOG.md).
+
+## Terminal status — October 24, 2026
+
+The hosted Terminal now has a full-width chart workspace, compact token rows with project pictures, expanded paginated discovery, verified bonding-state filtering and embedded quote review. See the [dated release record](updates/terminal-2026-10-24.md) for verification and provider limits.
+
+Proposed next: saved discovery filters. Streaming ingestion, exhaustive token coverage and real-device mobile/signing validation are not claimed by this update.

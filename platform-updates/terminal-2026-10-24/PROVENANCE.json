@@ -1,0 +1,64 @@
+{
+  "recordedDate": "2026-10-24",
+  "sourceRevision": "ccd95fe82ca8ec566e005c36d47ee9003f23c279",
+  "hostedVersion": 179,
+  "scope": "Selected browser assets, Terminal markup and offline tests. Not the complete hosted application.",
+  "files": [
+    {
+      "path": "public/terminal-console.css",
+      "sha256": "8e935075691803833130a986c7005e817f82eeabb8cf133c6ebf6ea47fd31559"
+    },
+    {
+      "path": "public/terminal-entry.css",
+      "sha256": "016e8e3844f8d2cbe360a2d5937c0cf0c191207f07de97478f101cf0c2579b8f"
+    },
+    {
+      "path": "public/terminal-plus.js",
+      "sha256": "ecde2110a5d70eab5cb2fa232ea6ae36ba8391c8ac5d3f9e555ee72125bd749e"
+    },
+    {
+      "path": "public/terminal-premium.css",
+      "sha256": "499075c454406bab84e45463ee992751ec03e799a14db8f830e87ec8b74eebe9"
+    },
+    {
+      "path": "public/terminal-pulse.js",
+      "sha256": "fa8872f1bea04962066ee413d2b83f0e26d8f034c271168eaa21cab4f6e0416d"
+    },
+    {
+      "path": "public/terminal-saved.js",
+      "sha256": "227b2c5005b215360eaf3e69c2b1aa2bbbe681a6ba974246302af9a93e81add0"
+    },
+    {
+      "path": "public/terminal-workspace.js",
+      "sha256": "fb718bae67fc4c707a8b88349e79b2d131fef8a37bb89518ddf382f1b1cd705a"
+    },
+    {
+      "path": "public/terminal.css",
+      "sha256": "639d1091501e32192491c863c7213992758ddd1bfa9d7ab692210428126ed3a2"
+    },
+    {
+      "path": "public/terminal.js",
+      "sha256": "65d77612f48dc079f994b64a45d1e935ea3cb0afc451ad1a2489633a88c9550f"
+    },
+    {
+      "path": "public/trading-desk.js",
+      "sha256": "df5247908e482f9e7cca7aa46e14ee5bf52e698ca1a2b573c16a7c674cb0675c"
+    },
+    {
+      "path": "public/trading-desk.css",
+      "sha256": "af4e087feeeb80508e1aafd0729bc29fec7bd64354d2dfac88bf08b914d8a392"
+    },
+    {
+      "path": "app/terminal.html",
+      "sha256": "45b5e0b0a2e012ef06c1bbc6f88f5fba32b292d3b264656cc3ea4ed237ee62b8"
+    },
+    {
+      "path": "tests/terminal-workspace.test.cjs",
+      "sha256": "072d261b4d936b524399cb846450f1e9afbd765b445f41b48bc8e098213c609a"
+    },
+    {
+      "path": "tests/terminal-amount.test.cjs",
+      "sha256": "928bec496f23a8e4326eb71731edfde7760a454302948ad7b4978d94fb8abbbd"
+    }
+  ]
+}

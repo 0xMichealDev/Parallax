@@ -1,5 +1,12 @@
 # Changelog
 
+## Hosted Terminal update — 2026-10-24
+
+- Recorded the deployed Terminal rebuild through hosted version 179: larger charts, compact project-image rows, expanded paginated discovery, bonding data and quote-review controls.
+- Published selected unmodified browser assets and markup with source provenance and nine offline checks, included in `npm run check`.
+- Documented provider freshness, FDV labeling, coverage limits and remaining mobile/signing checks. Saved discovery filters remain a proposed follow-up.
+- See the [Terminal release record](docs/updates/terminal-2026-10-24.md). The October 20 history archive and developer-kit version are unchanged.
+
 ## Unreleased
 
 - Prepared a filtered import of 155 original browser-code, stylesheet and implementation-note commits, preserving original dates and Codex attribution. See the import receipt for completion status.

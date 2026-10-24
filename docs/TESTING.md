@@ -38,3 +38,7 @@ They do not establish a real-device browser pass, live RPC availability, end-to-
 - iPhone/Phantom wallet-signature walkthroughs in the hosted platform.
 
 Use the hosted [SolHandle guide](https://parallaxlaunch.live/docs/solhandle) for deployment context and dates. A manual live lookup can be run with `node examples/lookup.mjs @solhandle`; do not interpret a successful lookup as certification of the entire integration.
+
+## Terminal snapshot — October 24, 2026
+
+`npm run check:terminal` verifies 14 exported files against the version-179 source manifest and runs nine offline amount/workspace checks. It is also included in `npm run check`. See the [release record](updates/terminal-2026-10-24.md) for hosted validation and limits. The snapshot excludes backend services; these public tests do not establish live market accuracy or successful signing.

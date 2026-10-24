@@ -22,11 +22,14 @@ This repository is the **PARALLAX developer kit**: selected integration source, 
 
 | Workspace | Purpose | Guide |
 | --- | --- | --- |
+| **Terminal** | Discover markets, inspect charts and bonding progress, and review trades. | [October 24 update](docs/updates/terminal-2026-10-24.md) |
 | **Project Passports** | Collect, save and compare token research snapshots with source context. | [Passports](https://parallaxlaunch.live/docs/passports) |
 | **Wallet Watch** | Inspect wallet activity and keep saved watches tied to exact addresses. | [Wallet Watch](https://parallaxlaunch.live/docs/wallet-watch) |
 | **Project Atlas** | Explore community project profiles and creator identities. | [Creator tools](https://parallaxlaunch.live/docs/creators) |
 | **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
+
+**Latest platform update:** [Terminal rebuild — October 24, 2026](docs/updates/terminal-2026-10-24.md), with a dated browser-source snapshot, provenance and offline checks.
 
 ## What you can inspect here
 
@@ -42,6 +45,7 @@ This repository is the **PARALLAX developer kit**: selected integration source, 
 | [`browser/`](browser/) | Identity-card rendering and refresh lifecycle |
 | [`examples/`](examples/) | Read-only mainnet lookup |
 | [`tests/`](tests/) | Offline resolver and simulated-browser checks |
+| [`platform-updates/`](platform-updates/) | Dated browser-source snapshots, provenance and focused checks |
 | [`docs/`](docs/) | Architecture, API contract, test coverage and roadmap |
 
 ## Run the kit
@@ -55,7 +59,7 @@ npm ci --ignore-scripts
 npm run check
 ```
 
-The check command validates source provenance and runs the offline test suite. No wallet, SOL, account credentials or RPC subscription is required for those checks.
+The check command validates source provenance and runs the SolHandle and Terminal offline checks. No wallet, SOL, account credentials or RPC subscription is required for those checks.
 
 To try a live read:
 
