@@ -1,0 +1,90 @@
+/* Premium Worlds: normal-flow artwork and a compact mobile editor. */
+body.workspace-shell[data-workspace-page=premium] #main{max-width:1360px}
+body.workspace-shell[data-workspace-page=premium] #main .hero{padding:28px 0 26px;gap:24px;align-items:center}
+body.workspace-shell[data-workspace-page=premium] #main .hero h1{font-size:clamp(30px,3.5vw,46px);line-height:1.12;margin:8px 0 14px;letter-spacing:-.045em}
+body.workspace-shell[data-workspace-page=premium] #main .hero .eyebrow{font-size:10px;margin:0}
+body.workspace-shell[data-workspace-page=premium] #main .hero .lead{font-size:14px;line-height:1.7;max-width:560px;margin:0}
+body.workspace-shell[data-workspace-page=premium] #main .release-note{font-size:11px;max-width:250px;padding:16px;border:1px solid #ffffff12;border-radius:10px;background:#101925}
+body.workspace-shell[data-workspace-page=premium] #main .release-note p{margin:8px 0 0;font-size:11px;line-height:1.6}
+body.workspace-shell[data-workspace-page=premium] #main .design-grid{grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);overflow:visible;border-radius:14px;align-items:start}
+body.workspace-shell[data-workspace-page=premium] #main .preview-panel{position:sticky;top:84px;border-radius:14px 0 0 14px;overflow:hidden;min-width:0}
+body.workspace-shell[data-workspace-page=premium] #main .preview-caption{display:block;padding:18px 24px 24px}
+body.workspace-shell[data-workspace-page=premium] #main .preview-caption h2{font-size:25px;line-height:1.2;margin:6px 0 10px}
+body.workspace-shell[data-workspace-page=premium] #main .preview-caption .eyebrow{margin:0}
+body.workspace-shell[data-workspace-page=premium] #main .preview-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+body.workspace-shell[data-workspace-page=premium] #main .preview-buttons button{min-width:0;min-height:44px;margin:0;padding:10px;font-size:12px;white-space:normal}
+body.workspace-shell[data-workspace-page=premium] #world-designer{padding:26px;min-width:0;border-radius:0 14px 14px 0}
+body.workspace-shell[data-workspace-page=premium] #world-designer>.eyebrow{margin:0 0 8px;font-size:10px}
+body.workspace-shell[data-workspace-page=premium] #world-designer h2{font-size:26px;line-height:1.2;margin:0 0 10px;letter-spacing:-.035em}
+body.workspace-shell[data-workspace-page=premium] #world-designer .designer-intro{margin:0 0 20px;font-size:12px;line-height:1.7;color:#99abc3}
+body.workspace-shell[data-workspace-page=premium] #world-designer .control-title{font-size:10px;font-weight:600;letter-spacing:.12em;margin:24px 0 12px;color:#90a3bd}
+body.workspace-shell[data-workspace-page=premium] #world-designer .materials{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;margin:0}
+body.workspace-shell[data-workspace-page=premium] #world-designer .materials button{display:grid;grid-template-columns:48px minmax(0,1fr) 16px;align-items:center;justify-content:normal;gap:16px;min-height:82px;height:auto;padding:14px 16px;text-align:left;border:1px solid #ffffff16;border-radius:10px;background:#0a111b;overflow:visible}
+body.workspace-shell[data-workspace-page=premium] #world-designer .materials button:hover{border-color:#789bcc75;background:#101c2d}
+body.workspace-shell[data-workspace-page=premium] #world-designer .materials button[aria-pressed=true]{border-color:#88aaff;background:#18263b;box-shadow:inset 0 0 0 1px #88aaff20}
+body.workspace-shell[data-workspace-page=premium] #world-designer .materials button[aria-pressed=true]::after{position:static;grid-column:3;grid-row:1;align-self:center;color:#b7ceff;font-size:14px}
+body.workspace-shell[data-workspace-page=premium] #world-designer .material-orb{display:block;position:relative;inset:auto;grid-column:1;grid-row:1;align-self:center;margin:0;width:42px;height:42px;justify-self:center;flex:none}
+body.workspace-shell[data-workspace-page=premium] #world-designer .materials button>span:last-child{display:block;grid-column:2;grid-row:1;min-width:0;font-size:14px;font-weight:550;line-height:1.4;color:#e5ecf8;overflow-wrap:anywhere}
+body.workspace-shell[data-workspace-page=premium] #world-designer .materials small{font-size:11px;line-height:1.5;margin-top:4px;color:#99acc8;font-weight:400}
+body.workspace-shell[data-workspace-page=premium] #world-designer .themes{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+body.workspace-shell[data-workspace-page=premium] #world-designer .themes button{min-height:86px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center}
+body.workspace-shell[data-workspace-page=premium] #world-designer .themes button>span:nth-child(2){flex:none;font-size:12px;line-height:1.4}
+body.workspace-shell[data-workspace-page=premium] #world-designer .theme-swatch{width:27px;height:27px}
+body.workspace-shell[data-workspace-page=premium] #main .premium-options{margin:20px 0 0;padding:0;border:1px solid #ffffff18;border-radius:10px;background:#0b131e;overflow:hidden}
+body.workspace-shell[data-workspace-page=premium] #main .premium-options>summary{display:flex;align-items:center;gap:10px;list-style:none;min-height:52px;padding:15px 16px;font-size:13px;line-height:1.5;color:#dce6f7;cursor:pointer}
+body.workspace-shell[data-workspace-page=premium] #main .premium-options>summary::-webkit-details-marker{display:none}
+body.workspace-shell[data-workspace-page=premium] #main .premium-options>summary span{margin-left:auto;font-size:10px;color:#8fa4c0;white-space:nowrap}
+body.workspace-shell[data-workspace-page=premium] #main .premium-options>summary::after{content:'+';font-size:17px;font-weight:400;color:#a8c4ff}
+body.workspace-shell[data-workspace-page=premium] #main .premium-options[open]>summary::after{content:'−'}
+body.workspace-shell[data-workspace-page=premium] #world-designer .controls{padding:0 16px 18px;margin:6px 0 0;gap:18px 12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+body.workspace-shell[data-workspace-page=premium] #world-designer .controls label{min-width:0;font-size:12px;gap:7px}
+body.workspace-shell[data-workspace-page=premium] #world-designer .controls :is(input,select){width:100%;min-width:0;min-height:46px;max-width:100%;font-size:14px}
+body.workspace-shell[data-workspace-page=premium] #world-designer>.help{font-size:11px;line-height:1.7;margin:18px 0 0}
+body.workspace-shell[data-workspace-page=premium] #world-designer .signature-collection{padding:0 14px 16px;scroll-margin-top:100px}
+body.workspace-shell[data-workspace-page=premium] #world-designer .collection-heading{display:block;margin:0 0 15px}
+body.workspace-shell[data-workspace-page=premium] #world-designer .collection-heading .eyebrow{display:none}
+body.workspace-shell[data-workspace-page=premium] #world-designer .collection-heading h2{font-size:17px;margin:6px 0}
+body.workspace-shell[data-workspace-page=premium] #world-designer .collection-heading>p{font-size:11px;margin:0}
+body.workspace-shell[data-workspace-page=premium] #world-designer .signature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+body.workspace-shell[data-workspace-page=premium] #world-designer .signature-grid button{padding:10px;min-height:180px;border-radius:8px}
+body.workspace-shell[data-workspace-page=premium] #world-designer .signature-art{width:100%;height:90px;margin:0 0 10px}
+body.workspace-shell[data-workspace-page=premium] #world-designer .signature-name{font-size:13px;line-height:1.4}
+body.workspace-shell[data-workspace-page=premium] #world-designer .signature-grid small{font-size:10px;margin:5px 0 12px;line-height:1.5}
+body.workspace-shell[data-workspace-page=premium] #world-designer .signature-action{font-size:10px}
+body.workspace-shell[data-workspace-page=premium] #main .premium-compare .plan-comparison{padding:8px 20px 24px}
+@media(max-width:1100px){body.workspace-shell[data-workspace-page=premium] #main .design-grid{display:block}body.workspace-shell[data-workspace-page=premium] #main .preview-panel{position:static;border-radius:14px 14px 0 0;border-right:0}body.workspace-shell[data-workspace-page=premium] #main #premium-canvas{max-height:360px;object-fit:contain}body.workspace-shell[data-workspace-page=premium] #world-designer{border-radius:0 0 14px 14px}}
+@media(max-width:760px){
+ body.workspace-shell[data-workspace-page=premium] .workspace-header{min-height:64px;height:64px;padding:10px 16px;gap:10px}
+ body.workspace-shell[data-workspace-page=premium] .workspace-header :is(.account-link,#session-link).account-link{display:none}
+ body.workspace-shell[data-workspace-page=premium] .workspace-header .dashboard-search{min-width:70px;min-height:44px;padding:9px 11px}
+ body.workspace-shell[data-workspace-page=premium] #main{width:auto;margin:0;padding:16px 16px 70px}
+ body.workspace-shell[data-workspace-page=premium] #main .page-sections{margin-bottom:16px}
+ body.workspace-shell[data-workspace-page=premium] #main .hero{padding:14px 0 22px}
+ body.workspace-shell[data-workspace-page=premium] #main .hero h1{font-size:32px}
+ body.workspace-shell[data-workspace-page=premium] #main .hero .lead{font-size:13px}
+ body.workspace-shell[data-workspace-page=premium] #main .release-note{max-width:none;margin-top:16px;padding:12px 14px}
+ body.workspace-shell[data-workspace-page=premium] #main .design-grid{border:1px solid #ffffff16}
+ body.workspace-shell[data-workspace-page=premium] #main .preview-panel{position:static;box-shadow:none}
+ body.workspace-shell[data-workspace-page=premium] #main #premium-canvas{max-height:230px;min-height:0;width:100%;height:auto;aspect-ratio:1.5}
+ body.workspace-shell[data-workspace-page=premium] #main .preview-panel .panel-head{padding:14px 18px;font-size:9px}
+ body.workspace-shell[data-workspace-page=premium] #main .preview-caption{padding:14px 18px 18px}
+ body.workspace-shell[data-workspace-page=premium] #main .preview-caption h2{font-size:21px;margin:5px 0}
+ body.workspace-shell[data-workspace-page=premium] #main .preview-caption p:last-child{display:none}
+ body.workspace-shell[data-workspace-page=premium] #main .preview-buttons{margin-top:14px;gap:8px}
+ body.workspace-shell[data-workspace-page=premium] #world-designer{padding:22px 18px}
+ body.workspace-shell[data-workspace-page=premium] #world-designer h2{font-size:24px;margin:0 0 9px}
+ body.workspace-shell[data-workspace-page=premium] #world-designer .materials button{min-height:80px;padding:12px;gap:12px;grid-template-columns:46px minmax(0,1fr) 16px}
+ body.workspace-shell[data-workspace-page=premium] #world-designer .controls{grid-template-columns:minmax(0,1fr)}
+ body.workspace-shell[data-workspace-page=premium] #main .premium-options>summary{font-size:12px;padding:14px 12px}
+ body.workspace-shell[data-workspace-page=premium] #main .premium-options>summary span{font-size:9px}
+ body.workspace-shell[data-workspace-page=premium] #main .graphics-status{padding:0 18px;font-size:11px}
+ body.workspace-shell[data-workspace-page=premium] #main .plan-comparison h2{font-size:23px}
+}
+@media(max-width:360px){body.workspace-shell[data-workspace-page=premium] #main{padding-inline:12px}body.workspace-shell[data-workspace-page=premium] #world-designer{padding-inline:14px}body.workspace-shell[data-workspace-page=premium] #world-designer .materials button{gap:9px}body.workspace-shell[data-workspace-page=premium] #main .premium-options>summary span{display:none}}
+
+/* Rendered material previews replace decorative gradient spheres. */
+body.workspace-shell[data-workspace-page=premium] #world-designer .materials button{grid-template-columns:60px minmax(0,1fr) 16px;min-height:88px;gap:14px}
+body.workspace-shell[data-workspace-page=premium] #world-designer img.material-orb{width:60px;height:60px;border:0;border-radius:0;background:transparent;box-shadow:none;object-fit:contain}
+body.workspace-shell[data-workspace-page=premium] #world-designer .themes button{min-height:108px;gap:6px}
+body.workspace-shell[data-workspace-page=premium] #world-designer img.theme-swatch{width:56px;height:56px;border:0;border-radius:0;background:transparent;box-shadow:none!important;object-fit:contain}
+@media(max-width:760px){body.workspace-shell[data-workspace-page=premium] #world-designer .materials button{grid-template-columns:54px minmax(0,1fr) 16px;min-height:86px;gap:12px}body.workspace-shell[data-workspace-page=premium] #world-designer img.material-orb{width:54px;height:54px}}

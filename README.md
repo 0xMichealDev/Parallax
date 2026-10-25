@@ -29,7 +29,7 @@ This repository is the **PARALLAX developer kit**: selected integration source, 
 | **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-**Latest platform update:** [Terminal rebuild — October 24, 2026](docs/updates/terminal-2026-10-24.md), with a dated browser-source snapshot, provenance and offline checks.
+**Latest platform update:** [Workspace, Gold and Premium Worlds — October 25, 2026](docs/updates/workspace-2026-10-25.md), with 35 exported source files, eight textured planet previews and offline checks. The [October 24 Terminal rebuild](docs/updates/terminal-2026-10-24.md) remains available.
 
 ## What you can inspect here
 

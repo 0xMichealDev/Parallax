@@ -1,0 +1,149 @@
+{
+  "recordedDate": "2026-10-25",
+  "sourceRevision": "97e972053a734e5e2b394aeaab4e98a868656e3f",
+  "hostedVersion": 186,
+  "previousPublishedSnapshotVersion": 179,
+  "scope": "Selected browser source, markup, shared shell rendering, asset-generation helper, eight thumbnails and offline client tests. Not the full hosted application.",
+  "files": [
+    {
+      "path": "app/control.html",
+      "sha256": "201776e642686b75c0c58bbcb2400fa4ed70f8a0b3dde18f77fb3589bdd10f21"
+    },
+    {
+      "path": "app/home.html",
+      "sha256": "07b6d43708f49d02d062f22288e8c6be7c16f0582709c8b9934b7d1d3868c421"
+    },
+    {
+      "path": "app/observatory.html",
+      "sha256": "728eef5d57ae0fa4b8c3021d57433f9d03c8f87d8a786b955acb4727d00f8979"
+    },
+    {
+      "path": "app/premium.html",
+      "sha256": "378ff69fad2e27fef53c3fcafd765287e0d1cc6bd5188b1e5845008ee8431ac4"
+    },
+    {
+      "path": "app/pro.html",
+      "sha256": "e07e97dcb0a57f3e6db469731e365fd3c41d78aa8ad443db8c0b141dcfcd06dc"
+    },
+    {
+      "path": "app/terminal.html",
+      "sha256": "296ce365c9cc95aea3be65e006cb3222abc151cf49ee328696f6b50ff86b776e"
+    },
+    {
+      "path": "app/workspace-shell.ts",
+      "sha256": "f7958eb4502ae828c2e7b94953a3133d812c6ac215531ecf6eba1fc6b2934420"
+    },
+    {
+      "path": "app/workspace.html",
+      "sha256": "4d3bed979ae4def40be1a98c09fcb70a390784b3ff6632d9b9146642959a82ea"
+    },
+    {
+      "path": "public/assets/premium/environment-aurora-v186.webp",
+      "sha256": "936d4216c8f23e05a9ed8c495ae306e183e660c5b50e10409b676a7d4880a233"
+    },
+    {
+      "path": "public/assets/premium/environment-eclipse-v186.webp",
+      "sha256": "791746ff54414bc0b308e5f61357af3e6a4fa458c1c330ee0421d6ac7b729394"
+    },
+    {
+      "path": "public/assets/premium/environment-orbit-v186.webp",
+      "sha256": "cb8fe60ca12489f4751ec51a1f000d0991acdaf2f8e7ee9aa79ebf53aeb04a21"
+    },
+    {
+      "path": "public/assets/premium/surface-biolume-v186.webp",
+      "sha256": "ab149aeccf2ca9f9124817fa3fa7e483e163147934745d5254fa15bcc0d41e4f"
+    },
+    {
+      "path": "public/assets/premium/surface-glacial-v186.webp",
+      "sha256": "8f4a1c586c87411e325c1e1a226d405c3a9958831e36f5a155d97e5ef68e32bd"
+    },
+    {
+      "path": "public/assets/premium/surface-obsidian-v186.webp",
+      "sha256": "5508e92000787cb06b8b10d134f4a65be85b857d2d21f03fad940405c9e4c402"
+    },
+    {
+      "path": "public/assets/premium/surface-original-v186.webp",
+      "sha256": "14e328a16a7893f2d8e2b1a53fe879de2531839279b5a4183a4d811d5f535df7"
+    },
+    {
+      "path": "public/assets/premium/surface-volcanic-v186.webp",
+      "sha256": "8d22d9d7151562f81966f910733077d01ce74b18020c2316506018f325a70019"
+    },
+    {
+      "path": "public/dashboard-pro.js",
+      "sha256": "e998f4c75dc2f0deee45224633e11d1e41041274fc4e49685a51c95b29acaff4"
+    },
+    {
+      "path": "public/gold-experience.js",
+      "sha256": "a5291cc45afcaff2d60c5a3f827bdc63ae54770349d90acaea1060c84497c89f"
+    },
+    {
+      "path": "public/planet-design.js",
+      "sha256": "f21c5f99719ff866024e9c53a593f672a31b3dde9837695e3cfab44d139ce552"
+    },
+    {
+      "path": "public/planet-renderer.js",
+      "sha256": "0851445f0a263ec111db9013cd129a5d42e1db0f3fb7f89583902923662deb92"
+    },
+    {
+      "path": "public/premium-clean.css",
+      "sha256": "04691cdf6789f720319378ff36f57befcf900c5082d8b27fa0da986d5d0e4fba"
+    },
+    {
+      "path": "public/premium-scene.js",
+      "sha256": "4a81769bd873c0825ad3d8f81134c6d522d74e4b23aafe9f20eeadc5cb1894b3"
+    },
+    {
+      "path": "public/premium.js",
+      "sha256": "55fd938f2c07f477a00c9ed1dda01e3007ba30efeebd6a3c2c883d32047e4c5e"
+    },
+    {
+      "path": "public/terminal-console.css",
+      "sha256": "d80a7e38b07484fd254b5a1745c04da451471338d235d97e25b6876a54623a6f"
+    },
+    {
+      "path": "public/terminal-workspace.js",
+      "sha256": "488a070db9b478127117aed4ad65e4b8a9ffb30e10e739f9a5bbe49acc112632"
+    },
+    {
+      "path": "public/terminal.js",
+      "sha256": "68c08c71491433b2eee47374564587674db4febbe0d74142b96c9e9e364d7258"
+    },
+    {
+      "path": "public/workspace-clean.css",
+      "sha256": "ae6f9276ac059fef2d2ba9dd8f0fb1677114cbffaa9467760bb9f72be4968195"
+    },
+    {
+      "path": "public/workspace-hub.css",
+      "sha256": "1b26bc410faf0c846f8c434bc4bd9a5432939cc718157a10767ec6ae2b787af8"
+    },
+    {
+      "path": "public/workspace-usability.js",
+      "sha256": "6667e344899a6b2d76a72cbe335ce66568928dadf7655f0cc66c0f8aba8e0d2c"
+    },
+    {
+      "path": "scripts/render-premium.py",
+      "sha256": "c4fcabc9cc918e5006107fd07cb839dd8a84dd202e6f34eb089b5a5aa2e1c42e"
+    },
+    {
+      "path": "tests/gold-experience.mjs",
+      "sha256": "1288c0e9cf80cc964fbbae0b34bc8a8474afba6313e315d659d50f7400483d82"
+    },
+    {
+      "path": "tests/navigation-state.test.cjs",
+      "sha256": "cae57c27e447167ecf83d7619ec5f702e1edc309f0654c1f21f50134894f8f89"
+    },
+    {
+      "path": "tests/premium-client.mjs",
+      "sha256": "f10bd51db5ae2add8162194a4ffa9516866fdc14c332ee441ee40afae67fc73d"
+    },
+    {
+      "path": "tests/terminal-workspace.test.cjs",
+      "sha256": "1e2dc4806de73bdbbcb4981a915e1e6ed561663833824a82749c5068318f515d"
+    },
+    {
+      "path": "tests/workspace-usability.test.cjs",
+      "sha256": "6b5ee94cf533a8538c40e095887e6dca7aa0426322a0e88f003f7f204474c685"
+    }
+  ]
+}

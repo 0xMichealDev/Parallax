@@ -1,5 +1,12 @@
 # Changelog
 
+## Hosted workspace update — 2026-10-25
+
+- Recorded shipped work through version 186: My Workspace, consistent navigation, simpler Gold and research pages, Premium Worlds mobile layout and eight textured thumbnails.
+- Added the Terminal chart-height and disclosure fixes; documented exact-pool valuation enrichment and data limits.
+- Published a separate 35-file selected-source snapshot with hashes, 18 navigation/layout tests and Gold/Premium client harnesses. Existing archives remain intact.
+- See the [workspace release record](docs/updates/workspace-2026-10-25.md). Run `npm run check:workspace` for the new offline checks.
+
 ## Hosted Terminal update — 2026-10-24
 
 - Recorded the deployed Terminal rebuild through hosted version 179: larger charts, compact project-image rows, expanded paginated discovery, bonding data and quote-review controls.

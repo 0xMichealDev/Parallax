@@ -1,0 +1,54 @@
+/* Focused tool-page cleanup; the homepage and dashboard are unchanged. */
+body.workspace-shell[data-workspace-page=pro] .pro-main{max-width:1320px;padding-top:30px}
+body.workspace-shell[data-workspace-page=pro] .pro-hero{display:block;margin:0 0 24px;padding:0;border:0}
+body.workspace-shell[data-workspace-page=pro] .pro-hero h1{font-size:clamp(28px,3vw,38px);margin:8px 0 10px;line-height:1.15;letter-spacing:-.04em}
+body.workspace-shell[data-workspace-page=pro] .pro-lead{font-size:14px;margin:0;max-width:none}
+body.workspace-shell[data-workspace-page=pro] .pro-kicker{font-size:10px;margin:0;color:#c6b080}
+body.workspace-shell[data-workspace-page=pro] .pro-overview{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(0,1.45fr);gap:22px;align-items:start}
+body.workspace-shell[data-workspace-page=pro] .pro-access{padding:24px;max-width:none;border-radius:14px;background:#0d141e;border-color:#bda16c38;box-shadow:none}
+body.workspace-shell[data-workspace-page=pro] .pro-access h2{font-size:22px;margin:10px 0}
+body.workspace-shell[data-workspace-page=pro] .pro-access>p{font-size:13px;line-height:1.7;margin:10px 0}
+body.workspace-shell[data-workspace-page=pro] .pro-membership-summary{padding:16px 0;margin:18px 0;border-width:1px 0;border-radius:0;background:transparent}
+body.workspace-shell[data-workspace-page=pro] .pro-membership-heading>span{font-size:9px}
+body.workspace-shell[data-workspace-page=pro] .pro-membership-heading strong{font-size:10px;padding:4px 7px}
+body.workspace-shell[data-workspace-page=pro] .pro-holding-metrics{padding:0;margin:16px 0 12px;gap:12px}
+body.workspace-shell[data-workspace-page=pro] .pro-holding-metrics dd{font-size:20px}
+body.workspace-shell[data-workspace-page=pro] :is(.pro-verification-time,.pro-access>small){font-size:11px;line-height:1.6}
+body.workspace-shell[data-workspace-page=pro] .pro-actions{gap:8px}
+body.workspace-shell[data-workspace-page=pro] .pro-benefits{margin:0;padding:0;border:0;min-width:0}
+body.workspace-shell[data-workspace-page=pro] .pro-section-head{margin:0 0 14px;gap:12px}
+body.workspace-shell[data-workspace-page=pro] .pro-section-head h2{font-size:21px;margin:5px 0 0}
+body.workspace-shell[data-workspace-page=pro] .pro-benefit-state{font-size:10px;white-space:nowrap;padding:5px 9px}
+body.workspace-shell[data-workspace-page=pro] .pro-benefit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0}
+body.workspace-shell[data-workspace-page=pro] .pro-benefit-grid article{padding:20px;border:1px solid #ffffff10;background:#0c131d;border-radius:12px}
+body.workspace-shell[data-workspace-page=pro] .pro-benefit-grid article>span{font-size:9px}
+body.workspace-shell[data-workspace-page=pro] .pro-benefit-grid h3{font-size:16px;margin:10px 0 8px}
+body.workspace-shell[data-workspace-page=pro] .pro-benefit-grid p{font-size:12px;line-height:1.65;margin:0}
+body.workspace-shell[data-workspace-page=pro] .pro-benefit-grid small{display:block;font-size:10px;color:#91a0b4;line-height:1.5;margin-top:9px}
+body.workspace-shell[data-workspace-page=pro] .pro-benefit-grid .pro-link{margin-top:12px;font-size:12px;min-height:28px}
+body.workspace-shell[data-workspace-page=pro] :is(.pro-coverage,.pro-identity){margin-top:14px;font-size:12px;color:#9eacbd}
+body.workspace-shell[data-workspace-page=pro] :is(.pro-coverage,.pro-identity)>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:10px;color:#cbb88e;list-style:none}
+body.workspace-shell[data-workspace-page=pro] :is(.pro-coverage,.pro-identity)>summary::after{content:'+';margin-left:auto}
+body.workspace-shell[data-workspace-page=pro] :is(.pro-coverage,.pro-identity)[open]>summary::after{content:'−'}
+body.workspace-shell[data-workspace-page=pro] .pro-identity:not(:has(#pro-member-card:not([hidden]))){display:none}
+body.workspace-shell[data-workspace-page=pro] .pro-identity .gold-member-card{margin-top:12px}
+body.workspace-shell[data-workspace-page=pro] .gold-welcome,body.workspace-shell[data-workspace-page=pro] .gold-tool-links{display:none}
+body.workspace-shell[data-workspace-page=pro] #pro-workspace{margin-top:30px;padding-top:24px;border-top:1px solid #ffffff10}
+body.workspace-shell[data-workspace-page=pro] .pro-membership-faq{margin:24px 0 0;padding:0;max-width:none;border:1px solid #ffffff10;border-radius:12px;background:#0c131d}
+body.workspace-shell[data-workspace-page=pro] .pro-membership-faq>summary{display:flex;align-items:center;gap:18px;padding:18px 22px;min-height:58px;list-style:none;font-size:14px}
+body.workspace-shell[data-workspace-page=pro] .pro-membership-faq>summary::after{content:'+';margin-left:auto;color:#cbb88e}
+body.workspace-shell[data-workspace-page=pro] .pro-membership-faq[open]>summary::after{content:'−'}
+body.workspace-shell[data-workspace-page=pro] .pro-membership-faq>summary span{color:#8999ad;font-size:11px}
+body.workspace-shell[data-workspace-page=pro] .pro-faq-body{padding:0 22px 18px}
+body.workspace-shell[data-workspace-page=pro] .pro-faq-body details{padding:0;margin:0;border-width:1px 0 0;border-radius:0;background:transparent}
+body.workspace-shell[data-workspace-page=pro] .pro-footer{margin-top:20px;padding-top:14px;font-size:11px}
+body.workspace-shell[data-workspace-page=pro] summary:focus-visible{outline:2px solid #dbc18c;outline-offset:3px}
+body.workspace-shell[data-workspace-page=control] #wallet .watch-intro,body.workspace-shell[data-workspace-page=observatory] .obs-hero{padding:16px 0 22px;margin:0 0 20px;min-height:0;gap:18px;grid-template-columns:1fr}
+body.workspace-shell[data-workspace-page=control] #wallet .watch-intro h1,body.workspace-shell[data-workspace-page=observatory] .obs-hero h1{font-size:clamp(28px,3vw,36px);line-height:1.15;margin:8px 0 12px}
+body.workspace-shell[data-workspace-page=control] #wallet .watch-orbit,body.workspace-shell[data-workspace-page=observatory] .obs-orbit{display:none}
+body.workspace-shell[data-workspace-page=control] #wallet .watch-intro p,body.workspace-shell[data-workspace-page=observatory] .obs-hero p{margin:8px 0;font-size:13px!important}
+body.workspace-shell[data-workspace-page=observatory] main .obs-tags{margin-top:12px}
+body.workspace-shell[data-workspace-page=observatory] .obs-hero .obs-button{margin-top:12px;padding:8px 0;border:0;background:none;font-size:12px}
+body.workspace-shell[data-workspace-page=control] #wallet .watch-search,body.workspace-shell[data-workspace-page=observatory] .obs-start{padding:22px}
+@media(max-width:1100px){body.workspace-shell[data-workspace-page=pro] .pro-overview{grid-template-columns:1fr}body.workspace-shell[data-workspace-page=pro] .pro-access{max-width:none}}
+@media(max-width:600px){body.workspace-shell[data-workspace-page=pro] .pro-main{padding-top:22px}body.workspace-shell[data-workspace-page=pro] .pro-benefit-grid{grid-template-columns:1fr}body.workspace-shell[data-workspace-page=pro] .pro-access{padding:20px}body.workspace-shell[data-workspace-page=pro] .pro-benefits .pro-section-head{flex-direction:row;align-items:center}body.workspace-shell[data-workspace-page=pro] .pro-membership-faq>summary span{display:none}body.workspace-shell[data-workspace-page=pro] .pro-benefit-grid .pro-link{min-height:44px;display:inline-flex;align-items:center}}
