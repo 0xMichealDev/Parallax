@@ -1,0 +1,231 @@
+{
+  "version": "209",
+  "created_date": "2026-10-28",
+  "generation_tool": "built-in image_gen.imagegen",
+  "purpose": "Photoreal source portraits for PARALLAX project planet rendering, matching the approved GATTO v207 realism direction.",
+  "processing": "Generated PNGs copied byte-for-byte, with original transparency preserved. Planet volume, lighting and orbits are handled by the shared production renderer.",
+  "assets": [
+    {
+      "id": "bonk",
+      "path": "public/assets/globe/bonk-realism-v209.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 2835373,
+      "sha256": "ed86696812478f6cc9f0b545e34c860ad04906994b471d3d59316478af76dc53",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        1253,
+        1254
+      ],
+      "solid_alpha_bbox": [
+        78,
+        42,
+        1167,
+        1226
+      ],
+      "generated_source_filename": "exec-6aa76382-cacb-469d-8139-db8ed0c8a1ef.png",
+      "reference_images": [
+        {
+          "path": "public/assets/globe/gatto-face-v207.png",
+          "role": "Photographic-detail and lighting style reference"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ultra-realistic production portrait texture for a dimensional floating character planet in PARALLAX. Input image 1 is a STYLE AND QUALITY reference only: keep its photographic microdetail, tasteful cinematic lighting, crisp transparent silhouette; DO NOT reproduce the black cat or golden rim as the subject. The new subject must look physically real, like premium animal photography, not a cartoon mascot, toy, clay, emoji, plush or plastic. Square image with genuine transparent alpha background, single centered frontal symmetrical subject looking directly at viewer. About 84% of canvas occupied; leave clear margin around all ears/hat/whiskers; do not crop extremities. Soft upper-left studio key, gentle right fill, restrained rim; natural shadows, rich but realistic colors. No background, no starfield, no text, no logos, no watermark, no orbital rings, no moon, no pedestal, no floating decorative objects.\nSubject: a compact round-headed red-orange Shiba Inu dog inspired by BONK, head only with no neck or body. Realistic fine orange guard hairs, pale cream muzzle and cheeks, small cream eyebrow patches, upright triangular ears with soft peach inner fur, calm slightly sleepy brown almond eyes with small natural catchlights, moist black nose, relaxed closed mouth with subtle knowing expression. Rounded generous cheeks but anatomically convincing proportions; individual fur and whiskers visibly detailed. Preserve orange-and-cream dog identity."
+    },
+    {
+      "id": "pengu",
+      "path": "public/assets/globe/pengu-realism-v209.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 2217180,
+      "sha256": "f695281745e126d35800909447337359146024e4013e1d66e9ef3621d3b7460c",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        19,
+        1234,
+        1238
+      ],
+      "solid_alpha_bbox": [
+        91,
+        74,
+        1169,
+        1205
+      ],
+      "generated_source_filename": "exec-52b5dce1-dc7a-43af-bcb2-7c8fd538b634.png",
+      "reference_images": [
+        {
+          "path": "generated_images/exec-b7ce2898-397c-4b8e-b54e-575525154648.png",
+          "role": "Edit target: first PENGU realism portrait; composition and palette preserved"
+        }
+      ],
+      "prompt": "Use case: style-transfer. Edit target: the attached isolated PENGU character source image. Make ONE targeted realism correction while preserving its identity, exact square framing, centered frontal pose, complete compact rounded silhouette, soft upper-left lighting, the periwinkle/slate-blue crown/back/flippers, broad white facial mask and white belly, peach-orange bill and feet, and the genuine transparent background.\nReplace the current plush-toy appearance with a convincingly real juvenile penguin photographed with a wildlife portrait lens. Make its eyes considerably smaller and naturally recessed within feathered eyelids, anatomically plausible dark bird eyes with only tiny subtle catchlights, no enormous glossy glass buttons. Replace uniform hair-like fuzz across the face and belly with very short dense layered penguin feathers and fine juvenile down: close feather grains, overlapping directional feather rows over blue crown and flippers, gently mottled compact down on the belly, natural imperfect microdetail. Make the little bill anatomically plausible and slightly slimmer, hard keratin with an understated natural seam, without exaggerated cartoon nostrils. Keep the two short flippers close at the sides and webbed feet, with believable avian anatomy. Keep the existing body proportions and placement close enough for the same source-texture mapping.\nThis is a REAL animal interpretation of the established character, not a plush toy, doll, cartoon, mascot suit or Pixar render. Retain the blue/white/orange brand palette but with realistic restrained saturation. No rings, no environment, no ground shadow, no text, no accessories, no border. Preserve true transparent alpha and the entire uncut silhouette.",
+      "revision_reason": "Reduced oversized glossy eyes and replaced plush-like fur with short layered feathering/down for more convincing juvenile penguin realism.",
+      "prior_generation": {
+        "generated_source_filename": "exec-b7ce2898-397c-4b8e-b54e-575525154648.png",
+        "sha256": "e82da86e926841f775d7cdf4f340848d5b7541585642f1dd81330e8f6072f3c4",
+        "reference_images": [
+          {
+            "path": "public/assets/globe/gatto-face-v207.png",
+            "role": "Photographic-detail and lighting style reference"
+          },
+          {
+            "path": "public/assets/ecosystem/pengu-v192.webp",
+            "role": "Existing project identity and component reference"
+          }
+        ],
+        "prompt": "Use case: stylized-concept. Asset type: ultra-realistic production portrait texture for a dimensional floating character planet in PARALLAX. Input image1 is ONLY a quality reference showing photographic microdetail and crisp transparent silhouette; do not turn the subject into a cat. Input image2 defines the subject's recognizable design, colors and essential parts, but REPLACE its smooth cartoon rendering with convincingly real materials. Square image with genuine transparent alpha background. Single centered FRONT-FACING subject, orthographic-ish camera at the subject's center, complete silhouette, clear 6–10%margin around all extremities. Soft upper-left studio key and gentle right fill with restrained rim lighting. Cinematic but naturally textured, rich realistic colors, natural shadows. No background, no ground, no starfield, no text, no logos, no watermark, no orbital rings, no moon, no pedestal, no other objects. NOT a cartoon, plush toy, clay figurine, emoji or smooth plastic.\nSubject: a compact rounded PENGU-inspired penguin with naturally detailed feathers, cool periwinkle/slate-blue back and crown, broad white facial patches merging into an ivory white belly, realistic small glossy dark eyes with subtle catchlights, petite peach-orange beak with fine real keratin texture. Include its entire compact plump body, two short flippers at its sides and small orange webbed feet visible below, all cleanly isolated. Preserve the broad white facial-mask and blue penguin identity from reference2. Make the feathering delicate and biologically convincing, head and body proportions plausible rather than toy-like. Perfectly frontal orientation."
+      }
+    },
+    {
+      "id": "wif",
+      "path": "public/assets/globe/wif-realism-v209.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 2752062,
+      "sha256": "3438570ac98d9e95649a5f0739ec9ee8f1418c145ab584d11b4c506427face41",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        1232,
+        1254
+      ],
+      "solid_alpha_bbox": [
+        112,
+        20,
+        1145,
+        1211
+      ],
+      "generated_source_filename": "exec-df1fd652-c193-4d69-9e5e-fddff030f61f.png",
+      "reference_images": [
+        {
+          "path": "public/assets/globe/gatto-face-v207.png",
+          "role": "Photographic-detail and lighting style reference"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ultra-realistic production portrait texture for a dimensional floating character planet in PARALLAX. Input image 1 is a STYLE AND QUALITY reference only: keep its photographic microdetail, tasteful cinematic lighting, crisp transparent silhouette; DO NOT reproduce the black cat or golden rim as the subject. The new subject must look physically real, like premium animal photography, not a cartoon mascot, toy, clay, emoji, plush or plastic. Square image with genuine transparent alpha background, single centered frontal symmetrical subject looking directly at viewer. About 84% of canvas occupied; leave clear margin around all ears/hat/whiskers; do not crop extremities. Soft upper-left studio key, gentle right fill, restrained rim; natural shadows, rich but realistic colors. No background, no starfield, no text, no logos, no watermark, no orbital rings, no moon, no pedestal, no floating decorative objects.\nSubject: a compact tan Shiba Inu dog head wearing a salmon dusty-pink knitted beanie, inspired by dogwifhat. Head only with no neck or torso. Real tan individual fur, cream muzzle and cheeks, calm dark almond eyes, wet detailed black nose, naturally closed mouth. The hat has a full softly domed tall crown and a rolled ribbed brim, with convincingly knitted wool loops, subtle fuzz and thread shadows; hat covers the ears naturally, whole top fully in frame. Its salmon pink color is essential. Avoid exaggerated eyes, smooth toy surfaces or cartoon proportions."
+    },
+    {
+      "id": "popcat",
+      "path": "public/assets/globe/popcat-realism-v209.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 2697158,
+      "sha256": "dd004ed15b87de0918e33ac31996541530e1c8850e252037fa0a8ad67fcb1ac6",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        19,
+        1254,
+        1254
+      ],
+      "solid_alpha_bbox": [
+        34,
+        58,
+        1230,
+        1198
+      ],
+      "generated_source_filename": "exec-92a85403-1190-443a-bbd2-0fa27d157238.png",
+      "reference_images": [
+        {
+          "path": "public/assets/globe/gatto-face-v207.png",
+          "role": "Photographic-detail and lighting style reference"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ultra-realistic production portrait texture for a dimensional floating character planet in PARALLAX. Input image 1 is a STYLE AND QUALITY reference only: keep its photographic microdetail, tasteful cinematic lighting, crisp transparent silhouette; DO NOT reproduce the black cat or golden rim as the subject. The new subject must look physically real, like premium animal photography, not a cartoon mascot, toy, clay, emoji, plush or plastic. Square image with genuine transparent alpha background, single centered frontal symmetrical subject looking directly at viewer. About 84% of canvas occupied; leave clear margin around all ears/hat/whiskers; do not crop extremities. Soft upper-left studio key, gentle right fill, restrained rim; natural shadows, rich but realistic colors. No background, no starfield, no text, no logos, no watermark, no orbital rings, no moon, no pedestal, no floating decorative objects.\nSubject: a compact cream-and-taupe domestic shorthaired cat head inspired by Popcat, no neck or body. Natural dense short fur with taupe brown crown and ears, cream cheeks and lower face, realistic triangular ears with delicate pink interiors, small naturally proportioned warm hazel eyes, pale pink nose and fine whiskers. Distinctive surprise expression: mouth opened in a generous ROUND O shape, a real dark open mouth with subtle natural pink inner lip and very subdued tongue, not a drawn black circle, no bared fangs or aggressive snarling. Preserve this recognizable open-mouth cat identity while making anatomy, fur, muzzle and lighting photographically realistic."
+    },
+    {
+      "id": "sheeple",
+      "path": "public/assets/globe/sheeple-realism-v209.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1616331,
+      "sha256": "23a36bed2d7035ed921ef979c2fa5e6a40848fe829cff62cbb26d85fcb1498f8",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        19,
+        1254,
+        1254
+      ],
+      "solid_alpha_bbox": [
+        264,
+        85,
+        1019,
+        1174
+      ],
+      "generated_source_filename": "exec-6dde74f4-fce2-45cf-b15e-95de2712823d.png",
+      "reference_images": [
+        {
+          "path": "public/assets/globe/gatto-face-v207.png",
+          "role": "Photographic-detail and lighting style reference"
+        },
+        {
+          "path": "public/assets/ecosystem/sheeple-v195.webp",
+          "role": "Existing project identity and component reference"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ultra-realistic production portrait texture for a dimensional floating character planet in PARALLAX. Input image1 is ONLY a quality reference showing photographic microdetail and crisp transparent silhouette; do not turn the subject into a cat. Input image2 defines the subject's recognizable design, colors and essential parts, but REPLACE its smooth cartoon rendering with convincingly real materials. Square image with genuine transparent alpha background. Single centered FRONT-FACING subject, orthographic-ish camera at the subject's center, complete silhouette, clear 6–10%margin around all extremities. Soft upper-left studio key and gentle right fill with restrained rim lighting. Cinematic but naturally textured, rich realistic colors, natural shadows. No background, no ground, no starfield, no text, no logos, no watermark, no orbital rings, no moon, no pedestal, no other objects. NOT a cartoon, plush toy, clay figurine, emoji or smooth plastic.\nSubject: SHEEPLE's distinctive camera-headed sheep, rendered as a physically real compact sculpture/creature. A generously round ivory wool sheep body with very detailed individual crimped wool fibers and dense realistic curls; four short wool-covered legs with dark cloven hooves, rear pair subtly visible offset behind front pair. The HEAD MUST BE A BLACK RECTANGULAR CCTV SECURITY CAMERA housing with a compact circular optical lens looking straight at camera, brushed dark metal/polymer, tiny screw heads, subtle real glass lens reflections. Absolutely no biological sheep face or eyes. A real red leather neck collar with small metal buckle connects camera and wool body. Above the CCTV head, a tilted slim dark blue photovoltaic solar panel on a believable short metal bracket, clearly visible complete within frame with microscopic solar-cell lines. Keep all reference2 essential components. Full compact body, front-facing camera lens, neutral level view; prioritize convincing wool, machined dark housing, glass, red leather, dark hoof texture."
+    },
+    {
+      "id": "trump",
+      "path": "public/assets/globe/trump-realism-v209.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1960601,
+      "sha256": "29920ff385e1a3712c51904f88a07522fc0fc874fc691df9dac1883af146b051",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        19,
+        1226,
+        1254
+      ],
+      "solid_alpha_bbox": [
+        132,
+        47,
+        1122,
+        1224
+      ],
+      "generated_source_filename": "exec-e3f796b0-828e-41fb-90a5-ef9f27eb6770.png",
+      "reference_images": [
+        {
+          "path": "public/assets/globe/gatto-face-v207.png",
+          "role": "Photographic-detail and lighting style reference"
+        },
+        {
+          "path": "public/assets/ecosystem/trump-v196.webp",
+          "role": "Existing project identity and component reference"
+        }
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ultra-realistic production portrait texture for a dimensional floating character planet in PARALLAX. Input image1 is ONLY a quality reference showing photographic microdetail and crisp transparent silhouette; do not turn the subject into a cat. Input image2 defines the subject's recognizable design, colors and essential parts, but REPLACE its smooth cartoon rendering with convincingly real materials. Square image with genuine transparent alpha background. Single centered FRONT-FACING subject, orthographic-ish camera at the subject's center, complete silhouette, clear 6–10%margin around all extremities. Soft upper-left studio key and gentle right fill with restrained rim lighting. Cinematic but naturally textured, rich realistic colors, natural shadows. No background, no ground, no starfield, no text, no logos, no watermark, no orbital rings, no moon, no pedestal, no other objects. NOT a cartoon, plush toy, clay figurine, emoji or smooth plastic.\nSubject: a realistic studio portrait of Donald Trump as a compact floating character bust for an independent artistic project world. Frontal older male face with recognizable swept blond hair, realistic blue eyes, subtle neutral expression, natural skin pores, wrinkles, hair strands and natural human proportions. Below the head include a short compact navy suit shoulder-and-chest base with white shirt collar and red tie, neatly rounded silhouette terminating below the tie knot/lower upper chest, fully within frame; no arms or hands. Use real finely woven navy wool, crisp white cotton and red silk with subtle texture. Match reference2's essential swept blond hair, blue eyes, navy suit/white collar/red tie palette while replacing the cartoon completely with photographic realism. No campaign text, flags, podium, badges, symbols or gold rings."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+(()=>{'use strict';
+const $=id=>document.getElementById(id),api=window.ParallaxResearch.request,fmt=n=>Number(n||0).toLocaleString();
+let data=null,epoch=0,session={signedIn:false,wallet:null};
+const status=(id,text,error=false)=>{const el=$(id);el.textContent=text;el.dataset.error=String(error)};
+function node(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
+function link(text,href,cls='creator-button'){const a=node('a',cls,text);a.href=href;return a;}
+function fillSelect(select,projects,label){const old=select.value;select.replaceChildren(new Option(label,''),...projects.map(p=>new Option(p.name+' · $'+p.ticker,p.id)));if(projects.some(p=>p.id===old))select.value=old;}
+function signIn(){ $('creator-signin').hidden=false;$('creator-workspace').hidden=true;status('creator-status','');}
+function chart(daily){
+ const host=$('creator-chart');host.replaceChildren();const any=daily.some(d=>d.visits||d.clicks);host.hidden=!any;$('creator-chart-empty').hidden=any;if(!any)return;
+ const NS='http://www.w3.org/2000/svg',svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 760 205');svg.setAttribute('role','img');svg.setAttribute('aria-label','Daily project visits and website clicks. Exact values are available in View daily numbers below.');
+ const add=(tag,attrs,text)=>{const e=document.createElementNS(NS,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,String(v));if(text!==undefined)e.textContent=text;svg.append(e);return e;};
+ const peak=Math.max(1,...daily.map(d=>Math.max(d.visits,d.clicks))),max=Math.max(1,Math.ceil(peak/4)*4),left=33,width=710,height=147,base=171;
+ for(let i=0;i<=4;i++){const y=base-height*i/4;add('line',{x1:left,y1:y,x2:750,y2:y,stroke:'#afcdd618','stroke-dasharray':'3 5'});add('text',{x:23,y:y+4,fill:'#7d9aa9','text-anchor':'end','font-size':10},String(max*i/4));}
+ const step=width/daily.length;
+ daily.forEach((d,i)=>{const x=left+i*step+step*.1;for(const [key,color,offset]of [['visits','#9bd8c8',0],['clicks','#9cace5',step*.43]]){if(!d[key])continue;const h=d[key]/max*height;const b=add('rect',{x:x+offset,y:base-h,width:Math.max(1,step*.34),height:h,rx:Math.min(2,step*.1),fill:color});const title=document.createElementNS(NS,'title');title.textContent=d.day+': '+d[key]+' '+key;b.append(title);}});
+ for(const i of [...new Set([0,Math.floor((daily.length-1)/2),daily.length-1])]){const d=daily[i];add('text',{x:left+i*step+step/2,y:198,fill:'#8ba6b5','text-anchor':i===0?'start':i===daily.length-1?'end':'middle','font-size':10},new Date(d.day+'T12:00:00Z').toLocaleDateString(undefined,{month:'short',day:'numeric',timeZone:'UTC'}));}
+ host.append(svg);
+}
+async function copy(text){try{await navigator.clipboard.writeText(text);status('creator-status','Project link copied.')}catch{status('creator-status','Copy your project link: '+text);}}
+function projectCard(p){
+ const card=node('article','creator-project'),top=node('div','creator-project-top'),orb=node('span','creator-project-planet'),d=decodePlanet(p.color);orb.setAttribute('aria-hidden','true');orb.style.setProperty('--planet-color',planetPalette[d.index][1]);const map=realPlanetMaps[p.color.replace('solar-','')]||({earth:'2k_earth_daymap.jpg',rocky:'2k_mars.jpg',gas:'2k_jupiter.jpg'}[d.surface]);orb.style.setProperty('--planet-map',"url('/assets/globe/"+map+"')");if(d.rings!=='none')orb.classList.add('has-rings');
+ const names=node('div');names.append(node('h3','',p.name),node('div','creator-project-kicker','$'+p.ticker+' / PUBLISHED'));top.append(orb,names);card.append(top,node('p','creator-project-description',p.description));
+ const metrics=node('div','creator-project-metrics');for(const [label,value]of [['Visits',p.stats.visits],['Browsers (est.)',p.stats.browsers],['Website clicks',p.stats.clicks]]){const m=node('div');m.append(node('strong','',fmt(value)),node('span','',label));metrics.append(m);}card.append(metrics);
+ const base='/studio?project='+encodeURIComponent(p.id),actions=node('div','creator-project-actions');actions.append(link('Edit world ↗',base),link('Launch kit ↗',base+'&step=4'),link('Premium Worlds ↗','/premium?project='+encodeURIComponent(p.id)),link('Research panel ↗','/utility?project='+encodeURIComponent(p.id)+'#workspace'));
+ const share=node('button','creator-text-button','Copy link');share.type='button';share.onclick=()=>copy('https://parallaxlaunch.live/world/'+p.id);actions.append(share);card.append(actions);
+ const footer=node('div','creator-project-link'),view=link('Open public page ↗','/world/'+encodeURIComponent(p.id),'');view.target='_blank';view.rel='noopener';const stats=node('button','creator-text-button','View activity');stats.type='button';stats.onclick=()=>{$('creator-filter').value=p.id;load();$('creator-activity-title').scrollIntoView({block:'start',behavior:'auto'});};footer.append(view,stats);card.append(footer);return card;
+}
+function render(){
+ window.ParallaxCreatorPerformance?.render(data);
+ $('creator-signin').hidden=true;$('creator-workspace').hidden=false;
+ fillSelect($('creator-filter'),data.projects,'All my worlds');$('creator-filter').value=data.selectedId;
+ fillSelect($('creator-update-project'),data.projects,'Choose a published world');if(!$('creator-update-project').value&&data.projects.length===1)$('creator-update-project').value=data.projects[0].id;
+ $('creator-world-count').textContent=fmt(data.projects.length);$('creator-visit-count').textContent=fmt(data.totals.visits);$('creator-return-count').textContent=fmt(data.totals.returningVisits);$('creator-click-count').textContent=fmt(data.totals.clicks);
+ const selected=data.projects.find(p=>p.id===data.selectedId);$('creator-chart-scope').textContent=(selected?selected.name:'All my worlds')+' · Last '+data.days+' days · UTC';$('creator-freshness').textContent='Updated '+new Date(data.updatedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+ $('creator-collected-since').textContent=data.collectedSince?'First recorded visit in retained history: '+new Date(data.collectedSince).toLocaleString()+'. Data is collected from this release onward.':'No visits recorded yet. Tracking starts with this release; earlier traffic is not available.';
+ chart(data.daily);$('creator-daily-rows').replaceChildren(...data.daily.map(d=>{const r=node('tr');for(const v of [d.day,fmt(d.visits),fmt(d.returningVisits),fmt(d.clicks)])r.append(node('td','',v));return r;}));
+ const projects=data.projects.filter(p=>!data.selectedId||p.id===data.selectedId);$('creator-projects').replaceChildren(...projects.map(projectCard));
+ if(!data.projects.length){const empty=node('div','creator-empty');empty.append(node('h3','','Your first world is waiting.'),node('p','','Publish a world in Creator Studio, then return here to manage it and see its activity. Browser drafts remain in Studio.'),link('Create your first world ↗','/studio','creator-button primary'));$('creator-projects').append(empty);}
+ $('creator-update-form').querySelectorAll('input,textarea,select,button').forEach(e=>e.disabled=!data.projects.length);window.ParallaxUpdateEditor?.sync(data.projects);
+}
+async function load(){
+ const id=++epoch;$('creator-refresh').disabled=true;$('creator-export').disabled=true;$('creator-projects').setAttribute('aria-busy','true');status('creator-status','Loading project activity…');
+ try{const next=await api('/api/creator/dashboard?days='+encodeURIComponent($('creator-range').value)+'&project='+encodeURIComponent($('creator-filter').value));if(id!==epoch)return;data=next;render();status('creator-status','');}
+ catch(e){if(id!==epoch)return;if(e.status===401){signIn();return;}if(data){$('creator-filter').value=data.selectedId;$('creator-range').value=String(data.days);}status('creator-status',e.message+(data?' Showing the last successfully loaded activity.':''),true);}
+ finally{if(id===epoch){$('creator-refresh').disabled=false;$('creator-export').disabled=!data;$('creator-projects').setAttribute('aria-busy','false');}}
+}
+$('creator-filter').onchange=load;$('creator-range').onchange=load;$('creator-refresh').onclick=load;
+$('creator-export').onclick=()=>{if(!data)return;const lines=['date_utc,visits,returning_visits,website_clicks',...data.daily.map(d=>[d.day,d.visits,d.returningVisits,d.clicks].join(','))];const url=URL.createObjectURL(new Blob([lines.join('\r\n')],{type:'text/csv;charset=utf-8'})),a=node('a');a.href=url;a.download='parallax-activity-'+data.days+'-days.csv';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);};
+$('creator-verify').onclick=async()=>{const provider=window.phantom?.solana;if(!provider?.isPhantom){status('creator-wallet-status','On iPhone, open parallaxlaunch.live/creator in Phantom’s browser and sign in there. On desktop, use the Phantom extension.');return;}$('creator-verify').disabled=true;try{const connected=await provider.connect(),challenge=await api('/api/wallet/challenge',{wallet:connected.publicKey.toString()}),signed=await provider.signMessage(new TextEncoder().encode(challenge.message),'utf8');session.wallet=(await api('/api/wallet/verify',{signature:Array.from(signed.signature)})).wallet;status('creator-wallet-status','Wallet verified: '+session.wallet.slice(0,5)+'…'+session.wallet.slice(-5)+'. You can publish updates for its projects.');}catch(e){status('creator-wallet-status',e.code===4001?'Verification cancelled. No transaction was requested.':e.message,true);}finally{$('creator-verify').disabled=false;}};
+load();
+})();

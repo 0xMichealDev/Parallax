@@ -1,0 +1,167 @@
+{
+  "version": "210",
+  "created_date": "2026-10-28",
+  "generation_tool": "built-in image_gen.imagegen",
+  "use_case": "Photographic albedo material atlas for GATTO and SHEEPLE expedition game surfaces",
+  "requested_resolution": [
+    2048,
+    2048
+  ],
+  "actual_resolution": [
+    1254,
+    1254
+  ],
+  "generated_source_filename": "exec-4e6144bf-7719-4ac1-ad99-a8dfdf4c01ba.png",
+  "png": {
+    "path": "public/assets/expeditions/material-atlas-v210.png",
+    "bytes": 4221426,
+    "sha256": "e3fed277cfec80821bf1d726afa758d80902a81c57a180be94e7c2ded95fd67b",
+    "processing": "Original generated PNG copied byte-for-byte."
+  },
+  "webp": {
+    "path": "public/assets/expeditions/material-atlas-v210.webp",
+    "bytes": 2456090,
+    "sha256": "b708b0e3fb112814f6be5b0a50e31a139f55ea2205ffebb82cb828cba56351fb",
+    "encoding": "Pillow lossless WebP, quality100, method6, exact=True",
+    "decoded_rgba_identical_to_png": true
+  },
+  "mode": "RGBA",
+  "alpha_range": [
+    255,
+    255
+  ],
+  "quadrant_contract": {
+    "coordinate_origin": "Top-left of source image; pixel boxes are [left,top,right,bottom], right/bottom exclusive. UV boxes are [u0,v0,u1,v1] using the same top-left origin.",
+    "layout": "2 columns × 2 rows, exactly equal quadrants; no gutter or divider.",
+    "tile_dimensions": [
+      627,
+      627
+    ],
+    "tiles": [
+      {
+        "material": "cat_fur",
+        "position": "top_left",
+        "uv_box": [
+          0,
+          0,
+          0.5,
+          0.5
+        ],
+        "pixel_box": [
+          0,
+          0,
+          627,
+          627
+        ]
+      },
+      {
+        "material": "sheep_fleece",
+        "position": "top_right",
+        "uv_box": [
+          0.5,
+          0,
+          1,
+          0.5
+        ],
+        "pixel_box": [
+          627,
+          0,
+          1254,
+          627
+        ]
+      },
+      {
+        "material": "limestone",
+        "position": "bottom_left",
+        "uv_box": [
+          0,
+          0.5,
+          0.5,
+          1
+        ],
+        "pixel_box": [
+          0,
+          627,
+          627,
+          1254
+        ]
+      },
+      {
+        "material": "lunar_regolith",
+        "position": "bottom_right",
+        "uv_box": [
+          0.5,
+          0.5,
+          1,
+          1
+        ],
+        "pixel_box": [
+          627,
+          627,
+          1254,
+          1254
+        ]
+      }
+    ],
+    "sampling": "Select a quadrant before local tiling. Use a half-texel inset to avoid neighboring-material bleed. Quadrant-local mirrored repeat is recommended because generated opposite-edge pixels are not mathematically identical; do not claim exact periodic source pixels or repeat the full atlas."
+  },
+  "validation": {
+    "visual_review": "Correct materials and quadrant order; flat surface-only composition; no typography, objects, gutters or background.",
+    "pixel_verification": "PNG and WebP decode to identical RGBA dimensions and bytes.",
+    "edge_measurements": [
+      {
+        "material": "cat_fur",
+        "pixel_box": [
+          0,
+          0,
+          627,
+          627
+        ],
+        "mean_horizontal_edge_jump": 22.852,
+        "mean_vertical_edge_jump": 23.24,
+        "mean_adjacent_pixel_jump_x": 12.441,
+        "mean_adjacent_pixel_jump_y": 17.174
+      },
+      {
+        "material": "sheep_fleece",
+        "pixel_box": [
+          627,
+          0,
+          1254,
+          627
+        ],
+        "mean_horizontal_edge_jump": 19.216,
+        "mean_vertical_edge_jump": 19.61,
+        "mean_adjacent_pixel_jump_x": 7.769,
+        "mean_adjacent_pixel_jump_y": 7.216
+      },
+      {
+        "material": "limestone",
+        "pixel_box": [
+          0,
+          627,
+          627,
+          1254
+        ],
+        "mean_horizontal_edge_jump": 25.233,
+        "mean_vertical_edge_jump": 27.589,
+        "mean_adjacent_pixel_jump_x": 15.447,
+        "mean_adjacent_pixel_jump_y": 17.136
+      },
+      {
+        "material": "lunar_regolith",
+        "pixel_box": [
+          627,
+          627,
+          1254,
+          1254
+        ],
+        "mean_horizontal_edge_jump": 39.94,
+        "mean_vertical_edge_jump": 37.651,
+        "mean_adjacent_pixel_jump_x": 24.692,
+        "mean_adjacent_pixel_jump_y": 28.647
+      }
+    ]
+  },
+  "prompt": "Use case: product-mockup. Asset type: production PBR diffuse/albedo material atlas for actual 3D game surface mapping, NOT a scene or mockup. Generate one SQUARE 2048x2048 opaque image consisting of exactly FOUR equal square material tiles in a strict 2-by-2 arrangement. The seam between left/right tiles is exactly at 50%width, top/bottom exactly at50%height. Fill every pixel with material texture. No margins, no gutters, no dividers, no borders, no labels or text. Each quadrant is independently seamlessly tileable in both directions, with matching opposite edges within that quadrant. View all four materials absolutely straight down/orthographic macro, flat plane, uniform diffuse overcast illumination, no cast shadows, no ambient-occlusion gradients, no specular highlights, no lighting gradients, no vignettes or depth of field. High frequency physically believable photographic surface detail, evenly sharp everywhere.\nTOP LEFT quadrant: short fine charcoal-black domestic cat fur, very dark neutral charcoal with subtle natural black/gray tonal detail, tightly packed short soft directional fibers, gentle coherent fiber flow, no face, no eyes, no ears, no body/anatomy, no bald patches. Real short cat coat texture, not plastic or paint strokes.\nTOP RIGHT quadrant: natural warm ivory sheep fleece, dense SMALL irregular curls and crimped wool fibers, real coarse-yet-soft wool microdetail. Even coverage, off-white palecream with modest tonal variations only. Not cotton balls, not fluffy clouds, not plush toy fabric; no visible animal/anatomy.\nBOTTOM LEFT quadrant: worn warm beige Italian limestone/travertine, flat natural stone surface with fine small pores, subtle tan mineral grain and understated irregular mottling. Restrained contrast, matte finish. No masonry blocks, no grout lines, no bricks, no grid, no obvious repeating motifs, no large cavities or major cracks. Stone surface only.\nBOTTOM RIGHT quadrant: natural cold neutral gray lunar regolith, densely packed fine dusty grains and very tiny sparse darker pebbles, subtle granular variation. Predominantly matte gray fine dust; no deep craters, no large rocks, no footprints, no stars, no planets, no landscape or horizon.\nKeep the four quadrant positions EXACTLY as specified; do not blend across their center boundaries. The deliverable must be a clean square technical material atlas made of photographic surfaces. Absolutely no words, lettering, logos, watermark, decorative framing, objects or perspective."
+}

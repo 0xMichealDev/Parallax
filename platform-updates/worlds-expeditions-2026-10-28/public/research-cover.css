@@ -1,0 +1,44 @@
+/* Shared visual identity for the homepage research destination and the research workspace. */
+.research-tech-art{background:#06131a;isolation:isolate}
+.research-tech-art .path-image{object-position:50% 47%;filter:saturate(.92)}
+.clean-home .research-tech-art:after{background:linear-gradient(180deg,#020a126e,transparent 30%,transparent 58%,#08151bee)}
+.research-tech-art:before{content:'';position:absolute;inset:-20% -60%;background:linear-gradient(110deg,transparent 43%,#adffee0e 49%,#c9fff52a 50%,#adffee0d 51%,transparent 57%);transform:translateX(-55%);opacity:0;z-index:2;pointer-events:none}
+.research-tech-caption{position:absolute;bottom:18px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:end;gap:16px;z-index:3;color:#c7e7e3}
+.research-tech-caption>div>span{display:block;font:7px/1.7 ui-monospace,monospace;letter-spacing:.17em;color:#a8d9ce}
+.research-tech-caption strong{display:block;font-size:12px;line-height:1.5;font-weight:450;letter-spacing:.01em;margin-top:3px}
+.research-tech-caption>span{font:6px/1.5 ui-monospace,monospace;letter-spacing:.1em;color:#85aaa9;text-align:right;max-width:55px}
+.research-tech-art .path-symbol{border-color:#c2eee642;background:#0a242733;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.research-cover-page{background:radial-gradient(ellipse at 70% 0%,#12363728,transparent 60%),#070e15}
+.research-cover-page .site-header{background:#070e15;border-bottom-color:#b8e4db19}
+.research-cover-page .site-header a[aria-current=page]{color:#c4efdf}
+.research-cover-page .market-page{max-width:1400px;padding-top:28px}
+.research-cover-page .research-subnav{gap:12px 25px;margin-bottom:24px;font-size:11px;color:#a7cfc8}
+.research-page-cover{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:1fr 1.25fr;align-items:center;min-height:345px;border:1px solid #bce2db2d;border-radius:14px;margin-bottom:32px;background:#09151e}
+.research-page-art{position:absolute;inset:0 0 0 36%;z-index:-2;display:block}
+.research-page-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:52% 48%}
+.research-page-cover:after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#09151eff 4%,#09151ef5 30%,#09151e70 48%,#09151e00 70%),linear-gradient(0deg,#09151ed9,transparent 32%,transparent 88%,#09151e4d)}
+.research-page-copy{padding:39px 0 40px 37px;min-width:0}
+.research-page-copy .eyebrow{font-size:9px;line-height:1.7;letter-spacing:.17em;color:#a7d8cb;margin:0 0 22px;display:flex;align-items:center;gap:9px}
+.research-page-copy .eyebrow:before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:#b6ead3;box-shadow:0 0 12px #a4e6d377;flex:none}
+.research-page-copy h1{font-size:clamp(35px,4vw,53px);font-weight:450;line-height:1.08;letter-spacing:-.045em;margin:0 0 20px}
+.research-page-copy h1 em{font-family:Georgia,serif;font-style:italic;color:#bfe7d8;font-weight:400}
+.research-page-copy>p:not(.eyebrow){max-width:320px;font-size:12px;line-height:1.85;color:#aac0cb;margin:0}
+.research-cover-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:23px}
+.research-cover-tags span{font:8px/1.4 ui-monospace,monospace;padding:5px 8px;border:1px solid #b5e4d82c;border-radius:4px;color:#b6d6ce;background:#a8dbca08}
+.research-art-label{position:absolute;bottom:18px;right:21px;font:7px/1.6 ui-monospace,monospace;letter-spacing:.16em;color:#8ab8b3}
+.research-cover-page #market-search{border:1px solid #b8dbd728;border-radius:10px;padding:22px;background:#0c1b23}
+.research-cover-page #market-search label{font-size:11px;color:#b7d1d8;margin-bottom:12px}
+.research-cover-page .market-search-row input{border-color:#a3c9c33c;background:#09141e;border-radius:6px;font-size:13px}
+.research-cover-page .market-search-row button{border-radius:6px;font-size:11px}
+.research-cover-page .market-search-row .primary{background:#c2e9dc;border-color:#c2e9dc;color:#123029}
+.research-cover-page .market-metrics>div{border-color:#a3d0ca25;background:#0e1e28}
+.research-cover-page .market-metrics strong{color:#d8f0e7;font-weight:500}
+.research-cover-page .chain-research{border-color:#a3daca35;background:linear-gradient(140deg,#122d2b99,#0a1722)}
+.research-cover-page .market-note{font-size:11px;color:#89a8b7}
+@media(hover:hover) and (pointer:fine){.path-research:hover .research-tech-art:before{animation:research-cover-sheen 1.3s ease-out both}.path-research:hover .research-tech-image{transform:scale(1.06)}}
+.path-research:focus-visible .research-tech-art{box-shadow:inset 0 0 0 1px #c1ead8}
+@keyframes research-cover-sheen{0%{transform:translateX(-55%);opacity:0}15%{opacity:1}80%{opacity:.6}100%{transform:translateX(55%);opacity:0}}
+@media(max-width:1000px){.research-page-cover{grid-template-columns:1.1fr 1fr;min-height:325px}.research-page-copy{padding:32px 0 33px 28px}.research-page-copy h1{font-size:42px}.research-page-art{left:32%}.research-page-cover:after{background:linear-gradient(90deg,#09151eff 4%,#09151ef0 30%,#09151e70 52%,#09151e0a 85%),linear-gradient(0deg,#09151eb3,transparent 35%)}.research-page-copy>p:not(.eyebrow){max-width:285px;font-size:11px}.research-page-copy .eyebrow{font-size:8px}.research-cover-tags span{font-size:7px}}
+@media(max-width:700px){.research-tech-caption{left:21px;right:21px;bottom:18px}.research-tech-caption>div>span{font-size:7px}.research-tech-caption strong{font-size:12px}.research-tech-caption>span{font-size:6px}.research-cover-page .market-page{padding-top:20px}.research-cover-page .research-subnav{display:grid;gap:8px;margin-bottom:20px}.research-cover-page .research-subnav a{border-color:#a1d1c92d;background:#0d20272e;font-size:11px}.research-page-cover{display:block;min-height:0;border-radius:12px;margin-bottom:23px}.research-page-copy{padding:28px 24px 25px;max-width:none}.research-page-copy .eyebrow{font-size:8px;letter-spacing:.13em;margin-bottom:18px}.research-page-copy h1{font-size:clamp(37px,10.3vw,52px);letter-spacing:-.045em;margin-bottom:17px}.research-page-copy>p:not(.eyebrow){font-size:12px;line-height:1.85;max-width:400px}.research-cover-tags{margin-top:19px;gap:7px}.research-cover-tags span{font-size:8px;padding:5px 8px}.research-page-art{position:relative;inset:auto;display:block;height:245px;z-index:-2;margin-top:-5px}.research-page-art img{object-position:50% 47%}.research-page-cover:after{background:linear-gradient(0deg,#09151e99 0,transparent 42px,transparent 190px,#09151e 258px);z-index:-1}.research-art-label{bottom:16px;right:18px;font-size:6px;color:#a7d4cc}.research-cover-page #market-search{padding:19px 16px;border-radius:9px}.research-cover-page #market-search label{font-size:12px}.research-cover-page .market-search-row{gap:9px}.research-cover-page .market-search-row input{min-width:0;padding:14px 12px;min-height:49px}.research-cover-page .market-search-row button{min-height:46px;font-size:11px;flex:1}.research-cover-page #market-status{font-size:12px;line-height:1.8}.research-cover-page .market-note{font-size:10px;line-height:1.9}}
+@media(max-width:370px){.research-page-copy{padding:25px 20px 22px}.research-page-copy h1{font-size:35px}.research-cover-tags span{font-size:7px}.research-page-art{height:220px}.research-page-cover:after{background:linear-gradient(0deg,#09151e99,transparent 38px,transparent 170px,#09151e 232px)}.research-cover-page #market-search{padding:17px 13px}}
+@media(prefers-reduced-motion:reduce){.path-research:hover .research-tech-art:before{animation:none;opacity:0}.path-research:hover .research-tech-image{transform:none}.research-tech-image{transition:none}}

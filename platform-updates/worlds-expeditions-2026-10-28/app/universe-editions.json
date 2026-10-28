@@ -1,0 +1,68 @@
+{
+  "builders": [
+    {
+      "id": "gatto",
+      "name": "GATTO",
+      "label": "COMMUNITY SHOWCASE",
+      "title": "An identity you can explore.",
+      "summary": "A black-cat community expressed through an obsidian planet, gold rings and its own project artwork.",
+      "image": "/assets/projects/gatto-community.png",
+      "imageAlt": "GATTO black cat and gold community artwork",
+      "href": "/projects/gatto",
+      "world": "curated-gatto",
+      "note": "Curated showcase. Project links and the token address are sourced from GATTO’s official website."
+    },
+    {
+      "id": "parallax",
+      "name": "PARALLAX",
+      "label": "BUILT HERE / OUR PROJECT",
+      "title": "A place to research. A universe to build.",
+      "summary": "Project Passports, creator worlds and an explorable Atlas, brought together by a passion for building and space.",
+      "image": "/assets/projects/parallax-horizon.webp",
+      "imageAlt": "The Parallax black hole with a compact icy-blue accretion disk",
+      "href": "/projects/parallax",
+      "world": "curated-parallax",
+      "note": "Parallax’s own project, included as a builder showcase."
+    }
+  ],
+  "editions": [
+    {
+      "slug": "001-gatto",
+      "number": 1,
+      "status": "published",
+      "publishedOn": "2026-10-17",
+      "projectId": "gatto",
+      "title": "Nine lives. A world of its own.",
+      "standfirst": "Our first Solana Universe spotlight explores how GATTO’s black-and-gold identity became a place its community can visit and share.",
+      "sections": [
+        {
+          "title": "A familiar face. A new destination.",
+          "paragraphs": [
+            "GATTO’s black-cat mascot and “Nine Lives. One Coin.” artwork give this showcase its starting point. The idea is simple: make a project recognizable the moment someone arrives.",
+            "Inside Parallax, that identity carries through to a dedicated About section, the project’s artwork and ticker, and a planet people can explore from Atlas."
+          ]
+        },
+        {
+          "title": "Black stone. Gold in orbit.",
+          "paragraphs": [
+            "The planet pairs an obsidian surface with fine gold veins, double gold rings and a companion moon. Open the world to rotate it, pause its motion and see the design up close.",
+            "It is a visual home for the project’s story. Its size and position in Atlas do not represent market cap or a ranking."
+          ]
+        },
+        {
+          "title": "The next world could be yours.",
+          "paragraphs": [
+            "This first feature shows the direction of Solana Universe: short stories about projects and the worlds they create, with a clear path from discovery to exploration.",
+            "Publish your own planet, add its Atlas listing, then share its link with the Parallax team through our community portal for editorial consideration. Standard publishing is free, and a token is not required."
+          ]
+        }
+      ],
+      "details": [
+        {"label":"SURFACE", "value":"Obsidian & gold"},
+        {"label":"ORBIT", "value":"Double rings + one moon"},
+        {"label":"IDENTITY", "value":"Artwork, ticker & story"}
+      ],
+      "editorNote": "This is a Parallax-created showcase. GATTO’s page includes its official website, X, published token address and public launch-wallet link. The feature does not verify project ownership or affiliation."
+    }
+  ]
+}

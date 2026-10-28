@@ -1,0 +1,2516 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-28",
+  "releaseId": "worlds-expeditions-2026-10-28",
+  "sourceRepository": "native-sites",
+  "baselineCommit": "97e972053a734e5e2b394aeaab4e98a868656e3f",
+  "baselineHostedVersion": 186,
+  "sourceRevision": "c79c3c7ff8f8e0f2a8a71a62138072a0b7433910",
+  "hostedVersion": 211,
+  "runtimeFeatureVersion": 210,
+  "scope": "Selected public world/game browser source, complete changed artwork history, required world-renderer assets, reviewed presentation adapters, focused tests and render helpers; not the full hosted backend or a complete offline app.",
+  "copyMethod": "Every exported source file is copied byte-for-byte from a regular Git blob at the recorded source commit, preserving its source-relative path and executable mode.",
+  "publicReleaseRecord": "../../docs/updates/worlds-expeditions-2026-10-28.md",
+  "manifest": "PUBLIC-SYNC.json",
+  "totals": {
+    "exportedFiles": 454,
+    "exportedBytes": 86697311,
+    "nativeChangedPaths": 224,
+    "changedPathsExported": 207,
+    "sourceOnlyChangedPaths": 17,
+    "focusedTestSuites": 14
+  },
+  "groups": {
+    "rootPublicBrowserFiles": {
+      "files": 219,
+      "bytes": 2743100
+    },
+    "htmlTemplates": {
+      "files": 27,
+      "bytes": 422707
+    },
+    "editorialCatalog": {
+      "files": 1,
+      "bytes": 3438
+    },
+    "reviewedPresentationModules": {
+      "files": 21,
+      "bytes": 109902
+    },
+    "changedAssetAndProvenanceFiles": {
+      "files": 123,
+      "bytes": 49542423
+    },
+    "inheritedAssetAndAttributionFiles": {
+      "files": 39,
+      "bytes": 33416699
+    },
+    "implementationNotes": {
+      "files": 2,
+      "bytes": 16490
+    },
+    "renderHelpers": {
+      "files": 4,
+      "bytes": 27708
+    },
+    "focusedTests": {
+      "files": 14,
+      "bytes": 216295
+    },
+    "otherPublicSupport": {
+      "files": 4,
+      "bytes": 198549
+    }
+  },
+  "scopeNotes": [
+    "All 123 changed asset/provenance files are included, including PNG masters and intermediate historical images.",
+    "The three desktop 8k Earth textures are included because the exported earth-globe.js constructs those requests dynamically.",
+    "All six dynamically named portrait contour data textures are included.",
+    "Public catalog creator wallets and the original SolHandle project UUID are intentionally public identity pins and are preserved unchanged.",
+    "The private creator route is excluded; project-share.test.cjs explicitly supplies its own route stub.",
+    "The copied community-showcases.md contains historical v192/v193 notes; the current public release record is authoritative for later behavior.",
+    "Unrelated home, film and desert media collections are not bundled in full; additional archived browser source and templates do not imply a complete offline app.",
+    "No local web-font files are required by the selected pages; Python card reproduction uses system DejaVu or Nimbus Sans fonts.",
+    "Native AGENTS.md is classified as a source-only policy update; the public repository has its own release policy."
+  ],
+  "inheritedAssets": [
+    "public/assets/earth-cinematic.png",
+    "public/assets/globe/1k_pluto.jpg",
+    "public/assets/globe/2k_earth_clouds.jpg",
+    "public/assets/globe/2k_earth_daymap.jpg",
+    "public/assets/globe/2k_earth_nightmap.jpg",
+    "public/assets/globe/2k_europa.jpg",
+    "public/assets/globe/2k_jupiter.jpg",
+    "public/assets/globe/2k_mars.jpg",
+    "public/assets/globe/2k_mercury.jpg",
+    "public/assets/globe/2k_moon.jpg",
+    "public/assets/globe/2k_neptune.jpg",
+    "public/assets/globe/2k_saturn.jpg",
+    "public/assets/globe/2k_uranus.jpg",
+    "public/assets/globe/2k_venus_atmosphere.jpg",
+    "public/assets/globe/8k_earth_clouds.jpg",
+    "public/assets/globe/8k_earth_daymap.jpg",
+    "public/assets/globe/8k_earth_nightmap.jpg",
+    "public/assets/globe/SOURCES.txt",
+    "public/assets/globe/earth_clouds_1024.png",
+    "public/assets/meet/parallax-qr.svg",
+    "public/assets/parallax-singularity.png",
+    "public/assets/premium/aurora-v139.webp",
+    "public/assets/premium/ember-v139.webp",
+    "public/assets/premium/environment-aurora-v186.webp",
+    "public/assets/premium/environment-eclipse-v186.webp",
+    "public/assets/premium/environment-orbit-v186.webp",
+    "public/assets/premium/frontier-v139.webp",
+    "public/assets/premium/sovereign-v139.webp",
+    "public/assets/premium/surface-biolume-v186.webp",
+    "public/assets/premium/surface-glacial-v186.webp",
+    "public/assets/premium/surface-obsidian-v186.webp",
+    "public/assets/premium/surface-original-v186.webp",
+    "public/assets/premium/surface-volcanic-v186.webp",
+    "public/assets/projects/gatto-community.png",
+    "public/assets/projects/parallax-horizon.webp",
+    "public/assets/refresh/orbital-1672-v102.webp",
+    "public/assets/refresh/orbital-640-v102.webp",
+    "public/assets/refresh/orbital-960-v102.webp",
+    "public/favicon.svg"
+  ],
+  "reviewedPresentationSources": [
+    "app/community-showcase.ts",
+    "app/docs-content.ts",
+    "app/docs-render.ts",
+    "app/ecosystem.ts",
+    "app/expeditions/gatto/route.ts",
+    "app/expeditions/sheeple/route.ts",
+    "app/explore/route.ts",
+    "app/gatto-profile.ts",
+    "app/planets/route.ts",
+    "app/project-presentations.ts",
+    "app/projects/[slug]/route.ts",
+    "app/projects/gatto/route.ts",
+    "app/recovery-response.ts",
+    "app/share/[slug]/route.ts",
+    "app/share/gatto-v207/route.ts",
+    "app/site-response.ts",
+    "app/sitemap.xml/route.ts",
+    "app/solhandle-world.ts",
+    "app/studio/route.ts",
+    "app/universe-editorial.ts",
+    "app/workspace-shell.ts"
+  ],
+  "sourceOnlyChanges": [
+    {
+      "path": "AGENTS.md",
+      "status": "A",
+      "summary": "Native release-continuity policy requires each completed Site revision to receive a reviewed public GitHub update; the public policy is maintained separately."
+    },
+    {
+      "path": "app/api/project-wallet/[action]/route.ts",
+      "status": "A",
+      "summary": "Hosted project-wallet association API entry point; private request handling and runtime bindings are outside the public snapshot."
+    },
+    {
+      "path": "app/atlas-projects.ts",
+      "status": "M",
+      "summary": "Hosted project directory incorporates curated showcases and original-record presentation metadata; database-backed listing implementation remains private."
+    },
+    {
+      "path": "app/growth-service.ts",
+      "status": "M",
+      "summary": "Hosted growth-invoice QR generation uses explicit medium error correction; payment-service implementation remains private."
+    },
+    {
+      "path": "app/project-wallet-service.ts",
+      "status": "A",
+      "summary": "Hosted signature and official-website proof lifecycle for designated project wallets, including expiry and removal; account-bound verification implementation remains private."
+    },
+    {
+      "path": "app/world/[id]/route.ts",
+      "status": "M",
+      "summary": "Hosted creator-world routing integrates the reviewed SolHandle presentation and related project context; private data access and account handling are omitted."
+    },
+    {
+      "path": "db/schema.ts",
+      "status": "M",
+      "summary": "Private storage models for project-wallet proof claims and active associations; no schema implementation or runtime records are exported."
+    },
+    {
+      "path": "drizzle/0027_project_wallet_links.sql",
+      "status": "A",
+      "summary": "Private database migration supporting project-wallet association records; migration implementation is omitted."
+    },
+    {
+      "path": "drizzle/meta/0027_snapshot.json",
+      "status": "A",
+      "summary": "Private migration schema snapshot for the project-wallet storage change; omitted with the database implementation."
+    },
+    {
+      "path": "drizzle/meta/_journal.json",
+      "status": "M",
+      "summary": "Private migration journal records the project-wallet storage migration; omitted with database internals."
+    },
+    {
+      "path": "tests/atlas-discovery.mjs",
+      "status": "M",
+      "summary": "Hosted discovery and directory regressions depend on private service/database fixtures; summarized rather than copied."
+    },
+    {
+      "path": "tests/atlas-projects.mjs",
+      "status": "M",
+      "summary": "Hosted project-directory and presentation regressions depend on the private query implementation; summarized rather than copied."
+    },
+    {
+      "path": "tests/growth.mjs",
+      "status": "M",
+      "summary": "Hosted payment and growth-service regression coverage remains with the excluded private service."
+    },
+    {
+      "path": "tests/project-wallets.mjs",
+      "status": "A",
+      "summary": "Private project-wallet proof, permission, expiry and isolation regression suite remains with the excluded service and storage fixtures."
+    },
+    {
+      "path": "tests/site-integrity.mjs",
+      "status": "M",
+      "summary": "Whole-application route and page-integrity suite depends on additional hosted application routes beyond this selected snapshot."
+    },
+    {
+      "path": "tests/solhandle-world.mjs",
+      "status": "A",
+      "summary": "Full creator-world integration suite includes private creator-route dependencies; public presentation and share behavior are covered by the included focused suite."
+    },
+    {
+      "path": "tests/universe-editorial.mjs",
+      "status": "M",
+      "summary": "Whole-application editorial route integration suite remains with omitted hosted route dependencies; the public editorial source and data are exported."
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    }
+  ],
+  "files": [
+    {
+      "path": "app/assistant.html",
+      "sha256": "c86bc9640d0418cff21b6a2ab6c0d1dc79023a6d6998ac2ae1a0e62ca6171b21",
+      "bytes": 5859
+    },
+    {
+      "path": "app/briefing.html",
+      "sha256": "3f6c80c42cb2ac9f9913010ce4461158d09060c94806b9c6c6850685684773c1",
+      "bytes": 7501
+    },
+    {
+      "path": "app/community-showcase.ts",
+      "sha256": "ef87f0551ec8ea9741beadfad3d77e62df466fcedd4b5f5b54413a8bf348b36b",
+      "bytes": 1153
+    },
+    {
+      "path": "app/control.html",
+      "sha256": "201776e642686b75c0c58bbcb2400fa4ed70f8a0b3dde18f77fb3589bdd10f21",
+      "bytes": 21344
+    },
+    {
+      "path": "app/creator.html",
+      "sha256": "f730d1868170c421fb63a32d05d5e4056c20789e6c7ff9fc159620873e093854",
+      "bytes": 14844
+    },
+    {
+      "path": "app/dashboard.html",
+      "sha256": "7c18f235bad02910d3e3523a59a249b04ec5dbed0a2ef185739c1af776e3e339",
+      "bytes": 51709
+    },
+    {
+      "path": "app/development.html",
+      "sha256": "0c7eb8d7bc61ddc086e535964db2d81c03ac68bfa86a50e601fe3719c6689ca5",
+      "bytes": 5809
+    },
+    {
+      "path": "app/discover.html",
+      "sha256": "cb8606bbe67d063ca6ad32adcdb548e237ceee523bb5f343a6d630372d7d8a73",
+      "bytes": 6305
+    },
+    {
+      "path": "app/docs-content.ts",
+      "sha256": "3631a69176791abcefd4fd975fc7309f5f5e11edaffe15667f9e91824dd215fd",
+      "bytes": 28333
+    },
+    {
+      "path": "app/docs-render.ts",
+      "sha256": "cbd029b0b36b25e043e3936e46dd97858959bbd3abedc496672dec81b812c48c",
+      "bytes": 6568
+    },
+    {
+      "path": "app/ecosystem.ts",
+      "sha256": "57668eff39fb2623770af6a6f8cc699c401e60a61eab3edf5c5e2b7f529a638d",
+      "bytes": 12848
+    },
+    {
+      "path": "app/expeditions/gatto/route.ts",
+      "sha256": "9d2f39aded22947470b2cd2f5bd2e9b271fa2be7cf41347bb8810533851581ee",
+      "bytes": 485
+    },
+    {
+      "path": "app/expeditions/sheeple/route.ts",
+      "sha256": "132755a09c732f04201364f8dabb1fc94958023955d6b8b721099878eedaeddd",
+      "bytes": 308
+    },
+    {
+      "path": "app/explore/route.ts",
+      "sha256": "33b65c087f4fc6be39aff9147b32f4a181dae2b3fe083d268d595dab07470dec",
+      "bytes": 1721
+    },
+    {
+      "path": "app/following.html",
+      "sha256": "aaa3631047ad2e7b1129f96a291091885030eb5c1f6bf46166093f0f74d907d3",
+      "bytes": 6668
+    },
+    {
+      "path": "app/gatto-expedition.html",
+      "sha256": "08ee7bea80459268f8a749901ecf08360d1dfa83c140ef595865ab1595da6968",
+      "bytes": 12102
+    },
+    {
+      "path": "app/gatto-preview.html",
+      "sha256": "c9a9f65ee504b12a6097d97e850aa45c7add9fe7ce0ec7906e8bde266b0fe507",
+      "bytes": 6391
+    },
+    {
+      "path": "app/gatto-profile.ts",
+      "sha256": "29a30b0defe52970dfe9ba2f50577e1ac5bd4d562aa060784c06f5ee02bfbe9f",
+      "bytes": 2673
+    },
+    {
+      "path": "app/home.html",
+      "sha256": "07b6d43708f49d02d062f22288e8c6be7c16f0582709c8b9934b7d1d3868c421",
+      "bytes": 14351
+    },
+    {
+      "path": "app/markets.html",
+      "sha256": "96d623f8dfc934a87399c1c06c784ed3438a421383e25ee8c2060228a29d7970",
+      "bytes": 6824
+    },
+    {
+      "path": "app/meet.html",
+      "sha256": "4d6ac71af4ad5fb869648158097952303122919057258cc3b99e74d5d8002ce7",
+      "bytes": 10647
+    },
+    {
+      "path": "app/observatory.html",
+      "sha256": "728eef5d57ae0fa4b8c3021d57433f9d03c8f87d8a786b955acb4727d00f8979",
+      "bytes": 9980
+    },
+    {
+      "path": "app/planets.html",
+      "sha256": "7a52f4e71d3c572a6238d3c6d33a21cb42657b9abc9845f8f17e2d8f9127370b",
+      "bytes": 24923
+    },
+    {
+      "path": "app/planets/route.ts",
+      "sha256": "5f3e6e3a6a6770dd4060f15ce19056478e73b05c9ca099ae93f31c97520c98a4",
+      "bytes": 742
+    },
+    {
+      "path": "app/premium.html",
+      "sha256": "42ca6d6002e531cf503ab4dbf5334c7547ee5d6916ebfedd996ec95d4b0514fd",
+      "bytes": 25490
+    },
+    {
+      "path": "app/pro.html",
+      "sha256": "e07e97dcb0a57f3e6db469731e365fd3c41d78aa8ad443db8c0b141dcfcd06dc",
+      "bytes": 9563
+    },
+    {
+      "path": "app/project-presentations.ts",
+      "sha256": "5c41d6fcf88b835f629bc4ff6cee07295d5475e2ddcbdb209313e9aea3b4d242",
+      "bytes": 1449
+    },
+    {
+      "path": "app/projects.html",
+      "sha256": "21e8f1b5320405c1bb331d48bb289e35ba05a58337e0158ea7fae6970049e30b",
+      "bytes": 10874
+    },
+    {
+      "path": "app/projects/[slug]/route.ts",
+      "sha256": "b5f87802ad3ff9e759ef0bd470586e1f178fc81d1b1e199419ec24f374fc7875",
+      "bytes": 680
+    },
+    {
+      "path": "app/projects/gatto/route.ts",
+      "sha256": "904830438fe31b6700b243fb3f3efac5e2ecd1d06a3bc9c686f7e85989972d9c",
+      "bytes": 563
+    },
+    {
+      "path": "app/recovery-response.ts",
+      "sha256": "d9a2fadb52fe0570f4d110b801247ab5b526f7e0b5341a7edb2b68a48635a022",
+      "bytes": 1896
+    },
+    {
+      "path": "app/roadmap.html",
+      "sha256": "73a6871355da1f2efec2260a49041d93b3bdbc4f612a17f28f776853837a6763",
+      "bytes": 13532
+    },
+    {
+      "path": "app/share/[slug]/route.ts",
+      "sha256": "22dfcc1af19fad3cc8b86f6b048985c62a88aaa7bcf6eef3c965064d86d07a97",
+      "bytes": 2036
+    },
+    {
+      "path": "app/share/gatto-v207/route.ts",
+      "sha256": "7f6ed73b9ceb846c15b4b03c3a31d6846c84631c533c6566f91b1fcf23c781ff",
+      "bytes": 1044
+    },
+    {
+      "path": "app/sheeple-expedition.html",
+      "sha256": "389f1ef20918a81f791ab6daea58d772607da9245f966fe61f1942a0adf26e58",
+      "bytes": 16456
+    },
+    {
+      "path": "app/singularity.html",
+      "sha256": "0a74144ab6465ba9d5d21977cd49c96ccc7d1fb6f2fb6f342316ebfd534e2cd5",
+      "bytes": 5453
+    },
+    {
+      "path": "app/site-response.ts",
+      "sha256": "37c3067e76313841915c6c8b5fa7e3a5ccbef4e30725516dc481e45c9770ffab",
+      "bytes": 1475
+    },
+    {
+      "path": "app/site.html",
+      "sha256": "2cd25c783d2213fb4afb054c7576611551f5273aa1bf50bada247e2ef600d008",
+      "bytes": 74053
+    },
+    {
+      "path": "app/sitemap.xml/route.ts",
+      "sha256": "3499d221efeb437ac287be5d32da024257e31fae7b2584541306eb321ee7a565",
+      "bytes": 1123
+    },
+    {
+      "path": "app/solhandle-world.ts",
+      "sha256": "603bf6d848fa42191428e6ffe0d84a8705ecc11e552dcdf2992aa27e964e048c",
+      "bytes": 9890
+    },
+    {
+      "path": "app/solhandle.html",
+      "sha256": "3bc857b9614bcf59736f8e0fe334b6988578289b74b5ebd5426061320b92b54d",
+      "bytes": 4266
+    },
+    {
+      "path": "app/studio.html",
+      "sha256": "64dadb16f23ada01eb63efbb4c8db155edb0f573493f8f670b059f1239c2f824",
+      "bytes": 17043
+    },
+    {
+      "path": "app/studio/route.ts",
+      "sha256": "98c1b65f6933e54346d2920cff6cdc0e410d7aaaf2889ad230302055b4d0b875",
+      "bytes": 373
+    },
+    {
+      "path": "app/terminal.html",
+      "sha256": "296ce365c9cc95aea3be65e006cb3222abc151cf49ee328696f6b50ff86b776e",
+      "bytes": 28046
+    },
+    {
+      "path": "app/universe-editions.json",
+      "sha256": "957f5e45a8624b0a4212226f75d3977f18d92ef38d5bb8984efcb90871368fe9",
+      "bytes": 3438
+    },
+    {
+      "path": "app/universe-editorial.ts",
+      "sha256": "44f52ce5258d16efa84d8e06070562cdbc030011322bc0db9888700bf67bfcf7",
+      "bytes": 9513
+    },
+    {
+      "path": "app/utility.html",
+      "sha256": "a3a800bb9c4a529ce757e8a987c84e399ed6ea044a8bf6a1faa3513d85540d59",
+      "bytes": 9021
+    },
+    {
+      "path": "app/workspace-shell.ts",
+      "sha256": "6d3ef4ac66ecfb87144720c5031f33f88dd2fecdffbaa3fa07cc4ab501bbae72",
+      "bytes": 25029
+    },
+    {
+      "path": "app/workspace.html",
+      "sha256": "4d3bed979ae4def40be1a98c09fcb70a390784b3ff6632d9b9146642959a82ea",
+      "bytes": 3653
+    },
+    {
+      "path": "docs/community-showcases.md",
+      "sha256": "94a0682b7d90d40fdc9dca19fd4696751994c5a91cf4f216b744b368db0e212f",
+      "bytes": 10548
+    },
+    {
+      "path": "docs/planet-collection.md",
+      "sha256": "3b94272e7ab02d11239349717eb8c61dda2121ac5601079fc1c90dc36088a457",
+      "bytes": 5942
+    },
+    {
+      "path": "public/after-dark-director.js",
+      "sha256": "16bc91857f98594d499522ffea4a28230460f4e2d3d2f11950d78d0e9247ebda",
+      "bytes": 5720
+    },
+    {
+      "path": "public/after-dark.css",
+      "sha256": "9ca8eb4f1a9762ac410ef8f71c922d73cc6f2359ffbb7d84cb0a6802de6c901a",
+      "bytes": 11726
+    },
+    {
+      "path": "public/after-dark.js",
+      "sha256": "61716290749f49cf606877b9060d0a943d94520efd6bd3ab8af4095fcf7d54ba",
+      "bytes": 13244
+    },
+    {
+      "path": "public/assets/earth-cinematic.png",
+      "sha256": "c5ec8be9c2d3894bf875a4944e8847e890e1fa6f1aa655135ca490669c037d6a",
+      "bytes": 2201671
+    },
+    {
+      "path": "public/assets/ecosystem/SOURCES.md",
+      "sha256": "af242853eae3db91d1a998a89d729756892db4806c5872b2738b515bbf706242",
+      "bytes": 15926
+    },
+    {
+      "path": "public/assets/ecosystem/bonk-v190.webp",
+      "sha256": "d6d6283ab54790117f4dad6a012ad5d6bd091b3efa69465415d92e7682d59cfa",
+      "bytes": 54902
+    },
+    {
+      "path": "public/assets/ecosystem/bonk-v192.webp",
+      "sha256": "a2b3012d452ff4e8eedd25dce47f2e4eb8033c07256c80bc55122c6eecb110e5",
+      "bytes": 28100
+    },
+    {
+      "path": "public/assets/ecosystem/bonk-v209.webp",
+      "sha256": "1f4c30335a0b7ac170a12542657ab7682b1a0c9e51f5a34906a82d6e5b01c330",
+      "bytes": 170890
+    },
+    {
+      "path": "public/assets/ecosystem/bonk.webp",
+      "sha256": "f51c3753a4e6c7a830b2285bdcd20d2e73ed20ccf5ff0db2a074fcd0c0dd2861",
+      "bytes": 344662
+    },
+    {
+      "path": "public/assets/ecosystem/community-lineup-v190.webp",
+      "sha256": "8bc7905b7c1ee04d8dddaba335caf519f6395d4832e26cc6b05b335e2241c4cd",
+      "bytes": 158064
+    },
+    {
+      "path": "public/assets/ecosystem/community-lineup-v192.webp",
+      "sha256": "4227afca2d6ee978e78bd486362afe6bffbb7cfe15a65223bf86231ff197329d",
+      "bytes": 106894
+    },
+    {
+      "path": "public/assets/ecosystem/gatto-v193.webp",
+      "sha256": "473882dc118843500296f4cedf21fcfaa124e97a3afe55c0568a02d5d2433b86",
+      "bytes": 50288
+    },
+    {
+      "path": "public/assets/ecosystem/gatto-v207.webp",
+      "sha256": "8276ffd7451a90ec945d31b5a0601e1d8416a78758934d535373de550dc91b91",
+      "bytes": 124074
+    },
+    {
+      "path": "public/assets/ecosystem/icons/bonk-v192.webp",
+      "sha256": "47de6bd65e30033487955196fa22e265937f3415d436af5d0e046c9c15a111a3",
+      "bytes": 39500
+    },
+    {
+      "path": "public/assets/ecosystem/icons/bonk-v209.webp",
+      "sha256": "9b3cbbac4a656529e03edf7fe6149e4a3094a7c409415a475f6225fab34ea453",
+      "bytes": 67354
+    },
+    {
+      "path": "public/assets/ecosystem/icons/gatto-v193.webp",
+      "sha256": "ea5937698d764f2159746014552448447466c6a879a016966ee1a748e764f908",
+      "bytes": 31460
+    },
+    {
+      "path": "public/assets/ecosystem/icons/gatto-v207.webp",
+      "sha256": "5e85f448273a414c3e072a1ce76894f471dc20140134ce696d8ca6d29c696b8c",
+      "bytes": 43830
+    },
+    {
+      "path": "public/assets/ecosystem/icons/jupiter-v209.webp",
+      "sha256": "b36f63caa3eb853999718f3a7d8bd6e78c2c5e644dba614f6f548e2e5030852f",
+      "bytes": 33400
+    },
+    {
+      "path": "public/assets/ecosystem/icons/pengu-v192.webp",
+      "sha256": "7659c6fd50c47f11f3bb5cb603075889bc3e99f08b421791c23702653a215022",
+      "bytes": 36846
+    },
+    {
+      "path": "public/assets/ecosystem/icons/pengu-v209.webp",
+      "sha256": "f1c30f43f7309eaa7b50f88fa69e95a2f68e1da74259c68c936fcaf5a8ceedaf",
+      "bytes": 57042
+    },
+    {
+      "path": "public/assets/ecosystem/icons/phantom-v209.webp",
+      "sha256": "ee341fe26a2f53896a8f474bc6944694f497940b5e595b05f56a903a78c067be",
+      "bytes": 30756
+    },
+    {
+      "path": "public/assets/ecosystem/icons/popcat-v192.webp",
+      "sha256": "f784d2336d61bd9cb23642b585808adffd52394ce53d4cb8d48f5bd627da6c46",
+      "bytes": 39038
+    },
+    {
+      "path": "public/assets/ecosystem/icons/popcat-v209.webp",
+      "sha256": "f6bff264fe6f498b565926ea0b9d21aad7314830f0e73d671e3e009c567dabd2",
+      "bytes": 62752
+    },
+    {
+      "path": "public/assets/ecosystem/icons/sheeple-v192.webp",
+      "sha256": "e0885f44c238b0ce7891d4734580bfef236c9d6665211854337c9e5c78516c5b",
+      "bytes": 32268
+    },
+    {
+      "path": "public/assets/ecosystem/icons/sheeple-v194.webp",
+      "sha256": "9da1702d8e84f3a99849ab278fc812bf1880693005ffbaa06b75bf880452cd36",
+      "bytes": 32438
+    },
+    {
+      "path": "public/assets/ecosystem/icons/sheeple-v195.webp",
+      "sha256": "45ff66e3f416b9dd8bea276efb8dacf777dd8c927e12107981a0875a5ef87f93",
+      "bytes": 33910
+    },
+    {
+      "path": "public/assets/ecosystem/icons/sheeple-v209.webp",
+      "sha256": "6a3e8e9b36d13aa6378523171e2954027145c14f89b7fd29fc033ecf91389440",
+      "bytes": 48246
+    },
+    {
+      "path": "public/assets/ecosystem/icons/solana-v209.webp",
+      "sha256": "87d1f9d2c64a31a478703a539e4a774248f4f68448910bacad5212d7f604b9c8",
+      "bytes": 32312
+    },
+    {
+      "path": "public/assets/ecosystem/icons/solflare-v209.webp",
+      "sha256": "5fa7d0113d20f6d9e05b26a6fec70ffd51ac00fb84e3c1f66ae3d3031bbbe942",
+      "bytes": 57836
+    },
+    {
+      "path": "public/assets/ecosystem/icons/solhandle-v209.webp",
+      "sha256": "4deac486f88483763dd53d1d730274bc52b394c7834a359c6309e00c2b9a1990",
+      "bytes": 32560
+    },
+    {
+      "path": "public/assets/ecosystem/icons/trump-v192.webp",
+      "sha256": "601e2a50742d8ccc05f90b065b0743f0b4a9edf61c996c41bfded51905386f9f",
+      "bytes": 39876
+    },
+    {
+      "path": "public/assets/ecosystem/icons/trump-v196.webp",
+      "sha256": "79213881528231cd79600c11fc7be95092a961611d87693c97a57c57ad343cc3",
+      "bytes": 33734
+    },
+    {
+      "path": "public/assets/ecosystem/icons/trump-v209.webp",
+      "sha256": "8caf4433b461d4047abfcb60e9f28b694a7231cdcc5bb923e8e190b0f9459cd3",
+      "bytes": 43318
+    },
+    {
+      "path": "public/assets/ecosystem/icons/wif-v192.webp",
+      "sha256": "3d2bb3b01c1356e9128fd47784c55cc8fcd423441be413abac6030d4e76c9e45",
+      "bytes": 35152
+    },
+    {
+      "path": "public/assets/ecosystem/icons/wif-v209.webp",
+      "sha256": "8d0e4d9fe2dd1679d52215f58e6936e8a307340dd4e3975e9f1a97ced7fbfa0f",
+      "bytes": 62882
+    },
+    {
+      "path": "public/assets/ecosystem/jupiter-v209.webp",
+      "sha256": "67ded69920f6c23fad68cfd92869510b7b9dc9076dcc54fd6d6995e0bda17b66",
+      "bytes": 101994
+    },
+    {
+      "path": "public/assets/ecosystem/pengu-v190.webp",
+      "sha256": "64bd112f78901e97d79e6a7c4d2067b51afe61b86a2f9b47a922b6c862f2ddc4",
+      "bytes": 43098
+    },
+    {
+      "path": "public/assets/ecosystem/pengu-v192.webp",
+      "sha256": "3ea2fae536b0740ca2505bef6953bbbf1cd266369ac1eb416028dfa7c3f1e731",
+      "bytes": 25076
+    },
+    {
+      "path": "public/assets/ecosystem/pengu-v209.webp",
+      "sha256": "999e81de02d955d5f82d30c05aee0303d894183c4ce6ba7afe70e4385a81fbac",
+      "bytes": 121720
+    },
+    {
+      "path": "public/assets/ecosystem/pengu.webp",
+      "sha256": "2858bd8d5404a04a57de4fa90106c6b71f20e9f51b241b4b7f0fb0d7a165020e",
+      "bytes": 315108
+    },
+    {
+      "path": "public/assets/ecosystem/phantom-v209.webp",
+      "sha256": "b2e302b1d7ca253b368cc28a2500dc9345118e4c1ca8097b51c688aac14d4bc2",
+      "bytes": 110810
+    },
+    {
+      "path": "public/assets/ecosystem/popcat-v190.webp",
+      "sha256": "eaddd1052d93d780bbdc4d19884d7af8dfdaba8c3f7edcc524feebef13e11830",
+      "bytes": 38450
+    },
+    {
+      "path": "public/assets/ecosystem/popcat-v192.webp",
+      "sha256": "8740f57e983ce3ed535ceea248c63efb8c2943201ea490190f0922a57f6b0d88",
+      "bytes": 25346
+    },
+    {
+      "path": "public/assets/ecosystem/popcat-v209.webp",
+      "sha256": "bce8ac899f0a9e001b85dbe6b73b71e36b63b44794359336caeac7c5e224eca9",
+      "bytes": 158568
+    },
+    {
+      "path": "public/assets/ecosystem/popcat.webp",
+      "sha256": "e3f7f19789f75ebfe890b880f1dbc1882d186e034b6029e72c5857646d9edfde",
+      "bytes": 368872
+    },
+    {
+      "path": "public/assets/ecosystem/project-lineup-v209.webp",
+      "sha256": "3d8b65e5899ef23623b56f6df65b4db60a22437e6e291d2189de9c736d1da249",
+      "bytes": 392756
+    },
+    {
+      "path": "public/assets/ecosystem/share/bonk-v190.png",
+      "sha256": "f3fa10bbcacd8fa9bd3a79af436c1d459c4eb4d914e5d6af680dbe81989d54e6",
+      "bytes": 243023
+    },
+    {
+      "path": "public/assets/ecosystem/share/bonk-v192.png",
+      "sha256": "fb8132a9c2478433523e6a0e2bf0731cfc4dc7bd84761dac91668c9000ef1a9d",
+      "bytes": 154146
+    },
+    {
+      "path": "public/assets/ecosystem/share/bonk-v209.png",
+      "sha256": "c1a96ef1e06526d358e21a174436833bf45b900bbbbd6c1b1e7c658b10d6ee82",
+      "bytes": 365556
+    },
+    {
+      "path": "public/assets/ecosystem/share/bonk.png",
+      "sha256": "5efd61871bd822f19a19a51e8f0e57b52352f28d6dace5ab41cc55cc72ac1971",
+      "bytes": 337960
+    },
+    {
+      "path": "public/assets/ecosystem/share/gatto-v193.png",
+      "sha256": "61c731b31166f918dd39e23a9ea5707f9921c7e79ab2bf75e498779a63368ff4",
+      "bytes": 173090
+    },
+    {
+      "path": "public/assets/ecosystem/share/gatto-v207.png",
+      "sha256": "f70ff04765abb120c9cfe645b8cc4e4a3e7d2e3843a535be7a1ca8fa63d5b2fa",
+      "bytes": 338310
+    },
+    {
+      "path": "public/assets/ecosystem/share/jupiter-v209.png",
+      "sha256": "eb99697a2c8bbfb71b5a875f2c120e72a5ad9174fe4700cb9c3f6dadda9b067c",
+      "bytes": 234834
+    },
+    {
+      "path": "public/assets/ecosystem/share/pengu-v190.png",
+      "sha256": "f6f9b38e6a147d3f9672d3cc3565e75dd46bb38456944c5c3eb64b8b4fcb46b3",
+      "bytes": 232028
+    },
+    {
+      "path": "public/assets/ecosystem/share/pengu-v192.png",
+      "sha256": "5772bb9d377300a1a624d0893865d485730801fbe0d6b3a65128e4e4ae8b87a0",
+      "bytes": 148496
+    },
+    {
+      "path": "public/assets/ecosystem/share/pengu-v209.png",
+      "sha256": "d903ea650592ffb7d30088c530f438e718789f6994b88475b12187d3adf7e3a9",
+      "bytes": 331131
+    },
+    {
+      "path": "public/assets/ecosystem/share/pengu.png",
+      "sha256": "bbe5a32355d2a11d19443262dd4a22eee632eca39c892e46aaa8ce1cc1473f93",
+      "bytes": 343264
+    },
+    {
+      "path": "public/assets/ecosystem/share/phantom-v209.png",
+      "sha256": "daf7170dcdc82b95426dccfe775e67808faa33bc4b21bbb4dfce03d7c4c43f47",
+      "bytes": 222396
+    },
+    {
+      "path": "public/assets/ecosystem/share/popcat-v190.png",
+      "sha256": "cda8e13cc44c6e66902349007953d58dfd9ca98146bdb3ca337f59e035a2d93c",
+      "bytes": 215753
+    },
+    {
+      "path": "public/assets/ecosystem/share/popcat-v192.png",
+      "sha256": "c7f3d7e26d2c9688774f1f0ca9c414c535b3d9a7f7d9ab9c7ce318f94dc3eab0",
+      "bytes": 158387
+    },
+    {
+      "path": "public/assets/ecosystem/share/popcat-v209.png",
+      "sha256": "22112285a069380a15142aac3998de999eca2c91b7cddf0be0a4e6e88c4a35aa",
+      "bytes": 368759
+    },
+    {
+      "path": "public/assets/ecosystem/share/popcat.png",
+      "sha256": "fb7bf33cbe8aee4cf01f84dd0fa201271ec96c5e44d6cac602aebed8f73df374",
+      "bytes": 332297
+    },
+    {
+      "path": "public/assets/ecosystem/share/sheeple-v190.png",
+      "sha256": "4146f7f73cc4ea1bd0b99f251cb5a143d698d7d4f2e6f0139e0bd5fd18d4695e",
+      "bytes": 240284
+    },
+    {
+      "path": "public/assets/ecosystem/share/sheeple-v192.png",
+      "sha256": "e0815c7f790501d1057e731b29b07f361eaf937690dc7847a81275ecc5e5b4dd",
+      "bytes": 142657
+    },
+    {
+      "path": "public/assets/ecosystem/share/sheeple-v194.png",
+      "sha256": "333e3d7c40ddcda2d09a028bd43e3b4af2eef14c7e46d04cb30a54246790bd38",
+      "bytes": 201902
+    },
+    {
+      "path": "public/assets/ecosystem/share/sheeple-v195.png",
+      "sha256": "978977b196b2c4472482886afad76e86f414dc99f923504967b8a362b6fac6df",
+      "bytes": 205940
+    },
+    {
+      "path": "public/assets/ecosystem/share/sheeple-v209.png",
+      "sha256": "60fefe1053a0c41140c7c3b79d1f0279cb244c391704c2d53edc8497191a78c7",
+      "bytes": 236053
+    },
+    {
+      "path": "public/assets/ecosystem/share/sheeple.png",
+      "sha256": "55053bdc33d0d291f9477f24e13fd1b0567250a81df336142c47c3df5f72edc7",
+      "bytes": 252495
+    },
+    {
+      "path": "public/assets/ecosystem/share/solana-v209.png",
+      "sha256": "26dd2eba5e9c0104ada8f618b3c5b2755d6e7dc3a817638bc08b82c80eb0fa54",
+      "bytes": 232723
+    },
+    {
+      "path": "public/assets/ecosystem/share/solflare-v209.png",
+      "sha256": "019792fd7c47bfdb579a0d6914fb629d402b5546a6e406c669b51eef856ce27f",
+      "bytes": 272065
+    },
+    {
+      "path": "public/assets/ecosystem/share/solhandle-v209.png",
+      "sha256": "ecec34893beeada35a9b1ded8096e73d7ebf10ee5152aab7dab212c003eb54c1",
+      "bytes": 218881
+    },
+    {
+      "path": "public/assets/ecosystem/share/trump-v190.png",
+      "sha256": "a00aa343e771abe17647eda9173375cab00adc0921bb013c8a35aadc8f189576",
+      "bytes": 283798
+    },
+    {
+      "path": "public/assets/ecosystem/share/trump-v192.png",
+      "sha256": "c131ecadd6e287608e9f3cd7c3cc4e65921c882244f52a82d0176135a177a8e5",
+      "bytes": 210319
+    },
+    {
+      "path": "public/assets/ecosystem/share/trump-v196.png",
+      "sha256": "cb1bc53e8755c6bceb0ebc974b796fcff52e547fc3f7efab87c5b2402639b75a",
+      "bytes": 171623
+    },
+    {
+      "path": "public/assets/ecosystem/share/trump-v209.png",
+      "sha256": "b129261260b64285c1854463170cee1856c863b9d52abb531bb0e632fd9b5fa9",
+      "bytes": 286073
+    },
+    {
+      "path": "public/assets/ecosystem/share/trump.png",
+      "sha256": "3edbb9f9985fac24adcd9565d155814b591fe1ed3c3d0ae6c0084634fffb53ef",
+      "bytes": 232286
+    },
+    {
+      "path": "public/assets/ecosystem/share/wif-v190.png",
+      "sha256": "511ba8bca90ea782a2d261c9ed364b8a4ab6d6e594edd814e014cb7eaa3e97ff",
+      "bytes": 244882
+    },
+    {
+      "path": "public/assets/ecosystem/share/wif-v192.png",
+      "sha256": "4622892701e999b6e9501938fa98b2c6591dec9d9f89ee7509734e786092bef3",
+      "bytes": 158520
+    },
+    {
+      "path": "public/assets/ecosystem/share/wif-v209.png",
+      "sha256": "801f8258ea723e6a7cfaaeac571c9ef2f8f1d73fffd593eeff08d273e62ab317",
+      "bytes": 358018
+    },
+    {
+      "path": "public/assets/ecosystem/share/wif.png",
+      "sha256": "9f5194741c966e6de7d6313800a012815bcee49314d09b8254219026bd622a84",
+      "bytes": 309576
+    },
+    {
+      "path": "public/assets/ecosystem/sheeple-v190.webp",
+      "sha256": "8d10cf1b13fb9b07aeb937508f5a7d99be7ba860fe52a19019f95a123d4510cc",
+      "bytes": 51334
+    },
+    {
+      "path": "public/assets/ecosystem/sheeple-v192.webp",
+      "sha256": "12c47d1613efa7dbe65b4be2583c3152ffafccd2c2e760a2ebc219b89903384f",
+      "bytes": 23318
+    },
+    {
+      "path": "public/assets/ecosystem/sheeple-v194.webp",
+      "sha256": "a74ea1e7686cf8512bbe0f5237280f5c89e825acc9677df94a858e78af1c85ff",
+      "bytes": 54580
+    },
+    {
+      "path": "public/assets/ecosystem/sheeple-v195.webp",
+      "sha256": "afa18919b0efdbe8199f570beee8f5ade3fa16d91f39e9661b392a456d29c084",
+      "bytes": 56574
+    },
+    {
+      "path": "public/assets/ecosystem/sheeple-v209.webp",
+      "sha256": "e24d5375280bc2b37bcfb44931710967bbfe209bc93fa2c22df95fc77df18ace",
+      "bytes": 96802
+    },
+    {
+      "path": "public/assets/ecosystem/sheeple.webp",
+      "sha256": "81c5c30d9ba0224bea345d9acae098b25846e0f382cf0a2374f831826436fb45",
+      "bytes": 57462
+    },
+    {
+      "path": "public/assets/ecosystem/solana-v209.webp",
+      "sha256": "6d127f67583c4a6865618a0a6b73fda36b552d852d7a2d677cf1fc36c0c4ebcf",
+      "bytes": 74686
+    },
+    {
+      "path": "public/assets/ecosystem/solflare-v209.webp",
+      "sha256": "1bee1b6460bf666af6878aece2a530271e0fb04d4a5c0e0565d6d1a1ed2d36a4",
+      "bytes": 46216
+    },
+    {
+      "path": "public/assets/ecosystem/solhandle-v209.webp",
+      "sha256": "ec69de331a7a0facd7c0c74fbbdd200800d5ffc6683796bac32e258e7fc629c9",
+      "bytes": 58834
+    },
+    {
+      "path": "public/assets/ecosystem/trump-v190.webp",
+      "sha256": "05c5c73b077cbf5d91e4b9f8300b0171bc1a0c947547f6c2f90cc703612ab4f8",
+      "bytes": 82522
+    },
+    {
+      "path": "public/assets/ecosystem/trump-v192.webp",
+      "sha256": "f8aa6a83e40d3642e49deaf3462f515eb55f2ca357b3bc78c6cd2905dd867f2c",
+      "bytes": 62690
+    },
+    {
+      "path": "public/assets/ecosystem/trump-v196.webp",
+      "sha256": "08511ae111072f3ba6c0ac05d5cb3a72d5d50c8e876736178b01c9904919f927",
+      "bytes": 38468
+    },
+    {
+      "path": "public/assets/ecosystem/trump-v209.webp",
+      "sha256": "06725ab13cbb287f41133e6b05b893d4f7c4106dcc067f309414e3bee7fb0450",
+      "bytes": 109566
+    },
+    {
+      "path": "public/assets/ecosystem/trump.webp",
+      "sha256": "453d603d71c9e362304b21c559f40991ab8b048ffbdd92bf012363782462e7d4",
+      "bytes": 68166
+    },
+    {
+      "path": "public/assets/ecosystem/wif-v190.webp",
+      "sha256": "ddd646b7df782b4b317cf9abf38f145db2c0abe48d2ade297c18c7a91d82c343",
+      "bytes": 46346
+    },
+    {
+      "path": "public/assets/ecosystem/wif-v192.webp",
+      "sha256": "02e1fa0cc3d94356731405b54f70eb11d2411547f556fcc147c1409df8b391c8",
+      "bytes": 25264
+    },
+    {
+      "path": "public/assets/ecosystem/wif-v209.webp",
+      "sha256": "41017d5572c79e0767cb7c64f8877ec1aa5680a6ab5677a8cdce7e8ddd176d8c",
+      "bytes": 161600
+    },
+    {
+      "path": "public/assets/ecosystem/wif.webp",
+      "sha256": "3cb8d28045e9eabf874944fd85209c6eb69ab2227926dbff1ba725cf5da930af",
+      "bytes": 274810
+    },
+    {
+      "path": "public/assets/expeditions/gatto-city-stamp.svg",
+      "sha256": "fd62f26a749dc3e42404dc451e27b5598df688e36dba493ffbae04eb1c22c107",
+      "bytes": 2169
+    },
+    {
+      "path": "public/assets/expeditions/lunar-flock-stamp.svg",
+      "sha256": "43859f6b772eea725c2d17d4e707e1de56eb9e0476e770beb6a80bbcece2dc7a",
+      "bytes": 2880
+    },
+    {
+      "path": "public/assets/expeditions/material-atlas-v210-sources.json",
+      "sha256": "4762f807cefba79ca1d6987c1348d7ac67d058eeee3ebc9dc0bb73ec03662ff3",
+      "bytes": 6804
+    },
+    {
+      "path": "public/assets/expeditions/material-atlas-v210.png",
+      "sha256": "e3fed277cfec80821bf1d726afa758d80902a81c57a180be94e7c2ded95fd67b",
+      "bytes": 4221426
+    },
+    {
+      "path": "public/assets/expeditions/material-atlas-v210.webp",
+      "sha256": "b708b0e3fb112814f6be5b0a50e31a139f55ea2205ffebb82cb828cba56351fb",
+      "bytes": 2456090
+    },
+    {
+      "path": "public/assets/globe/1k_pluto.jpg",
+      "sha256": "66ba3b789c6be07a54ad776d641e684eb5c0520d3ca3906a84521c1649c1db66",
+      "bytes": 119011
+    },
+    {
+      "path": "public/assets/globe/2k_earth_clouds.jpg",
+      "sha256": "fffd7f68d41b37274822150e54a6ef605af1d3ec35624d9f628c3b896bfa42ed",
+      "bytes": 965676
+    },
+    {
+      "path": "public/assets/globe/2k_earth_daymap.jpg",
+      "sha256": "767ee1dc6eb3802699bfccf6f264880f8acd0b80de3191cd24984fe279b07b7c",
+      "bytes": 463087
+    },
+    {
+      "path": "public/assets/globe/2k_earth_nightmap.jpg",
+      "sha256": "c16fd1bc096ab91a5c5265c6ff9847c43f489f2e2ee790ccdbcbd03251cf3a5a",
+      "bytes": 255287
+    },
+    {
+      "path": "public/assets/globe/2k_europa.jpg",
+      "sha256": "7215341560b2af558f693c0530373433b579db60c83cf7b37fcaf733da440c7f",
+      "bytes": 415203
+    },
+    {
+      "path": "public/assets/globe/2k_jupiter.jpg",
+      "sha256": "b0f04d005350252636b0e3396fc592548cbd9e9126b269d32d5c6abd4b0e4f2b",
+      "bytes": 498976
+    },
+    {
+      "path": "public/assets/globe/2k_mars.jpg",
+      "sha256": "2d187f3e77a98eaa8cea5f4cc722f633c122ef170b9e94ace6b5fb6cbc3f8e01",
+      "bytes": 750547
+    },
+    {
+      "path": "public/assets/globe/2k_mercury.jpg",
+      "sha256": "5a5c80607f643496bac9a631e71957def35ed788895f18b678ac849c2b38e48a",
+      "bytes": 872555
+    },
+    {
+      "path": "public/assets/globe/2k_moon.jpg",
+      "sha256": "2764ba6535ea0481a062846ee033cc7a909dae05b31a8fd13f3e98f3a7fd92bd",
+      "bytes": 1053869
+    },
+    {
+      "path": "public/assets/globe/2k_neptune.jpg",
+      "sha256": "cb42ea82709741d28b0af44d8b283cbc6dbd0c521a7f0e1e1e010ade00977df6",
+      "bytes": 241580
+    },
+    {
+      "path": "public/assets/globe/2k_saturn.jpg",
+      "sha256": "54a900ca9bf7ab62e70f862852759abdf342e6d6436a95a2fe9ebdb6bcd3bbac",
+      "bytes": 199916
+    },
+    {
+      "path": "public/assets/globe/2k_uranus.jpg",
+      "sha256": "d15239d46f82d3ea13d2b260b5b29b2a382f42f2916dae0694d0387b1204a09d",
+      "bytes": 77751
+    },
+    {
+      "path": "public/assets/globe/2k_venus_atmosphere.jpg",
+      "sha256": "225012ad4911730605c4e189ca2a3bf674fce50cc48aab4102b936b47d6991ac",
+      "bytes": 229696
+    },
+    {
+      "path": "public/assets/globe/8k_earth_clouds.jpg",
+      "sha256": "c792eca228989d36ebb45d3ea6ff1198be5e21a25d70d2fbcb2124ffd14ba7f5",
+      "bytes": 11619184
+    },
+    {
+      "path": "public/assets/globe/8k_earth_daymap.jpg",
+      "sha256": "88ab060b6e7d241cfc590c69f528fab2b3247b738d40124cb590999a6fe44abc",
+      "bytes": 4565076
+    },
+    {
+      "path": "public/assets/globe/8k_earth_nightmap.jpg",
+      "sha256": "9894e83a585a22c1c425e7ca4f987a9ba625bf08ecee45d3c9dcacae3c2ad5f7",
+      "bytes": 3144468
+    },
+    {
+      "path": "public/assets/globe/SOURCES.txt",
+      "sha256": "958503769016b67f319ca5da3ab3f74267364a8bd58a9ddf52395cbbd34be2b8",
+      "bytes": 2422
+    },
+    {
+      "path": "public/assets/globe/bonk-realism-contour-v209.png",
+      "sha256": "f04247731b33cc4c7818e7178c6dd582a8fde322ff577d07e429c2f30ac800fb",
+      "bytes": 2951
+    },
+    {
+      "path": "public/assets/globe/bonk-realism-v209.png",
+      "sha256": "ed86696812478f6cc9f0b545e34c860ad04906994b471d3d59316478af76dc53",
+      "bytes": 2835373
+    },
+    {
+      "path": "public/assets/globe/bonk-realism-v209.webp",
+      "sha256": "3f9c8670ee5dd34fd965efd266b6d7c6701bf1db1292e65c6e44ca6f57a4258d",
+      "bytes": 1832110
+    },
+    {
+      "path": "public/assets/globe/earth_clouds_1024.png",
+      "sha256": "5f9612e4f4040975a195dd0d14e89c9ba72bd6bdd22e1454db4fcefb92d37d38",
+      "bytes": 226113
+    },
+    {
+      "path": "public/assets/globe/gatto-face-v207.png",
+      "sha256": "8452745f63d47a86123ad05b731d9ae8cdc40e549a0a219e611a33a37247881f",
+      "bytes": 2548421
+    },
+    {
+      "path": "public/assets/globe/pengu-realism-contour-v209.png",
+      "sha256": "9a8a7339c9247c2c34c1a1cfa1522e7b101d6713d4a6427b4227f5d79d3fcaf3",
+      "bytes": 3140
+    },
+    {
+      "path": "public/assets/globe/pengu-realism-v209.png",
+      "sha256": "f695281745e126d35800909447337359146024e4013e1d66e9ef3621d3b7460c",
+      "bytes": 2217180
+    },
+    {
+      "path": "public/assets/globe/pengu-realism-v209.webp",
+      "sha256": "dc5825081d670ae740045be137db75a345007917b7b6564f87d91554ac02bc4e",
+      "bytes": 1337042
+    },
+    {
+      "path": "public/assets/globe/popcat-realism-contour-v209.png",
+      "sha256": "d03dd5dea4d4b182d1380a8b6f0a8d0ec92ff9dc558f1b04b82c190f2d956918",
+      "bytes": 3089
+    },
+    {
+      "path": "public/assets/globe/popcat-realism-v209.png",
+      "sha256": "dd004ed15b87de0918e33ac31996541530e1c8850e252037fa0a8ad67fcb1ac6",
+      "bytes": 2697158
+    },
+    {
+      "path": "public/assets/globe/popcat-realism-v209.webp",
+      "sha256": "da8788032f41b92ebb7aeea9883a213e87c9cba16c31cce846bce64d27afd582",
+      "bytes": 1654838
+    },
+    {
+      "path": "public/assets/globe/realism-v209-sources.json",
+      "sha256": "05d84f4820e164fd445be2a6fa52f2cac99544112236188744058dd2558ef7c6",
+      "bytes": 18200
+    },
+    {
+      "path": "public/assets/globe/sheeple-fleece-v194.png",
+      "sha256": "a5aa57454ecb40753f8d90ce5f3d4b8736de28a3db55ff566d2a2c4403075313",
+      "bytes": 1819118
+    },
+    {
+      "path": "public/assets/globe/sheeple-realism-contour-v209.png",
+      "sha256": "b5ca678a4908faef8e18c11b88e703c54416698faa1e30a6730281e6d6a0243d",
+      "bytes": 3718
+    },
+    {
+      "path": "public/assets/globe/sheeple-realism-v209.png",
+      "sha256": "23a36bed2d7035ed921ef979c2fa5e6a40848fe829cff62cbb26d85fcb1498f8",
+      "bytes": 1616331
+    },
+    {
+      "path": "public/assets/globe/sheeple-realism-v209.webp",
+      "sha256": "753bb6585bd79dfb92aae777f51c5cbbbbaafee3365bde168b3e541285ce44e8",
+      "bytes": 1030760
+    },
+    {
+      "path": "public/assets/globe/solhandle-emblem-v198.png",
+      "sha256": "20fbfac6b76e7ff62645aa12bcd3f6d921fc08d10127e6e81c928507ea87100b",
+      "bytes": 1210190
+    },
+    {
+      "path": "public/assets/globe/trump-realism-contour-v209.png",
+      "sha256": "e3f00b409356129766a1267af83021c041f15023fa63f3e7cd6830272a66daad",
+      "bytes": 4105
+    },
+    {
+      "path": "public/assets/globe/trump-realism-v209.png",
+      "sha256": "29920ff385e1a3712c51904f88a07522fc0fc874fc691df9dac1883af146b051",
+      "bytes": 1960601
+    },
+    {
+      "path": "public/assets/globe/trump-realism-v209.webp",
+      "sha256": "6a3344a9faf526a8e5da4492a5ba0fda709658879f9a62e539eac5d959d82def",
+      "bytes": 1256180
+    },
+    {
+      "path": "public/assets/globe/wif-realism-contour-v209.png",
+      "sha256": "05932ddcd13f39d4e43b0dbcac40d47d8102e9a7e26155dea047ff90b777f46b",
+      "bytes": 3544
+    },
+    {
+      "path": "public/assets/globe/wif-realism-v209.png",
+      "sha256": "3438570ac98d9e95649a5f0739ec9ee8f1418c145ab584d11b4c506427face41",
+      "bytes": 2752062
+    },
+    {
+      "path": "public/assets/globe/wif-realism-v209.webp",
+      "sha256": "63e2fa76806b7b039ab4ce3225ac4e058626ee867f4c9ecc0f05b13cf518abac",
+      "bytes": 1719586
+    },
+    {
+      "path": "public/assets/meet/parallax-qr.svg",
+      "sha256": "82fd31ebf4787f49d35c3d8307d6651aaa19cfa2a8a178fa2be18ddb0c797709",
+      "bytes": 1539
+    },
+    {
+      "path": "public/assets/parallax-singularity.png",
+      "sha256": "9a7d9c736d6a764a582a34fc1c242757ee61c93727b5f0f29966448db883925d",
+      "bytes": 2567813
+    },
+    {
+      "path": "public/assets/premium/aurora-v139.webp",
+      "sha256": "c2b51b3fcbe32ca93abd935a175cb50eb4fb9f6f2687947defd9465c6dd064f3",
+      "bytes": 83054
+    },
+    {
+      "path": "public/assets/premium/ember-v139.webp",
+      "sha256": "58068cf948c18155f5f8a6f06fe4fe9416296f5429db0915f6c291d7c48f9c61",
+      "bytes": 75940
+    },
+    {
+      "path": "public/assets/premium/environment-aurora-v186.webp",
+      "sha256": "936d4216c8f23e05a9ed8c495ae306e183e660c5b50e10409b676a7d4880a233",
+      "bytes": 22784
+    },
+    {
+      "path": "public/assets/premium/environment-eclipse-v186.webp",
+      "sha256": "791746ff54414bc0b308e5f61357af3e6a4fa458c1c330ee0421d6ac7b729394",
+      "bytes": 19110
+    },
+    {
+      "path": "public/assets/premium/environment-orbit-v186.webp",
+      "sha256": "cb8fe60ca12489f4751ec51a1f000d0991acdaf2f8e7ee9aa79ebf53aeb04a21",
+      "bytes": 16722
+    },
+    {
+      "path": "public/assets/premium/frontier-v139.webp",
+      "sha256": "bdef0b6df27d02c964da48532e135bda80344b18a1331833eaba8753bd95c014",
+      "bytes": 114992
+    },
+    {
+      "path": "public/assets/premium/sovereign-v139.webp",
+      "sha256": "8be7c47af17d5dd778365c809e9d2cfabe9ba9ffdebbe68aad4b70b14c6a89a4",
+      "bytes": 68034
+    },
+    {
+      "path": "public/assets/premium/surface-biolume-v186.webp",
+      "sha256": "ab149aeccf2ca9f9124817fa3fa7e483e163147934745d5254fa15bcc0d41e4f",
+      "bytes": 20046
+    },
+    {
+      "path": "public/assets/premium/surface-glacial-v186.webp",
+      "sha256": "8f4a1c586c87411e325c1e1a226d405c3a9958831e36f5a155d97e5ef68e32bd",
+      "bytes": 20350
+    },
+    {
+      "path": "public/assets/premium/surface-obsidian-v186.webp",
+      "sha256": "5508e92000787cb06b8b10d134f4a65be85b857d2d21f03fad940405c9e4c402",
+      "bytes": 17250
+    },
+    {
+      "path": "public/assets/premium/surface-original-v186.webp",
+      "sha256": "14e328a16a7893f2d8e2b1a53fe879de2531839279b5a4183a4d811d5f535df7",
+      "bytes": 21784
+    },
+    {
+      "path": "public/assets/premium/surface-volcanic-v186.webp",
+      "sha256": "8d22d9d7151562f81966f910733077d01ce74b18020c2316506018f325a70019",
+      "bytes": 17604
+    },
+    {
+      "path": "public/assets/projects/gatto-community.png",
+      "sha256": "98dad17d868af7d4a9f61acf649bdac0c72499dc25e9e8b76e3214ae75cc4efa",
+      "bytes": 1983003
+    },
+    {
+      "path": "public/assets/projects/parallax-horizon.webp",
+      "sha256": "63a6b9a7531584ab87ec677b0e63aa39555ffa57c8c0de9652f1a70f799c4f51",
+      "bytes": 298838
+    },
+    {
+      "path": "public/assets/projects/solhandle-planet-v198.png",
+      "sha256": "6cbe9557023516812da8bd7fcfa7fae6db0dbebdc8b528d83cf69cc7e7ec4bb3",
+      "bytes": 467572
+    },
+    {
+      "path": "public/assets/projects/solhandle-share-v198.png",
+      "sha256": "f54e2c99eb3ca8a3ae80c9b27394a7b348ae853ebef3820e2fb81a8393fcb202",
+      "bytes": 330914
+    },
+    {
+      "path": "public/assets/refresh/orbital-1672-v102.webp",
+      "sha256": "e55c24ec5d66a838cc091e332369aee021ddd59405e72341fec96640a9f622b5",
+      "bytes": 103504
+    },
+    {
+      "path": "public/assets/refresh/orbital-640-v102.webp",
+      "sha256": "4c89ed5a429891c4aeb7b9b30bd41af8aadad4be5b5fcbbd10699434e5ef2ea4",
+      "bytes": 20404
+    },
+    {
+      "path": "public/assets/refresh/orbital-960-v102.webp",
+      "sha256": "80d7cc3c56a458e731c1f9a8927acfddfa4a08daed78dcecfa2ed7d01a84d4fb",
+      "bytes": 41556
+    },
+    {
+      "path": "public/atlas-expeditions.css",
+      "sha256": "012ef1e12eb3d20fb454ee9d97436b6dfd052ad25a7386db54bd2d4c9618258a",
+      "bytes": 8147
+    },
+    {
+      "path": "public/atlas-expeditions.js",
+      "sha256": "9c606d14dc570d75b66dba3e9c95d3858f9a386efe85786455fd0623ff4592c2",
+      "bytes": 2800
+    },
+    {
+      "path": "public/black-hole.css",
+      "sha256": "0643cc84e43eb4b63f6584252e67aad65403b588486b85d99682493198c82467",
+      "bytes": 5191
+    },
+    {
+      "path": "public/black-hole.js",
+      "sha256": "659951d01331caee1bf0922655804425623d0f1b1a56235a12fe8e64e79a45e8",
+      "bytes": 6205
+    },
+    {
+      "path": "public/bonding.css",
+      "sha256": "053ba661a0c13d421386e142aac3078b33bbc15b1f4c1ec720c98d36f1735043",
+      "bytes": 10432
+    },
+    {
+      "path": "public/bonding.js",
+      "sha256": "63d5bc7790ede14de6861f458de7a6565b21097837e52d96e874b5598c635937",
+      "bytes": 12762
+    },
+    {
+      "path": "public/boost.css",
+      "sha256": "d36d110b30720a2f3c64b4366b0b5a3df6ec278071918d32e64dff1c71e6a6f7",
+      "bytes": 4847
+    },
+    {
+      "path": "public/briefing.css",
+      "sha256": "6cf4bb4507da16b0f0379c749e845aaa098316a9bddd29c2fd6e4a95eddf1111",
+      "bytes": 22806
+    },
+    {
+      "path": "public/briefing.js",
+      "sha256": "cdb0e4b819e18807b79efb794ca0b0a04c37883018d45284b87d58f81d503ac1",
+      "bytes": 18235
+    },
+    {
+      "path": "public/camp-audio.js",
+      "sha256": "c7758ae46f30a2f2ad0106940d528cad234115380d5a89aaf4c288e36fd48b16",
+      "bytes": 3741
+    },
+    {
+      "path": "public/camp-experience.js",
+      "sha256": "23cdf7bf14de19b36a8fb0cb99c33c7b4fd89997bd93f394576d8cc8418a29cd",
+      "bytes": 30771
+    },
+    {
+      "path": "public/clean-site.css",
+      "sha256": "040fdc61ae47e7d0c6ec142588e79c45cad0dbfea2979ce248ec0f1d1df7d5e5",
+      "bytes": 9568
+    },
+    {
+      "path": "public/community-atlas-core.js",
+      "sha256": "4c85f7a06417ff903c5b69cedfb41908dbbe79fb16cbf8c4969e6fba5b062445",
+      "bytes": 9670
+    },
+    {
+      "path": "public/community-atlas-scene.js",
+      "sha256": "6f47e4c3921966ed83b2a2f68ebc5182df977de4f96a2b6fbf393aa70b670c71",
+      "bytes": 14085
+    },
+    {
+      "path": "public/community-atlas.css",
+      "sha256": "799345083afd5e52d9e00fbcf810896d7945fd19a353f9260e31f6c2f5a78d38",
+      "bytes": 32347
+    },
+    {
+      "path": "public/community-atlas.js",
+      "sha256": "64b61acb95639eda018d61634a1ca1a4147167b902c87942054c90f7299db7d8",
+      "bytes": 19503
+    },
+    {
+      "path": "public/control.css",
+      "sha256": "fd924851f6d5bb1c14806a2d1e22ceb05017adce142c227e880f458283bc8289",
+      "bytes": 18160
+    },
+    {
+      "path": "public/control.js",
+      "sha256": "c9b83c66c6e7164297c30b4ba7ea762fc71fc755595292d59a12bf53d8af23c7",
+      "bytes": 66110
+    },
+    {
+      "path": "public/creator-dashboard.css",
+      "sha256": "6f228fb735ce147aa9764810b0122a4938f5cdb800e2469148edcb935097c2ce",
+      "bytes": 14807
+    },
+    {
+      "path": "public/creator-dashboard.js",
+      "sha256": "0c7f069c67f8903887025b26002a0e8fef41fb4cf26ed4c324b83997174fc8c9",
+      "bytes": 9542
+    },
+    {
+      "path": "public/creator-kit.css",
+      "sha256": "aef9ada6a1193b1a614fe8e44b4ddcfded5595dd1f848a87975f5aeb3b5baf78",
+      "bytes": 5625
+    },
+    {
+      "path": "public/creator-kit.js",
+      "sha256": "6f24b1e8d7af2b34e62a3091c48b5333826c93f5512932fd0e9936726a213669",
+      "bytes": 6738
+    },
+    {
+      "path": "public/creator-performance.js",
+      "sha256": "3c28dc8b2340eafb2a6f2753ec4eee4ad25b6b3272c4558a761ffb8064ecb1ca",
+      "bytes": 4730
+    },
+    {
+      "path": "public/creator-update-editor.js",
+      "sha256": "ad7f2674b30fc33522d64d7e3d5d4087766d5fc8614281d508a52099727092fc",
+      "bytes": 8102
+    },
+    {
+      "path": "public/dashboard-flight.css",
+      "sha256": "5809a152df3b047f3ab7a2ad185c209db1dcad17b45334fb42aabae7f3c620a4",
+      "bytes": 6711
+    },
+    {
+      "path": "public/dashboard-flight.js",
+      "sha256": "4cc29662666f40ea60d1bc52e0ef38c52506155fa41d1930fecf0cf906f2f931",
+      "bytes": 8858
+    },
+    {
+      "path": "public/dashboard-focus.js",
+      "sha256": "eadae503fc888641fb20944be2b628ee5902b79fcfe022dac5fa73174d305abe",
+      "bytes": 1022
+    },
+    {
+      "path": "public/dashboard-glass.css",
+      "sha256": "0e03674b5a62496f83aeb8a012f6707968b8c75a26fbda1a493da24960e100ff",
+      "bytes": 1721
+    },
+    {
+      "path": "public/dashboard-home.css",
+      "sha256": "991f4f129e6117017b5bad2370abaf9fc66a278fc136a315fd21fba2fda0b9aa",
+      "bytes": 27018
+    },
+    {
+      "path": "public/dashboard-layout.css",
+      "sha256": "7096a28c96c6f82068d290b12c8f8d02f7ceef9df3cdd5f7bbddaf26e7443cd9",
+      "bytes": 8173
+    },
+    {
+      "path": "public/dashboard-layout.js",
+      "sha256": "9f06602af3772a75b9336b383f930fdd07ed00f01b8f0a5e15008a5121cca910",
+      "bytes": 11357
+    },
+    {
+      "path": "public/dashboard-orbit.css",
+      "sha256": "0e05cdf8726b1e71d110a1f2758a53b22f0d54e66feb036b10b496d6cbb6160f",
+      "bytes": 21254
+    },
+    {
+      "path": "public/dashboard-pro.css",
+      "sha256": "85adb55a6928f907a58def8bf58347c83e71c314f0c0bb9e90ba793e9e56404b",
+      "bytes": 43087
+    },
+    {
+      "path": "public/dashboard-pro.js",
+      "sha256": "e998f4c75dc2f0deee45224633e11d1e41041274fc4e49685a51c95b29acaff4",
+      "bytes": 7576
+    },
+    {
+      "path": "public/dashboard-refresh.css",
+      "sha256": "ec7decd7d0e8f54cebe28eff5ce630104ab663921a9a01967f463f3ca8b0798e",
+      "bytes": 44361
+    },
+    {
+      "path": "public/desert-adventure.js",
+      "sha256": "81b90e2337b356ec1e5f14804c383d8a5ba3b4a14f00192ce399ad43858c1042",
+      "bytes": 20337
+    },
+    {
+      "path": "public/desert-life.js",
+      "sha256": "c9150492f3999844c0e472f0f04aecd99190e28c6c05e2deb7206c5aea61b310",
+      "bytes": 31535
+    },
+    {
+      "path": "public/desert-story.js",
+      "sha256": "ba4e5d987958c92ca7e859a29e9920d7d527d2008f6e3b2b05993eda29a29ce8",
+      "bytes": 3628
+    },
+    {
+      "path": "public/desert-world.js",
+      "sha256": "e6b9fd1a3d9df4ca1815103ac5d0f6979ee22410e40e2804a5fb456a6c3f9f7b",
+      "bytes": 114815
+    },
+    {
+      "path": "public/destinations.css",
+      "sha256": "b7e1c6e22bfa0baf17d199ab4ecbf7416aa242ddb4ad4cb2d113aa398b3d4ca7",
+      "bytes": 10198
+    },
+    {
+      "path": "public/development.css",
+      "sha256": "da62accaa46a7120e1fdea05911d92adbec03f0b7e1d3a48f224768a9223ba02",
+      "bytes": 5231
+    },
+    {
+      "path": "public/development.js",
+      "sha256": "6a66cfb8407d8a6a890837095b98da13b66e84bc45d9271c78ec2589c345f695",
+      "bytes": 4690
+    },
+    {
+      "path": "public/discovery.css",
+      "sha256": "4f04bad684d5d0712110919767abfb3f9c5dd862476a36053dca091645d2add8",
+      "bytes": 8865
+    },
+    {
+      "path": "public/discovery.js",
+      "sha256": "a93149f64e45fcc41b66de7ef61cfb52396e612ad6f7d4dae44437c023b6a08a",
+      "bytes": 7622
+    },
+    {
+      "path": "public/docs.css",
+      "sha256": "10c2b64bd584841a487b3e8a1a9063597e0c92cc1ab4f18dc142c7c47e2bd577",
+      "bytes": 9497
+    },
+    {
+      "path": "public/docs.js",
+      "sha256": "b294bc3cd41c32ae4e4b9fbe9153ec33b9025dbce26811e7e0e3b2ec4f5dbd05",
+      "bytes": 1098
+    },
+    {
+      "path": "public/earth-atmosphere.css",
+      "sha256": "3f98a2b25315b4404af407a352d58cddfaad62cd264bd53c28488771fad894f3",
+      "bytes": 2375
+    },
+    {
+      "path": "public/earth-companions.css",
+      "sha256": "88365ef86d3f471caea9c4ff111361c7b9ff13d4c0de01dadc2fed2f75806917",
+      "bytes": 1348
+    },
+    {
+      "path": "public/earth-explorer.css",
+      "sha256": "dff68547102d095fdbab311a3239f615ef407f2503b096571818ddd0515547b5",
+      "bytes": 2805
+    },
+    {
+      "path": "public/earth-explorer.js",
+      "sha256": "a77ec089c9b61e4c388923647de40b75181f70b2b964f01774e4dd3421d585b7",
+      "bytes": 4405
+    },
+    {
+      "path": "public/earth-globe.css",
+      "sha256": "edbc931cca4e82f0eae8de657e26f713d2749883a3d6a973461190c647ff8b59",
+      "bytes": 394
+    },
+    {
+      "path": "public/earth-globe.js",
+      "sha256": "d58fc91f5c09efc915bfd15e9097165f42883753ec8111014b82753909e9f4a8",
+      "bytes": 9463
+    },
+    {
+      "path": "public/earth-lighting.css",
+      "sha256": "fdeb11c2c93a607a229c29350f58fbbb2dcd1c316ea433deecef4dff3452ba48",
+      "bytes": 1045
+    },
+    {
+      "path": "public/ecosystem-worlds.json",
+      "sha256": "2b436b8b19f41b8bbfd0eb49f336428181ee8cb3baa9ccfa0b98731f628ca6c6",
+      "bytes": 19263
+    },
+    {
+      "path": "public/ecosystem.css",
+      "sha256": "e7015a3c348c05e5b48da7e9ee60b9e1f0cdb6efd42940b88bdbd7ded8dcc494",
+      "bytes": 15719
+    },
+    {
+      "path": "public/ecosystem.js",
+      "sha256": "394b939d239d1dfb75f529215032db9aa028266387db414d2063bd2c9c872241",
+      "bytes": 12628
+    },
+    {
+      "path": "public/expedition-log.js",
+      "sha256": "aa3eaa968bc7fce6bb3063d6c26ba4133cdf4347823886709b6ad212848a0ac7",
+      "bytes": 6485
+    },
+    {
+      "path": "public/expedition-materials.js",
+      "sha256": "e18cf1faf7af6eb8ad1e6eac6302b7d91ac61b03eaebff8671f1196828c5fe7c",
+      "bytes": 11485
+    },
+    {
+      "path": "public/expedition-realism.css",
+      "sha256": "df485006f17b3e4a7b08c2f57686585e658b7e3225f72620c7011b025166ec26",
+      "bytes": 3881
+    },
+    {
+      "path": "public/experience-premium.css",
+      "sha256": "806b6bc0150dd96b4f19412900c94aef4fa39743c31ad488e41194b80f74d536",
+      "bytes": 23284
+    },
+    {
+      "path": "public/explore-clean.css",
+      "sha256": "f5a49f01b2a60af6272519828263ed543e3df8bfa08f8e6b81f3251be4c0dfa9",
+      "bytes": 2539
+    },
+    {
+      "path": "public/explore-clean.js",
+      "sha256": "5703d5ae17c764993a2dc2dfb252b0fd7fe92db923b8f73274fb5a53602fd310",
+      "bytes": 2362
+    },
+    {
+      "path": "public/favicon.svg",
+      "sha256": "03924d9226e597e9fb341f06b26fd8f6fc1b6ba2f5e03d04a501754a97cc10aa",
+      "bytes": 284
+    },
+    {
+      "path": "public/first-contact.css",
+      "sha256": "cab880ac3fe94b6a9ba91e2fe0b8a2d7ebf11c98c745c822b3c3f60b4b5e9ba5",
+      "bytes": 5331
+    },
+    {
+      "path": "public/first-contact.js",
+      "sha256": "798ac5b128e8ea797468a64b0e71982c32ca4e0aec0d1b51812101d2bd5b04e5",
+      "bytes": 8359
+    },
+    {
+      "path": "public/gatto-expedition-scene.js",
+      "sha256": "aa9ba05fa03c37603aca8bab3fdec031ed4513ba9ba53906c9dbc6030ce2a86b",
+      "bytes": 60029
+    },
+    {
+      "path": "public/gatto-expedition.css",
+      "sha256": "65c20111c2468531c1cd4a5e7c3177c8f45cda1e829e069c9f241a5a142b7555",
+      "bytes": 4729
+    },
+    {
+      "path": "public/gatto-expedition.js",
+      "sha256": "61af44be57ecc9e175a3382a4286b06ad0e9e47adfcbc95677f895f2e094521e",
+      "bytes": 25605
+    },
+    {
+      "path": "public/gatto-preview.css",
+      "sha256": "76c51afd5de27ee1cc6598e84e503b4db059420db54b243bba467286e9260ddd",
+      "bytes": 6890
+    },
+    {
+      "path": "public/gatto-preview.js",
+      "sha256": "58604f8161d530a009114d827b14a66c15f984735dcf3d1d0b60c1812f6613e3",
+      "bytes": 4556
+    },
+    {
+      "path": "public/gatto-project-info.css",
+      "sha256": "673e0b50cadfbd1287b3869332d4aec48d9caf7a44ecbf4f580f0b1229fc9012",
+      "bytes": 2212
+    },
+    {
+      "path": "public/gatto-project-info.js",
+      "sha256": "947557f21db846f6ef28e0314feda4f3efe51ee64132a73dca2a64ed70fe38ff",
+      "bytes": 905
+    },
+    {
+      "path": "public/gatto-world.json",
+      "sha256": "8f5efffb2732937a2075e0bf5df5b4b2e98c53aa98270feccd244a819cc29b7a",
+      "bytes": 2278
+    },
+    {
+      "path": "public/gold-assistant.css",
+      "sha256": "c43da23788042f403cbf43b434b118064e883db975610eb44817fe44855a3f70",
+      "bytes": 5361
+    },
+    {
+      "path": "public/gold-assistant.js",
+      "sha256": "9c086c26b4d0bff973ed08c20ba752eaf49abe97bb9b7b96ab18766d9dabafb9",
+      "bytes": 10123
+    },
+    {
+      "path": "public/gold-experience.css",
+      "sha256": "4fa1f0427923d2cff71574ebe8a2a7a31a1f23eef700a80a4fda7ecc74c1ab63",
+      "bytes": 9331
+    },
+    {
+      "path": "public/gold-experience.js",
+      "sha256": "a5291cc45afcaff2d60c5a3f827bdc63ae54770349d90acaea1060c84497c89f",
+      "bytes": 4045
+    },
+    {
+      "path": "public/guided-tour-data.js",
+      "sha256": "137beaa34c63d5db23663325a94a7c176b08e10e1b07e95257f0c13393c66381",
+      "bytes": 7392
+    },
+    {
+      "path": "public/guided-tour-policy.js",
+      "sha256": "8847954fa686695d37dc61fe8f6783542a70490682cb4422cf5576b48c92ecba",
+      "bytes": 852
+    },
+    {
+      "path": "public/guided-tour.css",
+      "sha256": "7d1b68fc566c04dbba360eb8082c10be59783960ffe7e4c2ee5f0883110a71e0",
+      "bytes": 9983
+    },
+    {
+      "path": "public/guided-tour.js",
+      "sha256": "bf215c0b9e4c36cf3029abde217d8ad124dcdd80629ce76e9fa79fc0d66a4200",
+      "bytes": 15249
+    },
+    {
+      "path": "public/holder-pro.css",
+      "sha256": "3c7cee5c6b19ed82b1b38f2d8816d7f27eb2087a7072d96f764200b62d7492cf",
+      "bytes": 12566
+    },
+    {
+      "path": "public/holder-pro.js",
+      "sha256": "f1cece4882011e5838c5915dc82dd7148603fb169dea1f37de5f911eff1a1624",
+      "bytes": 14000
+    },
+    {
+      "path": "public/home-clean.js",
+      "sha256": "e2e53becd6987ef9816773780b8e2227a2257f9e0398b00f09937e1d18dec4fc",
+      "bytes": 1262
+    },
+    {
+      "path": "public/home-future.css",
+      "sha256": "b0bf29243576bf3757de83a369ef6e858c7af6982c50905f1c6606246209a164",
+      "bytes": 29254
+    },
+    {
+      "path": "public/home-hub.css",
+      "sha256": "8ea44b10d2f6d1356da9f8ec5e0977081cc4f357a42b30ce080e3a0b4657986b",
+      "bytes": 9812
+    },
+    {
+      "path": "public/home-hub.js",
+      "sha256": "f39100228b32e13cbdbddb874a19caec5971aa5443428fd3eaa5fd2b2b7b7f2c",
+      "bytes": 697
+    },
+    {
+      "path": "public/home-living.css",
+      "sha256": "c0568a4d0ee853b92551e60ac9402cd25e92c11c0632181f85e91d982e7d91f7",
+      "bytes": 9267
+    },
+    {
+      "path": "public/home-living.js",
+      "sha256": "46cd1da7e8458f3061b3abcf71bc7fccecf8755b1f6eb1985439c702e6394963",
+      "bytes": 7401
+    },
+    {
+      "path": "public/home-market.js",
+      "sha256": "90497423ba11e9ceb67b1de11fb051d3c9755bf8e950f84a1b701cc67032a9a0",
+      "bytes": 11285
+    },
+    {
+      "path": "public/home-overview.css",
+      "sha256": "0fea01629341e79f39b9cd58b552529202b7e8d829fc427d591bc506bacebe37",
+      "bytes": 8838
+    },
+    {
+      "path": "public/home-overview.js",
+      "sha256": "1dc2e246d5a4003e8200a88f8ce826123833ca73901d43c770c7ed567e224aec",
+      "bytes": 615
+    },
+    {
+      "path": "public/home-showcase.css",
+      "sha256": "7189ef4aaf85759e8a5a026d66240faa3185be5ef6b4fb95962fddf7229fe394",
+      "bytes": 17182
+    },
+    {
+      "path": "public/home-story.css",
+      "sha256": "6a1555e9ea0756229f76145a11ac65696ae9d7a9618bd12fd0aee95944229496",
+      "bytes": 21497
+    },
+    {
+      "path": "public/intro-film-data.js",
+      "sha256": "b2f12ba1855b19f47db5ae9eb4fc4bd7c64856820bebb2aae3bd01e47f05a97a",
+      "bytes": 4690
+    },
+    {
+      "path": "public/intro-film.css",
+      "sha256": "b9f9970f0657627c25e75f55b6c3d4994732eab791a41446b497196232bca573",
+      "bytes": 3368
+    },
+    {
+      "path": "public/intro-film.js",
+      "sha256": "1a2d0820c4f165800531ac6f0516611dea71b1bbde9afb97e994c4502dabef41",
+      "bytes": 7512
+    },
+    {
+      "path": "public/launch.js",
+      "sha256": "57a3eb9f5781141d6160683498f36ff0e1c9c2f2483b1cfc8dcb2b1e5d3d2fd2",
+      "bytes": 2634
+    },
+    {
+      "path": "public/market-observatory.css",
+      "sha256": "ea891c34ea91ee8e0e8f0551ddbce1576cfc4303f8c609e64a46dbf26cd2bd12",
+      "bytes": 3573
+    },
+    {
+      "path": "public/market-observatory.js",
+      "sha256": "5a7ad0d37b33ad994276c51b6f422266f2c83bfc0a4ca5217feb0d3fbcde0890",
+      "bytes": 5204
+    },
+    {
+      "path": "public/meet-entry.css",
+      "sha256": "66bbbcc79687dd94f6333600cb16f7b3fedd4c2570e63c8d7ab2d5c689ba1603",
+      "bytes": 2158
+    },
+    {
+      "path": "public/meet.css",
+      "sha256": "5e4856ff4cf1fda1229e047d5ee347df01fc579399a98bdfbc8e5b9043dc2e6b",
+      "bytes": 11682
+    },
+    {
+      "path": "public/meet.js",
+      "sha256": "c93cbbe8e76acb987131b1dae6a616959d81140ce10e5ea2674f1d40446da596",
+      "bytes": 5033
+    },
+    {
+      "path": "public/mission.css",
+      "sha256": "13cca17dd07a1e50aa18fb180077aed2653c3bb23d512c6753c2f7f443e6edff",
+      "bytes": 8140
+    },
+    {
+      "path": "public/mission.js",
+      "sha256": "6e808ecc69809b323a22c7ce45efcdf4bad51298255e82405f100dd5eb1bcf13",
+      "bytes": 9312
+    },
+    {
+      "path": "public/mobile-refinement.css",
+      "sha256": "a9871bdaf2a3c7540933b5addbabda25ea9ea55c4f1efc63c960a16f2e68ad2e",
+      "bytes": 7592
+    },
+    {
+      "path": "public/navigation-clean.css",
+      "sha256": "661c5ee48fb11b3438849fb146cae13884dc26c18c187e0c5cd80c1dd5a9e2c8",
+      "bytes": 2491
+    },
+    {
+      "path": "public/observatory-compare.js",
+      "sha256": "f76430bab397ff96277554ac5b586c81cab9101e51c52b66bf53e6b3edbe2c9e",
+      "bytes": 5382
+    },
+    {
+      "path": "public/observatory-core.js",
+      "sha256": "bbe3990929ced7b2cf5e3789db9fcbc245bdec12a781f11d27f9638138272d75",
+      "bytes": 1683
+    },
+    {
+      "path": "public/observatory-design.css",
+      "sha256": "ef16a5e4f3265181f17e159b16d3b480072bd8ff866ede34467f5310d6d740a3",
+      "bytes": 8861
+    },
+    {
+      "path": "public/observatory-pilot.js",
+      "sha256": "8a4afbe1b3f4a2df1c5597cf1cb48305633514507a775b2f4fb79d75ec53acc3",
+      "bytes": 11581
+    },
+    {
+      "path": "public/observatory.css",
+      "sha256": "d7c5db0cd82df0a0ab786bb0c93c88500818601d678078e1e29198bccb0ba43d",
+      "bytes": 8784
+    },
+    {
+      "path": "public/observatory.js",
+      "sha256": "617c2baa793c4511db2b788846f7287a4e7787c77254804875e8f793b6e9689b",
+      "bytes": 13322
+    },
+    {
+      "path": "public/obsidian-theme.css",
+      "sha256": "cc331ddc084c8db1f2e6fbc1ca366804b9f6f40e59f6a8b9409a31694e74ee92",
+      "bytes": 18574
+    },
+    {
+      "path": "public/official-token.css",
+      "sha256": "f58dbc2266ee25522d8f2f9cc0a01382a78e0f67c9a19a5332fa3075b1d3417a",
+      "bytes": 2437
+    },
+    {
+      "path": "public/orbital-scene.css",
+      "sha256": "1450313e0a85d77d832ff4c2d146280567fa090ed755e757e56a8c5714a3dc77",
+      "bytes": 4381
+    },
+    {
+      "path": "public/orbital-scene.js",
+      "sha256": "eb46b515c23bc35c2bff4cbf65c0ac462b4c5d2a1458261cfe338074c40421a6",
+      "bytes": 1505
+    },
+    {
+      "path": "public/parallax-solhandle-handoff.md",
+      "sha256": "e4c53bdcfcd2c931966bd1a3a265b023b079f4d923826c51c3d5a2ba0685e8e1",
+      "bytes": 4739
+    },
+    {
+      "path": "public/passport-card.css",
+      "sha256": "aef5fb55588ea8c96e7cb69c56169bbf6ff05beeaacce21e6391f7f858750ae4",
+      "bytes": 1544
+    },
+    {
+      "path": "public/passport-card.js",
+      "sha256": "4faa8d3dc3dcc25b91ef6d806abfeb51ab6a963266362e9aa8ec0f26d03ecad7",
+      "bytes": 9689
+    },
+    {
+      "path": "public/passport-clean.css",
+      "sha256": "2b74f40a0f08b9268232bf294b389349fdd088c5f32f1192b1f3cdaa0b876a7d",
+      "bytes": 5498
+    },
+    {
+      "path": "public/planet-atlas-core.js",
+      "sha256": "ce0806da69f7549b69e8f671a8d31ecbeb4e0dbda1ae54318b6d377b0120b74c",
+      "bytes": 4234
+    },
+    {
+      "path": "public/planet-atlas-director.js",
+      "sha256": "2406821809ae06e07aa424315528cc83a75aaaf253d4dbebe7fd270e24aa8408",
+      "bytes": 4244
+    },
+    {
+      "path": "public/planet-atlas-scene.js",
+      "sha256": "7fe866420a66cca737207b651d5814a95a055719ce47ef0f76ffe5726d02d95f",
+      "bytes": 11878
+    },
+    {
+      "path": "public/planet-atlas.css",
+      "sha256": "59b33ef5267073a7743938c3dd3b366f29ff7022c9c5de46f4108a5d3e451a0b",
+      "bytes": 31439
+    },
+    {
+      "path": "public/planet-atlas.js",
+      "sha256": "9e64e7e58a94f732f6f1ee0e8c8f1e4a574c91236df902c4adaa89df95c28509",
+      "bytes": 17887
+    },
+    {
+      "path": "public/planet-customizer.css",
+      "sha256": "5b36092f89985119a430461e61658b90f44d6179c43a9b363e27aa07db8000f9",
+      "bytes": 4793
+    },
+    {
+      "path": "public/planet-customizer.js",
+      "sha256": "8779fa243e18d954f872d37c3d52621ea3df4e9d2d7bd9eba9024c5032a4b487",
+      "bytes": 4166
+    },
+    {
+      "path": "public/planet-design.js",
+      "sha256": "f21c5f99719ff866024e9c53a593f672a31b3dde9837695e3cfab44d139ce552",
+      "bytes": 4999
+    },
+    {
+      "path": "public/planet-growth.css",
+      "sha256": "a07958dd9f277c522f80114a95b6a4e736535bc13616974b4b86d1fccd271dd4",
+      "bytes": 3776
+    },
+    {
+      "path": "public/planet-growth.js",
+      "sha256": "7b81ad672ea99f0937e6ef7b33b2801344f589f3c734e86c785be0eaf4e5969e",
+      "bytes": 7735
+    },
+    {
+      "path": "public/planet-leaders.js",
+      "sha256": "c73e5b78a04206f5754d6ea8c0554b0b4a2946dee61a9ecccfdc7c8cb7b072de",
+      "bytes": 1657
+    },
+    {
+      "path": "public/planet-renderer.js",
+      "sha256": "6f41cb26d6747f17407b1b0da0bb2435fd186ff71dcddce9f1e3d8b104d0478d",
+      "bytes": 66376
+    },
+    {
+      "path": "public/planet-updates.css",
+      "sha256": "2c2eff861f937f5c24968828f796c048d93cf854b13d5e87793195e8e96f2480",
+      "bytes": 7887
+    },
+    {
+      "path": "public/planet-updates.js",
+      "sha256": "463066a3ede2b1d9f53afc3528f84a96c0b45359a068baab78958cb9dfaa9246",
+      "bytes": 11079
+    },
+    {
+      "path": "public/platform-release.css",
+      "sha256": "341e4cf3fbee9af965ce58323f4489162fc5a0b48e7c3cc41f7b3035764ea8ec",
+      "bytes": 3813
+    },
+    {
+      "path": "public/premium-clean.css",
+      "sha256": "04691cdf6789f720319378ff36f57befcf900c5082d8b27fa0da986d5d0e4fba",
+      "bytes": 12330
+    },
+    {
+      "path": "public/premium-scene.js",
+      "sha256": "65da99fec7c789369793a62b923302c8cd15f4bb9a615e2fcfbbdfa956348e5d",
+      "bytes": 8491
+    },
+    {
+      "path": "public/premium.css",
+      "sha256": "2aa216da8ea0e9ff4141810fbd78d97a6b605a2c2eb4bb1c649344a96335f5ab",
+      "bytes": 18647
+    },
+    {
+      "path": "public/premium.js",
+      "sha256": "55fd938f2c07f477a00c9ed1dda01e3007ba30efeebd6a3c2c883d32047e4c5e",
+      "bytes": 22082
+    },
+    {
+      "path": "public/pro-membership-panel.js",
+      "sha256": "9304330ac56fd95c915f5b9fc9bc0769b3a2df1ce32f1c9db3bcb4e74c7d47a2",
+      "bytes": 2490
+    },
+    {
+      "path": "public/pro-membership.css",
+      "sha256": "98657bef60ee7e91ebbc353d262b8e1d67a2a73edb15336469cc365af99ec7c8",
+      "bytes": 2177
+    },
+    {
+      "path": "public/pro-membership.js",
+      "sha256": "66984545562fed941def2b651aba26071b33de22970bfee6ceace1fc74d4deec",
+      "bytes": 2905
+    },
+    {
+      "path": "public/pro-share-card.js",
+      "sha256": "bc68bb16c66bb9ec1c87c0a3a40107311a32d2527cf7c946427c4d5741dc6f2f",
+      "bytes": 5751
+    },
+    {
+      "path": "public/project-activity.css",
+      "sha256": "5be5b24f3c011e9f707a0ffa0da6263296a59f772d9d74d0890ac564c55cc04d",
+      "bytes": 1822
+    },
+    {
+      "path": "public/project-activity.js",
+      "sha256": "9b39228bb6615b60f275bf543d4a358646e826320a1e520de87476d9ae8c58c0",
+      "bytes": 6601
+    },
+    {
+      "path": "public/project-atlas.css",
+      "sha256": "610ba01e0233416f3a3e1196d71360f2c7b12c3b86e0bba947a7ae8e59a30565",
+      "bytes": 8984
+    },
+    {
+      "path": "public/project-atlas.js",
+      "sha256": "2ac5da669faa7f82395e1b5c248abdd48f556d8c478a64d4a06ba0018134486b",
+      "bytes": 12491
+    },
+    {
+      "path": "public/project-planets.css",
+      "sha256": "f4ce8d221e5c9370b3d2446119ec220a63eb24fc30692fab5889cd26d478cdaf",
+      "bytes": 12686
+    },
+    {
+      "path": "public/project-profile.css",
+      "sha256": "a2b96abc4dc5709106de2594c32638954b9d38b73953af7f05ab19885d9f6361",
+      "bytes": 2589
+    },
+    {
+      "path": "public/project-research.css",
+      "sha256": "7548272918d670fde02ae797bace9e9bea9cf600ef2efcb52e75e75e4d38d38a",
+      "bytes": 3345
+    },
+    {
+      "path": "public/project-research.js",
+      "sha256": "85cd0444afdf840e20f0f9f7ba070c284380a2567be2eb6b5e783436e376dec6",
+      "bytes": 4716
+    },
+    {
+      "path": "public/project-status.css",
+      "sha256": "eb8fccd0261683edfa7b7e7911061fc53fd76c53f61fe4f394ff26817883554f",
+      "bytes": 2868
+    },
+    {
+      "path": "public/project-wallet-link.css",
+      "sha256": "e2709c9afd6141e4c1d7ce82c5a157b186a7f3d430f7df85edd5bce60c9888d1",
+      "bytes": 6188
+    },
+    {
+      "path": "public/project-wallet-link.js",
+      "sha256": "5e1e83a253469d3aa362000fba8276fac27e40c4b388f8d2072ef208d5ce77bd",
+      "bytes": 18869
+    },
+    {
+      "path": "public/projects-launch.js",
+      "sha256": "30441cc98188bda1f393cea5cd8189dd42b3cfad60b6ffdea73cd8680839a86f",
+      "bytes": 4963
+    },
+    {
+      "path": "public/recovery.css",
+      "sha256": "7cf65c10ee813ac97286a952741cf851f604127e1ecc6bd6e7ef58f7af2a80f5",
+      "bytes": 1917
+    },
+    {
+      "path": "public/research-cover.css",
+      "sha256": "1b057078ed9b0125d94baea9479e434c8cea4889c2f372c5962bf8a4443856f6",
+      "bytes": 7619
+    },
+    {
+      "path": "public/research-following.css",
+      "sha256": "c38657fea33d5bf86bd4c1a8cdfdc67d8a8251b1a967bd5e0c6a3eb53ab80e3c",
+      "bytes": 8237
+    },
+    {
+      "path": "public/research-following.js",
+      "sha256": "db4a6c8fed00d372fd591bdf4b72078aae55b18997b7459e3f33eb546b91578f",
+      "bytes": 11017
+    },
+    {
+      "path": "public/research-home.css",
+      "sha256": "2766a7f54bf88a89befc484779ced2529169b477ee1290e0753e41f29ff129eb",
+      "bytes": 7858
+    },
+    {
+      "path": "public/research-home.js",
+      "sha256": "91b1983e41d6af6b7697aba76742d3f145fa8ae441ce34df379972cd67557244",
+      "bytes": 2479
+    },
+    {
+      "path": "public/research-premium.css",
+      "sha256": "550c3d29c04d6acbdc2c91cae331be769db2873f5c5e8faea631052193844d1c",
+      "bytes": 81642
+    },
+    {
+      "path": "public/research-utils.js",
+      "sha256": "77250633d72c6daae7d0cbea1df0d74511ed7a0a6a61ab3c6c8780c39fb08c1f",
+      "bytes": 2862
+    },
+    {
+      "path": "public/roadmap.css",
+      "sha256": "72433128f6e1aa0f7a33085b2bc2ad28e2acf50a51abed31607b6e8caefc3106",
+      "bytes": 3336
+    },
+    {
+      "path": "public/robots.txt",
+      "sha256": "b2b21ae25a93e545368b6428a6a7381f3c76decda6ffced3cb8f48442663ce70",
+      "bytes": 152
+    },
+    {
+      "path": "public/rocket-experience.js",
+      "sha256": "2623687a8018e296236f2728f25eb2f6722b711105fbc59dcaf714b362e7b4d3",
+      "bytes": 4577
+    },
+    {
+      "path": "public/rocket-state.js",
+      "sha256": "3c5bd584714f91028abd41a70142d9fd238b9641097c27dfb71ae01e434d9933",
+      "bytes": 1869
+    },
+    {
+      "path": "public/scenarios.css",
+      "sha256": "fa63748e135115d921176f9c74ce120b6fdd67c05bb22bbfcd6d1e4efc195f17",
+      "bytes": 1521
+    },
+    {
+      "path": "public/scenarios.js",
+      "sha256": "3aa703e1874945d48f50293e1cb9ccea75be0c11f991ed42fa02f4559ddc55e3",
+      "bytes": 4653
+    },
+    {
+      "path": "public/sheeple-expedition-scene.js",
+      "sha256": "1fdde466db28a6faa95c7e21bc26b9fa48318ac72acf67986c53e1c775943277",
+      "bytes": 71497
+    },
+    {
+      "path": "public/sheeple-expedition.css",
+      "sha256": "52615d4b7d4bec106e773a90b8e3d4bfce1add9786a29716282d7e966130bbf6",
+      "bytes": 37546
+    },
+    {
+      "path": "public/sheeple-expedition.js",
+      "sha256": "757d9867703a49a62031328fe5b55d8a5ef1f374f931a873b49ddf80d140badb",
+      "bytes": 30032
+    },
+    {
+      "path": "public/sheeple-player.js",
+      "sha256": "12b1849e0ff19d09466a4bbea0842b7507d8cf360af2592f623ca63f5b18a7a6",
+      "bytes": 9774
+    },
+    {
+      "path": "public/singularity-renderer.js",
+      "sha256": "f7fd258d66c156029af84df6b85ae73562b2934c00223b57ff5878ba156a3320",
+      "bytes": 7836
+    },
+    {
+      "path": "public/singularity.css",
+      "sha256": "23bc3a909647f89cc6cb5702e9c388f72a6b86d65c8be4b4b4628954a6dfc47b",
+      "bytes": 9509
+    },
+    {
+      "path": "public/singularity.js",
+      "sha256": "b0d894e21568a96ffb114c2f36cbc98eb77732cae662948bab394dd870ff9d53",
+      "bytes": 8261
+    },
+    {
+      "path": "public/site-polish.css",
+      "sha256": "f675fce2508fc38ffb429f234ed7ad76f7fdf4ac8321fee759647a99aacbfa84",
+      "bytes": 1462
+    },
+    {
+      "path": "public/site-stats.css",
+      "sha256": "117af8bf0f7b724cf7cde1df5dc9814c0974848d4182bf14993fddff6248b04f",
+      "bytes": 1825
+    },
+    {
+      "path": "public/site-stats.js",
+      "sha256": "25b5ea8bca2f921222290b358c0e1e60c6705266e377b64e1dd55e5ef3c5fe75",
+      "bytes": 3390
+    },
+    {
+      "path": "public/solhandle-identity.css",
+      "sha256": "377de6865bfe73579e9b714e14d906ee2e8f21e5cbe0eec62a766ccd6baa5264",
+      "bytes": 3144
+    },
+    {
+      "path": "public/solhandle-identity.js",
+      "sha256": "523332b96815125ed39b00bb50dc4860c0e75739f1f8fc9f18aa0cca7aa159a3",
+      "bytes": 8297
+    },
+    {
+      "path": "public/solhandle-page.js",
+      "sha256": "3102cff1c524ec70e4c0b3a3e9e501e3e417709a486afd39106d97942b9e128c",
+      "bytes": 750
+    },
+    {
+      "path": "public/solhandle-world.css",
+      "sha256": "f40db432c7c11201c1adb857bf59a83501654a934b83feaac951a8e630863c16",
+      "bytes": 12752
+    },
+    {
+      "path": "public/solhandle-world.js",
+      "sha256": "aec248d44ffdb9ecc0632f87877f573b0945bf049c1f39efb53f38c2092e5026",
+      "bytes": 6225
+    },
+    {
+      "path": "public/solhandle-world.json",
+      "sha256": "3e98aac4cb87ce271fc6d49e48665b733ec769b5b3f7bc55f1227fa6b6aaf6ab",
+      "bytes": 1288
+    },
+    {
+      "path": "public/space-gallery.css",
+      "sha256": "48c224359c128d04d365c31b0ccf4b7e730b3ef6862fe8dd9d2ffd29d58f3217",
+      "bytes": 2399
+    },
+    {
+      "path": "public/space-gallery.js",
+      "sha256": "439e2071383283013857fe3a4b2d1ee9438b505deae2fa0f50249bbe12b71c22",
+      "bytes": 6918
+    },
+    {
+      "path": "public/studio-flow.css",
+      "sha256": "9bfde6334a916108c324e5713cafb25837d0cc098d29c286bd0adf48ba4f444f",
+      "bytes": 10265
+    },
+    {
+      "path": "public/studio.css",
+      "sha256": "f0dcf117dc5234c655f82a650a2192b534e71fc5cda44818ba59bbedd224194d",
+      "bytes": 6000
+    },
+    {
+      "path": "public/studio.js",
+      "sha256": "617c84277f5fc6fe7134b45612c7f73a04631fab1094ee500f5ef7412af2cce0",
+      "bytes": 37861
+    },
+    {
+      "path": "public/terminal-console.css",
+      "sha256": "d80a7e38b07484fd254b5a1745c04da451471338d235d97e25b6876a54623a6f",
+      "bytes": 52464
+    },
+    {
+      "path": "public/terminal-entry.css",
+      "sha256": "016e8e3844f8d2cbe360a2d5937c0cf0c191207f07de97478f101cf0c2579b8f",
+      "bytes": 863
+    },
+    {
+      "path": "public/terminal-plus.js",
+      "sha256": "ecde2110a5d70eab5cb2fa232ea6ae36ba8391c8ac5d3f9e555ee72125bd749e",
+      "bytes": 10231
+    },
+    {
+      "path": "public/terminal-premium.css",
+      "sha256": "499075c454406bab84e45463ee992751ec03e799a14db8f830e87ec8b74eebe9",
+      "bytes": 84060
+    },
+    {
+      "path": "public/terminal-pulse.js",
+      "sha256": "fa8872f1bea04962066ee413d2b83f0e26d8f034c271168eaa21cab4f6e0416d",
+      "bytes": 7306
+    },
+    {
+      "path": "public/terminal-saved.js",
+      "sha256": "227b2c5005b215360eaf3e69c2b1aa2bbbe681a6ba974246302af9a93e81add0",
+      "bytes": 8987
+    },
+    {
+      "path": "public/terminal-workspace.js",
+      "sha256": "488a070db9b478127117aed4ad65e4b8a9ffb30e10e739f9a5bbe49acc112632",
+      "bytes": 5949
+    },
+    {
+      "path": "public/terminal.css",
+      "sha256": "639d1091501e32192491c863c7213992758ddd1bfa9d7ab692210428126ed3a2",
+      "bytes": 28774
+    },
+    {
+      "path": "public/terminal.js",
+      "sha256": "68c08c71491433b2eee47374564587674db4febbe0d74142b96c9e9e364d7258",
+      "bytes": 56470
+    },
+    {
+      "path": "public/token-analytics.js",
+      "sha256": "8718fe9b623b8c8aad46f5c7eb420461d2ec7e0f8dc609a4ec6164cb983e84fa",
+      "bytes": 4192
+    },
+    {
+      "path": "public/token.js",
+      "sha256": "a478baa00aff4b47f0229d6a7eaeca8317d4e496cda2074b0809334d441ed6c7",
+      "bytes": 502
+    },
+    {
+      "path": "public/trading-desk.css",
+      "sha256": "af4e087feeeb80508e1aafd0729bc29fec7bd64354d2dfac88bf08b914d8a392",
+      "bytes": 18018
+    },
+    {
+      "path": "public/trading-desk.js",
+      "sha256": "df5247908e482f9e7cca7aa46e14ee5bf52e698ca1a2b573c16a7c674cb0675c",
+      "bytes": 30532
+    },
+    {
+      "path": "public/universe-editorial.css",
+      "sha256": "a1fabc68f828e5cccaf9644f7ebaea610fbc1390c9cfea2ad9ac83a97f69170e",
+      "bytes": 11352
+    },
+    {
+      "path": "public/universe-editorial.js",
+      "sha256": "1efa58f30122db30b41e5a70183c765c2ad025169c74b7bbcac9cc94dc9defba",
+      "bytes": 890
+    },
+    {
+      "path": "public/universe.css",
+      "sha256": "734f742c29c945c24a470b68ddd4d35900cb13d5694aeb4bb07b449a597f0435",
+      "bytes": 37184
+    },
+    {
+      "path": "public/universe.js",
+      "sha256": "50eae4f29fc8435c25b697890095f044648eb8262a3b361fb5961a208a9b3b6c",
+      "bytes": 46634
+    },
+    {
+      "path": "public/utility.css",
+      "sha256": "2f6857c990f287881028846f22b5eba3d3c5db6beae40aab6425719001a7b9ce",
+      "bytes": 10005
+    },
+    {
+      "path": "public/utility.js",
+      "sha256": "4c38cff756bd4efbfc2a4c21d123450ab4ed76188a882689948b7962e9c6a1a0",
+      "bytes": 8347
+    },
+    {
+      "path": "public/vendor/lightweight-charts-5.0.9.js",
+      "sha256": "e6bd6516d9ab9cb897c0d6438e3fe1126f2fdce07e68c23836e84d527de81f52",
+      "bytes": 182311
+    },
+    {
+      "path": "public/vendor/lightweight-charts-LICENSE.txt",
+      "sha256": "70c9d5382506dd184465425c08a99ad9bd6d9ac1313c252968ba0b585e5ef823",
+      "bytes": 11347
+    },
+    {
+      "path": "public/wallet-watch.css",
+      "sha256": "f72011b509d6e9ebfb6e3586373db7e24575a5db09bdbd66f2cc4c77bb81a15b",
+      "bytes": 6788
+    },
+    {
+      "path": "public/wallet.js",
+      "sha256": "c26df2e5ebcde9a6cd2f79e37c512c3b41878d03de2f642b6aa5e75d6c5fccf7",
+      "bytes": 6564
+    },
+    {
+      "path": "public/workspace-clean.css",
+      "sha256": "ae6f9276ac059fef2d2ba9dd8f0fb1677114cbffaa9467760bb9f72be4968195",
+      "bytes": 7219
+    },
+    {
+      "path": "public/workspace-hub.css",
+      "sha256": "1b26bc410faf0c846f8c434bc4bd9a5432939cc718157a10767ec6ae2b787af8",
+      "bytes": 3653
+    },
+    {
+      "path": "public/workspace-premium.css",
+      "sha256": "e6ba790d52376b4ebde3944c0a684563bc1c3fa79f83f6ba89ad6955df683714",
+      "bytes": 41012
+    },
+    {
+      "path": "public/workspace-shell.css",
+      "sha256": "01d878ad580228b50f6f18c6e1a4ec7b3a2085abb4f17c2065a1555d530f56f8",
+      "bytes": 14484
+    },
+    {
+      "path": "public/workspace-usability.css",
+      "sha256": "01281ad7bee4f12ef64de044e21ebda785faa62bc392db387c1cc42beb1ea6ed",
+      "bytes": 11456
+    },
+    {
+      "path": "public/workspace-usability.js",
+      "sha256": "6667e344899a6b2d76a72cbe335ce66568928dadf7655f0cc66c0f8aba8e0d2c",
+      "bytes": 5175
+    },
+    {
+      "path": "public/worlds-premium.css",
+      "sha256": "b87c7040ba38ffb844908d145cbb879662a9e5847c2962ab023dd6476adc1cce",
+      "bytes": 73128
+    },
+    {
+      "path": "scripts/build-portrait-contours.py",
+      "sha256": "c2612f553361776a59bec57e3f780ecde45e8e9d440800b9c1ba1f2d93cefb22",
+      "bytes": 2265
+    },
+    {
+      "path": "scripts/render-community-cards.py",
+      "sha256": "ed4c75280c4818d19bbe4fc9f08d24edf570951a702035a2b5101b39c4f301b6",
+      "bytes": 9651
+    },
+    {
+      "path": "scripts/render-ecosystem.py",
+      "sha256": "abe768cc0cc83bab4cc33f11f07fdd32fdf0f8501a8fd4936626e6fbb08682f2",
+      "bytes": 10415
+    },
+    {
+      "path": "scripts/render-solhandle-card.py",
+      "sha256": "c2c355ef60ac655ede4e578bd7fd57b82442d0d0bae984f70b2c09bc8fd1a638",
+      "bytes": 5377
+    },
+    {
+      "path": "tests/community-atlas.test.cjs",
+      "sha256": "350b48bcbddd343e7e233745ed99216e8f899ffb67f1da42ad71cc6a4bd7eeec",
+      "bytes": 36599
+    },
+    {
+      "path": "tests/ecosystem.test.cjs",
+      "sha256": "d0e9262b71f4477d31939d3faba50d05a79002e4415c4840e5fdb516472ceb38",
+      "bytes": 22387
+    },
+    {
+      "path": "tests/expedition-log.test.cjs",
+      "sha256": "4b3e880c8e7529a8c10ab48ecb580e35ba2c22843b4a22068ad83cc0a42bda66",
+      "bytes": 34334
+    },
+    {
+      "path": "tests/expedition-materials.test.cjs",
+      "sha256": "0a84165b8258b31312d8aeba6d7892eea7000738d1d87a00e2daa41145fb7e4b",
+      "bytes": 5453
+    },
+    {
+      "path": "tests/gatto-expedition-controller.test.cjs",
+      "sha256": "9a07c8ef5d6c41305078c61137d9174df915125153a428c36e5ba113cb60a870",
+      "bytes": 22759
+    },
+    {
+      "path": "tests/gatto-expedition-scene.test.cjs",
+      "sha256": "ca7e0625b89c5a2a3164ca90a761fd474a7ce242e2345361feb48cda1d8a408c",
+      "bytes": 13387
+    },
+    {
+      "path": "tests/planet-atlas.test.cjs",
+      "sha256": "35622a96c7527209fa6e908a38de511c26725513e2b48754eaef5fb2a7fa15c2",
+      "bytes": 21524
+    },
+    {
+      "path": "tests/planet-palette.test.cjs",
+      "sha256": "43fd1f0866202931f673243a0ad9a9cd70cad253d1125ece3c0f33f9ba928916",
+      "bytes": 5538
+    },
+    {
+      "path": "tests/planet-realism.test.cjs",
+      "sha256": "355a7de77bc9ade2f7281329c827d90c430a7a17504b030f555acaa46d3fd6dc",
+      "bytes": 5631
+    },
+    {
+      "path": "tests/project-share.test.cjs",
+      "sha256": "fab442f73b71f809fbff6a4a0bde791d98cb9fc2ad4dd317b0346693985dacc6",
+      "bytes": 4587
+    },
+    {
+      "path": "tests/sheeple-expedition-rig.test.cjs",
+      "sha256": "bb811763880929cacf43e74eabf6763d21a2b542276b2bba4a3d3ebf72afee3a",
+      "bytes": 5105
+    },
+    {
+      "path": "tests/sheeple-expedition-scene.test.cjs",
+      "sha256": "89722ff35e0b7e4c03af1ca9ee03e9143c975dc16a26b1e0785769b33ba19ef2",
+      "bytes": 24258
+    },
+    {
+      "path": "tests/sheeple-player-rig.test.cjs",
+      "sha256": "8bedfd5a7a21104841aca1fa8f82fe589a9826e5fa9dbd47a61ebbfee6c7f6ed",
+      "bytes": 6591
+    },
+    {
+      "path": "tests/sheeple-player.test.cjs",
+      "sha256": "c78141863b2c0fc30181de17366c44a903060683f5bb1f83866db05c14c7a779",
+      "bytes": 8142
+    }
+  ]
+}

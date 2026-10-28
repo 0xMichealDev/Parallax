@@ -16,7 +16,7 @@
 
 PARALLAX is a Solana research and creator workspace. It brings project research, wallet activity and creator identity into one place, with source links and clear verification boundaries.
 
-This repository is the **PARALLAX developer kit**: selected integration source, executable tests and implementation notes. The hosted platform is available at [parallaxlaunch.live](https://parallaxlaunch.live). The full application is maintained separately.
+This repository is the **PARALLAX developer kit and public source record**: selected integration code, dated browser-source snapshots, runtime artwork, executable tests and implementation notes. The hosted platform is available at [parallaxlaunch.live](https://parallaxlaunch.live). Private server services and the full application deployment are maintained separately.
 
 ## The platform
 
@@ -26,10 +26,13 @@ This repository is the **PARALLAX developer kit**: selected integration source, 
 | **Project Passports** | Collect, save and compare token research snapshots with source context. | [Passports](https://parallaxlaunch.live/docs/passports) |
 | **Wallet Watch** | Inspect wallet activity and keep saved watches tied to exact addresses. | [Wallet Watch](https://parallaxlaunch.live/docs/wallet-watch) |
 | **Project Atlas** | Explore community project profiles and creator identities. | [Creator tools](https://parallaxlaunch.live/docs/creators) |
+| **Worlds & Expeditions** | Explore realistic project worlds, visit GATTO's city and play as a sheep in the lunar habitat. | [October 28 update](docs/updates/worlds-expeditions-2026-10-28.md) |
 | **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-**Latest platform update:** [Workspace, Gold and Premium Worlds — October 25, 2026](docs/updates/workspace-2026-10-25.md), with 35 exported source files, eight textured planet previews and offline checks. The [October 24 Terminal rebuild](docs/updates/terminal-2026-10-24.md) remains available.
+**Latest platform update:** [Worlds, Expeditions & Community Tools — October 28, 2026](docs/updates/worlds-expeditions-2026-10-28.md), covering feature work after v186 through v210: realistic project worlds, both playable expeditions, Atlas improvements, project sharing, SolHandle's world presentation and the public project-wallet linking interface. The [new snapshot](platform-updates/worlds-expeditions-2026-10-28/) is pinned to the subsequent workflow-only v211 source revision, which records the continuing GitHub publication policy; the game runtime remains v210. It includes the browser implementation, complete world/game runtime assets, artwork sources, render helpers and offline checks. Earlier [workspace](docs/updates/workspace-2026-10-25.md) and [Terminal](docs/updates/terminal-2026-10-24.md) snapshots remain available.
+
+The latest snapshot contains **454 exact source exports totaling 86,697,311 bytes**, with 14 focused browser/rendering test files. Every one of the 224 source changes since v186 is accounted for: 207 changed paths are exported and 17 source-only changes are summarized. The additional exported files supply the unchanged public dependencies and assets needed to inspect the new implementation.
 
 ## What you can inspect here
 
@@ -37,7 +40,9 @@ This repository is the **PARALLAX developer kit**: selected integration source, 
 
 **Identity lifecycle.** The browser module handles expiry, tab backgrounding, restored pages and delayed responses. A handle transfer cannot silently redirect an existing address-based watch.
 
-**Executable checks.** Fixture tests exercise ownership transfers, invalid records, missing handles, provider failures and browser request races. A provenance check verifies the two extracted production modules against their recorded hashes.
+**Worlds and games.** Inspect the production planet renderer, curated catalogs, GATTO and SHEEPLE scenes and controllers, material loading, Canvas fallbacks, local travel logs and accessibility behavior. The latest snapshot includes the original generated artwork, runtime textures, fallback renders, icons and social cards, with source attribution and reproduction helpers.
+
+**Executable checks.** Fixture tests exercise ownership transfers, invalid records, missing handles, provider failures and browser request races. Dated snapshots add focused browser and rendering checks. Provenance verification compares exported files with their recorded source hashes.
 
 | Directory | Contents |
 | --- | --- |
@@ -45,7 +50,7 @@ This repository is the **PARALLAX developer kit**: selected integration source, 
 | [`browser/`](browser/) | Identity-card rendering and refresh lifecycle |
 | [`examples/`](examples/) | Read-only mainnet lookup |
 | [`tests/`](tests/) | Offline resolver and simulated-browser checks |
-| [`platform-updates/`](platform-updates/) | Dated browser-source snapshots, provenance and focused checks |
+| [`platform-updates/`](platform-updates/) | Dated browser-source snapshots, runtime assets, provenance and focused checks |
 | [`docs/`](docs/) | Architecture, API contract, test coverage and roadmap |
 
 ## Run the kit
@@ -59,7 +64,7 @@ npm ci --ignore-scripts
 npm run check
 ```
 
-The check command validates source provenance and runs the SolHandle and Terminal offline checks. No wallet, SOL, account credentials or RPC subscription is required for those checks.
+The check command validates source provenance and runs the included offline suites. Each dated snapshot documents its focused checks. No wallet, SOL, account credentials or RPC subscription is required for those checks.
 
 To try a live read:
 
@@ -91,7 +96,15 @@ Read the [platform guides](docs/platform/README.md) for feature details and veri
 
 The resolver and browser module are extracted from deployed PARALLAX source. [`PROVENANCE.json`](PROVENANCE.json) records their origin and SHA-256 hashes. Test scope and remaining real-device checks are documented in [Testing](docs/TESTING.md).
 
+The [worlds and expeditions snapshot](platform-updates/worlds-expeditions-2026-10-28/) records complete export source revision `c79c3c7ff8f8e0f2a8a71a62138072a0b7433910` for workflow-only v211. Its feature release is v210 revision `b92e26dd4c0232b9c7e471a4563d40f01afe12bc`; v211 adds the release policy without changing the game runtime. The snapshot's own provenance file covers the exported browser code and assets, while the original SolHandle kit's provenance remains separate. A snapshot's recorded source revision is the reference for what has reached GitHub.
+
 Joint partner SDK review, an authorized real NFT transfer and iPhone/Phantom signing validation remain outstanding for the broader integration. **Partner Mint is planned.** Track shipped work and future scope in the [roadmap](docs/ROADMAP.md).
+
+## Keeping the public record current
+
+Each hosted release should be accompanied by a reviewed update here: public browser source, required runtime assets, relevant tests and release notes tied to the exact Site source revision. Changes to private server services are summarized in the release notes; authentication services, account data, database migrations, credentials and hosting configuration stay outside the export. Earlier snapshots retain their recorded contents.
+
+GitHub's checks verify committed snapshots. A successful Site deployment alone does not establish that its source has been published here; the dated snapshot and its provenance provide that evidence.
 
 ## Contribute and report issues
 

@@ -1,0 +1,62 @@
+/* Homepage and custom dashboard: a fixed flight beneath readable, independently usable panels. */
+body.workspace-shell.dashboard-flight{background:#03080c;isolation:isolate}
+.dashboard-flight-backdrop{position:fixed;inset:0 0 0 var(--sidebar-width,0px);z-index:0;overflow:hidden;pointer-events:none;background:#03080c;contain:strict}
+.dashboard-flight-backdrop>picture,.dashboard-flight-backdrop img,.dashboard-flight-backdrop video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:56% center}
+.dashboard-flight-backdrop video{opacity:0;transition:opacity .35s ease}
+.dashboard-flight-backdrop[data-state=ready] video{opacity:1}
+.dashboard-flight-backdrop:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#03080c66,transparent 52%),linear-gradient(180deg,#03080c66,transparent 27%,#03080c22 75%,#03080c88)}
+body.dashboard-flight :is(#main,.site-footer,.home-art-credits){position:relative;z-index:1}
+body.premium-dashboard.dashboard-flight .dashboard-heading-actions{flex-wrap:wrap}
+body.dashboard-flight .dashboard-flight-motion{min-height:44px;border:1px solid #bdd9d43d;border-radius:10px;background:#0b171de8;color:#c4d9d4;font:11px/1.5 system-ui,sans-serif;padding:10px 14px;white-space:nowrap;cursor:pointer}
+body.dashboard-flight .dashboard-flight-motion[hidden],body.dashboard-flight .dashboard-flight-status[hidden]{display:none}
+body.dashboard-flight .dashboard-flight-status{font:11px/1.5 system-ui,sans-serif;color:#b5d1c9}
+body.dashboard-flight .dashboard-flight-motion:disabled{color:#a1b7b3;cursor:default}
+body.dashboard-flight .dashboard-flight-motion:focus-visible{outline:2px solid #c6f4df;outline-offset:3px}
+body.premium-dashboard.dashboard-flight .dashboard-heading{ text-shadow:0 2px 16px #000 }
+body.premium-dashboard.dashboard-flight .dashboard-hero{background:transparent;border-color:#bce5de38;box-shadow:0 16px 60px #0003}
+body.premium-dashboard.dashboard-flight .dashboard-hero:before{display:none}
+body.premium-dashboard.dashboard-flight .dashboard-hero:after{background:linear-gradient(90deg,#071118f5,#071118cc 35%,#07111833 76%,#0711180a),linear-gradient(0deg,#071118b3,transparent 25%)}
+body.premium-dashboard.dashboard-flight .hero-copy{text-shadow:0 2px 14px #0008}
+body.premium-dashboard.dashboard-flight :is(.home-market,.home-release-notes,.terminal-purpose,.following-home,.eco-teaser,.home-premium,.site-growth,.path-card,.example-card){background-color:#0b151bea;background-image:none}
+body.premium-dashboard.dashboard-flight :is(.dashboard-return-grid .briefing-entry,.dashboard-return-grid .discovery-compact){background:#0c181fea}
+body.premium-dashboard.dashboard-flight :is(.home-community,.project-strip){background:#071118db;border-radius:17px;padding:25px}
+body.premium-dashboard.dashboard-flight .site-footer{background:#071118d9;border-radius:14px;padding:20px}
+/* The main homepage retains its compact tool hub, with an open view into the same flight. */
+body.home-hub.dashboard-flight .hub-intro{min-height:clamp(420px,56svh,620px);background:linear-gradient(90deg,#071118f2,#071118b3 44%,#0711181a 83%);border-color:#bce5de38;display:flex;flex-direction:column;justify-content:center}
+body.home-hub.dashboard-flight .hub-intro-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;position:relative;z-index:1;margin-top:18px}
+body.home-hub.dashboard-flight .hub-introduction{margin-top:0}
+body.home-hub.dashboard-flight .hub-flight-caption{display:block;font:8px/1.7 ui-monospace,monospace;letter-spacing:.1em;color:#b5d1c9;margin-top:22px}
+body.home-hub.dashboard-flight :is(.hub-tool,.hub-directory,.hub-project-invite){background:#0b171eed}
+body.home-hub.dashboard-flight :is(.hub-return,.hub-project,.hub-footer){background:#071118e8;border-radius:12px;padding:18px 22px}
+body.home-hub.dashboard-flight .hub-section-heading{background:linear-gradient(90deg,#071118e8,#07111899);border-radius:10px;padding:7px 16px}
+body.home-hub.dashboard-flight .hub-footer>div{align-items:center;gap:12px 24px}
+/* A longer desktop journey, using space between useful sections rather than a forced scroll track. */
+@media(min-width:901px){
+ body.home-hub.dashboard-flight .hub-intro{min-height:clamp(560px,78svh,850px)}
+ body.home-hub.dashboard-flight .hub-tools{padding-top:clamp(42px,7svh,76px)}
+ body.home-hub.dashboard-flight .hub-tools .hub-section-heading{margin-top:0}
+ body.home-hub.dashboard-flight .hub-tool{min-height:240px}
+ body.home-hub.dashboard-flight .hub-project-invite{margin:clamp(60px,10svh,120px) 0}
+ body.home-hub.dashboard-flight .hub-return{margin:clamp(44px,6svh,72px) 0}
+ body.home-hub.dashboard-flight .hub-project{margin-top:60px}
+ body.home-hub.dashboard-flight .hub-footer{margin-top:40px}
+}
+/* Let the flight carry the motion; existing decorative loops stay still. Controls remain interactive. */
+body.premium-dashboard.dashboard-flight :is(.path-image,.research-tech-art:before,.terminal-orbital,.terminal-orbital i,.release-world-art span,.release-world-art:before,.release-world-art:after){animation:none!important}
+@media(max-width:1100px){body.premium-dashboard.dashboard-flight .dashboard-heading-actions{min-width:145px}}
+@media(max-width:760px){
+ .dashboard-flight-backdrop{left:0}
+ .dashboard-flight-backdrop>picture,.dashboard-flight-backdrop video{width:120%;left:-10%}
+ .dashboard-flight-backdrop img,.dashboard-flight-backdrop video{object-fit:contain;object-position:center 58%}
+ .dashboard-flight-backdrop:after{background:linear-gradient(180deg,#03080c66,transparent 35%,#03080c11 70%,#03080c66)}
+ body.premium-dashboard.dashboard-flight .dashboard-heading-actions{min-width:0;flex-direction:row;align-items:center}
+ body.premium-dashboard.dashboard-flight .dashboard-heading-actions>*{flex:0 1 auto;width:auto}
+ body.dashboard-flight .dashboard-flight-motion{min-height:42px;padding:10px 12px}
+ body.premium-dashboard.dashboard-flight .dashboard-hero:after{background:linear-gradient(180deg,#071118ed 25%,#071118d9 56%,#0711181a 85%,#071118cc)}
+ body.premium-dashboard.dashboard-flight .home-community,body.premium-dashboard.dashboard-flight .project-strip{padding:23px}
+ body.home-hub.dashboard-flight .hub-intro{min-height:0;padding-bottom:175px;background:linear-gradient(180deg,#071118ed 30%,#071118d9 58%,#0711181a 90%)}
+ body.home-hub.dashboard-flight .hub-flight-caption{position:absolute;left:23px;bottom:22px;font-size:7px}
+ body.home-hub.dashboard-flight .hub-section-heading{padding:7px 12px}
+ body.home-hub.dashboard-flight :is(.hub-return,.hub-project,.hub-footer){padding:16px}
+}
+@media(prefers-reduced-motion:reduce){.dashboard-flight-backdrop video,.dashboard-flight-backdrop[data-state=ready] video{opacity:0;transition:none}}

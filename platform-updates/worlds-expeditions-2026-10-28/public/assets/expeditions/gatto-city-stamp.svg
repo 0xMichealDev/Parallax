@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280" role="img" aria-labelledby="title desc">
+ <title id="title">GATTO — The Golden Quarter</title><desc id="desc">A black cat with amber eyes above an Italian city, framed by a golden discovery stamp.</desc>
+ <defs><linearGradient id="gold" x2="1" y2="1"><stop stop-color="#f6e0a8"/><stop offset=".5" stop-color="#b58a42"/><stop offset="1" stop-color="#edd29b"/></linearGradient><path id="arc" d="M42 140a98 98 0 0 1 196 0"/></defs>
+ <circle cx="140" cy="140" r="130" fill="#17161b" stroke="url(#gold)" stroke-width="3"/><circle cx="140" cy="140" r="121" fill="none" stroke="#d8b775" stroke-width="1" stroke-dasharray="2 6"/><circle cx="140" cy="140" r="91" fill="#24202a" stroke="#b8995e" stroke-width=".8"/>
+ <text fill="#e8ca8a" font-family="system-ui,sans-serif" font-size="12" letter-spacing="3.1"><textPath href="#arc" startOffset="50%" text-anchor="middle">THE GOLDEN QUARTER</textPath></text>
+ <path d="M57 180v-39l17-11 18 11v39m6 0v-24l18-12 17 12v24m41 0v-47l13-10 14 10v47m9 0v-31l13-8 13 8v31" fill="#bca579" stroke="#e3c991" stroke-width="1.5"/>
+ <path d="M169 175v-66h19v66m-21-66 12-18 12 18" fill="#d4bd8d" stroke="#ebd4a1" stroke-width="2"/><path d="M176 114h6v11h-6z" fill="#514334"/>
+ <path d="M90 175c-14-25-16-53-8-80L76 64l31 19c18-7 42-7 60 0l31-19-6 31c11 32 7 62-12 80" fill="#080b11" stroke="#c5a669" stroke-width="2"/>
+ <path d="m91 108 29 5-13 12zm71 5 29-5-16 17z" fill="#e3b956"/><path d="m108 112 1 10m66-10-1 10" stroke="#11121a" stroke-width="3"/><path d="m132 137 8 6 8-6" fill="#ae8550"/><path d="m98 138-33-5m34 13-32 5m115-13 33-5m-34 13 32 5" stroke="#9a845b" stroke-width="1"/>
+ <path d="M55 184h170" stroke="#d4b374" stroke-width="2"/><text x="140" y="205" text-anchor="middle" fill="#edd7a4" font-family="system-ui,sans-serif" font-size="20" font-weight="650" letter-spacing="5">GATTO</text><text x="140" y="224" text-anchor="middle" fill="#bca67f" font-family="system-ui,sans-serif" font-size="8" letter-spacing="2.4">PARALLAX · DISCOVERED</text>
+ <path d="m121 240 3-5 3 5-3 5zm16 0 3-5 3 5-3 5zm16 0 3-5 3 5-3 5z" fill="#d9b876"/>
+</svg>

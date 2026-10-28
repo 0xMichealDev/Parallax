@@ -1,0 +1,204 @@
+/* The dashboard's approved flight follows native page scroll. No playback or scroll interception. */
+(() => {
+  'use strict';
+  const host = document.getElementById('dashboard-flight');
+  const video = document.getElementById('dashboard-flight-video');
+  if (!host || !video || !document.body.classList.contains('dashboard-flight')) return;
+  const body = document.body;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const compact = matchMedia('(max-width: 900px)');
+  const retryButtons = [...document.querySelectorAll('[data-flight-retry]')];
+  const statuses = [...document.querySelectorAll('[data-flight-status]')];
+  let active = true, started = false, failed = false, pending = false;
+  let frame = 0, deadline = 0, lastTarget = NaN, lastTick = 0, selectedSrc = '';
+  let download = null, objectUrl = '', generation = 0;
+  const motionAllowed = () => active && !document.hidden && !reduced.matches &&
+    body.classList.contains('home-motion-running');
+  const allowed = () => motionAllowed() && !failed;
+
+  function chooseSource() {
+    const connection = navigator.connection;
+    if (connection?.saveData || /^(slow-2g|2g|3g)$/.test(connection?.effectiveType || '')) {
+      return video.dataset.saverSrc || video.dataset.mobileSrc;
+    }
+    // Only large/high-density desktop displays need the 4K download. Select once
+    // so resize/rotation never interrupts a buffered flight or downloads it twice.
+    const pixels = Math.max(window.innerWidth || 0, (window.innerHeight || 0) * 16 / 9) *
+      Math.min(window.devicePixelRatio || 1, 2);
+    if (!compact.matches && pixels > 2100 && video.dataset.highSrc &&
+        video.canPlayType?.('video/mp4; codecs="avc1.640033"')) return video.dataset.highSrc;
+    return compact.matches ? video.dataset.mobileSrc : video.dataset.desktopSrc;
+  }
+
+  function buttons() {
+    for (const button of retryButtons) {
+      button.hidden = !failed || !motionAllowed();
+      button.textContent = 'Retry background';
+    }
+    for (const status of statuses) {
+      status.hidden = !motionAllowed() || host.dataset.state === 'ready';
+      status.textContent = failed ? 'Flight unavailable. Please retry.' : 'Preparing your flight…';
+    }
+  }
+  function clearDeadline() { clearTimeout(deadline); deadline = 0; }
+  function stopWork() {
+    cancelAnimationFrame(frame); frame = 0;
+    lastTick = 0;
+    clearDeadline();
+    video.pause();
+  }
+  function fail() {
+    if (failed) return;
+    // A device can advertise 4K support but fail to decode it in practice. Recover
+    // once with the HD rendition, preserving the current scroll and saved motion.
+    if (selectedSrc && selectedSrc === video.dataset.highSrc) {
+      stopWork(); pending = false; lastTarget = NaN;
+      generation++; download?.abort(); download = null;
+      video.removeAttribute('src'); video.load();
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      objectUrl = '';
+      selectedSrc = video.dataset.desktopSrc;
+      host.dataset.state = 'poster';
+      loadMedia(); buttons(); return;
+    }
+    failed = true;
+    stopWork();
+    pending = false;
+    lastTarget = NaN;
+    host.dataset.state = 'fallback';
+    generation++;
+    download?.abort(); download = null;
+    video.removeAttribute('src');
+    video.load();
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
+    objectUrl = '';
+    buttons();
+  }
+  function finishSeek() {
+    if (!pending || video.seeking || video.readyState < 2) return false;
+    pending = false;
+    lastTarget = video.currentTime;
+    clearDeadline();
+    paint();
+    return true;
+  }
+  function armDeadline() {
+    if (!deadline && allowed() && (pending || video.readyState < 2)) {
+      deadline = setTimeout(() => {
+        deadline = 0;
+        // Completion events may be lost after a background tab or mobile suspension.
+        if (finishSeek()) schedule();
+        else fail();
+      }, pending ? 12000 : 30000);
+    }
+  }
+  function paint() {
+    if (failed || video.readyState < 2 || pending) return;
+    host.dataset.state = 'ready';
+    clearDeadline();
+    buttons();
+  }
+  async function loadMedia() {
+    const request = ++generation;
+    download = new AbortController();
+    armDeadline();
+    try {
+      // The production asset host may ignore Range requests. A complete local Blob
+      // makes every frame seekable without depending on server-side byte ranges.
+      const response = await fetch(selectedSrc, { signal: download.signal, cache: 'force-cache' });
+      if (!response.ok) throw new Error('Flight download failed.');
+      const blob = await response.blob();
+      if (request !== generation) return;
+      if (!blob.size || !blob.type.startsWith('video/')) throw new Error('Invalid flight media.');
+      download = null;
+      objectUrl = URL.createObjectURL(blob);
+      video.src = objectUrl;
+      video.preload = 'auto';
+      video.muted = true; video.defaultMuted = true;
+      video.loop = false; video.autoplay = false; video.playsInline = true;
+      video.pause();
+      video.load();
+      clearDeadline(); armDeadline(); schedule();
+    } catch {
+      if (request === generation) fail();
+    }
+  }
+  function seek(time) {
+    frame = 0;
+    if (!allowed()) return;
+    const duration = video.duration;
+    if (!Number.isFinite(duration) || duration <= 0 || video.readyState < 1 || pending) {
+      armDeadline(); return;
+    }
+    const page = document.scrollingElement || document.documentElement;
+    const distance = Math.max(0, page.scrollHeight - page.clientHeight);
+    const progress = distance ? Math.max(0, Math.min(1, page.scrollTop / distance)) : 0;
+    // Stop on the last decodable frame, including after a layout change or overscroll.
+    const target = progress * Math.max(0, duration - 1 / 24);
+    if (Number.isFinite(lastTarget) && Math.abs(target - lastTarget) < .001) { lastTick = 0; paint(); return; }
+    if (!Number.isFinite(lastTarget) && Math.abs(video.currentTime - target) < 1 / 48) {
+      lastTarget = target; paint(); return;
+    }
+    // Ease wheel/trackpad steps on desktop. Native scrolling itself stays immediate.
+    // Bound the elapsed time so a slow decode or restored tab cannot cause a large catch-up jump.
+    const elapsed = lastTick ? Math.min(50, Math.max(1, time - lastTick)) : 1000 / 60;
+    lastTick = time;
+    const next = !compact.matches && Number.isFinite(lastTarget) && Math.abs(target - lastTarget) > 1 / 24
+      ? lastTarget + (target - lastTarget) * (1 - Math.exp(-elapsed / 160)) : target;
+    pending = true;
+    lastTarget = next;
+    clearDeadline(); armDeadline();
+    try { video.currentTime = next; } catch { fail(); }
+  }
+  function schedule() {
+    if (!allowed() || frame) return;
+    finishSeek();
+    if (pending) return;
+    frame = requestAnimationFrame(seek);
+  }
+  function sync() {
+    buttons();
+    if (!allowed()) { stopWork(); return; }
+    // A browser can finish a seek while the page is frozen without delivering its event.
+    finishSeek();
+    if (!started) {
+      started = true;
+      // Select once: rotating a phone must not discard a buffered journey.
+      selectedSrc ||= chooseSource();
+      loadMedia();
+    }
+    if (pending || video.readyState < 2) armDeadline();
+    schedule();
+  }
+  function retry() {
+    if (!motionAllowed() || !failed) return;
+    failed = false; started = false; pending = false; lastTarget = NaN;
+    host.dataset.state = 'poster';
+    sync();
+  }
+  retryButtons.forEach(button => button.addEventListener('click', retry));
+  video.addEventListener('loadedmetadata', schedule);
+  video.addEventListener('durationchange', schedule);
+  video.addEventListener('loadeddata', () => { paint(); schedule(); });
+  video.addEventListener('canplay', () => { paint(); schedule(); });
+  video.addEventListener('seeked', () => {
+    pending = false;
+    clearDeadline(); paint(); schedule();
+  });
+  video.addEventListener('error', fail);
+  video.addEventListener('waiting', armDeadline);
+  video.addEventListener('stalled', armDeadline);
+  video.addEventListener('play', () => video.pause());
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  window.visualViewport?.addEventListener('resize', schedule, { passive: true });
+  document.addEventListener('visibilitychange', sync);
+  reduced.addEventListener('change', sync);
+  window.addEventListener('pagehide', () => { active = false; stopWork(); });
+  window.addEventListener('pageshow', () => { active = true; sync(); });
+  window.addEventListener('online', retry);
+  // home-living owns all controls and the saved preference. This module only reads its state.
+  if (window.MutationObserver) new MutationObserver(sync).observe(body, { attributes: true, attributeFilter: ['class'] });
+  if (window.ResizeObserver) new ResizeObserver(schedule).observe(body);
+  sync();
+})();

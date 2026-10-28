@@ -1,0 +1,225 @@
+/* PARALLAX 167 / Documentation, presentations, shared evidence and immersive chrome. */
+body:is(.meet-page,.shared-passport-page,.recovery-route) {
+  --prlx-canvas:#070b12;--prlx-panel:#0d1420;--prlx-raised:#111c2b;
+  --prlx-ink:#edf3ff;--prlx-secondary:#bbcbe2;--prlx-muted:#9aaecb;
+  --prlx-blue:#8caaff;--prlx-blue-bright:#b4c9ff;
+  --prlx-line:#a4b9df20;--prlx-line-strong:#a4b9df38;
+  color-scheme:dark;background:var(--prlx-canvas);color:var(--prlx-ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;
+}
+body:is(.meet-page,.shared-passport-page,.recovery-route) [hidden] {display:none!important}
+body:is(.meet-page,.shared-passport-page,.recovery-route) :is(a,button,input,select,summary):focus-visible {outline:2px solid var(--prlx-blue-bright);outline-offset:4px}
+body:is(.meet-page,.shared-passport-page,.recovery-route) ::selection {color:white;background:#8caaff40}
+
+/* Documentation has its own reading rail, with the same materials as the tools. */
+body.workspace-shell[data-workspace-page=docs] .docs-main {max-width:1500px;padding:34px clamp(22px,3vw,48px) 70px;min-width:0}
+body.workspace-shell[data-workspace-page=docs] .docs-topbar {padding-bottom:23px;border-color:var(--prlx-line);gap:24px}
+body.workspace-shell[data-workspace-page=docs] .docs-wordmark {font-size:16px;letter-spacing:.08em}
+body.workspace-shell[data-workspace-page=docs] .docs-wordmark span {color:var(--prlx-blue-bright);background:#8caaff0b;border-color:#8caaff35;border-radius:5px;font-size:10px}
+body.workspace-shell[data-workspace-page=docs] .docs-search label {font-size:11px;color:var(--prlx-muted);margin-bottom:7px}
+body.workspace-shell[data-workspace-page=docs] .docs-search input {min-height:44px;padding:12px 15px;border:1px solid var(--prlx-line-strong);background:#0a1220;border-radius:8px;color:var(--prlx-ink);font-size:13px}
+body.workspace-shell[data-workspace-page=docs] .docs-layout {grid-template-columns:190px minmax(0,1fr);gap:36px;padding-top:30px}
+body.workspace-shell[data-workspace-page=docs] .docs-rail details {top:90px;scrollbar-width:thin;scrollbar-color:#34445f transparent}
+body.workspace-shell[data-workspace-page=docs] .docs-rail nav a {padding:10px 13px;color:var(--prlx-muted);border-radius:0 6px 6px 0;font-size:12px;line-height:1.6}
+body.workspace-shell[data-workspace-page=docs] .docs-rail nav a:hover {color:var(--prlx-ink);background:#8caaff07}
+body.workspace-shell[data-workspace-page=docs] .docs-rail nav a[aria-current=page] {color:#d7e5ff;border-left-color:var(--prlx-blue);background:linear-gradient(90deg,#8caaff16,#8caaff04)}
+body.workspace-shell[data-workspace-page=docs] .docs-nav-group>p {color:#a8bff5;font-size:10px;line-height:1.6;margin:0 0 8px 13px}
+body.workspace-shell[data-workspace-page=docs] .docs-hero {gap:28px;padding:18px 0 38px}
+body.workspace-shell[data-workspace-page=docs] .docs-eyebrow {color:#a8bff5;font-size:10px;line-height:1.8;letter-spacing:.12em;margin-bottom:18px}
+body.workspace-shell[data-workspace-page=docs] h1 {color:var(--prlx-ink);font-size:clamp(34px,3.5vw,54px);font-weight:550;line-height:1.08;letter-spacing:-.05em}
+body.workspace-shell[data-workspace-page=docs] h1 em {color:var(--prlx-blue-bright)}
+body.workspace-shell[data-workspace-page=docs] .docs-deck {color:var(--prlx-secondary);font-size:15px;line-height:1.85;max-width:630px}
+body.workspace-shell[data-workspace-page=docs] .docs-hero-links {gap:23px;margin-top:26px}
+body.workspace-shell[data-workspace-page=docs] .docs-main a:not(.docs-wordmark):not(.docs-action):not(.docs-card) {color:var(--prlx-blue-bright)}
+body.workspace-shell[data-workspace-page=docs] .docs-action {color:#091426!important;background:linear-gradient(135deg,#b4c9ff,#8caaff);border:1px solid #bbceff;border-radius:7px;min-height:44px;padding:12px 18px;font-size:12px;box-shadow:inset 0 1px #ffffff30}
+body.workspace-shell[data-workspace-page=docs] .docs-action:hover {background:#c1d3ff}
+body.workspace-shell[data-workspace-page=docs] .docs-orbit {border-color:#8caaff30;background:radial-gradient(circle,#8caaff19,transparent 68%);color:var(--prlx-blue)}
+body.workspace-shell[data-workspace-page=docs] .docs-orbit::before,body.workspace-shell[data-workspace-page=docs] .docs-orbit::after {border-color:#8caaff45}
+body.workspace-shell[data-workspace-page=docs] .docs-orbit b {color:var(--prlx-blue-bright)}
+body.workspace-shell[data-workspace-page=docs] .docs-orbit i {background:var(--prlx-blue-bright);box-shadow:0 0 15px #8caaff50}
+body.workspace-shell[data-workspace-page=docs] .docs-orbit small {font-size:8px;color:var(--prlx-muted);white-space:nowrap}
+body.workspace-shell[data-workspace-page=docs] .docs-status-strip {padding:16px 18px;border:1px solid var(--prlx-line);border-radius:8px;background:#101a2a;color:var(--prlx-muted);font-size:11px;gap:10px 18px}
+body.workspace-shell[data-workspace-page=docs] .docs-status-strip i {background:var(--prlx-blue)}
+body.workspace-shell[data-workspace-page=docs] .docs-section-title {margin:36px 0 18px}
+body.workspace-shell[data-workspace-page=docs] .docs-section-title h2 {color:var(--prlx-ink);font-size:25px;font-weight:550;letter-spacing:-.04em}
+body.workspace-shell[data-workspace-page=docs] .docs-section-title>span {font-size:11px;color:var(--prlx-muted)}
+body.workspace-shell[data-workspace-page=docs] .docs-grid {gap:14px}
+body.workspace-shell[data-workspace-page=docs] .docs-card {padding:27px 26px 38px;border:1px solid var(--prlx-line);border-radius:12px;background:linear-gradient(135deg,#111e31,#0d1420 78%);box-shadow:inset 0 1px #d3e3ff05;transition:background .16s,border-color .16s}
+body.workspace-shell[data-workspace-page=docs] .docs-card:hover {border-color:#8caaff58;background:#142239}
+body.workspace-shell[data-workspace-page=docs] .docs-card-meta {font-size:10px;color:#a0b8e8;line-height:1.7}
+body.workspace-shell[data-workspace-page=docs] .docs-card h3 {color:var(--prlx-ink);font-size:20px;font-weight:550;letter-spacing:-.03em;margin:17px 0 10px}
+body.workspace-shell[data-workspace-page=docs] .docs-card p {color:var(--prlx-muted);font-size:13px;line-height:1.75;max-width:330px}
+body.workspace-shell[data-workspace-page=docs] .docs-card-arrow {color:var(--prlx-blue-bright);right:22px;bottom:18px}
+body.workspace-shell[data-workspace-page=docs] .docs-principle {padding:28px 30px;margin-top:28px;border:1px solid #8caaff2b;border-left:2px solid #8caaff85;background:#101b2b;border-radius:10px}
+body.workspace-shell[data-workspace-page=docs] .docs-principle :is(p:not(.docs-eyebrow),.docs-caption) {color:var(--prlx-muted);font-size:13px;line-height:1.8}
+body.workspace-shell[data-workspace-page=docs] .docs-principle h2 {color:var(--prlx-ink);font-weight:500}
+body.workspace-shell[data-workspace-page=docs] .docs-article {max-width:850px}
+body.workspace-shell[data-workspace-page=docs] .docs-article-meta {color:var(--prlx-muted);font-size:11px;line-height:1.6;flex-wrap:wrap;gap:8px 20px}
+body.workspace-shell[data-workspace-page=docs] .docs-on-page {padding:20px 22px;border-color:var(--prlx-line-strong);border-radius:9px;background:#0e192a;gap:13px 22px}
+body.workspace-shell[data-workspace-page=docs] .docs-on-page>span {color:var(--prlx-muted);font-size:10px}
+body.workspace-shell[data-workspace-page=docs] .docs-on-page a {font-size:12px}
+body.workspace-shell[data-workspace-page=docs] .docs-prose {font-size:15px;line-height:1.85;color:var(--prlx-secondary)}
+body.workspace-shell[data-workspace-page=docs] .docs-prose h2 {font-size:25px;font-weight:550;color:var(--prlx-ink);letter-spacing:-.03em;margin:40px 0 16px}
+body.workspace-shell[data-workspace-page=docs] .docs-prose :is(strong,.doc-lead) {color:#d7e3f5}
+body.workspace-shell[data-workspace-page=docs] .docs-prose .doc-lead {font-size:17px}
+body.workspace-shell[data-workspace-page=docs] .doc-table-wrap {border-color:var(--prlx-line-strong);border-radius:9px}
+body.workspace-shell[data-workspace-page=docs] .docs-prose th {background:#132138;color:#ceddf5;font-size:12px}
+body.workspace-shell[data-workspace-page=docs] .docs-prose td {border-color:var(--prlx-line);font-size:13px;color:var(--prlx-secondary)}
+body.workspace-shell[data-workspace-page=docs] .docs-prose td:first-child {color:var(--prlx-ink)}
+body.workspace-shell[data-workspace-page=docs] .docs-prose :is(pre,.docs-address) {color:#c4d6f6;background:#091220;border-color:#8caaff32;border-radius:8px}
+body.workspace-shell[data-workspace-page=docs] .docs-prose code {font-size:12px;line-height:1.8}
+body.workspace-shell[data-workspace-page=docs] :is(.docs-next,.docs-footer) {border-color:var(--prlx-line)}
+body.workspace-shell[data-workspace-page=docs] .docs-next small {color:var(--prlx-muted);font-size:10px;line-height:1.7}
+body.workspace-shell[data-workspace-page=docs] .docs-footer {font-size:11px;line-height:1.7;color:var(--prlx-muted)}
+body.workspace-shell[data-workspace-page=docs] .docs-clear {color:var(--prlx-blue-bright);border-color:var(--prlx-line-strong);background:#111d30;min-height:44px;border-radius:7px}
+body.workspace-shell[data-workspace-page=docs] :is(#docs-search-status,#docs-search-empty) {color:var(--prlx-muted)}
+
+/* Meet is a presentation, so keep its planetary stage and chapter navigation. */
+body.meet-page .presentation {background:radial-gradient(ellipse at 85% 42%,#1e3f712c,transparent 55%)}
+body.meet-page .presentation:fullscreen {background-color:var(--prlx-canvas)}
+body.meet-page .workspace-skip {background:var(--prlx-blue-bright);color:#091427;border-radius:7px}
+body.meet-page .meet-header {border-color:var(--prlx-line)}
+body.meet-page .wordmark {color:var(--prlx-ink);font-size:17px;letter-spacing:.15em}
+body.meet-page .wordmark svg {stroke:var(--prlx-blue-bright)}
+body.meet-page :is(.edition,.header-actions a,.detail,.planet-caption-label,.orbital-coordinate,.capabilities,.studio-notes,.phone-link>span,.meet-credits,.fineprint,.thanks) {color:var(--prlx-muted)}
+body.meet-page .header-actions button {border-color:var(--prlx-line-strong);background:#101c2d;border-radius:7px;min-height:40px;color:var(--prlx-secondary)}
+body.meet-page .chapters {gap:clamp(20px,3vw,52px);scrollbar-color:#34445f transparent}
+body.meet-page .chapters a {color:var(--prlx-muted);font-size:12px;padding-bottom:14px}
+body.meet-page .chapters [aria-current] {color:#d2e0ff;border-color:var(--prlx-blue)}
+body.meet-page .eyebrow {color:#a8bff5;letter-spacing:.13em}
+body.meet-page .eyebrow i {background:var(--prlx-blue);box-shadow:0 0 10px #8caaff40}
+body.meet-page h1 {color:var(--prlx-ink);font-weight:550;letter-spacing:-.055em}
+body.meet-page h1 :is(span,em) {color:var(--prlx-blue-bright)}
+body.meet-page .lead {color:#ccdaf0}
+body.meet-page .detail {line-height:1.85}
+body.meet-page .primary {color:#081427;background:linear-gradient(135deg,#b4c9ff,#8caaff);border-color:#bbceff;border-radius:7px;box-shadow:inset 0 1px #ffffff35}
+body.meet-page .primary:hover {background:#c1d3ff}
+body.meet-page :is(.quiet,.research-form a,.next-actions b) {color:var(--prlx-blue-bright)}
+body.meet-page :is(.orbital-line,.planet-grid) {border-color:#8caaff26}
+body.meet-page .planet-caption {border-color:#8caaff35;color:var(--prlx-secondary)}
+body.meet-page .planet-caption #meet-world-type {color:var(--prlx-blue-bright)}
+body.meet-page .meet-footer {border-color:var(--prlx-line)}
+body.meet-page .chapter-progress {color:var(--prlx-muted)}
+body.meet-page .progress-track {background:#8caaff1d}
+body.meet-page .progress-track i {background:var(--prlx-blue)}
+body.meet-page .step-controls button {color:var(--prlx-secondary);border-color:var(--prlx-line-strong);background:#111c2b;border-radius:7px;min-height:44px}
+body.meet-page .step-controls button:last-child {color:#d0dfff;background:#8caaff13;border-color:#8caaff3d}
+body.meet-page .phone-link strong {color:var(--prlx-ink)}
+body.meet-page .research-form label {color:var(--prlx-secondary);font-size:11px;letter-spacing:.06em}
+body.meet-page .research-form>div {border-color:#8caaff50;background:#0c1626;border-radius:9px;padding:6px}
+body.meet-page .research-form input {color:var(--prlx-ink)}
+body.meet-page .research-form button {color:#091427;background:var(--prlx-blue-bright);border-radius:5px}
+body.meet-page .research-form p {color:var(--prlx-muted);font-size:12px}
+body.meet-page .workflow li {color:var(--prlx-secondary);border-color:var(--prlx-line)}
+body.meet-page .workflow b {color:var(--prlx-blue);font-size:11px}
+body.meet-page .world-choices button {border-color:var(--prlx-line-strong);border-radius:7px;color:var(--prlx-muted);min-height:42px}
+body.meet-page .world-choices button[aria-pressed=true] {color:#d4e2ff;background:#8caaff15;border-color:#8caaff70}
+body.meet-page .next-actions a {border-color:var(--prlx-line);color:var(--prlx-secondary);min-height:48px}
+body.meet-page .thanks span {color:var(--prlx-muted)}
+
+/* Shareable reports retain their historical-data labels and complete exact values. */
+body.shared-passport-page {margin:0;--mint:var(--prlx-blue);--line:var(--prlx-line);--panel:var(--prlx-panel);--muted:var(--prlx-muted);background:radial-gradient(ellipse at 90% 0,#203e6d28,transparent 50%),var(--prlx-canvas)}
+body.shared-passport-page>header {max-width:none;padding:22px max(24px,calc((100vw - 1120px)/2));border-bottom:1px solid var(--prlx-line);background:#0a111df0;gap:20px}
+body.shared-passport-page .brand {color:var(--prlx-ink);letter-spacing:.14em;font-size:13px}
+body.shared-passport-page .shared-main {max-width:1120px;padding:48px 30px 60px;margin:0 auto}
+body.shared-passport-page h1 {font-size:clamp(32px,4vw,54px);line-height:1.1;letter-spacing:-.05em;color:var(--prlx-ink);font-weight:550;overflow-wrap:anywhere}
+body.shared-passport-page .eyebrow {color:#a8bff5;font-size:10px;letter-spacing:.12em}
+body.shared-passport-page .address {color:var(--prlx-secondary);overflow-wrap:anywhere}
+body.shared-passport-page .notice {padding:21px 24px;border:1px solid #c5a56545;border-left:2px solid #d2b577;border-radius:9px;background:#191b1f;margin:24px 0;color:#d5c6a3}
+body.shared-passport-page .notice p {color:#b8b1a3;font-size:13px;line-height:1.8}
+body.shared-passport-page .panel {padding:26px;border:1px solid var(--prlx-line-strong);border-radius:14px;background:var(--prlx-panel);box-shadow:inset 0 1px #d3e3ff05}
+body.shared-passport-page .metrics {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+body.shared-passport-page .metric {min-width:0;padding:19px 15px;border:1px solid var(--prlx-line);border-radius:8px;background:#101b2c}
+body.shared-passport-page .metric label {font-size:11px;color:var(--prlx-muted)}
+body.shared-passport-page .metric strong {display:block;font-size:20px;font-weight:500;color:var(--prlx-ink);line-height:1.5;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+body.shared-passport-page .metric small {font-size:10px;line-height:1.6;color:var(--prlx-muted)}
+body.shared-passport-page .report-grid {gap:18px;margin-top:24px}
+body.shared-passport-page .report-grid>div {border-color:var(--prlx-line);border-radius:10px;background:#0a1321;padding:22px}
+body.shared-passport-page .report-grid h3 {color:var(--prlx-ink);font-size:17px;font-weight:550}
+body.shared-passport-page .report-grid :is(p,li) {color:var(--prlx-secondary);font-size:13px;line-height:1.85;overflow-wrap:anywhere}
+body.shared-passport-page :is(.sources,.fingerprint,.summary) {border-color:var(--prlx-line);background:#0c1728;border-radius:9px}
+body.shared-passport-page :is(.sources a,.fingerprint code) {color:var(--prlx-blue-bright);font-size:12px;line-height:1.75;overflow-wrap:anywhere}
+body.shared-passport-page .fine {color:var(--prlx-muted);font-size:12px;line-height:1.8}
+body.shared-passport-page .button {min-height:44px;padding:11px 17px;border:1px solid var(--prlx-line-strong);border-radius:7px;background:#13213a;color:var(--prlx-secondary);font-size:12px;display:inline-flex;align-items:center;justify-content:center}
+body.shared-passport-page .button.primary {color:#091427;background:var(--prlx-blue-bright);border-color:var(--prlx-blue-bright)}
+body.shared-passport-page>footer {border-color:var(--prlx-line);color:var(--prlx-muted);font-size:11px;padding:24px;max-width:1120px;margin:0 auto;gap:18px}
+
+/* Even unavailable destinations belong to the same product. */
+body.recovery-route {margin:0}
+body.recovery-route .recovery-page {background:radial-gradient(ellipse at 50% 20%,#244b8238,transparent 65%),var(--prlx-canvas);color:var(--prlx-ink)}
+body.recovery-route .recovery-card {padding:40px;border:1px solid var(--prlx-line);border-radius:18px;background:linear-gradient(145deg,#101d30c9,#0b121ec9);box-shadow:0 24px 70px #0003,inset 0 1px #d3e3ff06}
+body.recovery-route .recovery-brand {color:var(--prlx-ink);margin-bottom:30px}
+body.recovery-route .recovery-orbit {color:var(--prlx-blue-bright);border-color:#8caaff45;box-shadow:0 0 65px #8caaff10,inset 0 0 30px #8caaff0d}
+body.recovery-route .recovery-eyebrow {color:#a8bff5}
+body.recovery-route .recovery-page h1 {font-weight:550;letter-spacing:-.045em}
+body.recovery-route :is(.recovery-description,.recovery-note) {color:var(--prlx-muted)}
+body.recovery-route .recovery-actions a {color:var(--prlx-secondary);background:#13213a;border-color:var(--prlx-line-strong);border-radius:7px}
+body.recovery-route .recovery-actions .recovery-primary {color:#091427;background:var(--prlx-blue-bright);border-color:var(--prlx-blue-bright)}
+
+/* Immersive canvases are untouched; their controls and destination cards share the finish. */
+body.workspace-shell[data-workspace-page=explore] {background:var(--prlx-canvas);color:var(--prlx-ink)}
+body.workspace-shell[data-workspace-page=explore] :is(.research-explore-band,.atlas-destination-entry,.space-gallery,.eco) {border:1px solid var(--prlx-line-strong);border-radius:15px;background:linear-gradient(140deg,#13243be8,#0b1421ed 65%);box-shadow:inset 0 1px #d3e3ff05}
+body.workspace-shell[data-workspace-page=explore] .research-explore-band {padding:clamp(26px,4vw,52px)}
+body.workspace-shell[data-workspace-page=explore] :is(.research-explore-band,.atlas-destination-entry,.eco-heading) h2 {color:var(--prlx-ink);font-weight:550;letter-spacing:-.045em}
+body.workspace-shell[data-workspace-page=explore] :is(.research-explore-band,.atlas-destination-entry,.eco-heading) p {color:var(--prlx-secondary);line-height:1.8}
+body.workspace-shell[data-workspace-page=explore] .atlas-destination-entry p:first-child {color:#a8bff5}
+body.workspace-shell[data-workspace-page=explore] .atlas-destination-entry>a {color:#091427;background:var(--prlx-blue-bright);border:1px solid var(--prlx-blue-bright);border-radius:7px}
+body.workspace-shell[data-workspace-page=explore] :is(.explore-choices button,.explore-choices a,.eco-button,.eco-view-controls button) {color:var(--prlx-secondary);background:#14243b;border:1px solid var(--prlx-line-strong);border-radius:7px;min-height:44px}
+body.workspace-shell[data-workspace-page=explore] :is(.eco-button,.eco-view-controls button)[aria-pressed=true] {color:#dbe7ff;background:#8caaff17;border-color:#8caaff60}
+body.workspace-shell[data-workspace-page=explore] :is(.u-dock,.u-camp-menu,.u-crash-panel,.u-mission-panel,.u-rocket-panel) {background:#0c1626f0;border-color:#8caaff38;color:var(--prlx-secondary);box-shadow:0 15px 40px #0004}
+body.workspace-shell[data-workspace-page=explore] :is(.u-camp-entry,.u-camp-close,.u-scope-controls button,.u-satellite-guide) {border-color:#8caaff38;color:var(--prlx-secondary);background:#13233ae8}
+body.workspace-shell[data-workspace-page=explore] :is(.u-hud-left,.u-hud-right,.u-rocket-hud,.ad-scene-meta) {color:var(--prlx-secondary)}
+
+@media(max-width:1200px) {
+  body.workspace-shell[data-workspace-page=docs] .docs-layout {grid-template-columns:165px minmax(0,1fr);gap:25px}
+  body.workspace-shell[data-workspace-page=docs] .docs-hero {grid-template-columns:1fr}
+  body.workspace-shell[data-workspace-page=docs] .docs-orbit {display:none}
+}
+@media(max-width:900px),(hover:none) and (pointer:coarse) and (max-width:1100px) {
+  body.workspace-shell[data-workspace-page=docs] .docs-main {padding:26px 22px 38px}
+  body.workspace-shell[data-workspace-page=docs] .docs-layout {display:block;padding-top:22px}
+  body.workspace-shell[data-workspace-page=docs] .docs-rail {margin-bottom:24px}
+  body.workspace-shell[data-workspace-page=docs] .docs-rail details {position:static;max-height:none;border:1px solid var(--prlx-line);border-radius:8px;background:#0f1a2a}
+  body.workspace-shell[data-workspace-page=docs] .docs-rail summary {display:flex;justify-content:space-between;align-items:center;min-height:46px;padding:12px 16px;color:var(--prlx-secondary);font-size:13px;cursor:pointer}
+  body.workspace-shell[data-workspace-page=docs] .docs-rail nav {padding:6px 5px 16px}
+  body.workspace-shell[data-workspace-page=docs] .docs-rail nav a {min-height:43px}
+}
+@media(max-width:760px) {
+  body.workspace-shell[data-workspace-page=docs] .docs-topbar {align-items:flex-start;flex-direction:column;gap:18px}
+  body.workspace-shell[data-workspace-page=docs] .docs-search {width:100%}
+  body.workspace-shell[data-workspace-page=docs] .docs-search input {font-size:16px;min-height:46px}
+  body.workspace-shell[data-workspace-page=docs] .docs-grid {grid-template-columns:1fr;gap:12px}
+  body.workspace-shell[data-workspace-page=docs] .docs-card {padding:24px 23px 34px}
+  body.workspace-shell[data-workspace-page=docs] .docs-card p {max-width:none}
+  body.workspace-shell[data-workspace-page=docs] h1 {font-size:36px}
+  body.workspace-shell[data-workspace-page=docs] .docs-prose {font-size:14px}
+  body.workspace-shell[data-workspace-page=docs] .docs-status-strip a {margin-left:0;width:100%}
+  body.workspace-shell[data-workspace-page=docs] .docs-principle {padding:23px}
+  body.meet-page .presentation {padding-inline:22px}
+  body.meet-page .wordmark {font-size:14px}
+  body.meet-page .research-form input {font-size:16px}
+  body.meet-page .detail {font-size:14px}
+  body.shared-passport-page>header {padding:16px 20px;flex-wrap:wrap}
+  body.shared-passport-page .shared-main {padding:32px 20px 40px}
+  body.shared-passport-page .metrics {grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.shared-passport-page .panel {padding:18px}
+  body.shared-passport-page .report-grid {grid-template-columns:1fr}
+  body.shared-passport-page .report-grid>div {padding:18px}
+  body.shared-passport-page .metric {padding:16px 12px}
+  body.shared-passport-page .metric strong {font-size:18px}
+  body.shared-passport-page .actions {display:flex;flex-wrap:wrap;gap:10px}
+  body.shared-passport-page .actions a {flex:1;min-width:200px}
+  body.recovery-route .recovery-card {padding:30px 22px}
+  body.workspace-shell[data-workspace-page=explore] :is(.research-explore-band,.atlas-destination-entry,.space-gallery) {border-radius:11px}
+}
+@media(max-width:420px) {
+  body.workspace-shell[data-workspace-page=docs] .docs-main {padding-inline:17px}
+  body.workspace-shell[data-workspace-page=docs] h1 {font-size:33px}
+  body.shared-passport-page .shared-main {padding-inline:14px}
+  body.shared-passport-page .panel {padding:14px}
+  body.shared-passport-page .metrics {gap:8px}
+  body.recovery-route .recovery-page {padding:22px 14px}
+}
+@media(prefers-reduced-motion:reduce) {
+  body.workspace-shell[data-workspace-page=docs] .docs-card {transition:none}
+}

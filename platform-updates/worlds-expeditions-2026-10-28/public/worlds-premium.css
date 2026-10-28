@@ -1,0 +1,583 @@
+/* PARALLAX 167 / Creation, worlds and product pages.
+   Interface surfaces only. Planet artwork, renderers and chosen palettes keep their own colors. */
+body.workspace-shell:is([data-workspace-page=studio],[data-workspace-page=creator],[data-workspace-page=planets],[data-workspace-page=projects],[data-workspace-page=premium],[data-workspace-page=discover],[data-workspace-page=utility],[data-workspace-page=development],[data-workspace-page=roadmap],[data-workspace-page=solhandle]) {
+  --world-base: #070b12;
+  --world-panel: #0d1420;
+  --world-raised: #111c2b;
+  --world-ink: #edf3ff;
+  --world-soft: #c5d2e6;
+  --world-muted: #9aaecb;
+  --world-blue: #8caaff;
+  --world-blue-light: #b4c9ff;
+  --world-line: #9bb5e024;
+  --world-edge: #9bb5e03d;
+  --world-shadow: 0 14px 35px #00000016, inset 0 1px #d2e0ff05;
+  background-color: var(--world-base);
+  color: var(--world-ink);
+}
+body.workspace-shell:is([data-workspace-page=studio],[data-workspace-page=creator],[data-workspace-page=planets],[data-workspace-page=projects],[data-workspace-page=premium],[data-workspace-page=discover],[data-workspace-page=utility],[data-workspace-page=development],[data-workspace-page=roadmap],[data-workspace-page=solhandle]) main { min-width: 0; }
+body.workspace-shell:is([data-workspace-page=studio],[data-workspace-page=creator],[data-workspace-page=planets],[data-workspace-page=projects],[data-workspace-page=premium],[data-workspace-page=discover],[data-workspace-page=utility],[data-workspace-page=development],[data-workspace-page=roadmap],[data-workspace-page=solhandle]) [hidden] { display: none !important; }
+
+/* Studio: a composed editing surface and a separate, generous preview. */
+body.workspace-shell[data-workspace-page=studio] main { max-width: 1460px; width: calc(100% - 64px); padding: 0 0 44px; margin-inline: auto; }
+body.workspace-shell[data-workspace-page=studio] .intro { padding: 46px 0 28px; border-bottom: 0; }
+body.workspace-shell[data-workspace-page=studio] .intro h1 { max-width: 800px; margin: 14px 0 18px; font-size: clamp(38px,4.4vw,62px); font-weight: 550; letter-spacing: -.055em; line-height: 1.06; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=studio] .intro .lead { color: var(--world-muted); font-size: 15px; line-height: 1.8; max-width: 620px; }
+body.workspace-shell[data-workspace-page=studio] .intro-note { color: var(--world-muted); font-size: 12px; line-height: 1.75; border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=studio] .studio-steps { gap: 5px; padding: 5px; background: var(--world-panel); border: 1px solid var(--world-line); border-radius: 11px; }
+body.workspace-shell[data-workspace-page=studio] .studio-steps button { min-height: 58px; gap: 11px; padding: 13px 16px; border-radius: 7px; color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=studio] .studio-steps button span { color: var(--world-muted); font-size: 11px; }
+body.workspace-shell[data-workspace-page=studio] .studio-steps button[aria-current=step] { background: #8caaff12; border-color: #8caaff42; color: #d8e4ff; box-shadow: inset 0 1px #c6d7ff08; }
+body.workspace-shell[data-workspace-page=studio] .studio-steps button[aria-current=step] span { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=studio] .flow-heading { padding-block: 28px 22px; }
+body.workspace-shell[data-workspace-page=studio] .flow-heading h2 { font-size: 24px; font-weight: 550; letter-spacing: -.035em; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=studio] .flow-heading p { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=studio] .beta-pill { color: var(--world-muted); border-color: var(--world-edge); border-radius: 5px; font-size: 10px; }
+body.workspace-shell[data-workspace-page=studio] .workspace { grid-template-columns: minmax(285px,350px) minmax(0,1fr); gap: 20px; }
+body.workspace-shell[data-workspace-page=studio] main .stage-panel { padding: 24px; border: 1px solid var(--world-line); border-radius: 13px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=studio]:not([data-premium-surface=obsidian]) main .viewport { padding: 0; border: 1px solid var(--world-edge); border-radius: 13px; background: var(--world-panel); box-shadow: var(--world-shadow); overflow: hidden; }
+body.workspace-shell[data-workspace-page=studio] .panel-top { border-color: var(--world-line); color: var(--world-muted); font-size: 10px; letter-spacing: .11em; }
+body.workspace-shell[data-workspace-page=studio] .stage-panel h3 { margin: 17px 0 14px; font-size: 25px; font-weight: 550; letter-spacing: -.035em; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=studio] :is(.hint,.world-source,.graphics-status) { color: var(--world-muted); font-size: 12px; line-height: 1.75; }
+body.workspace-shell[data-workspace-page=studio] .collection-tabs { gap: 5px; padding: 3px; border: 1px solid var(--world-line); border-radius: 8px; background: #080e17; }
+body.workspace-shell[data-workspace-page=studio] .collection-tabs button { border-color: transparent; background: transparent; font-size: 12px; color: var(--world-muted); padding: 10px 8px; border-radius: 5px; }
+body.workspace-shell[data-workspace-page=studio] .collection-tabs button[aria-pressed=true] { background: #8caaff17; border-color: #8caaff35; color: #d3e0ff; }
+body.workspace-shell[data-workspace-page=studio] .presets { gap: 10px; }
+body.workspace-shell[data-workspace-page=studio] .presets button { border-color: var(--world-line); border-radius: 9px; color: var(--world-soft); font-size: 12px; background: linear-gradient(145deg,#152238,#0b131f); }
+body.workspace-shell[data-workspace-page=studio] .presets button small { color: var(--world-muted); font-size: 11px; line-height: 1.5; }
+body.workspace-shell[data-workspace-page=studio] .presets button[aria-pressed=true] { border-color: #8caaff88; box-shadow: inset 0 0 0 1px #8caaff15; }
+body.workspace-shell[data-workspace-page=studio] .presets button[aria-pressed=true]::after { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=studio] .studio-premium-invite { padding: 23px 19px; border: 1px solid #8caaff35; border-radius: 10px; background: radial-gradient(ellipse at 100% 0,#8caaff10,transparent 80%),#111c2b; box-shadow: none; }
+body.workspace-shell[data-workspace-page=studio] .studio-premium-invite :is(.eyebrow,#premium-world-link) { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=studio] .studio-premium-invite p:not(.eyebrow) { color: var(--world-muted); font-size: 12px; }
+body.workspace-shell[data-workspace-page=studio] .studio-premium-invite button[aria-pressed=true] { color: #d2dfff; border-color: #8caaff75; background: #8caaff16; }
+body.workspace-shell[data-workspace-page=studio] #premium-world-link { background: #8caaff08; }
+body.workspace-shell[data-workspace-page=studio] .studio-details { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=studio] .studio-details summary { color: var(--world-soft); font-size: 13px; }
+body.workspace-shell[data-workspace-page=studio] .world-copy { padding: 25px 28px; }
+body.workspace-shell[data-workspace-page=studio] .world-copy h2 { font-size: clamp(29px,3vw,42px); font-weight: 500; line-height: 1.15; letter-spacing: -.045em; }
+body.workspace-shell[data-workspace-page=studio] .world-copy p { color: var(--world-muted); line-height: 1.8; }
+body.workspace-shell[data-workspace-page=studio] .scene-controls { background: #0b1423e8; border-color: var(--world-edge); color: var(--world-soft); }
+body.workspace-shell[data-workspace-page=studio] .saved-look-status:not([data-state=error]),
+body.workspace-shell[data-workspace-page=studio] .studio-atlas-return { background: #111e31; border-color: #8caaff35; color: var(--world-soft); border-radius: 9px; }
+body.workspace-shell[data-workspace-page=studio] .studio-atlas-return strong { color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=studio] .studio-atlas-return p { color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=studio] .flow-actions { margin-top: 5px; padding-block: 24px; border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=studio] #flow-count { color: var(--world-muted); font-size: 12px; }
+
+/* Creator workspace: distinct instruments, activity and project collections. */
+body.workspace-shell[data-workspace-page=creator] .creator-shell { max-width: 1480px; }
+body.workspace-shell[data-workspace-page=creator] .creator-main { padding: 42px 32px 50px; }
+body.workspace-shell[data-workspace-page=creator] .creator-heading { gap: 26px; padding-bottom: 26px; margin-bottom: 26px; border-bottom: 1px solid var(--world-line); }
+body.workspace-shell[data-workspace-page=creator] .creator-heading h1 { margin: 12px 0 16px; font-size: clamp(37px,4vw,58px); line-height: 1.08; letter-spacing: -.05em; font-weight: 550; }
+body.workspace-shell[data-workspace-page=creator] .creator-heading>div>p:last-child { font-size: 14px; color: var(--world-muted); max-width: 650px; }
+body.workspace-shell[data-workspace-page=creator] main .creator-metrics { gap: 12px; border: 0; background: transparent; }
+body.workspace-shell[data-workspace-page=creator] main .creator-metrics article { padding: 23px; border: 1px solid var(--world-line); border-radius: 11px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=creator] main .creator-metrics article:first-child { background: linear-gradient(135deg,#15243a,#0e1724); border-color: #8caaff38; }
+body.workspace-shell[data-workspace-page=creator] main .creator-metrics strong { margin: 20px 0 13px; font-size: clamp(30px,3.3vw,44px); font-weight: 500; color: var(--world-ink); overflow-wrap: anywhere; }
+body.workspace-shell[data-workspace-page=creator] main .creator-metrics :is(span,small) { color: var(--world-muted); font-size: 12px; line-height: 1.65; }
+body.workspace-shell[data-workspace-page=creator] .creator-filters { flex-wrap: wrap; padding: 15px 18px; background: #0b121e; border: 1px solid var(--world-line); border-radius: 10px; }
+body.workspace-shell[data-workspace-page=creator] .creator-filters label { font-size: 11px; color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=creator] .creator-filters>span { font-size: 11px; color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=creator] main .creator-panel { padding: 26px; margin-block: 24px; border: 1px solid var(--world-line); border-radius: 12px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=creator] .creator-panel-head h2 { font-size: 24px; color: var(--world-ink); font-weight: 550; letter-spacing: -.035em; }
+body.workspace-shell[data-workspace-page=creator] .creator-panel-head p:not(.eyebrow) { font-size: 12px; color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=creator] .creator-chart-empty { border: 1px dashed var(--world-edge); border-radius: 9px; background: #8caaff03; padding: 32px 22px; }
+body.workspace-shell[data-workspace-page=creator] .creator-chart-empty p { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=creator] .creator-projects { gap: 18px; }
+body.workspace-shell[data-workspace-page=creator] .creator-project { padding: 24px; border: 1px solid var(--world-line); border-radius: 12px; background: linear-gradient(145deg,#122034,#0d1420 75%); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=creator] .creator-project h3 { font-size: 22px; font-weight: 550; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=creator] .creator-project-kicker { color: var(--world-blue-light); font-size: 10px; }
+body.workspace-shell[data-workspace-page=creator] .creator-project-description { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=creator] .creator-project-metrics { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=creator] .creator-project-metrics strong { font-size: 23px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+body.workspace-shell[data-workspace-page=creator] .creator-project-actions .creator-button { font-size: 12px; }
+body.workspace-shell[data-workspace-page=creator] .creator-project-link { font-size: 11px; color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=creator] .creator-project-link a { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=creator] .creator-empty { border-color: var(--world-edge); border-radius: 12px; background: var(--world-panel); padding: 36px 24px; }
+body.workspace-shell[data-workspace-page=creator] .creator-empty p { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=creator] .creator-welcome { padding: 38px; max-width: 920px; background: radial-gradient(ellipse at 100% 0,#8caaff12,transparent 68%),var(--world-panel); border-color: #8caaff35; border-radius: 14px; box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=creator] .creator-welcome h2 { font-size: 36px; font-weight: 500; }
+body.workspace-shell[data-workspace-page=creator] .creator-welcome p:not(.eyebrow) { color: var(--world-muted); font-size: 15px; }
+body.workspace-shell[data-workspace-page=creator] .weekly-summary { background: #122137; color: var(--world-soft); border-left-color: var(--world-blue); border-radius: 0 8px 8px 0; }
+body.workspace-shell[data-workspace-page=creator] .creator-update-history { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=creator] .creator-update-item { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=creator] .creator-update-item time { color: var(--world-muted); font-size: 11px; }
+body.workspace-shell[data-workspace-page=creator] .creator-update-item p { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=creator] .creator-update-item h3 { color: var(--world-ink); font-size: 17px; }
+
+/* Premium Worlds: curated artwork leads, with an orderly design and purchase flow. */
+body.workspace-shell[data-workspace-page=premium] main { width: calc(100% - 64px); max-width: 1420px; margin-inline: auto; }
+body.workspace-shell[data-workspace-page=premium] .hero { padding: 52px 0 42px; align-items: center; }
+body.workspace-shell[data-workspace-page=premium] .hero h1 { max-width: 830px; font-size: clamp(43px,5.2vw,74px); font-weight: 540; line-height: 1.04; letter-spacing: -.06em; }
+body.workspace-shell[data-workspace-page=premium] .hero h1 em { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=premium] .hero .lead { color: var(--world-muted); font-size: 16px; line-height: 1.8; max-width: 570px; }
+body.workspace-shell[data-workspace-page=premium] .release-note { padding: 19px; border: 1px solid var(--world-line); border-radius: 10px; background: var(--world-panel); color: var(--world-blue-light); font-size: 12px; }
+body.workspace-shell[data-workspace-page=premium] .release-note p { color: var(--world-muted); font-size: 12px; }
+body.workspace-shell[data-workspace-page=premium] .signature-collection { padding-block: 18px 42px; }
+body.workspace-shell[data-workspace-page=premium] .collection-heading h2 { font-size: 32px; font-weight: 550; letter-spacing: -.04em; }
+body.workspace-shell[data-workspace-page=premium] .collection-heading>p { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=premium] .signature-grid { gap: 15px; }
+body.workspace-shell[data-workspace-page=premium] .signature-grid button { padding-bottom: 21px; border: 1px solid var(--world-line); border-radius: 12px; background: var(--world-panel); box-shadow: var(--world-shadow); transition: border-color .18s, background .18s; }
+body.workspace-shell[data-workspace-page=premium] .signature-grid button:hover { border-color: #8caaff68; background: #122036; }
+body.workspace-shell[data-workspace-page=premium] .signature-grid button[aria-pressed=true] { border-color: #8caaffbb; background: #152239; box-shadow: inset 0 0 0 1px #8caaff28; }
+body.workspace-shell[data-workspace-page=premium] .signature-art { height: clamp(160px,14vw,220px); }
+body.workspace-shell[data-workspace-page=premium] .signature-name { color: var(--world-ink); font-size: 19px; letter-spacing: -.035em; }
+body.workspace-shell[data-workspace-page=premium] .signature-grid small { font-size: 12px; line-height: 1.75; color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=premium] .signature-action { color: var(--world-blue-light); font-size: 11px; }
+body.workspace-shell[data-workspace-page=premium] .design-grid { border: 1px solid var(--world-edge); border-radius: 14px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=premium] .preview-panel { border-color: var(--world-line); background: #080e18; }
+body.workspace-shell[data-workspace-page=premium] .panel-head { color: var(--world-muted); border-color: var(--world-line); font-size: 11px; }
+body.workspace-shell[data-workspace-page=premium] .preview-caption h2 { font-size: 30px; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=premium] .preview-caption p:last-child { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=premium] .design-panel { padding: 30px; background: var(--world-panel); }
+body.workspace-shell[data-workspace-page=premium] :is(.design-panel,.checkout-card,.how-it-works) h2 { font-size: 29px; font-weight: 550; letter-spacing: -.04em; }
+body.workspace-shell[data-workspace-page=premium] .themes button { background: #0a111d; border-color: var(--world-line); border-radius: 8px; color: var(--world-soft); }
+body.workspace-shell[data-workspace-page=premium] .themes button>span:nth-child(2) { font-size: 13px; }
+body.workspace-shell[data-workspace-page=premium] .themes small { color: var(--world-muted); font-size: 11px; }
+body.workspace-shell[data-workspace-page=premium] :is(.themes,.materials) button[aria-pressed=true] { border-color: #8caaff9c; background-color: #17253a; color: #d9e5ff; }
+body.workspace-shell[data-workspace-page=premium] .materials button[aria-pressed=true]::after { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=premium] .materials small { color: var(--world-muted); font-size: 11px; }
+body.workspace-shell[data-workspace-page=premium] :is(.help,.text-link) { font-size: 12px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=premium] .help { color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=premium] .text-link { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=premium] .features { gap: 16px; padding-block: 30px; border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=premium] .features article { padding: 23px; border: 1px solid var(--world-line); border-radius: 10px; background: #0b121e; }
+body.workspace-shell[data-workspace-page=premium] .features span { font-size: 10px; color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=premium] .features h3 { color: var(--world-ink); font-size: 19px; }
+body.workspace-shell[data-workspace-page=premium] .features p { font-size: 13px; line-height: 1.8; color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=premium] .plan-comparison :is(th,td) { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=premium] .plan-comparison :is(th,td):last-child { color: var(--world-blue-light); background: #8caaff05; }
+body.workspace-shell[data-workspace-page=premium] .checkout-grid { gap: 24px; padding-block: 45px; }
+body.workspace-shell[data-workspace-page=premium] :is(.checkout-card,.invoice-card,.development-fund) { border: 1px solid var(--world-line); border-radius: 13px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=premium] .checkout-card { padding: 32px; border-top-color: #8caaff65; }
+body.workspace-shell[data-workspace-page=premium] .checkout-card>p:not(.eyebrow):not(.status) { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=premium] .price { font-size: 36px; color: var(--world-ink); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+body.workspace-shell[data-workspace-page=premium] .invoice-card :is(dt,dd) { font-size: 12px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=premium] .invoice-card dt { color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=premium] .how-it-works { padding: 30px 25px; }
+body.workspace-shell[data-workspace-page=premium] .how-it-works li::before { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=premium] .how-it-works li span { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=premium] .development-fund { gap: 40px; padding: 32px; background: linear-gradient(120deg,#142139,#0d1420 65%); }
+body.workspace-shell[data-workspace-page=premium] .development-fund h2 { color: var(--world-ink); font-size: 32px; }
+body.workspace-shell[data-workspace-page=premium] .development-fund p { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=premium] .fund-wallet { border-color: var(--world-line); }
+
+/* Project launch and individual worlds retain the character of their artwork. */
+body.workspace-shell[data-workspace-page=projects] .projects-main { max-width: 1420px; width: calc(100% - 64px); padding: 42px 0 55px; }
+body.workspace-shell[data-workspace-page=projects] .projects-hero { gap: 38px; padding-bottom: 48px; }
+body.workspace-shell[data-workspace-page=projects] .projects-hero h1 { font-size: clamp(44px,5.5vw,76px); font-weight: 550; letter-spacing: -.06em; line-height: 1.06; }
+body.workspace-shell[data-workspace-page=projects] .projects-hero em { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=projects] .projects-hero p:not(.projects-eyebrow) { color: var(--world-muted); font-size: 15px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=projects] :is(.projects-section-heading,.projects-signature-copy) h2 { font-size: clamp(29px,3.4vw,46px); letter-spacing: -.045em; font-weight: 550; line-height: 1.14; }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path { gap: 15px; }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path article { padding: 26px; background: var(--world-panel); border: 1px solid var(--world-line); border-radius: 12px; box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path article[data-state=next] { border-color: #8caaff65; background: #111e31; }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path article[data-state=complete] { border-color: #81cbaa50; }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path h3 { color: var(--world-ink); font-size: 23px; }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path p { font-size: 13px; color: var(--world-muted); line-height: 1.8; }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path article>span { color: var(--world-blue-light); font-size: 10px; }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path small { color: var(--world-muted); font-size: 12px; }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path [data-state=complete] small { color: #a6dec5; }
+body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path a { color: var(--world-blue-light); font-size: 13px; }
+body.workspace-shell[data-workspace-page=projects] :is(.launch-account,.launch-share-tools,.launch-selector,.projects-research,.projects-pilot) { background-color: var(--world-panel); border-color: var(--world-line); border-radius: 12px; }
+body.workspace-shell[data-workspace-page=projects] .projects-grid { gap: 18px; }
+body.workspace-shell[data-workspace-page=projects] a.project-tile { padding: 27px; border-color: var(--world-line); border-radius: 12px; background: linear-gradient(140deg,#132137,#0d1420 70%); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=projects] a.project-tile:hover { border-color: #8caaff75; background: #132036; }
+body.workspace-shell[data-workspace-page=projects] .project-tile h3 { color: var(--world-ink); font-size: 24px; }
+body.workspace-shell[data-workspace-page=projects] .project-tile p { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=projects] :is(.project-tile-tag,.project-tile-open) { color: var(--world-blue-light); font-size: 11px; }
+body.workspace-shell[data-workspace-page=projects] .projects-signature { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=projects] .projects-signature-copy>p { color: var(--world-muted); font-size: 15px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=projects] .projects-faq details { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=projects] .projects-faq summary { color: var(--world-ink); font-size: 15px; }
+body.workspace-shell[data-workspace-page=projects] .projects-faq p { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=projects] :is(.eco-info,.eco-research,.gatto-about,.gatto-details,.sg-story,.sg-utility) { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=projects] :is(.eco-info,.eco-research) { background: var(--world-panel); border-radius: 12px; }
+body.workspace-shell[data-workspace-page=projects] .eco-info { box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=projects] :is(.eco-description,.eco-source,.eco-status) { color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=projects] :is(.eco-info h1,.eco-info h2) { color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=projects] :is(.eco-view-controls,.sg-controls) { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=projects].viewer :is(.world-copy,.tools) { color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=projects].viewer:not([data-premium-surface=obsidian]) .viewport { background: var(--world-panel); border: 1px solid var(--world-edge); border-radius: 13px; }
+body.workspace-shell[data-workspace-page=projects].viewer main .tools { padding: 25px; border: 1px solid var(--world-line); background: var(--world-panel); border-radius: 12px; }
+
+/* Atlas: an instrument frame around the full, unobstructed world renderer. */
+body.workspace-shell[data-workspace-page=planets] #atlas-main { max-width: 1740px; padding: 38px 32px 55px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-intro { gap: 28px; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--world-line); }
+body.workspace-shell[data-workspace-page=planets] .atlas-intro h1 { margin: 12px 0 15px; font-size: clamp(39px,4vw,58px); font-weight: 540; line-height: 1.08; letter-spacing: -.055em; }
+body.workspace-shell[data-workspace-page=planets] .atlas-intro h1 em { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=planets] .atlas-intro>div>p:last-child { color: var(--world-muted); font-size: 14px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=planets] :is(.atlas-eyebrow,.universe-editorial-kicker,.atlas-intro .atlas-eyebrow) { color: var(--world-blue-light); font-size: 10px; letter-spacing: .13em; }
+body.workspace-shell[data-workspace-page=planets] .atlas-mode-bar { border-color: var(--world-line); padding-bottom: 16px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-mode-bar>p { color: var(--world-muted); font-size: 12px; line-height: 1.75; }
+body.workspace-shell[data-workspace-page=planets] .atlas-segment { border: 1px solid var(--world-line); border-radius: 8px; background: #0a111c; padding: 3px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-segment button { border-color: transparent; border-radius: 5px; color: var(--world-muted); background: transparent; min-height: 38px; font-size: 12px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-segment button[aria-pressed=true] { color: #d2dfff; background: #8caaff17; border-color: #8caaff26; }
+body.workspace-shell[data-workspace-page=planets] :is(.atlas-primary,.atlas-intro-actions .atlas-primary) { color: #0a1530; background: var(--world-blue-light); border: 1px solid #bed1ff; border-radius: 7px; padding: 12px 17px; font-size: 12px; min-height: 44px; box-shadow: inset 0 1px #ffffff25; }
+body.workspace-shell[data-workspace-page=planets] :is(.atlas-primary,.atlas-intro-actions .atlas-primary):hover { background: #cfddff; }
+body.workspace-shell[data-workspace-page=planets] .atlas-intro-actions>a { color: var(--world-soft); font-size: 12px; }
+body.workspace-shell[data-workspace-page=planets] .universe-toolbar { padding: 13px 16px; border: 1px solid var(--world-line); border-radius: 10px; background: var(--world-panel); }
+body.workspace-shell[data-workspace-page=planets] .universe-toolbar form { background: #090f1c; border-color: var(--world-edge); }
+body.workspace-shell[data-workspace-page=planets] .universe-toolbar input { color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=planets] .universe-toolbar form>button { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=planets] :is(.universe-stage,.atlas-observatory) { border-color: var(--world-edge); border-radius: 12px; }
+body.workspace-shell[data-workspace-page=planets] .universe-stage { background-color: #050a13; }
+body.workspace-shell[data-workspace-page=planets] .universe-stage-label { color: var(--world-muted); font-size: 10px; }
+body.workspace-shell[data-workspace-page=planets] :is(.universe-flight-bar,.universe-camera-popover) { background: #0e1828f5; color: var(--world-soft); border-color: var(--world-edge); border-radius: 9px; }
+body.workspace-shell[data-workspace-page=planets] .universe-footer { color: var(--world-muted); font-size: 11px; line-height: 1.7; }
+body.workspace-shell[data-workspace-page=planets] .universe-footer button { color: var(--world-blue-light); font-size: 11px; }
+body.workspace-shell[data-workspace-page=planets] .universe-disclosure { color: var(--world-muted); font-size: 11px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-stage-wrap { background: radial-gradient(ellipse at 60% 40%,#1f3d6820,transparent 70%),#080e18; }
+body.workspace-shell[data-workspace-page=planets] .atlas-inspector { background: var(--world-panel); border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=planets] .atlas-world-title h2 { color: var(--world-ink); font-size: clamp(29px,3vw,41px); font-weight: 500; }
+body.workspace-shell[data-workspace-page=planets] .atlas-inspector>p { color: var(--world-muted); font-size: 13px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=planets] .atlas-world-stat { color: var(--world-muted); border-color: var(--world-line); font-size: 12px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-world-stat strong { color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=planets] .atlas-world-links :is(a,button) { color: var(--world-blue-light); font-size: 11px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-inspector>small { color: var(--world-muted); font-size: 11px; line-height: 1.7; }
+body.workspace-shell[data-workspace-page=planets] .atlas-world-card { background: var(--world-panel); border-color: var(--world-line); border-radius: 10px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-world-card:hover { background: #152239; border-color: #8caaff60; }
+body.workspace-shell[data-workspace-page=planets] .atlas-world-card[aria-pressed=true] { background: #17263e; border-color: #8caaff85; box-shadow: inset 0 -2px var(--world-blue); }
+body.workspace-shell[data-workspace-page=planets] .atlas-world-card strong { color: var(--world-soft); font-size: 11px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-world-card small { color: var(--world-muted); font-size: 10px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-directory-toolbar { padding: 22px; border: 1px solid var(--world-line); border-radius: 11px; background: var(--world-panel); }
+body.workspace-shell[data-workspace-page=planets] .atlas-directory-toolbar label { color: var(--world-muted); font-size: 12px; }
+body.workspace-shell[data-workspace-page=planets] :is(.atlas-directory-toolbar,.atlas-claim-modal,.universe-profile-dialog) :is(input:not([type=checkbox]):not([type=range]):not([type=color]),select,textarea) { color: var(--world-ink); background: #090f1a; border-color: var(--world-edge); border-radius: 7px; color-scheme: dark; }
+body.workspace-shell[data-workspace-page=planets] .atlas-directory-meta { color: var(--world-muted); font-size: 11px; }
+body.workspace-shell[data-workspace-page=planets] :is(.atlas-project-card,.universe-empty,.atlas-empty) { border-color: var(--world-line); background: var(--world-panel); border-radius: 11px; }
+body.workspace-shell[data-workspace-page=planets] :is(.universe-profile-dialog,.atlas-claim-modal) { background: #0b121f; color: var(--world-ink); border-color: var(--world-edge); border-radius: 13px; }
+body.workspace-shell[data-workspace-page=planets] .atlas-showcase-dialog { background: #0b121f; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=planets] :is(.atlas-camera-tools,.atlas-tour-strip,.atlas-showcase-bar) { background: #0e1827; border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=planets] :is(.atlas-lighting>span,.atlas-camera-adjust label,.atlas-camera-tools>p,.atlas-tour-status) { color: var(--world-muted); font-size: 10px; line-height: 1.7; }
+body.workspace-shell[data-workspace-page=planets] :is(.atlas-lighting button[aria-pressed=true],.atlas-tour-actions>button) { color: var(--world-blue-light); border-color: #8caaff35; background: #8caaff0d; }
+body.workspace-shell[data-workspace-page=planets] #atlas-tour[aria-pressed=true] { color: #0b1630; background: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=planets] .atlas-camera-adjust output { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=planets] .atlas-camera-adjust input { accent-color: var(--world-blue); }
+body.workspace-shell[data-workspace-page=planets] .universe-profile { padding: 28px; }
+body.workspace-shell[data-workspace-page=planets] #universe-project-about { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=planets] .universe-project-socials a { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=planets] .universe-feature { background: var(--world-panel); border-color: var(--world-line); border-radius: 13px; box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=planets] .universe-feature-copy { padding: 34px; border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=planets] .universe-feature-copy h3 { color: var(--world-ink); font-weight: 500; }
+body.workspace-shell[data-workspace-page=planets] .universe-feature-copy>p:not(.universe-editorial-kicker) { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=planets] .universe-editorial-actions a { color: var(--world-blue-light); font-size: 12px; }
+body.workspace-shell[data-workspace-page=planets] a.universe-story-primary { background: var(--world-blue-light); color: #0b1630; border-color: var(--world-blue-light); border-radius: 7px; }
+body.workspace-shell[data-workspace-page=planets] .universe-builder { padding: 24px; border: 1px solid var(--world-line); border-radius: 11px; background: #0c1421; }
+body.workspace-shell[data-workspace-page=planets] .universe-builder-copy h3 { color: var(--world-ink); font-weight: 500; }
+body.workspace-shell[data-workspace-page=planets] .universe-builder-copy>p:not(.universe-editorial-kicker) { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=planets] .universe-builder-copy small { color: var(--world-muted); font-size: 11px; }
+body.workspace-shell[data-workspace-page=planets] :is(.universe-editorial-intro,.universe-editorial-policy,.universe-editorial-fineprint) { color: var(--world-muted); font-size: 12px; }
+body.workspace-shell[data-workspace-page=planets] :is(.universe-journal-intro,.universe-story-heading) h1 { color: var(--world-ink); font-weight: 500; }
+body.workspace-shell[data-workspace-page=planets] .universe-story-body p { color: var(--world-soft); }
+body.workspace-shell[data-workspace-page=planets] .universe-story-body h2 { color: var(--world-ink); font-weight: 550; }
+body.workspace-shell[data-workspace-page=planets] :is(.universe-story-note,.universe-story-fieldnotes,.universe-story-share) { border-color: var(--world-line); }
+
+/* Discovery progress remains real; its completed state keeps a distinct green cue. */
+body.workspace-shell[data-workspace-page=discover] .discovery-main { max-width: 1420px; padding: 0 32px 55px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-hero { min-height: 430px; gap: 28px; padding: 45px 0 35px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-hero h1 { font-size: clamp(40px,4.8vw,66px); font-weight: 550; line-height: 1.08; letter-spacing: -.055em; }
+body.workspace-shell[data-workspace-page=discover] .discovery-hero h1 em { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=discover] .discovery-hero-copy>p:not(.discovery-eyebrow) { color: var(--world-muted); font-size: 15px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=discover] .discovery-eyebrow { color: var(--world-blue-light) !important; }
+body.workspace-shell[data-workspace-page=discover] .discovery-tags { color: var(--world-muted); font-size: 11px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-coordinate { color: var(--world-muted); font-size: 10px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-orbit { border-color: #8caaff30; }
+body.workspace-shell[data-workspace-page=discover] .discovery-heading h2 { color: var(--world-ink); font-size: 31px; font-weight: 550; }
+body.workspace-shell[data-workspace-page=discover] .discovery-heading p { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-profile { border-color: #8caaff38; background: linear-gradient(130deg,#14253d,#0e1725 75%); border-radius: 13px; padding: 30px; box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=discover] .discovery-profile p { color: var(--world-muted); font-size: 13px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-progress-ring { background: conic-gradient(var(--world-blue) calc(var(--progress)*1%),#c8d9ff16 0); }
+body.workspace-shell[data-workspace-page=discover] .discovery-progress-core { background: #0c1625; }
+body.workspace-shell[data-workspace-page=discover] .discovery-progress-core small { color: var(--world-muted); font-size: 10px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-level { color: #c1d1ff; border-color: #8caaff45; background: #8caaff0b; font-size: 11px; border-radius: 6px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-missions { gap: 17px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-mission { padding: 28px; border: 1px solid var(--world-line); border-radius: 12px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=discover] .discovery-mission h3 { font-size: 25px; font-weight: 550; letter-spacing: -.04em; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=discover] .discovery-mission p { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-mission .discovery-requirement { border-color: var(--world-line); color: var(--world-soft); font-size: 12px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-step { color: var(--world-blue-light); font-size: 11px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-mission.completed { border-color: #8dd5b445; background: linear-gradient(145deg,#102623,#0d1420 70%); }
+body.workspace-shell[data-workspace-page=discover] .discovery-earned { color: #a5dfc3; font-size: 11px; }
+body.workspace-shell[data-workspace-page=discover] .discovery-faq { gap: 46px; margin-top: 44px; padding-top: 44px; border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=discover] .discovery-faq details { border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=discover] .discovery-faq p { color: var(--world-muted); font-size: 14px; }
+
+/* Utility and project funding use the same editorial rhythm as the workspace. */
+body.workspace-shell[data-workspace-page=utility] main { width: calc(100% - 64px); max-width: 1340px; margin-inline: auto; }
+body.workspace-shell[data-workspace-page=utility] main>.utility-benefits:first-of-type { padding: 44px 0 32px; border-top: 0; border-bottom: 1px solid var(--world-line); }
+body.workspace-shell[data-workspace-page=utility] main>.utility-benefits:first-of-type h1 { font-size: clamp(39px,4.7vw,65px); font-weight: 550; line-height: 1.08; letter-spacing: -.055em; }
+body.workspace-shell[data-workspace-page=utility] :is(.utility-benefits,.utility-hero) .lead { color: var(--world-muted); font-size: 16px; line-height: 1.8; max-width: 750px; }
+body.workspace-shell[data-workspace-page=utility] .utility-hero { padding-block: 50px; }
+body.workspace-shell[data-workspace-page=utility] .utility-hero h1 { font-size: clamp(36px,4.5vw,64px); font-weight: 500; line-height: 1.1; letter-spacing: -.05em; }
+body.workspace-shell[data-workspace-page=utility] .utility-hero h1 em { color: var(--world-blue-light); font: inherit; }
+body.workspace-shell[data-workspace-page=utility] .benefit-grid { gap: 15px; border: 0; overflow: visible; }
+body.workspace-shell[data-workspace-page=utility] .benefit-grid article { padding: 27px; border: 1px solid var(--world-line); border-radius: 12px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=utility] .benefit-grid article:last-child { border: 1px solid #8caaff38; background: linear-gradient(145deg,#14233b,#0d1420 75%); }
+body.workspace-shell[data-workspace-page=utility] .benefit-grid h3 { color: var(--world-ink); font-size: 24px; font-weight: 550; letter-spacing: -.03em; }
+body.workspace-shell[data-workspace-page=utility] .benefit-grid p { color: var(--world-muted); font-size: 14px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=utility] .benefit-grid a { color: var(--world-blue-light); font-size: 13px; }
+body.workspace-shell[data-workspace-page=utility] .benefit-icon { color: var(--world-blue-light); border-color: #8caaff35; background-color: #8caaff0a; border-radius: 9px; }
+body.workspace-shell[data-workspace-page=utility] .utility-price { gap: 40px; padding: 38px; background: radial-gradient(ellipse at 100% 0,#8caaff12,transparent 70%),#101b2d; border-color: #8caaff3b; border-radius: 13px; }
+body.workspace-shell[data-workspace-page=utility] .utility-price h2 { color: var(--world-ink); font-weight: 550; letter-spacing: -.035em; }
+body.workspace-shell[data-workspace-page=utility] .utility-price p { color: var(--world-muted); font-size: 14px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=utility] .price-box { border-color: var(--world-line); color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=utility] .panel-manager { border: 1px solid var(--world-edge); border-radius: 12px; background: var(--world-panel); }
+body.workspace-shell[data-workspace-page=utility] .panel-controls { background: var(--world-panel); border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=utility] .panel-preview { background-color: #090f19; }
+body.workspace-shell[data-workspace-page=utility] .utility-fund { gap: 55px; border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=utility] .utility-fund p { color: var(--world-muted); font-size: 15px; }
+body.workspace-shell[data-workspace-page=development] .fund-shell { width: calc(100% - 64px); max-width: 1340px; }
+body.workspace-shell[data-workspace-page=development] .fund-hero { gap: 40px; padding: 48px 0 35px; }
+body.workspace-shell[data-workspace-page=development] .fund-hero h1 { font-size: clamp(40px,4.8vw,65px); font-weight: 540; line-height: 1.08; letter-spacing: -.055em; }
+body.workspace-shell[data-workspace-page=development] .fund-hero h1 em { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=development] .fund-intro { color: var(--world-muted); font-size: 15px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=development] .fund-purpose { padding: 28px; border-color: var(--world-line); border-radius: 12px; background: linear-gradient(140deg,#14253d,#0d1420); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=development] .fund-purpose p { color: var(--world-soft); font-size: 27px; line-height: 1.45; }
+body.workspace-shell[data-workspace-page=development] .fund-managed { color: var(--world-muted); font-size: 11px; border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=development] main .fund-stats { gap: 14px; background: transparent; border: 0; }
+body.workspace-shell[data-workspace-page=development] main .fund-stats article { padding: 26px; border: 1px solid var(--world-line); border-radius: 11px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=development] main .fund-stats article:first-child { border-color: #8caaff35; background: #111f33; }
+body.workspace-shell[data-workspace-page=development] main .fund-stats strong { color: var(--world-ink); font-size: clamp(30px,3.5vw,44px); font-weight: 500; }
+body.workspace-shell[data-workspace-page=development] main .fund-stats :is(span,small) { color: var(--world-muted); font-size: 12px; line-height: 1.7; }
+body.workspace-shell[data-workspace-page=development] .fund-columns { gap: 20px; }
+body.workspace-shell[data-workspace-page=development] main .fund-panel { padding: 28px; margin-bottom: 20px; border: 1px solid var(--world-line); border-radius: 12px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=development] .fund-panel h2 { color: var(--world-ink); font-size: 25px; font-weight: 550; letter-spacing: -.035em; }
+body.workspace-shell[data-workspace-page=development] .fund-panel>p { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=development] :is(.fund-fine,.fund-panel>p.fund-fine,.fund-note,.fund-toolbar p) { color: var(--world-muted); font-size: 12px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=development] .fund-table-wrap :is(th,td) { border-color: var(--world-line); padding: 15px 10px; font-size: 13px; }
+body.workspace-shell[data-workspace-page=development] .fund-table-wrap th { color: var(--world-soft); }
+body.workspace-shell[data-workspace-page=development] .fund-table-wrap td { color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=development] .fund-address { color: var(--world-blue-light); font-size: 12px; }
+body.workspace-shell[data-workspace-page=development] .fund-empty { border-color: var(--world-edge); background: #111d30; color: var(--world-muted); border-radius: 9px; font-size: 13px; }
+body.workspace-shell[data-workspace-page=development] .fund-expense { background: #0a121f; border-color: var(--world-line); border-radius: 9px; }
+body.workspace-shell[data-workspace-page=development] .fund-expense strong { color: var(--world-ink); font-variant-numeric: tabular-nums; }
+body.workspace-shell[data-workspace-page=development] .fund-thanks p { color: var(--world-soft); font-size: 21px; }
+
+/* Roadmap: measured chapters rather than an undifferentiated long list. */
+body.workspace-shell[data-workspace-page=roadmap] main { max-width: 1400px; margin-inline: auto; }
+body.workspace-shell[data-workspace-page=roadmap] .hero { margin: 28px 32px 0; padding: 52px 45px; min-height: 430px; border: 1px solid var(--world-edge); border-radius: 15px; overflow: hidden; }
+body.workspace-shell[data-workspace-page=roadmap] .hero h1 { font-size: clamp(45px,5.5vw,75px); font-weight: 550; line-height: 1.06; letter-spacing: -.06em; }
+body.workspace-shell[data-workspace-page=roadmap] .hero h1 em { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=roadmap] .cta { color: #0b1630; background: var(--world-blue-light); border-radius: 7px; min-height: 46px; }
+body.workspace-shell[data-workspace-page=roadmap] .cta:hover { background: #cfddff; }
+body.workspace-shell[data-workspace-page=roadmap] .hero .intro { font-size: 17px; line-height: 1.8; color: #c1d0e7; max-width: 520px; }
+body.workspace-shell[data-workspace-page=roadmap] .context { margin: 24px 32px 0; padding: 24px 28px; background: var(--world-panel); border: 1px solid var(--world-line); border-radius: 11px; color: var(--world-muted); font-size: 14px; line-height: 1.8; }
+body.workspace-shell[data-workspace-page=roadmap] .context p { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=roadmap] .context span { color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=roadmap] .gate { border-color: var(--world-blue); }
+body.workspace-shell[data-workspace-page=roadmap] summary span { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=roadmap] .milestone { margin: 0 32px; padding: 38px 20px; grid-template-columns: 58px minmax(0,1fr); gap: 28px; border-color: var(--world-line); }
+body.workspace-shell[data-workspace-page=roadmap] .number { display: grid; place-items: center; width: 50px; height: 50px; border: 1px solid #8caaff32; border-radius: 10px; background: #8caaff09; color: var(--world-blue-light); font-size: 20px; }
+body.workspace-shell[data-workspace-page=roadmap] .milestone h2 { font-size: 31px; font-weight: 550; line-height: 1.15; letter-spacing: -.04em; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=roadmap] .milestone .lead { color: var(--world-soft); font-size: 16px; line-height: 1.7; }
+body.workspace-shell[data-workspace-page=roadmap] .milestone summary { font-size: 14px; color: var(--world-soft); }
+body.workspace-shell[data-workspace-page=roadmap] .milestone details p { color: var(--world-muted); font-size: 14px; }
+body.workspace-shell[data-workspace-page=roadmap] .milestone .try { font-size: 13px; color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=roadmap] .status { border-radius: 5px; font-size: 10px; letter-spacing: .1em; padding: 6px 9px; }
+body.workspace-shell[data-workspace-page=roadmap] .status.next { background: #8caaff10; color: #bdcfff; border-color: #8caaff45; }
+body.workspace-shell[data-workspace-page=roadmap] .status.later { background: #aabbd40a; color: #afbed5; border-color: #aabbd430; }
+body.workspace-shell[data-workspace-page=roadmap] .closing { margin: 0 32px 35px; padding: 38px; max-width: none; border: 1px solid var(--world-line); border-radius: 13px; background: linear-gradient(135deg,#14243b,#0d1420 75%); }
+body.workspace-shell[data-workspace-page=roadmap] .closing h2 { font-size: clamp(32px,4vw,50px); line-height: 1.1; font-weight: 500; letter-spacing: -.045em; }
+body.workspace-shell[data-workspace-page=roadmap] .closing>p:not(.eyebrow) { color: var(--world-muted); font-size: 15px; line-height: 1.8; max-width: 720px; }
+
+/* SolHandle: a clear identity workflow with equally clear permission boundaries. */
+body.workspace-shell[data-workspace-page=solhandle] .solhandle-main { max-width: 1320px; padding: 50px 32px 60px; }
+body.workspace-shell[data-workspace-page=solhandle] .sh-kicker { color: var(--world-blue-light); font-size: 10px; letter-spacing: .14em; }
+body.workspace-shell[data-workspace-page=solhandle] .solhandle-main h1 { font-size: clamp(38px,4.7vw,66px); line-height: 1.09; font-weight: 540; letter-spacing: -.05em; max-width: 970px; }
+body.workspace-shell[data-workspace-page=solhandle] .solhandle-main h1 span { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=solhandle] .solhandle-main .sh-intro { color: var(--world-muted); font-size: 16px; line-height: 1.85; max-width: 740px; }
+body.workspace-shell[data-workspace-page=solhandle] .sh-links { gap: 12px 24px; align-items: center; }
+body.workspace-shell[data-workspace-page=solhandle] .sh-links a { min-height: 44px; display: inline-flex; align-items: center; font-size: 13px; }
+body.workspace-shell[data-workspace-page=solhandle] .solhandle-main a:not(.sh-button) { color: var(--world-blue-light); }
+body.workspace-shell[data-workspace-page=solhandle] main .sh-lookup { margin-block: 32px; padding: 32px; border: 1px solid #8caaff3d; border-radius: 13px; background: radial-gradient(ellipse at 100% 0,#8caaff10,transparent 70%),var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=solhandle] .sh-lookup h2 { font-size: 28px; line-height: 1.25; letter-spacing: -.04em; font-weight: 550; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=solhandle] .sh-lookup p { font-size: 14px; line-height: 1.8; color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=solhandle] .sh-lookup form { margin-top: 22px; gap: 10px; }
+body.workspace-shell[data-workspace-page=solhandle] .sh-grid { gap: 16px; margin: 24px 0; }
+body.workspace-shell[data-workspace-page=solhandle] main .sh-grid article { padding: 27px; border: 1px solid var(--world-line); border-radius: 12px; background: var(--world-panel); box-shadow: var(--world-shadow); }
+body.workspace-shell[data-workspace-page=solhandle] .sh-grid h2 { font-size: 23px; font-weight: 550; line-height: 1.2; letter-spacing: -.035em; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=solhandle] .sh-grid p { font-size: 14px; line-height: 1.85; color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=solhandle] .sh-scope { margin-top: 34px; padding: 30px; background: #0b121e; border: 1px solid var(--world-line); border-radius: 12px; color: var(--world-muted); }
+body.workspace-shell[data-workspace-page=solhandle] .sh-scope h2 { font-size: 25px; font-weight: 500; letter-spacing: -.03em; color: var(--world-ink); }
+body.workspace-shell[data-workspace-page=solhandle] .sh-scope p { font-size: 14px; line-height: 1.85; max-width: 900px; }
+body.workspace-shell[data-workspace-page=solhandle] :is(.sh-lookup button,.sh-button) { background: var(--world-blue-light); color: #0b1630; border: 1px solid #bed1ff; border-radius: 7px; padding: 12px 18px; min-height: 46px; font-size: 13px; font-weight: 600; }
+body.workspace-shell[data-workspace-page=solhandle] :is(.sh-lookup button,.sh-button):hover { background: #cfddff; }
+
+/* Action styling is explicit so decorative swatches, canvas controls and state labels remain intact. */
+body.workspace-shell[data-workspace-page=studio] main .primary,
+body.workspace-shell[data-workspace-page=projects].viewer main .primary,
+body.workspace-shell[data-workspace-page=premium] main :is(.primary,.button.primary),
+body.workspace-shell[data-workspace-page=discover] main .discovery-primary,
+body.workspace-shell[data-workspace-page=projects] main .projects-primary,
+body.workspace-shell[data-workspace-page=development] main .fund-button.primary {
+  background: var(--world-blue-light); color: #0b1630; border-color: #bed1ff; border-radius: 7px;
+  font-weight: 600; min-height: 46px; box-shadow: inset 0 1px #ffffff25;
+}
+body.workspace-shell[data-workspace-page=studio] main .primary:hover:not(:disabled),
+body.workspace-shell[data-workspace-page=projects].viewer main .primary:hover:not(:disabled),
+body.workspace-shell[data-workspace-page=premium] main :is(.primary,.button.primary):hover:not(:disabled),
+body.workspace-shell[data-workspace-page=discover] main .discovery-primary:hover:not(:disabled),
+body.workspace-shell[data-workspace-page=projects] main .projects-primary:hover,
+body.workspace-shell[data-workspace-page=development] main .fund-button.primary:hover:not(:disabled) { background: #ccdaff; color: #0b1630; }
+body.workspace-shell[data-workspace-page=discover] main .discovery-button:not(.discovery-primary),
+body.workspace-shell[data-workspace-page=development] main .fund-button:not(.primary) { background: #142035; border-color: var(--world-edge); color: var(--world-soft); border-radius: 7px; }
+body.workspace-shell:is([data-workspace-page=premium],[data-workspace-page=projects]) .planet-leaders { border-color: var(--world-line); background: var(--world-panel); border-radius: 12px; }
+
+@media (max-width:1280px) {
+  body.workspace-shell[data-workspace-page=creator] .creator-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  body.workspace-shell[data-workspace-page=discover] .discovery-mission { padding: 23px; }
+  body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path article { padding: 23px; }
+  body.workspace-shell[data-workspace-page=premium] .signature-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  body.workspace-shell[data-workspace-page=premium] .signature-art { height: 210px; }
+  body.workspace-shell[data-workspace-page=solhandle] .sh-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  body.workspace-shell[data-workspace-page=solhandle] .sh-grid article:last-child { grid-column: 1 / -1; }
+}
+@media (max-width:1100px) {
+  body.workspace-shell[data-workspace-page=studio] main { width: calc(100% - 40px); }
+  body.workspace-shell[data-workspace-page=studio] .workspace { grid-template-columns: minmax(260px,.9fr) minmax(0,1.1fr); gap: 15px; }
+  body.workspace-shell[data-workspace-page=studio] main .stage-panel { padding: 20px; }
+  body.workspace-shell[data-workspace-page=premium] .hero { align-items: flex-start; flex-direction: column; gap: 24px; }
+  body.workspace-shell[data-workspace-page=premium] .release-note { max-width: none; width: 100%; }
+  body.workspace-shell[data-workspace-page=premium] .design-grid { grid-template-columns: 1.15fr 1fr; }
+  body.workspace-shell[data-workspace-page=premium] .design-panel { padding: 24px; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-missions { grid-template-columns: 1fr; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-mission { padding: 26px; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-mission p { max-width: 720px; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-mission .discovery-button { align-self: flex-start; min-width: 180px; }
+  body.workspace-shell[data-workspace-page=creator] .creator-projects { grid-template-columns: minmax(0,1fr); }
+  body.workspace-shell[data-workspace-page=creator] .creator-update-grid { grid-template-columns: minmax(0,1fr); gap: 26px; }
+  body.workspace-shell[data-workspace-page=creator] .creator-update-history { border-left: 0; border-top: 1px solid var(--world-line); padding: 22px 0 0; }
+  body.workspace-shell[data-workspace-page=planets] .universe-builder-grid { grid-template-columns: 1fr; gap: 14px; }
+}
+@media (max-width:900px), (hover:none) and (pointer:coarse) and (max-width:1100px) {
+  body.workspace-shell[data-workspace-page=creator] .creator-main,
+  body.workspace-shell[data-workspace-page=solhandle] .solhandle-main { padding: 32px 20px 44px; }
+  body.workspace-shell[data-workspace-page=planets] #atlas-main { padding: 30px 20px 44px; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-main { padding: 0 20px 44px; }
+  body.workspace-shell:is([data-workspace-page=premium],[data-workspace-page=utility]) main,
+  body.workspace-shell[data-workspace-page=development] .fund-shell,
+  body.workspace-shell[data-workspace-page=projects] .projects-main { width: calc(100% - 40px); }
+  body.workspace-shell[data-workspace-page=studio] .intro { padding-top: 32px; }
+  body.workspace-shell[data-workspace-page=studio] .studio-steps button { padding-inline: 10px; }
+  body.workspace-shell[data-workspace-page=studio] .workspace { display: flex; flex-direction: column; gap: 18px; }
+  body.workspace-shell[data-workspace-page=studio] .workspace .viewport { position: static; width: 100%; order: -1; }
+  body.workspace-shell[data-workspace-page=studio] .workspace .stage-panel { width: 100%; }
+  body.workspace-shell[data-workspace-page=creator] .creator-heading { align-items: flex-start; flex-wrap: wrap; gap: 18px; }
+  body.workspace-shell[data-workspace-page=creator] .creator-filters label:first-child { max-width: none; }
+  body.workspace-shell[data-workspace-page=creator] main .creator-metrics article { padding: 21px; }
+  body.workspace-shell[data-workspace-page=premium] .design-grid { display: block; }
+  body.workspace-shell[data-workspace-page=premium] .preview-panel { border-right: 0; border-bottom: 1px solid var(--world-line); }
+  body.workspace-shell[data-workspace-page=premium] .features { grid-template-columns: minmax(0,1fr); }
+  body.workspace-shell[data-workspace-page=premium] .features p { max-width: none; }
+  body.workspace-shell[data-workspace-page=premium] .checkout-grid { grid-template-columns: minmax(0,1fr); }
+  body.workspace-shell[data-workspace-page=premium] .development-fund { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  body.workspace-shell[data-workspace-page=premium] .fund-wallet { padding: 20px 0 0; border-left: 0; border-top: 1px solid var(--world-line); }
+  body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path { grid-template-columns: minmax(0,1fr); }
+  body.workspace-shell[data-workspace-page=projects] .projects-launch .projects-path p { min-height: 0; }
+  body.workspace-shell[data-workspace-page=utility] .utility-price { padding: 30px; grid-template-columns: minmax(0,1fr); gap: 24px; }
+  body.workspace-shell[data-workspace-page=development] .fund-columns { grid-template-columns: minmax(0,1fr); gap: 0; }
+  body.workspace-shell[data-workspace-page=development] .fund-hero { grid-template-columns: 1fr; }
+  body.workspace-shell[data-workspace-page=development] .fund-purpose { max-width: none; }
+  body.workspace-shell[data-workspace-page=roadmap] .hero { margin-inline: 20px; padding: 40px 28px; }
+  body.workspace-shell[data-workspace-page=roadmap] :is(.context,.milestone,.closing) { margin-inline: 20px; }
+  body.workspace-shell:is([data-workspace-page=studio],[data-workspace-page=creator],[data-workspace-page=planets],[data-workspace-page=projects],[data-workspace-page=premium],[data-workspace-page=discover],[data-workspace-page=utility],[data-workspace-page=development],[data-workspace-page=roadmap],[data-workspace-page=solhandle]) main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),select,textarea) { font-size: 16px; min-height: 46px; }
+}
+@media (max-width:640px) {
+  body.workspace-shell[data-workspace-page=studio] main,
+  body.workspace-shell:is([data-workspace-page=premium],[data-workspace-page=utility]) main,
+  body.workspace-shell[data-workspace-page=development] .fund-shell,
+  body.workspace-shell[data-workspace-page=projects] .projects-main { width: calc(100% - 32px); }
+  body.workspace-shell[data-workspace-page=creator] .creator-main,
+  body.workspace-shell[data-workspace-page=solhandle] .solhandle-main { padding: 28px 16px 38px; }
+  body.workspace-shell[data-workspace-page=planets] #atlas-main { padding: 25px 16px 38px; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-main { padding: 0 16px 38px; }
+  body.workspace-shell[data-workspace-page=studio] .intro h1 { font-size: 38px; }
+  body.workspace-shell[data-workspace-page=studio] .studio-steps { padding: 4px; gap: 2px; }
+  body.workspace-shell[data-workspace-page=studio] .studio-steps button { flex-direction: column; justify-content: center; min-height: 60px; padding: 9px 4px; gap: 5px; font-size: 11px; }
+  body.workspace-shell[data-workspace-page=studio] .studio-steps button span { font-size: 10px; }
+  body.workspace-shell[data-workspace-page=studio] .flow-heading { padding-block: 22px 18px; }
+  body.workspace-shell[data-workspace-page=studio] .flow-heading h2 { font-size: 22px; }
+  body.workspace-shell[data-workspace-page=studio] main .stage-panel { padding: 22px 19px; }
+  body.workspace-shell[data-workspace-page=studio] .world-copy { padding: 22px; }
+  body.workspace-shell[data-workspace-page=studio] .studio-premium-invite { padding: 22px 18px; }
+  body.workspace-shell[data-workspace-page=creator] main .creator-metrics { gap: 10px; }
+  body.workspace-shell[data-workspace-page=creator] main .creator-metrics article { padding: 19px 16px; }
+  body.workspace-shell[data-workspace-page=creator] main .creator-metrics strong { font-size: 33px; margin: 16px 0 10px; }
+  body.workspace-shell[data-workspace-page=creator] main .creator-panel { padding: 22px 18px; }
+  body.workspace-shell[data-workspace-page=creator] .creator-filters { gap: 14px; padding: 17px; }
+  body.workspace-shell[data-workspace-page=creator] .creator-filters label:first-child { width: 100%; min-width: 0; }
+  body.workspace-shell[data-workspace-page=creator] .creator-filters>span { margin: 0; flex-basis: 100%; }
+  body.workspace-shell[data-workspace-page=creator] .creator-project { padding: 23px 19px; }
+  body.workspace-shell[data-workspace-page=creator] .creator-welcome { padding: 26px 22px; }
+  body.workspace-shell[data-workspace-page=creator] .creator-welcome h2 { font-size: 30px; }
+  body.workspace-shell[data-workspace-page=creator] .creator-panel-head { flex-wrap: wrap; align-items: flex-start; gap: 12px; }
+  body.workspace-shell[data-workspace-page=premium] .hero { padding-block: 34px 28px; }
+  body.workspace-shell[data-workspace-page=premium] .hero h1 { font-size: 43px; }
+  body.workspace-shell[data-workspace-page=premium] .hero .lead { font-size: 15px; }
+  body.workspace-shell[data-workspace-page=premium] .signature-grid { gap: 10px; }
+  body.workspace-shell[data-workspace-page=premium] .signature-grid button { padding: 0 14px 17px; }
+  body.workspace-shell[data-workspace-page=premium] .signature-art { height: 155px; }
+  body.workspace-shell[data-workspace-page=premium] .signature-name { font-size: 17px; }
+  body.workspace-shell[data-workspace-page=premium] .signature-grid small { font-size: 11px; }
+  body.workspace-shell[data-workspace-page=premium] .collection-heading h2 { font-size: 29px; }
+  body.workspace-shell[data-workspace-page=premium] :is(.design-panel,.checkout-card,.invoice-card) { padding: 24px 21px; }
+  body.workspace-shell[data-workspace-page=premium] .preview-caption { padding: 0 21px 24px; align-items: flex-start; flex-wrap: wrap; }
+  body.workspace-shell[data-workspace-page=premium] .features article { padding: 22px; }
+  body.workspace-shell[data-workspace-page=premium] .how-it-works { padding: 20px 10px; }
+  body.workspace-shell[data-workspace-page=premium] .development-fund { padding: 26px 22px; }
+  body.workspace-shell[data-workspace-page=premium] .development-fund h2 { font-size: 29px; }
+  body.workspace-shell[data-workspace-page=projects] .projects-main { padding-top: 28px; }
+  body.workspace-shell[data-workspace-page=projects] .projects-hero h1 { font-size: 44px; }
+  body.workspace-shell[data-workspace-page=projects] .projects-hero { padding-bottom: 28px; }
+  body.workspace-shell[data-workspace-page=projects] a.project-tile { padding: 24px; }
+  body.workspace-shell[data-workspace-page=planets] .atlas-intro h1 { font-size: 38px; }
+  body.workspace-shell[data-workspace-page=planets] .atlas-intro { gap: 20px; padding-bottom: 20px; }
+  body.workspace-shell[data-workspace-page=planets] .atlas-intro-actions { width: 100%; }
+  body.workspace-shell[data-workspace-page=planets] .atlas-intro-actions .atlas-primary { flex: 1; min-height: 46px; }
+  body.workspace-shell[data-workspace-page=planets] .atlas-segment button { font-size: 11px; min-height: 40px; }
+  body.workspace-shell[data-workspace-page=planets] .universe-toolbar { padding: 12px; }
+  body.workspace-shell[data-workspace-page=planets] .atlas-directory-toolbar { padding: 17px; }
+  body.workspace-shell[data-workspace-page=planets] .universe-feature-copy { padding: 25px 22px; }
+  body.workspace-shell[data-workspace-page=planets] .universe-builder { padding: 21px 18px; }
+  body.workspace-shell[data-workspace-page=planets] .universe-profile { padding: 24px 20px; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-hero { padding-top: 32px; min-height: auto; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-hero h1 { font-size: 40px; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-profile { padding: 24px 20px; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-mission { padding: 25px 22px; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-mission .discovery-button { align-self: stretch; }
+  body.workspace-shell[data-workspace-page=discover] .discovery-faq { grid-template-columns: 1fr; gap: 15px; }
+  body.workspace-shell[data-workspace-page=utility] main>.utility-benefits:first-of-type { padding-block: 30px 26px; }
+  body.workspace-shell[data-workspace-page=utility] main>.utility-benefits:first-of-type h1 { font-size: 38px; }
+  body.workspace-shell[data-workspace-page=utility] .benefit-grid { gap: 13px; }
+  body.workspace-shell[data-workspace-page=utility] .benefit-grid article { padding: 25px 22px; }
+  body.workspace-shell[data-workspace-page=utility] .utility-price { padding: 25px 22px; }
+  body.workspace-shell[data-workspace-page=utility] .utility-fund { grid-template-columns: 1fr; gap: 16px; }
+  body.workspace-shell[data-workspace-page=development] .fund-hero { padding-block: 32px 28px; }
+  body.workspace-shell[data-workspace-page=development] .fund-hero h1 { font-size: 39px; }
+  body.workspace-shell[data-workspace-page=development] main .fund-stats { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  body.workspace-shell[data-workspace-page=development] main .fund-stats article { padding: 21px 18px; }
+  body.workspace-shell[data-workspace-page=development] main .fund-stats article:first-child { grid-column: 1 / -1; }
+  body.workspace-shell[data-workspace-page=development] main .fund-panel { padding: 24px 20px; }
+  body.workspace-shell[data-workspace-page=roadmap] .hero { margin: 20px 16px 0; padding: 37px 23px; min-height: 420px; }
+  body.workspace-shell[data-workspace-page=roadmap] .hero h1 { font-size: 45px; }
+  body.workspace-shell[data-workspace-page=roadmap] .hero .intro { font-size: 16px; }
+  body.workspace-shell[data-workspace-page=roadmap] .context { margin: 18px 16px 0; padding: 22px; }
+  body.workspace-shell[data-workspace-page=roadmap] .milestone { margin-inline: 16px; padding: 29px 0; grid-template-columns: 39px minmax(0,1fr); gap: 17px; }
+  body.workspace-shell[data-workspace-page=roadmap] .number { width: 37px; height: 37px; font-size: 16px; border-radius: 8px; }
+  body.workspace-shell[data-workspace-page=roadmap] .milestone h2 { font-size: 27px; }
+  body.workspace-shell[data-workspace-page=roadmap] .milestone .lead { font-size: 15px; }
+  body.workspace-shell[data-workspace-page=roadmap] .closing { margin: 0 16px 25px; padding: 29px 23px; }
+  body.workspace-shell[data-workspace-page=solhandle] .solhandle-main h1 { font-size: 38px; }
+  body.workspace-shell[data-workspace-page=solhandle] .sh-grid { grid-template-columns: 1fr; gap: 13px; }
+  body.workspace-shell[data-workspace-page=solhandle] .sh-grid article:last-child { grid-column: auto; }
+  body.workspace-shell[data-workspace-page=solhandle] main .sh-grid article { padding: 25px 22px; }
+  body.workspace-shell[data-workspace-page=solhandle] main .sh-lookup { padding: 27px 22px; }
+  body.workspace-shell[data-workspace-page=solhandle] .sh-lookup h2 { font-size: 26px; }
+  body.workspace-shell[data-workspace-page=solhandle] .sh-lookup form { display: grid; grid-template-columns: minmax(0,1fr); }
+  body.workspace-shell[data-workspace-page=solhandle] .sh-lookup input { min-width: 0; }
+  body.workspace-shell[data-workspace-page=solhandle] .sh-scope { padding: 25px 22px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  body.workspace-shell:is([data-workspace-page=studio],[data-workspace-page=creator],[data-workspace-page=planets],[data-workspace-page=projects],[data-workspace-page=premium],[data-workspace-page=discover],[data-workspace-page=utility],[data-workspace-page=development],[data-workspace-page=roadmap],[data-workspace-page=solhandle]) main :is(button,a) { transition: none; scroll-behavior: auto; }
+}

@@ -1,5 +1,20 @@
 # Changelog
 
+## Hosted worlds, expeditions and community tools update — 2026-10-28
+
+- Recorded all feature work after v186 through v210, application revision `b92e26dd4c0232b9c7e471a4563d40f01afe12bc`. The complete public export is pinned to subsequent workflow-only v211 source revision `c79c3c7ff8f8e0f2a8a71a62138072a0b7433910`.
+- Added six community showcase destinations with reviewed project and token links, public project-wallet linking controls, editable sharing actions and documentation of the separate website-and-wallet proof process.
+- Refined Atlas spacing, label placement, mobile framing and static fallback behavior; added landing links and separate local expedition memories.
+- Added GATTO's Italian city expedition and SHEEPLE's playable lunar habitat, including explicit discoveries, photo controls, cosmetic stamps, keyboard/touch controls, reduced-motion support and browser-local progress.
+- Brought the curated collection to the approved realistic style: GATTO v207, eleven matching v209 worlds, consistent live/static/card artwork, and distinct versioned share URLs. Six frontal portraits use bounded ±24° turns; scientific worlds and ordinary creator designs retain their existing behavior.
+- Added v210 game materials, refined articulated cat and sheep anatomy, warm architectural surfaces and local lighting, matching Canvas fallbacks, and nonblocking material loading.
+- Refined SolHandle's original creator-world presentation and Studio exports; preserved ownership, saved-style precedence and the distinction between product identities and token tickers. Expanded GATTO's source-reviewed project profile and fixed navigation style interference.
+- Published the public browser implementation, complete world/game runtime assets, original artwork, source provenance, render helpers and focused tests in a separate dated snapshot. Private server work is documented in the release record without exporting backend, authentication or database code.
+- Included 454 exact source exports totaling 86,697,311 bytes and 14 focused browser/rendering test files. Classified all 224 source changes since v186: 207 exported paths and 17 documented source-only changes, with supporting unchanged public dependencies included in the export.
+- Recorded the ongoing release-update policy in the native Site source for v211: keep the public source record tied to each deployed Site revision, with the same reviewed scope and preserved historical snapshots. This workflow update leaves the v210 game runtime unchanged.
+- Retained the source's v192/v193 community-showcase notes byte-for-byte as historical documentation; the new release record describes the current catalog, artwork and sharing behavior.
+- See the [worlds and expeditions release record](docs/updates/worlds-expeditions-2026-10-28.md) and its [source snapshot](platform-updates/worlds-expeditions-2026-10-28/).
+
 ## Hosted workspace update — 2026-10-25
 
 - Recorded shipped work through version 186: My Workspace, consistent navigation, simpler Gold and research pages, Premium Worlds mobile layout and eight textured thumbnails.
