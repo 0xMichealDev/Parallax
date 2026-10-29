@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "terminal-trenches-validation-2026-10-29",
+  "latestRelease": "terminal-trenches-workspace-2026-10-29",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -17,6 +17,10 @@
     {
       "id": "terminal-trenches-validation-2026-10-29",
       "manifest": "platform-updates/terminal-trenches-validation-2026-10-29/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "terminal-trenches-workspace-2026-10-29",
+      "manifest": "platform-updates/terminal-trenches-workspace-2026-10-29/PUBLIC-SYNC.json"
     }
   ]
 }

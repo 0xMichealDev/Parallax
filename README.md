@@ -22,8 +22,8 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 
 | Workspace | Purpose | Guide |
 | --- | --- | --- |
-| **Terminal** | Inspect selected pools, readable cap/FDV/price charts, holder observations and trades. | [Terminal upgrade](docs/updates/terminal-trenches-2026-10-29.md) |
-| **Trenches** | Compare fresh launches, curves near graduation and indexed graduated tokens. | [Trenches guide](docs/updates/terminal-trenches-2026-10-29.md) |
+| **Terminal** | Inspect selected pools, readable cap/FDV/price charts, holder observations and trades. | [Market workspace](docs/updates/terminal-trenches-workspace-2026-10-29.md) |
+| **Trenches** | Scan fresh launches, curves near graduation and indexed graduated tokens with density controls and local pins. | [Trenches guide](docs/updates/terminal-trenches-workspace-2026-10-29.md) |
 | **Replay** | Rewind recent pool activity, inspect loaded swaps and share captured evidence. | [Replay update](docs/updates/replay-2026-10-28.md) |
 | **Project Passports** | Collect, save and compare token research snapshots with source context. | [Passports](https://parallaxlaunch.live/docs/passports) |
 | **Wallet Watch** | Inspect wallet activity and keep saved watches tied to exact addresses. | [Wallet Watch](https://parallaxlaunch.live/docs/wallet-watch) |
@@ -32,11 +32,11 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 | **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-**Latest platform update:** [Terminal and Trenches validation follow-up](docs/updates/terminal-trenches-validation-2026-10-29.md), hosted v216, records a Node.js compact-currency fixture compatibility correction at native revision `610995b2368af062314d4e41ad24be8ce0207ea3`. The [new snapshot](platform-updates/terminal-trenches-validation-2026-10-29/) exports the one changed test and its two unchanged browser inputs; hosted runtime behavior is unchanged.
+**Latest platform update:** [Terminal and Trenches market workspace](docs/updates/terminal-trenches-workspace-2026-10-29.md), hosted v217, records native revision `fddfd0fac87276fe1806c05255f9899bdbd7a62f`. Terminal and Trenches share a compact midnight-and-iris workspace with a wider chart, denser discovery columns, density controls, local pins, copy-contract actions and keyboard search.
 
-The [Terminal and Trenches feature release](docs/updates/terminal-trenches-2026-10-29.md) introduced readable market-cap/FDV/price charts, holder observations, safe project links and a three-stage launch-discovery board. Its complete 49-file source snapshot remains intact. Market cap and FDV remain distinct; historical valuation estimates disclose their current supply basis, and discovery reflects the indexed provider sample.
+Discovery opens a broader bounded sample, retains exact token/pool links and gives each loaded page's observations their own age. The [new 50-file snapshot](platform-updates/terminal-trenches-workspace-2026-10-29/) exports all changed browser assets and focused fixtures while summarizing private service changes. The [original Terminal and Trenches feature record](docs/updates/terminal-trenches-2026-10-29.md) and [v216 fixture correction](docs/updates/terminal-trenches-validation-2026-10-29.md) remain intact.
 
-The public gate retains every existing suite and runs the corrected selection fixture from the new immutable snapshot. All six earlier retained directories preserve their published bytes and provenance.
+The public gate preserves every earlier suite and adds `npm run check:market-workspace`. All seven earlier snapshot/archive directories retain their published bytes and provenance. Market cap and FDV remain distinct; historical valuation estimates disclose their current supply basis, and discovery remains a cached indexed provider sample.
 
 ## What you can inspect here
 

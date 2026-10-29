@@ -1,5 +1,16 @@
 # Changelog
 
+## Terminal and Trenches market workspace — hosted v217
+
+- Recorded source `fddfd0fac87276fe1806c05255f9899bdbd7a62f` after synchronized v216 `610995b2368af062314d4e41ad24be8ce0207ea3`.
+- Unified the market pages with a midnight palette, iris accents, mint/rose activity colors and compact navigation. Refined the Terminal market strip, discovery collapse, chart focus and keyboard search.
+- Rebuilt Trenches around denser columns, Compact/Comfortable views, up to 20 local pins, pinned filtering, copy-contract actions and exact market handoffs.
+- Expanded bounded opening discovery and deeper-source coverage while retaining lifecycle proof, cached provider observations, cooldowns and explicit loading limits.
+- Added per-page row snapshot ages and older-observation indicators; preserved interaction-held refresh ordering, hidden-tab/pause behavior and prior data on source failures.
+- Published 50 exact files (1,090,727 bytes), classifying all 20 native changes as 15 changed exports and 5 private summaries, with 35 unchanged dependencies.
+- Added `npm run check:market-workspace` without removing existing public suites. Preserved all seven older snapshot/archive directories and their fingerprints.
+- See the [release record](docs/updates/terminal-trenches-workspace-2026-10-29.md) and [source snapshot](platform-updates/terminal-trenches-workspace-2026-10-29/).
+
 ## Terminal and Trenches validation follow-up — hosted v216
 
 - Recorded source `610995b2368af062314d4e41ad24be8ce0207ea3` after synchronized v215 `3b66a88e96d75b23ccf3ac46a55bebef258a7eb5`.
