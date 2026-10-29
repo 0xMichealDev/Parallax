@@ -22,7 +22,8 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 
 | Workspace | Purpose | Guide |
 | --- | --- | --- |
-| **Terminal** | Discover markets, inspect charts and bonding progress, and review trades. | [October 24 update](docs/updates/terminal-2026-10-24.md) |
+| **Terminal** | Inspect selected pools, readable cap/FDV/price charts, holder observations and trades. | [Terminal upgrade](docs/updates/terminal-trenches-2026-10-29.md) |
+| **Trenches** | Compare fresh launches, curves near graduation and indexed graduated tokens. | [Trenches guide](docs/updates/terminal-trenches-2026-10-29.md) |
 | **Replay** | Rewind recent pool activity, inspect loaded swaps and share captured evidence. | [Replay update](docs/updates/replay-2026-10-28.md) |
 | **Project Passports** | Collect, save and compare token research snapshots with source context. | [Passports](https://parallaxlaunch.live/docs/passports) |
 | **Wallet Watch** | Inspect wallet activity and keep saved watches tied to exact addresses. | [Wallet Watch](https://parallaxlaunch.live/docs/wallet-watch) |
@@ -31,11 +32,11 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 | **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-**Latest platform update:** [PARALLAX Replay — October 28, 2026](docs/updates/replay-2026-10-28.md), hosted v212, adds a public timeline for recent Solana pool activity: completed candle closes, loaded swaps, sender totals, source links and captured replay sharing. The [Replay snapshot](platform-updates/replay-2026-10-28/) records source `71ab595e472670c98b5b047b1bd3b8ba2da690e0`. Coverage is explicit: one selected pool, up to 300 recent indexed trades, and snapshots with a fixed seven-day lifetime.
+**Latest platform update:** [Terminal and Trenches — October 29, 2026](docs/updates/terminal-trenches-2026-10-29.md), hosted v215, introduces readable selected-market valuation charts and a separate three-stage launch-discovery board. The [source snapshot](platform-updates/terminal-trenches-2026-10-29/) records native revision `3b66a88e96d75b23ccf3ac46a55bebef258a7eb5`. Market cap and FDV remain distinct; historical valuations disclose their current supply basis, and lifecycle discovery depends on provider evidence.
 
-The new snapshot contains **37 exact exports totaling 492,664 bytes**, including two focused offline test files and 21 unchanged shared dependencies. All 22 native changed paths since v211 are represented: 16 exact changed exports and 6 private source-only summaries.
+The snapshot contains **49 exact exports totaling 1,018,782 bytes**, including 31 unchanged reviewed dependencies. All 26 native changed paths since v212 are represented: 18 exact exports and 8 private source-only summaries. Holder freshness, safe provider-listed project links, missing values and bounded provider coverage stay explicit.
 
-The earlier [worlds and expeditions](docs/updates/worlds-expeditions-2026-10-28.md), [workspace](docs/updates/workspace-2026-10-25.md) and [Terminal](docs/updates/terminal-2026-10-24.md) source snapshots remain available with their original provenance and contents.
+Earlier [Replay](docs/updates/replay-2026-10-28.md), [worlds and expeditions](docs/updates/worlds-expeditions-2026-10-28.md), [workspace](docs/updates/workspace-2026-10-25.md) and [Terminal](docs/updates/terminal-2026-10-24.md) snapshots retain their original bytes and provenance.
 
 ## What you can inspect here
 
@@ -46,6 +47,8 @@ The earlier [worlds and expeditions](docs/updates/worlds-expeditions-2026-10-28.
 **Worlds and games.** Inspect the production planet renderer, curated catalogs, GATTO and SHEEPLE scenes and controllers, material loading, Canvas fallbacks, local travel logs and accessibility behavior. The [worlds snapshot](platform-updates/worlds-expeditions-2026-10-28/) includes the original generated artwork, runtime textures, fallback renders, icons and social cards, with source attribution and reproduction helpers.
 
 **Replay evidence.** Inspect the playback controller, completed-candle timing, sender aggregation, exact capture links, retry behavior and clear missing-data states. The public browser tests use fixtures; hosted provider services remain private.
+
+**Trading and launch discovery.** Inspect the separate cap, FDV and price transformations, execution-marker invariants, provider-labeled metadata, stage filters and browser request lifecycle. Public tests use fixtures and do not require a wallet or provider credentials.
 
 **Executable checks.** Fixture tests exercise ownership transfers, invalid records, missing handles, provider failures and browser request races. Dated snapshots add focused browser and rendering checks. Provenance verification compares exported files with their recorded source hashes.
 

@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-29",
+  "releaseId": "terminal-trenches-2026-10-29",
+  "sourceRepository": "native-sites",
+  "baselineCommit": "71ab595e472670c98b5b047b1bd3b8ba2da690e0",
+  "sourceRevision": "3b66a88e96d75b23ccf3ac46a55bebef258a7eb5",
+  "hostedVersion": 215,
+  "scope": "Terminal and Trenches browser implementation, reviewed templates and shared navigation presentation, public documentation and offline fixtures; private hosted implementation is summarized only.",
+  "copyMethod": "Exact regular Git blobs from the recorded deployed revision, preserving source-relative paths and executable modes.",
+  "publicReleaseRecord": "../../docs/updates/terminal-trenches-2026-10-29.md",
+  "totals": {
+    "exportedFiles": 49,
+    "exportedBytes": 1018782,
+    "nativeChangedPaths": 26,
+    "changedPathsExported": 18,
+    "sourceOnlyChangedPaths": 8,
+    "unchangedDependencies": 31
+  },
+  "reviewedPresentationSources": [
+    "app/workspace-shell.ts"
+  ],
+  "sourceOnlyChanges": [
+    {
+      "path": "app/terminal-data.ts",
+      "status": "M",
+      "summary": "Private provider normalization adds source-labeled project links, holder observation details and explicit launch-completion and migration evidence; unsupported and contradictory records remain unknown."
+    },
+    {
+      "path": "app/terminal-service.ts",
+      "status": "M",
+      "summary": "Private hosted service supplies coherent exact-pool valuation and price observations, bounded launch-lifecycle discovery, provider metadata and shared caching and quota behavior. Transport, runtime bindings and service implementation remain native."
+    },
+    {
+      "path": "app/terminal/route.ts",
+      "status": "M",
+      "summary": "Hosted Terminal page assembly updates the versioned route stylesheet; native hosting and page-response implementation remain private."
+    },
+    {
+      "path": "app/trenches/route.ts",
+      "status": "A",
+      "summary": "Hosted Trenches route assembles the shared shell and its page styles without publishing native deployment routing."
+    },
+    {
+      "path": "scripts/test-terminal-prebond.mjs",
+      "status": "M",
+      "summary": "Private lifecycle fixtures exercise incomplete, near-graduation and graduated classifications without inferring completion from names or trading activity."
+    },
+    {
+      "path": "scripts/test-terminal-upgrade.mjs",
+      "status": "A",
+      "summary": "Private upgrade fixtures verify normalized safe project metadata, coherent valuation observations and launch-discovery service contracts; service dependencies remain native."
+    },
+    {
+      "path": "scripts/test-terminal-worker.mjs",
+      "status": "M",
+      "summary": "Private service integration fixtures verify provider response handling, request bounds, shared caches and endpoint behavior."
+    },
+    {
+      "path": "scripts/test-terminal.mjs",
+      "status": "M",
+      "summary": "Private normalization fixtures verify provider candles, launch-state evidence and source identity; excluded application imports remain private."
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    }
+  ],
+  "files": [
+    {
+      "path": "app/home.html",
+      "sha256": "e6b8ada01d577e133bab1ee92ae09bfdbcde62d3daa815c8f88c8dc33824671f",
+      "bytes": 14439
+    },
+    {
+      "path": "app/terminal.html",
+      "sha256": "4368de331c976bbe1903cca56110162101f2880f58287798ef7a4d665c99e2bd",
+      "bytes": 28895
+    },
+    {
+      "path": "app/trenches.html",
+      "sha256": "06410d17e597f240005350695f28b350f95fe011accc740476c7824d29764eec",
+      "bytes": 15999
+    },
+    {
+      "path": "app/workspace-shell.ts",
+      "sha256": "309c8901074b47ebfe08f437ec8794a11a64e0b712118542ac5cece7e8e3fa9a",
+      "bytes": 26093
+    },
+    {
+      "path": "docs/terminal-trenches.md",
+      "sha256": "9039742b8dd85aca12b3ecdb1f262c4b395c7c8c09288239298aa63168d38f7b",
+      "bytes": 5755
+    },
+    {
+      "path": "public/dashboard-pro.css",
+      "sha256": "85adb55a6928f907a58def8bf58347c83e71c314f0c0bb9e90ba793e9e56404b",
+      "bytes": 43087
+    },
+    {
+      "path": "public/dashboard-pro.js",
+      "sha256": "e998f4c75dc2f0deee45224633e11d1e41041274fc4e49685a51c95b29acaff4",
+      "bytes": 7576
+    },
+    {
+      "path": "public/dashboard-refresh.css",
+      "sha256": "ec7decd7d0e8f54cebe28eff5ce630104ab663921a9a01967f463f3ca8b0798e",
+      "bytes": 44361
+    },
+    {
+      "path": "public/favicon.svg",
+      "sha256": "03924d9226e597e9fb341f06b26fd8f6fc1b6ba2f5e03d04a501754a97cc10aa",
+      "bytes": 284
+    },
+    {
+      "path": "public/gold-experience.css",
+      "sha256": "4fa1f0427923d2cff71574ebe8a2a7a31a1f23eef700a80a4fda7ecc74c1ab63",
+      "bytes": 9331
+    },
+    {
+      "path": "public/gold-experience.js",
+      "sha256": "a5291cc45afcaff2d60c5a3f827bdc63ae54770349d90acaea1060c84497c89f",
+      "bytes": 4045
+    },
+    {
+      "path": "public/navigation-clean.css",
+      "sha256": "661c5ee48fb11b3438849fb146cae13884dc26c18c187e0c5cd80c1dd5a9e2c8",
+      "bytes": 2491
+    },
+    {
+      "path": "public/observatory-design.css",
+      "sha256": "ef16a5e4f3265181f17e159b16d3b480072bd8ff866ede34467f5310d6d740a3",
+      "bytes": 8861
+    },
+    {
+      "path": "public/obsidian-theme.css",
+      "sha256": "cc331ddc084c8db1f2e6fbc1ca366804b9f6f40e59f6a8b9409a31694e74ee92",
+      "bytes": 18574
+    },
+    {
+      "path": "public/pro-membership.css",
+      "sha256": "98657bef60ee7e91ebbc353d262b8e1d67a2a73edb15336469cc365af99ec7c8",
+      "bytes": 2177
+    },
+    {
+      "path": "public/pro-membership.js",
+      "sha256": "66984545562fed941def2b651aba26071b33de22970bfee6ceace1fc74d4deec",
+      "bytes": 2905
+    },
+    {
+      "path": "public/research-utils.js",
+      "sha256": "77250633d72c6daae7d0cbea1df0d74511ed7a0a6a61ab3c6c8780c39fb08c1f",
+      "bytes": 2862
+    },
+    {
+      "path": "public/site-polish.css",
+      "sha256": "f675fce2508fc38ffb429f234ed7ad76f7fdf4ac8321fee759647a99aacbfa84",
+      "bytes": 1462
+    },
+    {
+      "path": "public/site-stats.js",
+      "sha256": "25b5ea8bca2f921222290b358c0e1e60c6705266e377b64e1dd55e5ef3c5fe75",
+      "bytes": 3390
+    },
+    {
+      "path": "public/solhandle-identity.css",
+      "sha256": "377de6865bfe73579e9b714e14d906ee2e8f21e5cbe0eec62a766ccd6baa5264",
+      "bytes": 3144
+    },
+    {
+      "path": "public/solhandle-identity.js",
+      "sha256": "523332b96815125ed39b00bb50dc4860c0e75739f1f8fc9f18aa0cca7aa159a3",
+      "bytes": 8297
+    },
+    {
+      "path": "public/terminal-chart.js",
+      "sha256": "819696d7d8fb4176d2d5724991b5a775f9920fa735c781e0641615bbbf0fa34d",
+      "bytes": 4510
+    },
+    {
+      "path": "public/terminal-console.css",
+      "sha256": "1539b260515c825397bb68e3a8b205871fa99ce381deeae468857d4c21d445b7",
+      "bytes": 65367
+    },
+    {
+      "path": "public/terminal-plus.js",
+      "sha256": "77b14ba8531da7341cd3beec974d338a4e94b4c0be9c3fa0e546524e3f76225e",
+      "bytes": 10335
+    },
+    {
+      "path": "public/terminal-premium.css",
+      "sha256": "499075c454406bab84e45463ee992751ec03e799a14db8f830e87ec8b74eebe9",
+      "bytes": 84060
+    },
+    {
+      "path": "public/terminal-pulse.js",
+      "sha256": "fa8872f1bea04962066ee413d2b83f0e26d8f034c271168eaa21cab4f6e0416d",
+      "bytes": 7306
+    },
+    {
+      "path": "public/terminal-saved.js",
+      "sha256": "227b2c5005b215360eaf3e69c2b1aa2bbbe681a6ba974246302af9a93e81add0",
+      "bytes": 8987
+    },
+    {
+      "path": "public/terminal-workspace.js",
+      "sha256": "488a070db9b478127117aed4ad65e4b8a9ffb30e10e739f9a5bbe49acc112632",
+      "bytes": 5949
+    },
+    {
+      "path": "public/terminal.css",
+      "sha256": "639d1091501e32192491c863c7213992758ddd1bfa9d7ab692210428126ed3a2",
+      "bytes": 28774
+    },
+    {
+      "path": "public/terminal.js",
+      "sha256": "f8478e7c06a7790ac30be7ee97ffb26bcbb6668276cbd0bda2609b07cdbc9063",
+      "bytes": 61686
+    },
+    {
+      "path": "public/trading-desk.css",
+      "sha256": "af4e087feeeb80508e1aafd0729bc29fec7bd64354d2dfac88bf08b914d8a392",
+      "bytes": 18018
+    },
+    {
+      "path": "public/trading-desk.js",
+      "sha256": "8bd4381d50b514b4acf9e7c4a1145a23ff7c5e2d6b7805a26bb575b7647e3eb0",
+      "bytes": 34847
+    },
+    {
+      "path": "public/trenches-core.js",
+      "sha256": "2d64843fe7ed6a3c9a61ccd2786a39ca7fe58bc4f43a109410b3471af74d2d9c",
+      "bytes": 8947
+    },
+    {
+      "path": "public/trenches.css",
+      "sha256": "6ff0ff6b98066a2996d9132823b5389786e1618417532b5202de1ac29f632e7b",
+      "bytes": 23384
+    },
+    {
+      "path": "public/trenches.js",
+      "sha256": "660cfaf003c75a298ef7a050ee2aea9617e97da68d9ccf9c0785b15d2b782c0e",
+      "bytes": 26011
+    },
+    {
+      "path": "public/vendor/lightweight-charts-5.0.9.js",
+      "sha256": "e6bd6516d9ab9cb897c0d6438e3fe1126f2fdce07e68c23836e84d527de81f52",
+      "bytes": 182311
+    },
+    {
+      "path": "public/vendor/lightweight-charts-LICENSE.txt",
+      "sha256": "70c9d5382506dd184465425c08a99ad9bd6d9ac1313c252968ba0b585e5ef823",
+      "bytes": 11347
+    },
+    {
+      "path": "public/workspace-hub.css",
+      "sha256": "1b26bc410faf0c846f8c434bc4bd9a5432939cc718157a10767ec6ae2b787af8",
+      "bytes": 3653
+    },
+    {
+      "path": "public/workspace-premium.css",
+      "sha256": "e6ba790d52376b4ebde3944c0a684563bc1c3fa79f83f6ba89ad6955df683714",
+      "bytes": 41012
+    },
+    {
+      "path": "public/workspace-shell.css",
+      "sha256": "01d878ad580228b50f6f18c6e1a4ec7b3a2085abb4f17c2065a1555d530f56f8",
+      "bytes": 14484
+    },
+    {
+      "path": "public/workspace-usability.css",
+      "sha256": "01281ad7bee4f12ef64de044e21ebda785faa62bc392db387c1cc42beb1ea6ed",
+      "bytes": 11456
+    },
+    {
+      "path": "public/workspace-usability.js",
+      "sha256": "6667e344899a6b2d76a72cbe335ce66568928dadf7655f0cc66c0f8aba8e0d2c",
+      "bytes": 5175
+    },
+    {
+      "path": "scripts/test-terminal-selection.mjs",
+      "sha256": "f4f5b5289bb9c6af434940f6037446682877f1e647524619a0a460acb2267e73",
+      "bytes": 10546
+    },
+    {
+      "path": "scripts/test-terminal-ui.mjs",
+      "sha256": "515f9c9c95b08891a43c63044cc0e7e02ff73ab7afe3cc1f93f0288b599ffa0f",
+      "bytes": 51303
+    },
+    {
+      "path": "scripts/test-trenches-ui.mjs",
+      "sha256": "730909c5c17ecca5827b299397a2398d356fb65a8ee0754720163dcdfa679bee",
+      "bytes": 13637
+    },
+    {
+      "path": "tests/terminal-amount.test.cjs",
+      "sha256": "928bec496f23a8e4326eb71731edfde7760a454302948ad7b4978d94fb8abbbd",
+      "bytes": 1006
+    },
+    {
+      "path": "tests/terminal-chart.test.cjs",
+      "sha256": "9c89478c5b4bd37f6b63576222da6fe248507aa4415e21eb2efc90384f28d415",
+      "bytes": 14979
+    },
+    {
+      "path": "tests/terminal-workspace.test.cjs",
+      "sha256": "1e2dc4806de73bdbbcb4981a915e1e6ed561663833824a82749c5068318f515d",
+      "bytes": 9007
+    },
+    {
+      "path": "tests/trenches-core.test.cjs",
+      "sha256": "111757f8cffcad9089d2943e23bb54ea562d69fedbc34620ac802383c7d068e2",
+      "bytes": 6657
+    }
+  ]
+}

@@ -1,5 +1,16 @@
 # Changelog
 
+## Hosted Terminal and Trenches update — 2026-10-29
+
+- Recorded hosted v215, source `3b66a88e96d75b23ccf3ac46a55bebef258a7eb5`, after synchronized v212.
+- Refined Terminal with graphite surfaces, jade/coral charts, a prominent reported valuation, indexed holder freshness and safe provider-listed website/social links.
+- Added explicit Market cap, FDV and Price chart views with readable currency units and a disclosed coherent current-supply estimate. Preserved raw candles, volume, quote-currency entry lines and actual execution prices.
+- Added the separate three-stage Trenches board with independent filters, sorting, device-local preferences, freshness and exact token/pool links into Terminal.
+- Kept launch completion and migration dependent on provider evidence; missing metrics and incomplete indexed coverage remain visible.
+- Published 49 exact files (1,018,782 bytes), classifying all 26 native changes as 18 changed exports and 8 private summaries, with 31 unchanged dependencies.
+- Added `npm run check:terminal-trenches` to the public gate. Preserved all five earlier retained directories and their fingerprints.
+- See the [release record](docs/updates/terminal-trenches-2026-10-29.md) and [source snapshot](platform-updates/terminal-trenches-2026-10-29/).
+
 ## Hosted Replay update — 2026-10-28
 
 - Recorded hosted v212, native source `71ab595e472670c98b5b047b1bd3b8ba2da690e0`, continuing from synchronized v211.

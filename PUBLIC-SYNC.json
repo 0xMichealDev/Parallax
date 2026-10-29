@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "replay-2026-10-28",
+  "latestRelease": "terminal-trenches-2026-10-29",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -9,6 +9,10 @@
     {
       "id": "replay-2026-10-28",
       "manifest": "platform-updates/replay-2026-10-28/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "terminal-trenches-2026-10-29",
+      "manifest": "platform-updates/terminal-trenches-2026-10-29/PUBLIC-SYNC.json"
     }
   ]
 }
