@@ -1,0 +1,23 @@
+/* Task-based navigation: primary destinations first, secondary tools grouped. */
+body.workspace-shell .dashboard-sidebar{padding:25px 14px 18px;background:#0c1418}
+body.workspace-shell .dashboard-sidebar>.sidebar-caption{margin:16px 11px 23px;font-size:8px;letter-spacing:.1em}
+body.workspace-shell .dashboard-sidebar nav{gap:3px}
+body.workspace-shell .dashboard-sidebar nav>a{font-size:12px;min-height:44px;padding:10px 12px}
+body.workspace-shell .dashboard-sidebar .nav-group{border:0;border-top:1px solid #c0d9d61a;margin:14px 0 0;padding-top:9px;background:none;border-radius:0}
+body.workspace-shell .nav-group>summary{display:flex;align-items:center;justify-content:space-between;list-style:none;cursor:pointer;min-height:44px;padding:11px 12px;color:#b8c8c9;font:500 12px/1.5 Inter,system-ui,sans-serif;border-radius:7px}
+body.workspace-shell .nav-group>summary::-webkit-details-marker{display:none}
+body.workspace-shell .nav-group>summary>span{color:#7f9a9b;font-size:16px;transition:transform .15s}
+body.workspace-shell .nav-group[open]>summary>span{transform:rotate(180deg)}
+body.workspace-shell .nav-group>summary:hover{background:#bdded309;color:#e2f1e8}
+body.workspace-shell .nav-group>summary:focus-visible{outline:2px solid #b9ead7;outline-offset:2px}
+body.workspace-shell .nav-group nav{padding:0 0 3px 7px}
+body.workspace-shell .nav-group nav>a{font-size:11px;min-height:42px;padding:10px;gap:9px}
+body.workspace-shell .nav-group nav>a svg{width:15px;height:15px;opacity:.7}
+body.workspace-shell .dashboard-sidebar a.sidebar-custom{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;font:11px/1.5 Inter,system-ui,sans-serif;color:#8fa8a7;margin:13px 3px 16px;padding:9px}
+body.workspace-shell .sidebar-custom:hover{color:#c9e7d9}
+body.workspace-shell .sidebar-bottom{margin-top:auto;font-size:10px;padding-top:18px}
+body.workspace-shell .sidebar-bottom small{font-size:8px}
+body.workspace-shell .dashboard-search{min-width:210px}
+body.workspace-shell .tool-directory>a[hidden]{display:none!important}
+@media(max-width:760px){body.workspace-shell .dashboard-search{min-width:0}.workspace-shell>.mobile-dock{border-radius:12px;box-shadow:0 5px 22px #0006}.workspace-shell>.mobile-dock>a{font-size:10px}.workspace-shell>.mobile-dock>a[data-open-tools]{color:#c7e1d7}.workspace-shell .dashboard-command .tool-directory a{min-height:64px}}
+body.workspace-shell .dashboard-sidebar>:is(nav,details,.sidebar-custom,.sidebar-bottom){flex-shrink:0}

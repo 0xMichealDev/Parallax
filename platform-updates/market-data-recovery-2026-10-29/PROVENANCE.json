@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-29",
+  "releaseId": "market-data-recovery-2026-10-29",
+  "sourceRepository": "native-sites",
+  "baselineCommit": "fddfd0fac87276fe1806c05255f9899bdbd7a62f",
+  "sourceRevision": "33f8c23fa4aca7e181f4713531a066f6ac5c822a",
+  "hostedVersion": 220,
+  "scope": "Reviewed Terminal and Trenches browser recovery behavior, shared presentation dependencies, documentation and offline fixtures; private provider services and dependent server fixtures are summarized.",
+  "copyMethod": "Exact committed Git blobs with original source-relative paths and executable modes; no native working-tree copy.",
+  "publicReleaseRecord": "../../docs/updates/market-data-recovery-2026-10-29.md",
+  "totals": {
+    "exportedFiles": 52,
+    "exportedBytes": 1122725,
+    "nativeChangedPaths": 15,
+    "changedPathsExported": 10,
+    "sourceOnlyChangedPaths": 5,
+    "unchangedDependencies": 42
+  },
+  "reviewedPresentationSources": [
+    "app/workspace-shell.ts"
+  ],
+  "sourceOnlyChanges": [
+    {
+      "path": "app/terminal-service.ts",
+      "status": "M",
+      "summary": "Adds strictly verified included-credit grants after the base local allowance, shared inspection/grant coordination, bounded provider selection, atomic request accounting and retained read-only discovery/chart observations. Private capacity diagnostics never expose account figures or credentials in public responses. Provider cooldowns, exact-pool verification and transaction boundaries remain enforced; service and database implementation remain private."
+    },
+    {
+      "path": "scripts/test-market-recovery-worker.mjs",
+      "status": "A",
+      "summary": "Native Worker and D1 fixtures exercise credit-aware recovery in the actual runtime, shared reservations/inspection coordination, provider isolation, retained observations, expiry and exact-pool rejection. The suite depends on excluded server and database implementation and is not exported."
+    },
+    {
+      "path": "scripts/test-market-recovery.mjs",
+      "status": "A",
+      "summary": "Native service fixtures exercise verified credit grants, concurrency and revalidation boundaries, provider selection, recovery retention and failure handling. The suite depends on private service implementation and is not exported."
+    },
+    {
+      "path": "scripts/test-terminal-prebond.mjs",
+      "status": "M",
+      "summary": "Updates native pre-bond discovery fixtures for atomic reservations and actual upstream accounting. The suite depends on private provider and database implementation."
+    },
+    {
+      "path": "scripts/test-terminal.mjs",
+      "status": "M",
+      "summary": "Updates native terminal-service fixtures for paid-provider request accounting and the bounded public recovery path. The suite depends on excluded service implementation."
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    }
+  ],
+  "files": [
+    {
+      "path": "app/terminal.html",
+      "sha256": "78c00e74c6de9e37442f9528175eca3f3cdac8805ffbac68b36ca8c234c0529a",
+      "bytes": 29341
+    },
+    {
+      "path": "app/trenches.html",
+      "sha256": "8f97ac33bb698b9e3dde2fd446e20920ed46d0f2c83959bb2feee8626f571cda",
+      "bytes": 18148
+    },
+    {
+      "path": "app/workspace-shell.ts",
+      "sha256": "309c8901074b47ebfe08f437ec8794a11a64e0b712118542ac5cece7e8e3fa9a",
+      "bytes": 26093
+    },
+    {
+      "path": "docs/coingecko-connection.md",
+      "sha256": "28f15da4895af6490f87590678ee356ee179f2e0794cfb94f443aa22c363f9e6",
+      "bytes": 7291
+    },
+    {
+      "path": "docs/terminal-trenches.md",
+      "sha256": "1f5d93ccde20f5db4c3ca19b76730fae5e2184229a3faeca267fb75cbecac130",
+      "bytes": 15466
+    },
+    {
+      "path": "public/dashboard-pro.css",
+      "sha256": "85adb55a6928f907a58def8bf58347c83e71c314f0c0bb9e90ba793e9e56404b",
+      "bytes": 43087
+    },
+    {
+      "path": "public/dashboard-pro.js",
+      "sha256": "e998f4c75dc2f0deee45224633e11d1e41041274fc4e49685a51c95b29acaff4",
+      "bytes": 7576
+    },
+    {
+      "path": "public/dashboard-refresh.css",
+      "sha256": "ec7decd7d0e8f54cebe28eff5ce630104ab663921a9a01967f463f3ca8b0798e",
+      "bytes": 44361
+    },
+    {
+      "path": "public/favicon.svg",
+      "sha256": "03924d9226e597e9fb341f06b26fd8f6fc1b6ba2f5e03d04a501754a97cc10aa",
+      "bytes": 284
+    },
+    {
+      "path": "public/gold-experience.css",
+      "sha256": "4fa1f0427923d2cff71574ebe8a2a7a31a1f23eef700a80a4fda7ecc74c1ab63",
+      "bytes": 9331
+    },
+    {
+      "path": "public/gold-experience.js",
+      "sha256": "a5291cc45afcaff2d60c5a3f827bdc63ae54770349d90acaea1060c84497c89f",
+      "bytes": 4045
+    },
+    {
+      "path": "public/market-workspace.css",
+      "sha256": "2dac0d3fd6c3398a524149d98efe5e015e4e297ee6be7434a08a378816fd13a5",
+      "bytes": 4118
+    },
+    {
+      "path": "public/navigation-clean.css",
+      "sha256": "661c5ee48fb11b3438849fb146cae13884dc26c18c187e0c5cd80c1dd5a9e2c8",
+      "bytes": 2491
+    },
+    {
+      "path": "public/observatory-design.css",
+      "sha256": "ef16a5e4f3265181f17e159b16d3b480072bd8ff866ede34467f5310d6d740a3",
+      "bytes": 8861
+    },
+    {
+      "path": "public/obsidian-theme.css",
+      "sha256": "cc331ddc084c8db1f2e6fbc1ca366804b9f6f40e59f6a8b9409a31694e74ee92",
+      "bytes": 18574
+    },
+    {
+      "path": "public/pro-membership.css",
+      "sha256": "98657bef60ee7e91ebbc353d262b8e1d67a2a73edb15336469cc365af99ec7c8",
+      "bytes": 2177
+    },
+    {
+      "path": "public/pro-membership.js",
+      "sha256": "66984545562fed941def2b651aba26071b33de22970bfee6ceace1fc74d4deec",
+      "bytes": 2905
+    },
+    {
+      "path": "public/research-utils.js",
+      "sha256": "77250633d72c6daae7d0cbea1df0d74511ed7a0a6a61ab3c6c8780c39fb08c1f",
+      "bytes": 2862
+    },
+    {
+      "path": "public/site-polish.css",
+      "sha256": "f675fce2508fc38ffb429f234ed7ad76f7fdf4ac8321fee759647a99aacbfa84",
+      "bytes": 1462
+    },
+    {
+      "path": "public/site-stats.js",
+      "sha256": "25b5ea8bca2f921222290b358c0e1e60c6705266e377b64e1dd55e5ef3c5fe75",
+      "bytes": 3390
+    },
+    {
+      "path": "public/solhandle-identity.css",
+      "sha256": "377de6865bfe73579e9b714e14d906ee2e8f21e5cbe0eec62a766ccd6baa5264",
+      "bytes": 3144
+    },
+    {
+      "path": "public/solhandle-identity.js",
+      "sha256": "523332b96815125ed39b00bb50dc4860c0e75739f1f8fc9f18aa0cca7aa159a3",
+      "bytes": 8297
+    },
+    {
+      "path": "public/terminal-chart.js",
+      "sha256": "1f64eb484563381fd8f62a898f40d820b921b20cc2c503dc36005912d1035e9c",
+      "bytes": 4510
+    },
+    {
+      "path": "public/terminal-console.css",
+      "sha256": "1539b260515c825397bb68e3a8b205871fa99ce381deeae468857d4c21d445b7",
+      "bytes": 65367
+    },
+    {
+      "path": "public/terminal-plus.js",
+      "sha256": "56acaa6d288e036012504130bec9d14a1b9be6c090a39c7cdb7cd22a2615dc8d",
+      "bytes": 13228
+    },
+    {
+      "path": "public/terminal-premium.css",
+      "sha256": "499075c454406bab84e45463ee992751ec03e799a14db8f830e87ec8b74eebe9",
+      "bytes": 84060
+    },
+    {
+      "path": "public/terminal-pro.css",
+      "sha256": "c21020fd781b3254a2b69e6d99e5371aa2ef190fe9f66e4b38b289493b5793b9",
+      "bytes": 46841
+    },
+    {
+      "path": "public/terminal-pulse.js",
+      "sha256": "fa8872f1bea04962066ee413d2b83f0e26d8f034c271168eaa21cab4f6e0416d",
+      "bytes": 7306
+    },
+    {
+      "path": "public/terminal-saved.js",
+      "sha256": "227b2c5005b215360eaf3e69c2b1aa2bbbe681a6ba974246302af9a93e81add0",
+      "bytes": 8987
+    },
+    {
+      "path": "public/terminal-workspace.js",
+      "sha256": "5cb9b74a30783e542626d927458541f7af5512581cd66d0786395176fe8c9707",
+      "bytes": 7282
+    },
+    {
+      "path": "public/terminal.css",
+      "sha256": "639d1091501e32192491c863c7213992758ddd1bfa9d7ab692210428126ed3a2",
+      "bytes": 28774
+    },
+    {
+      "path": "public/terminal.js",
+      "sha256": "b3cae6b4f892d9d0faf7caa53118c04baa6a53376e938d0a5efe2010053c482d",
+      "bytes": 62456
+    },
+    {
+      "path": "public/trading-desk.css",
+      "sha256": "af4e087feeeb80508e1aafd0729bc29fec7bd64354d2dfac88bf08b914d8a392",
+      "bytes": 18018
+    },
+    {
+      "path": "public/trading-desk.js",
+      "sha256": "fc0d086a13e92e518f1d445456799442cf8cd7979ac020a6278e10d4e7ac49f3",
+      "bytes": 34848
+    },
+    {
+      "path": "public/trenches-core.js",
+      "sha256": "4a517847ee8310e5ddb6f6bcc668921683da9b6487cac035d67745ad9fc7edce",
+      "bytes": 10103
+    },
+    {
+      "path": "public/trenches.css",
+      "sha256": "ed7ba0c8434e5fe4a225cf2559a96162b50e8bfc637fabc4f5c91724196f39c3",
+      "bytes": 26590
+    },
+    {
+      "path": "public/trenches.js",
+      "sha256": "768a1a6e69a38cd555c0d9630ea633c12d301ef7bfe6772c59da6a7780091521",
+      "bytes": 33934
+    },
+    {
+      "path": "public/vendor/lightweight-charts-5.0.9.js",
+      "sha256": "e6bd6516d9ab9cb897c0d6438e3fe1126f2fdce07e68c23836e84d527de81f52",
+      "bytes": 182311
+    },
+    {
+      "path": "public/vendor/lightweight-charts-LICENSE.txt",
+      "sha256": "70c9d5382506dd184465425c08a99ad9bd6d9ac1313c252968ba0b585e5ef823",
+      "bytes": 11347
+    },
+    {
+      "path": "public/workspace-hub.css",
+      "sha256": "1b26bc410faf0c846f8c434bc4bd9a5432939cc718157a10767ec6ae2b787af8",
+      "bytes": 3653
+    },
+    {
+      "path": "public/workspace-premium.css",
+      "sha256": "e6ba790d52376b4ebde3944c0a684563bc1c3fa79f83f6ba89ad6955df683714",
+      "bytes": 41012
+    },
+    {
+      "path": "public/workspace-shell.css",
+      "sha256": "01d878ad580228b50f6f18c6e1a4ec7b3a2085abb4f17c2065a1555d530f56f8",
+      "bytes": 14484
+    },
+    {
+      "path": "public/workspace-usability.css",
+      "sha256": "01281ad7bee4f12ef64de044e21ebda785faa62bc392db387c1cc42beb1ea6ed",
+      "bytes": 11456
+    },
+    {
+      "path": "public/workspace-usability.js",
+      "sha256": "6667e344899a6b2d76a72cbe335ce66568928dadf7655f0cc66c0f8aba8e0d2c",
+      "bytes": 5175
+    },
+    {
+      "path": "scripts/test-terminal-selection.mjs",
+      "sha256": "d92e05e756d30f1bf89a71be6754eceea89825011be825f03659026f0115a2b4",
+      "bytes": 10743
+    },
+    {
+      "path": "scripts/test-terminal-ui.mjs",
+      "sha256": "c9e376c6714130a207240a1d8877cd4382d8c2d8b26c58bb9dbf8c3eb4c7fb1d",
+      "bytes": 56519
+    },
+    {
+      "path": "scripts/test-trenches-ui.mjs",
+      "sha256": "d60729895370ca7e0c6b57418d7ed21df8381a4bc45acdef2f386b614ac24a8d",
+      "bytes": 23421
+    },
+    {
+      "path": "tests/terminal-amount.test.cjs",
+      "sha256": "928bec496f23a8e4326eb71731edfde7760a454302948ad7b4978d94fb8abbbd",
+      "bytes": 1006
+    },
+    {
+      "path": "tests/terminal-chart.test.cjs",
+      "sha256": "5a937a2d6f9c76f9d7b6072286d72b9e5bd46b1d3b3c41ac449916de1f9efe05",
+      "bytes": 14979
+    },
+    {
+      "path": "tests/terminal-request-budget.test.cjs",
+      "sha256": "501b810d8aca0f00dce1e53d1317c66309418fd3125b9f796aef6dbe7030e32a",
+      "bytes": 9826
+    },
+    {
+      "path": "tests/terminal-workspace.test.cjs",
+      "sha256": "125146a1c771156c4dd6e3d9a0ccac1dd688a75db8c3a550d2e887ea216b8f09",
+      "bytes": 10812
+    },
+    {
+      "path": "tests/trenches-core.test.cjs",
+      "sha256": "84eaa58a1656ce8a57055c4f7ee5040b3e5e1ac6dd4437241f49240c8a3d504c",
+      "bytes": 10373
+    }
+  ]
+}

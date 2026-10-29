@@ -32,11 +32,11 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 | **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-**Latest platform update:** [Terminal and Trenches market workspace](docs/updates/terminal-trenches-workspace-2026-10-29.md), hosted v217, records native revision `fddfd0fac87276fe1806c05255f9899bdbd7a62f`. Terminal and Trenches share a compact midnight-and-iris workspace with a wider chart, denser discovery columns, density controls, local pins, copy-contract actions and keyboard search.
+**Latest platform update:** [Market data recovery](docs/updates/market-data-recovery-2026-10-29.md), hosted v220, records native revision `33f8c23fa4aca7e181f4713531a066f6ac5c822a`. The release addresses the shared application-allowance failure affecting discovery and charts, with strictly verified included-credit grants, bounded provider recovery, honest retained observations and tighter client request behavior.
 
-Discovery opens a broader bounded sample, retains exact token/pool links and gives each loaded page's observations their own age. The [new 50-file snapshot](platform-updates/terminal-trenches-workspace-2026-10-29/) exports all changed browser assets and focused fixtures while summarizing private service changes. The [original Terminal and Trenches feature record](docs/updates/terminal-trenches-2026-10-29.md) and [v216 fixture correction](docs/updates/terminal-trenches-validation-2026-10-29.md) remain intact.
+The [new source snapshot](platform-updates/market-data-recovery-2026-10-29/) exports 52 exact browser, presentation, documentation and fixture files while summarizing private service changes. The [v217 market workspace](docs/updates/terminal-trenches-workspace-2026-10-29.md) remains preserved as its original release record.
 
-The public gate preserves every earlier suite and adds `npm run check:market-workspace`. All seven earlier snapshot/archive directories retain their published bytes and provenance. Market cap and FDV remain distinct; historical valuation estimates disclose their current supply basis, and discovery remains a cached indexed provider sample.
+The public gate appends `npm run check:market-recovery` and preserves every earlier suite. All eight earlier snapshot/archive directories retain their published bytes and provenance. Provider limits and incomplete coverage remain visible; actual account credit figures and credentials remain private.
 
 ## What you can inspect here
 

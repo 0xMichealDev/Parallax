@@ -1,0 +1,22 @@
+/* Shared market workspace. Scoped to Terminal and Trenches only. */
+body.parallax-market-workspace{--market-bg:#0b0d13;--market-panel:#11151e;--market-raised:#181d29;--market-line:#252b3a;--market-text:#edf0f7;--market-muted:#929bb0;--market-accent:#b4a6f5;--market-positive:#71d6b0;--market-negative:#e58ca4;--market-font:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0;padding:0!important;background:var(--market-bg)!important;color:var(--market-text);font-family:var(--market-font);color-scheme:dark}
+.parallax-market-workspace>.dashboard-sidebar,.parallax-market-workspace>.workspace-header,.parallax-market-workspace>.mobile-dock{display:none!important}
+.parallax-market-workspace :is(button,input,select,a,summary):focus-visible{outline:2px solid var(--market-accent);outline-offset:3px}
+.parallax-market-workspace [hidden]{display:none!important}
+.parallax-market-workspace .market-topbar{display:flex;align-items:center;gap:26px;min-height:56px;padding:0 20px;border-bottom:1px solid var(--market-line);background:#0f121a;box-sizing:border-box;flex:none}
+.parallax-market-workspace .market-brand{display:flex;align-items:center;gap:10px;color:var(--market-text);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:2.2px;white-space:nowrap}
+.parallax-market-workspace .market-brand svg{width:29px;height:29px;color:var(--market-accent);fill:none;stroke:currentColor;stroke-width:1.2}
+.parallax-market-workspace .market-nav{display:flex;align-items:stretch;gap:7px;align-self:stretch;position:static;width:auto;height:auto;padding:0;margin:0;border:0;background:none;box-shadow:none}
+.parallax-market-workspace .market-nav>a{display:flex;align-items:center;gap:7px;position:relative;padding:0 13px;text-decoration:none;color:var(--market-muted);font-size:12px;font-weight:550;white-space:nowrap;background:none;border:0;border-radius:0}
+.parallax-market-workspace .market-nav>a:hover{color:var(--market-text)}
+.parallax-market-workspace .market-nav>a[aria-current=page]{color:#d3caff;background:linear-gradient(0deg,#b4a6f50e,transparent)}
+.parallax-market-workspace .market-nav>a[aria-current=page]:after{content:"";position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--market-accent);border-radius:2px}
+.parallax-market-workspace .market-header-actions{display:flex;align-items:center;gap:12px;margin-left:auto}
+.parallax-market-workspace .market-network{display:flex;align-items:center;gap:7px;font-size:10px;color:var(--market-muted);white-space:nowrap}
+.parallax-market-workspace .market-network:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--market-positive)}
+.parallax-market-workspace .market-workspace-link{display:flex;align-items:center;gap:7px;min-height:32px;border:1px solid var(--market-line);border-radius:6px;padding:0 11px;color:#c9cfe0;background:#171b26;text-decoration:none;font-size:11px;white-space:nowrap}
+.parallax-market-workspace .market-workspace-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5}
+.parallax-market-workspace .market-workspace-link:hover{border-color:#665b89;background:#201e31}
+.parallax-market-workspace ::selection{background:#b4a6f540;color:#fff}
+@media(max-width:760px){.parallax-market-workspace .market-topbar{gap:15px;padding:0 13px;min-height:54px}.parallax-market-workspace .market-brand{font-size:11px;letter-spacing:1.4px;gap:7px}.parallax-market-workspace .market-brand svg{width:25px;height:25px}.parallax-market-workspace .market-nav{gap:0}.parallax-market-workspace .market-nav>a{padding:0 10px;font-size:12px}.parallax-market-workspace .market-nav>a[data-market-secondary],.parallax-market-workspace .market-network{display:none}.parallax-market-workspace .market-header-actions{gap:5px}.parallax-market-workspace .market-workspace-link{padding:0 8px;min-height:32px}.parallax-market-workspace .market-workspace-link span{display:none}}
+@media(prefers-reduced-motion:reduce){.parallax-market-workspace{scroll-behavior:auto}.parallax-market-workspace *{animation-duration:.01ms!important;transition-duration:.01ms!important}}

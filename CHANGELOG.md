@@ -1,5 +1,15 @@
 # Changelog
 
+## Market data recovery — hosted v220
+
+- Recorded source `33f8c23fa4aca7e181f4713531a066f6ac5c822a` after synchronized v217 `fddfd0fac87276fe1806c05255f9899bdbd7a62f`, grouping the recovery revisions since that public baseline.
+- Addressed the fixed local allowance stopping market data despite included capacity. Additional paid usage now requires strictly verified, bounded grants with a reserve, revalidation and shared coordination; existing usage counters and billing settings remain intact.
+- Preserved separately bounded public-provider fallback and retained discovery/chart observations with original timestamps and explicit stale labels. Exact token/pool and quote-review requirements remain enforced.
+- Prioritized the selected native chart; bounded Terminal opening discovery and metadata requests, retained deeper observations and respected server retry guidance. Updated asset versions for existing visitors.
+- Published 52 exact files (1,122,725 bytes), classifying all 15 native changes as 10 changed exports and 5 private summaries, with 42 unchanged dependencies.
+- Added the reviewed connection/allowance guide and five offline request-budget checks. Appended `npm run check:market-recovery` and preserved all eight earlier snapshot/archive directories.
+- See the [release record](docs/updates/market-data-recovery-2026-10-29.md) and [source snapshot](platform-updates/market-data-recovery-2026-10-29/).
+
 ## Terminal and Trenches market workspace — hosted v217
 
 - Recorded source `fddfd0fac87276fe1806c05255f9899bdbd7a62f` after synchronized v216 `610995b2368af062314d4e41ad24be8ce0207ea3`.

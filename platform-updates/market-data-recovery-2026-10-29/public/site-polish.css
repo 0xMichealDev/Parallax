@@ -1,0 +1,23 @@
+/* Shared finishing details; page layouts and immersive controls keep their own sizing. */
+.workspace-shell :is(a,button,input,select,textarea,summary):focus-visible{outline:2px solid #b9ead7;outline-offset:4px}
+.workspace-shell :is(input,select,textarea){max-width:100%}
+.workspace-shell :is(.obs-address,.hub-contract code,.tool-directory small){overflow-wrap:anywhere}
+.workspace-shell .mobile-dock a:focus-visible{outline-offset:-2px}
+.workspace-shell .dashboard-command{overscroll-behavior:contain}
+.workspace-shell .tool-directory{scrollbar-gutter:stable;overscroll-behavior:contain}
+.workspace-shell .tool-directory a{min-width:0}
+.workspace-shell .tool-directory a>span:first-child{min-width:0}
+.workspace-shell main :is(section,[id]){scroll-margin-top:20px}
+.workspace-shell #obs-more{display:block;margin:22px auto 0;min-height:44px}
+.workspace-shell #obs-more[hidden]{display:none}
+@media(max-width:760px){
+ body.workspace-shell{padding-bottom:calc(86px + env(safe-area-inset-bottom,0px))}
+ .workspace-shell main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),select,textarea){font-size:16px}
+ .workspace-shell .workspace-header{height:auto;min-height:72px}
+ .workspace-shell .tool-directory small{font-size:12px}
+ .workspace-shell .tool-directory strong{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+ .workspace-shell{scroll-behavior:auto}
+ .workspace-shell .nav-group>summary>span{transition:none}
+}
