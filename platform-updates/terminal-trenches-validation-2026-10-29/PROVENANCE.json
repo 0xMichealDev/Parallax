@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-29",
+  "releaseId": "terminal-trenches-validation-2026-10-29",
+  "sourceRepository": "native-sites",
+  "baselineCommit": "3b66a88e96d75b23ccf3ac46a55bebef258a7eb5",
+  "sourceRevision": "610995b2368af062314d4e41ad24be8ce0207ea3",
+  "hostedVersion": 216,
+  "scope": "One offline Terminal selection assertion corrected for equivalent compact currency formatting, with its two unchanged reviewed browser inputs. No runtime changes.",
+  "copyMethod": "Exact regular Git blobs from the recorded deployed revision, preserving source-relative paths and executable modes.",
+  "publicReleaseRecord": "../../docs/updates/terminal-trenches-validation-2026-10-29.md",
+  "totals": {
+    "exportedFiles": 3,
+    "exportedBytes": 101324,
+    "nativeChangedPaths": 1,
+    "changedPathsExported": 1,
+    "sourceOnlyChangedPaths": 0,
+    "unchangedDependencies": 2
+  },
+  "reviewedPresentationSources": [],
+  "sourceOnlyChanges": [],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    }
+  ],
+  "files": [
+    {
+      "path": "app/terminal.html",
+      "sha256": "4368de331c976bbe1903cca56110162101f2880f58287798ef7a4d665c99e2bd",
+      "bytes": 28895
+    },
+    {
+      "path": "public/terminal.js",
+      "sha256": "f8478e7c06a7790ac30be7ee97ffb26bcbb6668276cbd0bda2609b07cdbc9063",
+      "bytes": 61686
+    },
+    {
+      "path": "scripts/test-terminal-selection.mjs",
+      "sha256": "d92e05e756d30f1bf89a71be6754eceea89825011be825f03659026f0115a2b4",
+      "bytes": 10743
+    }
+  ]
+}

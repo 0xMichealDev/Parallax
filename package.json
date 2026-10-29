@@ -15,7 +15,7 @@
     "check:sync": "node scripts/verify-public-sync.mjs",
     "check:worlds": "cd platform-updates/worlds-expeditions-2026-10-28 && node --test tests/*.test.cjs",
     "check:replay": "cd platform-updates/replay-2026-10-28 && node --test tests/replay-core.test.cjs && node scripts/test-replay-ui.mjs",
-    "check:terminal-trenches": "cd platform-updates/terminal-trenches-2026-10-29 && node tests/terminal-chart.test.cjs && node --test tests/terminal-workspace.test.cjs tests/terminal-amount.test.cjs tests/trenches-core.test.cjs && node scripts/test-terminal-ui.mjs && node scripts/test-terminal-selection.mjs && node scripts/test-trenches-ui.mjs"
+    "check:terminal-trenches": "cd platform-updates/terminal-trenches-2026-10-29 && node tests/terminal-chart.test.cjs && node --test tests/terminal-workspace.test.cjs tests/terminal-amount.test.cjs tests/trenches-core.test.cjs && node scripts/test-terminal-ui.mjs && node scripts/test-trenches-ui.mjs && cd ../terminal-trenches-validation-2026-10-29 && node scripts/test-terminal-selection.mjs"
   },
   "dependencies": {
     "@solana/web3.js": "1.99.0",

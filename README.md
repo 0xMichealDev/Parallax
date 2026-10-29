@@ -32,11 +32,11 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 | **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-**Latest platform update:** [Terminal and Trenches — October 29, 2026](docs/updates/terminal-trenches-2026-10-29.md), hosted v215, introduces readable selected-market valuation charts and a separate three-stage launch-discovery board. The [source snapshot](platform-updates/terminal-trenches-2026-10-29/) records native revision `3b66a88e96d75b23ccf3ac46a55bebef258a7eb5`. Market cap and FDV remain distinct; historical valuations disclose their current supply basis, and lifecycle discovery depends on provider evidence.
+**Latest platform update:** [Terminal and Trenches validation follow-up](docs/updates/terminal-trenches-validation-2026-10-29.md), hosted v216, records a Node.js compact-currency fixture compatibility correction at native revision `610995b2368af062314d4e41ad24be8ce0207ea3`. The [new snapshot](platform-updates/terminal-trenches-validation-2026-10-29/) exports the one changed test and its two unchanged browser inputs; hosted runtime behavior is unchanged.
 
-The snapshot contains **49 exact exports totaling 1,018,782 bytes**, including 31 unchanged reviewed dependencies. All 26 native changed paths since v212 are represented: 18 exact exports and 8 private source-only summaries. Holder freshness, safe provider-listed project links, missing values and bounded provider coverage stay explicit.
+The [Terminal and Trenches feature release](docs/updates/terminal-trenches-2026-10-29.md) introduced readable market-cap/FDV/price charts, holder observations, safe project links and a three-stage launch-discovery board. Its complete 49-file source snapshot remains intact. Market cap and FDV remain distinct; historical valuation estimates disclose their current supply basis, and discovery reflects the indexed provider sample.
 
-Earlier [Replay](docs/updates/replay-2026-10-28.md), [worlds and expeditions](docs/updates/worlds-expeditions-2026-10-28.md), [workspace](docs/updates/workspace-2026-10-25.md) and [Terminal](docs/updates/terminal-2026-10-24.md) snapshots retain their original bytes and provenance.
+The public gate retains every existing suite and runs the corrected selection fixture from the new immutable snapshot. All six earlier retained directories preserve their published bytes and provenance.
 
 ## What you can inspect here
 

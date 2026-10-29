@@ -1,5 +1,13 @@
 # Changelog
 
+## Terminal and Trenches validation follow-up — hosted v216
+
+- Recorded source `610995b2368af062314d4e41ad24be8ce0207ea3` after synchronized v215 `3b66a88e96d75b23ccf3ac46a55bebef258a7eb5`.
+- Corrected one offline selection assertion to accept equivalent compact USD formatting across supported Node.js/ICU versions. Runtime behavior and visual styling are unchanged.
+- Published the changed fixture plus its two unchanged browser inputs as a new immutable snapshot: 3 exact files, 101,324 bytes.
+- Kept all existing Terminal and Trenches suites active and routed the selection suite to the corrected snapshot. Preserved all six earlier retained directories, including v215.
+- See the [release record](docs/updates/terminal-trenches-validation-2026-10-29.md) and [source snapshot](platform-updates/terminal-trenches-validation-2026-10-29/).
+
 ## Hosted Terminal and Trenches update — 2026-10-29
 
 - Recorded hosted v215, source `3b66a88e96d75b23ccf3ac46a55bebef258a7eb5`, after synchronized v212.
