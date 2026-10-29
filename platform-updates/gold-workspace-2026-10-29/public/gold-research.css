@@ -1,0 +1,401 @@
+/* PARALLAX Gold research desk: real evidence, warm materials, focused layouts. */
+/* Legacy themes redeclare aliases on main, so reset the palette at both levels. */
+body.workspace-shell.gold-research-page.gold-workspace[data-workspace-page="control"],
+body.workspace-shell.gold-research-page.gold-workspace[data-workspace-page="control"] main.gold-research-main {
+  --bg: var(--gw-bg, #0d0e10);
+  --panel: var(--gw-panel, #151619);
+  --edge: var(--gw-border, #30302e);
+  --muted: var(--gw-muted, #aaa7a1);
+  --cyan: var(--gw-gold, #dfbd78);
+  --purple: var(--gw-sage, #91c7b1);
+  --text: var(--gw-text, #f0ece4);
+  --research-panel: var(--gw-panel, #151619);
+  --research-raised: var(--gw-panel-raised, #1c1d20);
+  --research-field: #101113;
+  --research-ink: var(--gw-text, #f0ece4);
+  --research-muted: var(--gw-muted, #aaa7a1);
+  --research-line: var(--gw-border, #30302e);
+  --research-line-strong: #dfbd783b;
+  --research-accent: var(--gw-gold, #dfbd78);
+  --research-accent-light: #ecd09a;
+  color: var(--gw-text, #f0ece4);
+  background: var(--bg);
+}
+body.gold-research-page.gold-workspace main.gold-research-main { max-width: 1480px; }
+body.gold-research-page.gold-workspace main > .hero,
+body.gold-research-page.gold-workspace main > .workspace-disclosure { display: none; }
+body.gold-research-page.gold-workspace [role=tabpanel] { padding: 0 0 18px; scroll-margin-top: 110px; }
+body.gold-research-page.gold-workspace main.gold-research-main .tabs {
+  display: flex; flex-wrap: nowrap; gap: 23px; margin: 4px 0 0; padding: 0;
+  overflow-x: auto; scrollbar-width: none; border: 0; border-bottom: 1px solid var(--edge);
+  border-radius: 0; background: none;
+}
+body.gold-research-page.gold-workspace main.gold-research-main .tabs::-webkit-scrollbar { display: none; }
+body.gold-research-page.gold-workspace main.gold-research-main .tabs button {
+  min-height: 49px; padding: 12px 0; flex: 0 0 auto; font-size: 0; border: 0;
+  border-bottom: 2px solid transparent; border-radius: 0; color: var(--muted);
+  background: none; box-shadow: none; text-align: left;
+}
+body.gold-research-page.gold-workspace main.gold-research-main .tabs button span { margin: 0; font-size: 12px; color: inherit; }
+body.gold-research-page.gold-workspace main.gold-research-main .tabs button:hover { color: var(--gw-text, #f0ece4); background: none; }
+body.gold-research-page.gold-workspace main.gold-research-main .tabs button[aria-selected=true] { color: var(--cyan); border-bottom-color: var(--cyan); background: none; box-shadow: none; }
+body.gold-research-page.gold-workspace main.gold-research-main .tabs button[aria-selected=true] span { color: inherit; }
+body.gold-research-page.gold-workspace .research-intro,
+body.gold-research-page.gold-workspace #wallet .watch-intro,
+body.gold-research-page.gold-workspace #passport .passport-intro {
+  display: flex; align-items: center; justify-content: space-between; gap: 34px;
+  margin: 0; padding: 36px 0 30px; background: none;
+}
+body.gold-research-page.gold-workspace .research-intro h1,
+body.gold-research-page.gold-workspace #wallet .watch-intro h1,
+body.gold-research-page.gold-workspace #passport .passport-intro h1 {
+  margin: 12px 0 16px; font-size: clamp(34px, 3.65vw, 53px); letter-spacing: -.055em;
+  line-height: 1.06; font-weight: 500; color: var(--gw-text, #f0ece4);
+}
+body.gold-research-page.gold-workspace .research-intro h1 em,
+body.gold-research-page.gold-workspace #passport .passport-intro h1 em { font-style: normal; color: #c6ae7e; }
+body.gold-research-page.gold-workspace .research-intro p:not(.eyebrow),
+body.gold-research-page.gold-workspace #wallet .watch-intro p:not(.eyebrow),
+body.gold-research-page.gold-workspace #passport .passport-intro p:not(.eyebrow) {
+  margin: 0 0 17px; max-width: 560px; font-size: 14px; line-height: 1.7; color: var(--muted);
+}
+body.gold-research-page.gold-workspace .eyebrow,
+body.gold-research-page.gold-workspace .workspace-head .eyebrow { margin: 0; color: var(--cyan); font-size: 9px; font-weight: 600; letter-spacing: .18em; }
+body.gold-research-page.gold-workspace .research-trust { display: inline-flex; align-items: center; gap: 7px; color: #b8b1a2; font-size: 10px; }
+body.gold-research-page.gold-workspace .research-trust > span { color: var(--cyan); font-size: 16px; }
+body.gold-research-page.gold-workspace .research-title-dot { color: var(--cyan); }
+body.gold-research-page.gold-workspace .research-hero-links { display: grid; gap: 13px; padding-top: 18px; }
+body.gold-research-page.gold-workspace .research-inline-link { color: var(--cyan); font-size: 12px; font-weight: 500; text-underline-offset: 4px; }
+body.gold-research-page.gold-workspace .research-inline-link:hover { text-decoration: underline; }
+body.gold-research-page.gold-workspace .research-muted-link { color: var(--muted); font-size: 11px; }
+body.gold-research-page.gold-workspace main.gold-research-main .button {
+  background: #202124; border: 1px solid #3a3935; border-radius: 8px; color: var(--gw-text, #f0ece4);
+  min-height: 42px; font-size: 12px; font-weight: 550; padding: 11px 16px; box-shadow: none;
+}
+body.gold-research-page.gold-workspace main.gold-research-main .button:hover { background: #2a2925; border-color: #776447; color: #fff5df; }
+body.gold-research-page.gold-workspace main.gold-research-main .button.primary { color: #211a0d; background: #dfbd78; border-color: #dfbd78; }
+body.gold-research-page.gold-workspace main.gold-research-main .button.primary:hover { background: #ecd09a; border-color: #ecd09a; }
+body.gold-research-page.gold-workspace main.gold-research-main .button:disabled { cursor: default; opacity: .45; }
+body.gold-research-page.gold-workspace main.gold-research-main .text-button { color: var(--cyan); font-size: 11px; min-height: 36px; }
+/* Match the legacy field exclusions without raising specificity above local ID rules. */
+body.gold-research-page.gold-workspace main.gold-research-main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),select,textarea) { background: #101113; border: 1px solid #3c3c37; color: var(--gw-text, #f0ece4); border-radius: 8px; font: inherit; }
+body.gold-research-page.gold-workspace input::placeholder,
+body.gold-research-page.gold-workspace textarea::placeholder { color: #797b76; }
+body.gold-research-page.gold-workspace :is(input,select,textarea):focus { border-color: #a28c5f; }
+body.gold-research-page.gold-workspace :is(a,button,input,select,textarea,summary):focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+body.gold-research-page.gold-workspace .pill { color: #c4bda9; background: #dfbd7808; border-color: #dfbd7826; border-radius: 6px; line-height: 1.4; font-size: 10px; }
+body.gold-research-page.gold-workspace .fine,
+body.gold-research-page.gold-workspace .muted { color: var(--muted); }
+body.gold-research-page.gold-workspace .address { color: #adaeaa; font-size: 11px; overflow-wrap: anywhere; }
+body.gold-research-page.gold-workspace .status { color: var(--gw-sage, #91c7b1); font-size: 12px; line-height: 1.7; }
+body.gold-research-page.gold-workspace .status:empty { display: none; }
+body.gold-research-page.gold-workspace .status.error { color: #e0a69d; }
+body.gold-research-page.gold-workspace .notice { padding: 12px 16px; margin: 14px 0; background: #dfbd780a; border-color: #dfbd7828; color: #c8bc9e; }
+body.gold-research-page.gold-workspace .notice a { color: var(--cyan); }
+body.gold-research-page.gold-workspace .research-wallet-grid { display: grid; grid-template-columns: minmax(260px, 320px) minmax(0, 1fr); gap: 22px; align-items: start; }
+body.gold-research-page.gold-workspace .research-wallet-main { grid-column: 2; grid-row: 1; min-width: 0; }
+body.gold-research-page.gold-workspace .research-wallet-sidebar { grid-column: 1; grid-row: 1; min-width: 0; background: var(--panel); border: 1px solid var(--edge); border-radius: 12px; overflow: hidden; }
+body.gold-research-page.gold-workspace #wallet .watch-search { padding: 24px; margin: 0; border: 1px solid #dfbd7836; border-radius: 12px; background: linear-gradient(115deg, #dfbd7807, transparent 75%), #151619; box-shadow: 0 8px 28px #00000010; }
+body.gold-research-page.gold-workspace #wallet .watch-search h2 { font-size: 21px; margin: 0 0 5px; letter-spacing: -.035em; }
+body.gold-research-page.gold-workspace .watch-search-heading { gap: 13px; margin-bottom: 23px; }
+body.gold-research-page.gold-workspace #wallet .watch-search-heading p { color: var(--muted); font-size: 12px; }
+body.gold-research-page.gold-workspace #wallet .watch-step,
+body.gold-research-page.gold-workspace #passport .passport-step { width: 37px; height: 37px; border: 1px solid #dfbd7833; background: #dfbd7808; border-radius: 9px; color: var(--cyan); font: 25px/1 sans-serif; }
+body.gold-research-page.gold-workspace #wallet .watch-search input,
+body.gold-research-page.gold-workspace #passport .passport-search input { min-height: 48px; background: #0d0e10; border-color: #42413a; border-radius: 8px; font-size: 13px; }
+body.gold-research-page.gold-workspace #wallet .watch-search .primary,
+body.gold-research-page.gold-workspace #passport .passport-search .primary { min-height: 48px; padding-inline: 20px; border-radius: 8px; }
+body.gold-research-page.gold-workspace #wallet .watch-search label { color: #c2bfb7; font-size: 11px; }
+body.gold-research-page.gold-workspace .watch-search-note { margin-top: 12px; font-size: 10px; color: #97978d; }
+body.gold-research-page.gold-workspace .watch-save { margin-top: 19px; border-top: 1px solid var(--edge); }
+body.gold-research-page.gold-workspace .watch-save > summary { padding-top: 14px; color: #c8b17e; font-size: 11px; }
+body.gold-research-page.gold-workspace #wallet .watch-save .watch-row { margin: 0; }
+body.gold-research-page.gold-workspace #wallet .watch-list-heading { margin: 0; padding: 22px 20px 15px; display: flex; align-items: flex-start; gap: 8px; }
+body.gold-research-page.gold-workspace #wallet .watch-list-heading h2 { font-size: 21px; letter-spacing: -.035em; margin: 9px 0 8px; }
+body.gold-research-page.gold-workspace #wallet .watch-list-heading p:not(.eyebrow) { margin: 0; font-size: 11px; }
+body.gold-research-page.gold-workspace #wallet .watch-list-heading .pill { margin-top: 3px; padding: 4px 6px; font-size: 9px; white-space: nowrap; }
+body.gold-research-page.gold-workspace .research-list-search { display: flex; align-items: center; gap: 8px; border: 1px solid var(--edge); border-radius: 8px; background: #101113; padding: 0 12px; min-width: 0; }
+body.gold-research-page.gold-workspace .research-wallet-sidebar > .research-list-search { margin: 0 18px; }
+body.gold-research-page.gold-workspace .research-list-search > span { font-size: 21px; line-height: 1; color: #9c967f; }
+body.gold-research-page.gold-workspace .research-list-search:focus-within { border-color: #a28c5f; }
+body.gold-research-page.gold-workspace #research-wallet-filter,
+body.gold-research-page.gold-workspace #research-report-filter { min-width: 0; min-height: 44px; width: 100%; padding: 12px 0; font-size: 12px; border: 0; border-radius: 0; background: transparent; outline-offset: 0; box-shadow: none; }
+body.gold-research-page.gold-workspace .research-list-search kbd { font: 10px/1.3 monospace; color: #8f8f84; border: 1px solid var(--edge); border-radius: 3px; padding: 2px 5px; }
+body.gold-research-page.gold-workspace .research-filter-status { margin: 8px 20px 0; color: #9b9b91; font-size: 10px; }
+body.gold-research-page.gold-workspace .research-filter-status:empty { display: none; }
+body.gold-research-page.gold-workspace #watchlist { gap: 0; padding: 12px 0 0; max-height: 790px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #524c3f transparent; }
+body.gold-research-page.gold-workspace #watchlist > .muted { padding: 28px 23px 40px; margin: 0; font-size: 12px; line-height: 1.8; text-align: left; }
+body.gold-research-page.gold-workspace #wallet .watched-wallet { margin: 0; border: 0; border-top: 1px solid var(--edge); border-radius: 0; background: transparent; }
+body.gold-research-page.gold-workspace #wallet .watched-wallet:hover { background: #dfbd7804; }
+body.gold-research-page.gold-workspace #wallet .saved-row { padding: 20px; border: 0; border-radius: 0; background: transparent; display: block; }
+body.gold-research-page.gold-workspace #wallet .saved-row strong { color: var(--gw-text, #f0ece4); font-size: 16px; letter-spacing: -.02em; margin: 2px 0 8px; }
+body.gold-research-page.gold-workspace #wallet .watch-wallet-mark { width: 32px; height: 32px; border: 1px solid #dfbd7825; background: #dfbd7808; color: var(--cyan); border-radius: 8px; font-size: 19px; margin: 2px 11px 10px 0; }
+body.gold-research-page.gold-workspace #wallet .saved-row .fine { font-size: 10px; }
+body.gold-research-page.gold-workspace #wallet .saved-row .address { font-size: 10px; clear: both; margin: 10px 0; }
+body.gold-research-page.gold-workspace #wallet .saved-row .pill { font-size: 9px; padding: 4px 7px; background: #dfbd7808; }
+body.gold-research-page.gold-workspace #wallet .saved-row .actions { margin-top: 13px; display: flex; justify-content: space-between; gap: 10px; }
+body.gold-research-page.gold-workspace #wallet .saved-row .actions .button { min-height: 36px; padding: 7px 12px; font-size: 11px; }
+body.gold-research-page.gold-workspace #wallet .saved-row .actions .text-button { color: #9d9a92; }
+body.gold-research-page.gold-workspace #wallet .watch-rule-settings { border: 0; }
+body.gold-research-page.gold-workspace #wallet .watch-rule-settings > summary { padding: 0 20px 17px; font-size: 11px; color: #c8b17e; }
+body.gold-research-page.gold-workspace #wallet .watch-rule-settings > summary .fine { display: block; margin: 4px 0 0; color: #8d8f85; font-size: 10px; }
+body.gold-research-page.gold-workspace #wallet .alert-rule { grid-template-columns: 1fr; padding: 18px 20px; background: #101113; border-top: 1px solid var(--edge); border-radius: 0; gap: 12px; }
+body.gold-research-page.gold-workspace #wallet .alert-rule label { color: #b7b2a6; }
+body.gold-research-page.gold-workspace #wallet .alert-rule input,
+body.gold-research-page.gold-workspace #wallet .alert-rule select { font-size: 12px; min-height: 41px; background: #18191b; border-color: var(--edge); }
+body.gold-research-page.gold-workspace #wallet .alert-rule input[type=checkbox] { min-height: auto; accent-color: #dfbd78; }
+body.gold-research-page.gold-workspace .research-watchlist-foot { padding: 16px 20px; border-top: 1px solid var(--edge); display: flex; gap: 9px; color: #93958a; font-size: 10px; line-height: 1.7; }
+body.gold-research-page.gold-workspace .research-watchlist-foot > span { color: var(--cyan); font-size: 16px; }
+body.gold-research-page.gold-workspace #wallet .watch-empty { margin: 0 16px 16px; padding: 24px 16px; background: transparent; border: 1px dashed #dfbd7829; border-radius: 8px; }
+body.gold-research-page.gold-workspace #wallet .watch-empty h3 { font-size: 17px; line-height: 1.3; color: var(--gw-text, #f0ece4); }
+body.gold-research-page.gold-workspace #wallet .watch-empty p { font-size: 11px; }
+body.gold-research-page.gold-workspace .research-snapshot-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 320px; margin-top: 20px; border: 1px solid var(--edge); border-radius: 12px; padding: 30px 28px; background: radial-gradient(ellipse at 50% 0, #dfbd7806, transparent 70%), #121315; text-align: center; }
+body.gold-research-page.gold-workspace .research-snapshot-empty h3 { margin: 10px 0; font-size: 23px; letter-spacing: -.04em; }
+body.gold-research-page.gold-workspace .research-snapshot-empty > p:not(.eyebrow) { max-width: 350px; margin: 0; font-size: 12px; line-height: 1.8; color: var(--muted); }
+body.gold-research-page.gold-workspace .research-radar { position: relative; display: grid; place-items: center; width: 90px; height: 90px; margin-bottom: 20px; }
+body.gold-research-page.gold-workspace .research-radar i { position: absolute; width: 90px; height: 90px; border: 1px solid #dfbd7815; border-radius: 50%; }
+body.gold-research-page.gold-workspace .research-radar i:nth-child(2) { width: 62px; height: 62px; border-color: #dfbd7829; }
+body.gold-research-page.gold-workspace .research-radar i:nth-child(3) { width: 35px; height: 35px; border-color: #dfbd7849; background: #dfbd7806; }
+body.gold-research-page.gold-workspace .research-radar span { color: #dfbd78; font-size: 19px; }
+body.gold-research-page.gold-workspace .research-radar b { position: absolute; top: 20px; right: 16px; width: 5px; height: 5px; background: #dfbd78; border-radius: 50%; box-shadow: 0 0 12px #dfbd7850; }
+body.gold-research-page.gold-workspace .research-empty-capabilities { display: flex; justify-content: center; flex-wrap: wrap; gap: 17px; margin-top: 24px; font-size: 9px; color: #a4a08f; }
+body.gold-research-page.gold-workspace .research-empty-capabilities span:before { content: ''; display: inline-block; height: 3px; width: 3px; border-radius: 50%; background: #b3a783; margin: 0 6px 2px 0; }
+body.gold-research-page.gold-workspace #wallet #wallet-view { margin: 20px 0 0; padding: 26px; border: 1px solid var(--edge); border-radius: 12px; background: var(--panel); scroll-margin-top: 110px; }
+body.gold-research-page.gold-workspace #wallet #wallet-view .report-heading h3 { font-size: 35px; letter-spacing: -.06em; color: var(--gw-text, #f0ece4); margin: 10px 0 12px; }
+body.gold-research-page.gold-workspace #wallet #wallet-view .report-heading .button { min-height: 35px; padding: 7px 12px; }
+body.gold-research-page.gold-workspace #wallet #wallet-view h4 { font-size: 12px; color: #cbc3ad; margin: 26px 0 14px; }
+body.gold-research-page.gold-workspace #wallet .transaction { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 3px 14px; padding: 12px 0; border-color: var(--edge); font-size: 11px; }
+body.gold-research-page.gold-workspace #wallet .transaction a { color: var(--cyan); }
+body.gold-research-page.gold-workspace #wallet .transaction span { color: #adb9ab; text-align: right; font-size: 10px; }
+body.gold-research-page.gold-workspace #wallet .transaction small { grid-column: 1/-1; color: #90958b; font-size: 9px; }
+body.gold-research-page.gold-workspace #wallet .watch-section-label { margin: 34px 0 19px; padding-top: 29px; border-top: 1px solid var(--edge); }
+body.gold-research-page.gold-workspace #wallet .watch-section-label h2 { font-size: 27px; letter-spacing: -.04em; margin: 10px 0; }
+body.gold-research-page.gold-workspace #wallet .watch-section-label > p:last-child { font-size: 12px; }
+body.gold-research-page.gold-workspace #wallet .watch-disclosure { margin: 10px 0; border: 1px solid var(--edge); background: #141517; border-radius: 10px; }
+body.gold-research-page.gold-workspace #wallet .watch-disclosure > summary { padding: 19px 22px; font-size: 13px; }
+/* These summaries already contain their own expanding icon. */
+body.gold-research-page.gold-workspace #wallet .watch-disclosure > summary::after { content: none; display: none; }
+body.gold-research-page.gold-workspace #wallet .watch-summary-note { font-size: 11px; color: #92958b; }
+body.gold-research-page.gold-workspace #wallet .watch-disclosure > .workspace-disclosure-body { padding: 0 22px 22px; }
+body.gold-research-page.gold-workspace #wallet .watch-disclosure .panel { background: #101113; border-color: var(--edge); border-radius: 9px; padding: 20px; }
+body.gold-research-page.gold-workspace #wallet .watch-disclosure .report-heading h3 { color: var(--gw-text, #f0ece4); font-size: 23px; letter-spacing: -.035em; }
+body.gold-research-page.gold-workspace #wallet .watch-footnote { font-size: 10px; color: #96988d; }
+body.gold-research-page.gold-workspace #wallet .delivery-metrics { border-color: var(--edge); background: var(--edge); border-radius: 8px; }
+body.gold-research-page.gold-workspace #wallet .delivery-metrics > div { background: #18191b; }
+body.gold-research-page.gold-workspace #wallet .delivery-metrics strong { color: var(--cyan); }
+body.gold-research-page.gold-workspace #wallet .delivery-checks > div { background: #18191b; border-color: var(--edge); border-radius: 7px; }
+body.gold-research-page.gold-workspace #wallet .delivery-checks b { color: var(--gw-sage, #91c7b1); }
+body.gold-research-page.gold-workspace #wallet .alert-history-controls select { background: #1b1b1b; border-color: var(--edge); }
+body.gold-research-page.gold-workspace #wallet .alert-receipt.needs-attention { color: #d1b27e; }
+body.gold-research-page.gold-workspace .research-intro-note { min-width: 190px; padding: 0 20px; border-left: 1px solid var(--edge); }
+body.gold-research-page.gold-workspace .research-intro-note > span { display: flex; gap: 25px; align-items: center; font: 400 31px/1.5 'Space Grotesk',sans-serif; color: #ddc796; }
+body.gold-research-page.gold-workspace .research-intro-note i { font-size: 20px; color: #6e6e61; font-style: normal; }
+body.gold-research-page.gold-workspace .research-intro-note p { font-size: 11px; margin: 8px 0 0; color: var(--muted); }
+body.gold-research-page.gold-workspace #compare-form { padding: 25px; background: var(--panel); border-color: #dfbd7830; border-radius: 12px; }
+body.gold-research-page.gold-workspace #compare .comparison-selects { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; margin: 0 0 24px; }
+body.gold-research-page.gold-workspace #compare .comparison-selects > div { min-width: 0; border: 1px solid var(--edge); border-radius: 9px; padding: 21px; background: #111214; }
+body.gold-research-page.gold-workspace .research-select-step { display: block; font-size: 9px; letter-spacing: .15em; color: #c9ad74; margin-bottom: 13px; }
+body.gold-research-page.gold-workspace #compare .comparison-selects label { color: #d7d1c1; font-size: 13px; margin-bottom: 12px; }
+body.gold-research-page.gold-workspace #compare .comparison-selects select { width: 100%; font-size: 12px; padding: 12px 10px; background: #1c1d1f; border-color: #3c3c37; border-radius: 7px; text-overflow: ellipsis; }
+body.gold-research-page.gold-workspace .research-comparison-connector { position: absolute; top: calc(50% - 16px); left: calc(50% - 16px); display: grid; place-items: center; width: 32px; height: 32px; color: #c0a366; background: var(--panel); border: 1px solid var(--edge); border-radius: 50%; font-size: 18px; }
+body.gold-research-page.gold-workspace #compare-hint { margin: 17px 0 0; font-size: 11px; }
+body.gold-research-page.gold-workspace .research-comparison-empty { margin-top: 23px; padding: 40px 25px; background: #111214; border: 1px solid var(--edge); border-radius: 12px; }
+body.gold-research-page.gold-workspace .research-comparison-empty h3 { font-size: 24px; color: var(--gw-text, #f0ece4); letter-spacing: -.035em; margin: 10px 0 13px; }
+body.gold-research-page.gold-workspace .research-comparison-empty p:not(.eyebrow) { line-height: 1.8; max-width: 500px; font-size: 12px; color: var(--muted); }
+body.gold-research-page.gold-workspace .research-comparison-empty .research-inline-link { display: inline-block; margin-top: 20px; }
+body.gold-research-page.gold-workspace .research-empty-orbit { display: flex; justify-content: center; align-items: center; margin-bottom: 28px; }
+body.gold-research-page.gold-workspace .research-empty-orbit span { width: 45px; height: 45px; display: grid; place-items: center; border: 1px solid #dfbd7844; color: #ddc796; background: #dfbd7806; border-radius: 50%; font-size: 13px; }
+body.gold-research-page.gold-workspace .research-empty-orbit i { width: 80px; height: 1px; background: repeating-linear-gradient(90deg,#dfbd7855 0 4px,transparent 4px 8px); }
+body.gold-research-page.gold-workspace #comparison-view { background: var(--panel); border: 1px solid var(--edge); border-radius: 12px; padding: 26px; }
+body.gold-research-page.gold-workspace #comparison-view .comparison-times > div { padding: 18px; border-radius: 8px; border: 1px solid var(--edge); background: #101113; }
+body.gold-research-page.gold-workspace #comparison-view .comparison-counts { gap: 9px; }
+body.gold-research-page.gold-workspace #comparison-view .comparison-counts span { background: #1e1f20; border: 1px solid #393a34; color: #bbb9ad; border-radius: 6px; padding: 8px 11px; }
+body.gold-research-page.gold-workspace #comparison-view .comparison-counts .changed { color: #dfbd78; border-color: #dfbd7840; background: #dfbd7808; }
+body.gold-research-page.gold-workspace #comparison-view .comparison-table-wrap { border: 1px solid var(--edge); border-radius: 9px; scrollbar-width: thin; scrollbar-color: #6d6044 #171819; }
+body.gold-research-page.gold-workspace #comparison-view .comparison-table th { background: #202020; color: #c9bb9b; border-color: var(--edge); }
+body.gold-research-page.gold-workspace #comparison-view .comparison-table td { color: #c6c3ba; border-color: var(--edge); }
+body.gold-research-page.gold-workspace #comparison-view .comparison-table tr[data-state=changed] { background: #dfbd7807; }
+body.gold-research-page.gold-workspace #comparison-view .comparison-table caption { background: #151619; color: var(--muted); }
+body.gold-research-page.gold-workspace #comparison-view .summary { background: #dfbd7807; border-color: #dfbd782b; }
+body.gold-research-page.gold-workspace .research-library-toolbar { display: flex; gap: 14px; margin: 0 0 26px; padding: 20px; border: 1px solid var(--edge); border-radius: 10px; background: var(--panel); }
+body.gold-research-page.gold-workspace .research-library-toolbar .research-list-search { flex: 1; }
+body.gold-research-page.gold-workspace .research-library-heading { display: flex; justify-content: space-between; gap: 20px; margin: 0 0 13px; padding: 0 2px; color: #bba87e; font-size: 9px; letter-spacing: .12em; }
+body.gold-research-page.gold-workspace .research-library-heading > span:last-child { color: var(--muted); letter-spacing: 0; }
+body.gold-research-page.gold-workspace #reports-list { gap: 10px; }
+body.gold-research-page.gold-workspace #reports-list > .saved-row { padding: 22px 24px; background: #151619; border: 1px solid var(--edge); border-radius: 10px; gap: 22px; }
+body.gold-research-page.gold-workspace #reports-list > .saved-row:hover { border-color: #6c5d3f; background: #1a1b1b; }
+body.gold-research-page.gold-workspace #reports-list .saved-row > div:first-child { position: relative; min-width: 0; padding-left: 47px; }
+body.gold-research-page.gold-workspace #reports-list .saved-row > div:first-child:before { content: '◇'; position: absolute; left: 0; top: 2px; display: grid; place-items: center; width: 32px; height: 37px; font-size: 21px; border: 1px solid #dfbd7830; border-radius: 5px 8px 8px 5px; background: #dfbd7806; color: #dfbd78; }
+body.gold-research-page.gold-workspace #reports-list strong { display: block; font-size: 16px; color: var(--gw-text, #f0ece4); letter-spacing: -.02em; }
+body.gold-research-page.gold-workspace #reports-list .address { font-size: 10px; }
+body.gold-research-page.gold-workspace #reports-list .fine { font-size: 10px; color: #9a9b90; }
+body.gold-research-page.gold-workspace #reports-list .actions .text-button { padding: 0 8px; color: #a49f93; }
+body.gold-research-page.gold-workspace #reports-list > .muted,
+body.gold-research-page.gold-workspace #reports-list > .empty { margin: 0; padding: 70px 24px; text-align: center; background: #121315; border: 1px solid var(--edge); border-radius: 12px; font-size: 13px; }
+body.gold-research-page.gold-workspace #reports-list > .empty h3 { color: var(--gw-text, #f0ece4); }
+body.gold-research-page.gold-workspace .research-library-note { display: flex; align-items: flex-start; gap: 10px; padding: 17px 0; color: var(--muted); }
+body.gold-research-page.gold-workspace .research-library-note > span { color: var(--cyan); font-size: 20px; }
+body.gold-research-page.gold-workspace .research-library-note p { margin: 3px 0 0; font-size: 11px; line-height: 1.8; }
+body.gold-research-page.gold-workspace .research-library-note a { color: var(--cyan); }
+body.gold-research-page.gold-workspace .research-filter-empty { padding: 38px 24px; color: var(--muted); text-align: center; border: 1px dashed var(--edge); border-radius: 10px; font-size: 12px; }
+body.gold-research-page.gold-workspace .research-wallet-sidebar .research-filter-empty { border: 0; border-top: 1px solid var(--edge); border-radius: 0; margin-top: 16px; }
+body.gold-research-page.gold-workspace .research-filter-empty strong { color: var(--gw-text, #f0ece4); font-size: 15px; font-weight: 500; }
+body.gold-research-page.gold-workspace .research-verify-desk { max-width: 900px; margin: 0 auto; }
+body.gold-research-page.gold-workspace #verify-form { padding: 35px; background: radial-gradient(ellipse at 50% 0, #dfbd7806, transparent 65%), #151619; border: 1px solid #dfbd7835; border-radius: 12px; }
+body.gold-research-page.gold-workspace #verify-form > .eyebrow { margin: 20px 0 12px; }
+body.gold-research-page.gold-workspace #verify-form > label { color: var(--gw-text, #f0ece4); font-size: 21px; line-height: 1.4; letter-spacing: -.025em; }
+body.gold-research-page.gold-workspace .research-file-mark { width: 43px; height: 48px; display: grid; place-items: center; border: 1px solid #dfbd7840; border-radius: 6px 12px 6px 6px; background: #dfbd7807; color: var(--cyan); font-size: 26px; }
+body.gold-research-page.gold-workspace #report-file { margin: 22px 0; padding: 14px; border: 1px dashed #62604e; background: #101113; font-size: 12px; }
+body.gold-research-page.gold-workspace #report-file::file-selector-button { border: 1px solid #4f4c40; border-radius: 5px; padding: 8px 12px; margin-right: 12px; background: #262621; color: #dbd2bb; font: inherit; cursor: pointer; }
+body.gold-research-page.gold-workspace #verify-form > .fine { margin: 20px 0 0; }
+body.gold-research-page.gold-workspace #verify-open-reports { margin: 14px 0 0; }
+body.gold-research-page.gold-workspace #verify .note-panel { background: #121315; border-color: var(--edge); border-radius: 10px; }
+body.gold-research-page.gold-workspace #verify .note-panel h3 { color: #d2c7ad; font-size: 18px; }
+body.gold-research-page.gold-workspace #verify .note-panel p { font-size: 12px; line-height: 1.9; }
+body.gold-research-page.gold-workspace #passport .passport-art { width: 160px; height: 188px; margin-right: 35px; border-color: #a58c55; background: linear-gradient(145deg,#363025,#1b1b19 60%,#272218); color: #e5cca1; box-shadow: 14px 18px 36px #0002, inset 4px 0 #dfbd7812; transform: rotate(7deg); padding: 20px; border-radius: 8px 18px 18px 8px; }
+body.gold-research-page.gold-workspace #passport .passport-art > span { color: #d1b57e; font-size: 7px; letter-spacing: .16em; }
+body.gold-research-page.gold-workspace #passport .passport-art > div { color: #e2c791; font-size: 37px; margin: 10px 0; }
+body.gold-research-page.gold-workspace #passport .passport-art > b { color: #ecddbf; font-size: 12px; }
+body.gold-research-page.gold-workspace #passport .passport-art i { background: #dfbd7838; }
+body.gold-research-page.gold-workspace #passport .passport-art small { display: block; margin-top: 12px; font-size: 5px; letter-spacing: .12em; color: #b3a382; }
+body.gold-research-page.gold-workspace #passport .passport-search { background: linear-gradient(115deg,#dfbd7805,transparent 70%),var(--panel); border: 1px solid #dfbd7830; border-radius: 12px; padding: 27px; }
+body.gold-research-page.gold-workspace #passport .passport-search h2 { font-size: 22px; color: var(--gw-text,#f0ece4); }
+body.gold-research-page.gold-workspace #passport .passport-search-title p { color: var(--muted); font-size: 12px; }
+body.gold-research-page.gold-workspace #passport .passport-help { border-color: var(--edge); }
+body.gold-research-page.gold-workspace #passport .passport-help summary { color: #c1b18a; font-size: 11px; }
+body.gold-research-page.gold-workspace #passport .passport-search-foot { color: var(--muted); }
+body.gold-research-page.gold-workspace #passport .passport-benefits { gap: 20px; }
+body.gold-research-page.gold-workspace #passport .passport-benefits > div { border-top: 1px solid #dfbd7838; padding-top: 22px; }
+body.gold-research-page.gold-workspace #passport .passport-benefits span { color: #b8a478; font-size: 9px; }
+body.gold-research-page.gold-workspace #passport .passport-benefits h3 { color: #e4dfd3; font-size: 19px; }
+body.gold-research-page.gold-workspace #passport .passport-benefits p { color: var(--muted); font-size: 12px; }
+body.gold-research-page.gold-workspace #passport #report-view { margin-top: 23px; padding: 27px; border: 1px solid var(--edge); border-radius: 12px; background: var(--panel); }
+body.gold-research-page.gold-workspace #passport #report-view .metrics { gap: 10px; border: 0; }
+body.gold-research-page.gold-workspace #passport #report-view .metric { padding: 17px; border: 1px solid var(--edge); border-radius: 8px; background: #101113; }
+body.gold-research-page.gold-workspace #passport #report-view .metric:last-child { border-right: 1px solid var(--edge); }
+body.gold-research-page.gold-workspace #passport #report-view .metric label { color: #a49f8f; }
+body.gold-research-page.gold-workspace #passport #report-view .metric strong { color: #ece4cf; }
+body.gold-research-page.gold-workspace #passport #report-view .metric small { color: #8d9287; }
+body.gold-research-page.gold-workspace #passport .passport-report-detail { border: 1px solid var(--edge); border-radius: 8px; margin: 10px 0; background: #111214; }
+body.gold-research-page.gold-workspace #passport .passport-report-detail > summary { padding: 18px 20px; color: #ded3ba; font-size: 13px; }
+body.gold-research-page.gold-workspace #passport .passport-report-detail > summary span { color: #95988b; font-size: 10px; }
+body.gold-research-page.gold-workspace #passport .passport-detail-body { padding: 3px 20px 20px; }
+body.gold-research-page.gold-workspace #passport .report-grid { border-color: var(--edge); }
+body.gold-research-page.gold-workspace #passport .report-grid > div { background: transparent; border-color: var(--edge); }
+body.gold-research-page.gold-workspace #passport .report-grid h4,
+body.gold-research-page.gold-workspace #passport .summary h4 { color: #d4c49e; }
+body.gold-research-page.gold-workspace #passport .report-grid p,
+body.gold-research-page.gold-workspace #passport .report-grid li,
+body.gold-research-page.gold-workspace #passport .summary p { color: #bdbeb3; }
+body.gold-research-page.gold-workspace #passport .snapshot-followup { background: #dfbd7806; border-color: #dfbd7825; color: #cac4b3; }
+body.gold-research-page.gold-workspace #passport .passport-gaps { background: #dfbd7806; border-left-color: #c8a35b; }
+body.gold-research-page.gold-workspace #passport .passport-gaps ul { color: #c1bbaa; }
+body.gold-research-page.gold-workspace #passport .summary { background: #dfbd7806; border-color: #dfbd7833; }
+body.gold-research-page.gold-workspace #passport .fingerprint code { color: #aaa996; }
+body.gold-research-page.gold-workspace .research-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 1120px) {
+  body.gold-research-page.gold-workspace .research-wallet-grid { grid-template-columns: minmax(235px,280px) minmax(0,1fr); gap: 17px; }
+  body.gold-research-page.gold-workspace #wallet .watch-search .input-row { flex-direction: column; gap: 10px; }
+  /* Legacy input flex-basis was a horizontal width; never carry it into a column. */
+  body.gold-research-page.gold-workspace #wallet .watch-search .input-row input { flex: 1 1 auto; }
+  body.gold-research-page.gold-workspace #wallet .watch-search .watch-row { flex-direction: row; }
+  body.gold-research-page.gold-workspace #wallet .watch-list-heading { flex-wrap: wrap; }
+  body.gold-research-page.gold-workspace #wallet .watch-search,
+  body.gold-research-page.gold-workspace #wallet #wallet-view { padding: 21px; }
+  body.gold-research-page.gold-workspace #wallet #wallet-view .report-heading { flex-wrap: wrap; }
+}
+@media (max-width: 880px) {
+  body.gold-research-page.gold-workspace .research-wallet-grid { grid-template-columns: 1fr; }
+  body.gold-research-page.gold-workspace .research-wallet-main,
+  body.gold-research-page.gold-workspace .research-wallet-sidebar { grid-column: auto; grid-row: auto; }
+  body.gold-research-page.gold-workspace #wallet .watch-search .input-row { flex-direction: row; }
+  body.gold-research-page.gold-workspace .research-wallet-sidebar { margin-top: 2px; }
+  body.gold-research-page.gold-workspace #wallet .watch-list-heading { flex-wrap: nowrap; }
+  body.gold-research-page.gold-workspace #watchlist { max-height: none; }
+  body.gold-research-page.gold-workspace #wallet .saved-row { display: flex; }
+  body.gold-research-page.gold-workspace #wallet .alert-rule { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  body.gold-research-page.gold-workspace .research-hero-links { display: none; }
+  body.gold-research-page.gold-workspace #reports-list > .saved-row { align-items: flex-start; flex-direction: column; gap: 14px; }
+  body.gold-research-page.gold-workspace #reports-list .actions { margin-left: 47px; }
+}
+@media (max-width: 760px) {
+  body.gold-research-page.gold-workspace [role=tabpanel],
+  body.gold-research-page.gold-workspace #wallet #wallet-view { scroll-margin-top: 90px; }
+}
+@media (max-width: 600px) {
+  body.gold-research-page.gold-workspace main.gold-research-main .tabs { gap: 20px; margin-top: 0; }
+  body.gold-research-page.gold-workspace main.gold-research-main .tabs button span { font-size: 11px; }
+  body.gold-research-page.gold-workspace main.gold-research-main .tabs button { padding: 11px 0; min-height: 44px; }
+  body.gold-research-page.gold-workspace .research-intro,
+  body.gold-research-page.gold-workspace #wallet .watch-intro,
+  body.gold-research-page.gold-workspace #passport .passport-intro { padding: 28px 0 24px; gap: 20px; }
+  body.gold-research-page.gold-workspace .research-intro h1,
+  body.gold-research-page.gold-workspace #wallet .watch-intro h1,
+  body.gold-research-page.gold-workspace #passport .passport-intro h1 { font-size: 37px; letter-spacing: -.05em; }
+  body.gold-research-page.gold-workspace .research-intro p:not(.eyebrow),
+  body.gold-research-page.gold-workspace #wallet .watch-intro p:not(.eyebrow),
+  body.gold-research-page.gold-workspace #passport .passport-intro p:not(.eyebrow) { font-size: 12px; }
+  body.gold-research-page.gold-workspace .research-trust { font-size: 9px; }
+  body.gold-research-page.gold-workspace #wallet .watch-search,
+  body.gold-research-page.gold-workspace #passport .passport-search { padding: 21px 18px; }
+  body.gold-research-page.gold-workspace #wallet .watch-search .input-row,
+  body.gold-research-page.gold-workspace #wallet .watch-search .watch-row,
+  body.gold-research-page.gold-workspace #passport .passport-search .input-row { flex-direction: column; }
+  body.gold-research-page.gold-workspace #wallet .watch-search .input-row input,
+  body.gold-research-page.gold-workspace #passport .passport-search .input-row input { flex: 1 1 auto; }
+  body.gold-research-page.gold-workspace #wallet .watch-search input,
+  body.gold-research-page.gold-workspace #passport .passport-search input,
+  body.gold-research-page.gold-workspace #compare .comparison-selects select,
+  body.gold-research-page.gold-workspace #research-wallet-filter,
+  body.gold-research-page.gold-workspace #research-report-filter { font-size: 16px; }
+  body.gold-research-page.gold-workspace .research-list-search kbd { display: none; }
+  body.gold-research-page.gold-workspace .research-snapshot-empty { min-height: 290px; padding: 28px 22px; }
+  body.gold-research-page.gold-workspace .research-snapshot-empty h3 { font-size: 22px; }
+  body.gold-research-page.gold-workspace .research-empty-capabilities { gap: 11px; font-size: 8px; }
+  body.gold-research-page.gold-workspace #wallet #wallet-view { padding: 21px 18px; }
+  body.gold-research-page.gold-workspace #wallet #wallet-view .report-heading h3 { font-size: 33px; }
+  body.gold-research-page.gold-workspace #wallet .saved-row { display: block; }
+  body.gold-research-page.gold-workspace #wallet .watch-list-heading { padding: 21px 18px 15px; }
+  body.gold-research-page.gold-workspace #wallet .watch-list-heading h2 { font-size: 21px; }
+  body.gold-research-page.gold-workspace #wallet .alert-rule { grid-template-columns: 1fr; }
+  body.gold-research-page.gold-workspace #wallet .watch-disclosure > summary { padding: 18px; }
+  body.gold-research-page.gold-workspace #wallet .watch-disclosure > .workspace-disclosure-body { padding: 0 16px 16px; }
+  body.gold-research-page.gold-workspace #wallet .watch-disclosure .panel { padding: 17px; }
+  body.gold-research-page.gold-workspace #wallet .watch-disclosure .actions { display: grid; grid-template-columns: 1fr; }
+  body.gold-research-page.gold-workspace #wallet .watch-disclosure .actions > * { width: 100%; white-space: normal; }
+  body.gold-research-page.gold-workspace #wallet .delivery-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  body.gold-research-page.gold-workspace .research-intro-note { display: none; }
+  body.gold-research-page.gold-workspace #compare-form { padding: 17px; }
+  body.gold-research-page.gold-workspace #compare .comparison-selects { grid-template-columns: 1fr; gap: 22px; margin-bottom: 20px; }
+  body.gold-research-page.gold-workspace #compare .comparison-selects > div { padding: 18px; }
+  body.gold-research-page.gold-workspace .research-comparison-connector { top: calc(50% - 16px); transform: rotate(90deg); }
+  body.gold-research-page.gold-workspace #compare-form .actions { display: grid; grid-template-columns: 1fr; gap: 9px; }
+  body.gold-research-page.gold-workspace .research-comparison-empty { padding: 32px 20px; }
+  body.gold-research-page.gold-workspace .research-comparison-empty h3 { font-size: 23px; }
+  body.gold-research-page.gold-workspace #comparison-view { padding: 20px 16px; }
+  body.gold-research-page.gold-workspace #comparison-view .report-heading { flex-direction: column; }
+  body.gold-research-page.gold-workspace #comparison-view .comparison-times { grid-template-columns: 1fr; }
+  body.gold-research-page.gold-workspace #comparison-view .comparison-counts { align-items: stretch; flex-direction: column; }
+  body.gold-research-page.gold-workspace .research-library-toolbar { padding: 14px; flex-direction: column; gap: 11px; margin-bottom: 23px; }
+  body.gold-research-page.gold-workspace #vault .research-intro { align-items: flex-start; flex-direction: column; gap: 0; }
+  body.gold-research-page.gold-workspace #vault .research-intro > .button { min-height: 40px; }
+  body.gold-research-page.gold-workspace #reports-list > .saved-row { padding: 21px 18px; }
+  body.gold-research-page.gold-workspace #reports-list .actions { margin-left: 0; width: 100%; justify-content: space-between; }
+  body.gold-research-page.gold-workspace #verify .research-intro { align-items: flex-start; flex-direction: column; gap: 0; }
+  body.gold-research-page.gold-workspace #verify-form { padding: 24px 20px; }
+  body.gold-research-page.gold-workspace #verify-form > label { font-size: 20px; }
+  body.gold-research-page.gold-workspace #report-file { font-size: 11px; padding: 10px; }
+  body.gold-research-page.gold-workspace #report-file::file-selector-button { margin-right: 6px; padding: 9px 8px; font-size: 10px; }
+  body.gold-research-page.gold-workspace #passport .passport-art { display: none; }
+  body.gold-research-page.gold-workspace #passport .passport-benefits { grid-template-columns: 1fr; gap: 18px; }
+  body.gold-research-page.gold-workspace #passport .passport-search-foot { flex-direction: column; align-items: flex-start; gap: 0; }
+  body.gold-research-page.gold-workspace #passport #report-view { padding: 20px 17px; }
+  body.gold-research-page.gold-workspace #passport #report-view .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+  body.gold-research-page.gold-workspace #passport #report-view .metric { padding: 14px 12px; }
+  body.gold-research-page.gold-workspace #passport #report-view .metric strong { font-size: 18px; }
+  body.gold-research-page.gold-workspace #passport .passport-report-detail > summary { padding: 17px; }
+  body.gold-research-page.gold-workspace #passport .passport-detail-body { padding: 0 17px 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.gold-research-page.gold-workspace * { scroll-behavior: auto; }
+}

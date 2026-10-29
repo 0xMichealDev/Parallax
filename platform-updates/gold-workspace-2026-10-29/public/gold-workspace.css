@@ -1,0 +1,114 @@
+/* PARALLAX Gold research suite. Warm materials, quiet chrome, readable evidence. */
+body.workspace-shell.gold-workspace {
+  --gw-bg:#0d0e10;
+  --gw-panel:#151619;
+  --gw-panel-raised:#1c1d20;
+  --gw-border:#e3d7be1c;
+  --gw-text:#f0ece4;
+  --gw-muted:#aaa7a1;
+  --gw-gold:#dfbd78;
+  --gw-gold-soft:#dfbd7812;
+  --gw-sage:#91c7b1;
+  --gw-rose:#db9a92;
+  --gw-radius:16px;
+  --research-panel:var(--gw-panel);
+  --research-raised:var(--gw-panel-raised);
+  --research-field:#101113;
+  --research-ink:var(--gw-text);
+  --research-muted:var(--gw-muted);
+  --research-line:var(--gw-border);
+  --research-line-strong:#dfbd783b;
+  --research-accent:var(--gw-gold);
+  --research-shadow:0 18px 50px #00000020;
+  --surface-accent:var(--gw-gold);
+  --surface-border:var(--gw-border);
+  --dash-accent:var(--gw-gold);
+  --dash-muted:var(--gw-muted);
+  --dash-line:var(--gw-border);
+  margin:0;
+  /* Legacy site themes use long :not() selectors; these two scoped overrides establish the suite canvas. */
+  color:var(--gw-text)!important;
+  background:radial-gradient(ellipse at 82% -10%,#b78d4210,transparent 45%),var(--gw-bg)!important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:14px;
+  line-height:1.6;
+  color-scheme:dark;
+}
+.gold-workspace *, .gold-workspace *::before, .gold-workspace *::after {box-sizing:border-box}
+.gold-workspace [hidden] {display:none!important}
+.gold-workspace ::selection {background:#dfbd783a;color:#fff7e4}
+.gold-workspace :is(button,a,input,select,textarea,summary):focus-visible {outline:2px solid var(--gw-gold);outline-offset:4px}
+.gold-workspace button {font-family:inherit;cursor:pointer}
+.gold-workspace button:disabled {cursor:not-allowed;opacity:.48}
+.gold-workspace :is(input,textarea,select) {color-scheme:dark;font-family:inherit;accent-color:var(--gw-gold)}
+.gold-workspace :is(h1,h2,h3,h4) {color:var(--gw-text);text-wrap:balance}
+.gold-workspace :is(code,kbd) {font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+.gold-workspace :is(p,code,a) {overflow-wrap:break-word}
+.gold-workspace :is(input,select,textarea)::placeholder {color:#817f79;opacity:1}
+body.workspace-shell.gold-workspace[data-workspace-page]>main:is(#workspace-main,#assistant-main) {max-width:1510px;margin:0 auto;padding:0 32px 70px;min-width:0}
+body.workspace-shell.gold-workspace .dashboard-sidebar {background:#101113;border-color:var(--gw-border);box-shadow:none;scrollbar-color:#494138 transparent}
+body.workspace-shell.gold-workspace .dashboard-sidebar .brand-orbit {color:var(--gw-gold)}
+body.workspace-shell.gold-workspace .dashboard-sidebar .sidebar-caption {color:#85817a}
+body.workspace-shell.gold-workspace .dashboard-sidebar nav>a {color:#a4a29d;border-radius:8px}
+body.workspace-shell.gold-workspace .dashboard-sidebar nav>a:hover {background:#ffffff05;color:var(--gw-text)}
+body.workspace-shell.gold-workspace .dashboard-sidebar nav a[aria-current=page] {background:var(--gw-gold-soft);color:#ead4a7;box-shadow:inset 2px 0 var(--gw-gold);border-color:transparent}
+body.workspace-shell.gold-workspace .dashboard-sidebar .sidebar-bottom {color:#c1bdb4;border-color:var(--gw-border)}
+body.workspace-shell.gold-workspace .sidebar-bottom small {color:#85817a}
+body.workspace-shell.gold-workspace .network-glyph {color:var(--gw-gold)}
+body.workspace-shell.gold-workspace .nav-group {border-color:var(--gw-border)}
+body.workspace-shell.gold-workspace .nav-group>summary {color:#928d84}
+body.workspace-shell.gold-workspace .workspace-header {height:66px;min-height:66px;background:#101113f5;border-bottom:1px solid var(--gw-border);box-shadow:none;backdrop-filter:blur(14px)}
+body.workspace-shell.gold-workspace .dashboard-breadcrumb {color:#d4cfc5}
+body.workspace-shell.gold-workspace .dashboard-breadcrumb span:first-child {color:#85817a}
+body.workspace-shell.gold-workspace .dashboard-breadcrumb b {color:#514d46}
+body.workspace-shell.gold-workspace .dashboard-search {background:#17181b;border-color:var(--gw-border);color:#aaa69d}
+body.workspace-shell.gold-workspace .dashboard-search kbd {border-color:#ffffff16;color:#aaa69d;background:#101113}
+body.workspace-shell.gold-workspace .workspace-header :is(.account-link,#session-link) {background:#ffffff03;color:#e1dace;border-color:var(--gw-border)}
+body.workspace-shell.gold-workspace .workspace-header .brand-orbit {stroke:var(--gw-gold)}
+body.workspace-shell.gold-workspace .site-pro-member {border-color:#dfbd783b;background:#dfbd780b;color:#d8bc88;box-shadow:none}
+body.workspace-shell.gold-workspace .site-pro-member.is-active {background:#dfbd781b;border-color:#dfbd7866;color:#f2d89e;box-shadow:none}
+body.workspace-shell.gold-workspace .gold-site-frame {border-width:1px;border-color:#dfbd7840;box-shadow:none;border-radius:12px}
+body.workspace-shell.gold-workspace .gold-welcome {display:none!important}
+body.workspace-shell.gold-workspace .gold-tool-links {display:none}
+body.workspace-shell.gold-workspace .gold-suite-nav {display:flex;align-items:center;justify-content:space-between;gap:20px;position:sticky;inset:auto;top:0;z-index:30;width:100%;max-width:none;min-height:86px;padding:17px 0;margin:0 0 32px;border:0;border-bottom:1px solid var(--gw-border);border-radius:0;background:#0d0e10f5;box-shadow:none;transform:none;overflow:visible;backdrop-filter:blur(14px)}
+.gold-workspace .gold-suite-brand {display:flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;color:var(--gw-gold);flex:none}
+.gold-workspace .gold-suite-brand>svg {height:26px;width:26px;fill:none;stroke:currentColor;stroke-width:1;flex:none}
+.gold-workspace .gold-suite-brand>span {font-size:12px;font-weight:600;letter-spacing:.22em;line-height:1.25}
+.gold-workspace .gold-suite-brand>span>span {display:block;font:8px/1.6 ui-monospace,monospace;letter-spacing:.11em;color:#8c8679;margin-top:4px}
+.gold-workspace .gold-suite-links {display:flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--gw-border);background:#121315;border-radius:11px}
+.gold-workspace .gold-suite-links>a {display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;min-height:40px;border-radius:7px;color:#a9a49a;font-size:12px;font-weight:500;text-decoration:none;white-space:nowrap;border:1px solid transparent;transition:color .18s,background .18s}
+.gold-workspace .gold-suite-links>a:hover {color:var(--gw-text);background:#ffffff04}
+.gold-workspace .gold-suite-links>a[aria-current=page] {color:#f0d6a3;background:#dfbd7812;border-color:#dfbd7820;box-shadow:0 2px 8px #0002}
+.gold-workspace .gold-suite-links svg {height:16px;width:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.gold-workspace .gold-suite-terminal {display:inline-flex;align-items:center;justify-content:center;gap:18px;min-height:44px;font-size:11px;color:#bcb6aa;text-decoration:none;white-space:nowrap}
+.gold-workspace .gold-suite-terminal:hover {color:var(--gw-gold)}
+.gold-workspace .gold-suite-terminal span {color:var(--gw-gold);font-size:16px}
+body.workspace-shell.gold-workspace .dashboard-command {background:#141518;border-color:#dfbd7830;color:var(--gw-text)}
+body.workspace-shell.gold-workspace .dashboard-command :is(.command-input-wrap,.tool-category) {border-color:var(--gw-border)}
+body.workspace-shell.gold-workspace .dashboard-command .command-input-wrap {background:#0e0f11}
+body.workspace-shell.gold-workspace .dashboard-command :is(input,.tool-directory strong) {color:var(--gw-text)}
+body.workspace-shell.gold-workspace .dashboard-command :is(.eyebrow,.tool-category h3) {color:var(--gw-gold)}
+body.workspace-shell.gold-workspace .dashboard-command :is(.tool-directory small,.command-footer) {color:var(--gw-muted)}
+body.workspace-shell.gold-workspace>.mobile-dock {background:#121315f5;border-color:var(--gw-border)}
+body.workspace-shell.gold-workspace>.mobile-dock>a {color:#99958d}
+body.workspace-shell.gold-workspace>.mobile-dock>a[aria-current=page] {background:var(--gw-gold-soft);color:var(--gw-gold)}
+body.workspace-shell.gold-workspace>footer {border-color:var(--gw-border);color:var(--gw-muted)}
+@media(min-width:1600px){body.workspace-shell.gold-workspace[data-workspace-page]>main:is(#workspace-main,#assistant-main){padding-left:46px;padding-right:46px}}
+@media(max-width:1250px){body.workspace-shell.gold-workspace[data-workspace-page]>main:is(#workspace-main,#assistant-main){padding-left:24px;padding-right:24px}.gold-workspace .gold-suite-brand>span>span{display:none}.gold-workspace .gold-suite-links>a{padding:10px 11px}.gold-workspace .gold-suite-terminal{display:none}}
+@media(max-width:950px){body.workspace-shell.gold-workspace .gold-suite-nav{gap:12px}.gold-workspace .gold-suite-brand{gap:7px}.gold-workspace .gold-suite-brand>span{font-size:10px}.gold-workspace .gold-suite-links>a{font-size:11px;padding:9px}.gold-workspace .gold-suite-links svg{display:none}}
+@media(max-width:760px){
+ body.workspace-shell.gold-workspace[data-workspace-page]>main:is(#workspace-main,#assistant-main){padding:0 18px 100px}
+ body.workspace-shell.gold-workspace .workspace-header{height:66px;min-height:66px;padding:10px 16px}
+ body.workspace-shell.gold-workspace .workspace-header .brand{font-size:11px!important;letter-spacing:.14em!important}
+ body.workspace-shell.gold-workspace .workspace-header .dashboard-header-actions{gap:7px}
+ body.workspace-shell.gold-workspace .workspace-header .dashboard-search{min-width:40px;width:40px;padding:9px;justify-content:center}
+ body.workspace-shell.gold-workspace .workspace-header .dashboard-search>span{display:none!important}
+ body.workspace-shell.gold-workspace .site-pro-member{font-size:9px;padding:8px}
+ body.workspace-shell.gold-workspace .gold-suite-nav{min-height:70px;margin:0 0 26px;padding:12px 0;gap:10px}
+ .gold-workspace .gold-suite-brand{display:none}
+ .gold-workspace .gold-suite-links{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;padding:3px;border-radius:10px}
+ .gold-workspace .gold-suite-links>a{font-size:10px;min-height:40px;padding:7px 3px;gap:4px}
+ .gold-workspace .gold-suite-links svg{display:none}
+}
+@media(prefers-reduced-motion:reduce){.gold-workspace *{scroll-behavior:auto!important}.gold-workspace .gold-suite-links>a{transition:none}}
+@media(forced-colors:active){.gold-workspace .gold-suite-links>a[aria-current=page]{border-color:Highlight}.gold-workspace .gold-suite-nav{border-color:CanvasText}}

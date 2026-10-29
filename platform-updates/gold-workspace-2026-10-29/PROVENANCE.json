@@ -1,0 +1,404 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-29",
+  "releaseId": "gold-workspace-2026-10-29",
+  "sourceRepository": "native-sites",
+  "baselineCommit": "33f8c23fa4aca7e181f4713531a066f6ac5c822a",
+  "sourceRevision": "89dabd844238dd7f6738b4b4da692a37511dbee3",
+  "hostedVersion": 225,
+  "scope": "Reviewed Gold workspace browser presentation, client interactions, public dependencies and offline UI checks, plus the preceding Terminal launch-card catch-up.",
+  "copyMethod": "Exact committed Git blobs with source-relative paths and original executable modes; no native working-tree copy.",
+  "publicReleaseRecord": "../../docs/updates/gold-workspace-2026-10-29.md",
+  "totals": {
+    "exportedFiles": 65,
+    "exportedBytes": 1492786,
+    "nativeChangedPaths": 21,
+    "changedPathsExported": 20,
+    "sourceOnlyChangedPaths": 1,
+    "unchangedDependencies": 45
+  },
+  "reviewedPresentationSources": [
+    "app/workspace-shell.ts"
+  ],
+  "sourceOnlyChanges": [
+    {
+      "path": "app/share/terminal-20261029/route.ts",
+      "status": "A",
+      "summary": "Adds a versioned Terminal launch share destination with specific large-card metadata and canonical routing. Associated public HTML/artwork are exported; the hosted route integration is summarized."
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    }
+  ],
+  "files": [
+    {
+      "path": "app/assistant.html",
+      "sha256": "543783339f6ff0b51052319bace4c36c5969e518e36a78a000c34d41cafc47f0",
+      "bytes": 12551
+    },
+    {
+      "path": "app/control.html",
+      "sha256": "335e3e739bb1c4aae8b24b9e878f626b970ecbcdb92d8c38dcdd3d72920af94a",
+      "bytes": 25071
+    },
+    {
+      "path": "app/pro.html",
+      "sha256": "3650041eb0bdeb52e0b7c0d1c55c074cc382dcfd16513cf4925503d2c6396152",
+      "bytes": 13230
+    },
+    {
+      "path": "app/terminal.html",
+      "sha256": "dc68e7936e318b7eff32313db790aadf2541763505cfd2fafba7fa0a5a5df0e8",
+      "bytes": 30554
+    },
+    {
+      "path": "app/workspace-shell.ts",
+      "sha256": "c23204f9dd5a36b649aa6a875d76c1c19151ef722679929b560cffd2c79bb6f8",
+      "bytes": 28120
+    },
+    {
+      "path": "docs/terminal-launch-card.md",
+      "sha256": "57ff9427692d7e9e71ad1eb4dd7c8996ec0de2371e3fe0d926d80b362819b093",
+      "bytes": 2219
+    },
+    {
+      "path": "public/assets/terminal/terminal-interface-20261029.jpg",
+      "sha256": "33e1bbd7d1ce04f806901bc325b53e4278add15b95a06f0fc9014c2a1b4fd9f1",
+      "bytes": 161607
+    },
+    {
+      "path": "public/assets/terminal/terminal-launch-20261029.png",
+      "sha256": "3451b25cf5ac36c890da9f7c3cce327c2e370f210575dd1a53ca925f07f4de77",
+      "bytes": 307653
+    },
+    {
+      "path": "public/assets/terminal/terminal-launch-20261029.svg",
+      "sha256": "924f6db705661eda6a7b5b719741fa85c956e1b7576c0019e2762a1d2be49f9b",
+      "bytes": 219512
+    },
+    {
+      "path": "public/clean-site.css",
+      "sha256": "040fdc61ae47e7d0c6ec142588e79c45cad0dbfea2979ce248ec0f1d1df7d5e5",
+      "bytes": 9568
+    },
+    {
+      "path": "public/control.css",
+      "sha256": "fd924851f6d5bb1c14806a2d1e22ceb05017adce142c227e880f458283bc8289",
+      "bytes": 18160
+    },
+    {
+      "path": "public/control.js",
+      "sha256": "c9b83c66c6e7164297c30b4ba7ea762fc71fc755595292d59a12bf53d8af23c7",
+      "bytes": 66110
+    },
+    {
+      "path": "public/dashboard-pro.css",
+      "sha256": "85adb55a6928f907a58def8bf58347c83e71c314f0c0bb9e90ba793e9e56404b",
+      "bytes": 43087
+    },
+    {
+      "path": "public/dashboard-pro.js",
+      "sha256": "e998f4c75dc2f0deee45224633e11d1e41041274fc4e49685a51c95b29acaff4",
+      "bytes": 7576
+    },
+    {
+      "path": "public/dashboard-refresh.css",
+      "sha256": "ec7decd7d0e8f54cebe28eff5ce630104ab663921a9a01967f463f3ca8b0798e",
+      "bytes": 44361
+    },
+    {
+      "path": "public/discovery.css",
+      "sha256": "4f04bad684d5d0712110919767abfb3f9c5dd862476a36053dca091645d2add8",
+      "bytes": 8865
+    },
+    {
+      "path": "public/discovery.js",
+      "sha256": "a93149f64e45fcc41b66de7ef61cfb52396e612ad6f7d4dae44437c023b6a08a",
+      "bytes": 7622
+    },
+    {
+      "path": "public/favicon.svg",
+      "sha256": "03924d9226e597e9fb341f06b26fd8f6fc1b6ba2f5e03d04a501754a97cc10aa",
+      "bytes": 284
+    },
+    {
+      "path": "public/gold-assistant.css",
+      "sha256": "dcbcefc2b29d9436aab924c3a3a4c629c8a2c4e7146a07b739af3e9d39b3a571",
+      "bytes": 29469
+    },
+    {
+      "path": "public/gold-assistant.js",
+      "sha256": "b1d4791fca4b09ab24ebaaa083cafe997670db0e0ea8cbfb639318dd443a4a1c",
+      "bytes": 21015
+    },
+    {
+      "path": "public/gold-experience.css",
+      "sha256": "4fa1f0427923d2cff71574ebe8a2a7a31a1f23eef700a80a4fda7ecc74c1ab63",
+      "bytes": 9331
+    },
+    {
+      "path": "public/gold-experience.js",
+      "sha256": "a5291cc45afcaff2d60c5a3f827bdc63ae54770349d90acaea1060c84497c89f",
+      "bytes": 4045
+    },
+    {
+      "path": "public/gold-membership.css",
+      "sha256": "8f9ed352bfea3fb040ce7800f23f237bb5d727683bc50c52794559566ee05639",
+      "bytes": 24594
+    },
+    {
+      "path": "public/gold-research.css",
+      "sha256": "4bca985d3e6494327903e84df06d171f0d82795460e4b7fb50aacda28757ff2e",
+      "bytes": 44436
+    },
+    {
+      "path": "public/gold-research.js",
+      "sha256": "3d7cc24d7c4ef84b438abacc2706e61d608f4a5e643246de8a2c6ae9f8925f8f",
+      "bytes": 4030
+    },
+    {
+      "path": "public/gold-workspace.css",
+      "sha256": "c92e754aa88d200ef91772e3450b2d041c890c760dc25aeaa8831eff8bed33bd",
+      "bytes": 10439
+    },
+    {
+      "path": "public/gold-workspace.js",
+      "sha256": "6e870599103d6d743cd1aef6a5f2cbe0d28159baf3fb8c66efc67b2316dbc66d",
+      "bytes": 1455
+    },
+    {
+      "path": "public/holder-pro.css",
+      "sha256": "3c7cee5c6b19ed82b1b38f2d8816d7f27eb2087a7072d96f764200b62d7492cf",
+      "bytes": 12566
+    },
+    {
+      "path": "public/holder-pro.js",
+      "sha256": "cdeb49b139d66f8089e5691574bd73c9d1c0a16d99320280bfe9a60afd285741",
+      "bytes": 16048
+    },
+    {
+      "path": "public/mobile-refinement.css",
+      "sha256": "a9871bdaf2a3c7540933b5addbabda25ea9ea55c4f1efc63c960a16f2e68ad2e",
+      "bytes": 7592
+    },
+    {
+      "path": "public/navigation-clean.css",
+      "sha256": "661c5ee48fb11b3438849fb146cae13884dc26c18c187e0c5cd80c1dd5a9e2c8",
+      "bytes": 2491
+    },
+    {
+      "path": "public/observatory-design.css",
+      "sha256": "ef16a5e4f3265181f17e159b16d3b480072bd8ff866ede34467f5310d6d740a3",
+      "bytes": 8861
+    },
+    {
+      "path": "public/obsidian-theme.css",
+      "sha256": "cc331ddc084c8db1f2e6fbc1ca366804b9f6f40e59f6a8b9409a31694e74ee92",
+      "bytes": 18574
+    },
+    {
+      "path": "public/passport-card.css",
+      "sha256": "aef5fb55588ea8c96e7cb69c56169bbf6ff05beeaacce21e6391f7f858750ae4",
+      "bytes": 1544
+    },
+    {
+      "path": "public/passport-card.js",
+      "sha256": "4faa8d3dc3dcc25b91ef6d806abfeb51ab6a963266362e9aa8ec0f26d03ecad7",
+      "bytes": 9689
+    },
+    {
+      "path": "public/passport-clean.css",
+      "sha256": "2b74f40a0f08b9268232bf294b389349fdd088c5f32f1192b1f3cdaa0b876a7d",
+      "bytes": 5498
+    },
+    {
+      "path": "public/pro-membership-panel.js",
+      "sha256": "9304330ac56fd95c915f5b9fc9bc0769b3a2df1ce32f1c9db3bcb4e74c7d47a2",
+      "bytes": 2490
+    },
+    {
+      "path": "public/pro-membership.css",
+      "sha256": "98657bef60ee7e91ebbc353d262b8e1d67a2a73edb15336469cc365af99ec7c8",
+      "bytes": 2177
+    },
+    {
+      "path": "public/pro-membership.js",
+      "sha256": "66984545562fed941def2b651aba26071b33de22970bfee6ceace1fc74d4deec",
+      "bytes": 2905
+    },
+    {
+      "path": "public/pro-share-card.js",
+      "sha256": "bc68bb16c66bb9ec1c87c0a3a40107311a32d2527cf7c946427c4d5741dc6f2f",
+      "bytes": 5751
+    },
+    {
+      "path": "public/research-premium.css",
+      "sha256": "550c3d29c04d6acbdc2c91cae331be769db2873f5c5e8faea631052193844d1c",
+      "bytes": 81642
+    },
+    {
+      "path": "public/research-utils.js",
+      "sha256": "77250633d72c6daae7d0cbea1df0d74511ed7a0a6a61ab3c6c8780c39fb08c1f",
+      "bytes": 2862
+    },
+    {
+      "path": "public/site-polish.css",
+      "sha256": "f675fce2508fc38ffb429f234ed7ad76f7fdf4ac8321fee759647a99aacbfa84",
+      "bytes": 1462
+    },
+    {
+      "path": "public/site-stats.css",
+      "sha256": "117af8bf0f7b724cf7cde1df5dc9814c0974848d4182bf14993fddff6248b04f",
+      "bytes": 1825
+    },
+    {
+      "path": "public/site-stats.js",
+      "sha256": "25b5ea8bca2f921222290b358c0e1e60c6705266e377b64e1dd55e5ef3c5fe75",
+      "bytes": 3390
+    },
+    {
+      "path": "public/solhandle-identity.css",
+      "sha256": "377de6865bfe73579e9b714e14d906ee2e8f21e5cbe0eec62a766ccd6baa5264",
+      "bytes": 3144
+    },
+    {
+      "path": "public/solhandle-identity.js",
+      "sha256": "523332b96815125ed39b00bb50dc4860c0e75739f1f8fc9f18aa0cca7aa159a3",
+      "bytes": 8297
+    },
+    {
+      "path": "public/wallet-watch.css",
+      "sha256": "f72011b509d6e9ebfb6e3586373db7e24575a5db09bdbd66f2cc4c77bb81a15b",
+      "bytes": 6788
+    },
+    {
+      "path": "public/workspace-clean.css",
+      "sha256": "ae6f9276ac059fef2d2ba9dd8f0fb1677114cbffaa9467760bb9f72be4968195",
+      "bytes": 7219
+    },
+    {
+      "path": "public/workspace-hub.css",
+      "sha256": "1b26bc410faf0c846f8c434bc4bd9a5432939cc718157a10767ec6ae2b787af8",
+      "bytes": 3653
+    },
+    {
+      "path": "public/workspace-premium.css",
+      "sha256": "e6ba790d52376b4ebde3944c0a684563bc1c3fa79f83f6ba89ad6955df683714",
+      "bytes": 41012
+    },
+    {
+      "path": "public/workspace-shell.css",
+      "sha256": "01d878ad580228b50f6f18c6e1a4ec7b3a2085abb4f17c2065a1555d530f56f8",
+      "bytes": 14484
+    },
+    {
+      "path": "public/workspace-usability.css",
+      "sha256": "01281ad7bee4f12ef64de044e21ebda785faa62bc392db387c1cc42beb1ea6ed",
+      "bytes": 11456
+    },
+    {
+      "path": "public/workspace-usability.js",
+      "sha256": "6667e344899a6b2d76a72cbe335ce66568928dadf7655f0cc66c0f8aba8e0d2c",
+      "bytes": 5175
+    },
+    {
+      "path": "scripts/render-terminal-launch.mjs",
+      "sha256": "991c7a3c05341c0e3a2904c92ccde4934e0c159c8882eab250b0ed58aa039011",
+      "bytes": 5016
+    },
+    {
+      "path": "scripts/test-solhandle-ui.mjs",
+      "sha256": "b591912b51c49de28e302e2af99b86ebf312ba46d4c357232b3af21e683d8d5b",
+      "bytes": 5297
+    },
+    {
+      "path": "scripts/test-wallet-ui.mjs",
+      "sha256": "cb99e5c19fe013ba22828e8b289d48176cdaf08da276336ff01790d2141969ed",
+      "bytes": 4227
+    },
+    {
+      "path": "tests/gold-assistant-ui.mjs",
+      "sha256": "f3e6a3b957603f5e8955aa6cc39125d1fef95fa8e924bd974465d6d34bfc191f",
+      "bytes": 5617
+    },
+    {
+      "path": "tests/gold-experience.mjs",
+      "sha256": "1288c0e9cf80cc964fbbae0b34bc8a8474afba6313e315d659d50f7400483d82",
+      "bytes": 2842
+    },
+    {
+      "path": "tests/gold-monitor-ui.mjs",
+      "sha256": "9217775419171e4a410c4ea3d6467a852e97cc42ea696555889adc7cac13a243",
+      "bytes": 11368
+    },
+    {
+      "path": "tests/gold-workspace-ui.mjs",
+      "sha256": "0d74c9ef4c39bba19eb062327760e3c91891189c13a6e17a0fe44d61cbfe6a11",
+      "bytes": 3418
+    },
+    {
+      "path": "tests/navigation-state.test.cjs",
+      "sha256": "cae57c27e447167ecf83d7619ec5f702e1edc309f0654c1f21f50134894f8f89",
+      "bytes": 3226
+    },
+    {
+      "path": "tests/pro-membership-ui.mjs",
+      "sha256": "aeb196f598c1bc9067b7332fc92db8b52533e36cdfdc1a01165dd61c7bc1504c",
+      "bytes": 3421
+    },
+    {
+      "path": "tests/pro-share-card.mjs",
+      "sha256": "b78a724733f1789195059e87eddcca26c5f764b0c1d3e189db547584d750e782",
+      "bytes": 2504
+    },
+    {
+      "path": "tests/workspace-usability.test.cjs",
+      "sha256": "6b5ee94cf533a8538c40e095887e6dca7aa0426322a0e88f003f7f204474c685",
+      "bytes": 2291
+    }
+  ]
+}

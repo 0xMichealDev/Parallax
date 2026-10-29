@@ -1,0 +1,168 @@
+/* PARALLAX 167 / Obsidian Blue. Shared materials and navigation; scoped product finishes follow. */
+body.workspace-shell {
+  color-scheme: dark;
+  --prlx-canvas:#070b12; --prlx-panel:#0d1420; --prlx-raised:#111c2b;
+  --prlx-ink:#edf3ff; --prlx-secondary:#bbcbe2; --prlx-muted:#9aaecb;
+  --prlx-blue:#8caaff; --prlx-blue-bright:#b4c9ff;
+  --prlx-line:#a4b9df20; --prlx-line-strong:#a4b9df38;
+  --prlx-shadow:0 12px 32px #00000020,inset 0 1px #d3e3ff06;
+  --surface-base:var(--prlx-canvas); --surface-panel:var(--prlx-panel); --surface-raised:var(--prlx-raised);
+  --surface-border:var(--prlx-line); --surface-border-strong:var(--prlx-line-strong);
+  --surface-accent:var(--prlx-blue); --surface-muted:var(--prlx-muted); --surface-text:var(--prlx-ink);
+  --dash-line:var(--prlx-line); --dash-accent:var(--prlx-blue); --dash-muted:var(--prlx-muted);
+  --line:var(--prlx-line); --edge:var(--prlx-line-strong); --mint:var(--prlx-blue); --cyan:var(--prlx-blue);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased; accent-color:var(--prlx-blue);
+}
+body.workspace-shell:not(.home-hub):not(.premium-dashboard):not([data-workspace-page=explore]):not([data-workspace-page=planets]):not(.viewer) {
+  background:radial-gradient(ellipse 75% 430px at 85% 0,#23447824,transparent 85%),var(--prlx-canvas); color:var(--prlx-ink);
+}
+body.workspace-shell *,body.workspace-shell *::before,body.workspace-shell *::after {box-sizing:border-box}
+body.workspace-shell [hidden] {display:none!important}
+body.workspace-shell ::selection {background:#8caaff40;color:#fff}
+body.workspace-shell :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {outline:2px solid var(--prlx-blue-bright);outline-offset:4px}
+body.workspace-shell :is(button,a,summary) {-webkit-tap-highlight-color:#8caaff18}
+body.workspace-shell>.workspace-skip {background:var(--prlx-blue-bright);border-color:var(--prlx-blue-bright);color:#081326;border-radius:7px;box-shadow:0 8px 32px #0008}
+
+/* One restrained rail, with a clear active destination. */
+body.workspace-shell .dashboard-sidebar {
+  background:radial-gradient(ellipse 150% 260px at 0 0,#27447420,transparent 80%),#090f19;
+  border-right:1px solid var(--prlx-line);padding:28px 13px 20px;scrollbar-width:thin;scrollbar-color:#34445f transparent;
+}
+body.workspace-shell .dashboard-sidebar .brand {color:#f1f6ff;font-size:13px;font-weight:650;letter-spacing:.14em;gap:10px;padding:0 10px}
+body.workspace-shell .dashboard-sidebar .brand-orbit {width:33px;height:33px;padding:4px;flex:none;color:var(--prlx-blue-bright);border:1px solid #8caaff32;border-radius:10px;background:linear-gradient(140deg,#8caaff12,#8caaff02)}
+body.workspace-shell .sidebar-caption {color:var(--prlx-muted);font:9px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.1em}
+body.workspace-shell .dashboard-sidebar>.sidebar-caption {margin:16px 11px 27px}
+body.workspace-shell .dashboard-sidebar nav {gap:4px}
+body.workspace-shell .dashboard-sidebar nav a {color:#a9bbd4;min-height:43px;padding:10px 12px;font-size:12px;line-height:1.5;border-radius:7px;border:1px solid transparent;font-weight:450;transition:color .16s,background .16s,border-color .16s}
+body.workspace-shell .dashboard-sidebar nav a svg {width:17px;height:17px;opacity:.8}
+body.workspace-shell .dashboard-sidebar nav a:hover {color:#edf4ff;border-color:#a4b9df12;background:#8caaff08}
+body.workspace-shell:not(.gold-member-active) .dashboard-sidebar nav a[aria-current=page] {color:#e0eaff;background:linear-gradient(100deg,#8caaff1c,#8caaff08);border-color:#8caaff18;box-shadow:inset 2px 0 var(--prlx-blue);font-weight:600}
+body.workspace-shell .dashboard-sidebar nav a[aria-current=page] svg {opacity:1}
+body.workspace-shell .dashboard-sidebar .nav-group {margin-top:19px;padding-top:11px;border-top:1px solid var(--prlx-line)}
+body.workspace-shell .nav-group>summary {padding:9px 12px;color:var(--prlx-muted);font-size:10px;font-weight:550;letter-spacing:.1em}
+body.workspace-shell .nav-group>summary>span {color:var(--prlx-muted)}
+body.workspace-shell .nav-group>summary:hover {color:var(--prlx-ink);background:#8caaff06}
+body.workspace-shell .nav-group nav a {font-size:12px}
+body.workspace-shell .dashboard-sidebar a.sidebar-custom {min-height:42px;padding:10px 12px;color:var(--prlx-secondary);border:1px solid var(--prlx-line);border-radius:7px;background:#ffffff02;font-size:11px}
+body.workspace-shell .dashboard-sidebar a.sidebar-custom:hover {color:var(--prlx-blue-bright);border-color:#8caaff40;background:#8caaff08}
+body.workspace-shell .sidebar-bottom {color:var(--prlx-secondary);border-color:var(--prlx-line);padding:18px 10px 0;font-size:11px}
+body.workspace-shell .sidebar-bottom small {color:var(--prlx-muted);font-size:10px;line-height:1.7}
+body.workspace-shell .network-glyph {color:var(--prlx-blue)}
+
+/* The header and command menu repeat the same control language everywhere. */
+body.workspace-shell .workspace-header,body.home-hub.workspace-shell .workspace-header {min-height:68px;background:#090f19f2;border-bottom:1px solid var(--prlx-line);box-shadow:none;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+body.workspace-shell .workspace-header .brand {color:var(--prlx-ink)}
+body.workspace-shell .dashboard-breadcrumb {color:var(--prlx-ink);font-size:12px;font-weight:500}
+body.workspace-shell .dashboard-breadcrumb span:first-child {color:var(--prlx-muted);font-weight:400}
+body.workspace-shell .dashboard-breadcrumb b {color:#637b9d}
+body.workspace-shell .workspace-header .dashboard-search,body.home-hub .workspace-header .dashboard-search {min-height:40px;color:var(--prlx-secondary);background:#111b2a;border:1px solid var(--prlx-line-strong);border-radius:7px;box-shadow:inset 0 1px #d3e3ff05}
+body.workspace-shell .workspace-header .dashboard-search:hover {color:var(--prlx-ink);border-color:#8caaff70;background:#16243a}
+body.workspace-shell .dashboard-search kbd {color:var(--prlx-muted);border-color:var(--prlx-line-strong);background:#090f19;border-radius:4px}
+body.workspace-shell .workspace-header :is(.account-link,#session-link),body.home-hub .workspace-header .account-link {color:#cad8ef;min-height:40px;border-color:var(--prlx-line-strong);background:#0f1826;border-radius:7px}
+body.workspace-shell .workspace-header :is(.account-link,#session-link):hover {border-color:#8caaff70;background:#16243a}
+body.workspace-shell .site-pro-member:not(.is-active) {color:#c9d9ff;border-color:#8caaff38;border-radius:7px;background:#101b2d}
+body.workspace-shell .site-pro-member:not(.is-active) svg {stroke:var(--prlx-blue)}
+body.workspace-shell .site-pro-member:not(.is-active) .pro-badge-word {color:var(--prlx-muted)}
+body.workspace-shell .dashboard-command {background:radial-gradient(ellipse at 100% 0,#29487922,transparent 50%),#0c1421;border:1px solid #8caaff40;border-radius:16px;box-shadow:0 30px 100px #000b,inset 0 1px #d3e3ff10}
+body.workspace-shell .dashboard-command::backdrop {background:#03060bd9;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+body.workspace-shell .dashboard-command h2 {color:var(--prlx-ink);font-size:27px;font-weight:550;letter-spacing:-.04em}
+body.workspace-shell .dashboard-command .eyebrow {color:var(--prlx-blue);font-size:10px;letter-spacing:.13em}
+body.workspace-shell .dashboard-command .command-heading {border-color:var(--prlx-line);padding-bottom:18px}
+body.workspace-shell .dashboard-command .command-heading>button {color:var(--prlx-secondary);border-color:var(--prlx-line-strong);border-radius:7px;min-height:40px;min-width:40px}
+body.workspace-shell .dashboard-command .command-input-wrap {background:#080e18;border-color:var(--prlx-line-strong);border-radius:8px}
+body.workspace-shell .dashboard-command .command-input-wrap:focus-within {border-color:var(--prlx-blue);box-shadow:0 0 0 3px #8caaff10}
+body.workspace-shell .dashboard-command .command-input-wrap input {color:var(--prlx-ink)}
+body.workspace-shell :is(.command-search-label,.command-footer,.command-empty) {color:var(--prlx-muted);font-size:11px;line-height:1.6}
+body.workspace-shell .dashboard-command .tool-category>h3 {color:#a8bff5;background:#0c1421;font-size:10px;letter-spacing:.1em;border-color:var(--prlx-line)}
+body.workspace-shell .dashboard-command .tool-category>a {border-radius:8px;min-height:68px;padding:13px;border:1px solid transparent}
+body.workspace-shell .tool-category>a:hover,body.workspace-shell .tool-category>a:focus-visible {background:#8caaff09;border-color:#8caaff25}
+body.workspace-shell .tool-category strong {color:var(--prlx-ink);font-size:14px;font-weight:500}
+body.workspace-shell .tool-category small {color:var(--prlx-muted);font-size:12px;line-height:1.6}
+
+/* Reading rhythm and inputs. Directional prices, errors and verified state remain local. */
+body.workspace-shell:not(:is([data-workspace-page=overview],[data-workspace-page=explore],[data-workspace-page=planets],[data-workspace-page=terminal])) main {--bg:var(--prlx-canvas);--panel:var(--prlx-panel);--muted:var(--prlx-muted);--text:var(--prlx-ink);--cyan:var(--prlx-blue);--purple:var(--prlx-blue-bright)}
+body.workspace-shell:not([data-workspace-page=terminal]) main :is(h1,h2,h3) {text-wrap:balance}
+body.workspace-shell main :is(.eyebrow,.obs-eyebrow,.pro-kicker) {color:#a8bff5;letter-spacing:.12em}
+body.workspace-shell main :is(.button,.obs-button,.follow-button,.creator-button,.pro-quiet) {color:var(--prlx-ink);border:1px solid var(--prlx-line-strong);border-radius:8px;background:#142136;box-shadow:inset 0 1px #d3e3ff06;font-weight:500;transition:background .16s,border-color .16s}
+body.workspace-shell main :is(.button,.obs-button,.follow-button,.creator-button):hover {border-color:#8caaff60;background:#1b2c47}
+body.workspace-shell main :is(.button.primary,.obs-button.primary,.follow-primary,.creator-button.primary) {color:#081427;border-color:#aec6ff;background:linear-gradient(135deg,#adc4ff,#8caaff);box-shadow:inset 0 1px #edf3ff50,0 4px 14px #507cd910;font-weight:600}
+body.workspace-shell main .obs-button.primary {color:#081427!important}
+body.workspace-shell main :is(.button.primary,.obs-button.primary,.follow-primary,.creator-button.primary):hover {background:#c1d3ff;border-color:#c1d3ff}
+body.workspace-shell main :is(.text-button,.creator-text-button) {color:var(--prlx-blue-bright)}
+body.workspace-shell:not(:is([data-workspace-page=overview],[data-workspace-page=explore],[data-workspace-page=planets],[data-workspace-page=terminal],[data-workspace-page=briefing])) main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),select,textarea) {color:var(--prlx-ink);background:#090f1a;border-color:var(--prlx-line-strong);border-radius:8px;color-scheme:dark}
+body.workspace-shell main :is(input,textarea)::placeholder {color:#90a3bf;opacity:1}
+body.workspace-shell :is(.workspace-disclosure,.page-sections) {background:#0c1523;border-color:var(--prlx-line);border-radius:10px}
+body.workspace-shell .workspace-disclosure>summary {color:var(--prlx-secondary);font-weight:500}
+body.workspace-shell .workspace-disclosure>summary::after {color:var(--prlx-blue)}
+body.workspace-shell .workspace-disclosure[open]>summary {border-color:var(--prlx-line)}
+body.workspace-shell .page-sections>summary {color:var(--prlx-secondary);font-size:12px;min-height:44px}
+body.workspace-shell .page-sections a {color:var(--prlx-secondary);border-radius:6px;background:#111d30}
+body.workspace-shell .page-sections a:hover {color:var(--prlx-ink);background:#8caaff12}
+body.workspace-shell main :is(.table-scroll,.market-table-wrap,.creator-table-wrap,.comparison-scroll) {scrollbar-width:thin;scrollbar-color:#34445f transparent}
+body.workspace-shell main :is(.table-scroll,.market-table-wrap,.creator-table-wrap) th {color:#bfd0eb;background:#111d2e;font-weight:500}
+body.workspace-shell main :is(.table-scroll,.market-table-wrap,.creator-table-wrap) tbody tr:hover {background:#8caaff07}
+body.workspace-shell main :is(.market-metrics,.creator-metrics,.fund-stats) strong {color:var(--prlx-ink);font-variant-numeric:tabular-nums}
+body.workspace-shell main :is(.market-metrics,.creator-metrics,.fund-stats) span {color:var(--prlx-muted)}
+
+/* The customizable dashboard keeps its cinematic background and functioning panel controls. */
+body.premium-dashboard.workspace-shell {--dashboard-glass:#0b1420cf}
+body.premium-dashboard.workspace-shell main {max-width:1800px}
+body.premium-dashboard.workspace-shell .dashboard-heading {margin-bottom:28px}
+body.premium-dashboard.workspace-shell .dashboard-heading h1 {color:var(--prlx-ink);font-size:clamp(34px,3.8vw,58px);font-weight:550;line-height:1.05;letter-spacing:-.055em}
+body.premium-dashboard.workspace-shell .dashboard-heading h1 span {color:var(--prlx-blue-bright)}
+body.premium-dashboard.workspace-shell .dashboard-heading :is(p,.eyebrow) {color:var(--prlx-muted)}
+body.premium-dashboard.workspace-shell :is(.layout-customize,.dashboard-filters button) {color:var(--prlx-secondary);background:#0c1727e8;border-color:var(--prlx-line-strong);border-radius:7px}
+body.premium-dashboard.workspace-shell .dashboard-filters button[aria-pressed=true] {color:#dfebff;background:#22395ae8;border-color:#8caaff60}
+body.premium-dashboard.workspace-shell :is(.dashboard-token-bar,.dashboard-utility,.dashboard-hero,.dashboard-disclosure,.home-market,.home-release-notes,.terminal-purpose,.following-home,.eco-teaser,.home-premium,.site-growth,.briefing-entry,.discovery-compact) {border-color:var(--prlx-line-strong);border-radius:14px;box-shadow:var(--prlx-shadow)}
+body.premium-dashboard.workspace-shell :is(.path-card,.example-card) {border-color:var(--prlx-line-strong);border-radius:13px;background-color:#0c1625;box-shadow:var(--prlx-shadow);overflow:hidden}
+body.premium-dashboard.workspace-shell :is(.dashboard-hero h2 span,.destination-heading .eyebrow,.path-copy .eyebrow,.path-kicker,.release-eyebrow) {color:var(--prlx-blue-bright)}
+body.premium-dashboard.workspace-shell :is(.dashboard-utility-heading p,.dashboard-utility-description,.home-market-note,.following-note,.destination-deck,.path-description,.release-description) {color:var(--prlx-secondary);line-height:1.75}
+body.premium-dashboard.workspace-shell :is(.dashboard-token-bar,.dashboard-disclosure,.home-market,.briefing-entry) {background:#0c1626e0}
+body.premium-dashboard.workspace-shell :is(.dashboard-token-bar code,.growth-number,.home-market-row strong) {font-variant-numeric:tabular-nums}
+body.premium-dashboard.workspace-shell .layout-dialog {color:var(--prlx-ink);border-color:var(--prlx-line-strong);border-radius:14px;background:#0c1523;box-shadow:0 32px 90px #0009}
+body.premium-dashboard.workspace-shell .layout-dialog::backdrop {background:#03060bcc}
+body.premium-dashboard.workspace-shell .layout-dialog :is(input,select,button) {border-color:var(--prlx-line-strong);border-radius:7px;color:var(--prlx-secondary);background:#111d30}
+body.premium-dashboard.workspace-shell .layout-save {color:#091427!important;background:#a9c1ff!important;border-color:#a9c1ff!important}
+body.premium-dashboard.workspace-shell .layout-panel-list>li {background:#101b2c;border-color:var(--prlx-line);border-radius:8px}
+body.premium-dashboard.workspace-shell .layout-dialog :is(.layout-intro,.layout-status,.layout-summary,.layout-storage) {color:var(--prlx-muted)}
+
+/* Verified Gold keeps its account frame and its own accent. */
+body.workspace-shell.gold-member-active {--gold-edge:#c5a565;--gold-light:#f5e5bb;--gold-muted:#b6a887}
+body.workspace-shell.gold-member-active .workspace-header {border-bottom-color:var(--gold-edge)}
+body.workspace-shell.gold-member-active .dashboard-sidebar {border-right-color:var(--gold-edge)}
+body.workspace-shell.gold-member-active .dashboard-sidebar nav a[aria-current=page] {color:#f0d9a3;border-color:#c5a56530;background:linear-gradient(100deg,#c5a5651a,#c5a56505);box-shadow:inset 2px 0 var(--gold-edge)}
+body.workspace-shell.has-pro-membership .dashboard-sidebar a[href="/pro"] {color:#efd18c}
+
+@media(max-width:900px),(hover:none) and (pointer:coarse) and (max-width:1100px) {
+  body.workspace-shell:not(.premium-dashboard) {padding-left:0;padding-bottom:env(safe-area-inset-bottom,0px)}
+  body.workspace-shell .dashboard-sidebar {display:none}
+  body.workspace-shell .workspace-header,body.home-hub.workspace-shell .workspace-header {min-height:68px;height:auto;padding:11px 16px;padding-top:max(11px,env(safe-area-inset-top,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));gap:10px;background:#090f19f5}
+  body.workspace-shell .workspace-header .dashboard-search {min-height:44px;border-radius:7px}
+  body.workspace-shell .workspace-header :is(.account-link,#session-link) {min-height:44px}
+  body.workspace-shell:not(.gold-member-active) .workspace-header .brand-orbit {color:var(--prlx-blue-bright);stroke:var(--prlx-blue-bright)}
+  body.workspace-shell .dashboard-command {border-radius:13px;padding:20px}
+  body.workspace-shell .dashboard-command .command-input-wrap input {font-size:16px}
+}
+@media(max-width:760px) {
+  body.workspace-shell main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),select,textarea) {font-size:16px}
+  body.workspace-shell .dashboard-command .tool-category>a {min-height:70px}
+  body.workspace-shell .dashboard-command .tool-category small {font-size:12px}
+  body.workspace-shell .page-sections nav {gap:7px}
+  body.premium-dashboard.workspace-shell .dashboard-heading h1 {font-size:36px}
+  body.premium-dashboard.workspace-shell .dashboard-heading {margin-bottom:22px}
+}
+@media(max-width:380px) {
+  body.workspace-shell .workspace-header,body.home-hub.workspace-shell .workspace-header {padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));gap:6px}
+  body.workspace-shell .workspace-header .dashboard-header-actions {gap:5px}
+  body.workspace-shell .dashboard-command {padding:16px}
+}
+@media(prefers-reduced-motion:reduce) {
+  body.workspace-shell :is(.dashboard-sidebar a,.dashboard-search,.tool-category>a,.button,.obs-button,.follow-button,.creator-button) {transition:none}
+}
+@media(prefers-reduced-transparency:reduce) {
+  body.workspace-shell :is(.workspace-header,.mobile-dock),body.home-hub.workspace-shell .workspace-header {background:#090f19;backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+@media(forced-colors:active) {
+  body.workspace-shell :is(.dashboard-sidebar a[aria-current=page],.mobile-dock>a[aria-current=page]) {outline:1px solid Highlight}
+}

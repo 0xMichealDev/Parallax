@@ -1,5 +1,16 @@
 # Changelog
 
+## Gold research suite remodel — hosted v225
+
+- Recorded source `89dabd844238dd7f6738b4b4da692a37511dbee3` after synchronized v220 `33f8c23fa4aca7e181f4713531a066f6ac5c822a`, including the preceding v221 Terminal launch-card catch-up.
+- Remodeled Gold home, Wallet Watch, the snapshot library/comparison views and Gold AI with a shared charcoal and champagne palette, clearer research surfaces and active suite navigation.
+- Added local monitor wallet/project filtering, name/address search, collection status and distinct empty/unavailable states. Full saved-monitor refresh and wallet-change isolation remain intact.
+- Added local research-row filtering and keyboard focus helpers; reorganized the assistant's saved conversations, evidence selection, focus suggestions, request allowance and composer.
+- Preserved existing membership verification, account separation, provider request behavior, source timestamps and safe answer rendering. The remodel changes no private service implementation.
+- Published 65 exact files (1,492,786 bytes), classifying all 21 native changes as 20 changed exports and 1 share-route summary, with 45 unchanged dependencies.
+- Appended `npm run check:gold-workspace` and preserved all 9 earlier snapshot/archive directories. Release notes record live desktop checks, scoped offline coverage and remaining authenticated/mobile visual limits.
+- See the [release record](docs/updates/gold-workspace-2026-10-29.md) and [source snapshot](platform-updates/gold-workspace-2026-10-29/).
+
 ## Market data recovery — hosted v220
 
 - Recorded source `33f8c23fa4aca7e181f4713531a066f6ac5c822a` after synchronized v217 `fddfd0fac87276fe1806c05255f9899bdbd7a62f`, grouping the recovery revisions since that public baseline.

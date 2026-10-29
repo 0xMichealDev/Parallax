@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "market-data-recovery-2026-10-29",
+  "latestRelease": "gold-workspace-2026-10-29",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -25,6 +25,10 @@
     {
       "id": "market-data-recovery-2026-10-29",
       "manifest": "platform-updates/market-data-recovery-2026-10-29/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "gold-workspace-2026-10-29",
+      "manifest": "platform-updates/gold-workspace-2026-10-29/PUBLIC-SYNC.json"
     }
   ]
 }

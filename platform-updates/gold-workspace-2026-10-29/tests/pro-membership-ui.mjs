@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const code=fs.readFileSync('public/pro-membership.js','utf8');
+const wallet='11111111111111111111111111111111';
+const response=(data,status=200)=>({ok:status>=200&&status<300,status,json:async()=>data});
+const flush=()=>new Promise(resolve=>setImmediate(resolve));
+function client(replies,{page='control',member=null}={}){
+ const classes=()=>{const values=new Set();return {toggle(k,on){if(on)values.add(k);else values.delete(k);},contains:k=>values.has(k)};};
+ const detail={textContent:''},tier={textContent:'PRO'},badge={hidden:true,dataset:{},classList:classes(),setAttribute(){},querySelector:s=>s==='[data-pro-label]'?tier:detail};
+ const handlers={},body={dataset:{workspacePage:page},classList:classes()};
+ let calls=0;
+ const window={ParallaxProMemberState:member,addEventListener(){},phantom:{solana:{on(name,fn){handlers[name]=fn;}}}};
+ vm.runInNewContext(code,{window,document:{body,hidden:false,querySelectorAll:()=>[badge],addEventListener(){}},fetch:async()=>{calls++;const reply=replies.shift();if(reply instanceof Error)throw reply;return await reply;},setInterval(){},Date,Array});
+ return {badge,detail,tier,body,window,handlers,get calls(){return calls;}};
+}
+let c=client([response({signedIn:false,wallet:null})]);await flush();
+assert.equal(c.badge.hidden,false);assert.equal(c.badge.dataset.state,'signin');assert.equal(c.badge.classList.contains('is-active'),false);assert(c.badge.href.startsWith('/signin-with-chatgpt'));
+c=client([response({signedIn:true,wallet:null})]);await flush();assert.equal(c.badge.dataset.state,'verify');assert.equal(c.calls,1);
+c=client([response({signedIn:true,wallet}),response({eligible:true,wallet})]);await flush();
+assert.equal(c.badge.dataset.state,'active');assert.equal(c.detail.textContent,'ACTIVE');assert.equal(c.tier.textContent,'GOLD');assert(c.body.classList.contains('has-pro-membership'));
+c.handlers.accountChanged();assert.equal(c.badge.dataset.state,'verify');assert.equal(c.badge.classList.contains('is-active'),false);assert.equal(c.tier.textContent,'PRO');
+c=client([response({signedIn:true,wallet}),response({eligible:false,wallet})]);await flush();assert.equal(c.badge.dataset.state,'holdings');assert.equal(c.badge.classList.contains('is-active'),false);
+c=client([response({signedIn:true,wallet}),response({error:'offline'},503)]);await flush();assert.equal(c.badge.dataset.state,'unavailable');assert.equal(c.badge.hidden,false);
+c=client([response({signedIn:true,wallet}),response({code:'verify'},403)]);await flush();assert.equal(c.badge.dataset.state,'verify');
+c=client([response({signedIn:true,wallet}),response({eligible:true})]);await flush();assert.equal(c.badge.classList.contains('is-active'),false);
+let resolve;const pending=new Promise(r=>resolve=r);
+c=client([response({signedIn:true,wallet}),pending]);await flush();c.handlers.disconnect();resolve(response({eligible:true,wallet}));await flush();assert.equal(c.badge.dataset.state,'verify');
+c=client([],{page:'pro',member:{eligible:true,wallet}});assert.equal(c.badge.dataset.state,'active');assert.equal(c.calls,0);
+c.window.ParallaxProMembership.set(null);assert.equal(c.badge.classList.contains('is-active'),false);
+console.log('PASS Pro badge: verified, signed-out, unverified, insufficient holdings, provider failure, malformed response, wallet changes and stale responses.');

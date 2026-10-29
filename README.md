@@ -29,14 +29,14 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 | **Wallet Watch** | Inspect wallet activity and keep saved watches tied to exact addresses. | [Wallet Watch](https://parallaxlaunch.live/docs/wallet-watch) |
 | **Project Atlas** | Explore community project profiles and creator identities. | [Creator tools](https://parallaxlaunch.live/docs/creators) |
 | **Worlds & Expeditions** | Explore realistic project worlds, visit GATTO's city and play as a sheep in the lunar habitat. | [October 28 update](docs/updates/worlds-expeditions-2026-10-28.md) |
-| **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
+| **Gold** | Holder research suite with member monitoring, Wallet Watch, saved snapshots and evidence-based AI. | [Gold workspace update](docs/updates/gold-workspace-2026-10-29.md) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-**Latest platform update:** [Market data recovery](docs/updates/market-data-recovery-2026-10-29.md), hosted v220, records native revision `33f8c23fa4aca7e181f4713531a066f6ac5c822a`. The release addresses the shared application-allowance failure affecting discovery and charts, with strictly verified included-credit grants, bounded provider recovery, honest retained observations and tighter client request behavior.
+**Latest platform update:** [Gold research suite remodel](docs/updates/gold-workspace-2026-10-29.md), hosted v225, records native revision `89dabd844238dd7f6738b4b4da692a37511dbee3`. Gold home, Wallet Watch, saved snapshots and Gold AI now share a charcoal and champagne presentation, clearer research layouts and route-aware suite navigation. Local monitor/report filters and a redesigned evidence-based assistant preserve existing account and request boundaries.
 
-The [new source snapshot](platform-updates/market-data-recovery-2026-10-29/) exports 52 exact browser, presentation, documentation and fixture files while summarizing private service changes. The [v217 market workspace](docs/updates/terminal-trenches-workspace-2026-10-29.md) remains preserved as its original release record.
+The [new source snapshot](platform-updates/gold-workspace-2026-10-29/) exports 65 exact presentation, browser, artwork, documentation and fixture files. It also catches up the preceding v221 Terminal launch card. The [v220 market data recovery](docs/updates/market-data-recovery-2026-10-29.md) remains preserved as its original release record.
 
-The public gate appends `npm run check:market-recovery` and preserves every earlier suite. All eight earlier snapshot/archive directories retain their published bytes and provenance. Provider limits and incomplete coverage remain visible; actual account credit figures and credentials remain private.
+The public gate appends `npm run check:gold-workspace` and preserves every earlier suite. All 9 earlier snapshot/archive directories retain their published bytes and provenance. The release notes distinguish live desktop review and offline checks from the remaining authenticated/mobile visual coverage.
 
 ## What you can inspect here
 
@@ -49,6 +49,8 @@ The public gate appends `npm run check:market-recovery` and preserves every earl
 **Replay evidence.** Inspect the playback controller, completed-candle timing, sender aggregation, exact capture links, retry behavior and clear missing-data states. The public browser tests use fixtures; hosted provider services remain private.
 
 **Trading and launch discovery.** Inspect the separate cap, FDV and price transformations, execution-marker invariants, provider-labeled metadata, stage filters and browser request lifecycle. Public tests use fixtures and do not require a wallet or provider credentials.
+
+**Gold research.** Inspect the shared suite shell, local wallet/project and snapshot filters, searchable assistant conversations, selected-evidence controls, source rendering and wallet-change isolation. The [Gold snapshot](platform-updates/gold-workspace-2026-10-29/) includes its exact public dependencies and offline browser fixtures.
 
 **Executable checks.** Fixture tests exercise ownership transfers, invalid records, missing handles, provider failures and browser request races. Dated snapshots add focused browser and rendering checks. Provenance verification compares exported files with their recorded source hashes.
 
