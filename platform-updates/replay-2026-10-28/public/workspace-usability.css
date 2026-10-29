@@ -1,0 +1,112 @@
+/* Shared navigation and mobile reading rhythm. Immersive scene controls retain their own layout. */
+.workspace-shell .workspace-disclosure{box-sizing:border-box;min-width:0;margin:18px 0;border:1px solid #a8cfc52b;border-radius:12px;background:#0d1821;color:#dce9ec;padding:0;overflow:visible}
+.workspace-shell .workspace-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:20px;list-style:none;cursor:pointer;min-height:56px;padding:16px 20px;font:500 14px/1.5 Inter,system-ui,sans-serif;letter-spacing:0;color:#d2e8df}
+.workspace-shell .workspace-disclosure>summary::-webkit-details-marker{display:none}
+.workspace-shell .workspace-disclosure>summary::after{content:'+';font-size:21px;font-weight:400;color:#9fc9bb;flex:none}
+.workspace-shell .workspace-disclosure[open]>summary::after{content:'−'}
+.workspace-shell .workspace-disclosure[open]>summary{border-bottom:1px solid #a8cfc51c}
+.workspace-shell .workspace-disclosure-body{padding:18px;min-width:0}
+.workspace-shell .workspace-disclosure-body>:first-child{margin-top:0}
+.workspace-shell .workspace-disclosure-body>:last-child{margin-bottom:0}
+.workspace-shell .workspace-disclosure-body>:is(.panel,.release,.fund-purpose,.obs-next,.following-explainer,.pro-explainer,.briefing-guide,.terminal-entry,.release-notes,.discovery-shell,.creator-panel){border:0;box-shadow:none;background:transparent;padding:0}
+.workspace-shell .workspace-disclosure-body>.obs-next{margin:0}
+.workspace-shell .workspace-disclosure-body>.features{padding:12px 0}
+.workspace-shell .dashboard-command .tool-category{margin:0;padding:0;border:0;min-width:0}
+.workspace-shell .tool-category>h3{position:sticky;top:0;z-index:1;background:#0d1822;color:#a9c9be;font:600 11px/1.5 Inter,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:12px;margin:8px 0 2px;border-bottom:1px solid #b4d2de20}
+.workspace-shell .dashboard-command .tool-category>a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;min-height:66px;padding:12px;border:1px solid transparent;border-radius:8px;background:transparent;color:#e4edf4;white-space:normal;text-decoration:none}
+.workspace-shell .tool-category>a:hover,.workspace-shell .tool-category>a:focus-visible{background:#c4ead50b;border-color:#b4d2de30}
+.workspace-shell .tool-category>a>span:first-child{min-width:0}
+.workspace-shell .tool-category strong,.workspace-shell .tool-category small{display:block}
+.workspace-shell .tool-category strong{font-size:14px;line-height:1.5}
+.workspace-shell .tool-category small{font-size:12px;line-height:1.6;margin-top:3px;color:#9ab2be;overflow-wrap:anywhere}
+.workspace-shell .dashboard-command [hidden]{display:none!important}
+.workspace-shell .page-sections{position:relative;z-index:3;margin:0 0 24px;border:1px solid #a8cfc52b;border-radius:10px;background:#0e1a24;font:13px/1.5 Inter,system-ui,sans-serif;color:#c9dfd7}
+.workspace-shell .page-sections>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:12px 16px;list-style:none;cursor:pointer}
+.workspace-shell .page-sections>summary::-webkit-details-marker{display:none}
+.workspace-shell .page-sections>summary::after{content:'⌄';font-size:18px}
+.workspace-shell .page-sections[open]>summary::after{content:'⌃'}
+.workspace-shell .page-sections nav{position:static;transform:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:10px;margin:0;max-width:none;width:auto;border:0;background:transparent;box-shadow:none}
+.workspace-shell .page-sections a{display:flex;align-items:center;min-height:44px;border-radius:7px;padding:10px;color:#beddd0;font:13px/1.5 Inter,system-ui,sans-serif;text-decoration:none}
+.workspace-shell .page-sections a:hover{background:#b4e7d210}
+.workspace-shell[data-workspace-page=control] .hero{padding:32px 0 22px;gap:24px;grid-template-columns:minmax(0,1fr)}
+.workspace-shell[data-workspace-page=control] .hero h1{font-size:clamp(32px,4vw,48px);margin:12px 0}
+.workspace-shell[data-workspace-page=control] .hero .lead{max-width:730px}
+.workspace-shell[data-workspace-page=control] .hero>.workspace-disclosure{margin:0}
+.workspace-shell[data-workspace-page=control] .hero-tags{margin-top:16px}
+.workspace-shell main :is(.table-scroll,.market-table-wrap,.comparison-scroll){max-width:100%;overflow:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+@media(min-width:761px) and (max-width:1100px){
+ .workspace-shell :is(.briefing-layout,.fund-columns,.panel-manager,.checkout-grid,.design-grid,.atlas-observatory){grid-template-columns:minmax(0,1fr)}
+ .workspace-shell .briefing-sidebar{position:static}
+}
+@media(max-width:760px){
+ body.workspace-shell:not(.premium-dashboard){padding-left:0;padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
+ .workspace-shell .workspace-header{gap:8px;padding:12px 16px;min-height:68px}
+ .workspace-shell .dashboard-header-actions{gap:6px;min-width:0}
+ .workspace-shell .dashboard-search{min-height:44px;padding:10px;min-width:44px;justify-content:center}
+ .workspace-shell .dashboard-search>span{display:none}
+ .workspace-shell .workspace-header #session-link{min-height:44px;padding:9px;font-size:12px}
+ .workspace-shell .workspace-header>.brand{font-size:12px!important;letter-spacing:.1em!important}
+ .workspace-shell .workspace-header .brand-orbit{width:22px}
+ .workspace-shell .workspace-header .pro-badge-word{display:none}
+ .workspace-shell>.mobile-dock{border-radius:0;padding-bottom:max(9px,env(safe-area-inset-bottom,9px));gap:3px}
+ .workspace-shell>.mobile-dock>a{font-size:11px;min-height:48px}
+ .workspace-shell .dashboard-command{box-sizing:border-box;width:calc(100% - 24px);max-width:640px;max-height:calc(100dvh - 32px);padding:16px;margin:auto;border-radius:16px}
+ .workspace-shell .dashboard-command .command-heading{gap:12px}
+ .workspace-shell .dashboard-command h2{font-size:23px}
+ .workspace-shell .dashboard-command .command-heading>button{min-width:44px;min-height:44px}
+ .workspace-shell .dashboard-command .tool-directory{max-height:calc(100dvh - 250px);margin-top:10px;overflow-y:auto}
+ .workspace-shell .command-footer{display:none}
+ .workspace-shell .page-sections{margin-bottom:20px}
+ .workspace-shell .page-sections nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .workspace-shell .workspace-disclosure{margin:16px 0}
+ .workspace-shell .workspace-disclosure>summary{padding:15px 16px;font-size:14px;min-height:54px}
+ .workspace-shell .workspace-disclosure-body{padding:16px}
+ /* Keep the form and evidence readable across all working pages. */
+ .workspace-shell main :is(input,select,textarea){box-sizing:border-box;max-width:100%;min-width:0}
+ .workspace-shell main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),select,textarea){font-size:16px!important;min-height:46px}
+ .workspace-shell main :is(button,.button,.obs-button,.brief-button,.pro-button,summary){touch-action:manipulation}
+ .workspace-shell[data-workspace-page]:not([data-workspace-page=explore]):not([data-workspace-page=planets]):not([data-workspace-page=overview]) main button,
+ .workspace-shell main :is(.button,.obs-button,.brief-button,.pro-button){min-height:44px}
+ .workspace-shell main :is(.input-row,.obs-input-row,.replay-form,.replay-tools,.saved-workspace-head,.saved-workspace-actions,.saved-workspace-empty,.workspace-head,.report-heading,.project-toolbar,.project-context,.fund-panel-heading,.creator-panel-head,.obs-section-heading,.pro-section-head){flex-wrap:wrap;gap:12px}
+ .workspace-shell main :is(.input-row,.obs-input-row,.replay-form)>input,
+ .workspace-shell main :is(.input-row,.obs-input-row,.replay-form)>button{width:100%;flex-basis:100%}
+ .workspace-shell main :is(.actions,.pro-actions,.obs-card-actions,.creator-project-actions){gap:10px}
+ .workspace-shell main :is(.panel,.obs-card,.pro-card,.fund-panel,.creator-panel,.search-panel){padding:18px;min-width:0}
+ .workspace-shell main :is(.status,.fine,.obs-fine,.pro-muted,.briefing-fine,.hint,.muted){font-size:13px;line-height:1.65;overflow-wrap:anywhere}
+ .workspace-shell main :is(.report-grid,.comparison-selects,.comparison-times,.briefing-layout,.fund-columns,.checkout-grid,.design-grid,.panel-manager,.creator-update-grid,.performance-columns,.sh-grid,.obs-grid,.obs-next-grid,.pro-cards,.pro-explainer,.following-explainer,.benefit-grid,.setup-steps,.atlas-observatory){grid-template-columns:minmax(0,1fr);gap:18px}
+ .workspace-shell main :is(.metrics,.delivery-metrics,.creator-metrics,.fund-stats,.pilot-metric-grid){grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .workspace-shell main :is(.report-heading,.token-heading,.contract-line,.saved-row,.transaction,.obs-card-top,.pro-card-top){min-width:0;overflow-wrap:anywhere}
+ .workspace-shell main :is(.actions,.token-links,.obs-card-actions) a{display:inline-flex;align-items:center;min-height:44px}
+ .workspace-shell main :is(.tabs,.research-subnav){display:flex;overflow-x:auto;gap:6px;max-width:100%;padding:6px;scrollbar-width:thin;overscroll-behavior-x:contain}
+ .workspace-shell main :is(.tabs,.research-subnav)>:is(button,a){flex:0 0 auto;min-height:46px;white-space:nowrap;padding:10px 14px;font-size:13px}
+ .workspace-shell main .tabs>button[aria-selected=true]{border-color:#b4e7d2;background:#1a3535;color:#e4fff3}
+ .workspace-shell .terminal-grid{display:flex;flex-direction:column;gap:18px}
+ .workspace-shell .terminal-grid>*{width:100%;box-sizing:border-box;min-width:0}
+ .workspace-shell .terminal-intro{display:block}
+ .workspace-shell .terminal-intro .search{width:100%;margin-top:18px}
+ .workspace-shell .terminal-grid .discovery .feed-list{max-height:260px}
+ .workspace-shell .trade-panel,.workspace-shell .briefing-sidebar{position:static}
+ .workspace-shell .alert-rule{grid-template-columns:minmax(0,1fr);padding:16px}
+ .workspace-shell .input-foot{flex-wrap:wrap;gap:8px}
+ .workspace-shell .briefing-counts{grid-template-columns:1fr}
+ .workspace-shell .briefing-counts>div{padding:16px;border-right:0;border-bottom:1px solid #b1cfce22}
+ .workspace-shell .creator-sidebar{display:none}
+ .workspace-shell .creator-main{padding:24px 5%}
+ .workspace-shell .studio-steps button{min-width:0;min-height:48px}
+ .workspace-shell .pro-access,.workspace-shell .sh-lookup{padding:20px}
+ .workspace-shell .sh-lookup input{min-width:0;flex-basis:100%}
+ .workspace-shell .workspace .two{grid-template-columns:1fr}
+ .workspace-shell :is(.hero,.briefing-hero,.following-intro,.pro-hero,.obs-hero,.fund-hero){gap:20px;padding-top:24px;margin-bottom:26px}
+ .workspace-shell :is(.briefing-signal,.following-orbit,.obs-orbit){display:none}
+ .workspace-shell .obs-hero h1,.workspace-shell .pro-hero h1{font-size:36px;line-height:1.15}
+ .workspace-shell .briefing-hero{grid-template-columns:1fr}
+}
+@media(max-width:380px){
+ .workspace-shell .workspace-header{padding-left:10px;padding-right:10px}
+ .workspace-shell .workspace-header>.brand{font-size:10px!important;gap:4px!important}
+ .workspace-shell .workspace-header #session-link{font-size:11px;padding:8px}
+ .workspace-shell .page-sections nav{grid-template-columns:1fr}
+}
+.workspace-shell .page-sections[hidden],.workspace-shell .page-sections [hidden]{display:none!important}
+.workspace-shell .tool-search-compact{display:none}
+@media(min-width:381px) and (max-width:760px){.workspace-shell .workspace-header .dashboard-search>.tool-search-compact{display:inline;font-size:12px}}

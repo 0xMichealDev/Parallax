@@ -1,0 +1,59 @@
+/* Observatory identity: an immersive entrance, a quiet working surface. */
+body.workspace-shell{--prlx-blue:#80c9ee;--prlx-blue-bright:#c0e8ff;--prlx-line:#8cb8d320;--prlx-ink:#eef5fa;--prlx-muted:#94a7b7;--story-accent:#a7ddfa;color-scheme:dark;background-color:#060a10}
+body.workspace-shell .dashboard-sidebar{background:#080d14;border-right-color:#9ac4df1c}
+body.workspace-shell .workspace-header{background:#080d14f5;border-bottom-color:#9ac4df24}
+body.workspace-shell:not(.gold-member-active) .dashboard-sidebar nav a[aria-current=page]{background:linear-gradient(90deg,#75c7ee1b,transparent);box-shadow:inset 2px 0 #8dd6f7;border-color:#8dd6f71c;border-radius:3px}
+body.workspace-shell .dashboard-sidebar .brand-orbit{border:0;background:none;border-radius:0;color:#a9defa}
+body.workspace-shell .dashboard-sidebar nav a,body.workspace-shell .dashboard-search,body.workspace-shell .workspace-header .account-link{border-radius:4px}
+body.workspace-shell :is(.eyebrow,.atlas-eyebrow,.obs-kicker){letter-spacing:.15em}
+body.workspace-shell:not(.home-hub) main>section{scroll-margin-top:90px}
+body.workspace-shell:not(.gold-member-active) :is(.panel,.obs-panel,.terminal-panel){border-color:#8cb8d326;box-shadow:0 8px 24px #00000012}
+body.workspace-shell :is(input,select,textarea):focus-visible{outline-color:#9edcff}
+/* Homepage: custom art, typography and navigation, no live chart animation overhead. */
+body.home-hub.observatory-arrival{--story-line:#98bbcf26;--story-muted:#a3b4c3;--home-gutter:clamp(22px,5vw,84px);background:#060a10}
+body.home-hub.observatory-arrival .workspace-header{height:78px;min-height:78px;padding:0 var(--home-gutter);position:relative;background:#060a10;border-bottom:1px solid #bdddf41a}
+body.home-hub.observatory-arrival .workspace-header>.brand{font-size:15px;letter-spacing:.2em}
+body.home-hub.observatory-arrival .story-nav{gap:30px;margin-left:auto}
+body.home-hub.observatory-arrival .dashboard-header-actions{margin-left:16px}
+body.home-hub.observatory-arrival .workspace-header .account-link{background:transparent;color:#d5eaf7;border:1px solid #98bbcf3c}
+body.home-hub.observatory-arrival .story-hero{min-height:760px;min-height:calc(100svh - 78px);max-height:1100px;padding:28px var(--home-gutter) 26px;display:flex;justify-content:flex-start;background:#060a10;isolation:isolate;overflow:hidden}
+body.home-hub.observatory-arrival .story-hero::before{display:none}
+.arrival-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-3}
+.arrival-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#03070de8 0%,#03070d9e 34%,#03070d08 78%),linear-gradient(0deg,#060a10 0%,transparent 24%,transparent 85%,#060a1050)}
+.arrival-topline,.arrival-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;font:9px/1.6 ui-monospace,monospace;letter-spacing:.15em;color:#a9c3d6;width:100%}
+.arrival-topline{padding-bottom:20px;border-bottom:1px solid #accce921}
+.arrival-copy{padding:clamp(60px,10vh,130px) 0 70px;position:relative;max-width:900px}
+body.home-hub.observatory-arrival .story-eyebrow{color:#9ddaff;font-size:10px;letter-spacing:.18em}
+body.home-hub.observatory-arrival .story-hero h1{font-family:Arial,Helvetica,system-ui,sans-serif;font-size:clamp(60px,7.8vw,126px);font-weight:850;line-height:.94;letter-spacing:-.065em;text-wrap:initial;margin-bottom:30px}
+body.home-hub.observatory-arrival .story-hero h1>span{color:#b9e5ff;background:none;-webkit-text-fill-color:#b9e5ff;text-shadow:0 2px 36px #70c9ff15}
+body.home-hub.observatory-arrival .story-lead{color:#c0d0df;font-size:16px;line-height:1.85;max-width:480px}
+body.home-hub.observatory-arrival .story-button{border-radius:3px;background:#bce7ff;border-color:#bce7ff;color:#06121c;min-height:53px;box-shadow:none;font-size:12px;gap:32px}
+body.home-hub.observatory-arrival .story-button:hover{background:#e0f3ff;border-color:#e0f3ff;color:#06121c}
+body.home-hub.observatory-arrival .story-button-quiet{background:#07101c80;color:#d4e8f8;border-color:#accce94a;backdrop-filter:blur(8px)}
+body.home-hub.observatory-arrival .story-button-quiet:hover{background:#142639;color:#fff}
+.arrival-assurance{font:8px/1.8 ui-monospace,monospace;letter-spacing:.1em;color:#8da7ba;margin-top:23px}
+.arrival-bottom{margin-top:auto;padding-top:18px;border-top:1px solid #accce92b}
+.arrival-bottom a{color:#c7deee;display:flex;gap:35px;align-items:center;min-height:44px;text-decoration:none}
+.arrival-bottom a span{font-size:20px}
+.arrival-launchpad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0 var(--home-gutter);background:#080e16;border-block:1px solid #98bbcf26}
+.arrival-launchpad a{padding:30px 25px;border-right:1px solid #98bbcf26;color:#ecf6ff;text-decoration:none;transition:background .2s}
+.arrival-launchpad a:first-child{border-left:1px solid #98bbcf26}
+.arrival-launchpad a:hover{background:#87cfff0b}
+.arrival-launchpad small{font:9px/1.8 ui-monospace,monospace;letter-spacing:.12em;color:#8dbedb}
+.arrival-launchpad strong{display:flex;justify-content:space-between;font-size:21px;letter-spacing:-.03em;margin-top:15px;font-weight:500}
+.arrival-launchpad strong span{color:#89bddb;font-size:18px}
+.arrival-launchpad p{color:#92a8ba;font-size:12px;margin:8px 0 0}
+body.home-hub.observatory-arrival .story-content{background:#060a10;padding:0 var(--home-gutter)}
+body.home-hub.observatory-arrival .story-section{padding:110px 0;border-bottom-color:#98bbcf26;gap:7vw}
+body.home-hub.observatory-arrival .story-copy h2,body.home-hub.observatory-arrival .story-worlds h2,body.home-hub.observatory-arrival .story-closing h2{font-family:Arial,Helvetica,sans-serif;font-size:clamp(44px,5.8vw,84px);font-weight:800;line-height:.98;letter-spacing:-.055em}
+body.home-hub.observatory-arrival .story-copy h2 span{color:#a1cce6}
+body.home-hub.observatory-arrival :is(.story-console,.story-tracking-preview,.story-planet-preview,.story-utility-details,.story-earthbound){border-radius:4px;border-color:#98bbcf30;background-color:#0a111b;box-shadow:none}
+body.home-hub.observatory-arrival .story-console-bar{background:#0b1622;border-bottom:1px solid #98bbcf26;color:#a9d5ef;letter-spacing:.13em}
+body.home-hub.observatory-arrival :is(.story-text-link,.story-path-number){color:#a6dcfa}
+body.home-hub.observatory-arrival .story-closing{padding:110px 0;text-align:left;background:radial-gradient(ellipse at 80% 50%,#21426330,transparent 65%)}
+body.home-hub.observatory-arrival .story-footer-wordmark{font-weight:850;font-family:Arial,Helvetica,sans-serif;letter-spacing:-.065em;color:#d3e6f1;opacity:.95}
+body.home-hub.observatory-arrival .story-footer{border-top:1px solid #98bbcf26}
+@media(min-width:1600px){.arrival-scene{object-position:center 45%}}
+@media(max-width:1000px){body.home-hub.observatory-arrival .story-nav{gap:18px}.arrival-launchpad a{padding:26px 16px}.arrival-launchpad strong{font-size:18px}.arrival-topline span:last-child{display:none}body.home-hub.observatory-arrival .story-hero h1{font-size:clamp(65px,9vw,100px)}}
+@media(max-width:700px){body.home-hub.observatory-arrival .workspace-header{height:68px;min-height:68px;gap:12px}body.home-hub.observatory-arrival .story-nav{display:none}body.home-hub.observatory-arrival .dashboard-header-actions{margin-left:auto}body.home-hub.observatory-arrival .workspace-header .account-link{font-size:10px;padding:10px}.arrival-topline{font-size:8px}.arrival-scene{object-position:64% center}.arrival-shade{background:linear-gradient(90deg,#03070de0,#03070d68),linear-gradient(0deg,#060a10,transparent 40%)}body.home-hub.observatory-arrival .story-hero{min-height:690px;min-height:calc(94svh - 68px);padding-top:20px;max-height:none}.arrival-copy{padding:75px 0 65px}body.home-hub.observatory-arrival .story-hero h1{font-size:clamp(49px,12vw,80px)}body.home-hub.observatory-arrival .story-lead{font-size:14px}.arrival-assurance{font-size:7px}.arrival-bottom{font-size:8px}.arrival-bottom>span{display:none}.arrival-launchpad{grid-template-columns:repeat(2,minmax(0,1fr));padding:0 22px}.arrival-launchpad a{padding:24px 14px;border-bottom:1px solid #98bbcf26}.arrival-launchpad a:nth-child(3){border-left:1px solid #98bbcf26}.arrival-launchpad strong{font-size:17px}.arrival-launchpad p{font-size:11px}.arrival-launchpad small{font-size:8px}body.home-hub.observatory-arrival .story-section{padding:70px 0;gap:35px;grid-template-columns:1fr}body.home-hub.observatory-arrival .story-copy h2,body.home-hub.observatory-arrival .story-worlds h2,body.home-hub.observatory-arrival .story-closing h2{font-size:clamp(42px,10vw,64px)}body.home-hub.observatory-arrival .story-closing{padding:75px 0}.story-actions{gap:10px!important}body.home-hub.observatory-arrival .story-button{padding:13px 15px;gap:15px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.arrival-launchpad a{transition:none}}

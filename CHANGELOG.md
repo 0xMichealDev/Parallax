@@ -1,5 +1,16 @@
 # Changelog
 
+## Hosted Replay update — 2026-10-28
+
+- Recorded hosted v212, native source `71ab595e472670c98b5b047b1bd3b8ba2da690e0`, continuing from synchronized v211.
+- Added public 1H/6H/24H selected-pool replay, completed candle closes, buy/sell markers, sender filters and totals, largest-trade jumps, Solscan links and JSON evidence export.
+- Added fixed-lifetime snapshot sharing that preserves the captured dataset, playhead and filters; retries preserve the original request and explicit Load latest starts a new capture.
+- Linked Replay from shared navigation, the homepage, Terminal and project worlds. Token and pool selections remain explicit across refreshes.
+- Exposed recent-trade caps, missing USD, chart gaps and capture timestamps; this first release does not claim full token history, wallet profit/loss or transfers/liquidity replay.
+- Published 37 exact files (492,664 bytes), covering 16 of 22 changed native paths plus 21 shared dependencies. The remaining 6 private changes are summarized without implementation or runtime data.
+- Added public core and browser-controller fixtures to `npm run check:replay` and the complete public CI gate. Preserved all older snapshots and their hashes.
+- See the [Replay release record](docs/updates/replay-2026-10-28.md) and [source snapshot](platform-updates/replay-2026-10-28/).
+
 ## Hosted worlds, expeditions and community tools update — 2026-10-28
 
 - Recorded all feature work after v186 through v210, application revision `b92e26dd4c0232b9c7e471a4563d40f01afe12bc`. The complete public export is pinned to subsequent workflow-only v211 source revision `c79c3c7ff8f8e0f2a8a71a62138072a0b7433910`.

@@ -1,10 +1,14 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "worlds-expeditions-2026-10-28",
+  "latestRelease": "replay-2026-10-28",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
       "manifest": "platform-updates/worlds-expeditions-2026-10-28/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "replay-2026-10-28",
+      "manifest": "platform-updates/replay-2026-10-28/PUBLIC-SYNC.json"
     }
   ]
 }

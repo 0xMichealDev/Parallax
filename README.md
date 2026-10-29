@@ -23,6 +23,7 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 | Workspace | Purpose | Guide |
 | --- | --- | --- |
 | **Terminal** | Discover markets, inspect charts and bonding progress, and review trades. | [October 24 update](docs/updates/terminal-2026-10-24.md) |
+| **Replay** | Rewind recent pool activity, inspect loaded swaps and share captured evidence. | [Replay update](docs/updates/replay-2026-10-28.md) |
 | **Project Passports** | Collect, save and compare token research snapshots with source context. | [Passports](https://parallaxlaunch.live/docs/passports) |
 | **Wallet Watch** | Inspect wallet activity and keep saved watches tied to exact addresses. | [Wallet Watch](https://parallaxlaunch.live/docs/wallet-watch) |
 | **Project Atlas** | Explore community project profiles and creator identities. | [Creator tools](https://parallaxlaunch.live/docs/creators) |
@@ -30,9 +31,11 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 | **Gold** | Holder access to research assistance, monitoring and membership features. | [Gold membership](https://parallaxlaunch.live/docs/gold) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-**Latest platform update:** [Worlds, Expeditions & Community Tools — October 28, 2026](docs/updates/worlds-expeditions-2026-10-28.md), covering feature work after v186 through v210: realistic project worlds, both playable expeditions, Atlas improvements, project sharing, SolHandle's world presentation and the public project-wallet linking interface. The [new snapshot](platform-updates/worlds-expeditions-2026-10-28/) is pinned to the subsequent workflow-only v211 source revision, which records the continuing GitHub publication policy; the game runtime remains v210. It includes the browser implementation, complete world/game runtime assets, artwork sources, render helpers and offline checks. Earlier [workspace](docs/updates/workspace-2026-10-25.md) and [Terminal](docs/updates/terminal-2026-10-24.md) snapshots remain available.
+**Latest platform update:** [PARALLAX Replay — October 28, 2026](docs/updates/replay-2026-10-28.md), hosted v212, adds a public timeline for recent Solana pool activity: completed candle closes, loaded swaps, sender totals, source links and captured replay sharing. The [Replay snapshot](platform-updates/replay-2026-10-28/) records source `71ab595e472670c98b5b047b1bd3b8ba2da690e0`. Coverage is explicit: one selected pool, up to 300 recent indexed trades, and snapshots with a fixed seven-day lifetime.
 
-The latest snapshot contains **454 exact source exports totaling 86,697,311 bytes**, with 14 focused browser/rendering test files. Every one of the 224 source changes since v186 is accounted for: 207 changed paths are exported and 17 source-only changes are summarized. The additional exported files supply the unchanged public dependencies and assets needed to inspect the new implementation.
+The new snapshot contains **37 exact exports totaling 492,664 bytes**, including two focused offline test files and 21 unchanged shared dependencies. All 22 native changed paths since v211 are represented: 16 exact changed exports and 6 private source-only summaries.
+
+The earlier [worlds and expeditions](docs/updates/worlds-expeditions-2026-10-28.md), [workspace](docs/updates/workspace-2026-10-25.md) and [Terminal](docs/updates/terminal-2026-10-24.md) source snapshots remain available with their original provenance and contents.
 
 ## What you can inspect here
 
@@ -40,7 +43,9 @@ The latest snapshot contains **454 exact source exports totaling 86,697,311 byte
 
 **Identity lifecycle.** The browser module handles expiry, tab backgrounding, restored pages and delayed responses. A handle transfer cannot silently redirect an existing address-based watch.
 
-**Worlds and games.** Inspect the production planet renderer, curated catalogs, GATTO and SHEEPLE scenes and controllers, material loading, Canvas fallbacks, local travel logs and accessibility behavior. The latest snapshot includes the original generated artwork, runtime textures, fallback renders, icons and social cards, with source attribution and reproduction helpers.
+**Worlds and games.** Inspect the production planet renderer, curated catalogs, GATTO and SHEEPLE scenes and controllers, material loading, Canvas fallbacks, local travel logs and accessibility behavior. The [worlds snapshot](platform-updates/worlds-expeditions-2026-10-28/) includes the original generated artwork, runtime textures, fallback renders, icons and social cards, with source attribution and reproduction helpers.
+
+**Replay evidence.** Inspect the playback controller, completed-candle timing, sender aggregation, exact capture links, retry behavior and clear missing-data states. The public browser tests use fixtures; hosted provider services remain private.
 
 **Executable checks.** Fixture tests exercise ownership transfers, invalid records, missing handles, provider failures and browser request races. Dated snapshots add focused browser and rendering checks. Provenance verification compares exported files with their recorded source hashes.
 
@@ -95,6 +100,8 @@ Read the [platform guides](docs/platform/README.md) for feature details and veri
 ## Development status
 
 The resolver and browser module are extracted from deployed PARALLAX source. [`PROVENANCE.json`](PROVENANCE.json) records their origin and SHA-256 hashes. Test scope and remaining real-device checks are documented in [Testing](docs/TESTING.md).
+
+The [Replay snapshot](platform-updates/replay-2026-10-28/) records hosted v212 source `71ab595e472670c98b5b047b1bd3b8ba2da690e0`. Its manifest continues the source ledger from v211 and includes every changed path as an exact approved export or source-only summary.
 
 The [worlds and expeditions snapshot](platform-updates/worlds-expeditions-2026-10-28/) records complete export source revision `c79c3c7ff8f8e0f2a8a71a62138072a0b7433910` for workflow-only v211. Its feature release is v210 revision `b92e26dd4c0232b9c7e471a4563d40f01afe12bc`; v211 adds the release policy without changing the game runtime. The snapshot's own provenance file covers the exported browser code and assets, while the original SolHandle kit's provenance remains separate. A snapshot's recorded source revision is the reference for what has reached GitHub.
 

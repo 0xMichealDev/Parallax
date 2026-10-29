@@ -1,0 +1,308 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "replay-2026-10-28",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "c79c3c7ff8f8e0f2a8a71a62138072a0b7433910",
+    "commit": "71ab595e472670c98b5b047b1bd3b8ba2da690e0",
+    "hostedVersion": 212
+  },
+  "reviewedPresentationSources": [
+    "app/ecosystem.ts",
+    "app/explore/route.ts",
+    "app/gatto-profile.ts",
+    "app/workspace-shell.ts"
+  ],
+  "approvedExports": [
+    {
+      "source": "app/ecosystem.ts",
+      "destination": "platform-updates/replay-2026-10-28/app/ecosystem.ts",
+      "sha256": "b4a9b1de3fb8d61c10c625cdadbf36caf68d9e806164134a38dc388af3d07cfd",
+      "bytes": 12998
+    },
+    {
+      "source": "app/explore/route.ts",
+      "destination": "platform-updates/replay-2026-10-28/app/explore/route.ts",
+      "sha256": "9e61230758110e89a29c213020eea2f38d76d7cac7c8f38b76ab4a150bb86b6b",
+      "bytes": 1721
+    },
+    {
+      "source": "app/gatto-profile.ts",
+      "destination": "platform-updates/replay-2026-10-28/app/gatto-profile.ts",
+      "sha256": "fda1bea15efe8437b3df19dfbb578f3600283882d4f0e330f5a6b5b08032b2e7",
+      "bytes": 2873
+    },
+    {
+      "source": "app/home.html",
+      "destination": "platform-updates/replay-2026-10-28/app/home.html",
+      "sha256": "d0994a45095569e074612de8a14800c531f66f1d6130f8e370fba07697d3ee5a",
+      "bytes": 14388
+    },
+    {
+      "source": "app/replay.html",
+      "destination": "platform-updates/replay-2026-10-28/app/replay.html",
+      "sha256": "8e74b5f6284922760c24c282e7e30aa0faa9287684d718997069d5313ecc68ae",
+      "bytes": 10784
+    },
+    {
+      "source": "app/singularity.html",
+      "destination": "platform-updates/replay-2026-10-28/app/singularity.html",
+      "sha256": "1127ef0641e28fddb4a653ba4d8e71cd070c7911700dcb5dca34bf2aea1c9f3b",
+      "bytes": 5543
+    },
+    {
+      "source": "app/terminal.html",
+      "destination": "platform-updates/replay-2026-10-28/app/terminal.html",
+      "sha256": "4a3649ad4c74ebec456e981df7648efb3e02ae54e5e53da4e1879096c3683aff",
+      "bytes": 28141
+    },
+    {
+      "source": "app/workspace-shell.ts",
+      "destination": "platform-updates/replay-2026-10-28/app/workspace-shell.ts",
+      "sha256": "d769f37512776f190e666aa2c7490a2abcfc671c0d59f4c62618eafaac8cc802",
+      "bytes": 25523
+    },
+    {
+      "source": "docs/replay.md",
+      "destination": "platform-updates/replay-2026-10-28/docs/replay.md",
+      "sha256": "05f47567863914562221f84c9d19c80f6a4633d2666d57177cd24846d922eaf6",
+      "bytes": 3397
+    },
+    {
+      "source": "public/dashboard-pro.css",
+      "destination": "platform-updates/replay-2026-10-28/public/dashboard-pro.css",
+      "sha256": "85adb55a6928f907a58def8bf58347c83e71c314f0c0bb9e90ba793e9e56404b",
+      "bytes": 43087
+    },
+    {
+      "source": "public/dashboard-pro.js",
+      "destination": "platform-updates/replay-2026-10-28/public/dashboard-pro.js",
+      "sha256": "e998f4c75dc2f0deee45224633e11d1e41041274fc4e49685a51c95b29acaff4",
+      "bytes": 7576
+    },
+    {
+      "source": "public/dashboard-refresh.css",
+      "destination": "platform-updates/replay-2026-10-28/public/dashboard-refresh.css",
+      "sha256": "ec7decd7d0e8f54cebe28eff5ce630104ab663921a9a01967f463f3ca8b0798e",
+      "bytes": 44361
+    },
+    {
+      "source": "public/ecosystem-worlds.json",
+      "destination": "platform-updates/replay-2026-10-28/public/ecosystem-worlds.json",
+      "sha256": "2b436b8b19f41b8bbfd0eb49f336428181ee8cb3baa9ccfa0b98731f628ca6c6",
+      "bytes": 19263
+    },
+    {
+      "source": "public/ecosystem.js",
+      "destination": "platform-updates/replay-2026-10-28/public/ecosystem.js",
+      "sha256": "16e7a3b7b04142cfc753336d1dec4d0f58a7f013789a8576350e50cdf47e0f08",
+      "bytes": 12752
+    },
+    {
+      "source": "public/favicon.svg",
+      "destination": "platform-updates/replay-2026-10-28/public/favicon.svg",
+      "sha256": "03924d9226e597e9fb341f06b26fd8f6fc1b6ba2f5e03d04a501754a97cc10aa",
+      "bytes": 284
+    },
+    {
+      "source": "public/gatto-world.json",
+      "destination": "platform-updates/replay-2026-10-28/public/gatto-world.json",
+      "sha256": "8f5efffb2732937a2075e0bf5df5b4b2e98c53aa98270feccd244a819cc29b7a",
+      "bytes": 2278
+    },
+    {
+      "source": "public/gold-experience.css",
+      "destination": "platform-updates/replay-2026-10-28/public/gold-experience.css",
+      "sha256": "4fa1f0427923d2cff71574ebe8a2a7a31a1f23eef700a80a4fda7ecc74c1ab63",
+      "bytes": 9331
+    },
+    {
+      "source": "public/gold-experience.js",
+      "destination": "platform-updates/replay-2026-10-28/public/gold-experience.js",
+      "sha256": "a5291cc45afcaff2d60c5a3f827bdc63ae54770349d90acaea1060c84497c89f",
+      "bytes": 4045
+    },
+    {
+      "source": "public/navigation-clean.css",
+      "destination": "platform-updates/replay-2026-10-28/public/navigation-clean.css",
+      "sha256": "661c5ee48fb11b3438849fb146cae13884dc26c18c187e0c5cd80c1dd5a9e2c8",
+      "bytes": 2491
+    },
+    {
+      "source": "public/observatory-design.css",
+      "destination": "platform-updates/replay-2026-10-28/public/observatory-design.css",
+      "sha256": "ef16a5e4f3265181f17e159b16d3b480072bd8ff866ede34467f5310d6d740a3",
+      "bytes": 8861
+    },
+    {
+      "source": "public/obsidian-theme.css",
+      "destination": "platform-updates/replay-2026-10-28/public/obsidian-theme.css",
+      "sha256": "cc331ddc084c8db1f2e6fbc1ca366804b9f6f40e59f6a8b9409a31694e74ee92",
+      "bytes": 18574
+    },
+    {
+      "source": "public/pro-membership.css",
+      "destination": "platform-updates/replay-2026-10-28/public/pro-membership.css",
+      "sha256": "98657bef60ee7e91ebbc353d262b8e1d67a2a73edb15336469cc365af99ec7c8",
+      "bytes": 2177
+    },
+    {
+      "source": "public/pro-membership.js",
+      "destination": "platform-updates/replay-2026-10-28/public/pro-membership.js",
+      "sha256": "66984545562fed941def2b651aba26071b33de22970bfee6ceace1fc74d4deec",
+      "bytes": 2905
+    },
+    {
+      "source": "public/replay-core.js",
+      "destination": "platform-updates/replay-2026-10-28/public/replay-core.js",
+      "sha256": "e8ff2b2dd8015db5086348442d912421d18e396303443518a79b66b623d55035",
+      "bytes": 3275
+    },
+    {
+      "source": "public/replay.css",
+      "destination": "platform-updates/replay-2026-10-28/public/replay.css",
+      "sha256": "3105dd01fc25b5c207a27a7ba5c45d4fd08002fd4b43df95de33421ffd7a935c",
+      "bytes": 20097
+    },
+    {
+      "source": "public/replay.js",
+      "destination": "platform-updates/replay-2026-10-28/public/replay.js",
+      "sha256": "aed77e27fe8b91f5b63bb62e55123431567a7741711fe7ec2d6b7be91b23d920",
+      "bytes": 22216
+    },
+    {
+      "source": "public/site-polish.css",
+      "destination": "platform-updates/replay-2026-10-28/public/site-polish.css",
+      "sha256": "f675fce2508fc38ffb429f234ed7ad76f7fdf4ac8321fee759647a99aacbfa84",
+      "bytes": 1462
+    },
+    {
+      "source": "public/solhandle-identity.css",
+      "destination": "platform-updates/replay-2026-10-28/public/solhandle-identity.css",
+      "sha256": "377de6865bfe73579e9b714e14d906ee2e8f21e5cbe0eec62a766ccd6baa5264",
+      "bytes": 3144
+    },
+    {
+      "source": "public/solhandle-identity.js",
+      "destination": "platform-updates/replay-2026-10-28/public/solhandle-identity.js",
+      "sha256": "523332b96815125ed39b00bb50dc4860c0e75739f1f8fc9f18aa0cca7aa159a3",
+      "bytes": 8297
+    },
+    {
+      "source": "public/terminal.js",
+      "destination": "platform-updates/replay-2026-10-28/public/terminal.js",
+      "sha256": "0e1f48bfe7c1a7a868e4c27ef2d43154e40aed91b68d8eb621093b39b87cc7b9",
+      "bytes": 56793
+    },
+    {
+      "source": "public/workspace-hub.css",
+      "destination": "platform-updates/replay-2026-10-28/public/workspace-hub.css",
+      "sha256": "1b26bc410faf0c846f8c434bc4bd9a5432939cc718157a10767ec6ae2b787af8",
+      "bytes": 3653
+    },
+    {
+      "source": "public/workspace-premium.css",
+      "destination": "platform-updates/replay-2026-10-28/public/workspace-premium.css",
+      "sha256": "e6ba790d52376b4ebde3944c0a684563bc1c3fa79f83f6ba89ad6955df683714",
+      "bytes": 41012
+    },
+    {
+      "source": "public/workspace-shell.css",
+      "destination": "platform-updates/replay-2026-10-28/public/workspace-shell.css",
+      "sha256": "01d878ad580228b50f6f18c6e1a4ec7b3a2085abb4f17c2065a1555d530f56f8",
+      "bytes": 14484
+    },
+    {
+      "source": "public/workspace-usability.css",
+      "destination": "platform-updates/replay-2026-10-28/public/workspace-usability.css",
+      "sha256": "01281ad7bee4f12ef64de044e21ebda785faa62bc392db387c1cc42beb1ea6ed",
+      "bytes": 11456
+    },
+    {
+      "source": "public/workspace-usability.js",
+      "destination": "platform-updates/replay-2026-10-28/public/workspace-usability.js",
+      "sha256": "6667e344899a6b2d76a72cbe335ce66568928dadf7655f0cc66c0f8aba8e0d2c",
+      "bytes": 5175
+    },
+    {
+      "source": "scripts/test-replay-ui.mjs",
+      "destination": "platform-updates/replay-2026-10-28/scripts/test-replay-ui.mjs",
+      "sha256": "1a2cccf692b874d4eb7d58203377ac52b37f837f38f17c16d8eea145ac95f3f0",
+      "bytes": 15050
+    },
+    {
+      "source": "tests/replay-core.test.cjs",
+      "destination": "platform-updates/replay-2026-10-28/tests/replay-core.test.cjs",
+      "sha256": "42cd058427773a138196d0f9d8d1732cfb1bed08ce90c7132c48e0597dee1458",
+      "bytes": 3197
+    }
+  ],
+  "sourceOnlyChanges": [
+    {
+      "path": "app/api/replay/route.ts",
+      "status": "A",
+      "summary": "Hosted API entry point connects public replay requests to the private service; runtime binding access and route implementation remain in native source."
+    },
+    {
+      "path": "app/replay-data.ts",
+      "status": "A",
+      "summary": "Private provider normalization validates the selected token and pool, classifies swaps from token legs, retains missing-value evidence and filters completed candle intervals."
+    },
+    {
+      "path": "app/replay-service.ts",
+      "status": "A",
+      "summary": "Private replay service integrates provider requests, shared quotas and cooldowns, cached pool resolution, captured project associations, immutable snapshots and fixed expiry."
+    },
+    {
+      "path": "app/replay/route.ts",
+      "status": "A",
+      "summary": "Hosted Replay page route assembles the shared navigation and page styles; deployment routing remains with the native application."
+    },
+    {
+      "path": "app/terminal-service.ts",
+      "status": "M",
+      "summary": "Existing private provider transport, cache and quota helpers are exposed to the Replay service so both features share limits and credential handling."
+    },
+    {
+      "path": "scripts/test-replay.mjs",
+      "status": "A",
+      "summary": "Private service fixture suite exercises provider normalization, selected-pool validation, credential-safe transport, caches, snapshot expiry and rate limits; excluded service dependencies remain private."
+    }
+  ],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/replay-2026-10-28/README.md",
+      "sha256": "b8a8c60d7729f3cb895c48d4c4c104933502fd3599353ba9404b82fc180d75a4",
+      "bytes": 4047,
+      "purpose": "Snapshot scope, fixed-retention behavior, dependency notes and offline verification commands."
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28/PROVENANCE.json",
+      "sha256": "cee03fafb57bbadf3ed1b3a98ba3a809927f2c7481130b9239f396a9a0ad154d",
+      "bytes": 9253,
+      "purpose": "Exact source revision, source classifications, exported hashes and retained snapshot fingerprints."
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    }
+  ]
+}

@@ -9,11 +9,12 @@
   },
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "check": "npm run check:sync && node scripts/verify-provenance.mjs && npm test && npm run check:terminal && npm run check:workspace && npm run check:worlds",
+    "check": "npm run check:sync && node scripts/verify-provenance.mjs && npm test && npm run check:terminal && npm run check:workspace && npm run check:worlds && npm run check:replay",
     "check:terminal": "cd platform-updates/terminal-2026-10-24 && node verify.mjs && node --test tests/terminal-workspace.test.cjs tests/terminal-amount.test.cjs",
     "check:workspace": "cd platform-updates/workspace-2026-10-25 && node verify.mjs && node --test tests/navigation-state.test.cjs tests/terminal-workspace.test.cjs tests/workspace-usability.test.cjs && node tests/gold-experience.mjs && node tests/premium-client.mjs",
     "check:sync": "node scripts/verify-public-sync.mjs",
-    "check:worlds": "cd platform-updates/worlds-expeditions-2026-10-28 && node --test tests/*.test.cjs"
+    "check:worlds": "cd platform-updates/worlds-expeditions-2026-10-28 && node --test tests/*.test.cjs",
+    "check:replay": "cd platform-updates/replay-2026-10-28 && node --test tests/replay-core.test.cjs && node scripts/test-replay-ui.mjs"
   },
   "dependencies": {
     "@solana/web3.js": "1.99.0",
