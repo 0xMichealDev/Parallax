@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "earthbound-rover-2026-10-31",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "bc4320d02021f78f04c9bc6f8111d0945118455d",
+    "commit": "8c30b81415f7a861e7cb9765e72d7c3a7e4e10e1",
+    "hostedVersion": 228
+  },
+  "reviewedPresentationSources": [],
+  "approvedExports": [
+    {
+      "source": "app/site.html",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/app/site.html",
+      "sha256": "0e56b47875bedbc068178135645dd5aa5d8924447403fb0eaa6732a15777a747",
+      "bytes": 74212
+    },
+    {
+      "source": "docs/updates/earthbound-rover-2026-10-31.md",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/docs/updates/earthbound-rover-2026-10-31.md",
+      "sha256": "4593c2c77978e5428e6c6039da339dc17f3ad637e823e323f1e11f0831268efd",
+      "bytes": 2699
+    },
+    {
+      "source": "public/assets/rocket/parallax-rocket-web.glb",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/public/assets/rocket/parallax-rocket-web.glb",
+      "sha256": "83d86ca9b057b181e750738a1d9315b3cd6aef6a1ee85fb45562a7f8897b2511",
+      "bytes": 9266280
+    },
+    {
+      "source": "public/assets/rover/parallax-rover-web.glb",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/public/assets/rover/parallax-rover-web.glb",
+      "sha256": "d7cec1e56375dc951a66d4bf63c3c6dbdd147e0d719cdbd7bbc8357e46cc1cd1",
+      "bytes": 4714688
+    },
+    {
+      "source": "public/assets/rover/provenance.json",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/public/assets/rover/provenance.json",
+      "sha256": "a27ac3d0dde4ee1d83012960ef030a9c1bbfd5c8341091312a2bb03f39041a4c",
+      "bytes": 3701
+    },
+    {
+      "source": "public/desert-life.js",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/public/desert-life.js",
+      "sha256": "b9b5458892726cd7c8e3b82e2c53ed1c17f4fdcae790c6ab1e70968061d1e704",
+      "bytes": 31988
+    },
+    {
+      "source": "public/desert-world.js",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/public/desert-world.js",
+      "sha256": "6829e43ee5cb5a34f83570214c7896419b1891f1e7ded768f6f2050605bc9d79",
+      "bytes": 121031
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/public/rocket-model.js",
+      "sha256": "c39c0e5c5d8efa069f137cdb8ae0c296a4f03df0b7fa73b7662164512f5957ba",
+      "bytes": 31321
+    },
+    {
+      "source": "public/rover-model.js",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/public/rover-model.js",
+      "sha256": "df614c98744824acfb2498d2c089d247ae436039e6c320f2788d5872d780f89d",
+      "bytes": 6544
+    },
+    {
+      "source": "public/universe.js",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/public/universe.js",
+      "sha256": "dbb878265615118721e89833f5516e314cf7f34d44238ac2b12e022a32143de6",
+      "bytes": 46629
+    },
+    {
+      "source": "scripts/prepare-rover-asset.mjs",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/scripts/prepare-rover-asset.mjs",
+      "sha256": "edf7e0b695aabaa9f85b0943d1405fd66d75c5351888622eb4110edeed00b305",
+      "bytes": 12044
+    },
+    {
+      "source": "tests/desert-world.test.cjs",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/tests/desert-world.test.cjs",
+      "sha256": "f169e768d6542fa06f62790edb2e2753e3f7eac4e657ba47f8a065cfc3edfa0a",
+      "bytes": 9072
+    },
+    {
+      "source": "tests/rocket-model.test.cjs",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/tests/rocket-model.test.cjs",
+      "sha256": "117f38e64d591b3147f0ec6eb4afaf365c809c5cbad5228b286d195b501445fe",
+      "bytes": 10500
+    },
+    {
+      "source": "tests/rover-model.test.cjs",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/tests/rover-model.test.cjs",
+      "sha256": "5321c41bcbdd39d993a9a315495dba8f2a1e2d8284a6f79f8217d097ece1522f",
+      "bytes": 2655
+    },
+    {
+      "source": "tests/rover-stunts.test.cjs",
+      "destination": "platform-updates/earthbound-rover-2026-10-31/tests/rover-stunts.test.cjs",
+      "sha256": "4b2f608d7b4fd852f48c96f901d37b9c8020a6d6270fb448d380bc18dfee33a9",
+      "bytes": 2334
+    }
+  ],
+  "sourceOnlyChanges": [],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31/README.md",
+      "bytes": 1108,
+      "sha256": "a0ae6412c2ea391f9d098d9c384bc40e6cb2de43a43a76e57d6d3195c4d98c7b",
+      "purpose": "Release behavior, validation and provenance summary"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    }
+  ]
+}

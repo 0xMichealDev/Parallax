@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "earthbound-rocket-2026-10-30",
+  "latestRelease": "earthbound-rover-2026-10-31",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -33,6 +33,10 @@
     {
       "id": "earthbound-rocket-2026-10-30",
       "manifest": "platform-updates/earthbound-rocket-2026-10-30/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-rover-2026-10-31",
+      "manifest": "platform-updates/earthbound-rover-2026-10-31/PUBLIC-SYNC.json"
     }
   ]
 }

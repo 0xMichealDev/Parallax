@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "asset": "PARALLAX Earthbound rover",
+  "geometry_task": {
+    "resource": "text-to-3d",
+    "task_id": "01a192f0-246e-71a1-a729-b0f0f75e92ae",
+    "consumed_credits": 20
+  },
+  "texture_credits": 10,
+  "total_consumed_credits": 35,
+  "source_task": {
+    "resource": "text-to-3d",
+    "task_id": "01a192f1-d886-751b-9262-a5ad3fda481a"
+  },
+  "remesh_task": {
+    "resource": "remesh",
+    "task_id": "01a192f4-faa8-7206-bea2-18d2704b76a5",
+    "target_triangles": 30000,
+    "consumed_credits": 5
+  },
+  "original": {
+    "bytes": 107636396,
+    "triangles": 3391022,
+    "sha256": "cd91110818b3f01d57ec63c52606e1f14eaa59474f34f5aeb7a802d1e0562a8e"
+  },
+  "remeshed": {
+    "bytes": 17498436,
+    "triangles": 30616,
+    "sha256": "90e49b56026b2288bc659ee3d352579111b9566f85674183495dc6f0f6089903"
+  },
+  "web": {
+    "filename": "parallax-rover-web.glb",
+    "bytes": 4714688,
+    "triangles": 30616,
+    "sha256": "d7cec1e56375dc951a66d4bf63c3c6dbdd147e0d719cdbd7bbc8357e46cc1cd1"
+  },
+  "texture_encoding": [
+    {
+      "role": "normal",
+      "image_index": 0,
+      "source_width": 2048,
+      "source_height": 2048,
+      "source_mime_type": "image/png",
+      "source_bytes": 6351820,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 1207578,
+      "resize_kernel": "lanczos3",
+      "quality": 96,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "9848ec86bf6f27c3f2b58c1a3e82fcda05b889654d76e9fdabd938cf1919dd2a"
+    },
+    {
+      "role": "base_color",
+      "image_index": 1,
+      "source_width": 2048,
+      "source_height": 2048,
+      "source_mime_type": "image/png",
+      "source_bytes": 5167618,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 293200,
+      "resize_kernel": "lanczos3",
+      "quality": 92,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "1d560c9e915223ea751e862d7b40d6695fd05d35d0fca4af4cbec00062bc11ad"
+    },
+    {
+      "role": "metallic_roughness",
+      "image_index": 2,
+      "source_width": 2048,
+      "source_height": 2048,
+      "source_mime_type": "image/png",
+      "source_bytes": 3857798,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/png",
+      "bytes": 1092711,
+      "resize_kernel": "lanczos3",
+      "lossless_encoding": true,
+      "sha256": "b5de3fc2883ee6c8ffb1390d4761a674b50045ef066796aef64d9d3233505518"
+    }
+  ],
+  "geometry_preserved": {
+    "verified": true,
+    "source_sha256": "c110b3651b90489f84b97d94004bd1c326528941d0a771082e6e0f4d07593e5b",
+    "derived_sha256": "c110b3651b90489f84b97d94004bd1c326528941d0a771082e6e0f4d07593e5b",
+    "unchanged": [
+      "indices",
+      "positions",
+      "normals",
+      "uvs",
+      "accessors",
+      "meshes",
+      "nodes",
+      "scenes",
+      "materials",
+      "textures",
+      "samplers"
+    ],
+    "buffer_views": [
+      {
+        "buffer_view": 0,
+        "bytes": 725904,
+        "sha256": "fd3b60d9485efd007434b94fa7651a41e5e9f76fafb029589f14f2dd8ed19f44"
+      },
+      {
+        "buffer_view": 1,
+        "bytes": 725904,
+        "sha256": "b8e01311dc5e7d0cdb29bdff48bf5228de7b821d59e2609ed9a750807cc9fa03"
+      },
+      {
+        "buffer_view": 2,
+        "bytes": 483936,
+        "sha256": "e175a839923ccaa1f150ff9d5479a1c8a45dff8ddd3422eb85b17e19e213c162"
+      },
+      {
+        "buffer_view": 3,
+        "bytes": 183696,
+        "sha256": "751772c0c743a459d25e7ae42f50bd5de2d4f077bf3ae4b695ba7654b2cb32a6"
+      }
+    ]
+  },
+  "preparation": {
+    "script": "scripts/prepare-rover-asset.mjs",
+    "encoder": "sharp",
+    "encoder_version": "0.35.4"
+  }
+}

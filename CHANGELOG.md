@@ -1,5 +1,12 @@
 # Changelog
 
+## Earthbound expedition rover — hosted v228
+
+- Textured Rover 01 with animated wheels, terrain-facing headlights and parked work lighting; preserved Rover 02 and the procedural fallback.
+- Reduced the 107.6 MB generation to a 4.7 MB, 30,616-triangle runtime asset; total generation cost 35 Meshy credits.
+- Production build, 40 focused native tests and local browser driving/stunt/exit checks passed.
+- [Release details](docs/updates/earthbound-rover-2026-10-31.md) · [Exact source snapshot](platform-updates/earthbound-rover-2026-10-31/).
+
 ## Earthbound rocket and Observatory interface — hosted v227
 
 - Recorded source `bc4320d02021f78f04c9bc6f8111d0945118455d` after synchronized v225 `89dabd844238dd7f6738b4b4da692a37511dbee3`, grouping the v226 Observatory interface and v227 rocket integration.

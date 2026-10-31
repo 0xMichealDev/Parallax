@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "check": "npm run check:sync && node scripts/verify-provenance.mjs && npm test && npm run check:terminal && npm run check:workspace && npm run check:worlds && npm run check:replay && npm run check:terminal-trenches && npm run check:market-workspace && npm run check:market-recovery && npm run check:gold-workspace && npm run check:earthbound-rocket",
+    "check": "npm run check:sync && node scripts/verify-provenance.mjs && npm test && npm run check:terminal && npm run check:workspace && npm run check:worlds && npm run check:replay && npm run check:terminal-trenches && npm run check:market-workspace && npm run check:market-recovery && npm run check:gold-workspace && npm run check:earthbound-rocket && npm run check:earthbound-rover",
     "check:terminal": "cd platform-updates/terminal-2026-10-24 && node verify.mjs && node --test tests/terminal-workspace.test.cjs tests/terminal-amount.test.cjs",
     "check:workspace": "cd platform-updates/workspace-2026-10-25 && node verify.mjs && node --test tests/navigation-state.test.cjs tests/terminal-workspace.test.cjs tests/workspace-usability.test.cjs && node tests/gold-experience.mjs && node tests/premium-client.mjs",
     "check:sync": "node scripts/verify-public-sync.mjs",
@@ -19,7 +19,8 @@
     "check:market-workspace": "cd platform-updates/terminal-trenches-workspace-2026-10-29 && node --test tests/terminal-chart.test.cjs tests/terminal-workspace.test.cjs tests/terminal-amount.test.cjs tests/trenches-core.test.cjs && node scripts/test-terminal-ui.mjs && node scripts/test-trenches-ui.mjs && node scripts/test-terminal-selection.mjs",
     "check:market-recovery": "cd platform-updates/market-data-recovery-2026-10-29 && node --test tests/terminal-chart.test.cjs tests/terminal-workspace.test.cjs tests/terminal-amount.test.cjs tests/trenches-core.test.cjs && node scripts/test-terminal-ui.mjs && node scripts/test-trenches-ui.mjs && node scripts/test-terminal-selection.mjs && node --test tests/terminal-request-budget.test.cjs",
     "check:gold-workspace": "cd platform-updates/gold-workspace-2026-10-29 && node tests/gold-workspace-ui.mjs && node tests/gold-monitor-ui.mjs && node tests/gold-assistant-ui.mjs && node tests/gold-experience.mjs && node tests/pro-membership-ui.mjs && node tests/pro-share-card.mjs && node scripts/test-wallet-ui.mjs && node scripts/test-solhandle-ui.mjs && node --test tests/navigation-state.test.cjs tests/workspace-usability.test.cjs",
-    "check:earthbound-rocket": "cd platform-updates/earthbound-rocket-2026-10-30 && node --test tests/desert-world.test.cjs tests/rocket-model.test.cjs tests/navigation-state.test.cjs tests/parallax-shell-interactions.test.cjs && node tests/gold-monitor-ui.mjs && node tests/gold-assistant-ui.mjs && node scripts/test-research-controls.mjs && node scripts/test-trenches-ui.mjs"
+    "check:earthbound-rocket": "cd platform-updates/earthbound-rocket-2026-10-30 && node --test tests/desert-world.test.cjs tests/rocket-model.test.cjs tests/navigation-state.test.cjs tests/parallax-shell-interactions.test.cjs && node tests/gold-monitor-ui.mjs && node tests/gold-assistant-ui.mjs && node scripts/test-research-controls.mjs && node scripts/test-trenches-ui.mjs",
+    "check:earthbound-rover": "cd platform-updates/earthbound-rover-2026-10-31 && node --test tests/rover-model.test.cjs tests/rocket-model.test.cjs tests/rover-stunts.test.cjs tests/desert-world.test.cjs"
   },
   "dependencies": {
     "@solana/web3.js": "1.99.0",

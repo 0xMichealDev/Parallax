@@ -18,6 +18,10 @@ PARALLAX is a Solana research and creator workspace. It brings project research,
 
 This repository is the **PARALLAX developer kit and public source record**: selected integration code, dated browser-source snapshots, runtime artwork, executable tests and implementation notes. The hosted platform is available at [parallaxlaunch.live](https://parallaxlaunch.live). Private server services and the full application deployment are maintained separately.
 
+## Latest release
+
+[Earthbound expedition rover — v228](docs/updates/earthbound-rover-2026-10-31.md): textured Rover 01, animated wheels, working headlights and parked work lighting. [Reviewed source snapshot](platform-updates/earthbound-rover-2026-10-31/).
+
 ## The platform
 
 | Workspace | Purpose | Guide |
