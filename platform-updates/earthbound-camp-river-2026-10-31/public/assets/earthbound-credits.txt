@@ -1,0 +1,44 @@
+PARALLAX Earthbound — visual sources
+
+Celestial panorama: ESO/S. Brunier, "The Milky Way panorama", eso0932a.
+https://www.eso.org/public/images/eso0932a/
+Licensed under Creative Commons Attribution 4.0 International:
+https://creativecommons.org/licenses/by/4.0/
+Adaptations: JPEG compression, spherical reprojection, artistic orientation,
+exposure adjustment, atmospheric blending. This is not a current star chart.
+
+Ground diffuse and OpenGL normal texture: Gravelly Sand, Dario Barresi / Poly Haven.
+https://polyhaven.com/a/gravelly_sand
+CC0: https://polyhaven.com/license
+Adaptations: JPEG compression, tiling and shader color/lighting adjustments.
+
+Moon: NASA/JPL/USGS, Galileo, PIA00405.
+https://science.nasa.gov/resource/earths-moon/
+Jupiter: enhanced image by Kevin M. Gill (CC BY), based on images courtesy of
+NASA/JPL-Caltech/SwRI/MSSS, PIA22946.
+https://photojournal.jpl.nasa.gov/catalog/PIA22946
+Saturn: NASA/JPL-Caltech/SSI, Cassini, PIA17172.
+https://photojournal.jpl.nasa.gov/catalog/PIA17172
+Other telescope observations are credited individually in the eyepiece.
+
+Terrain, lighting, campsite, satellites, meteors and audio are simulations.
+Twilight horizon, creosote and canvas textures are generated art.
+Credits identify source authors and do not imply endorsement of PARALLAX.
+
+Launch campus: a fictional fan-built environment, with artist-designed black
+livery and stylized rocket dimensions. Not affiliated with or endorsed by SpaceX.
+Vehicle silhouette references: https://www.spacex.com/vehicles/falcon-9/
+and https://new.spacex.com/vehicles/starship
+Bark diffuse texture: Bark Brown 02, Rob Tuytel / Poly Haven (CC0).
+https://polyhaven.com/a/bark_brown_02
+Adaptations: atlas packing, UV mapping, color and lighting adjustments.
+
+SpaceX logo by SpaceX, via Wikimedia Commons (PD-textlogo):
+https://commons.wikimedia.org/wiki/File:SpaceX_logo_black.svg
+Vector source mirror: https://github.com/twyleg/constructions/blob/d25b7431593143fe59d7ca9420ce2152a04647f1/starship/resources/SpaceX_logo_black.svg
+Letter paths restored to their original horizontal positions, view box cropped.
+The logo is a trademark of SpaceX. Display color is inverted on the sign.
+
+Expedition tent, camp chairs/cooking table and footbridge: generated with Meshy.
+Embedded PBR maps resized for browser delivery; bridge and tent fitted to the scene.
+Task and packaging provenance: /assets/scenery/{tent,camp,bridge}/provenance.json.

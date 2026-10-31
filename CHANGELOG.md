@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound camp and river — v230
+
+Meshy tent, camp furniture and fitted bridge, plus improved riverbank and water rendering. [Release notes](docs/updates/earthbound-camp-river-2026-10-31.md) · [Exact source snapshot](platform-updates/earthbound-camp-river-2026-10-31/).
+
 ## Earthbound realistic expedition — v229
 
 Meshy sandstone, field equipment and lanterns with improved ground lighting and contact shading. [Release notes](docs/updates/earthbound-realism-2026-10-31.md) · [Exact source snapshot](platform-updates/earthbound-realism-2026-10-31/).

@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "consumed_credits": 20,
+      "stage": "geometry",
+      "task_id": "01a19331-f4be-77fe-8495-6b9612dd2464",
+      "resource": "text-to-3d"
+    },
+    {
+      "consumed_credits": 10,
+      "stage": "texture",
+      "task_id": "01a19334-44bf-74dd-868e-05a18fc92ef7",
+      "resource": "text-to-3d"
+    },
+    {
+      "consumed_credits": 5,
+      "stage": "remesh",
+      "task_id": "01a19336-fd31-7144-8ee3-0bd82c3beb57",
+      "resource": "remesh"
+    }
+  ],
+  "total_consumed_credits": 35,
+  "asset": "bridge",
+  "remeshed": {
+    "bytes": 43476584,
+    "triangles": 14297,
+    "sha256": "9cf393cbeca2bb695186b8063b495846534585fee59affd0d589188cb80c8e33"
+  },
+  "web": {
+    "filename": "web.glb",
+    "bytes": 2977940,
+    "triangles": 14297,
+    "sha256": "1075d7132b92a60080fb4cc781232d2f062a7cf83b449ce9e70c637ccd02bdbf"
+  },
+  "texture_encoding": [
+    {
+      "role": "normal",
+      "image_index": 0,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 16988389,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 891053,
+      "resize_kernel": "lanczos3",
+      "quality": 96,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "766341b1560318c52ec119f741142481d2ec4df2293d25098ee359bf37ce534a"
+    },
+    {
+      "role": "base_color",
+      "image_index": 1,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 16829377,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 321611,
+      "resize_kernel": "lanczos3",
+      "quality": 92,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "a94eb099202ddc7ed4cd025da4828e8b9003076a379d617b772c719efc5ef3a1"
+    },
+    {
+      "role": "metallic_roughness",
+      "image_index": 2,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 8801410,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/png",
+      "bytes": 907876,
+      "resize_kernel": "lanczos3",
+      "lossless_encoding": true,
+      "sha256": "5161d06840461513b45a92828db287de00674a7c1d9cedcf26094199bbd83d8a"
+    }
+  ],
+  "geometry_preserved": {
+    "verified": true,
+    "source_sha256": "b8264196ca0a8b448302400e11b1f60bfc1c7fa486697aee9f836fb92a7e6926",
+    "derived_sha256": "b8264196ca0a8b448302400e11b1f60bfc1c7fa486697aee9f836fb92a7e6926",
+    "unchanged": [
+      "indices",
+      "positions",
+      "normals",
+      "uvs",
+      "accessors",
+      "meshes",
+      "nodes",
+      "scenes",
+      "materials",
+      "textures",
+      "samplers"
+    ],
+    "buffer_views": [
+      {
+        "buffer_view": 0,
+        "bytes": 288696,
+        "sha256": "9634961e61f8ad3c2b4874d84f215436fe12865bd00ed9f57ef733bf76b3b059"
+      },
+      {
+        "buffer_view": 1,
+        "bytes": 288696,
+        "sha256": "fffbdedeb00241ac5b636224470f6f221b4a36b29b1965098056bc6abf714e29"
+      },
+      {
+        "buffer_view": 2,
+        "bytes": 192464,
+        "sha256": "f6dc6efaa92421ce51dc0e8e1c09a59c780ec5e59aa6c271f74f3d0391300e1e"
+      },
+      {
+        "buffer_view": 3,
+        "bytes": 85782,
+        "sha256": "d4b640aca1926e55c027975e874e9d94b7dfaeb39c864d2fdf3d81d8c8ea4bb5"
+      }
+    ]
+  },
+  "preparation": {
+    "script": "scripts/prepare-scenery-asset.mjs",
+    "encoder": "sharp",
+    "encoder_version": "0.35.4"
+  }
+}

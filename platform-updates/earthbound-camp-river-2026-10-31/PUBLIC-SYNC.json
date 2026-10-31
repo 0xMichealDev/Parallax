@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "earthbound-camp-river-2026-10-31",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "c484727086410dfbbe904f7a9fe0544eb4b350f9",
+    "commit": "d6a74578017735a9e10af104127157a3e0865ea7",
+    "hostedVersion": 230
+  },
+  "reviewedPresentationSources": [],
+  "approvedExports": [
+    {
+      "source": "app/site.html",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/app/site.html",
+      "sha256": "d804e5b7f69f4bbc5faaff9d075e4cea973da50781364e481f2cac86a132bd97",
+      "bytes": 74282
+    },
+    {
+      "source": "docs/updates/earthbound-camp-river-2026-10-31.md",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/docs/updates/earthbound-camp-river-2026-10-31.md",
+      "sha256": "60a7c5915b7e9b7ecf0f05c4b5f37e36f0528716b7a2015c01611ddd43724b4d",
+      "bytes": 2400
+    },
+    {
+      "source": "public/assets/earthbound-credits.txt",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/earthbound-credits.txt",
+      "sha256": "a9096406e58b53e1473155beaa98738870f293f17f71e2e1209c1273389c0ffa",
+      "bytes": 2430
+    },
+    {
+      "source": "public/assets/rocket/parallax-rocket-web.glb",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/rocket/parallax-rocket-web.glb",
+      "sha256": "83d86ca9b057b181e750738a1d9315b3cd6aef6a1ee85fb45562a7f8897b2511",
+      "bytes": 9266280
+    },
+    {
+      "source": "public/assets/rover/parallax-rover-web.glb",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/rover/parallax-rover-web.glb",
+      "sha256": "d7cec1e56375dc951a66d4bf63c3c6dbdd147e0d719cdbd7bbc8357e46cc1cd1",
+      "bytes": 4714688
+    },
+    {
+      "source": "public/assets/scenery/bridge/provenance.json",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/bridge/provenance.json",
+      "sha256": "d0c21883a7934888bcd7141d30a7194149df47e67df43274406221464725c74b",
+      "bytes": 3566
+    },
+    {
+      "source": "public/assets/scenery/bridge/web.glb",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/bridge/web.glb",
+      "sha256": "1075d7132b92a60080fb4cc781232d2f062a7cf83b449ce9e70c637ccd02bdbf",
+      "bytes": 2977940
+    },
+    {
+      "source": "public/assets/scenery/camp/provenance.json",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/camp/provenance.json",
+      "sha256": "caa552f5d3243dc5d03e43442cf72e8ff5c3e2d7d9a5be020d416f884354e5e1",
+      "bytes": 3566
+    },
+    {
+      "source": "public/assets/scenery/camp/web.glb",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/camp/web.glb",
+      "sha256": "ac2bb87d9ab3896ec6a6edc527219650ac8bf3f04c3bed9aa3f8c2d38f5be09d",
+      "bytes": 3310020
+    },
+    {
+      "source": "public/assets/scenery/lantern/provenance.json",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/lantern/provenance.json",
+      "sha256": "ab45a92cf81e3b2cff4470a4a245ec76a3d91dd5227843a1ee4340daa74db791",
+      "bytes": 3597
+    },
+    {
+      "source": "public/assets/scenery/lantern/web.glb",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/lantern/web.glb",
+      "sha256": "c14e4555996e8fcacc331b8810396467d33739bd62beca309068f77a21a4da90",
+      "bytes": 3032304
+    },
+    {
+      "source": "public/assets/scenery/rocks/provenance.json",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/rocks/provenance.json",
+      "sha256": "f4bfda3196b21c1dc9417a28a9fa31e4ef42188a489f5dfa83edcc4f75c996d9",
+      "bytes": 3595
+    },
+    {
+      "source": "public/assets/scenery/rocks/web.glb",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/rocks/web.glb",
+      "sha256": "09063f94baada0027bdda6641d204d261b9a474a6b576e26e55263914c9b2110",
+      "bytes": 2221828
+    },
+    {
+      "source": "public/assets/scenery/station/provenance.json",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/station/provenance.json",
+      "sha256": "9ce7e3afe4235b1eab706f755705966fdfec56b6dc931351123dc68e6067a7f5",
+      "bytes": 3597
+    },
+    {
+      "source": "public/assets/scenery/station/web.glb",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/station/web.glb",
+      "sha256": "a45e3e2f292449b4fbe207a3fe3a8fce30d6a46664e651a5425178e9671facbd",
+      "bytes": 2749112
+    },
+    {
+      "source": "public/assets/scenery/tent/provenance.json",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/tent/provenance.json",
+      "sha256": "322a2dfed27dedd0e7fa3b54ef5293883e935c2faec8c7b914eb32ea2bf0b8f1",
+      "bytes": 3565
+    },
+    {
+      "source": "public/assets/scenery/tent/web.glb",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/assets/scenery/tent/web.glb",
+      "sha256": "4a0ccdcfeabe5735cd9ba40a37b1b337e606f74d2d1d25459b24c27b15e9177d",
+      "bytes": 2991188
+    },
+    {
+      "source": "public/camp-experience.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/camp-experience.js",
+      "sha256": "23cdf7bf14de19b36a8fb0cb99c33c7b4fd89997bd93f394576d8cc8418a29cd",
+      "bytes": 30771
+    },
+    {
+      "source": "public/desert-adventure.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/desert-adventure.js",
+      "sha256": "81b90e2337b356ec1e5f14804c383d8a5ba3b4a14f00192ce399ad43858c1042",
+      "bytes": 20337
+    },
+    {
+      "source": "public/desert-life.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/desert-life.js",
+      "sha256": "b9b5458892726cd7c8e3b82e2c53ed1c17f4fdcae790c6ab1e70968061d1e704",
+      "bytes": 31988
+    },
+    {
+      "source": "public/desert-story.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/desert-story.js",
+      "sha256": "ba4e5d987958c92ca7e859a29e9920d7d527d2008f6e3b2b05993eda29a29ce8",
+      "bytes": 3628
+    },
+    {
+      "source": "public/desert-world.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/desert-world.js",
+      "sha256": "588feb06d9d399d62303629f99b4e3051fa26f041d35f4392a554af5cc7f71a6",
+      "bytes": 125644
+    },
+    {
+      "source": "public/first-contact.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/first-contact.js",
+      "sha256": "798ac5b128e8ea797468a64b0e71982c32ca4e0aec0d1b51812101d2bd5b04e5",
+      "bytes": 8359
+    },
+    {
+      "source": "public/rocket-experience.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/rocket-experience.js",
+      "sha256": "2623687a8018e296236f2728f25eb2f6722b711105fbc59dcaf714b362e7b4d3",
+      "bytes": 4577
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/rocket-model.js",
+      "sha256": "1027bd9e49078cb90fd356808d81b68cca267e3fa5e56c38a5dd91c653eb99a0",
+      "bytes": 31418
+    },
+    {
+      "source": "public/rocket-state.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/rocket-state.js",
+      "sha256": "5d9e0af9918533bd249dc6af5691e9c73bdcaadd79dd3a31d6a4e58bd73fa65a",
+      "bytes": 1869
+    },
+    {
+      "source": "public/rover-model.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/rover-model.js",
+      "sha256": "df614c98744824acfb2498d2c089d247ae436039e6c320f2788d5872d780f89d",
+      "bytes": 6544
+    },
+    {
+      "source": "public/scenery-model.js",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/public/scenery-model.js",
+      "sha256": "0e7a63599bba3a4d620a8fc1a1a08b35ff42324f6111208d1406e4230df3f692",
+      "bytes": 8746
+    },
+    {
+      "source": "tests/camp-experience.test.cjs",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/tests/camp-experience.test.cjs",
+      "sha256": "e76b8051390cc2f242f30e99b8169ed0146062988b97a27307e692850c3f4ab2",
+      "bytes": 23619
+    },
+    {
+      "source": "tests/desert-world.test.cjs",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/tests/desert-world.test.cjs",
+      "sha256": "f169e768d6542fa06f62790edb2e2753e3f7eac4e657ba47f8a065cfc3edfa0a",
+      "bytes": 9072
+    },
+    {
+      "source": "tests/rocket-model.test.cjs",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/tests/rocket-model.test.cjs",
+      "sha256": "117f38e64d591b3147f0ec6eb4afaf365c809c5cbad5228b286d195b501445fe",
+      "bytes": 10500
+    },
+    {
+      "source": "tests/rover-model.test.cjs",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/tests/rover-model.test.cjs",
+      "sha256": "5321c41bcbdd39d993a9a315495dba8f2a1e2d8284a6f79f8217d097ece1522f",
+      "bytes": 2655
+    },
+    {
+      "source": "tests/scenery-model.test.cjs",
+      "destination": "platform-updates/earthbound-camp-river-2026-10-31/tests/scenery-model.test.cjs",
+      "sha256": "e287393e6ed3bc5fb5339ca7f5b70198b252d549a5960033105f5b8232745808",
+      "bytes": 3544
+    }
+  ],
+  "sourceOnlyChanges": [],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/earthbound-camp-river-2026-10-31/README.md",
+      "bytes": 800,
+      "sha256": "8e7a14ad6733b4e0126234192b6286700d4b6a23c5be01e547259d8c16afe566",
+      "purpose": "Deployment, validation, asset costs and provenance summary"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31",
+      "treeSha256": "f752fbb066506c978612b6a36b584258ac2b0e176f04bf4146a1418591cab3af",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/earthbound-rover-validation-2026-10-31",
+      "treeSha256": "981bb09552316bea859cb833ce5d14ff7b1dc9702c008647450250749475ab4e",
+      "fileCount": 18
+    },
+    {
+      "path": "platform-updates/earthbound-realism-2026-10-31",
+      "treeSha256": "5265301cc6543fc9b6aba97dbcc07e041dc571128620276b7486c5f5ad9f6927",
+      "fileCount": 19
+    }
+  ]
+}
