@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "earthbound-realism-2026-10-31",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "8c30b81415f7a861e7cb9765e72d7c3a7e4e10e1",
+    "commit": "c484727086410dfbbe904f7a9fe0544eb4b350f9",
+    "hostedVersion": 229
+  },
+  "reviewedPresentationSources": [],
+  "approvedExports": [
+    {
+      "source": "app/site.html",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/app/site.html",
+      "sha256": "a6746014be11867ca4e6c4002fd7a74ceb4581c38e96472b0068ce4228804c4f",
+      "bytes": 74276
+    },
+    {
+      "source": "docs/updates/earthbound-realism-2026-10-31.md",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/docs/updates/earthbound-realism-2026-10-31.md",
+      "sha256": "0e4bd4b87e2bd751514490b3b2086b29bfa198bd013dcf755479d2f9ca318d41",
+      "bytes": 2472
+    },
+    {
+      "source": "public/assets/rocket/parallax-rocket-web.glb",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/assets/rocket/parallax-rocket-web.glb",
+      "sha256": "83d86ca9b057b181e750738a1d9315b3cd6aef6a1ee85fb45562a7f8897b2511",
+      "bytes": 9266280
+    },
+    {
+      "source": "public/assets/scenery/lantern/provenance.json",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/assets/scenery/lantern/provenance.json",
+      "sha256": "ab45a92cf81e3b2cff4470a4a245ec76a3d91dd5227843a1ee4340daa74db791",
+      "bytes": 3597
+    },
+    {
+      "source": "public/assets/scenery/lantern/web.glb",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/assets/scenery/lantern/web.glb",
+      "sha256": "c14e4555996e8fcacc331b8810396467d33739bd62beca309068f77a21a4da90",
+      "bytes": 3032304
+    },
+    {
+      "source": "public/assets/scenery/rocks/provenance.json",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/assets/scenery/rocks/provenance.json",
+      "sha256": "f4bfda3196b21c1dc9417a28a9fa31e4ef42188a489f5dfa83edcc4f75c996d9",
+      "bytes": 3595
+    },
+    {
+      "source": "public/assets/scenery/rocks/web.glb",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/assets/scenery/rocks/web.glb",
+      "sha256": "09063f94baada0027bdda6641d204d261b9a474a6b576e26e55263914c9b2110",
+      "bytes": 2221828
+    },
+    {
+      "source": "public/assets/scenery/station/provenance.json",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/assets/scenery/station/provenance.json",
+      "sha256": "9ce7e3afe4235b1eab706f755705966fdfec56b6dc931351123dc68e6067a7f5",
+      "bytes": 3597
+    },
+    {
+      "source": "public/assets/scenery/station/web.glb",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/assets/scenery/station/web.glb",
+      "sha256": "a45e3e2f292449b4fbe207a3fe3a8fce30d6a46664e651a5425178e9671facbd",
+      "bytes": 2749112
+    },
+    {
+      "source": "public/desert-world.js",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/desert-world.js",
+      "sha256": "957eccd6e5b902297c192aa69e3c61020f7dbcd080e111297f5524874ec320ed",
+      "bytes": 124129
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/rocket-model.js",
+      "sha256": "1027bd9e49078cb90fd356808d81b68cca267e3fa5e56c38a5dd91c653eb99a0",
+      "bytes": 31418
+    },
+    {
+      "source": "public/rocket-state.js",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/rocket-state.js",
+      "sha256": "5d9e0af9918533bd249dc6af5691e9c73bdcaadd79dd3a31d6a4e58bd73fa65a",
+      "bytes": 1869
+    },
+    {
+      "source": "public/scenery-model.js",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/public/scenery-model.js",
+      "sha256": "155ff387e6ce46ec72cb9c620f18425d810b26d2dffa679e059fc1e97d533e73",
+      "bytes": 5757
+    },
+    {
+      "source": "scripts/prepare-scenery-asset.mjs",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/scripts/prepare-scenery-asset.mjs",
+      "sha256": "b82caed51fa8729c006f234fbe4ff11a9050eaf05c8fde47e55b91fdc4f9ff1a",
+      "bytes": 11460
+    },
+    {
+      "source": "tests/desert-world.test.cjs",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/tests/desert-world.test.cjs",
+      "sha256": "f169e768d6542fa06f62790edb2e2753e3f7eac4e657ba47f8a065cfc3edfa0a",
+      "bytes": 9072
+    },
+    {
+      "source": "tests/rocket-model.test.cjs",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/tests/rocket-model.test.cjs",
+      "sha256": "117f38e64d591b3147f0ec6eb4afaf365c809c5cbad5228b286d195b501445fe",
+      "bytes": 10500
+    },
+    {
+      "source": "tests/scenery-model.test.cjs",
+      "destination": "platform-updates/earthbound-realism-2026-10-31/tests/scenery-model.test.cjs",
+      "sha256": "4c37bbfea63fe34b22786adf3728a3769be0202d60de704250942a4e84d25adf",
+      "bytes": 2000
+    }
+  ],
+  "sourceOnlyChanges": [],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/earthbound-realism-2026-10-31/README.md",
+      "bytes": 800,
+      "sha256": "fa182a039e020613782bcf13ca49e934d6a8b7e736ecb5623f33853f4ab63e1e",
+      "purpose": "Deployment, validation, asset costs and provenance summary"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31",
+      "treeSha256": "f752fbb066506c978612b6a36b584258ac2b0e176f04bf4146a1418591cab3af",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/earthbound-rover-validation-2026-10-31",
+      "treeSha256": "981bb09552316bea859cb833ce5d14ff7b1dc9702c008647450250749475ab4e",
+      "fileCount": 18
+    }
+  ]
+}

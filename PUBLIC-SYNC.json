@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "earthbound-rover-validation-2026-10-31",
+  "latestRelease": "earthbound-realism-2026-10-31",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -41,6 +41,10 @@
     {
       "id": "earthbound-rover-validation-2026-10-31",
       "manifest": "platform-updates/earthbound-rover-validation-2026-10-31/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-realism-2026-10-31",
+      "manifest": "platform-updates/earthbound-realism-2026-10-31/PUBLIC-SYNC.json"
     }
   ]
 }

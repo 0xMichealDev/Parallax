@@ -1,5 +1,9 @@
 <p align="center">
 
+## Earthbound realistic expedition — v229
+
+Meshy sandstone, field equipment and lanterns with improved ground lighting and contact shading. [Release notes](docs/updates/earthbound-realism-2026-10-31.md) · [Exact source snapshot](platform-updates/earthbound-realism-2026-10-31/).
+
 Public validation follow-up: [complete rover snapshot](platform-updates/earthbound-rover-validation-2026-10-31/) includes the unchanged rocket boarding state needed by the test suite. Hosted v228 is unchanged; the original snapshot is preserved.
   <img src="assets/parallax-banner.svg" alt="PARALLAX — The Onchain Observatory. Research with context. Build with evidence." width="100%">
 </p>
