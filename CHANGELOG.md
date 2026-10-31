@@ -1,5 +1,7 @@
 # Changelog
 
+Public validation follow-up: [complete rover snapshot](platform-updates/earthbound-rover-validation-2026-10-31/) includes the unchanged rocket boarding state needed by the test suite. Hosted v228 is unchanged; the original snapshot is preserved.
+
 ## Earthbound expedition rover — hosted v228
 
 - Textured Rover 01 with animated wheels, terrain-facing headlights and parked work lighting; preserved Rover 02 and the procedural fallback.

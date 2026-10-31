@@ -1,4 +1,6 @@
 <p align="center">
+
+Public validation follow-up: [complete rover snapshot](platform-updates/earthbound-rover-validation-2026-10-31/) includes the unchanged rocket boarding state needed by the test suite. Hosted v228 is unchanged; the original snapshot is preserved.
   <img src="assets/parallax-banner.svg" alt="PARALLAX — The Onchain Observatory. Research with context. Build with evidence." width="100%">
 </p>
 
