@@ -1,0 +1,215 @@
+/* PARALLAX / Observatory interface. Shared materials, navigation and controls.
+   Page compositions live in parallax-chapters.css; account state remains server-owned. */
+body.workspace-shell.prlx-system {
+  --sidebar-width:224px;
+  --prlx-canvas:#090b0e; --prlx-panel:#101419; --prlx-raised:#171c22;
+  --prlx-ink:#f0f2f4; --prlx-secondary:#c0c6ce; --prlx-muted:#929ca8;
+  --prlx-blue:#b3c7db; --prlx-blue-bright:#d0e3f3;
+  --prlx-line:#c0ccdc20; --prlx-line-strong:#c0ccdc38;
+  --prlx-accent:#bed6e7; --prlx-accent-rgb:190,214,231;
+  --prlx-display:'Space Grotesk','Arial',sans-serif;
+  --prlx-ui:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --prlx-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Consolas,monospace;
+  --surface-base:var(--prlx-canvas); --surface-panel:var(--prlx-panel); --surface-raised:var(--prlx-raised);
+  --surface-border:var(--prlx-line); --surface-border-strong:var(--prlx-line-strong);
+  --surface-accent:var(--prlx-accent); --surface-muted:var(--prlx-muted); --surface-text:var(--prlx-ink);
+  --dash-line:var(--prlx-line); --dash-accent:var(--prlx-accent); --dash-muted:var(--prlx-muted);
+  --line:var(--prlx-line); --edge:var(--prlx-line-strong);
+  color:var(--prlx-ink); color-scheme:dark;
+  font-family:var(--prlx-ui); -webkit-font-smoothing:antialiased;
+  accent-color:var(--prlx-accent);
+}
+body.workspace-shell.prlx-system[data-parallax-section=trade] {--prlx-accent:#a7e6cd;--prlx-accent-rgb:167,230,205;--prlx-blue:#a7e6cd;--prlx-blue-bright:#cdf4e4}
+body.workspace-shell.prlx-system[data-parallax-section=research] {--prlx-accent:#d7bc8b;--prlx-accent-rgb:215,188,139;--prlx-blue:#d7bc8b;--prlx-blue-bright:#eedbb8}
+body.workspace-shell.prlx-system[data-parallax-section=universe] {--prlx-accent:#bcb0ed;--prlx-accent-rgb:188,176,237;--prlx-blue:#bcb0ed;--prlx-blue-bright:#e1d8ff}
+body.workspace-shell.prlx-system:not(.home-hub):not(.premium-dashboard):not(.viewer):not([data-workspace-page=explore]):not([data-workspace-page=planets]) {
+  background:radial-gradient(ellipse 60% 400px at 70% -150px,rgba(var(--prlx-accent-rgb),.075),transparent),var(--prlx-canvas);
+}
+.prlx-system [hidden] {display:none!important}
+.prlx-system ::selection {background:rgba(var(--prlx-accent-rgb),.25);color:#fff}
+body.prlx-system :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible {outline:2px solid var(--prlx-accent);outline-offset:4px}
+body.prlx-system :is(button,a,input,select,textarea) {-webkit-tap-highlight-color:rgba(var(--prlx-accent-rgb),.12)}
+body.prlx-system :is(button,a,summary) {touch-action:manipulation}
+body.prlx-system :is(input,select,textarea) {scroll-margin-top:90px}
+body.prlx-system button:disabled {cursor:not-allowed}
+body.prlx-system :is(h1,h2,h3) {text-wrap:balance}
+body.prlx-system main :is(input,select,textarea) {color-scheme:dark}
+
+/* Navigation: a single instrument rail, with every primary tool exposed. */
+body.workspace-shell.prlx-system .dashboard-sidebar {
+  display:flex; padding:24px 14px 15px; width:var(--sidebar-width);
+  background:linear-gradient(145deg,#14191e 0,#0d1014 30%,#0b0d11 100%);
+  border-right:1px solid #d4dfeb1c; box-shadow:8px 0 36px #0000000c;
+  scrollbar-width:thin;scrollbar-color:#313943 transparent;z-index:24;
+}
+body.prlx-system .dashboard-sidebar .brand {gap:10px;padding:0 7px;color:#f3f5f7;font:600 15px/1.2 var(--prlx-ui);letter-spacing:.16em;min-height:42px}
+body.workspace-shell.prlx-system .dashboard-sidebar .brand>span {display:block;font:inherit;color:inherit;letter-spacing:inherit;text-transform:none}
+body.prlx-system .dashboard-sidebar .brand small {display:block;margin-top:8px;color:#74818e;font:7px/1 var(--prlx-mono);letter-spacing:.13em;white-space:nowrap}
+body.prlx-system .dashboard-sidebar .brand-orbit {width:33px;height:33px;border:0;border-radius:0;padding:0;background:none;color:#d4e1ea;stroke-width:.85}
+.prlx-sidebar-route {display:flex;align-items:center;gap:8px;margin:19px 8px 22px;color:#687583;font:7px/1.5 var(--prlx-mono);letter-spacing:.11em;white-space:nowrap}
+.prlx-route-line {width:18px;height:1px;background:#7f96a7;position:relative}
+.prlx-route-line::after {content:'';position:absolute;right:0;top:-2px;width:4px;height:4px;border:1px solid #9baebe;background:#101418;border-radius:50%}
+body.prlx-system .dashboard-sidebar nav {gap:2px;flex-shrink:0}
+body.prlx-system .dashboard-sidebar nav a {position:relative;border:1px solid transparent;border-radius:5px;background:transparent;min-height:37px;padding:8px 10px;gap:11px;color:#8e9aa7;font:450 12px/1.45 var(--prlx-ui);letter-spacing:.005em;box-shadow:none;transition:background .16s,color .16s,border-color .16s}
+body.prlx-system .dashboard-sidebar nav a svg {width:17px;height:17px;opacity:.7;stroke-width:1.4}
+body.prlx-system .dashboard-sidebar nav a:hover {color:#f4f7f9;background:#e2eaff06;border-color:#d9e7f00c}
+body.prlx-system .dashboard-sidebar nav a[aria-current=page] {color:var(--prlx-accent);background:linear-gradient(90deg,rgba(var(--prlx-accent-rgb),.11),rgba(var(--prlx-accent-rgb),.025));border-color:rgba(var(--prlx-accent-rgb),.13);box-shadow:none;font-weight:600}
+body.prlx-system .dashboard-sidebar nav a[aria-current=page]::after {content:'';position:absolute;right:10px;width:4px;height:4px;border-radius:50%;background:var(--prlx-accent);box-shadow:0 0 9px rgba(var(--prlx-accent-rgb),.3)}
+body.prlx-system .dashboard-sidebar nav a[aria-current=page] svg {opacity:1}
+.prlx-nav-group {margin:19px 0 0;padding:0;flex-shrink:0}
+body.prlx-system .prlx-nav-group h2 {display:flex;justify-content:space-between;align-items:center;margin:0 10px 7px;font:500 8px/1.5 var(--prlx-mono);text-transform:uppercase;letter-spacing:.16em;color:#626f7c}
+body.prlx-system .prlx-nav-group h2 span:last-child {font-size:7px;color:#45515f}
+.prlx-sidebar-footer {margin-top:auto;padding-top:24px;flex-shrink:0}
+body.prlx-system .prlx-gold-link {display:flex;align-items:center;gap:10px;margin:0 4px 17px;padding:14px 10px;border-block:1px solid #d2b77b25;background:linear-gradient(110deg,#d3b27608,transparent);color:#d1b887}
+body.prlx-system .prlx-gold-link>svg {width:19px;height:19px;stroke-width:1.25;flex:none}
+body.prlx-system .prlx-gold-link>svg:last-child {width:14px;margin-left:auto;opacity:.55}
+body.prlx-system .prlx-gold-link span {font:550 9px/1.4 var(--prlx-ui);letter-spacing:.12em}
+body.prlx-system .prlx-gold-link small {display:block;font:10px/1.5 var(--prlx-ui);letter-spacing:0;color:#918979;margin-top:3px}
+body.prlx-system .prlx-gold-link:hover {background:#d3b2760d;border-color:#d2b77b55}
+.prlx-footer-links {display:flex;flex-wrap:wrap;gap:10px 15px;padding:0 12px}
+body.prlx-system .prlx-footer-links a {font-size:10px;color:#798591;line-height:1.5;padding:3px 0}
+body.prlx-system .prlx-footer-links a:hover {color:#d6dfe7}
+body.prlx-system .prlx-footer-links a:last-child {display:flex;gap:8px;align-items:center;width:100%}
+body.prlx-system .prlx-footer-links svg {width:12px;height:12px}
+body.prlx-system .sidebar-bottom {margin:16px 8px 0;padding:13px 0 0;border-color:#a0bbce13;font:7px/1.5 var(--prlx-mono);letter-spacing:.13em;color:#657382;gap:9px}
+body.prlx-system .sidebar-bottom small {color:#4e5a67;font:8px/1.5 var(--prlx-ui);letter-spacing:0;margin-top:3px}
+body.prlx-system .network-glyph {color:#7c919c;font-size:23px}
+
+/* Low-profile shared bar. The tool itself gets the screen. */
+body.workspace-shell.prlx-system .workspace-header {height:62px;min-height:62px;padding:0 30px;gap:20px;background:#0d1014eF;border-bottom:1px solid #c6d5e319;box-shadow:none;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+body.prlx-system .dashboard-breadcrumb {gap:13px;font:500 11px/1.5 var(--prlx-ui);white-space:nowrap}
+body.prlx-system .dashboard-breadcrumb span:first-child {font:8px/1.5 var(--prlx-mono);color:#74808d;letter-spacing:.13em}
+body.prlx-system .dashboard-breadcrumb span:last-child {color:#d3dbe3;font-weight:500}
+body.prlx-system .dashboard-breadcrumb b {color:#48535f;font-weight:400}
+body.prlx-system .dashboard-header-actions {gap:12px}
+body.prlx-system .workspace-header .dashboard-search {min-width:190px;min-height:34px;padding:6px 11px;border:1px solid #cad7e125;background:#15191e;border-radius:5px;color:#9aa7b4;font:11px/1.4 var(--prlx-ui);box-shadow:inset 0 1px #fff03}
+body.prlx-system .workspace-header .dashboard-search:hover {border-color:#a1b7c94d;background:#1b2027;color:#e9eff4}
+body.prlx-system .dashboard-search svg {width:14px;height:14px;stroke-width:1.5}
+body.prlx-system .dashboard-search kbd {font:8px var(--prlx-mono);padding:3px 4px;border-radius:3px;color:#71808f;border:1px solid #c0d4e61d;background:#0d1116}
+@media(min-width:901px) {
+  body.workspace-shell.prlx-system .workspace-header .dashboard-search>span:not(.tool-search-compact) {display:inline}
+  body.workspace-shell.prlx-system .workspace-header .dashboard-search .tool-search-compact {display:none}
+  body.workspace-shell.prlx-system .workspace-header .dashboard-search kbd {display:inline}
+}
+body.prlx-system .workspace-header :is(.account-link,#session-link) {min-height:34px;padding:7px 11px;border-color:#b2c7d424;border-radius:5px;background:#14191e;font:10px/1.5 var(--prlx-ui);color:#b8c6d1;gap:10px}
+body.prlx-system .workspace-header :is(.account-link,#session-link):hover {border-color:#b2c7d44d;background:#1b2229}
+body.prlx-system .workspace-header .site-pro-member {min-height:30px;border:1px solid #d0b98430;border-radius:4px;background:#c1a65d07;color:#c9b887;padding:4px 8px;font:9px/1.5 var(--prlx-mono);gap:5px}
+body.prlx-system .workspace-header .site-pro-member svg {width:12px;height:12px;color:#ceb98b;stroke-width:1.4}
+body.prlx-system .workspace-header .site-pro-member .pro-badge-word {font-size:8px;color:#9c927e}
+body.prlx-system .workspace-header .site-pro-member.is-active {border-color:#d6bd7e70;background:#c6a45312;color:#f3dca5}
+body.prlx-system .prlx-motion-button,body.workspace-shell.prlx-system .workspace-header .prlx-motion-button {display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:34px;min-width:34px;border:0;background:transparent;color:#71808d;padding:7px 0;border-radius:4px;box-shadow:none;letter-spacing:0;cursor:pointer;font:9px/1.4 var(--prlx-ui);white-space:nowrap}
+body.prlx-system .prlx-motion-button:hover,body.workspace-shell.prlx-system .workspace-header .prlx-motion-button:hover:not(:disabled) {color:#d2e1ea;background:transparent;border-color:transparent}
+body.prlx-system .prlx-motion-button svg {width:16px;height:16px;stroke-width:1.4;fill:none;stroke:currentColor}
+.prlx-motion-button .prlx-play-symbol {display:none}
+.prlx-motion-button[aria-pressed=true] .prlx-pause-symbol {display:none}
+.prlx-motion-button[aria-pressed=true] .prlx-play-symbol {display:block}
+.prlx-trade-utilities {display:flex;align-items:center;gap:4px;flex:none}
+body.prlx-system .terminal-intro .prlx-trade-menu>span,body.prlx-system .terminal-intro .prlx-trade-menu>kbd {display:none}
+body.workspace-shell.prlx-system.parallax-market-workspace .terminal-intro .terminal-nav-workspace {display:none!important}
+body.prlx-system .terminal-intro .terminal-title:has(.market-brand) {min-width:0}
+
+/* A purposeful directory, searchable from every page. */
+body.prlx-system .dashboard-command {width:min(700px,calc(100vw - 36px));max-height:min(780px,calc(100dvh - 60px));padding:26px;background:linear-gradient(140deg,#171d24,#101419 42%);border:1px solid #b5c6d849;border-radius:12px;box-shadow:0 25px 120px #000c,inset 0 1px #e6f1ff0a;color:#ebf0f4}
+body.prlx-system .dashboard-command::backdrop {background:#030508c9;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+body.prlx-system .dashboard-command h2 {font:500 28px/1.1 var(--prlx-display);letter-spacing:-.045em;color:#ecf1f5}
+body.prlx-system .dashboard-command .eyebrow {color:var(--prlx-accent);font:8px/1.5 var(--prlx-mono);letter-spacing:.13em}
+body.prlx-system .dashboard-command .command-heading {border-color:#cad5e21c;padding-bottom:18px}
+body.workspace-shell.prlx-system .dashboard-command .command-heading>button {border:1px solid #b8c8d62b;min-width:36px;min-height:36px;padding:7px;border-radius:4px;background:#ffffff03;color:#b4c2cc;box-shadow:none;font:12px/1 var(--prlx-ui)}
+body.workspace-shell.prlx-system .dashboard-command .command-heading>button:hover:not(:disabled) {border-color:#b8c8d66b;background:#ffffff0a;color:#e4edf5}
+body.prlx-system .dashboard-command .command-input-wrap {background:#0b1015;border:1px solid #acbecf2e;border-radius:5px;box-shadow:none}
+body.prlx-system .dashboard-command .command-input-wrap:focus-within {border-color:var(--prlx-accent);box-shadow:0 0 0 2px rgba(var(--prlx-accent-rgb),.08)}
+body.prlx-system .dashboard-command .tool-category>h3 {color:#7d8a99;background:#101419;font:8px/1.5 var(--prlx-mono);letter-spacing:.14em;text-transform:uppercase;padding:9px 10px;border-color:#c5d5e512}
+body.prlx-system .dashboard-command .tool-category>a {min-height:60px;padding:12px 10px;border-radius:4px;border:1px solid transparent;background:none}
+body.prlx-system .dashboard-command .tool-category>a:hover,body.prlx-system .dashboard-command .tool-category>a:focus-visible {background:rgba(var(--prlx-accent-rgb),.05);border-color:rgba(var(--prlx-accent-rgb),.2)}
+body.prlx-system .tool-category strong {font:500 13px/1.5 var(--prlx-ui);color:#e4ecf2}
+body.prlx-system .tool-category small {font:11px/1.6 var(--prlx-ui);color:#8593a2}
+body.prlx-system .command-footer {font:9px/1.5 var(--prlx-mono);color:#647381;border-color:#d2dce519}
+
+/* Material continuity without changing data, charts or the saved dashboard layout. */
+body.prlx-system main :is(.primary,.hub-primary,.story-button):not(.story-button-quiet) {border-radius:4px;box-shadow:inset 0 1px #fff1;transition:background .16s,border-color .16s,box-shadow .16s}
+body.prlx-system main :is(.primary,.hub-primary):not(:disabled):hover {box-shadow:inset 0 1px #fff2,0 4px 18px #0002}
+body.prlx-system main :is(.secondary,.quiet-button) {border-radius:4px}
+body.prlx-system .page-sections {margin-bottom:18px;background:#0e1319;border:1px solid #bbcbd81d;border-radius:5px;box-shadow:none;max-width:100%}
+body.prlx-system .page-sections>summary {color:#8595a5;font:10px/1.5 var(--prlx-ui);min-height:32px;padding:8px 12px}
+body.prlx-system .page-sections[open]>summary {color:var(--prlx-accent)}
+body.prlx-system .page-sections nav {background:#11171e;border:1px solid #bbd1e12c;border-radius:6px;box-shadow:0 14px 35px #0008}
+body.prlx-system .page-sections nav a {font-size:12px;color:#aab8c6;min-height:40px}
+body.prlx-system .workspace-section-nav {border:0;border-bottom:1px solid var(--prlx-line);background:none;border-radius:0;gap:20px;padding:0 0 0;margin:0 0 24px}
+body.prlx-system .workspace-section-nav a {border:0;border-bottom:1px solid transparent;border-radius:0;background:none;color:#8495a6;font:11px/1.5 var(--prlx-ui);padding:12px 0;min-height:40px}
+body.prlx-system .workspace-section-nav a[aria-current=page] {background:none;border-bottom-color:var(--prlx-accent);color:var(--prlx-accent)}
+
+/* Welcome remains the familiar Parallax observatory, now framed in the same system. */
+body.prlx-system.home-hub .arrival-hero {border:0;border-bottom:1px solid #bcd2e52b;border-radius:0}
+body.prlx-system.home-hub .arrival-topline {font-family:var(--prlx-mono);letter-spacing:.13em;color:#9caebd}
+body.prlx-system.home-hub .arrival-copy h1 {letter-spacing:-.065em;font-weight:450}
+body.prlx-system.home-hub .arrival-copy h1>span {color:#d2e3ec}
+body.prlx-system.home-hub .story-button {border-radius:4px;font-size:12px;letter-spacing:.01em}
+body.prlx-system.home-hub .arrival-launchpad {background:#101419;border-bottom:1px solid var(--prlx-line);gap:0}
+body.prlx-system.home-hub .arrival-launchpad>a {border-radius:0;background:transparent;border-color:#bfd0e01c;transition:background .18s}
+body.prlx-system.home-hub .arrival-launchpad>a:hover {background:#b8d8e508}
+body.prlx-system.home-hub .arrival-launchpad small {font-family:var(--prlx-mono);font-size:8px;letter-spacing:.13em;color:#6f8497}
+body.prlx-system.home-hub .arrival-launchpad strong {font-size:17px;font-weight:450;letter-spacing:-.02em}
+body.prlx-system.home-hub .story-content {background:#0b0f13}
+body.prlx-system.home-hub :is(.story-console,.story-tracking-preview,.story-planet-preview,.story-earthbound) {border-radius:5px;box-shadow:0 20px 50px #0003}
+body.prlx-system.home-hub .story-section {border-color:#becfe21a}
+
+/* Restrained entrance; actual data and interactive canvases remain stable. */
+@keyframes prlx-enter {from{opacity:.55;transform:translateY(5px)}to{opacity:1;transform:none}}
+body.prlx-system:not(.premium-dashboard):not([data-workspace-page=explore]):not(.viewer) main {animation:prlx-enter .35s ease-out both}
+body.prlx-system[data-motion=paused] main {animation:none!important}
+body.prlx-system[data-motion=paused] :is(.prlx-chapter-art,.prlx-chapter-art *),body.prlx-system[data-page-visible=false] :is(.prlx-chapter-art,.prlx-chapter-art *) {animation-play-state:paused!important}
+body.prlx-system[data-motion=paused] {scroll-behavior:auto}
+@media(prefers-reduced-motion:reduce) {body.prlx-system *,body.prlx-system *::before,body.prlx-system *::after {animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(min-width:901px) and (max-width:1250px) {
+  body.workspace-shell.prlx-system {--sidebar-width:202px}
+  body.prlx-system .dashboard-sidebar {padding-inline:10px}
+  body.prlx-system .dashboard-sidebar .brand {font-size:13px}
+  body.prlx-system .dashboard-sidebar .brand small {font-size:6px}
+  body.prlx-system .workspace-header {padding-inline:22px}
+  body.prlx-system .dashboard-header-actions {gap:9px}
+  body.prlx-system .dashboard-search {min-width:150px!important}
+  body.prlx-system .prlx-motion-button span {display:none}
+  body.prlx-system .workspace-header .account-link {display:none}
+}
+@media(max-height:850px) and (min-width:901px) {
+  body.prlx-system .dashboard-sidebar {padding-top:17px}
+  .prlx-sidebar-route {margin:13px 8px 15px}
+  .prlx-nav-group {margin-top:13px}
+  body.prlx-system .dashboard-sidebar nav a {min-height:34px;padding-block:6px}
+  .prlx-sidebar-footer {padding-top:18px}
+  body.prlx-system .prlx-gold-link {padding-block:10px;margin-bottom:12px}
+}
+@media(max-width:900px) {
+  body.workspace-shell.prlx-system,body.workspace-shell.prlx-system.premium-dashboard {--sidebar-width:0px;padding-left:0;padding-bottom:76px}
+  body.workspace-shell.prlx-system .dashboard-sidebar {display:none}
+  body.workspace-shell.prlx-system .workspace-header {width:100%;margin-left:0;height:62px;min-height:62px;gap:10px;padding:10px 18px}
+  body.prlx-system .workspace-header>.brand {display:inline-flex!important;gap:7px!important;font:600 12px/1 var(--prlx-ui)!important;letter-spacing:.13em!important}
+  body.prlx-system .workspace-header>.brand .brand-orbit {width:25px;height:25px;stroke:#c5d6e2;stroke-width:1}
+  body.prlx-system .dashboard-breadcrumb {display:none}
+  body.prlx-system .dashboard-header-actions {gap:8px}
+  body.prlx-system .workspace-header .dashboard-search {min-width:34px;min-height:34px;padding:7px 9px;gap:7px}
+  body.prlx-system .workspace-header .dashboard-search>span:not(.tool-search-compact),body.prlx-system .dashboard-search kbd {display:none}
+  body.prlx-system .workspace-header .dashboard-search .tool-search-compact {display:inline;font-size:10px}
+  body.prlx-system .prlx-motion-button span {display:none}
+  body.prlx-system .workspace-header .account-link {display:none}
+  body.prlx-system .workspace-header .site-pro-member {padding:4px 6px;font-size:8px}
+  body.prlx-system .workspace-header .site-pro-member .pro-badge-word {display:none}
+  body.prlx-system .workspace-header:has(#session-link) .dashboard-search>span {display:none}
+  body.prlx-system .workspace-header #session-link {max-width:88px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;padding:7px}
+  body.prlx-system>.mobile-dock {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;top:auto;margin:0;width:100%;max-width:none;transform:none;z-index:25;padding:7px 10px max(7px,env(safe-area-inset-bottom,7px));border:0;border-top:1px solid #b7c9d52e;border-radius:0;background:#0f141af5;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 -8px 28px #0003;gap:3px}
+  body.prlx-system>.mobile-dock a {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:6px 2px;min-height:48px;border:0;border-radius:4px;background:none;color:#74889b;font:9px/1.4 var(--prlx-ui);letter-spacing:0}
+  body.prlx-system>.mobile-dock a svg {width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+  body.prlx-system>.mobile-dock a[aria-current=page] {color:var(--prlx-accent);background:rgba(var(--prlx-accent-rgb),.065)}
+  body.prlx-system .dashboard-command {width:calc(100vw - 24px);max-height:calc(100dvh - 28px);padding:20px;border-radius:9px}
+  body.prlx-system .dashboard-command .tool-category>a {min-height:65px}
+  body.prlx-system .workspace-section-nav {gap:18px;overflow:auto;flex-wrap:nowrap}
+  body.prlx-system .workspace-section-nav a {white-space:nowrap}
+  body.prlx-system .page-sections {margin-bottom:14px}
+  body.prlx-system main :is(input,textarea,select) {font-size:16px}
+}
+@media(max-width:390px) {
+  body.prlx-system .workspace-header {padding-inline:12px!important}
+  body.prlx-system .workspace-header>.brand {font-size:10px!important;gap:5px!important}
+  body.prlx-system .dashboard-header-actions {gap:5px}
+  body.prlx-system .workspace-header .dashboard-search .tool-search-compact {display:none}
+}

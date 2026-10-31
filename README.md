@@ -32,11 +32,11 @@ This repository is the **PARALLAX developer kit and public source record**: sele
 | **Gold** | Holder research suite with member monitoring, Wallet Watch, saved snapshots and evidence-based AI. | [Gold workspace update](docs/updates/gold-workspace-2026-10-29.md) |
 | **SolHandle** | Resolve readable handles while independently checking current ownership. | [SolHandle](https://parallaxlaunch.live/docs/solhandle) |
 
-**Latest platform update:** [Gold research suite remodel](docs/updates/gold-workspace-2026-10-29.md), hosted v225, records native revision `89dabd844238dd7f6738b4b4da692a37511dbee3`. Gold home, Wallet Watch, saved snapshots and Gold AI now share a charcoal and champagne presentation, clearer research layouts and route-aware suite navigation. Local monitor/report filters and a redesigned evidence-based assistant preserve existing account and request boundaries.
+**Latest platform update:** [Earthbound rocket and Observatory interface](docs/updates/earthbound-rocket-2026-10-30.md), hosted v227, records native revision `bc4320d02021f78f04c9bc6f8111d0945118455d`. Earthbound now loads the textured rocket with runtime work lights and launch illumination, a fitted landing footprint, and the existing boarding/cabin flow. This record also catches up v226's shared Observatory presentation, navigation and request-recovery improvements.
 
-The [new source snapshot](platform-updates/gold-workspace-2026-10-29/) exports 65 exact presentation, browser, artwork, documentation and fixture files. It also catches up the preceding v221 Terminal launch card. The [v220 market data recovery](docs/updates/market-data-recovery-2026-10-29.md) remains preserved as its original release record.
+The [new source snapshot](platform-updates/earthbound-rocket-2026-10-30/) exports **35 exact files (10,053,716 bytes)**, including the **9,266,280-byte, 51,271-triangle** browser model and its encoding provenance. It classifies all 38 changed native paths; four private route/full-application-fixture changes have source-only summaries. No verifier allowlist expansion was needed.
 
-The public gate appends `npm run check:gold-workspace` and preserves every earlier suite. All 9 earlier snapshot/archive directories retain their published bytes and provenance. The release notes distinguish live desktop review and offline checks from the remaining authenticated/mobile visual coverage.
+The public gate appends `npm run check:earthbound-rocket` and preserves every earlier suite and all **10** preceding snapshot/archive fingerprints. Release notes distinguish offline shader/model verification from remaining real-device browser coverage. The [Gold research suite release](docs/updates/gold-workspace-2026-10-29.md) remains preserved as its original v225 record.
 
 ## What you can inspect here
 

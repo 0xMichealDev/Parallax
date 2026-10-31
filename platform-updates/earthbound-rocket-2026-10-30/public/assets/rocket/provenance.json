@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "asset": "PARALLAX Earthbound rocket",
+  "source_task": {
+    "resource": "image-to-3d",
+    "task_id": "01a19090-99e1-73fb-ae5c-9e9ff91e4483"
+  },
+  "remesh_task": {
+    "resource": "remesh",
+    "task_id": "01a1909a-3d3e-7178-b568-3d3d17c98eee",
+    "target_triangles": 50000,
+    "consumed_credits": 5
+  },
+  "original": {
+    "bytes": 41334584,
+    "triangles": 619356,
+    "sha256": "f19dafdfda4cbf5b1b45139ce22be6b84942c35531ea6ee02b5025174b17282c"
+  },
+  "remeshed": {
+    "bytes": 48695740,
+    "triangles": 51271,
+    "sha256": "1b270f051b144abe9891330d4889bf865fd3365cd1f317ae6b81f446cc2b62cc"
+  },
+  "web": {
+    "filename": "parallax-rocket-web.glb",
+    "bytes": 9266280,
+    "triangles": 51271,
+    "sha256": "83d86ca9b057b181e750738a1d9315b3cd6aef6a1ee85fb45562a7f8897b2511"
+  },
+  "texture_encoding": [
+    {
+      "role": "normal",
+      "image_index": 0,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 16568511,
+      "width": 2048,
+      "height": 2048,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 2520168,
+      "resize_kernel": "lanczos3",
+      "quality": 96,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "763f0a4e6ca55bfd79bccbdec02345bc8c775d212bc2b4feaf4188826ba375b1"
+    },
+    {
+      "role": "base_color",
+      "image_index": 1,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 18786994,
+      "width": 2048,
+      "height": 2048,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 1030727,
+      "resize_kernel": "lanczos3",
+      "quality": 92,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "0bed1642ead610ed8e52bfa2cff46b10763ddc66cc9abd274c5e23187a01aa27"
+    },
+    {
+      "role": "metallic_roughness",
+      "image_index": 2,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 11226551,
+      "width": 2048,
+      "height": 2048,
+      "channels": 3,
+      "mime_type": "image/png",
+      "bytes": 3601708,
+      "resize_kernel": "lanczos3",
+      "lossless_encoding": true,
+      "sha256": "089d4900674b0988398c282b70a2e9bdab5afa065bf5f9c71c70356a82546431"
+    }
+  ],
+  "geometry_preserved": {
+    "verified": true,
+    "source_sha256": "ad0a4871dc638bfb88079ab46c01a64788ccdd9acb9bf9a3f6c9eec2142e7bad",
+    "derived_sha256": "ad0a4871dc638bfb88079ab46c01a64788ccdd9acb9bf9a3f6c9eec2142e7bad",
+    "unchanged": [
+      "indices",
+      "positions",
+      "normals",
+      "uvs",
+      "accessors",
+      "meshes",
+      "nodes",
+      "scenes",
+      "materials",
+      "textures",
+      "samplers"
+    ],
+    "buffer_views": [
+      {
+        "buffer_view": 0,
+        "bytes": 676608,
+        "sha256": "71f6837f2fa7dbd477d753be523df2cc12eef5aadf60283151b29669fbe0b673"
+      },
+      {
+        "buffer_view": 1,
+        "bytes": 676608,
+        "sha256": "0ed871a75e7430272e4bb6d2be7804f864902deef461a8637e6e43d87b4827f1"
+      },
+      {
+        "buffer_view": 2,
+        "bytes": 451072,
+        "sha256": "9746c986f17654b9dcff3924c39a33ac932c84d4a9510d9189cff738ab05ec2f"
+      },
+      {
+        "buffer_view": 3,
+        "bytes": 307626,
+        "sha256": "8b31e14ec0f5ca24e5bb5cbb9f880eff4e5aa70cc29ca3b7cbd75603e5ea3118"
+      }
+    ]
+  },
+  "preparation": {
+    "script": "scripts/prepare-rocket-asset.mjs",
+    "encoder": "sharp",
+    "encoder_version": "0.35.5"
+  }
+}

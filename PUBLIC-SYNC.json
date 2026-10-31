@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "gold-workspace-2026-10-29",
+  "latestRelease": "earthbound-rocket-2026-10-30",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -29,6 +29,10 @@
     {
       "id": "gold-workspace-2026-10-29",
       "manifest": "platform-updates/gold-workspace-2026-10-29/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-rocket-2026-10-30",
+      "manifest": "platform-updates/earthbound-rocket-2026-10-30/PUBLIC-SYNC.json"
     }
   ]
 }

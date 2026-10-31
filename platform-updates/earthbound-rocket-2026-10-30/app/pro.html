@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Parallax Gold · Your research workspace.</title>
+<meta name="description" content="A focused workspace for verified PRLX holders. Monitor wallets and projects, compare saved snapshots, and research with your Gold AI assistant.">
+<link rel="icon" href="/favicon.svg">
+<link rel="stylesheet" href="/holder-pro.css?v=153">
+<link rel="stylesheet" href="/gold-membership.css?v=222">
+</head>
+<body class="holder-pro">
+<main class="pro-main">
+<section class="pro-hero">
+  <div class="pro-intro"><p class="pro-kicker">PARALLAX GOLD / YOUR RESEARCH WORKSPACE</p><h1>A clearer view.<br><em>A closer watch.</em></h1><p class="pro-lead">Your wallets, your evidence, your next question. Give your research a place of its own.</p></div>
+  <div class="pro-hero-signature" aria-hidden="true"><svg viewBox="0 0 110 110"><path d="m55 10 13 32 32 13-32 13-13 32-13-32-32-13 32-13z"/><circle cx="55" cy="55" r="36"/><path d="M55 0v18M55 92v18M0 55h18M92 55h18"/></svg><span>THE GOLD STANDARD</span></div>
+</section>
+<div class="pro-overview">
+  <section class="pro-access" id="pro-membership-panel" aria-label="Pro membership">
+    <div class="pro-access-top"><span class="pro-kicker" id="pro-access-caption">YOUR ACCESS</span><span class="pro-access-edition">PRLX / GOLD</span></div>
+    <h2 id="access-title">Make yourself at home.</h2>
+    <p id="access-message" role="status" aria-live="polite">Sign in and verify your wallet to open your Gold workspace.</p>
+    <div class="pro-membership-summary">
+      <div class="pro-membership-heading"><span>MEMBERSHIP STATUS</span><strong id="pro-membership-state">Not verified</strong></div>
+      <dl class="pro-holding-metrics"><div><dt>Your PRLX balance</dt><dd id="access-balance">Not checked</dd></div><div><dt>Current requirement</dt><dd><span id="pro-required">100,000</span> <small>PRLX</small></dd></div></dl>
+      <div id="pro-holding-progress" hidden><label for="pro-holding-meter" id="pro-remaining">Verify to check holdings</label><progress id="pro-holding-meter" max="100" value="0">0%</progress></div>
+      <p class="pro-verification-time" id="pro-checked">Your balance appears after wallet verification.</p>
+    </div>
+    <div class="pro-actions"><a id="pro-signin" class="pro-button" href="/signin-with-chatgpt?return_to=%2Fpro" target="_top">Sign in to unlock <span aria-hidden="true">↗</span></a><button id="pro-connect" hidden>Connect &amp; verify Phantom</button><button id="pro-recheck" hidden>Recheck holdings</button><button id="pro-disconnect" class="pro-quiet" hidden>Disconnect</button></div>
+    <a id="pro-phantom" class="pro-link" hidden>Open in Phantom mobile ↗</a>
+    <p class="pro-access-assurance"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM8 12l3 3 5-6"/></svg><span>Ownership signature only. Your tokens stay in your wallet.</span></p>
+    <details class="pro-identity"><summary>Your Gold card &amp; appearance <span aria-hidden="true">+</span></summary><div id="pro-member-card" class="gold-member-card" hidden aria-label="Your active Parallax Pro membership"><div class="gold-card-top"><span class="gold-card-brand">PARALLAX</span><span class="gold-member-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.3 9.4l6-.9z"/></svg> PRO ACTIVE</span></div><div class="gold-card-orbit" aria-hidden="true"><i></i><i></i><i></i></div><div class="gold-card-title">Your access.<br><strong>Elevated.</strong></div><div class="gold-card-bottom"><div><span>VERIFIED HOLDER</span><code id="pro-member-wallet"></code></div><span class="gold-active"><i aria-hidden="true"></i> Membership active</span></div></div><p class="pro-identity-note">Verify an eligible wallet to personalize and download your member card.</p></details>
+  </section>
+  <section class="pro-benefits" id="pro-benefits" aria-labelledby="pro-benefits-title">
+    <div class="pro-section-head"><div><p class="pro-kicker">ONE CONNECTED WORKSPACE</p><h2 id="pro-benefits-title">Keep your research moving.</h2></div><span class="pro-benefit-state" id="pro-benefits-state">Included with Pro</span></div>
+    <div class="pro-tool-list">
+      <article class="pro-tool-row"><span class="pro-tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h15v14H4zM4 6V4h12v2M15 10h6v6h-6zM18 13h.01"/></svg></span><div><span class="pro-tool-label">01 / FOLLOW</span><h3>Wallet &amp; project monitor</h3><p>Keep five wallets and five tokens in view. See fresh snapshots and changes between refreshes.</p><a id="pro-open-monitor" class="pro-link" href="#pro-workspace" hidden>Open your monitor ↗</a></div></article>
+      <article class="pro-tool-row"><span class="pro-tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H9l-5 4zM8 8h8M8 12h5"/></svg></span><div><span class="pro-tool-label">02 / UNDERSTAND</span><h3 id="pro-assistant-title">Your Gold AI assistant</h3><p>Ask better questions of your saved evidence, with private conversations and linked sources.</p><a class="pro-link" href="/assistant">Open Gold AI ↗</a></div></article>
+      <article class="pro-tool-row"><span class="pro-tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5zM3 12l9 5 9-5M3 16l9 5 9-5"/></svg></span><div><span class="pro-tool-label">03 / CONNECT THE DOTS</span><h3>A history you can inspect</h3><p>Revisit saved Passports, compare two moments, and export the evidence behind your research.</p><div class="pro-tool-links"><a class="pro-link" href="/control#compare">Compare snapshots ↗</a><a class="pro-link" href="/control#vault">Saved reports ↗</a></div></div></article>
+    </div>
+    <details class="pro-coverage"><summary>What your workspace covers <span aria-hidden="true">+</span></summary><p>The monitor saves five wallets and five projects in this browser for your verified wallet. It checks native SOL balances, recent transaction signatures and indexed token markets. Notices compare refreshes in the open page; Telegram alerts are managed separately in <a href="/control#wallet">Wallet Watch</a>. The assistant uses saved snapshots and supports 20 requests per account per UTC day, subject to capacity. Research conversations are private and available across devices. Basic Passports and Wallet Watch remain available outside Gold.</p></details>
+  </section>
+</div>
+<section id="pro-workspace" hidden aria-labelledby="monitor-title">
+  <div class="pro-section-head pro-monitor-heading"><div><p class="pro-kicker"><span class="pro-workspace-mark" aria-hidden="true">✦</span> YOUR PRIVATE MONITOR</p><h2 id="monitor-title">Keep a closer watch.</h2><p class="pro-muted">The wallets and projects you follow, together.</p></div><div class="pro-actions"><button id="pro-refresh">Refresh now <span aria-hidden="true">↻</span></button><button id="pro-export" class="pro-quiet" disabled>Export snapshot ↓</button></div></div>
+  <div class="pro-monitor-stats" aria-label="Monitor summary"><div><span>WATCHED WALLETS</span><strong id="pro-wallet-count">0 <small>/ 5</small></strong></div><div><span>PROJECT TOKENS</span><strong id="pro-project-count">0 <small>/ 5</small></strong></div><div><span>LATEST SNAPSHOT</span><strong class="pro-stat-time" id="pro-last-collected">Not collected</strong></div><div><span>REFRESH MODE</span><strong class="pro-stat-time" id="pro-refresh-mode">Manual</strong></div></div>
+  <details class="pro-add-panel" open><summary><span>Add to your monitor</span><span aria-hidden="true">+</span></summary><form id="pro-add" class="pro-form"><label>Watch type<select id="pro-kind"><option value="wallet">Wallet</option><option value="project">Project token</option></select></label><label>Label <span class="pro-optional">optional</span><input id="pro-label" maxlength="40" placeholder="A name you recognize"></label><label class="pro-address-field"><span id="pro-address-label">Wallet address</span><input id="pro-address" required minlength="32" maxlength="44" pattern="[1-9A-HJ-NP-Za-km-z]{32,44}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste a public Solana wallet"></label><button>Add to monitor <span aria-hidden="true">+</span></button></form></details>
+  <div class="pro-monitor-toolbar"><div class="pro-filter-tabs" role="group" aria-label="Filter monitored items"><button type="button" data-monitor-filter="all" aria-pressed="true">All</button><button type="button" data-monitor-filter="wallet" aria-pressed="false">Wallets</button><button type="button" data-monitor-filter="project" aria-pressed="false">Projects</button></div><label class="pro-monitor-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="visually-hidden">Search your monitor</span><input type="search" id="pro-search" placeholder="Search name or address" autocomplete="off" maxlength="80"></label><div class="pro-controls"><label class="pro-auto-label"><input id="pro-auto" type="checkbox"><span>Auto refresh <small>60s</small></span></label><label class="pro-threshold-label">Price notice<select id="pro-threshold"><option value="1">1%</option><option value="5" selected>5%</option><option value="10">10%</option></select></label></div></div>
+  <p id="scan-status" class="pro-scan-status" role="status" aria-live="polite">Add an address to start monitoring.</p>
+  <div id="pro-cards" class="pro-cards"></div>
+  <section class="pro-notices"><div class="pro-section-head"><div><p class="pro-kicker">BETWEEN SNAPSHOTS</p><h2>What changed?</h2></div><button id="pro-clear" class="pro-quiet">Clear notices</button></div><p class="pro-muted">Changes appear after successful refreshes in this session. Price notices compare the same indexed market pair.</p><ol id="pro-feed"><li>Your first refresh sets the baseline.</li></ol></section>
+  <details class="pro-monitor-coverage"><summary>Data coverage &amp; refresh behavior</summary><p>Wallets show native SOL balances and the latest ten transaction signatures, not trading performance. Token markets depend on provider indexing. Auto refresh runs only while this page is visible; these notices are not background or Telegram alerts. Your monitor is stored in this browser for your verified wallet.</p></details>
+</section>
+<details class="pro-membership-faq"><summary id="pro-faq-title">Membership questions <span>Eligibility, verification &amp; holdings</span></summary><div class="pro-faq-body">
+<details><summary>How do I activate Pro?</summary><p>Sign in, connect Phantom, and sign a wallet ownership message. Hold at least 100,000 of the official PRLX token directly in that verified wallet. Once the balance check succeeds, your Pro badge and gold outline activate. Your tokens stay in your wallet; no staking, transfer, or spending approval is required.</p></details>
+<details><summary>Will the requirement change if the price rises?</summary><p>The current requirement is 100,000 PRLX. It does not automatically adjust with price. We may review the threshold as Parallax grows, but no adjustment is scheduled. Any future change will be announced ahead of time.</p></details>
+<details><summary>When are my holdings checked?</summary><p>Holdings are checked when you open Pro, recheck holdings, or refresh the monitor. While this page is visible, active memberships are also rechecked about every 60 seconds. Ownership proofs expire after one hour, when you will need to verify again. The last successful check appears in your membership panel.</p></details>
+<details><summary>What if I sell, transfer tokens, or switch wallets?</summary><p>If your verified balance falls below 100,000 PRLX, Pro access and Gold styling turn off at the next check. Switching or disconnecting your wallet clears the active membership display. Verify your selected wallet and recheck holdings to restore access if it qualifies.</p></details>
+<details><summary>Which tokens count toward my balance?</summary><p>Only the official PRLX held directly in your verified wallet counts. Token accounts belonging to that wallet are combined. Tokens in other wallets, lock contracts, or custodial services do not count.</p></details>
+<details><summary>Why does my membership say it is not verified?</summary><p>Sign in and verify your wallet, then select Recheck holdings. If a balance check fails, access stays unverified until a successful check; an unavailable balance is not treated as zero. On mobile, use Open in Phantom mobile to connect and sign.</p></details></div></details>
+<footer class="pro-footer"><p>Gold access follows your verified PRLX holdings. <a href="/premium">Premium Worlds &amp; planet growth</a> are separate purchases.</p><details><summary>Official PRLX token</summary><code>8B2G4oiTKZKbSVTKPAP7Cfe6zAsEtrySCYcX9M2kpump</code></details></footer>
+<noscript>Enable JavaScript to verify your wallet and use the monitor.</noscript>
+</main>
+<script src="/pro-membership-panel.js?v=153" defer></script>
+<script src="/holder-pro.js?v=226" defer></script>
+<script src="/pro-share-card.js?v=150" defer></script>
+</body>
+</html>

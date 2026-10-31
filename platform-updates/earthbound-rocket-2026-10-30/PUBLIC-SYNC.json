@@ -1,0 +1,315 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "earthbound-rocket-2026-10-30",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "89dabd844238dd7f6738b4b4da692a37511dbee3",
+    "commit": "bc4320d02021f78f04c9bc6f8111d0945118455d",
+    "hostedVersion": 227
+  },
+  "reviewedPresentationSources": [
+    "app/docs-content.ts",
+    "app/docs-render.ts",
+    "app/workspace-shell.ts"
+  ],
+  "approvedExports": [
+    {
+      "source": "app/assistant.html",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/app/assistant.html",
+      "sha256": "df3cc3582fd3911908daf1eca4be3a05044f41f5b21dd7adc24e875a9f65fc4e",
+      "bytes": 12551
+    },
+    {
+      "source": "app/control.html",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/app/control.html",
+      "sha256": "75f11e88f5d807344cbe465d386ed06b8b0aedae8006b6e8473c32b2ac455806",
+      "bytes": 25071
+    },
+    {
+      "source": "app/dashboard.html",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/app/dashboard.html",
+      "sha256": "34c9269c4d0c12dc1f5e3b0f4d5677103c277bba86108e5726959d28e1e7f558",
+      "bytes": 51709
+    },
+    {
+      "source": "app/docs-content.ts",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/app/docs-content.ts",
+      "sha256": "c62b3764c98ed26847be0e6b4f02a3f33c773ba4ff791b8dfe3a4f135408a4eb",
+      "bytes": 29781
+    },
+    {
+      "source": "app/docs-render.ts",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/app/docs-render.ts",
+      "sha256": "303635697b56ecb5de70d8b53091dc86f75d66893a3c81f53b565d39e736d922",
+      "bytes": 6589
+    },
+    {
+      "source": "app/pro.html",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/app/pro.html",
+      "sha256": "0150ad63f041081eebfeb6329e0f88d0fe64dc701bc01a70bd4536bb7ddc7e69",
+      "bytes": 13230
+    },
+    {
+      "source": "app/site.html",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/app/site.html",
+      "sha256": "dbcc6c53b37139030847d3f401921712bd9f7f55d3c75025d687724c3f4b3f4c",
+      "bytes": 74136
+    },
+    {
+      "source": "app/trenches.html",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/app/trenches.html",
+      "sha256": "1dd319189431b1258e882ada76f969485edbce37ef5c787b45a91d95140d37c5",
+      "bytes": 18143
+    },
+    {
+      "source": "app/workspace-shell.ts",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/app/workspace-shell.ts",
+      "sha256": "390befa057378fc84b18c54f03e50ae868fd448c5c3ab84ae2425ef24cd2da81",
+      "bytes": 23900
+    },
+    {
+      "source": "docs/observatory-redesign-2026-10-30.md",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/docs/observatory-redesign-2026-10-30.md",
+      "sha256": "9e1ba740b53a20390aef9dd0f4e4caea941d1730cde5fbd7101274cf5bd074b9",
+      "bytes": 7304
+    },
+    {
+      "source": "public/assets/rocket/parallax-rocket-web.glb",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/assets/rocket/parallax-rocket-web.glb",
+      "sha256": "83d86ca9b057b181e750738a1d9315b3cd6aef6a1ee85fb45562a7f8897b2511",
+      "bytes": 9266280
+    },
+    {
+      "source": "public/assets/rocket/provenance.json",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/assets/rocket/provenance.json",
+      "sha256": "07ba17c9aa1173d4e2d2625080686fbfd85d1e599a998c534defcd2ff68deb3c",
+      "bytes": 3512
+    },
+    {
+      "source": "public/control.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/control.js",
+      "sha256": "8d803bdf0cfb2b2e8befa5a1683dd342a58e584ec4747020069623d6eb2d2124",
+      "bytes": 66317
+    },
+    {
+      "source": "public/dashboard-pro.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/dashboard-pro.js",
+      "sha256": "7041ace329e03581a2399eeacffd43e827b0c025d128a2a1fc4b74914285acd8",
+      "bytes": 8859
+    },
+    {
+      "source": "public/desert-world.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/desert-world.js",
+      "sha256": "a3adfae2d198eca6ea6cd833e2c550b92cb7d6714f467b4d9c26d3ea71b25bb0",
+      "bytes": 119080
+    },
+    {
+      "source": "public/gold-assistant.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/gold-assistant.js",
+      "sha256": "e239796a550baa49c5becf7e9334a0a92c88e0400832365153a74e5e6df387e1",
+      "bytes": 21889
+    },
+    {
+      "source": "public/holder-pro.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/holder-pro.js",
+      "sha256": "655b20c15be9b7db4c6d29bbe720c3bf1cce3dc3c7d603b25d0c7c1f98485e7e",
+      "bytes": 16642
+    },
+    {
+      "source": "public/home-living.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/home-living.js",
+      "sha256": "e3039d90b46db5b6e970df1792c26c37beb839919039fd423be87409198b1751",
+      "bytes": 7686
+    },
+    {
+      "source": "public/parallax-chapters.css",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/parallax-chapters.css",
+      "sha256": "f9bce424ae468e14c65f3191649460921e70a0de81cadb17406045999e77dfa4",
+      "bytes": 70965
+    },
+    {
+      "source": "public/parallax-chapters.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/parallax-chapters.js",
+      "sha256": "21f54c2a3777f19029af34357241b1fd35cef4c92f799eea271bbdda3b766113",
+      "bytes": 9284
+    },
+    {
+      "source": "public/parallax-system.css",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/parallax-system.css",
+      "sha256": "c831c5598e2d44c476043f6d4c98afda4b36c9b325e444487f16b8f9516881f9",
+      "bytes": 21711
+    },
+    {
+      "source": "public/parallax-system.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/parallax-system.js",
+      "sha256": "fb6cf74ac4d36ef1fad52431b694e0a5a29fd38e2bcd3929924561e5ed06d4b5",
+      "bytes": 3685
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/rocket-model.js",
+      "sha256": "2979dcd1d4f66e4d05f86cd4d086798b6ead99dc2a258b867491b01f8b8657c1",
+      "bytes": 30560
+    },
+    {
+      "source": "public/rocket-state.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/rocket-state.js",
+      "sha256": "5d9e0af9918533bd249dc6af5691e9c73bdcaadd79dd3a31d6a4e58bd73fa65a",
+      "bytes": 1869
+    },
+    {
+      "source": "public/trenches-core.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/trenches-core.js",
+      "sha256": "4a517847ee8310e5ddb6f6bcc668921683da9b6487cac035d67745ad9fc7edce",
+      "bytes": 10103
+    },
+    {
+      "source": "public/trenches.js",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/public/trenches.js",
+      "sha256": "6b40b534e2e0710bdb28370c935c1af64da7d85160516e76b43110868a0a6e47",
+      "bytes": 34167
+    },
+    {
+      "source": "scripts/prepare-rocket-asset.mjs",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/scripts/prepare-rocket-asset.mjs",
+      "sha256": "d7b9cc1555081340ee81ce3570984c95e01a74c56f348666678185984331d46e",
+      "bytes": 11880
+    },
+    {
+      "source": "scripts/test-research-controls.mjs",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/scripts/test-research-controls.mjs",
+      "sha256": "b79f318bdb6781aa9d3da913c2ca66fc14330a2ecee085e7902a29c29e15e289",
+      "bytes": 3354
+    },
+    {
+      "source": "scripts/test-trenches-ui.mjs",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/scripts/test-trenches-ui.mjs",
+      "sha256": "e6d10714d33d9036e956ca104ad6fa0bc91a03a5c7f8450186c50b32bca0d12f",
+      "bytes": 24301
+    },
+    {
+      "source": "tests/desert-world.test.cjs",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/tests/desert-world.test.cjs",
+      "sha256": "f169e768d6542fa06f62790edb2e2753e3f7eac4e657ba47f8a065cfc3edfa0a",
+      "bytes": 9072
+    },
+    {
+      "source": "tests/gold-assistant-ui.mjs",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/tests/gold-assistant-ui.mjs",
+      "sha256": "95ee73003eae3d0546d2407185322eefa2b97586067d34b6911b98ec20d35149",
+      "bytes": 8045
+    },
+    {
+      "source": "tests/gold-monitor-ui.mjs",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/tests/gold-monitor-ui.mjs",
+      "sha256": "5cc6926ec7463df701d093599783ced5299bd17b5768ad1c6a2210bd28d7d1ec",
+      "bytes": 13069
+    },
+    {
+      "source": "tests/navigation-state.test.cjs",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/tests/navigation-state.test.cjs",
+      "sha256": "ae30ebfbf5b0fa8472702a5c493a15cdac51b3459e1df7774e9578bc588344c8",
+      "bytes": 3374
+    },
+    {
+      "source": "tests/parallax-shell-interactions.test.cjs",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/tests/parallax-shell-interactions.test.cjs",
+      "sha256": "8a5d87ff519a352869f26ffb6bdce814d362f989ccbf8747e488b38286d413cf",
+      "bytes": 15098
+    },
+    {
+      "source": "tests/rocket-model.test.cjs",
+      "destination": "platform-updates/earthbound-rocket-2026-10-30/tests/rocket-model.test.cjs",
+      "sha256": "117f38e64d591b3147f0ec6eb4afaf365c809c5cbad5228b286d195b501445fe",
+      "bytes": 10500
+    }
+  ],
+  "sourceOnlyChanges": [
+    {
+      "path": "app/replay/route.ts",
+      "status": "M",
+      "summary": "Applies the updated Observatory shell and current browser assets to the hosted Replay route; private route implementation remains in the native application."
+    },
+    {
+      "path": "app/terminal/route.ts",
+      "status": "M",
+      "summary": "Applies the updated Observatory shell and current browser assets to the hosted Terminal route; private route implementation remains in the native application."
+    },
+    {
+      "path": "app/trenches/route.ts",
+      "status": "M",
+      "summary": "Applies the updated Observatory shell and current browser assets to the hosted Trenches route; private route implementation remains in the native application."
+    },
+    {
+      "path": "tests/site-integrity.mjs",
+      "status": "M",
+      "summary": "Extends the full hosted-route, asset and recovery checks for the Observatory shell and Earthbound rocket. This fixture imports private application modules; focused public client, terrain and model tests are exported."
+    }
+  ],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30/README.md",
+      "sha256": "a81b82ffaed3356610408e377506fb4d1745a78777d8526626a9b1e31dc108fe",
+      "bytes": 5286,
+      "purpose": "Release behavior, public scope, reproduction commands and actual validation limits."
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30/PROVENANCE.json",
+      "sha256": "8a0ad2e4c8653598247815957f1f8d85cce7e63d2bb27447162cfa10a1ef1f10",
+      "bytes": 9559,
+      "purpose": "Exact source export hashes, source revision, grouped release scope and retained snapshot fingerprints."
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    }
+  ]
+}

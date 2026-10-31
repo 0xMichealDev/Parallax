@@ -1,5 +1,15 @@
 # Changelog
 
+## Earthbound rocket and Observatory interface — hosted v227
+
+- Recorded source `bc4320d02021f78f04c9bc6f8111d0945118455d` after synchronized v225 `89dabd844238dd7f6738b4b4da692a37511dbee3`, grouping the v226 Observatory interface and v227 rocket integration.
+- Added the textured, normal-mapped Earthbound rocket: 51,271 triangles, a 9,266,280-byte web GLB, preserved geometry/UV bytes, runtime work lamps and launch-engine lighting, and a procedural loading/support fallback.
+- Fitted the launch apron, footprint collisions, service tower, boarding lift and nearby equipment to the model; preserved the cabin/launch flow and added a late-load rover clearance window.
+- Caught up the shared Observatory navigation/page treatments and repairs for directory dismissal, motion preferences, Snapshot Library refresh, paused Trenches cooldown recovery, and bounded Gold request failures.
+- Published 35 exact files (10,053,716 bytes), classifying all 38 native changes as 34 changed exports and 4 source-only summaries, with one unchanged fixture dependency. Existing exact presentation exceptions suffice.
+- Appended `npm run check:earthbound-rocket`; preserved all 10 earlier snapshot/archive directories. Offline shader/model renders and live asset-byte checks are recorded separately from unverified real-device browser performance.
+- See the [release record](docs/updates/earthbound-rocket-2026-10-30.md) and [source snapshot](platform-updates/earthbound-rocket-2026-10-30/).
+
 ## Gold research suite remodel — hosted v225
 
 - Recorded source `89dabd844238dd7f6738b4b4da692a37511dbee3` after synchronized v220 `33f8c23fa4aca7e181f4713531a066f6ac5c822a`, including the preceding v221 Terminal launch-card catch-up.

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gold Assistant · PARALLAX</title>
+  <meta name="description" content="Your private Gold research desk. Read saved Project Passports, compare snapshots, and ask better questions with the evidence in view.">
+  <link rel="icon" href="/favicon.svg">
+  <link rel="stylesheet" href="/clean-site.css?v=58">
+  <link rel="stylesheet" href="/gold-assistant.css?v=222">
+</head>
+<body class="assistant-page">
+<main id="assistant-main" class="assistant-main">
+  <section class="assistant-hero" aria-labelledby="assistant-page-title">
+    <div>
+      <p class="assistant-kicker">GOLD / PRIVATE RESEARCH</p>
+      <h1 id="assistant-page-title">A clearer perspective.</h1>
+      <p>Bring the evidence. Follow the questions.</p>
+    </div>
+    <div class="assistant-hero-badge"><span class="assistant-mini-orbit" aria-hidden="true"></span><span>GOLD ASSISTANT<small>Your research, in context</small></span></div>
+  </section>
+
+  <div id="assistant-access-panel" class="assistant-access" data-state="loading">
+    <span class="assistant-access-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 3v5c0 5-7 10-7 10S5 16 5 11V6z"/><path d="m8.5 11.5 2.5 2.5 4.5-5"/></svg></span>
+    <div class="assistant-access-copy"><strong id="assistant-access-title">Checking your membership…</strong><p id="assistant-access-detail">Your conversations stay private to your account.</p></div>
+    <a class="assistant-button" id="assistant-access-link" href="/pro">Verify Gold access <span aria-hidden="true">↗</span></a>
+  </div>
+
+  <div class="assistant-status-row"><p id="assistant-status" role="status" aria-live="polite">Opening your research desk…</p><button id="assistant-reload" class="assistant-button quiet" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 8a6.2 6.2 0 1 0 .1 4M16 3v5h-5"/></svg>Refresh</button></div>
+
+  <section id="assistant-welcome" class="assistant-welcome" aria-labelledby="assistant-welcome-title">
+    <aside class="assistant-welcome-rail" aria-label="Research workflow">
+      <p class="assistant-kicker">YOUR RESEARCH DESK</p>
+      <h2>One question.<br>A better view.</h2>
+      <ol class="assistant-workflow">
+        <li><span>01</span><div><strong>Choose your evidence</strong><p>Start with a saved Project Passport.</p></div></li>
+        <li><span>02</span><div><strong>Set your focus</strong><p>Read a snapshot or compare two moments.</p></div></li>
+        <li><span>03</span><div><strong>Follow the sources</strong><p>Keep questions and references together.</p></div></li>
+      </ol>
+      <a class="assistant-rail-link" href="/control#vault">Open saved Passports <span aria-hidden="true">↗</span></a>
+    </aside>
+    <div class="assistant-welcome-canvas">
+      <div class="assistant-emblem" aria-hidden="true"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="18"/><ellipse cx="40" cy="40" rx="35" ry="12" transform="rotate(-35 40 40)"/><circle cx="65" cy="21" r="3"/></svg></div>
+      <span class="assistant-eyeline">EVIDENCE FIRST. ALWAYS.</span>
+      <h2 id="assistant-welcome-title">Your next insight<br>starts with a question.</h2>
+      <p id="assistant-welcome-detail">Sign in to open your research library. Verified Gold members can ask questions grounded in their saved snapshots.</p>
+      <a id="assistant-welcome-action" class="assistant-button primary" href="/signin-with-chatgpt?return_to=%2Fassistant" target="_top">Open my research desk <span aria-hidden="true">↗</span></a>
+      <div class="assistant-capability-row"><span>Private conversations</span><span>Linked evidence</span><span>Saved across devices</span></div>
+    </div>
+  </section>
+
+  <div id="assistant-workspace" hidden>
+    <div class="assistant-layout">
+      <aside class="assistant-library" aria-label="Your research conversations">
+        <div class="assistant-library-top"><span class="assistant-kicker">YOUR LIBRARY</span><span id="assistant-library-count" class="assistant-count">0</span></div>
+        <div class="assistant-section-head"><h2>Conversations</h2><button id="assistant-new" class="assistant-button assistant-new" type="button" aria-label="Start a new research conversation"><span aria-hidden="true">＋</span> New</button></div>
+        <label class="assistant-search-label" for="assistant-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input id="assistant-search" type="search" placeholder="Find a conversation" autocomplete="off" maxlength="100" aria-label="Search your conversations"></label>
+        <div id="assistant-chats" aria-label="Saved conversations"></div>
+        <div class="assistant-library-bottom"><a href="/control#vault">Saved Passports <span aria-hidden="true">↗</span></a><p>Private to your account.<br>Up to 20 conversations.</p></div>
+      </aside>
+
+      <section class="assistant-desk" aria-label="Gold research assistant">
+        <div class="assistant-desk-topline"><span><span class="assistant-desk-dot" aria-hidden="true"></span> GOLD ASSISTANT</span><span id="assistant-desk-mode">NEW CONVERSATION</span></div>
+
+        <div id="assistant-setup" class="assistant-setup">
+          <div class="assistant-setup-heading"><span class="assistant-setup-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M9 5h13l4 4v18H9zM21 5v6h5M5 11v15M14 16h7M14 21h4"/></svg></span><div><p class="assistant-kicker">START WITH EVIDENCE</p><h2>What are we researching?</h2><p>Choose a saved Passport, then make room for a better question.</p></div></div>
+          <div id="assistant-no-reports" class="assistant-empty-evidence" hidden><span aria-hidden="true">＋</span><h3>Your first Passport is the starting point.</h3><p>Collect a project snapshot to give your assistant evidence to work with.</p><a class="assistant-button primary" href="/control#passport">Create a Project Passport <span aria-hidden="true">↗</span></a><p class="assistant-small">Return here and refresh when your Passport is saved.</p></div>
+
+          <form id="assistant-create">
+            <div class="assistant-evidence-grid">
+              <label class="assistant-evidence-field" for="assistant-report"><span class="assistant-field-number">01 / PRIMARY EVIDENCE</span><strong>Project Passport</strong><select id="assistant-report" required aria-describedby="assistant-report-note"></select><span id="assistant-report-note" class="assistant-field-note">Select a snapshot from your research library.</span></label>
+              <label class="assistant-evidence-field" for="assistant-compare"><span class="assistant-field-number">02 / ANOTHER MOMENT</span><strong>Comparison <span>Optional</span></strong><select id="assistant-compare" aria-describedby="assistant-compare-note"><option value="">Single-report analysis</option></select><span id="assistant-compare-note" class="assistant-field-note">Compare saved snapshots of the same token.</span></label>
+            </div>
+            <div class="assistant-focus-field"><label for="assistant-focus">Where should we focus? <span>Optional</span></label><textarea id="assistant-focus" maxlength="400" rows="3" placeholder="What should I understand about this project’s liquidity and missing evidence?"></textarea><div class="assistant-focus-prompts" aria-label="Research focus suggestions"><button type="button" data-focus="Explain the key observations in plain English and show me what to check next.">The essentials</button><button type="button" data-focus="Explain what changed between my selected snapshots, and identify differences that cannot be compared.">Changes over time</button><button type="button" data-focus="Identify missing evidence and practical next checks without assuming the missing data.">Missing evidence</button></div></div>
+            <div class="assistant-create-footer"><p class="assistant-small">Your focus stays with this conversation.<br>Answers begin when you send a question.</p><button class="assistant-button primary" id="assistant-start" type="submit">Create conversation <span aria-hidden="true">↗</span></button></div>
+          </form>
+          <div class="assistant-evidence-principle"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2 6 3v4c0 4-6 9-6 9s-6-5-6-9V5zM7 9.5l2 2 4-4"/></svg><span>Grounded in your saved snapshots. Missing evidence stays visible.</span></div>
+        </div>
+
+        <div id="assistant-conversation" hidden>
+          <div class="assistant-conversation-heading"><div class="assistant-section-head"><div><p class="assistant-kicker">YOUR PRIVATE RESEARCH</p><h2 id="assistant-title"></h2></div><div class="assistant-actions"><button class="assistant-button quiet" id="assistant-export" type="button" aria-label="Export this research conversation"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v10m-4-4 4 4 4-4M3 13v4h14v-4"/></svg>Export</button><button class="assistant-button quiet assistant-delete" id="assistant-delete" type="button" aria-label="Delete this research conversation">Delete</button></div></div><p class="assistant-small" id="assistant-chat-focus"></p><p class="assistant-snapshot-note"><span aria-hidden="true">◷</span> Answers use the selected saved snapshots. <a href="/control#passport">Collect a new Passport</a> for fresh evidence.</p></div>
+          <div id="assistant-messages" aria-label="Conversation history" tabindex="0"></div>
+          <div class="assistant-compose-area">
+            <div class="assistant-prompts" aria-label="Suggested questions"><button type="button" data-prompt="Explain the most important observations and what I should check next.">Explain this report <span aria-hidden="true">↗</span></button><button type="button" data-prompt="What changed between these snapshots, and which differences cannot be compared?">What changed? <span aria-hidden="true">↗</span></button><button type="button" data-prompt="What important evidence is missing, and where should I investigate next?">What’s missing? <span aria-hidden="true">↗</span></button></div>
+            <form id="assistant-ask"><label for="assistant-question">Ask your Gold assistant</label><textarea id="assistant-question" maxlength="1200" rows="3" required placeholder="Ask a question about your selected evidence…" aria-describedby="assistant-composer-hint assistant-remaining"></textarea><div class="assistant-compose-footer"><span id="assistant-composer-hint" class="assistant-small"><kbd>⌘ / Ctrl</kbd> + <kbd>Enter</kbd> to send <span id="assistant-character-count">0 / 1,200</span></span><button class="assistant-button primary" id="assistant-send" type="submit">Ask assistant <span aria-hidden="true">↑</span></button></div></form>
+            <div class="assistant-usage-row"><span id="assistant-remaining" class="assistant-small"></span><span class="assistant-small">Verify the evidence. AI can make mistakes.</span></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <details class="assistant-privacy"><summary>Evidence, privacy &amp; your allowance <span aria-hidden="true">＋</span></summary><div class="assistant-privacy-grid"><section><h2>Your evidence</h2><p>Selected Passport data, your question, your saved research focus, and the last six completed exchanges are sent to OpenAI to generate an answer. Source links open the provider’s current page; snapshot timestamps describe the evidence used for the answer.</p><p>This assistant does not fetch live news, track developer wallets, execute trades, or monitor projects. Missing information remains unknown.</p></section><section><h2>Your conversations</h2><p>Conversations are saved privately in your Parallax account until you delete them. Export or delete your history even if your Gold membership expires.</p><p>Deleting a Passport does not delete existing conversations; it prevents new answers that require that report.</p></section><section><h2>Your allowance</h2><p>20 requests per account per UTC day, shared with AI Passport summaries and change explanations, subject to shared capacity. Failed generation attempts may count. Each conversation supports 30 requests.</p><p>No automatic AI requests or background charges.</p></section></div></details>
+  <noscript><p class="assistant-noscript">Enable JavaScript to sign in, open your saved conversations, and use Gold Assistant.</p></noscript>
+</main>
+<script src="/gold-assistant.js?v=226" defer></script>
+</body>
+</html>
