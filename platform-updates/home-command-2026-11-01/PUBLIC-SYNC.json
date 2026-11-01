@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "home-command-2026-11-01",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "3b214cc954558e0e90e6ea0c4f93844591766f4f",
+    "commit": "f6b18634c0d0c104a1146a964b04c81f488698c2",
+    "hostedVersion": 238
+  },
+  "reviewedPresentationSources": [],
+  "approvedExports": [
+    {
+      "source": "app/dashboard.html",
+      "destination": "platform-updates/home-command-2026-11-01/app/dashboard.html",
+      "sha256": "a3c89333730e4f7170d0f56e4a46b43f63aeaef51bba8739af8c7c87c330be2c",
+      "bytes": 52284
+    },
+    {
+      "source": "docs/updates/home-command-2026-11-01.md",
+      "destination": "platform-updates/home-command-2026-11-01/docs/updates/home-command-2026-11-01.md",
+      "sha256": "397c3cf55b2c501c3e388e9c4cc3be5e013ab03a75c156b93aa81a0652de9738",
+      "bytes": 1439
+    },
+    {
+      "source": "public/assets/atlas-port/observatory/preview.webp",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/atlas-port/observatory/preview.webp",
+      "sha256": "af9c35b1100e20f17f5796e720aa68ded4ae1bd01c3f24f61281e815b1790a62",
+      "bytes": 33564
+    },
+    {
+      "source": "public/assets/atlas-port/shuttle/provenance.json",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/atlas-port/shuttle/provenance.json",
+      "sha256": "bc97a5d541e44deae481178cb035c01351dddd52d785fc05bcb74e48f8c322a8",
+      "bytes": 4197
+    },
+    {
+      "source": "public/assets/atlas-port/shuttle/web.glb",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/atlas-port/shuttle/web.glb",
+      "sha256": "2fd5328c366f18620df1d43ae64765f701779684dd640c5772fdda53e045a6dc",
+      "bytes": 2662932
+    },
+    {
+      "source": "public/assets/home-command/array/preview.webp",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/home-command/array/preview.webp",
+      "sha256": "bdd9bb6b0ec17b970fc27c7c6b439d161531fada6699a69f87c301579540ccef",
+      "bytes": 32440
+    },
+    {
+      "source": "public/assets/home-command/array/provenance.json",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/home-command/array/provenance.json",
+      "sha256": "9d78db2f1fc527d2a432a5ac7713521830f7f53f117dab7c9354e46270b76472",
+      "bytes": 3631
+    },
+    {
+      "source": "public/assets/home-command/array/web.glb",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/home-command/array/web.glb",
+      "sha256": "f587ea4f8365de30093ec78145719f6e1f9edf4343a6d361a246a564c736179c",
+      "bytes": 2031984
+    },
+    {
+      "source": "public/assets/home-command/citadel/preview.webp",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/home-command/citadel/preview.webp",
+      "sha256": "d5fb200f941b3bbc364e3f0c1ec0d69488046f3cf55b9456f08906ff8976dc78",
+      "bytes": 22656
+    },
+    {
+      "source": "public/assets/home-command/citadel/provenance.json",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/home-command/citadel/provenance.json",
+      "sha256": "0df62a578126e43733453b4d9655932bfbf0dcdf3c9618c493b839086dfac966",
+      "bytes": 3638
+    },
+    {
+      "source": "public/assets/home-command/citadel/web.glb",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/home-command/citadel/web.glb",
+      "sha256": "94932a050c248d7a8fd5ef6cf8629bbf09b347933aef76c8f38751b39f01b6bc",
+      "bytes": 3525740
+    },
+    {
+      "source": "public/assets/home-command/concourse/preview.webp",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/home-command/concourse/preview.webp",
+      "sha256": "829efd4c16e345b94704d2ce0d95d37a6c2690a869f8c99dd704811aa523c932",
+      "bytes": 22482
+    },
+    {
+      "source": "public/assets/home-command/concourse/provenance.json",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/home-command/concourse/provenance.json",
+      "sha256": "db1214bf28ab0888e47fb45dcbc9466cb6667c62864833a0989d554cfaf12028",
+      "bytes": 3639
+    },
+    {
+      "source": "public/assets/home-command/concourse/web.glb",
+      "destination": "platform-updates/home-command-2026-11-01/public/assets/home-command/concourse/web.glb",
+      "sha256": "8f5fb2c9787fb6269ad96872c660f508166bff7716c61ae1a9cb698c886f4351",
+      "bytes": 3460356
+    },
+    {
+      "source": "public/atlas-port-core.js",
+      "destination": "platform-updates/home-command-2026-11-01/public/atlas-port-core.js",
+      "sha256": "d8011c22d997747102c7ca286848838f0d305116178fbfabff9a5b4b148ff91f",
+      "bytes": 2342
+    },
+    {
+      "source": "public/dashboard-focus.js",
+      "destination": "platform-updates/home-command-2026-11-01/public/dashboard-focus.js",
+      "sha256": "eadae503fc888641fb20944be2b628ee5902b79fcfe022dac5fa73174d305abe",
+      "bytes": 1022
+    },
+    {
+      "source": "public/dashboard-layout.js",
+      "destination": "platform-updates/home-command-2026-11-01/public/dashboard-layout.js",
+      "sha256": "9f06602af3772a75b9336b383f930fdd07ed00f01b8f0a5e15008a5121cca910",
+      "bytes": 11357
+    },
+    {
+      "source": "public/home-command.css",
+      "destination": "platform-updates/home-command-2026-11-01/public/home-command.css",
+      "sha256": "d41786e183b519e0d04ae546a5568840b4ff381dd7d40fc05a7d0f8d716206c2",
+      "bytes": 7504
+    },
+    {
+      "source": "public/home-command.js",
+      "destination": "platform-updates/home-command-2026-11-01/public/home-command.js",
+      "sha256": "e677c063bd66b01eaeb6aed7cdbc137d1c98fee9c20d4c93112ca467fb40da5d",
+      "bytes": 5156
+    },
+    {
+      "source": "public/home-living.js",
+      "destination": "platform-updates/home-command-2026-11-01/public/home-living.js",
+      "sha256": "e3039d90b46db5b6e970df1792c26c37beb839919039fd423be87409198b1751",
+      "bytes": 7686
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/home-command-2026-11-01/public/rocket-model.js",
+      "sha256": "3602072d80c926b2f9570ab3320950fbc79359611f87c6ed5ff5f6cd7a66a0cc",
+      "bytes": 32314
+    },
+    {
+      "source": "scripts/prune-unused-build-assets.mjs",
+      "destination": "platform-updates/home-command-2026-11-01/scripts/prune-unused-build-assets.mjs",
+      "sha256": "d1508a1f7686b75c0aba6005345e06f814149d70fd2c21681525fd486573d852",
+      "bytes": 1010
+    },
+    {
+      "source": "tests/dashboard-focus.test.cjs",
+      "destination": "platform-updates/home-command-2026-11-01/tests/dashboard-focus.test.cjs",
+      "sha256": "67a7dd77215bb42612733b5e9ad50858acaa0303a3c5b3b5ffd0a3c15fbba1af",
+      "bytes": 1814
+    },
+    {
+      "source": "tests/dashboard-layout-client.mjs",
+      "destination": "platform-updates/home-command-2026-11-01/tests/dashboard-layout-client.mjs",
+      "sha256": "7f733081abbc9eaddc9c5f641d865a757daf1b84157f266cb839b4727b2ec31f",
+      "bytes": 8939
+    },
+    {
+      "source": "tests/home-command.test.cjs",
+      "destination": "platform-updates/home-command-2026-11-01/tests/home-command.test.cjs",
+      "sha256": "52d7b201bb7ee0371fbc64fd58040656ee4ecc5f55800fc3efd11740bf0d3c61",
+      "bytes": 4940
+    },
+    {
+      "source": "tests/home-living.test.cjs",
+      "destination": "platform-updates/home-command-2026-11-01/tests/home-living.test.cjs",
+      "sha256": "d617b6db10b8e5590540d89a597e695bcf96e37969d619c7b1efcfda3f19c3eb",
+      "bytes": 7264
+    }
+  ],
+  "sourceOnlyChanges": [],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/home-command-2026-11-01/README.md",
+      "bytes": 671,
+      "sha256": "a5994918dcc8f5a11d5b93b6b7fed1580957cd9d97cf4d36b01be80f3a7161a8",
+      "purpose": "Deployment, validation, asset costs and provenance summary"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31",
+      "treeSha256": "f752fbb066506c978612b6a36b584258ac2b0e176f04bf4146a1418591cab3af",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/earthbound-rover-validation-2026-10-31",
+      "treeSha256": "981bb09552316bea859cb833ce5d14ff7b1dc9702c008647450250749475ab4e",
+      "fileCount": 18
+    },
+    {
+      "path": "platform-updates/earthbound-realism-2026-10-31",
+      "treeSha256": "5265301cc6543fc9b6aba97dbcc07e041dc571128620276b7486c5f5ad9f6927",
+      "fileCount": 19
+    },
+    {
+      "path": "platform-updates/earthbound-camp-river-2026-10-31",
+      "treeSha256": "9fc6e75549634434f8440c56fd489d194d3849a997cebef61c4d2e9e18ffbd6f",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-compound-crash-2026-10-31",
+      "treeSha256": "75ee105ee942426e64d10c209c2f336687dd1cdca799d33b17dc9cd38d38e105",
+      "fileCount": 72
+    },
+    {
+      "path": "platform-updates/earthbound-entry-2026-10-31",
+      "treeSha256": "50254cc29f997b2c54f11168157a50d93e436249011041e44129ecbefbb9b5ca",
+      "fileCount": 33
+    },
+    {
+      "path": "platform-updates/starship-cabin-2026-10-31",
+      "treeSha256": "6a0e0c58ebb4d65f2568da072d83d9857eeab5139f5281db16d9dfb6915e6e86",
+      "fileCount": 34
+    },
+    {
+      "path": "platform-updates/starship-ascent-2026-10-31",
+      "treeSha256": "c0a8bee0419c7c1763d74cf3791a223ab0fe80b05c3f53cdabf6838f183632b9",
+      "fileCount": 36
+    },
+    {
+      "path": "platform-updates/atlas-port-2026-10-31",
+      "treeSha256": "73af2dc022dc7a990df32dd75064cd2f492be49cf7df5f1ee67db68746df9226",
+      "fileCount": 54
+    },
+    {
+      "path": "platform-updates/atlas-departures-2026-11-01",
+      "treeSha256": "5527a31fe50bffdc158e943f90a09ff3d1098c88690b6abf43079d79d1a678d1",
+      "fileCount": 47
+    }
+  ]
+}

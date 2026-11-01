@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "name": "citadel",
+  "provider": "Meshy",
+  "created_at": "2026-11-01",
+  "stages": [
+    {
+      "stage": "geometry",
+      "task_id": "01a19754-a553-711a-a769-e34530222526",
+      "resource": "text-to-3d",
+      "consumed_credits": 20
+    },
+    {
+      "stage": "texture",
+      "task_id": "01a19756-643e-7764-87f7-d4ef560934e9",
+      "resource": "text-to-3d",
+      "consumed_credits": 10
+    },
+    {
+      "stage": "web",
+      "task_id": "01a19759-2300-746a-b38d-4f4967fbfda6",
+      "resource": "remesh",
+      "consumed_credits": 5
+    }
+  ],
+  "consumed_credits": 35,
+  "remeshed": {
+    "bytes": 49304464,
+    "triangles": 20299,
+    "sha256": "51fbbdcfdb09ad97122d7c34f319ba9d6e6ff9ff67a6657e435e64269a65fa2c"
+  },
+  "web": {
+    "filename": "web.glb",
+    "bytes": 3525740,
+    "triangles": 20299,
+    "sha256": "94932a050c248d7a8fd5ef6cf8629bbf09b347933aef76c8f38751b39f01b6bc"
+  },
+  "texture_encoding": [
+    {
+      "role": "normal",
+      "image_index": 0,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 19247761,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 1118154,
+      "resize_kernel": "lanczos3",
+      "quality": 96,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "3e00f7fcb93d1c49775dccaa6a94a5dfb6c187b0229fa183aa04c598ac5beb8c"
+    },
+    {
+      "role": "base_color",
+      "image_index": 1,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 17821578,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 302523,
+      "resize_kernel": "lanczos3",
+      "quality": 92,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "a09d85a49ba02b01b726432632e2e1ce06455213d7e1a632be8e2972fb3e2832"
+    },
+    {
+      "role": "metallic_roughness",
+      "image_index": 2,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 10764745,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 634691,
+      "resize_kernel": "lanczos3",
+      "quality": 98,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "ad9e1360e16062c5d3dfe4d21c6b94938da32cd36c7e7364bf2f0c743f3c7206"
+    }
+  ],
+  "geometry_preserved": {
+    "verified": true,
+    "source_sha256": "b336085ffafcabff1ec2d7f464bd26bbd74ecbea6f8ddceb4749fbded75712f3",
+    "derived_sha256": "b336085ffafcabff1ec2d7f464bd26bbd74ecbea6f8ddceb4749fbded75712f3",
+    "unchanged": [
+      "indices",
+      "positions",
+      "normals",
+      "uvs",
+      "accessors",
+      "meshes",
+      "nodes",
+      "scenes",
+      "materials",
+      "textures",
+      "samplers"
+    ],
+    "buffer_views": [
+      {
+        "buffer_view": 0,
+        "bytes": 505056,
+        "sha256": "cda485a3a537d21002a9a825e6ba658d1305f8f5b6b8f466ccf3474a2abe6531"
+      },
+      {
+        "buffer_view": 1,
+        "bytes": 505056,
+        "sha256": "17e84c73176c458ac42be5881598aaa9ccb2826982126906bd7029af45ecaaf8"
+      },
+      {
+        "buffer_view": 2,
+        "bytes": 336704,
+        "sha256": "7e149db38d461c5ec0fb22cc8c0822016b06506b46636ab7af3227dfdff60106"
+      },
+      {
+        "buffer_view": 3,
+        "bytes": 121794,
+        "sha256": "ad718a55b730285501d88b596d581aeb637c936763a343a7a104b6995b4f101e"
+      }
+    ]
+  },
+  "preparation": {
+    "script": "scripts/prepare-atlas-asset.mjs",
+    "encoder": "sharp",
+    "encoder_version": "0.35.4"
+  }
+}

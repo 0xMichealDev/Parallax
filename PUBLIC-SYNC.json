@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "atlas-departures-2026-11-01",
+  "latestRelease": "home-command-2026-11-01",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -73,6 +73,10 @@
     {
       "id": "atlas-departures-2026-11-01",
       "manifest": "platform-updates/atlas-departures-2026-11-01/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "home-command-2026-11-01",
+      "manifest": "platform-updates/home-command-2026-11-01/PUBLIC-SYNC.json"
     }
   ]
 }

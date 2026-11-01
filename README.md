@@ -1,5 +1,9 @@
 <p align="center">
 
+## Orbital command dashboard — v238
+
+A new citadel scene, three Meshy assets and clear Research / Create / Explore entrances. [Release notes](docs/updates/home-command-2026-11-01.md) · [Exact source snapshot](platform-updates/home-command-2026-11-01/).
+
 ## Atlas departures — v237
 
 A shared station and shuttle departure scene with searchable project destinations and cinematic travel. [Release notes](docs/updates/atlas-departures-2026-11-01.md) · [Exact source snapshot](platform-updates/atlas-departures-2026-11-01/).
