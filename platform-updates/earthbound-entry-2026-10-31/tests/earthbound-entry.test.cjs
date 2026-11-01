@@ -1,0 +1,18 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
+const box={module:{exports:{}},setTimeout,clearTimeout};vm.runInNewContext(fs.readFileSync('public/earthbound-entry.js','utf8'),box);const Entry=box.module.exports;
+function fixture(build){let timeout,changes=[];const c=Entry.create({build,onChange:s=>changes.push(s.state),schedule:f=>(timeout=f,1),cancel:()=>timeout=null});return {c,changes,expire:()=>timeout?.()};}
+test('a failed graphics attempt can retry successfully without reloading the page',()=>{let count=0;const f=fixture(()=>++count===1?null:{ready:true});f.c.start();assert.equal(f.c.state,'error');f.c.start();assert.equal(f.c.state,'ready');assert.equal(count,2);f.c.dispose();});
+test('stalled loading times out, destroys resources and ignores its late ready callback',()=>{let ready,destroyed=0;const f=fixture((fail,r)=>(ready=r,{ready:false,destroy(){destroyed++}}));f.c.start();assert.equal(f.c.state,'loading');f.expire();assert.equal(f.c.state,'error');assert.equal(destroyed,1);ready();assert.equal(f.c.state,'error');});
+test('context loss releases the current scene and a fresh retry owns subsequent callbacks',()=>{let callbacks=[],destroyed=0;const f=fixture((fail,ready)=>(callbacks.push({fail,ready}),{ready:false,destroy(){destroyed++}}));f.c.start();callbacks[0].ready();assert.equal(f.c.state,'ready');callbacks[0].fail('Graphics paused');assert.equal(f.c.state,'error');f.c.start();callbacks[0].ready();callbacks[0].fail();assert.equal(f.c.state,'loading');callbacks[1].ready();assert.equal(f.c.state,'ready');f.c.dispose();assert.equal(destroyed,2);});
+test('closing during loading cancels timeout and disposes exactly once',()=>{let destroyed=0,ready;const f=fixture((fail,r)=>(ready=r,{ready:false,destroy(){destroyed++}}));f.c.start();f.c.dispose();f.c.dispose();ready();f.expire();assert.equal(f.c.state,'idle');assert.equal(destroyed,1);});
+test('synchronous failure and thrown initialization errors leave no live scene',()=>{for(const build of [()=>{throw Error('Startup failed')},fail=>{fail('No graphics');return {destroy(){}}}]){const f=fixture(build);f.c.start();assert.equal(f.c.state,'error');assert.equal(f.c.scene,null);}});
+test('world startup reports disabled graphics and tries compatible context preferences',()=>{
+ let handler,message,options=[];const canvas={setAttribute(){},addEventListener(k,f){handler=f;},getContext(kind,o){options.push(o);handler({statusMessage:'GL_RENDERER = Disabled'});return null;}};
+ const window={},host={dataset:{}};vm.runInNewContext(fs.readFileSync('public/desert-world.js','utf8'),{window,document:{createElement:()=>canvas},console:{warn(){}}});
+ assert.equal(window.ParallaxDesert.create(host,m=>message=m),null);assert.match(message,/disabled/);assert.deepEqual(options.map(o=>o.powerPreference),['default','high-performance']);assert.ok(options.every(o=>o.antialias===false));assert.equal(host.dataset.earthboundGraphics,'unavailable');
+});
+test('shader initialization failure releases its graphics context',()=>{
+ let released=0,removed=0;const gl={getExtension:()=>({loseContext(){released++}}),createProgram:()=>({}),createShader:()=>({}),shaderSource(){},compileShader(){},getShaderParameter:()=>false,getShaderInfoLog:()=> 'compile failed'};
+ const canvas={setAttribute(){},addEventListener(){},getContext:()=>gl,remove(){removed++}},window={};vm.runInNewContext(fs.readFileSync('public/desert-world.js','utf8'),{window,document:{createElement:()=>canvas},console:{warn(){}}});
+ assert.equal(window.ParallaxDesert.create({dataset:{}}),null);assert.equal(released,1);assert.equal(removed,1);
+});

@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound entry and recovery — v232
+
+Clear entry choices, direct travel to camp/compound/wreck, retryable loading, graphics cleanup and useful failure guidance. [Release notes](docs/updates/earthbound-entry-2026-10-31.md) · [Exact source snapshot](platform-updates/earthbound-entry-2026-10-31/).
+
 ## Earthbound launch compound and alien crash — v231
 
 Meshy buildings, utilities, service equipment and animated crew; damaged alien craft, debris and reactor with distinct lighting. [Release notes](docs/updates/earthbound-compound-crash-2026-10-31.md) · [Exact source snapshot](platform-updates/earthbound-compound-crash-2026-10-31/).
