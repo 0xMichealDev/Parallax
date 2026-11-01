@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "budget_credits": 300,
+  "consumed_credits": 210,
+  "assets": [
+    {
+      "id": "station",
+      "model": "/assets/atlas-port/station/web.glb",
+      "preview": "/assets/atlas-port/station/preview.webp",
+      "provenance": "/assets/atlas-port/station/provenance.json",
+      "bytes": 4100296,
+      "triangles": 17619,
+      "consumed_credits": 35
+    },
+    {
+      "id": "shuttle",
+      "model": "/assets/atlas-port/shuttle/web.glb",
+      "preview": "/assets/atlas-port/shuttle/preview.webp",
+      "provenance": "/assets/atlas-port/shuttle/provenance.json",
+      "bytes": 2662932,
+      "triangles": 13500,
+      "consumed_credits": 35
+    },
+    {
+      "id": "observatory",
+      "model": "/assets/atlas-port/observatory/web.glb",
+      "preview": "/assets/atlas-port/observatory/preview.webp",
+      "provenance": "/assets/atlas-port/observatory/provenance.json",
+      "bytes": 3018272,
+      "triangles": 17637,
+      "consumed_credits": 35
+    },
+    {
+      "id": "docking-platform",
+      "model": "/assets/atlas-port/docking-platform/web.glb",
+      "preview": "/assets/atlas-port/docking-platform/preview.webp",
+      "provenance": "/assets/atlas-port/docking-platform/provenance.json",
+      "bytes": 3191328,
+      "triangles": 9728,
+      "consumed_credits": 35
+    },
+    {
+      "id": "satellite",
+      "model": "/assets/atlas-port/satellite/web.glb",
+      "preview": "/assets/atlas-port/satellite/preview.webp",
+      "provenance": "/assets/atlas-port/satellite/provenance.json",
+      "bytes": 2814348,
+      "triangles": 7824,
+      "consumed_credits": 35
+    },
+    {
+      "id": "habitat",
+      "model": "/assets/atlas-port/habitat/web.glb",
+      "preview": "/assets/atlas-port/habitat/preview.webp",
+      "provenance": "/assets/atlas-port/habitat/provenance.json",
+      "bytes": 3157184,
+      "triangles": 9901,
+      "consumed_credits": 35
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "gatto",
+  "name": "GATTO",
+  "ticker": "GATTO",
+  "label": "GATTO / BLACK-CAT COMMUNITY",
+  "world": "Obsidian Gold",
+  "accent": "#d7b367",
+  "secondary": "#15171d",
+  "design": "p-8-rocky-wide-clear",
+  "style": {
+    "identity": "gatto",
+    "theme": "eclipse",
+    "accent": "#d7b367",
+    "moons": 1,
+    "surface": "obsidian",
+    "rings": "double",
+    "atmosphere": "soft",
+    "lighting": "studio",
+    "palette": {
+      "primary": "#17191f",
+      "secondary": "#080a0e",
+      "ring": "#d7b367"
+    }
+  },
+  "image": "/assets/ecosystem/gatto-v207.webp",
+  "icon": "/assets/ecosystem/icons/gatto-v207.webp",
+  "shareImage": "/assets/ecosystem/share/gatto-v207.png",
+  "map": "2k_mars.jpg",
+  "concept": "A sculpted black-cat world with fine charcoal fur, expressive amber-gold eyes, tapered cheeks, detailed pointed ears and slender gold orbital rings.",
+  "description": "GATTO is a Solana community coin built by Cabilval / Yaga, with a black Italian cat at its heart.",
+  "url": "https://gattocoin.com/",
+  "x": "https://x.com/StrategicYaga",
+  "xLabel": "@StrategicYaga",
+  "contractAddress": "25Lrwta8CGeMt3pmxy7DivhJzRzBp5Ne76bdaxbPpump",
+  "creatorName": "Cabilval / Yaga",
+  "creatorWallet": "52n996RJLC3qK2x1k23z6AKcJGGNsMHVZcFBRDc4y2UF",
+  "marketPair": "GATTO / SOL · PumpSwap",
+  "dexUrl": "https://dexscreener.com/solana/8WptpTnYqkjgZuxRhoPaR4Z323RaUaoagRrarUUMJYmn",
+  "pumpUrl": "https://pump.fun/coin/25Lrwta8CGeMt3pmxy7DivhJzRzBp5Ne76bdaxbPpump",
+  "chartUrl": "https://cryptok.me/charts?address=25Lrwta8CGeMt3pmxy7DivhJzRzBp5Ne76bdaxbPpump&chain=solana",
+  "building": {
+    "name": "Trattoria Gatto",
+    "description": "A gathering place in Parallax’s imagined Italian city, inspired by the trattoria in GATTO’s official artwork.",
+    "source": "https://gattocoin.com/assets/trattoria-600.webp?v=04317cc579"
+  },
+  "buildDescription": "The project describes a public community experiment, with development shaped by participation and progress.",
+  "funFact": "Gatto means “cat” in Italian. A whole crew of cats? Gatti.",
+  "funFactSource": "https://www.treccani.it/vocabolario/gatto/",
+  "joke": "Nine lives. Nine espressos. Still asleep on your keyboard.",
+  "source": "https://gattocoin.com/",
+  "checkedAt": "2026-10-27"
+}

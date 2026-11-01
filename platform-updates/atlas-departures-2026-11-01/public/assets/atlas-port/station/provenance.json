@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "asset": "station",
+  "provider": "Meshy",
+  "date": "2026-10-31",
+  "tasks": [
+    {
+      "stage": "preview",
+      "resource": "text-to-3d",
+      "taskId": "01a19614-372e-7561-9797-c9110cb777c6",
+      "status": "SUCCEEDED",
+      "consumedCredits": 20,
+      "prompt": "Photorealistic functional orbital space station, complete isolated object. Long central pressure spine with four radial cylindrical habitat modules, two open docking collars, folded mechanical docking arms, broad rectangular dark radiator arrays and delicate antenna clusters. Strong legible silhouette, physically plausible aerospace engineering, ivory ceramic hull panels, brushed titanium framework, restrained gold trim, dark glass observation windows. Fine panel seams and service hatches. No ground, base, background, text or logos."
+    },
+    {
+      "stage": "refine",
+      "resource": "text-to-3d",
+      "taskId": "01a19616-319a-765d-97f3-8c182fa4d666",
+      "status": "SUCCEEDED",
+      "consumedCredits": 10,
+      "prompt": "Photorealistic functional orbital space station, complete isolated object. Long central pressure spine with four radial cylindrical habitat modules, two open docking collars, folded mechanical docking arms, broad rectangular dark radiator arrays and delicate antenna clusters. Strong legible silhouette, physically plausible aerospace engineering, ivory ceramic hull panels, brushed titanium framework, restrained gold trim, dark glass observation windows. Fine panel seams and service hatches. No ground, base, background, text or logos.",
+      "texturePrompt": "Photoreal aerospace materials. Ivory ceramic pressure modules, brushed titanium frames, dark graphite radiator arrays, subtly gold thermal foil around couplings, dark glass observation windows with restrained warm illumination. Fine maintenance seams, bolts, slight scuffs, realistic roughness variation. No readable words, no logos, no painted shadows."
+    },
+    {
+      "stage": "remesh",
+      "resource": "remesh",
+      "taskId": "01a1961a-23ad-75ac-8b5e-3649519dea01",
+      "status": "SUCCEEDED",
+      "consumedCredits": 5
+    }
+  ],
+  "totalConsumedCredits": 35,
+  "targetTriangles": 18000,
+  "textureResolution": "4k",
+  "pbr": true,
+  "previewInspected": true,
+  "previewDescription": "Textured model render inspected; geometry topology not established by preview.",
+  "sourceFile": "remeshed.glb",
+  "previewFile": "textured.png",
+  "total_consumed_credits": 35,
+  "remeshed": {
+    "bytes": 55868388,
+    "triangles": 17619,
+    "sha256": "304fb9d11da01f6d3c5ff8e36730d1513f617e625202829024481682bd6a01e6"
+  },
+  "web": {
+    "filename": "web.glb",
+    "bytes": 4100296,
+    "triangles": 17619,
+    "sha256": "e57197d32da9d4f089e116ca73412c2c1f81eb2dc2b40ac6160f36cf73b27857"
+  },
+  "texture_encoding": [
+    {
+      "role": "normal",
+      "image_index": 0,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 20291587,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 1177885,
+      "resize_kernel": "lanczos3",
+      "quality": 96,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "0ad97070b1f634bca5e60ad33d927bd6e2b81db1576eef2994695fb843850344"
+    },
+    {
+      "role": "base_color",
+      "image_index": 1,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 19436332,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 521470,
+      "resize_kernel": "lanczos3",
+      "quality": 92,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "617df24e491567e5fad45f033dc006de81cf202f5891c20d2ee2e71114d88aa1"
+    },
+    {
+      "role": "metallic_roughness",
+      "image_index": 2,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 14850365,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 1110838,
+      "resize_kernel": "lanczos3",
+      "quality": 98,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "e2715dbbd70940896a19cc2043f13356128c696bb3f167db2c4bb00a24c3d20a"
+    }
+  ],
+  "geometry_preserved": {
+    "verified": true,
+    "source_sha256": "c195908de962f8c5d774bdd4b4343c8cd3e1fe6991b58e62e6f926ad7ced2840",
+    "derived_sha256": "c195908de962f8c5d774bdd4b4343c8cd3e1fe6991b58e62e6f926ad7ced2840",
+    "unchanged": [
+      "indices",
+      "positions",
+      "normals",
+      "uvs",
+      "accessors",
+      "meshes",
+      "nodes",
+      "scenes",
+      "materials",
+      "textures",
+      "samplers"
+    ],
+    "buffer_views": [
+      {
+        "buffer_view": 0,
+        "bytes": 443484,
+        "sha256": "dc581a038284e48329099450cdabfe1a52f07ab09b2dce57312818ac6a7e1b34"
+      },
+      {
+        "buffer_view": 1,
+        "bytes": 443484,
+        "sha256": "6f50d9b4061dd2c7e075d3b44105a801f9eead6792ac02dbbf0c48dfc3ea6cbb"
+      },
+      {
+        "buffer_view": 2,
+        "bytes": 295656,
+        "sha256": "95d6f6b64118cd0f0cf79ff377f65a1f9a657b1befcfef430224791de7b8b4dd"
+      },
+      {
+        "buffer_view": 3,
+        "bytes": 105714,
+        "sha256": "c6571b3f73aa1e002ac07a3bcfb9b5e7dc9f72789f3ef2fb3f65a44d55d5a20b"
+      }
+    ]
+  },
+  "preparation": {
+    "script": "scripts/prepare-atlas-asset.mjs",
+    "encoder": "sharp",
+    "encoder_version": "0.35.4"
+  },
+  "preview": {
+    "file": "preview.webp",
+    "kind": "Meshy rendered thumbnail",
+    "sha256": "5c4444e766db35a15e0bb44a5d8f83ff339f860580063e58818044a71ad54293",
+    "visually_inspected": true
+  }
+}

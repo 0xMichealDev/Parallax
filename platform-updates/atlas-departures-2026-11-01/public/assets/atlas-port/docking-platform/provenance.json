@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "asset": "docking-platform",
+  "provider": "Meshy",
+  "date": "2026-10-31",
+  "tasks": [
+    {
+      "stage": "preview",
+      "resource": "text-to-3d",
+      "taskId": "01a19614-785d-76c4-bbed-9d47b663f8c2",
+      "status": "SUCCEEDED",
+      "consumedCredits": 20,
+      "prompt": "Photorealistic orbital docking service platform, complete isolated spacecraft structure, open rectangular truss deck with central circular docking collar, two articulated robotic service arms, compact cargo containers, cable conduits, rails and amber approach light housings. Functional aerospace engineering with realistic scale and thick robust structural connections. Ivory ceramic panels, brushed titanium, dark graphite fittings, restrained gold trim and subtle wear. No planet, ground, pedestal, background, text or logos."
+    },
+    {
+      "stage": "refine",
+      "resource": "text-to-3d",
+      "taskId": "01a19616-6e2c-7312-9de2-91fa43b44c92",
+      "status": "SUCCEEDED",
+      "consumedCredits": 10,
+      "prompt": "Photorealistic orbital docking service platform, complete isolated spacecraft structure, open rectangular truss deck with central circular docking collar, two articulated robotic service arms, compact cargo containers, cable conduits, rails and amber approach light housings. Functional aerospace engineering with realistic scale and thick robust structural connections. Ivory ceramic panels, brushed titanium, dark graphite fittings, restrained gold trim and subtle wear. No planet, ground, pedestal, background, text or logos.",
+      "texturePrompt": "Photoreal aerospace service dock. Ivory ceramic plates and brushed titanium deck, graphite machinery, restrained gold docking collar and amber marker lights, realistic fasteners, cable bundles and cargo panels. Detailed metal roughness with slight maintenance wear, fine seams. No readable words or logos, no painted shadows."
+    },
+    {
+      "stage": "remesh",
+      "resource": "remesh",
+      "taskId": "01a1961a-3c79-74cf-9f6c-3ad3cf41a2e4",
+      "status": "SUCCEEDED",
+      "consumedCredits": 5
+    }
+  ],
+  "totalConsumedCredits": 35,
+  "targetTriangles": 10000,
+  "textureResolution": "4k",
+  "pbr": true,
+  "previewInspected": true,
+  "previewDescription": "Textured model render inspected; geometry topology not established by preview.",
+  "sourceFile": "remeshed.glb",
+  "previewFile": "textured.png",
+  "total_consumed_credits": 35,
+  "remeshed": {
+    "bytes": 52541688,
+    "triangles": 9728,
+    "sha256": "f6ee1183a8337c04ce3ca359da65c7b4114c4219687f41933360211129c8a294"
+  },
+  "web": {
+    "filename": "web.glb",
+    "bytes": 3191328,
+    "triangles": 9728,
+    "sha256": "75005b2295a741b4b9595c11e4be1f5dcdf7ba22fe1d3c2922de97ba0d83ef4e"
+  },
+  "texture_encoding": [
+    {
+      "role": "normal",
+      "image_index": 0,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 19257219,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 1095087,
+      "resize_kernel": "lanczos3",
+      "quality": 96,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "4213831d76f399cc646d352e23833b53570642b28e213382c646550bbc557782"
+    },
+    {
+      "role": "base_color",
+      "image_index": 1,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 18887912,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 402953,
+      "resize_kernel": "lanczos3",
+      "quality": 92,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "cc1e6412310ac74c8beea723de27556890b01a6e4c9024fd90f3b60f24557418"
+    },
+    {
+      "role": "metallic_roughness",
+      "image_index": 2,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 13726345,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 1023077,
+      "resize_kernel": "lanczos3",
+      "quality": 98,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "590a0487860954cb0a6053e5664d2fe00b669ddaa35693f84557769240f3260a"
+    }
+  ],
+  "geometry_preserved": {
+    "verified": true,
+    "source_sha256": "12308a787a8c43bb1e95ed477f5192ff77b8cf7bfcafebb4e29bdc3b60e9a302",
+    "derived_sha256": "12308a787a8c43bb1e95ed477f5192ff77b8cf7bfcafebb4e29bdc3b60e9a302",
+    "unchanged": [
+      "indices",
+      "positions",
+      "normals",
+      "uvs",
+      "accessors",
+      "meshes",
+      "nodes",
+      "scenes",
+      "materials",
+      "textures",
+      "samplers"
+    ],
+    "buffer_views": [
+      {
+        "buffer_view": 0,
+        "bytes": 228780,
+        "sha256": "9f1e5475b16aa7c4c3f283539e945d332b79f991fe5deee7f114ce50cb213964"
+      },
+      {
+        "buffer_view": 1,
+        "bytes": 228780,
+        "sha256": "254671f486d6b51d147c6b5c9defdf135ceb08e4dbba97d045cf5539c8092583"
+      },
+      {
+        "buffer_view": 2,
+        "bytes": 152520,
+        "sha256": "5329c8b9f6a4ed0a6c3c7e52b03632661e979474ad28b716d1380db9808a46b1"
+      },
+      {
+        "buffer_view": 3,
+        "bytes": 58368,
+        "sha256": "69f5d6253b5668eb8179754c7ceba718908c40152d1e016eb33fe73f2dc24afb"
+      }
+    ]
+  },
+  "preparation": {
+    "script": "scripts/prepare-atlas-asset.mjs",
+    "encoder": "sharp",
+    "encoder_version": "0.35.4"
+  },
+  "preview": {
+    "file": "preview.webp",
+    "kind": "Meshy rendered thumbnail",
+    "sha256": "5042f38ed60c41fe80bead0cea70e7470dc5b8a6ad8c61b481b96f068217cd30",
+    "visually_inspected": true
+  }
+}

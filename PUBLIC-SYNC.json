@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "atlas-port-2026-10-31",
+  "latestRelease": "atlas-departures-2026-11-01",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -69,6 +69,10 @@
     {
       "id": "atlas-port-2026-10-31",
       "manifest": "platform-updates/atlas-port-2026-10-31/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "atlas-departures-2026-11-01",
+      "manifest": "platform-updates/atlas-departures-2026-11-01/PUBLIC-SYNC.json"
     }
   ]
 }
