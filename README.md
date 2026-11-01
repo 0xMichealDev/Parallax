@@ -1,5 +1,9 @@
 <p align="center">
 
+## Atlas spacecraft and architecture — v236
+
+Six realistic Meshy assets, interactive model viewing, and a PARALLAX observatory showcase. [Release notes](docs/updates/atlas-port-2026-10-31.md) · [Exact source snapshot](platform-updates/atlas-port-2026-10-31/).
+
 ## Cinematic Starship ascent — v235
 
 Staged liftoff, atmospheric ascent, curved Earth horizon, subtle cabin vibration and corrected flight displays. [Release notes](docs/updates/starship-ascent-2026-10-31.md) · [Exact source snapshot](platform-updates/starship-ascent-2026-10-31/).

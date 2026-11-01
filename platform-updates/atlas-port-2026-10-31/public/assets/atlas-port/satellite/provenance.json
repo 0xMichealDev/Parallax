@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "asset": "satellite",
+  "total_consumed_credits": 35,
+  "tasks": [
+    {
+      "task_id": "01a19615-0a69-77c1-8daf-206346115eac",
+      "resource": "text-to-3d",
+      "stage": "geometry",
+      "parent_task_id": null,
+      "consumed_credits": 20,
+      "status": "SUCCEEDED"
+    },
+    {
+      "task_id": "01a19616-f87c-7656-84d8-6f3a5966f093",
+      "resource": "text-to-3d",
+      "stage": "texture",
+      "parent_task_id": "01a19615-0a69-77c1-8daf-206346115eac",
+      "consumed_credits": 10,
+      "status": "SUCCEEDED"
+    },
+    {
+      "task_id": "01a19618-fee7-7701-b14c-a1179e20dd26",
+      "resource": "remesh",
+      "stage": "remesh",
+      "parent_task_id": "01a19616-f87c-7656-84d8-6f3a5966f093",
+      "consumed_credits": 5,
+      "status": "SUCCEEDED"
+    }
+  ],
+  "preview": {
+    "file": "preview.webp",
+    "kind": "Meshy rendered thumbnail",
+    "sha256": "2eea7ce8ce98b41819bf333418e22f35132dc20d53130c4c9210b752fcecdd44",
+    "visually_inspected": true
+  },
+  "notes": "Original Meshy 4K PBR asset. Geometry and textured thumbnail inspected. No paid reruns. Browser texture encoding is a separate integration step.",
+  "remeshed": {
+    "bytes": 49309956,
+    "triangles": 7824,
+    "sha256": "e218dea16e742f4e87bffdd8ba67b3f0fd91b5681d08ba4d1abf5109e7de9490"
+  },
+  "web": {
+    "filename": "web.glb",
+    "bytes": 2814348,
+    "triangles": 7824,
+    "sha256": "c787f1198e9cd62cf7d2fc26e36ecd13c8dd5e7a818c0f813b4572f3d3a194c0"
+  },
+  "texture_encoding": [
+    {
+      "role": "normal",
+      "image_index": 0,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 17780911,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 923034,
+      "resize_kernel": "lanczos3",
+      "quality": 96,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "83816185d1aee67de63d947e0480377fd5c6fb6080c28bc5cad42d8a4c22c83f"
+    },
+    {
+      "role": "base_color",
+      "image_index": 1,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 19229669,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 446549,
+      "resize_kernel": "lanczos3",
+      "quality": 92,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "bfd531dbdca54259111268a6b11616629287751f005fb53f7630a9a9e3ee2f09"
+    },
+    {
+      "role": "metallic_roughness",
+      "image_index": 2,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 11765616,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 911005,
+      "resize_kernel": "lanczos3",
+      "quality": 98,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "9955a2c04af3d5f140f76a1b2cff0aefc1b93aa111453a2c1535d630cbe6a4c7"
+    }
+  ],
+  "geometry_preserved": {
+    "verified": true,
+    "source_sha256": "65de86ae41f9cc9e913ef9648c5ba8928695015d9c12d7f4e0dc745b576deb43",
+    "derived_sha256": "65de86ae41f9cc9e913ef9648c5ba8928695015d9c12d7f4e0dc745b576deb43",
+    "unchanged": [
+      "indices",
+      "positions",
+      "normals",
+      "uvs",
+      "accessors",
+      "meshes",
+      "nodes",
+      "scenes",
+      "materials",
+      "textures",
+      "samplers"
+    ],
+    "buffer_views": [
+      {
+        "buffer_view": 0,
+        "bytes": 181896,
+        "sha256": "9ec4ffd0b697d099621e706581bef93057dea38249e4e87b8e773a5703b5e97f"
+      },
+      {
+        "buffer_view": 1,
+        "bytes": 181896,
+        "sha256": "92e616f05f016cb36cfb9e48d87ffe8c860ee0c38950a59c172cebf9528537d6"
+      },
+      {
+        "buffer_view": 2,
+        "bytes": 121264,
+        "sha256": "4fdb297ae427054ab8a0c0d2a9a92f1dba5fe288c1bb769bad59592c1989e02d"
+      },
+      {
+        "buffer_view": 3,
+        "bytes": 46944,
+        "sha256": "2766c0dced023d736569a67005c3b2a801ab1b3a0b963d27b239df267143a98d"
+      }
+    ]
+  },
+  "preparation": {
+    "script": "scripts/prepare-atlas-asset.mjs",
+    "encoder": "sharp",
+    "encoder_version": "0.35.4"
+  }
+}

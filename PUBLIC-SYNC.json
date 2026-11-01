@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "starship-ascent-2026-10-31",
+  "latestRelease": "atlas-port-2026-10-31",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -65,6 +65,10 @@
     {
       "id": "starship-ascent-2026-10-31",
       "manifest": "platform-updates/starship-ascent-2026-10-31/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "atlas-port-2026-10-31",
+      "manifest": "platform-updates/atlas-port-2026-10-31/PUBLIC-SYNC.json"
     }
   ]
 }

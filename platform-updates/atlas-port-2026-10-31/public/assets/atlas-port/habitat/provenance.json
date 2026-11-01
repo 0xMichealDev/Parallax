@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "asset": "habitat",
+  "provider": "Meshy",
+  "date": "2026-10-31",
+  "tasks": [
+    {
+      "stage": "preview",
+      "resource": "text-to-3d",
+      "taskId": "01a19614-c55d-7454-ae78-72a89fd89935",
+      "status": "SUCCEEDED",
+      "consumedCredits": 20,
+      "prompt": "Photorealistic orbital crew habitat module, complete isolated object. Broad horizontal cylindrical pressure vessel with faceted ivory ceramic armor, dark panoramic observation windows, recessed circular airlock at one end, attached external utility equipment, titanium truss braces, cable conduits and small folded radiator panels. Functional near-future aerospace engineering, restrained gold trim, warm window interiors, detailed panel seams and realistic light wear. No ground, base, background, people, text or logos."
+    },
+    {
+      "stage": "refine",
+      "resource": "text-to-3d",
+      "taskId": "01a19616-7e19-7074-80b7-1bca00440f95",
+      "status": "SUCCEEDED",
+      "consumedCredits": 10,
+      "prompt": "Photorealistic orbital crew habitat module, complete isolated object. Broad horizontal cylindrical pressure vessel with faceted ivory ceramic armor, dark panoramic observation windows, recessed circular airlock at one end, attached external utility equipment, titanium truss braces, cable conduits and small folded radiator panels. Functional near-future aerospace engineering, restrained gold trim, warm window interiors, detailed panel seams and realistic light wear. No ground, base, background, people, text or logos.",
+      "texturePrompt": "Photoreal orbital habitat. Ivory ceramic hull panels, brushed titanium framing, graphite service equipment, restrained gold trim at the airlock, dark glass observation windows with subtle warm interior light. Finely detailed panel seams, bolts, soft scuffs and realistic material roughness. No readable text or logos, no painted shadows."
+    },
+    {
+      "stage": "remesh",
+      "resource": "remesh",
+      "taskId": "01a1961a-533c-7434-b524-63b284baa275",
+      "status": "SUCCEEDED",
+      "consumedCredits": 5
+    }
+  ],
+  "totalConsumedCredits": 35,
+  "targetTriangles": 10000,
+  "textureResolution": "4k",
+  "pbr": true,
+  "previewInspected": true,
+  "previewDescription": "Textured model render inspected; geometry topology not established by preview.",
+  "sourceFile": "remeshed.glb",
+  "previewFile": "textured.png",
+  "total_consumed_credits": 35,
+  "remeshed": {
+    "bytes": 49272936,
+    "triangles": 9901,
+    "sha256": "b701a058c2398e298829f9b87c47ad4d03dc63b6dde2f89e158612f3b62e0eb5"
+  },
+  "web": {
+    "filename": "web.glb",
+    "bytes": 3157184,
+    "triangles": 9901,
+    "sha256": "2f50e4b18caa448fabf0af44a2d564f06f4a58f2dd5a652177e28ddf28d111bd"
+  },
+  "texture_encoding": [
+    {
+      "role": "normal",
+      "image_index": 0,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 17685215,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 1037210,
+      "resize_kernel": "lanczos3",
+      "quality": 96,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "3b94d9965200b03aa8be2cce6d304acb1bfcdbf9ad07b4bca11adf16102213cd"
+    },
+    {
+      "role": "base_color",
+      "image_index": 1,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 18288073,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 434412,
+      "resize_kernel": "lanczos3",
+      "quality": 92,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "e0fe64aa51275b70a748cc89bea7bd69f9931ccb723eec2a62426c5ef29cd69c"
+    },
+    {
+      "role": "metallic_roughness",
+      "image_index": 2,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 12621263,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 1007181,
+      "resize_kernel": "lanczos3",
+      "quality": 98,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "b3109e80cacb6bafe45762c103e48fcbbeff9d7be23530cf6dd609a865cc63a9"
+    }
+  ],
+  "geometry_preserved": {
+    "verified": true,
+    "source_sha256": "f7c2eee5faee6846a7f529b6ad97c7d2e369f29a3c835e9ddcf8730ec5be75d2",
+    "derived_sha256": "f7c2eee5faee6846a7f529b6ad97c7d2e369f29a3c835e9ddcf8730ec5be75d2",
+    "unchanged": [
+      "indices",
+      "positions",
+      "normals",
+      "uvs",
+      "accessors",
+      "meshes",
+      "nodes",
+      "scenes",
+      "materials",
+      "textures",
+      "samplers"
+    ],
+    "buffer_views": [
+      {
+        "buffer_view": 0,
+        "bytes": 231456,
+        "sha256": "4befb6ec792bccb01fe45a3eb818dc2b2926a5b37f0b5ca93595af669a46bfe4"
+      },
+      {
+        "buffer_view": 1,
+        "bytes": 231456,
+        "sha256": "364f871c563c312e1f0d3b5d6c4e72a15896554aa0fa8616cce9050bcce12966"
+      },
+      {
+        "buffer_view": 2,
+        "bytes": 154304,
+        "sha256": "af19344a9a88d58006b3e48c67a29367d69da2a0fe9b135302ed31486208ccc0"
+      },
+      {
+        "buffer_view": 3,
+        "bytes": 59406,
+        "sha256": "6011145b4c1c341cf9e408960626eb26253ad26f610901207244cb6245334baa"
+      }
+    ]
+  },
+  "preparation": {
+    "script": "scripts/prepare-atlas-asset.mjs",
+    "encoder": "sharp",
+    "encoder_version": "0.35.4"
+  },
+  "preview": {
+    "file": "preview.webp",
+    "kind": "Meshy rendered thumbnail",
+    "sha256": "14ff444210c04d1b406707c81efcafb189accd3d4d7481a25e5c6da9f2102242",
+    "visually_inspected": true
+  }
+}

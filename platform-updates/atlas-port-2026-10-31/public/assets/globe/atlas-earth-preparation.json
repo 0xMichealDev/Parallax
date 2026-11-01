@@ -1,0 +1,32 @@
+{
+  "purpose": "Match existing desktop render cap without downloading unused resolution",
+  "files": [
+    {
+      "source": "8k_earth_daymap.jpg",
+      "output": "4k_earth_daymap.jpg",
+      "source_sha256": "88ab060b6e7d241cfc590c69f528fab2b3247b738d40124cb590999a6fe44abc",
+      "sha256": "1b6e2c4a4206c5edda604b464be85650e7ce60493b8b7ab1d73d0976feaeab09",
+      "bytes": 1591471,
+      "width": 4096,
+      "height": 2048
+    },
+    {
+      "source": "8k_earth_nightmap.jpg",
+      "output": "4k_earth_nightmap.jpg",
+      "source_sha256": "9894e83a585a22c1c425e7ca4f987a9ba625bf08ecee45d3c9dcacae3c2ad5f7",
+      "sha256": "d74b04b1f72ab435169425d9768283719de8b7a37e98985fa7b22cdfc713e7b9",
+      "bytes": 1054943,
+      "width": 4096,
+      "height": 2048
+    },
+    {
+      "source": "8k_earth_clouds.jpg",
+      "output": "4k_earth_clouds.jpg",
+      "source_sha256": "c792eca228989d36ebb45d3ea6ff1198be5e21a25d70d2fbcb2124ffd14ba7f5",
+      "sha256": "637d7b2cb227c2cfb588f3164f72a7507f0343341299303e3fa095257c92338c",
+      "bytes": 3094783,
+      "width": 4096,
+      "height": 2048
+    }
+  ]
+}

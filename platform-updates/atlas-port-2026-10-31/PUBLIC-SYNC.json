@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "atlas-port-2026-10-31",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "dcddfb7e057ffd46947ff0122908cea31e21bb42",
+    "commit": "b5be0c83a55ee74891489c60b188dc9024e35147",
+    "hostedVersion": 236
+  },
+  "reviewedPresentationSources": [],
+  "approvedExports": [
+    {
+      "source": "app/planets.html",
+      "destination": "platform-updates/atlas-port-2026-10-31/app/planets.html",
+      "sha256": "220122b956a093a6bcd9a8f6fbafa10895d9bb5a43e9f2736fb38bf12c9e3c8e",
+      "bytes": 27221
+    },
+    {
+      "source": "app/singularity.html",
+      "destination": "platform-updates/atlas-port-2026-10-31/app/singularity.html",
+      "sha256": "c88c1d8f20a841ab6b6833d867503ca137a459045b5e756d2e5a373738127c01",
+      "bytes": 7889
+    },
+    {
+      "source": "app/site.html",
+      "destination": "platform-updates/atlas-port-2026-10-31/app/site.html",
+      "sha256": "7c6c506621960614935e7dc89330c7272f4e2ced410cc8a36a7d1d464be46323",
+      "bytes": 74416
+    },
+    {
+      "source": "docs/updates/atlas-port-2026-10-31.md",
+      "destination": "platform-updates/atlas-port-2026-10-31/docs/updates/atlas-port-2026-10-31.md",
+      "sha256": "7a27668b6286bb63ccaa89d19b8c135804eef6b195eddd34fc182ff7f6e04510",
+      "bytes": 2308
+    },
+    {
+      "source": "public/assets/atlas-port/docking-platform/preview.webp",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/docking-platform/preview.webp",
+      "sha256": "5042f38ed60c41fe80bead0cea70e7470dc5b8a6ad8c61b481b96f068217cd30",
+      "bytes": 23040
+    },
+    {
+      "source": "public/assets/atlas-port/docking-platform/provenance.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/docking-platform/provenance.json",
+      "sha256": "122cf8a0b8d7a945b4df4e0c55837f89fa47b2bc37f106470124a801eab4d427",
+      "bytes": 5677
+    },
+    {
+      "source": "public/assets/atlas-port/docking-platform/web.glb",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/docking-platform/web.glb",
+      "sha256": "75005b2295a741b4b9595c11e4be1f5dcdf7ba22fe1d3c2922de97ba0d83ef4e",
+      "bytes": 3191328
+    },
+    {
+      "source": "public/assets/atlas-port/habitat/preview.webp",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/habitat/preview.webp",
+      "sha256": "14ff444210c04d1b406707c81efcafb189accd3d4d7481a25e5c6da9f2102242",
+      "bytes": 34378
+    },
+    {
+      "source": "public/assets/atlas-port/habitat/provenance.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/habitat/provenance.json",
+      "sha256": "05db74992a2e29337e913c3621dccccebbf4d883f24fdc84b453703ce9f3e4c4",
+      "bytes": 5666
+    },
+    {
+      "source": "public/assets/atlas-port/habitat/web.glb",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/habitat/web.glb",
+      "sha256": "2f50e4b18caa448fabf0af44a2d564f06f4a58f2dd5a652177e28ddf28d111bd",
+      "bytes": 3157184
+    },
+    {
+      "source": "public/assets/atlas-port/manifest.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/manifest.json",
+      "sha256": "957f313c5d69eb8c3e79c16257e43ca3b28e65aef56e6fbb55983993a4ca1d1f",
+      "bytes": 1917
+    },
+    {
+      "source": "public/assets/atlas-port/observatory/preview.webp",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/observatory/preview.webp",
+      "sha256": "af9c35b1100e20f17f5796e720aa68ded4ae1bd01c3f24f61281e815b1790a62",
+      "bytes": 33564
+    },
+    {
+      "source": "public/assets/atlas-port/observatory/provenance.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/observatory/provenance.json",
+      "sha256": "7ac67b62a2fa5b2e0e205b69c811fa0e5666ee3c4619c44317cb126f44069b21",
+      "bytes": 4202
+    },
+    {
+      "source": "public/assets/atlas-port/observatory/web.glb",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/observatory/web.glb",
+      "sha256": "f1667c89423028d7bb24ac6541b99c4d1a2c090ce37e0fe286447d83f58db373",
+      "bytes": 3018272
+    },
+    {
+      "source": "public/assets/atlas-port/satellite/preview.webp",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/satellite/preview.webp",
+      "sha256": "2eea7ce8ce98b41819bf333418e22f35132dc20d53130c4c9210b752fcecdd44",
+      "bytes": 26170
+    },
+    {
+      "source": "public/assets/atlas-port/satellite/provenance.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/satellite/provenance.json",
+      "sha256": "7fa4e0d5a183f0495174c88795ca2f90a8bd75f8a5696f55d09876daba4f740a",
+      "bytes": 4197
+    },
+    {
+      "source": "public/assets/atlas-port/satellite/web.glb",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/satellite/web.glb",
+      "sha256": "c787f1198e9cd62cf7d2fc26e36ecd13c8dd5e7a818c0f813b4572f3d3a194c0",
+      "bytes": 2814348
+    },
+    {
+      "source": "public/assets/atlas-port/shuttle/preview.webp",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/shuttle/preview.webp",
+      "sha256": "2c92ac25d5674bed5599d9cdcff990ee8e9cddced62ea1a6924fa69702d734c6",
+      "bytes": 10830
+    },
+    {
+      "source": "public/assets/atlas-port/shuttle/provenance.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/shuttle/provenance.json",
+      "sha256": "bc97a5d541e44deae481178cb035c01351dddd52d785fc05bcb74e48f8c322a8",
+      "bytes": 4197
+    },
+    {
+      "source": "public/assets/atlas-port/shuttle/web.glb",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/shuttle/web.glb",
+      "sha256": "2fd5328c366f18620df1d43ae64765f701779684dd640c5772fdda53e045a6dc",
+      "bytes": 2662932
+    },
+    {
+      "source": "public/assets/atlas-port/station/preview.webp",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/station/preview.webp",
+      "sha256": "5c4444e766db35a15e0bb44a5d8f83ff339f860580063e58818044a71ad54293",
+      "bytes": 31406
+    },
+    {
+      "source": "public/assets/atlas-port/station/provenance.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/station/provenance.json",
+      "sha256": "8ba6736c6363242041992bcbd72d2cdcfa1e915bb179cd0308937589da0aa503",
+      "bytes": 5719
+    },
+    {
+      "source": "public/assets/atlas-port/station/web.glb",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/atlas-port/station/web.glb",
+      "sha256": "e57197d32da9d4f089e116ca73412c2c1f81eb2dc2b40ac6160f36cf73b27857",
+      "bytes": 4100296
+    },
+    {
+      "source": "public/assets/globe/4k_earth_clouds.jpg",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/globe/4k_earth_clouds.jpg",
+      "sha256": "637d7b2cb227c2cfb588f3164f72a7507f0343341299303e3fa095257c92338c",
+      "bytes": 3094783
+    },
+    {
+      "source": "public/assets/globe/4k_earth_daymap.jpg",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/globe/4k_earth_daymap.jpg",
+      "sha256": "1b6e2c4a4206c5edda604b464be85650e7ce60493b8b7ab1d73d0976feaeab09",
+      "bytes": 1591471
+    },
+    {
+      "source": "public/assets/globe/4k_earth_nightmap.jpg",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/globe/4k_earth_nightmap.jpg",
+      "sha256": "d74b04b1f72ab435169425d9768283719de8b7a37e98985fa7b22cdfc713e7b9",
+      "bytes": 1054943
+    },
+    {
+      "source": "public/assets/globe/atlas-earth-preparation.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/assets/globe/atlas-earth-preparation.json",
+      "sha256": "ecce35d0a11b26d47a041a1d8ab7e101854785dbabede6660fce65dea1b05a2c",
+      "bytes": 1108
+    },
+    {
+      "source": "public/atlas-port-core.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/atlas-port-core.js",
+      "sha256": "d8011c22d997747102c7ca286848838f0d305116178fbfabff9a5b4b148ff91f",
+      "bytes": 2342
+    },
+    {
+      "source": "public/atlas-port.css",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/atlas-port.css",
+      "sha256": "f9d9d26bf6e397508b8b70975d119de9255cc21b751e8581b069004c71e21313",
+      "bytes": 4633
+    },
+    {
+      "source": "public/atlas-port.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/atlas-port.js",
+      "sha256": "4c5ad49a371299a0effa839ea157003b456ec236d83cb67fa69aef1cae72af85",
+      "bytes": 8994
+    },
+    {
+      "source": "public/community-atlas-core.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/community-atlas-core.js",
+      "sha256": "4c85f7a06417ff903c5b69cedfb41908dbbe79fb16cbf8c4969e6fba5b062445",
+      "bytes": 9670
+    },
+    {
+      "source": "public/community-atlas-scene.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/community-atlas-scene.js",
+      "sha256": "6f47e4c3921966ed83b2a2f68ebc5182df977de4f96a2b6fbf393aa70b670c71",
+      "bytes": 14085
+    },
+    {
+      "source": "public/community-atlas.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/community-atlas.js",
+      "sha256": "64b61acb95639eda018d61634a1ca1a4147167b902c87942054c90f7299db7d8",
+      "bytes": 19503
+    },
+    {
+      "source": "public/earth-globe.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/earth-globe.js",
+      "sha256": "ce243ac7beedaf009163d89c5bc94a5ca4d4cd670273c5e550fb66cbf756538a",
+      "bytes": 9463
+    },
+    {
+      "source": "public/ecosystem-worlds.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/ecosystem-worlds.json",
+      "sha256": "2b436b8b19f41b8bbfd0eb49f336428181ee8cb3baa9ccfa0b98731f628ca6c6",
+      "bytes": 19263
+    },
+    {
+      "source": "public/gatto-world.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/gatto-world.json",
+      "sha256": "8f5efffb2732937a2075e0bf5df5b4b2e98c53aa98270feccd244a819cc29b7a",
+      "bytes": 2278
+    },
+    {
+      "source": "public/planet-atlas-core.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/planet-atlas-core.js",
+      "sha256": "ce0806da69f7549b69e8f671a8d31ecbeb4e0dbda1ae54318b6d377b0120b74c",
+      "bytes": 4234
+    },
+    {
+      "source": "public/planet-atlas-director.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/planet-atlas-director.js",
+      "sha256": "2406821809ae06e07aa424315528cc83a75aaaf253d4dbebe7fd270e24aa8408",
+      "bytes": 4244
+    },
+    {
+      "source": "public/planet-atlas-scene.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/planet-atlas-scene.js",
+      "sha256": "7fe866420a66cca737207b651d5814a95a055719ce47ef0f76ffe5726d02d95f",
+      "bytes": 11878
+    },
+    {
+      "source": "public/planet-atlas.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/planet-atlas.js",
+      "sha256": "9e64e7e58a94f732f6f1ee0e8c8f1e4a574c91236df902c4adaa89df95c28509",
+      "bytes": 17887
+    },
+    {
+      "source": "public/planet-design.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/planet-design.js",
+      "sha256": "f21c5f99719ff866024e9c53a593f672a31b3dde9837695e3cfab44d139ce552",
+      "bytes": 4999
+    },
+    {
+      "source": "public/planet-renderer.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/planet-renderer.js",
+      "sha256": "f09f5e59923a736f43bf8d6d9c9caf5cac8d788e93e5d02361bd6e5e45b43f97",
+      "bytes": 66460
+    },
+    {
+      "source": "public/premium-scene.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/premium-scene.js",
+      "sha256": "65da99fec7c789369793a62b923302c8cd15f4bb9a615e2fcfbbdfa956348e5d",
+      "bytes": 8491
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/rocket-model.js",
+      "sha256": "3602072d80c926b2f9570ab3320950fbc79359611f87c6ed5ff5f6cd7a66a0cc",
+      "bytes": 32314
+    },
+    {
+      "source": "public/solhandle-world.json",
+      "destination": "platform-updates/atlas-port-2026-10-31/public/solhandle-world.json",
+      "sha256": "3e98aac4cb87ce271fc6d49e48665b733ec769b5b3f7bc55f1227fa6b6aaf6ab",
+      "bytes": 1288
+    },
+    {
+      "source": "scripts/prepare-atlas-asset.mjs",
+      "destination": "platform-updates/atlas-port-2026-10-31/scripts/prepare-atlas-asset.mjs",
+      "sha256": "2d79e584754f6c18c4c046ce68b974b3e7d3c51bb6dcc4d8a6f9d316e8a64e6b",
+      "bytes": 11266
+    },
+    {
+      "source": "scripts/prepare-atlas-collection.mjs",
+      "destination": "platform-updates/atlas-port-2026-10-31/scripts/prepare-atlas-collection.mjs",
+      "sha256": "6a3ed0a9b1a8ad97a20fbb0b11228691acbadd9cdc4fc1c278d374d62bb63c3d",
+      "bytes": 2585
+    },
+    {
+      "source": "scripts/prepare-atlas-earth-maps.mjs",
+      "destination": "platform-updates/atlas-port-2026-10-31/scripts/prepare-atlas-earth-maps.mjs",
+      "sha256": "a398bd87e1eb423bafa4701bbc144d8b9422b048cb6351d5dcb5c76e76a2fd0b",
+      "bytes": 1195
+    },
+    {
+      "source": "scripts/prune-unused-build-assets.mjs",
+      "destination": "platform-updates/atlas-port-2026-10-31/scripts/prune-unused-build-assets.mjs",
+      "sha256": "9c400d05cbf2b37ded075a77a2db5d247babd067131fea673fe17a61190048c5",
+      "bytes": 878
+    },
+    {
+      "source": "tests/atlas-port.test.cjs",
+      "destination": "platform-updates/atlas-port-2026-10-31/tests/atlas-port.test.cjs",
+      "sha256": "6f9c5126c132fee5e750586b049fb5945b6491986123ace4052ae40815399aa9",
+      "bytes": 4519
+    },
+    {
+      "source": "tests/community-atlas.test.cjs",
+      "destination": "platform-updates/atlas-port-2026-10-31/tests/community-atlas.test.cjs",
+      "sha256": "350b48bcbddd343e7e233745ed99216e8f899ffb67f1da42ad71cc6a4bd7eeec",
+      "bytes": 36599
+    },
+    {
+      "source": "tests/planet-atlas.test.cjs",
+      "destination": "platform-updates/atlas-port-2026-10-31/tests/planet-atlas.test.cjs",
+      "sha256": "35622a96c7527209fa6e908a38de511c26725513e2b48754eaef5fb2a7fa15c2",
+      "bytes": 21524
+    }
+  ],
+  "sourceOnlyChanges": [],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/atlas-port-2026-10-31/README.md",
+      "bytes": 917,
+      "sha256": "ca99ce775b1fa59ef675456d9310ac59de840e0ee378d629f435b76f524a2dc5",
+      "purpose": "Deployment, validation, asset costs and provenance summary"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31",
+      "treeSha256": "f752fbb066506c978612b6a36b584258ac2b0e176f04bf4146a1418591cab3af",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/earthbound-rover-validation-2026-10-31",
+      "treeSha256": "981bb09552316bea859cb833ce5d14ff7b1dc9702c008647450250749475ab4e",
+      "fileCount": 18
+    },
+    {
+      "path": "platform-updates/earthbound-realism-2026-10-31",
+      "treeSha256": "5265301cc6543fc9b6aba97dbcc07e041dc571128620276b7486c5f5ad9f6927",
+      "fileCount": 19
+    },
+    {
+      "path": "platform-updates/earthbound-camp-river-2026-10-31",
+      "treeSha256": "9fc6e75549634434f8440c56fd489d194d3849a997cebef61c4d2e9e18ffbd6f",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-compound-crash-2026-10-31",
+      "treeSha256": "75ee105ee942426e64d10c209c2f336687dd1cdca799d33b17dc9cd38d38e105",
+      "fileCount": 72
+    },
+    {
+      "path": "platform-updates/earthbound-entry-2026-10-31",
+      "treeSha256": "50254cc29f997b2c54f11168157a50d93e436249011041e44129ecbefbb9b5ca",
+      "fileCount": 33
+    },
+    {
+      "path": "platform-updates/starship-cabin-2026-10-31",
+      "treeSha256": "6a0e0c58ebb4d65f2568da072d83d9857eeab5139f5281db16d9dfb6915e6e86",
+      "fileCount": 34
+    },
+    {
+      "path": "platform-updates/starship-ascent-2026-10-31",
+      "treeSha256": "c0a8bee0419c7c1763d74cf3791a223ab0fe80b05c3f53cdabf6838f183632b9",
+      "fileCount": 36
+    }
+  ]
+}
