@@ -1,5 +1,9 @@
 <p align="center">
 
+## Shared 3D rendering fix — v239
+
+Restores 3D drawing for plain and typed lighting arrays, with a renderer regression test. [Release notes](docs/updates/renderer-lights-2026-11-01.md) · [Exact source snapshot](platform-updates/renderer-lights-2026-11-01/).
+
 ## Orbital command dashboard — v238
 
 A new citadel scene, three Meshy assets and clear Research / Create / Explore entrances. [Release notes](docs/updates/home-command-2026-11-01.md) · [Exact source snapshot](platform-updates/home-command-2026-11-01/).

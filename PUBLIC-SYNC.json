@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "home-command-2026-11-01",
+  "latestRelease": "renderer-lights-2026-11-01",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -77,6 +77,10 @@
     {
       "id": "home-command-2026-11-01",
       "manifest": "platform-updates/home-command-2026-11-01/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "renderer-lights-2026-11-01",
+      "manifest": "platform-updates/renderer-lights-2026-11-01/PUBLIC-SYNC.json"
     }
   ]
 }

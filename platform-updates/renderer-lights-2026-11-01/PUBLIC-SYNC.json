@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "renderer-lights-2026-11-01",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "f6b18634c0d0c104a1146a964b04c81f488698c2",
+    "commit": "6d16cf35d5578ab78acf82b5ce85ca2db5ff19d0",
+    "hostedVersion": 239
+  },
+  "reviewedPresentationSources": [],
+  "approvedExports": [
+    {
+      "source": "app/dashboard.html",
+      "destination": "platform-updates/renderer-lights-2026-11-01/app/dashboard.html",
+      "sha256": "71f479d2d129d6a3d2e1c005b1f1996264d4ab336c3b3e995c57e4bd5fd9f113",
+      "bytes": 52284
+    },
+    {
+      "source": "app/planets.html",
+      "destination": "platform-updates/renderer-lights-2026-11-01/app/planets.html",
+      "sha256": "80479f0779cad0107ddd2271cd0befbbfdf377cea48c9bf8676bf736244fa4c7",
+      "bytes": 29006
+    },
+    {
+      "source": "app/singularity.html",
+      "destination": "platform-updates/renderer-lights-2026-11-01/app/singularity.html",
+      "sha256": "9583802ccc5106d9a74a5d3c202bac6fc92a5cb92aec6170802e86a9f1278e1b",
+      "bytes": 9671
+    },
+    {
+      "source": "app/site.html",
+      "destination": "platform-updates/renderer-lights-2026-11-01/app/site.html",
+      "sha256": "935ead241c4182ccc0a061bd9125df4f9da2cc6ad1c258079e48826d201570a9",
+      "bytes": 74411
+    },
+    {
+      "source": "docs/updates/renderer-lights-2026-11-01.md",
+      "destination": "platform-updates/renderer-lights-2026-11-01/docs/updates/renderer-lights-2026-11-01.md",
+      "sha256": "98f315730bf841f7f520a5ac70a1e7260b44f66e2561878575074af687ed6986",
+      "bytes": 894
+    },
+    {
+      "source": "public/assets/rocket/parallax-rocket-web.glb",
+      "destination": "platform-updates/renderer-lights-2026-11-01/public/assets/rocket/parallax-rocket-web.glb",
+      "sha256": "83d86ca9b057b181e750738a1d9315b3cd6aef6a1ee85fb45562a7f8897b2511",
+      "bytes": 9266280
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/renderer-lights-2026-11-01/public/rocket-model.js",
+      "sha256": "867976f8ab6c5f27422506f9961e9eb685874836a9dcbaa7d8cd3c41d3151430",
+      "bytes": 32508
+    },
+    {
+      "source": "tests/rocket-model.test.cjs",
+      "destination": "platform-updates/renderer-lights-2026-11-01/tests/rocket-model.test.cjs",
+      "sha256": "8925ef0d6b9a3cc1cf40ba04f3727d0a6083eb461ab7df271d28dae847bd4edf",
+      "bytes": 12619
+    }
+  ],
+  "sourceOnlyChanges": [],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/renderer-lights-2026-11-01/README.md",
+      "bytes": 442,
+      "sha256": "119c46c937e152af2c2494d57ef18cc724a079e8b48abdd6f05f41cacbbffc8f",
+      "purpose": "Deployment, validation, asset costs and provenance summary"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31",
+      "treeSha256": "f752fbb066506c978612b6a36b584258ac2b0e176f04bf4146a1418591cab3af",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/earthbound-rover-validation-2026-10-31",
+      "treeSha256": "981bb09552316bea859cb833ce5d14ff7b1dc9702c008647450250749475ab4e",
+      "fileCount": 18
+    },
+    {
+      "path": "platform-updates/earthbound-realism-2026-10-31",
+      "treeSha256": "5265301cc6543fc9b6aba97dbcc07e041dc571128620276b7486c5f5ad9f6927",
+      "fileCount": 19
+    },
+    {
+      "path": "platform-updates/earthbound-camp-river-2026-10-31",
+      "treeSha256": "9fc6e75549634434f8440c56fd489d194d3849a997cebef61c4d2e9e18ffbd6f",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-compound-crash-2026-10-31",
+      "treeSha256": "75ee105ee942426e64d10c209c2f336687dd1cdca799d33b17dc9cd38d38e105",
+      "fileCount": 72
+    },
+    {
+      "path": "platform-updates/earthbound-entry-2026-10-31",
+      "treeSha256": "50254cc29f997b2c54f11168157a50d93e436249011041e44129ecbefbb9b5ca",
+      "fileCount": 33
+    },
+    {
+      "path": "platform-updates/starship-cabin-2026-10-31",
+      "treeSha256": "6a0e0c58ebb4d65f2568da072d83d9857eeab5139f5281db16d9dfb6915e6e86",
+      "fileCount": 34
+    },
+    {
+      "path": "platform-updates/starship-ascent-2026-10-31",
+      "treeSha256": "c0a8bee0419c7c1763d74cf3791a223ab0fe80b05c3f53cdabf6838f183632b9",
+      "fileCount": 36
+    },
+    {
+      "path": "platform-updates/atlas-port-2026-10-31",
+      "treeSha256": "73af2dc022dc7a990df32dd75064cd2f492be49cf7df5f1ee67db68746df9226",
+      "fileCount": 54
+    },
+    {
+      "path": "platform-updates/atlas-departures-2026-11-01",
+      "treeSha256": "5527a31fe50bffdc158e943f90a09ff3d1098c88690b6abf43079d79d1a678d1",
+      "fileCount": 47
+    },
+    {
+      "path": "platform-updates/home-command-2026-11-01",
+      "treeSha256": "1c9a25209b467ea49f4b3df1dbe52961d39c4ec643d651764ade270ddc3477e0",
+      "fileCount": 28
+    }
+  ]
+}
