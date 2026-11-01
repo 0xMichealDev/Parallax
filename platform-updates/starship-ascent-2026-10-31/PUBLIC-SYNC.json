@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "starship-ascent-2026-10-31",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "54872ea6100faffad2885c674e8ea58fc33a9add",
+    "commit": "dcddfb7e057ffd46947ff0122908cea31e21bb42",
+    "hostedVersion": 235
+  },
+  "reviewedPresentationSources": [],
+  "approvedExports": [
+    {
+      "source": "app/site.html",
+      "destination": "platform-updates/starship-ascent-2026-10-31/app/site.html",
+      "sha256": "fbb6832c2eb2e4257849a6ed067a994854e336bcd84f64582c926337d55c0275",
+      "bytes": 74415
+    },
+    {
+      "source": "docs/updates/starship-ascent-2026-10-31.md",
+      "destination": "platform-updates/starship-ascent-2026-10-31/docs/updates/starship-ascent-2026-10-31.md",
+      "sha256": "f80612e326b39e152d86d7aedd1b47c83d26eee621ca49c0604711c0f5885030",
+      "bytes": 1469
+    },
+    {
+      "source": "docs/updates/starship-displays-2026-10-31.md",
+      "destination": "platform-updates/starship-ascent-2026-10-31/docs/updates/starship-displays-2026-10-31.md",
+      "sha256": "375196e79057975d91f65624c00c2602b201c10f6d82727fab4a55e2d78378f3",
+      "bytes": 804
+    },
+    {
+      "source": "public/assets/globe/1k_pluto.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/1k_pluto.jpg",
+      "sha256": "66ba3b789c6be07a54ad776d641e684eb5c0520d3ca3906a84521c1649c1db66",
+      "bytes": 119011
+    },
+    {
+      "source": "public/assets/globe/2k_earth_daymap.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_earth_daymap.jpg",
+      "sha256": "767ee1dc6eb3802699bfccf6f264880f8acd0b80de3191cd24984fe279b07b7c",
+      "bytes": 463087
+    },
+    {
+      "source": "public/assets/globe/2k_europa.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_europa.jpg",
+      "sha256": "7215341560b2af558f693c0530373433b579db60c83cf7b37fcaf733da440c7f",
+      "bytes": 415203
+    },
+    {
+      "source": "public/assets/globe/2k_jupiter.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_jupiter.jpg",
+      "sha256": "b0f04d005350252636b0e3396fc592548cbd9e9126b269d32d5c6abd4b0e4f2b",
+      "bytes": 498976
+    },
+    {
+      "source": "public/assets/globe/2k_mars.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_mars.jpg",
+      "sha256": "2d187f3e77a98eaa8cea5f4cc722f633c122ef170b9e94ace6b5fb6cbc3f8e01",
+      "bytes": 750547
+    },
+    {
+      "source": "public/assets/globe/2k_mercury.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_mercury.jpg",
+      "sha256": "5a5c80607f643496bac9a631e71957def35ed788895f18b678ac849c2b38e48a",
+      "bytes": 872555
+    },
+    {
+      "source": "public/assets/globe/2k_moon.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_moon.jpg",
+      "sha256": "2764ba6535ea0481a062846ee033cc7a909dae05b31a8fd13f3e98f3a7fd92bd",
+      "bytes": 1053869
+    },
+    {
+      "source": "public/assets/globe/2k_neptune.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_neptune.jpg",
+      "sha256": "cb42ea82709741d28b0af44d8b283cbc6dbd0c521a7f0e1e1e010ade00977df6",
+      "bytes": 241580
+    },
+    {
+      "source": "public/assets/globe/2k_saturn.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_saturn.jpg",
+      "sha256": "54a900ca9bf7ab62e70f862852759abdf342e6d6436a95a2fe9ebdb6bcd3bbac",
+      "bytes": 199916
+    },
+    {
+      "source": "public/assets/globe/2k_uranus.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_uranus.jpg",
+      "sha256": "d15239d46f82d3ea13d2b260b5b29b2a382f42f2916dae0694d0387b1204a09d",
+      "bytes": 77751
+    },
+    {
+      "source": "public/assets/globe/2k_venus_atmosphere.jpg",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/assets/globe/2k_venus_atmosphere.jpg",
+      "sha256": "225012ad4911730605c4e189ca2a3bf674fce50cc48aab4102b936b47d6991ac",
+      "bytes": 229696
+    },
+    {
+      "source": "public/camp-experience.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/camp-experience.js",
+      "sha256": "23cdf7bf14de19b36a8fb0cb99c33c7b4fd89997bd93f394576d8cc8418a29cd",
+      "bytes": 30771
+    },
+    {
+      "source": "public/desert-adventure.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/desert-adventure.js",
+      "sha256": "81b90e2337b356ec1e5f14804c383d8a5ba3b4a14f00192ce399ad43858c1042",
+      "bytes": 20337
+    },
+    {
+      "source": "public/desert-life.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/desert-life.js",
+      "sha256": "360727471d313cbe0253cfa830b6b1ee58f712bb1f270e14a2fe874692c2378b",
+      "bytes": 32022
+    },
+    {
+      "source": "public/desert-story.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/desert-story.js",
+      "sha256": "ba4e5d987958c92ca7e859a29e9920d7d527d2008f6e3b2b05993eda29a29ce8",
+      "bytes": 3628
+    },
+    {
+      "source": "public/desert-world.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/desert-world.js",
+      "sha256": "ff0271d7e85a50f9039dd00d147fac0537508968533f677db6bf7157715befd3",
+      "bytes": 136894
+    },
+    {
+      "source": "public/earthbound-entry.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/earthbound-entry.js",
+      "sha256": "ea54484db458be50453f633841118f77f11be7ad95f527068227413c4ab070bc",
+      "bytes": 1589
+    },
+    {
+      "source": "public/first-contact.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/first-contact.js",
+      "sha256": "798ac5b128e8ea797468a64b0e71982c32ca4e0aec0d1b51812101d2bd5b04e5",
+      "bytes": 8359
+    },
+    {
+      "source": "public/planet-design.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/planet-design.js",
+      "sha256": "f21c5f99719ff866024e9c53a593f672a31b3dde9837695e3cfab44d139ce552",
+      "bytes": 4999
+    },
+    {
+      "source": "public/planet-renderer.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/planet-renderer.js",
+      "sha256": "f09f5e59923a736f43bf8d6d9c9caf5cac8d788e93e5d02361bd6e5e45b43f97",
+      "bytes": 66460
+    },
+    {
+      "source": "public/rocket-experience.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/rocket-experience.js",
+      "sha256": "297f96825b0400a1f457454f940e956845c4c7bcbc84a2a4d6bb274cf414c50e",
+      "bytes": 4764
+    },
+    {
+      "source": "public/rocket-state.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/rocket-state.js",
+      "sha256": "c583ca46162f29afdbf539b5cf4972c9f40fac80a66c56d6f7d93b7a251ab76f",
+      "bytes": 2602
+    },
+    {
+      "source": "public/scenery-model.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/scenery-model.js",
+      "sha256": "bd929211072a884ec60617699f2ceca3dafcdc8392ad6ec4290705c662f17db6",
+      "bytes": 14237
+    },
+    {
+      "source": "public/universe.js",
+      "destination": "platform-updates/starship-ascent-2026-10-31/public/universe.js",
+      "sha256": "ce372507c01f39797152f8a35e4202ad0b9d4e08ff25eb317d038830e08d5476",
+      "bytes": 50348
+    },
+    {
+      "source": "tests/camp-experience.test.cjs",
+      "destination": "platform-updates/starship-ascent-2026-10-31/tests/camp-experience.test.cjs",
+      "sha256": "736a6babafb9abb6e32f04c6a6cb6c869d31c158c60e445b0634110c8d6391ef",
+      "bytes": 23619
+    },
+    {
+      "source": "tests/compound-layout.test.cjs",
+      "destination": "platform-updates/starship-ascent-2026-10-31/tests/compound-layout.test.cjs",
+      "sha256": "bdc9bc6b9384e2373b3136173fde7e56b1c363cb01dc38252ae750b14461078e",
+      "bytes": 2924
+    },
+    {
+      "source": "tests/desert-world.test.cjs",
+      "destination": "platform-updates/starship-ascent-2026-10-31/tests/desert-world.test.cjs",
+      "sha256": "f169e768d6542fa06f62790edb2e2753e3f7eac4e657ba47f8a065cfc3edfa0a",
+      "bytes": 9072
+    },
+    {
+      "source": "tests/earthbound-entry.test.cjs",
+      "destination": "platform-updates/starship-ascent-2026-10-31/tests/earthbound-entry.test.cjs",
+      "sha256": "3aefc17552ea7404ae5e2dd59e6c8029b05fd6848cdd16777b1be841f3804f8c",
+      "bytes": 3660
+    },
+    {
+      "source": "tests/graphics-compatibility.test.cjs",
+      "destination": "platform-updates/starship-ascent-2026-10-31/tests/graphics-compatibility.test.cjs",
+      "sha256": "10070ec8f879dd8c11ded432e3ebd205dce4b51495bf2108a6540ad423ece433",
+      "bytes": 1615
+    },
+    {
+      "source": "tests/rocket-ascent.test.cjs",
+      "destination": "platform-updates/starship-ascent-2026-10-31/tests/rocket-ascent.test.cjs",
+      "sha256": "980561d2012d113f977a11bffb38e32d744275f1cfca2a18d80f67ed16ba836a",
+      "bytes": 1890
+    },
+    {
+      "source": "tests/universe-launch.test.cjs",
+      "destination": "platform-updates/starship-ascent-2026-10-31/tests/universe-launch.test.cjs",
+      "sha256": "5f8d1a2b235f2de7c3559e78908e46765c2fbfa57a5ef4419c73b90d81d47a28",
+      "bytes": 6802
+    }
+  ],
+  "sourceOnlyChanges": [],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/starship-ascent-2026-10-31/README.md",
+      "bytes": 776,
+      "sha256": "b21935b01db01f2f98233e2250e829861fe591f2d21fbb280a8ed85eb9d61573",
+      "purpose": "Deployment, validation, asset costs and provenance summary"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31",
+      "treeSha256": "f752fbb066506c978612b6a36b584258ac2b0e176f04bf4146a1418591cab3af",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/earthbound-rover-validation-2026-10-31",
+      "treeSha256": "981bb09552316bea859cb833ce5d14ff7b1dc9702c008647450250749475ab4e",
+      "fileCount": 18
+    },
+    {
+      "path": "platform-updates/earthbound-realism-2026-10-31",
+      "treeSha256": "5265301cc6543fc9b6aba97dbcc07e041dc571128620276b7486c5f5ad9f6927",
+      "fileCount": 19
+    },
+    {
+      "path": "platform-updates/earthbound-camp-river-2026-10-31",
+      "treeSha256": "9fc6e75549634434f8440c56fd489d194d3849a997cebef61c4d2e9e18ffbd6f",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-compound-crash-2026-10-31",
+      "treeSha256": "75ee105ee942426e64d10c209c2f336687dd1cdca799d33b17dc9cd38d38e105",
+      "fileCount": 72
+    },
+    {
+      "path": "platform-updates/earthbound-entry-2026-10-31",
+      "treeSha256": "50254cc29f997b2c54f11168157a50d93e436249011041e44129ecbefbb9b5ca",
+      "fileCount": 33
+    },
+    {
+      "path": "platform-updates/starship-cabin-2026-10-31",
+      "treeSha256": "6a0e0c58ebb4d65f2568da072d83d9857eeab5139f5281db16d9dfb6915e6e86",
+      "fileCount": 34
+    }
+  ]
+}

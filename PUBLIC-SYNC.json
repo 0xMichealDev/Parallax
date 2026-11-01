@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "starship-cabin-2026-10-31",
+  "latestRelease": "starship-ascent-2026-10-31",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -61,6 +61,10 @@
     {
       "id": "starship-cabin-2026-10-31",
       "manifest": "platform-updates/starship-cabin-2026-10-31/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "starship-ascent-2026-10-31",
+      "manifest": "platform-updates/starship-ascent-2026-10-31/PUBLIC-SYNC.json"
     }
   ]
 }
