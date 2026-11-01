@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "earthbound-camp-river-2026-10-31",
+  "latestRelease": "earthbound-compound-crash-2026-10-31",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -49,6 +49,10 @@
     {
       "id": "earthbound-camp-river-2026-10-31",
       "manifest": "platform-updates/earthbound-camp-river-2026-10-31/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-compound-crash-2026-10-31",
+      "manifest": "platform-updates/earthbound-compound-crash-2026-10-31/PUBLIC-SYNC.json"
     }
   ]
 }

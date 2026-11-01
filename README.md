@@ -1,5 +1,9 @@
 <p align="center">
 
+## Earthbound launch compound and alien crash — v231
+
+Meshy buildings, utilities, service equipment and animated crew; damaged alien craft, debris and reactor with distinct lighting. [Release notes](docs/updates/earthbound-compound-crash-2026-10-31.md) · [Exact source snapshot](platform-updates/earthbound-compound-crash-2026-10-31/).
+
 ## Earthbound camp and river — v230
 
 Meshy tent, camp furniture and fitted bridge, plus improved riverbank and water rendering. [Release notes](docs/updates/earthbound-camp-river-2026-10-31.md) · [Exact source snapshot](platform-updates/earthbound-camp-river-2026-10-31/).

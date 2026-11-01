@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "asset": "PARALLAX realistic expedition rocks",
+  "tasks": [
+    {
+      "stage": "geometry",
+      "resource": "text-to-3d",
+      "task_id": "01a19319-fef1-7211-aade-7dbfd82f4fa3",
+      "consumed_credits": 20
+    },
+    {
+      "stage": "texture",
+      "resource": "text-to-3d",
+      "task_id": "01a1931b-a5f5-70ea-96f6-16f74ed7c4e4",
+      "consumed_credits": 10
+    },
+    {
+      "stage": "remesh",
+      "resource": "remesh",
+      "task_id": "01a1931e-0f77-733f-aeaa-226bfedbec09",
+      "consumed_credits": 5
+    }
+  ],
+  "total_consumed_credits": 35,
+  "remeshed": {
+    "bytes": 47057356,
+    "triangles": 12316,
+    "sha256": "d4659a4f968d0ea45eb7fb1ba577a60f0cd1aa9aa0d1607488fde4601d21319f"
+  },
+  "web": {
+    "filename": "web.glb",
+    "bytes": 2221828,
+    "triangles": 12316,
+    "sha256": "09063f94baada0027bdda6641d204d261b9a474a6b576e26e55263914c9b2110"
+  },
+  "texture_encoding": [
+    {
+      "role": "normal",
+      "image_index": 0,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 17405206,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 613807,
+      "resize_kernel": "lanczos3",
+      "quality": 96,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "131322a38270af923d9534ca9e3890881aed1e87f3f8795bb9cb2862e23dff6d"
+    },
+    {
+      "role": "base_color",
+      "image_index": 1,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 20791180,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/jpeg",
+      "bytes": 277017,
+      "resize_kernel": "lanczos3",
+      "quality": 92,
+      "chroma_subsampling": "4:4:4",
+      "sha256": "bccab6f99b06806493b605ce2d3e71b6547b60cd1d75be719385be01b8b758a6"
+    },
+    {
+      "role": "metallic_roughness",
+      "image_index": 2,
+      "source_width": 4096,
+      "source_height": 4096,
+      "source_mime_type": "image/png",
+      "source_bytes": 8343843,
+      "width": 1024,
+      "height": 1024,
+      "channels": 3,
+      "mime_type": "image/png",
+      "bytes": 813880,
+      "resize_kernel": "lanczos3",
+      "lossless_encoding": true,
+      "sha256": "c75a4f1b2115142eb787eadb59dc0bdcc86e52ab53e1ed47b5b1a80b3218d796"
+    }
+  ],
+  "geometry_preserved": {
+    "verified": true,
+    "source_sha256": "5f049037cd24926d7ca4d74d66d4f25991181bba98c557c24f07e7f33a442a9a",
+    "derived_sha256": "5f049037cd24926d7ca4d74d66d4f25991181bba98c557c24f07e7f33a442a9a",
+    "unchanged": [
+      "indices",
+      "positions",
+      "normals",
+      "uvs",
+      "accessors",
+      "meshes",
+      "nodes",
+      "scenes",
+      "materials",
+      "textures",
+      "samplers"
+    ],
+    "buffer_views": [
+      {
+        "buffer_view": 0,
+        "bytes": 165552,
+        "sha256": "6e8af39e10a040b4a736ba56c0f9deb27a728e33daf41bb5d1586956a3c78c9e"
+      },
+      {
+        "buffer_view": 1,
+        "bytes": 165552,
+        "sha256": "430a40ffbf1a0c50379cc99f8333cf7711eff54906dc0cf37685e921a7728bbf"
+      },
+      {
+        "buffer_view": 2,
+        "bytes": 110368,
+        "sha256": "3ae61c304b6265d2d50c37cdbb46090d439d0dc89717e947c3c631bc0691cea0"
+      },
+      {
+        "buffer_view": 3,
+        "bytes": 73896,
+        "sha256": "3072705b2cea7f55fed31c30d28a55bda74003c9b762109be4a3cafe508c4c9f"
+      }
+    ]
+  },
+  "preparation": {
+    "script": "scripts/prepare-scenery-asset.mjs",
+    "encoder": "sharp",
+    "encoder_version": "0.35.4"
+  }
+}

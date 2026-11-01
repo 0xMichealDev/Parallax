@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "stage": "rigging",
+      "resource": "rigging",
+      "task_id": "01a19398-7ece-76dc-83ca-946c90ef96e7",
+      "consumed_credits": 5
+    },
+    {
+      "stage": "idle",
+      "resource": "animate",
+      "task_id": "01a1939a-35ae-7157-b0be-9ccf5c546e51",
+      "consumed_credits": 3
+    }
+  ],
+  "total_consumed_credits": 8,
+  "source_walk_sha256": "43c510625c69bfcfb864f79222990676de7e7cea0c002b11c1626f2f5aadc90c",
+  "source_idle_sha256": "3dd6ff84ade3ef537e43197ee98a0a7aeffc534f242ea569596e5a53e22b9ff3",
+  "vertices": 23480,
+  "triangles": 18598,
+  "walk_frames": 24,
+  "idle_frames": 1,
+  "duration_seconds": 1.066666603088379,
+  "height_metres": 1.8,
+  "forward_xz": [
+    0.00010572160622346312,
+    0.9999999944114711
+  ],
+  "position_quantum_metres": 0.0001220703125,
+  "root_motion": "removed using the skeleton root horizontal translation; each frame grounded at the feet",
+  "normalization": "uniform scaling; skinned normals normalized",
+  "animated": {
+    "bytes": 2434712,
+    "sha256": "34a29b81bb1b88fdc45e513f76385c7461d135224a55606b8f93ed606f7409d0"
+  },
+  "animation": {
+    "bytes": 7044032,
+    "sha256": "15068d9470c5eea384431ba84e8308f447aeb424d8e124268c65822fd226e08c"
+  },
+  "preparation": "scripts/prepare-worker-animation.mjs"
+}
