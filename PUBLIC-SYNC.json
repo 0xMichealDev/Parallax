@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "renderer-lights-2026-11-01",
+  "latestRelease": "atlas-cinematic-2026-11-01",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -81,6 +81,10 @@
     {
       "id": "renderer-lights-2026-11-01",
       "manifest": "platform-updates/renderer-lights-2026-11-01/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "atlas-cinematic-2026-11-01",
+      "manifest": "platform-updates/atlas-cinematic-2026-11-01/PUBLIC-SYNC.json"
     }
   ]
 }

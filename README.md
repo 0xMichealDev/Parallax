@@ -1,5 +1,9 @@
 <p align="center">
 
+## Cinematic Atlas departures — v240
+
+Adds cinematic shuttle departures and approach scenery with tested destination routing. [Release notes](docs/updates/atlas-cinematic-2026-11-01.md) · [Exact source snapshot](platform-updates/atlas-cinematic-2026-11-01/).
+
 ## Shared 3D rendering fix — v239
 
 Restores 3D drawing for plain and typed lighting arrays, with a renderer regression test. [Release notes](docs/updates/renderer-lights-2026-11-01.md) · [Exact source snapshot](platform-updates/renderer-lights-2026-11-01/).
