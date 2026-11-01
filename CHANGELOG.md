@@ -1,5 +1,9 @@
 # Changelog
 
+## Starship flight deck and graphics compatibility — v233
+
+Detailed flight deck, direct cabin travel, and a Windows shader compatibility repair. [Release notes](docs/updates/starship-cabin-2026-10-31.md) · [Exact source snapshot](platform-updates/starship-cabin-2026-10-31/).
+
 ## Earthbound entry and recovery — v232
 
 Clear entry choices, direct travel to camp/compound/wreck, retryable loading, graphics cleanup and useful failure guidance. [Release notes](docs/updates/earthbound-entry-2026-10-31.md) · [Exact source snapshot](platform-updates/earthbound-entry-2026-10-31/).

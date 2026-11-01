@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "earthbound-entry-2026-10-31",
+  "latestRelease": "starship-cabin-2026-10-31",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -57,6 +57,10 @@
     {
       "id": "earthbound-entry-2026-10-31",
       "manifest": "platform-updates/earthbound-entry-2026-10-31/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "starship-cabin-2026-10-31",
+      "manifest": "platform-updates/starship-cabin-2026-10-31/PUBLIC-SYNC.json"
     }
   ]
 }
