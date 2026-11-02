@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "earthbound-tactical-2026-11-01",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "b5b0ea00dd2d6229aa9bc00953b0ffa67d0bcffc",
+    "commit": "4ba27e73ac3fa3caa590ec1fcf4fc758c562359e",
+    "hostedVersion": 248
+  },
+  "reviewedPresentationSources": [],
+  "approvedExports": [
+    {
+      "source": "app/site.html",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/app/site.html",
+      "sha256": "930d7f4a84655b041b687c72bc22bd8c8bf6f2d388996b0dfdb4369b63476c25",
+      "bytes": 75117
+    },
+    {
+      "source": "docs/updates/earthbound-tactical-2026-11-01.md",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/docs/updates/earthbound-tactical-2026-11-01.md",
+      "sha256": "2f2295163fea8fb01ef96a7f2240c0162eb655b9ca52a52ed9c1168f3c099bdd",
+      "bytes": 2361
+    },
+    {
+      "source": "public/assets/earthbound-range/provenance.json",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/assets/earthbound-range/provenance.json",
+      "sha256": "e5e2693fe9d1ecfbb4bbc6bb20ef148806f4341fb3e6eed462055417b8379edf",
+      "bytes": 862
+    },
+    {
+      "source": "public/assets/earthbound-range/rifle-web.glb",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/assets/earthbound-range/rifle-web.glb",
+      "sha256": "7468da6123a37229c5e7cb900df2ba2e024a3deb3f0c23acc6cbc6718ad0639f",
+      "bytes": 1333444
+    },
+    {
+      "source": "public/assets/terrain/gaea-river.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/assets/terrain/gaea-river.js",
+      "sha256": "063fe00cee5b46d90ea806c3c8fca352856b3ec1fd609f70f35c10183fbe8ddd",
+      "bytes": 575507
+    },
+    {
+      "source": "public/camp-experience.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/camp-experience.js",
+      "sha256": "a969df37db2951ada826004ef3a719603d6f7edd0bbf18dcc7cdf950427e21de",
+      "bytes": 31142
+    },
+    {
+      "source": "public/desert-adventure.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/desert-adventure.js",
+      "sha256": "1d5c277d357189476e78bc9b933947c5407d4e1ac3435deb3e202d7be18def2b",
+      "bytes": 20337
+    },
+    {
+      "source": "public/desert-story.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/desert-story.js",
+      "sha256": "ba4e5d987958c92ca7e859a29e9920d7d527d2008f6e3b2b05993eda29a29ce8",
+      "bytes": 3628
+    },
+    {
+      "source": "public/desert-world.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/desert-world.js",
+      "sha256": "15f5cf6e3f3ccb57b0e99dbb7f57ab860c3ee63f2f66456a41db7de6f3493082",
+      "bytes": 142490
+    },
+    {
+      "source": "public/earthbound-combat-core.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/earthbound-combat-core.js",
+      "sha256": "1196d44c62d672119d36ad7bb0e47f0e7bfa147ebca55c1da96a715143749466",
+      "bytes": 6159
+    },
+    {
+      "source": "public/earthbound-network-config.json",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/earthbound-network-config.json",
+      "sha256": "832c6942b2121dfa838202814d40243569342d68b00978febe54808b80902eb8",
+      "bytes": 68
+    },
+    {
+      "source": "public/earthbound-network.css",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/earthbound-network.css",
+      "sha256": "ee83549d2792aa07f71c2bfda70f38ab400bb6d49003a64f0f73408d94e2e650",
+      "bytes": 1378
+    },
+    {
+      "source": "public/earthbound-network.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/earthbound-network.js",
+      "sha256": "3613ddc0c6e13e5dc4c8ec19421bc521ff2a0d000a7a7971a6310c2989013d33",
+      "bytes": 7607
+    },
+    {
+      "source": "public/earthbound-range.css",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/earthbound-range.css",
+      "sha256": "9995cb311dd3ad656c6af49f419a7b9b40e279530c1f63958f359078f1242a47",
+      "bytes": 1616
+    },
+    {
+      "source": "public/earthbound-range.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/earthbound-range.js",
+      "sha256": "b2a2e43494210adfee5c6f1e2caf56be0f4ea7c2485589334e7d9f6d4f05e2d9",
+      "bytes": 7346
+    },
+    {
+      "source": "public/earthbound-tactical.css",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/earthbound-tactical.css",
+      "sha256": "ba5e8fe411ccfe56a252b19d441243c22217ff49197d5e6643acac69d1deede6",
+      "bytes": 1292
+    },
+    {
+      "source": "public/earthbound-tactical.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/earthbound-tactical.js",
+      "sha256": "e1de407d1a78fe708731c8c56798fefb9502422ac264e6941bef1320310be4db",
+      "bytes": 3640
+    },
+    {
+      "source": "public/first-contact.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/first-contact.js",
+      "sha256": "798ac5b128e8ea797468a64b0e71982c32ca4e0aec0d1b51812101d2bd5b04e5",
+      "bytes": 8359
+    },
+    {
+      "source": "public/range-core.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/range-core.js",
+      "sha256": "efc0e1e949f88a1e3be1401832b25e39810c9056f42af6eff78435e48966887d",
+      "bytes": 2005
+    },
+    {
+      "source": "public/rifle-model.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/rifle-model.js",
+      "sha256": "bc1d09f39684f4c30931c96415e469f0b3b9e0b35806be2e0ba77d48a7f7335e",
+      "bytes": 8093
+    },
+    {
+      "source": "public/rocket-experience.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/rocket-experience.js",
+      "sha256": "3205ca1a571f65fd10f36356706fbb20fe4d58d64bb6b2b7063ca2eb96da344a",
+      "bytes": 4813
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/rocket-model.js",
+      "sha256": "867976f8ab6c5f27422506f9961e9eb685874836a9dcbaa7d8cd3c41d3151430",
+      "bytes": 32508
+    },
+    {
+      "source": "public/rocket-state.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/rocket-state.js",
+      "sha256": "becd94630b8b1d7ee59eded2ad7b219a16762c514508687cc1e5d5895084f08b",
+      "bytes": 2656
+    },
+    {
+      "source": "public/scenery-model.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/scenery-model.js",
+      "sha256": "48fefb0345e1fc8894e1d624737efd44ea7b3d6ea9f3677363d0945fb87aa3db",
+      "bytes": 15013
+    },
+    {
+      "source": "public/shot-effects.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/shot-effects.js",
+      "sha256": "597bf95e1f48800b533d67c4ed43bbcabd9751098f7c601598a89b8704952be6",
+      "bytes": 3975
+    },
+    {
+      "source": "public/universe.js",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/public/universe.js",
+      "sha256": "84293e4d1415ec325d4a2f85111fbb7d0e14850df1ceea232b0f3381b5522a8c",
+      "bytes": 50639
+    },
+    {
+      "source": "tests/camp-experience.test.cjs",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/tests/camp-experience.test.cjs",
+      "sha256": "ecb368b4ebf7413b6e4cf03d075b59d8cbc8918b0ae9658126a6844a33c913af",
+      "bytes": 26135
+    },
+    {
+      "source": "tests/earthbound-combat.test.cjs",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/tests/earthbound-combat.test.cjs",
+      "sha256": "ccbd8a0430adb8bf6608873ad3218326f3eb03177498877e0ff164f6b49f4035",
+      "bytes": 3098
+    },
+    {
+      "source": "tests/earthbound-controls.test.cjs",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/tests/earthbound-controls.test.cjs",
+      "sha256": "31cd9f608262f7f35d6c0cba120155010751f44488a134594cf9251acb004a0b",
+      "bytes": 3844
+    },
+    {
+      "source": "tests/earthbound-network.test.cjs",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/tests/earthbound-network.test.cjs",
+      "sha256": "d8056349337c1d89ec240710f3844c83b500427a37c48e93551e40298b46a55d",
+      "bytes": 2649
+    },
+    {
+      "source": "tests/earthbound-range.test.cjs",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/tests/earthbound-range.test.cjs",
+      "sha256": "b0ade8d6c599f6659f1c917288d47e934d8445388a018dd94d4d6b1779a8d009",
+      "bytes": 2807
+    },
+    {
+      "source": "tests/earthbound-tactical.test.cjs",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/tests/earthbound-tactical.test.cjs",
+      "sha256": "567fc4d93b037764b163095325e668facb37ff3c1c13fab5ebec78ee75151043",
+      "bytes": 2085
+    },
+    {
+      "source": "tests/shot-effects.test.cjs",
+      "destination": "platform-updates/earthbound-tactical-2026-11-01/tests/shot-effects.test.cjs",
+      "sha256": "cd23390643472424d21fbda87fedce8e5f942e0084899e5225b7dba7fc7d0563",
+      "bytes": 2308
+    }
+  ],
+  "sourceOnlyChanges": [
+    {
+      "path": "app/earthbound-network-server.ts",
+      "status": "M",
+      "summary": "Private multiplayer service now replicates posture and validates posture-aware shot origins and hit volumes. Capacity and connection limits remain unchanged."
+    }
+  ],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/earthbound-tactical-2026-11-01/README.md",
+      "bytes": 573,
+      "sha256": "06521786669970b4dff751a2c12676c6ff0ae7e02f373ed3659f822346067666",
+      "purpose": "Deployment, validation, asset costs and provenance summary"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31",
+      "treeSha256": "f752fbb066506c978612b6a36b584258ac2b0e176f04bf4146a1418591cab3af",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/earthbound-rover-validation-2026-10-31",
+      "treeSha256": "981bb09552316bea859cb833ce5d14ff7b1dc9702c008647450250749475ab4e",
+      "fileCount": 18
+    },
+    {
+      "path": "platform-updates/earthbound-realism-2026-10-31",
+      "treeSha256": "5265301cc6543fc9b6aba97dbcc07e041dc571128620276b7486c5f5ad9f6927",
+      "fileCount": 19
+    },
+    {
+      "path": "platform-updates/earthbound-camp-river-2026-10-31",
+      "treeSha256": "9fc6e75549634434f8440c56fd489d194d3849a997cebef61c4d2e9e18ffbd6f",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-compound-crash-2026-10-31",
+      "treeSha256": "75ee105ee942426e64d10c209c2f336687dd1cdca799d33b17dc9cd38d38e105",
+      "fileCount": 72
+    },
+    {
+      "path": "platform-updates/earthbound-entry-2026-10-31",
+      "treeSha256": "50254cc29f997b2c54f11168157a50d93e436249011041e44129ecbefbb9b5ca",
+      "fileCount": 33
+    },
+    {
+      "path": "platform-updates/starship-cabin-2026-10-31",
+      "treeSha256": "6a0e0c58ebb4d65f2568da072d83d9857eeab5139f5281db16d9dfb6915e6e86",
+      "fileCount": 34
+    },
+    {
+      "path": "platform-updates/starship-ascent-2026-10-31",
+      "treeSha256": "c0a8bee0419c7c1763d74cf3791a223ab0fe80b05c3f53cdabf6838f183632b9",
+      "fileCount": 36
+    },
+    {
+      "path": "platform-updates/atlas-port-2026-10-31",
+      "treeSha256": "73af2dc022dc7a990df32dd75064cd2f492be49cf7df5f1ee67db68746df9226",
+      "fileCount": 54
+    },
+    {
+      "path": "platform-updates/atlas-departures-2026-11-01",
+      "treeSha256": "5527a31fe50bffdc158e943f90a09ff3d1098c88690b6abf43079d79d1a678d1",
+      "fileCount": 47
+    },
+    {
+      "path": "platform-updates/home-command-2026-11-01",
+      "treeSha256": "1c9a25209b467ea49f4b3df1dbe52961d39c4ec643d651764ade270ddc3477e0",
+      "fileCount": 28
+    },
+    {
+      "path": "platform-updates/renderer-lights-2026-11-01",
+      "treeSha256": "d3d9c90cf3595c358d733cec9d81061482a9865d2430c2951a9f9077791210b2",
+      "fileCount": 10
+    },
+    {
+      "path": "platform-updates/atlas-cinematic-2026-11-01",
+      "treeSha256": "8a5089a14e9bbb349d52ad6630e90a34f1fd01778087c2ffb7f5c3a6c062e0f2",
+      "fileCount": 14
+    },
+    {
+      "path": "platform-updates/earthbound-detail-2026-11-01",
+      "treeSha256": "628f0aad6ab41ec0f6922d4620e8253c7321ebdc85a3777d704399cdd7737e56",
+      "fileCount": 23
+    },
+    {
+      "path": "platform-updates/earthbound-gaea-2026-11-01",
+      "treeSha256": "69f31e4dbbbce6f3bf45a0e6b0096f276af549d40d0fa35e9329f232332d6360",
+      "fileCount": 11
+    },
+    {
+      "path": "platform-updates/atlas-recovery-2026-11-01",
+      "treeSha256": "219b366ada58e554f8bd21c83da75e86beefb7fb1f9a8da79e2841bccba37885",
+      "fileCount": 7
+    },
+    {
+      "path": "platform-updates/earthbound-range-2026-11-01",
+      "treeSha256": "09501a4690dded975b8fb93d1e09019f6f32ca64887f279505a5228ef130c713",
+      "fileCount": 22
+    },
+    {
+      "path": "platform-updates/earthbound-pvp-2026-11-01",
+      "treeSha256": "2b5d464c7f3c4f4278e0ea2e01df8e64f21e9c3d6b00e551285057f0717235af",
+      "fileCount": 30
+    },
+    {
+      "path": "platform-updates/earthbound-tracers-2026-11-01",
+      "treeSha256": "ac8fb49696f27ada516a4125215c4b4bf1028103ec1ed2dc6a1e94e852fb1b43",
+      "fileCount": 31
+    }
+  ]
+}

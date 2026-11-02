@@ -1,5 +1,13 @@
 <p align="center">
 
+## Earthbound welcome — v249
+
+Adds a dismissible introduction and replaces the persistent controls box with a compact ammo readout. [Release notes](docs/updates/earthbound-welcome-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-welcome-2026-11-01/).
+
+## Earthbound rifle practice — v248
+
+Adds collapsible equipment, a minimap, controller triggers, crouch/prone and a PARALLAX camo reflex rifle. [Release notes](docs/updates/earthbound-tactical-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-tactical-2026-11-01/).
+
 ## Earthbound rifle practice — v247
 
 Adds immediate glowing bullet tracers, independent gunshot sound and 15-player room limits. [Release notes](docs/updates/earthbound-tracers-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-tracers-2026-11-01/).
