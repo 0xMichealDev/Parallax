@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "earthbound-range-2026-11-01",
+  "latestRelease": "earthbound-pvp-2026-11-01",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -101,6 +101,10 @@
     {
       "id": "earthbound-range-2026-11-01",
       "manifest": "platform-updates/earthbound-range-2026-11-01/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-pvp-2026-11-01",
+      "manifest": "platform-updates/earthbound-pvp-2026-11-01/PUBLIC-SYNC.json"
     }
   ]
 }

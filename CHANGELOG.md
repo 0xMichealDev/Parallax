@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound rifle practice — v246
+
+Adds shared multiplayer, server-validated PvP, health and respawn, plus a barrel-anchored muzzle flash. No hunger or thirst. [Release notes](docs/updates/earthbound-pvp-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-pvp-2026-11-01/).
+
 ## Earthbound rifle practice — v245
 
 Adds an original rifle prop, shooting and reload controls, and solo target practice. [Release notes](docs/updates/earthbound-range-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-range-2026-11-01/).
