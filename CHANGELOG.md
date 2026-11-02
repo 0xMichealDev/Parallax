@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound Gaea terrain — v242
+
+Adds Gaea river-valley erosion, matched terrain collisions and a direct bridge destination. [Release notes](docs/updates/earthbound-gaea-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-gaea-2026-11-01/).
+
 ## Earthbound detail upgrade — v241
 
 Adds Blender scenery detail, an upgraded pickup and smoother boarding lift with tested destination routing. [Release notes](docs/updates/earthbound-detail-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-detail-2026-11-01/).

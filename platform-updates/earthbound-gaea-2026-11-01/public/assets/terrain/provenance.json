@@ -1,0 +1,14 @@
+{
+  "generator": "Gaea 2.3.1 Indie",
+  "export": "1024x1024 EXR, cached build exported in Gaea",
+  "sourceSha256": "9df1d3c6c501b6f8755aa2e7ae17b3ccb5e7f80e1670882490cae556fdf398a4",
+  "domain": {
+    "minX": -64,
+    "minZ": -64,
+    "span": 192
+  },
+  "calibration": "Least-squares removal of File-node scale and offset against the original heightfield; erosion residual in metres.",
+  "sampleSpacing": 0.5,
+  "quantizationMetres": 0.001,
+  "siteConstraints": "Smooth perimeter blend; protected camp, bridge, placed rocks and authored detail patches."
+}
