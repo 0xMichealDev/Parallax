@@ -1,0 +1,28 @@
+{
+  "generator": "Blender 4.5.15",
+  "authoring": "Original procedural geometry authored for PARALLAX",
+  "groundSource": "Earthbound desert-world.js ground and actual fitted Meshy roof intersections",
+  "textures": [
+    {
+      "source": "https://polyhaven.com/a/rocky_terrain_02",
+      "license": "CC0",
+      "usage": "stone diffuse/normal atlas quadrant; original brushed metal atlas"
+    }
+  ],
+  "coordinates": "World Y-up; origin 0,0,0; scale 1; do not recenter",
+  "vertices": 44664,
+  "triangles": 14888,
+  "bytes": 3682068,
+  "bounds": {
+    "min": [
+      -144.08203125,
+      0.5296058654785156,
+      -100.5999984741211
+    ],
+    "max": [
+      74.81234741210938,
+      15.32708740234375,
+      -59.64918518066406
+    ]
+  }
+}

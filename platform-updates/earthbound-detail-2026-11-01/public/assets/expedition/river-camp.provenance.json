@@ -1,0 +1,28 @@
+{
+  "generator": "Blender 4.5.15",
+  "authoring": "Original procedural geometry authored for PARALLAX",
+  "groundSource": "Earthbound desert-world.js sampled heightfield, 192m / 1024",
+  "textures": [
+    {
+      "source": "https://polyhaven.com/a/rocky_terrain_02",
+      "license": "CC0",
+      "usage": "stone diffuse and normal atlas quadrant"
+    }
+  ],
+  "coordinates": "World Y-up; origin 0,0,0; scale 1; do not recenter",
+  "vertices": 77232,
+  "triangles": 25744,
+  "bytes": 4683428,
+  "bounds": {
+    "min": [
+      -10.068485260009766,
+      0.13345861434936523,
+      -18.185134887695312
+    ],
+    "max": [
+      51.80460739135742,
+      3.6399998664855957,
+      52.341957092285156
+    ]
+  }
+}

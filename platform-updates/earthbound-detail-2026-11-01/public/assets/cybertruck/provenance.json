@@ -1,0 +1,50 @@
+{
+  "vertices": 26460,
+  "triangles": 8820,
+  "bytes": 2843688,
+  "parts": {
+    "0": "body",
+    "1": "front left",
+    "2": "front right",
+    "3": "rear left",
+    "4": "rear right"
+  },
+  "wheelCenters": [
+    [
+      -0.886,
+      0.445,
+      -1.963
+    ],
+    [
+      0.886,
+      0.445,
+      -1.963
+    ],
+    [
+      -0.886,
+      0.445,
+      1.672
+    ],
+    [
+      0.886,
+      0.445,
+      1.672
+    ]
+  ],
+  "front": "-Z",
+  "up": "+Y",
+  "bounds": {
+    "min": [
+      -1.215000033378601,
+      -0.0036585854832082987,
+      -2.896569013595581
+    ],
+    "max": [
+      1.215000033378601,
+      1.8539999723434448,
+      2.936500072479248
+    ]
+  },
+  "generator": "Blender 4.5.15",
+  "authoring": "Original procedural geometry authored for PARALLAX"
+}

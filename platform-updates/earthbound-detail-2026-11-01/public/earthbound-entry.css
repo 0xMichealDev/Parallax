@@ -1,0 +1,23 @@
+/* A usable landing screen even when the browser refuses canvas rendering. */
+#universe[data-mode=surface]:not(.u-ground-ready) #u-stage{background:#14202c url('/assets/earthbound-arizona.png') center/cover no-repeat}
+#universe[data-mode=surface]:not(.u-ground-ready) #u-canvas{opacity:0}
+#u-earth-entry{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:min(680px,calc(100% - 36px));box-sizing:border-box;padding:30px;background:linear-gradient(135deg,#101d2af5,#09131ff5);border:1px solid #b6dae84d;border-radius:20px;box-shadow:0 20px 70px #0008}
+#u-earth-entry[hidden]{display:none!important}
+#u-earth-entry .eyebrow{font:10px monospace;letter-spacing:2px;color:#acdbd7}
+#u-earth-entry h2{font-size:clamp(28px,5vw,44px);letter-spacing:-1px;margin:12px 0}
+#u-earth-entry p{color:#c2d1dc;line-height:1.6;font-size:14px;margin:10px 0 20px}
+.u-entry-places{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+#universe .u-entry-places button{text-align:left;padding:18px 15px;font-size:14px;min-height:98px;background:#1d3544;border-color:#7aa5b94d;white-space:normal}
+.u-entry-places button strong,.u-entry-places button span{display:block}.u-entry-places button span{margin-top:8px;font-size:11px;line-height:1.4;color:#bbd0da}
+#universe .u-entry-places button:first-child{background:#b7eeef;color:#09202b}.u-entry-places button:first-child span{color:#284a55}
+#universe button:disabled{opacity:.6;cursor:wait}
+#u-entry-status{min-height:40px;margin-top:18px!important;margin-bottom:10px!important;font-size:13px!important}
+.u-entry-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.u-entry-actions a{font-size:12px;color:#b7eeef;text-decoration:underline}
+#universe[data-mode=surface]:not(.u-walking) .u-info,#universe[data-mode=surface]:not(.u-walking) .u-dock,#universe[data-mode=surface]:not(.u-walking) .u-beacons,#universe[data-mode=surface]:not(.u-walking) .u-discoveries{display:none}
+#universe[data-mode=surface]:not(.u-walking) .u-top-actions>button:not(#u-close):not(#u-map-toggle){display:none}
+#universe[data-mode=surface].u-cinema:not(.u-walking) .u-top-actions{display:flex}
+#u-entry-travel{max-width:190px;font-size:12px!important}#u-entry-help{font-size:11px!important;color:#93aebb!important;margin-bottom:0!important}
+.u-walking .u-camp-entry{top:220px}
+@media(max-width:700px){.u-walking .u-camp-entry{top:262px}}
+@media(max-width:540px){#u-earth-entry{padding:22px}.u-entry-places{grid-template-columns:1fr}#universe .u-entry-places button{min-height:0;padding:13px 15px}.u-entry-places button span{margin-top:4px}#u-earth-entry h2{margin:8px 0}#u-earth-entry p{margin:8px 0 14px}}
+@media(max-height:600px){#u-earth-entry{top:90px;transform:translateX(-50%);max-height:calc(100% - 105px);overflow:auto;padding:20px}.u-entry-places{grid-template-columns:repeat(3,1fr)}}

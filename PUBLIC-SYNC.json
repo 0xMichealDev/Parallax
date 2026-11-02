@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "atlas-cinematic-2026-11-01",
+  "latestRelease": "earthbound-detail-2026-11-01",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -85,6 +85,10 @@
     {
       "id": "atlas-cinematic-2026-11-01",
       "manifest": "platform-updates/atlas-cinematic-2026-11-01/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-detail-2026-11-01",
+      "manifest": "platform-updates/earthbound-detail-2026-11-01/PUBLIC-SYNC.json"
     }
   ]
 }

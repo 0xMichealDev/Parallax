@@ -1,5 +1,9 @@
 <p align="center">
 
+## Earthbound detail upgrade — v241
+
+Adds Blender scenery detail, an upgraded pickup and smoother boarding lift with tested destination routing. [Release notes](docs/updates/earthbound-detail-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-detail-2026-11-01/).
+
 ## Cinematic Atlas departures — v240
 
 Adds cinematic shuttle departures and approach scenery with tested destination routing. [Release notes](docs/updates/atlas-cinematic-2026-11-01.md) · [Exact source snapshot](platform-updates/atlas-cinematic-2026-11-01/).
