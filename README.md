@@ -1,5 +1,9 @@
 <p align="center">
 
+## Earthbound aimed shooting — v251
+
+Fixes left-click firing while right-click aim is held. [Release notes](docs/updates/earthbound-ads-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-ads-2026-11-02/).
+
 ## Earthbound mouse controls and menu — v250
 
 Corrects mouse aim/fire controls and adds Play Earthbound to the primary menu. [Release notes](docs/updates/earthbound-mouse-menu-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-mouse-menu-2026-11-02/).

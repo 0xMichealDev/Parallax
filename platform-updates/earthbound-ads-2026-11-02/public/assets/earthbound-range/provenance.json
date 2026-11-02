@@ -1,0 +1,32 @@
+{
+  "name": "PARALLAX digital-camo reflex rifle game prop",
+  "authoring": "Original Blender-authored nonfunctional digital art; no functional internals; arbitrary game units, not manufacturing geometry",
+  "textures": "Original procedural PBR atlas; no third-party assets",
+  "orientation": "Barrel -Z, up +Y, horizontal +X; origin at hand grip region; no recentering required",
+  "vertices": 29257,
+  "triangles": 14780,
+  "bytes": 1333444,
+  "bounds": {
+    "min": [
+      -0.16500000655651093,
+      -0.7082464694976807,
+      -2.063999891281128
+    ],
+    "max": [
+      0.24009793996810913,
+      0.8574999570846558,
+      1.3975000381469727
+    ]
+  },
+  "muzzleGameAnchor": [
+    0,
+    0.29,
+    -2.07
+  ],
+  "opticGameAnchor": [
+    0,
+    0.7,
+    -0.16
+  ],
+  "skin": "Original navy, teal and sand digital camouflage with PARALLAX receiver insignia"
+}
