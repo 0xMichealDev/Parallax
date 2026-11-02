@@ -1,5 +1,9 @@
 <p align="center">
 
+## Atlas graphics recovery — v243
+
+Restores planet graphics and textures after temporary WebGL interruption. [Release notes](docs/updates/atlas-recovery-2026-11-01.md) · [Exact source snapshot](platform-updates/atlas-recovery-2026-11-01/).
+
 ## Earthbound Gaea terrain — v242
 
 Adds Gaea river-valley erosion, matched terrain collisions and a direct bridge destination. [Release notes](docs/updates/earthbound-gaea-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-gaea-2026-11-01/).
