@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound bounty practice — v252
+
+Adds free-credit bounty matches with kill transfers, extraction, rules and standings. Real PRLX entry remains disabled. [Release notes](docs/updates/earthbound-bounty-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-bounty-2026-11-02/).
+
 ## Earthbound aimed shooting — v251
 
 Fixes left-click firing while right-click aim is held. [Release notes](docs/updates/earthbound-ads-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-ads-2026-11-02/).
