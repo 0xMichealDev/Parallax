@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound rifle practice — v245
+
+Adds an original rifle prop, shooting and reload controls, and solo target practice. [Release notes](docs/updates/earthbound-range-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-range-2026-11-01/).
+
 ## Atlas graphics recovery — v243
 
 Restores planet graphics and textures after temporary WebGL interruption. [Release notes](docs/updates/atlas-recovery-2026-11-01.md) · [Exact source snapshot](platform-updates/atlas-recovery-2026-11-01/).

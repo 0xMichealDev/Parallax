@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "atlas-recovery-2026-11-01",
+  "latestRelease": "earthbound-range-2026-11-01",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -97,6 +97,10 @@
     {
       "id": "atlas-recovery-2026-11-01",
       "manifest": "platform-updates/atlas-recovery-2026-11-01/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-range-2026-11-01",
+      "manifest": "platform-updates/earthbound-range-2026-11-01/PUBLIC-SYNC.json"
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "name": "PARALLAX expedition rifle game prop",
+  "authoring": "Original Blender-authored nonfunctional digital art; no functional internals; arbitrary game units, not manufacturing geometry",
+  "textures": "Original procedural PBR atlas; no third-party assets",
+  "orientation": "Barrel -Z, up +Y, horizontal +X; origin at hand grip region; no recentering required",
+  "vertices": 28071,
+  "triangles": 14300,
+  "bytes": 1289076,
+  "bounds": {
+    "min": [
+      -0.16500000655651093,
+      -0.7082464694976807,
+      -2.063999891281128
+    ],
+    "max": [
+      0.24009793996810913,
+      0.7249999642372131,
+      1.3975000381469727
+    ]
+  },
+  "muzzleGameAnchor": [
+    0,
+    0.29,
+    -2.07
+  ]
+}
