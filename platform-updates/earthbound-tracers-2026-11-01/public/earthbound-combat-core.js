@@ -1,0 +1,30 @@
+/* Authoritative game rules for anonymous Earthbound rooms. No real-world ballistics. */
+(function(root){'use strict';
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),finite=v=>typeof v==='number'&&Number.isFinite(v);
+const places={camp:[0,3],river:[27,22],compound:[-99,-88],crash:[56,-58],range:[-45,7],ship:[-110,-121.7]};
+function sphere(a,b,c,r){const d=b.map((v,i)=>v-a[i]),q=a.map((v,i)=>v-c[i]),A=d.reduce((s,v)=>s+v*v,0),B=2*d.reduce((s,v,i)=>s+v*q[i],0),C=q.reduce((s,v)=>s+v*v,0)-r*r;if(C<0)return 0;const disc=B*B-4*A*C;if(A<1e-8||disc<0)return null;const t=(-B-Math.sqrt(disc))/(2*A);return t>=0&&t<=1?t:null;}
+class Room{
+ constructor({ground=()=>0,cover=[],random=Math.random}={}){this.ground=ground;this.cover=cover;this.random=random;this.players=new Map();this.bullets=[];this.events=[];this.serial=0;}
+ add(id,now){if(this.players.size>=15)return null;const x=(this.players.size%4-1.5)*1.4,z=3+Math.floor(this.players.size/4)*1.4,p={id,name:'Explorer '+id.slice(0,4).toUpperCase(),x,z,y:this.ground(x,z),yaw:0,pitch:0,health:100,ammo:30,reserve:90,reloadAt:0,nextShot:0,protectedUntil:now+10000,deadAt:0,lastSeen:now,lastMove:now,sequence:0,moveSequence:0,moveCredit:3.5,mode:'foot',walking:false,kills:0,deaths:0};this.players.set(id,p);return p;}
+ remove(id){this.players.delete(id);this.bullets=this.bullets.filter(b=>b.owner!==id);}
+ safe(p,now){return p.protectedUntil>now||Math.hypot(p.x,p.z+3)<24||p.mode!=='foot';}
+ command(id,m,now){const p=this.players.get(id);if(!p||!m||typeof m!=='object')return false;p.lastSeen=now;
+  if(m.type==='move'){if(!Number.isSafeInteger(m.seq)||m.seq<=p.moveSequence||![m.x,m.z,m.yaw,m.pitch,m.jump].every(finite))return false;p.moveSequence=m.seq;const elapsed=clamp((now-p.lastMove)/1000,0,1),distance=Math.hypot(m.x-p.x,m.z-p.z);p.lastMove=now;if(p.health<=0)return false;if(Math.abs(m.x)>185||Math.abs(m.z)>185||distance>(p.moveCredit=Math.min(3.5,p.moveCredit+18*elapsed))){this.events.push({type:'correct',id:p.id,x:p.x,z:p.z});return false;}p.moveCredit-=distance;p.walking=distance>.02;p.x=m.x;p.z=m.z;p.y=this.ground(p.x,p.z)+clamp(m.jump,0,1.8);p.yaw=m.yaw%(Math.PI*2);p.pitch=clamp(m.pitch,-1.4,1.4);const mode=['foot','vehicle','flight','practice'].includes(m.mode)?m.mode:'foot';if(mode!==p.mode)p.protectedUntil=Math.max(p.protectedUntil,now+2000);p.mode=mode;return true;}
+  if(!Number.isSafeInteger(m.seq)||m.seq<=p.sequence)return false;p.sequence=m.seq;
+  if(m.type==='respawn'){if(p.health>0||now-p.deadAt<5000)return false;p.health=100;p.ammo=30;p.reserve=90;p.reloadAt=0;this.teleport(p,'camp',now);return true;}
+  if(p.health<=0)return false;
+  if(m.type==='travel'&&places[m.place]){this.teleport(p,m.place,now);return true;}
+  if(m.type==='reload'){if(p.reloadAt||p.ammo>=30||p.reserve<=0)return false;p.reloadAt=now+2200;return true;}
+  if(m.type==='fire'){if(p.reloadAt||now<p.nextShot||p.ammo<=0||p.mode!=='foot'||![m.yaw,m.pitch].every(finite))return false;p.yaw=m.yaw%(Math.PI*2);p.pitch=clamp(m.pitch,-1.4,1.4);p.ammo--;p.nextShot=now+180;const spread=m.aim===true?.002:.012,yaw=p.yaw+(this.random()-.5)*spread,pitch=p.pitch+(this.random()-.5)*spread,cp=Math.cos(pitch),velocity=[Math.sin(yaw)*cp*180,Math.sin(pitch)*180,-Math.cos(yaw)*cp*180],position=[p.x,p.y+1.65,p.z],bullet={id:++this.serial,owner:id,pos:position,velocity,life:0,damaging:!this.safe(p,now)};this.bullets.push(bullet);this.events.push({type:'shot',id:bullet.id,owner:id,from:position,velocity});return true;}
+  return false;
+ }
+ teleport(p,place,now){const [x,z]=places[place];Object.assign(p,{x,z,y:this.ground(x,z),protectedUntil:now+8000,mode:'foot',lastMove:now,walking:false});this.events.push({type:'teleport',id:p.id,x,z,place});}
+ blocked(a,b){const length=Math.hypot(...b.map((v,i)=>v-a[i])),steps=Math.ceil(length/.5);for(let i=1;i<=steps;i++){const t=i/steps,x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t,z=a[2]+(b[2]-a[2])*t;if(y<this.ground(x,z)+.03)return t;for(const c of this.cover)if(Math.abs(x-c[0])<c[2]&&Math.abs(z-c[1])<c[2]&&Math.hypot(x-c[0],z-c[1])<c[2]&&y<c[3]+c[4]&&y>c[3])return t;}return null;}
+ tick(dt,now){dt=clamp(dt,0,.1);for(const p of this.players.values()){if(p.reloadAt&&now>=p.reloadAt){const n=Math.min(30-p.ammo,p.reserve);p.ammo+=n;p.reserve-=n;p.reloadAt=0;}}
+  const active=[];for(const b of this.bullets){b.life+=dt;if(b.life>.9)continue;const a=b.pos,next=a.map((v,i)=>v+b.velocity[i]*dt);b.velocity[1]-=6*dt;let t=this.blocked(a,next),victim=null;for(const p of this.players.values()){if(p.id===b.owner||p.health<=0||p.mode!=='foot')continue;for(const y of [.4,.9,1.4]){const hit=sphere(a,next,[p.x,p.y+y,p.z],.34);if(hit!==null&&(t===null||hit<t)){t=hit;victim=p;}}}if(t!==null){const at=a.map((v,i)=>v+(next[i]-v)*t);if(victim&&b.damaging&&!this.safe(victim,now)){victim.health=Math.max(0,victim.health-25);this.events.push({type:'hit',bullet:b.id,owner:b.owner,id:victim.id,health:victim.health,at});if(!victim.health){victim.deadAt=now;victim.deaths++;const killer=this.players.get(b.owner);if(killer)killer.kills++;this.events.push({type:'down',id:victim.id,owner:b.owner});}}else this.events.push({type:'impact',bullet:b.id,at});continue;}b.pos=next;active.push(b);}this.bullets=active.slice(-128);
+ }
+ snapshot(now){return [...this.players.values()].map(p=>({id:p.id,seq:p.sequence,name:p.name,x:p.x,y:p.y,z:p.z,yaw:p.yaw,pitch:p.pitch,health:p.health,ammo:p.ammo,reserve:p.reserve,reload:Math.max(0,p.reloadAt-now)/1000,protected:this.safe(p,now),respawn:Math.max(0,5000-(now-p.deadAt))/1000,mode:p.mode,walking:p.walking,kills:p.kills,deaths:p.deaths}));}
+ drain(){return this.events.splice(0,256);}
+}
+const api={Room,sphere,places};if(typeof module!=='undefined')module.exports=api;if(root)root.ParallaxCombat=api;
+})(typeof window!=='undefined'?window:null);

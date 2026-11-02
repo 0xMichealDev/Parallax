@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "earthbound-pvp-2026-11-01",
+  "latestRelease": "earthbound-tracers-2026-11-01",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -105,6 +105,10 @@
     {
       "id": "earthbound-pvp-2026-11-01",
       "manifest": "platform-updates/earthbound-pvp-2026-11-01/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-tracers-2026-11-01",
+      "manifest": "platform-updates/earthbound-tracers-2026-11-01/PUBLIC-SYNC.json"
     }
   ]
 }

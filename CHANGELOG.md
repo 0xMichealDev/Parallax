@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound rifle practice — v247
+
+Adds immediate glowing bullet tracers, independent gunshot sound and 15-player room limits. [Release notes](docs/updates/earthbound-tracers-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-tracers-2026-11-01/).
+
 ## Earthbound rifle practice — v246
 
 Adds shared multiplayer, server-validated PvP, health and respawn, plus a barrel-anchored muzzle flash. No hunger or thirst. [Release notes](docs/updates/earthbound-pvp-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-pvp-2026-11-01/).
