@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "earthbound-welcome-2026-11-01",
+  "latestRelease": "earthbound-mouse-menu-2026-11-02",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -117,6 +117,10 @@
     {
       "id": "earthbound-welcome-2026-11-01",
       "manifest": "platform-updates/earthbound-welcome-2026-11-01/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-mouse-menu-2026-11-02",
+      "manifest": "platform-updates/earthbound-mouse-menu-2026-11-02/PUBLIC-SYNC.json"
     }
   ]
 }

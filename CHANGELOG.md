@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound mouse controls and menu — v250
+
+Corrects mouse aim/fire controls and adds Play Earthbound to the primary menu. [Release notes](docs/updates/earthbound-mouse-menu-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-mouse-menu-2026-11-02/).
+
 ## Earthbound welcome — v249
 
 Adds a dismissible introduction and replaces the persistent controls box with a compact ammo readout. [Release notes](docs/updates/earthbound-welcome-2026-11-01.md) · [Exact source snapshot](platform-updates/earthbound-welcome-2026-11-01/).
