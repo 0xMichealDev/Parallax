@@ -1,0 +1,27 @@
+{
+  "source": "Meshy text-to-3d",
+  "authoring": "Blender decimation, architectural weighted normals, PBR texture reduction, ground-normalized origin",
+  "triangles": 18000,
+  "originalFaces": 833762,
+  "bytes": 1390896,
+  "bounds": {
+    "min": [
+      -1.2825478315353394,
+      0.0,
+      -0.5288268327713013
+    ],
+    "max": [
+      1.2825478315353394,
+      1.25,
+      0.5288268327713013
+    ]
+  },
+  "recommendedHeight": 1.25,
+  "origin": "Centered X/Z, ground at Y=0, up +Y",
+  "geometryTask": "01a19ee4-e3c4-748a-a054-1ee57813ed93",
+  "textureTask": "01a19ee6-054b-73e9-b876-213aebc4fbfd",
+  "consumedCredits": 30,
+  "gameOnly": true,
+  "orientation": "Long wall spans X; thickness along Z; usable from either side",
+  "usage": "Low cover. Suggested 1.25m height; rotate groups to form compounds."
+}

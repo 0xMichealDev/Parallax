@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound PvP lobby and field update — v255
+
+Adds a ready lobby, clear PvP homepage link, compact combat HUD, loot pickups, extra cover and extraction pads, and cosmetic character styles. [Release notes](docs/updates/earthbound-pvp-lobby-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-pvp-lobby-2026-11-02/).
+
 ## Earthbound weapons and loadout — v253
 
 Adds SPECTRE sniper and VECTOR sidearm, server-validated loadouts, scope, weapon switching, animation and sound. [Release notes](docs/updates/earthbound-weapons-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-weapons-2026-11-02/).
