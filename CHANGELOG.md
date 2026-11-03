@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound saves, combat poses and river traversal — v257
+
+Fixes loadout saving and the truck exit handoff; adds a clean rematch lobby, slower river wading, combat poses and visible player weapons. [Release notes](docs/updates/earthbound-save-rematch-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-save-rematch-2026-11-02/).
+
 ## Earthbound vehicle and scenery traversal — v256
 
 Fixes Free Roam truck entry/exit, drives over low rocks and adds jumpable crates and tents. [Release notes](docs/updates/earthbound-traversal-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-traversal-2026-11-02/).

@@ -1,0 +1,29 @@
+{
+  "source": "Derived in Blender from ghillie-web.glb",
+  "authoring": "Lower mantle cropped from existing Meshy ghillie, fitted to torso width; no new paid generation",
+  "triangles": 10100,
+  "bytes": 1082584,
+  "bounds": {
+    "min": [
+      -0.36052405834198,
+      0,
+      -0.22423872351646423
+    ],
+    "max": [
+      0.36052405834198,
+      0.6499999761581421,
+      0.22423872351646423
+    ]
+  },
+  "gameOnly": true,
+  "sourceAsset": "ghillie-web.glb",
+  "additionalConsumedCredits": 0,
+  "sha256": "b9f1c1f2f293c0a0e25d8cf7f012ecc66378e7d4d64085e9d23c880204ec9fc4",
+  "orientation": "Y up; front +Z; X/Z centered; bottom Y=0; identity node transform",
+  "suggestedAttachment": {
+    "standingBaseY": 1,
+    "characterHeight": 1.8
+  },
+  "staticCosmetic": true,
+  "requiresRuntimeAttachment": true
+}
