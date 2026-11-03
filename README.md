@@ -1,5 +1,9 @@
 <p align="center">
 
+## Earthbound weapons and loadout — v253
+
+Adds SPECTRE sniper and VECTOR sidearm, server-validated loadouts, scope, weapon switching, animation and sound. [Release notes](docs/updates/earthbound-weapons-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-weapons-2026-11-02/).
+
 ## Earthbound bounty practice — v252
 
 Adds free-credit bounty matches with kill transfers, extraction, rules and standings. Real PRLX entry remains disabled. [Release notes](docs/updates/earthbound-bounty-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-bounty-2026-11-02/).

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "earthbound-bounty-2026-11-02",
+  "latestRelease": "earthbound-weapons-2026-11-02",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -129,6 +129,10 @@
     {
       "id": "earthbound-bounty-2026-11-02",
       "manifest": "platform-updates/earthbound-bounty-2026-11-02/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "earthbound-weapons-2026-11-02",
+      "manifest": "platform-updates/earthbound-weapons-2026-11-02/PUBLIC-SYNC.json"
     }
   ]
 }
