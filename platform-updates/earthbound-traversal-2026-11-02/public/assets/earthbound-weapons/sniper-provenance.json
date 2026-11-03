@@ -1,0 +1,22 @@
+{
+  "source": "Meshy text-to-3d",
+  "authoring": "Blender decimation, PBR texture reduction, viewmodel alignment and recoil action",
+  "triangles": 24000,
+  "bytes": 1948396,
+  "bounds": {
+    "min": [
+      -0.16619448363780975,
+      -0.211710587143898,
+      -2.400916814804077
+    ],
+    "max": [
+      0.12963174283504486,
+      0.8487793207168579,
+      1.0990830659866333
+    ]
+  },
+  "gameOnly": true,
+  "geometryTask": "01a19ebd-63ff-7374-a794-567286b16e2a",
+  "textureTask": "01a19ebe-691c-732e-b707-ac642b72e3c5",
+  "consumedCredits": 30
+}

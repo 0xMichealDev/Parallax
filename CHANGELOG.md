@@ -1,5 +1,9 @@
 # Changelog
 
+## Earthbound vehicle and scenery traversal — v256
+
+Fixes Free Roam truck entry/exit, drives over low rocks and adds jumpable crates and tents. [Release notes](docs/updates/earthbound-traversal-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-traversal-2026-11-02/).
+
 ## Earthbound PvP lobby and field update — v255
 
 Adds a ready lobby, clear PvP homepage link, compact combat HUD, loot pickups, extra cover and extraction pads, and cosmetic character styles. [Release notes](docs/updates/earthbound-pvp-lobby-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-pvp-lobby-2026-11-02/).

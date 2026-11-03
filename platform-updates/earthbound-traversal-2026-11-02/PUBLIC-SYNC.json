@@ -1,0 +1,707 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "earthbound-traversal-2026-11-02",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "be12b1d383cae75e84efe3e0a34e42fe3ba46ea0",
+    "commit": "23992ecd95d0b170d0f2a6de26a5eda9053d21be",
+    "hostedVersion": 256
+  },
+  "reviewedPresentationSources": [],
+  "approvedExports": [
+    {
+      "source": "docs/updates/earthbound-traversal-2026-11-02.md",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/docs/updates/earthbound-traversal-2026-11-02.md",
+      "sha256": "e25516a95f3abb6450a9c9f8a99f4802ee9c2c937757d18818a4ebbaa79cd774",
+      "bytes": 1246
+    },
+    {
+      "source": "public/assets/earthbound-range/provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/earthbound-range/provenance.json",
+      "sha256": "e5e2693fe9d1ecfbb4bbc6bb20ef148806f4341fb3e6eed462055417b8379edf",
+      "bytes": 862
+    },
+    {
+      "source": "public/assets/earthbound-range/rifle-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/earthbound-range/rifle-web.glb",
+      "sha256": "7468da6123a37229c5e7cb900df2ba2e024a3deb3f0c23acc6cbc6718ad0639f",
+      "bytes": 1333444
+    },
+    {
+      "source": "public/assets/earthbound-weapons/sidearm-preview.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/earthbound-weapons/sidearm-preview.png",
+      "sha256": "d76e09405f1b7f70f443582deaa37c1e7d903e98e2487b4d8e73cc3ce99ea6a8",
+      "bytes": 93650
+    },
+    {
+      "source": "public/assets/earthbound-weapons/sidearm-provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/earthbound-weapons/sidearm-provenance.json",
+      "sha256": "788503609adc9b20c3ab759bd694fcf791acd5312d7f3d08615c870148d7fa3c",
+      "bytes": 554
+    },
+    {
+      "source": "public/assets/earthbound-weapons/sidearm-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/earthbound-weapons/sidearm-web.glb",
+      "sha256": "feea3c778ff4861a1ca2869f19d03a43900a308e7e0c12b545c69658be87f97e",
+      "bytes": 1519532
+    },
+    {
+      "source": "public/assets/earthbound-weapons/sniper-preview.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/earthbound-weapons/sniper-preview.png",
+      "sha256": "319c09a77903cb67a594f6405ff681c7286d51e40935d6e1151ae4af34b5cc4c",
+      "bytes": 46824
+    },
+    {
+      "source": "public/assets/earthbound-weapons/sniper-provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/earthbound-weapons/sniper-provenance.json",
+      "sha256": "cc3e99e5b2ea8357759d681d2c3478f0dc8041b83b63eaa0fb4afd8b881a3e98",
+      "bytes": 551
+    },
+    {
+      "source": "public/assets/earthbound-weapons/sniper-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/earthbound-weapons/sniper-web.glb",
+      "sha256": "67a8d75a5be719e01f53e921d85c3db0c0c41061325b5fbcd3c496e8d1bc8ad1",
+      "bytes": 1948396
+    },
+    {
+      "source": "public/assets/pvp-characters/cape-provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/cape-provenance.json",
+      "sha256": "6f565b70bf3b204e1fef1c6c0a832f267e3601e3bf852601850f391cefe750ab",
+      "bytes": 811
+    },
+    {
+      "source": "public/assets/pvp-characters/cape-web-review.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/cape-web-review.png",
+      "sha256": "a304d5fbdaf4a39f9fbb179885766e340ae358aa118009e03acd919501188b0d",
+      "bytes": 437740
+    },
+    {
+      "source": "public/assets/pvp-characters/cape-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/cape-web.glb",
+      "sha256": "b9f1c1f2f293c0a0e25d8cf7f012ecc66378e7d4d64085e9d23c880204ec9fc4",
+      "bytes": 1082584
+    },
+    {
+      "source": "public/assets/pvp-characters/ghillie-card.webp",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/ghillie-card.webp",
+      "sha256": "48dd5e73aefda84de88dfb754628a99b40316612003424e82e124d326ab21e8f",
+      "bytes": 7616
+    },
+    {
+      "source": "public/assets/pvp-characters/ghillie-preview.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/ghillie-preview.png",
+      "sha256": "6833570407720616621a4aa0bf69e11140d40ee3887e042dd519b8e87c649305",
+      "bytes": 168324
+    },
+    {
+      "source": "public/assets/pvp-characters/ghillie-provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/ghillie-provenance.json",
+      "sha256": "d8acc08211b2d953ef78b9bcd7ebd70fb4868fc66bc39ca2ad75dd322cdd6ef7",
+      "bytes": 1066
+    },
+    {
+      "source": "public/assets/pvp-characters/ghillie-web-review.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/ghillie-web-review.png",
+      "sha256": "e91bb7c55dd46fea543cb547422b6e2d2e3f21d719bb53358c6dba3dad4887fb",
+      "bytes": 398619
+    },
+    {
+      "source": "public/assets/pvp-characters/ghillie-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/ghillie-web.glb",
+      "sha256": "cbc0c0e5e2c90220d6ce260aeda1fcd48f3ee27f56bff910df7c892f88762f0c",
+      "bytes": 1551040
+    },
+    {
+      "source": "public/assets/pvp-characters/helmet-card.webp",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/helmet-card.webp",
+      "sha256": "774e5639738688ff0c2ba223bfa08f48064043a76890be4f700d83bcb7ff9edc",
+      "bytes": 5478
+    },
+    {
+      "source": "public/assets/pvp-characters/helmet-preview.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/helmet-preview.png",
+      "sha256": "639a618b766e7676a0d9bbcf9b1fd66e28611d1795b2d1639137bb02f8892389",
+      "bytes": 139471
+    },
+    {
+      "source": "public/assets/pvp-characters/helmet-provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/helmet-provenance.json",
+      "sha256": "8fc28a3cb84dfea1b5dbea59f7ebd0e1437dc6bf4f541310ef9723878be1c9cf",
+      "bytes": 1069
+    },
+    {
+      "source": "public/assets/pvp-characters/helmet-web-review.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/helmet-web-review.png",
+      "sha256": "0ca5a27e6af441b7d4ac2134a5de67240ad2423642e8808904693ec9b1654d88",
+      "bytes": 383357
+    },
+    {
+      "source": "public/assets/pvp-characters/helmet-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/helmet-web.glb",
+      "sha256": "5d7230aca3dabe455ecb029764a3ee8b3ce598e6d016f784ee24b0b6ae7d339d",
+      "bytes": 1156880
+    },
+    {
+      "source": "public/assets/pvp-characters/vest-preview.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/vest-preview.png",
+      "sha256": "3c3d448e86731845cc9fef3ab07fa7de6e5f65b700ace166a87bff817206acc5",
+      "bytes": 162476
+    },
+    {
+      "source": "public/assets/pvp-characters/vest-provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/vest-provenance.json",
+      "sha256": "c268f51ca5247d400491ffdfca2ceee10ab6fb4f5be4f86fef600e2904362ca2",
+      "bytes": 1067
+    },
+    {
+      "source": "public/assets/pvp-characters/vest-web-review.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/vest-web-review.png",
+      "sha256": "959f7a9fa3f3eeffef54c1b4f6112167e905bceb5a1911ee1ebce53fc7b6e50b",
+      "bytes": 391152
+    },
+    {
+      "source": "public/assets/pvp-characters/vest-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-characters/vest-web.glb",
+      "sha256": "654c4db24fe3b2aaee24493adc2f0bdf3e5b6bbe8b602a163f5197d641e7af25",
+      "bytes": 1325812
+    },
+    {
+      "source": "public/assets/pvp-environment/barrier-optimized.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-environment/barrier-optimized.png",
+      "sha256": "5205a59a04e21561dd2861a5ebaae485bc2fe256eecda1a6d6f6520c6079d509",
+      "bytes": 456677
+    },
+    {
+      "source": "public/assets/pvp-environment/barrier-provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-environment/barrier-provenance.json",
+      "sha256": "9261e5b993606aed934573d1ace47b9eb931f1b8b2edf46ff5394d45ae7fb25d",
+      "bytes": 810
+    },
+    {
+      "source": "public/assets/pvp-environment/barrier-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-environment/barrier-web.glb",
+      "sha256": "9464fdfa8a94bbe3ffa9f8e0fe8675c1494d4071a655e131aeb694f754d5c6c3",
+      "bytes": 1390896
+    },
+    {
+      "source": "public/assets/pvp-environment/mesquite-optimized.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-environment/mesquite-optimized.png",
+      "sha256": "994ab4fb8f035263aaafcb3eb1c6a7bb5aeccdb998733d5458cdbd4f4d17885a",
+      "bytes": 521213
+    },
+    {
+      "source": "public/assets/pvp-environment/mesquite-provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-environment/mesquite-provenance.json",
+      "sha256": "792176b16e8365d039c997ee958da8152c32afaceb4a477ab4a46578820b7486",
+      "bytes": 812
+    },
+    {
+      "source": "public/assets/pvp-environment/mesquite-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-environment/mesquite-web.glb",
+      "sha256": "8db9da209fd718255f26657f493c8fc77f8f2c358ebc9ee207fe222b7f5b4c21",
+      "bytes": 713788
+    },
+    {
+      "source": "public/assets/pvp-environment/shelter-optimized.png",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-environment/shelter-optimized.png",
+      "sha256": "c8a179e919b300f99024814c3c95a17aaea08583abba30e2f52047b93b1f1bec",
+      "bytes": 508147
+    },
+    {
+      "source": "public/assets/pvp-environment/shelter-provenance.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-environment/shelter-provenance.json",
+      "sha256": "ac1d6f044673f46ada950813af3ceb6feba35676a1cab796162b64050206f4a8",
+      "bytes": 818
+    },
+    {
+      "source": "public/assets/pvp-environment/shelter-web.glb",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/pvp-environment/shelter-web.glb",
+      "sha256": "3b576db848060fc2e5e2b891966a3cc745826b2922a3902745fbd83ba6f8a816",
+      "bytes": 1758408
+    },
+    {
+      "source": "public/assets/terrain/gaea-river.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/assets/terrain/gaea-river.js",
+      "sha256": "063fe00cee5b46d90ea806c3c8fca352856b3ec1fd609f70f35c10183fbe8ddd",
+      "bytes": 575507
+    },
+    {
+      "source": "public/camp-experience.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/camp-experience.js",
+      "sha256": "d5b64259cb589da02ba933cc7f831ff4678ce2a011c6e24533a90366e8f8ea69",
+      "bytes": 32752
+    },
+    {
+      "source": "public/dashboard-pro.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/dashboard-pro.js",
+      "sha256": "7041ace329e03581a2399eeacffd43e827b0c025d128a2a1fc4b74914285acd8",
+      "bytes": 8859
+    },
+    {
+      "source": "public/desert-adventure.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/desert-adventure.js",
+      "sha256": "1d5c277d357189476e78bc9b933947c5407d4e1ac3435deb3e202d7be18def2b",
+      "bytes": 20337
+    },
+    {
+      "source": "public/desert-life.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/desert-life.js",
+      "sha256": "97d76b66041788481a8a287b53fa980a75b764c5262744e960508022c766a89a",
+      "bytes": 32628
+    },
+    {
+      "source": "public/desert-story.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/desert-story.js",
+      "sha256": "ba4e5d987958c92ca7e859a29e9920d7d527d2008f6e3b2b05993eda29a29ce8",
+      "bytes": 3628
+    },
+    {
+      "source": "public/desert-world.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/desert-world.js",
+      "sha256": "9b38f0725698be9aa69514c588c04d5ad2bbd3687ef9ffa874972f85084af359",
+      "bytes": 146595
+    },
+    {
+      "source": "public/earthbound-bounty-core.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-bounty-core.js",
+      "sha256": "6b717d172ce99eded29c23d08523d7371711e02107c1ed5cf6114421a346dc41",
+      "bytes": 7167
+    },
+    {
+      "source": "public/earthbound-bounty-ui.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-bounty-ui.js",
+      "sha256": "2e0a8be53d559d277662f6d14abf1a0f06815e955ad2be7b010cb9cbf1b8f2ff",
+      "bytes": 5916
+    },
+    {
+      "source": "public/earthbound-combat-core.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-combat-core.js",
+      "sha256": "40e214b448d3f4a4ed44ffb24f0880e5e5a02572c4d024104e4435d63ec01bd8",
+      "bytes": 7991
+    },
+    {
+      "source": "public/earthbound-loadout.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-loadout.js",
+      "sha256": "d5a1a4622e2f98ac16d9006ab05706bdb580e56e80e6adec7574283df1b108c2",
+      "bytes": 6158
+    },
+    {
+      "source": "public/earthbound-match-layout.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-match-layout.js",
+      "sha256": "99b492cb45549c9b7727a989de1875e4f3cd18e6526495edd8210da5a0af702a",
+      "bytes": 2454
+    },
+    {
+      "source": "public/earthbound-match.css",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-match.css",
+      "sha256": "579642abefe0a0f3ffce056273a485498aeb955ec63dc8830040c08b3cf6427b",
+      "bytes": 4871
+    },
+    {
+      "source": "public/earthbound-network-config.json",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-network-config.json",
+      "sha256": "832c6942b2121dfa838202814d40243569342d68b00978febe54808b80902eb8",
+      "bytes": 68
+    },
+    {
+      "source": "public/earthbound-network.css",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-network.css",
+      "sha256": "aa2a21c46c3c42b247b39bd519433aae4d4018dfa73a8a2ce8976c5a1a6533c6",
+      "bytes": 2455
+    },
+    {
+      "source": "public/earthbound-network.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-network.js",
+      "sha256": "8998874ea865d72efcd17221b2f60f12c7d594f495c154fa6ff05eadaaf764b8",
+      "bytes": 9942
+    },
+    {
+      "source": "public/earthbound-promo.css",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-promo.css",
+      "sha256": "7624d3f70a0c6252c1e7726c5a298cc4d7a6ff72de91a6609be044c74c98c697",
+      "bytes": 1456
+    },
+    {
+      "source": "public/earthbound-range.css",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-range.css",
+      "sha256": "7b19704b6f3e55857f1ffc085200097c572fbbdb0d019346eff62ba5aa990b6a",
+      "bytes": 4648
+    },
+    {
+      "source": "public/earthbound-range.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-range.js",
+      "sha256": "2f91ac57232a3879876e7bfe34bc478fe7e905f4a5ba5780cd191cc48ad856f1",
+      "bytes": 9508
+    },
+    {
+      "source": "public/earthbound-tactical.css",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-tactical.css",
+      "sha256": "9525face24664394d2d44dcbaa96d15d4b22eef555a55b8e01fcbb9c92dc3c1c",
+      "bytes": 2165
+    },
+    {
+      "source": "public/earthbound-tactical.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-tactical.js",
+      "sha256": "f8039ae6b28c742350fa55dfe938cb3dd27d9cb362987ef2b8e7e583dfe5336d",
+      "bytes": 3894
+    },
+    {
+      "source": "public/earthbound-weapons.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/earthbound-weapons.js",
+      "sha256": "c1c9b873621ac6db9d7fb58b94588d55adb3bed3937f6f619d646497e7e651e4",
+      "bytes": 1265
+    },
+    {
+      "source": "public/explore-clean.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/explore-clean.js",
+      "sha256": "8a5d6a88e5f00d1ce5d59c7a4793e4cfdc2f04aaf86a58d4e5a6f05339097239",
+      "bytes": 2622
+    },
+    {
+      "source": "public/first-contact.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/first-contact.js",
+      "sha256": "798ac5b128e8ea797468a64b0e71982c32ca4e0aec0d1b51812101d2bd5b04e5",
+      "bytes": 8359
+    },
+    {
+      "source": "public/range-core.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/range-core.js",
+      "sha256": "2aa3dfe5a375dbfb7ae88ae62fa7a1fd8d699dd09c51c80d10d21879f3eb63d3",
+      "bytes": 2243
+    },
+    {
+      "source": "public/rifle-model.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/rifle-model.js",
+      "sha256": "c05a32e7f5f9c3b7eeab3e5117441307d2140c09f9a7989c1e009d26cdb845b3",
+      "bytes": 10177
+    },
+    {
+      "source": "public/rocket-experience.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/rocket-experience.js",
+      "sha256": "3205ca1a571f65fd10f36356706fbb20fe4d58d64bb6b2b7063ca2eb96da344a",
+      "bytes": 4813
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/rocket-model.js",
+      "sha256": "867976f8ab6c5f27422506f9961e9eb685874836a9dcbaa7d8cd3c41d3151430",
+      "bytes": 32508
+    },
+    {
+      "source": "public/rocket-state.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/rocket-state.js",
+      "sha256": "becd94630b8b1d7ee59eded2ad7b219a16762c514508687cc1e5d5895084f08b",
+      "bytes": 2656
+    },
+    {
+      "source": "public/rover-model.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/rover-model.js",
+      "sha256": "a4a596b43c762819b1673eb23df741e5c7de7058b2f4ad2d40dce3b257d2e1da",
+      "bytes": 6569
+    },
+    {
+      "source": "public/scenery-model.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/scenery-model.js",
+      "sha256": "294ea2ca03c80831540236bed102f8092b158f97bd0501f8251a1086e37ed423",
+      "bytes": 17554
+    },
+    {
+      "source": "public/shot-effects.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/shot-effects.js",
+      "sha256": "aa4b0c8ae701a3fa0e409b66ba1f475f4e5083c70566ab39248b1760b78bd248",
+      "bytes": 4672
+    },
+    {
+      "source": "public/universe.js",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/public/universe.js",
+      "sha256": "a5849d0414c89b6e46d0014c4b9e9680bacea1f88fa5c1fa5e51c459bf922c7c",
+      "bytes": 51118
+    },
+    {
+      "source": "tests/camp-experience.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/camp-experience.test.cjs",
+      "sha256": "7e62916318a205c3e05dd8f940a5d560bbdc22d9dd04691900025d863b2b8fa4",
+      "bytes": 28165
+    },
+    {
+      "source": "tests/earthbound-bounty.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-bounty.test.cjs",
+      "sha256": "7f5ae37b850d72b8ccdf3e7ce73cc9ae0d49de2180fc783e106a28495fa33e40",
+      "bytes": 4569
+    },
+    {
+      "source": "tests/earthbound-combat.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-combat.test.cjs",
+      "sha256": "48b18983f31b77df3375981872c905af185d9453af376dedebae74d26b61b498",
+      "bytes": 3369
+    },
+    {
+      "source": "tests/earthbound-controls.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-controls.test.cjs",
+      "sha256": "4dd5ae69ce1330cd3d0ccd00e30c577e48e3aaa52e1eea38082f6fcaf12fc1f8",
+      "bytes": 3858
+    },
+    {
+      "source": "tests/earthbound-loadout.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-loadout.test.cjs",
+      "sha256": "2aa5be3ab06b23c56fc0c61a1ebf32f302c6c8e7374bd7df6934ef08b1005f4a",
+      "bytes": 4680
+    },
+    {
+      "source": "tests/earthbound-match.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-match.test.cjs",
+      "sha256": "f5cc0b03e7920ce04528652ac8f0f6c4fa19ff6fda25774cb138af8b982ea374",
+      "bytes": 3314
+    },
+    {
+      "source": "tests/earthbound-network.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-network.test.cjs",
+      "sha256": "82a801d3e4bb0d65a4d68a279d744b84dc5372bc49943a573c55026c1374f006",
+      "bytes": 4375
+    },
+    {
+      "source": "tests/earthbound-range.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-range.test.cjs",
+      "sha256": "7a8eabfb052bbf3ed722c7730fe412163f5351ec600104e92eae77cb21229c84",
+      "bytes": 3078
+    },
+    {
+      "source": "tests/earthbound-tactical.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-tactical.test.cjs",
+      "sha256": "567fc4d93b037764b163095325e668facb37ff3c1c13fab5ebec78ee75151043",
+      "bytes": 2085
+    },
+    {
+      "source": "tests/earthbound-traversal.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-traversal.test.cjs",
+      "sha256": "7bd5b5bf359e72cd3470639c9b4cf020463ed3e9ea1e136a0e831e4e58d4dc5b",
+      "bytes": 2831
+    },
+    {
+      "source": "tests/earthbound-weapons.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/earthbound-weapons.test.cjs",
+      "sha256": "14d1106ffd23425179708b6a84b41c2aad6ce528637efb416bc615f493979594",
+      "bytes": 3681
+    },
+    {
+      "source": "tests/navigation-state.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/navigation-state.test.cjs",
+      "sha256": "ae30ebfbf5b0fa8472702a5c493a15cdac51b3459e1df7774e9578bc588344c8",
+      "bytes": 3374
+    },
+    {
+      "source": "tests/rover-stunts.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/rover-stunts.test.cjs",
+      "sha256": "4b2f608d7b4fd852f48c96f901d37b9c8020a6d6270fb448d380bc18dfee33a9",
+      "bytes": 2334
+    },
+    {
+      "source": "tests/shot-effects.test.cjs",
+      "destination": "platform-updates/earthbound-traversal-2026-11-02/tests/shot-effects.test.cjs",
+      "sha256": "cd23390643472424d21fbda87fedce8e5f942e0084899e5225b7dba7fc7d0563",
+      "bytes": 2308
+    }
+  ],
+  "sourceOnlyChanges": [
+    {
+      "path": "app/earthbound-network-server.ts",
+      "status": "M",
+      "summary": "Private multiplayer gateway updates Free Roam movement allowance and world boundary for vehicle entry and exit."
+    }
+  ],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/earthbound-traversal-2026-11-02/README.md",
+      "bytes": 453,
+      "sha256": "69babd78811aa31de599d68f890b4311e5ad0c64d92bd7176e91c6e90f6541ab",
+      "purpose": "Deployment, validation, asset costs and provenance summary"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31",
+      "treeSha256": "f752fbb066506c978612b6a36b584258ac2b0e176f04bf4146a1418591cab3af",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/earthbound-rover-validation-2026-10-31",
+      "treeSha256": "981bb09552316bea859cb833ce5d14ff7b1dc9702c008647450250749475ab4e",
+      "fileCount": 18
+    },
+    {
+      "path": "platform-updates/earthbound-realism-2026-10-31",
+      "treeSha256": "5265301cc6543fc9b6aba97dbcc07e041dc571128620276b7486c5f5ad9f6927",
+      "fileCount": 19
+    },
+    {
+      "path": "platform-updates/earthbound-camp-river-2026-10-31",
+      "treeSha256": "9fc6e75549634434f8440c56fd489d194d3849a997cebef61c4d2e9e18ffbd6f",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-compound-crash-2026-10-31",
+      "treeSha256": "75ee105ee942426e64d10c209c2f336687dd1cdca799d33b17dc9cd38d38e105",
+      "fileCount": 72
+    },
+    {
+      "path": "platform-updates/earthbound-entry-2026-10-31",
+      "treeSha256": "50254cc29f997b2c54f11168157a50d93e436249011041e44129ecbefbb9b5ca",
+      "fileCount": 33
+    },
+    {
+      "path": "platform-updates/starship-cabin-2026-10-31",
+      "treeSha256": "6a0e0c58ebb4d65f2568da072d83d9857eeab5139f5281db16d9dfb6915e6e86",
+      "fileCount": 34
+    },
+    {
+      "path": "platform-updates/starship-ascent-2026-10-31",
+      "treeSha256": "c0a8bee0419c7c1763d74cf3791a223ab0fe80b05c3f53cdabf6838f183632b9",
+      "fileCount": 36
+    },
+    {
+      "path": "platform-updates/atlas-port-2026-10-31",
+      "treeSha256": "73af2dc022dc7a990df32dd75064cd2f492be49cf7df5f1ee67db68746df9226",
+      "fileCount": 54
+    },
+    {
+      "path": "platform-updates/atlas-departures-2026-11-01",
+      "treeSha256": "5527a31fe50bffdc158e943f90a09ff3d1098c88690b6abf43079d79d1a678d1",
+      "fileCount": 47
+    },
+    {
+      "path": "platform-updates/home-command-2026-11-01",
+      "treeSha256": "1c9a25209b467ea49f4b3df1dbe52961d39c4ec643d651764ade270ddc3477e0",
+      "fileCount": 28
+    },
+    {
+      "path": "platform-updates/renderer-lights-2026-11-01",
+      "treeSha256": "d3d9c90cf3595c358d733cec9d81061482a9865d2430c2951a9f9077791210b2",
+      "fileCount": 10
+    },
+    {
+      "path": "platform-updates/atlas-cinematic-2026-11-01",
+      "treeSha256": "8a5089a14e9bbb349d52ad6630e90a34f1fd01778087c2ffb7f5c3a6c062e0f2",
+      "fileCount": 14
+    },
+    {
+      "path": "platform-updates/earthbound-detail-2026-11-01",
+      "treeSha256": "628f0aad6ab41ec0f6922d4620e8253c7321ebdc85a3777d704399cdd7737e56",
+      "fileCount": 23
+    },
+    {
+      "path": "platform-updates/earthbound-gaea-2026-11-01",
+      "treeSha256": "69f31e4dbbbce6f3bf45a0e6b0096f276af549d40d0fa35e9329f232332d6360",
+      "fileCount": 11
+    },
+    {
+      "path": "platform-updates/atlas-recovery-2026-11-01",
+      "treeSha256": "219b366ada58e554f8bd21c83da75e86beefb7fb1f9a8da79e2841bccba37885",
+      "fileCount": 7
+    },
+    {
+      "path": "platform-updates/earthbound-range-2026-11-01",
+      "treeSha256": "09501a4690dded975b8fb93d1e09019f6f32ca64887f279505a5228ef130c713",
+      "fileCount": 22
+    },
+    {
+      "path": "platform-updates/earthbound-pvp-2026-11-01",
+      "treeSha256": "2b5d464c7f3c4f4278e0ea2e01df8e64f21e9c3d6b00e551285057f0717235af",
+      "fileCount": 30
+    },
+    {
+      "path": "platform-updates/earthbound-tracers-2026-11-01",
+      "treeSha256": "ac8fb49696f27ada516a4125215c4b4bf1028103ec1ed2dc6a1e94e852fb1b43",
+      "fileCount": 31
+    },
+    {
+      "path": "platform-updates/earthbound-tactical-2026-11-01",
+      "treeSha256": "37ffc14b9a77a1573e4e393e30ccdfdd7d474661cddf9434a92c6fbcf3c51eb4",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-welcome-2026-11-01",
+      "treeSha256": "1524d2dffa4fc9443f2e9222438596a4eed528f6dc4102f7fd9df3064670f508",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-mouse-menu-2026-11-02",
+      "treeSha256": "527659dd7e5b20568c88e400e90b65033fb125611ab8f377278d9182eaf51bc0",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-ads-2026-11-02",
+      "treeSha256": "d90f8cabce888d2a793b6c3181ef85fc394dd7cf1272ab5794314ae72bfe7fdc",
+      "fileCount": 37
+    },
+    {
+      "path": "platform-updates/earthbound-bounty-2026-11-02",
+      "treeSha256": "ec7de1e1631d7857dba647df75d4b3a95df99b4da677b39da8c7a8aa8f397ce6",
+      "fileCount": 42
+    },
+    {
+      "path": "platform-updates/earthbound-weapons-2026-11-02",
+      "treeSha256": "1a367d78dd0e647e51e65b0b53ed688636c05716cf3db94223cf48ce9a23756d",
+      "fileCount": 50
+    },
+    {
+      "path": "platform-updates/earthbound-pvp-lobby-2026-11-02",
+      "treeSha256": "44363899077b4d7b266e44f317f9b587ced2ce9cae4785209a451715cda99517",
+      "fileCount": 86
+    }
+  ]
+}

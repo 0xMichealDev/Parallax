@@ -1,0 +1,26 @@
+{
+  "source": "Meshy text-to-3d",
+  "authoring": "Meshoptimizer local pre-simplification then Blender decimation, PBR texture reduction, ground-normalized origin",
+  "triangles": 24525,
+  "originalFaces": 7647046,
+  "bytes": 713788,
+  "bounds": {
+    "min": [
+      -2.200528144836426,
+      0.0,
+      -2.780846357345581
+    ],
+    "max": [
+      2.200528144836426,
+      4.800000190734863,
+      2.780846357345581
+    ]
+  },
+  "recommendedHeight": 4.8,
+  "origin": "Centered X/Z, ground at Y=0, up +Y",
+  "geometryTask": "01a19ee5-3b37-764e-b2cd-b6e8cdd66d06",
+  "textureTask": "01a19ee6-e730-750a-9730-9b7a41dc3be1",
+  "consumedCredits": 30,
+  "gameOnly": true,
+  "usage": "Static foliage and trunk cover. Suggested 4.8m height; opaque foliage geometry. Use limited nearby instances with distance culling."
+}
