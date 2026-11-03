@@ -1,5 +1,9 @@
 <p align="center">
 
+## Earthbound vehicle freeze and PvP return — v258
+
+Fixes the loadout redraw loop freezing both vehicles, and adds a clear Join PvP button to Free Roam. [Release notes](docs/updates/earthbound-vehicle-loop-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-vehicle-loop-2026-11-02/).
+
 ## Earthbound saves, combat poses and river traversal — v257
 
 Fixes loadout saving and the truck exit handoff; adds a clean rematch lobby, slower river wading, combat poses and visible player weapons. [Release notes](docs/updates/earthbound-save-rematch-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-save-rematch-2026-11-02/).

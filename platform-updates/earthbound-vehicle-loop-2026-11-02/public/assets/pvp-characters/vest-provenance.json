@@ -1,0 +1,40 @@
+{
+  "source": "Meshy text-to-3d",
+  "authoring": "Blender decimation, PBR texture reduction and normalized wearable alignment",
+  "triangles": 9999,
+  "bytes": 1325812,
+  "bounds": {
+    "min": [
+      -0.23593072593212128,
+      0,
+      -0.19287796318531036
+    ],
+    "max": [
+      0.23593072593212128,
+      0.6399999856948853,
+      0.19287796318531036
+    ]
+  },
+  "gameOnly": true,
+  "tasks": [
+    {
+      "task_id": "01a19ee5-82bf-7098-ac36-289e6787bc34",
+      "resource": "text-to-3d",
+      "consumedCredits": 20
+    },
+    {
+      "task_id": "01a19ee6-9098-75af-8719-9ac68f3f8b1e",
+      "resource": "text-to-3d",
+      "consumedCredits": 10
+    }
+  ],
+  "totalConsumedCredits": 30,
+  "sha256": "654c4db24fe3b2aaee24493adc2f0bdf3e5b6bbe8b602a163f5197d641e7af25",
+  "orientation": "Y up; X/Z centered; bottom at Y=0; front +Z verified in Blender render; runtime fit to animated character remains required",
+  "suggestedAttachment": {
+    "standingBaseY": 1,
+    "characterHeight": 1.8
+  },
+  "staticCosmetic": true,
+  "requiresRuntimeAttachment": true
+}

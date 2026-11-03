@@ -1,0 +1,27 @@
+{
+  "source": "Meshy text-to-3d",
+  "authoring": "Blender decimation, architectural weighted normals, PBR texture reduction, ground-normalized origin",
+  "triangles": 18000,
+  "originalFaces": 366358,
+  "bytes": 1758408,
+  "bounds": {
+    "min": [
+      -1.4340142011642456,
+      0.0,
+      -1.4550553560256958
+    ],
+    "max": [
+      1.4340142011642456,
+      3.200000047683716,
+      1.4550553560256958
+    ]
+  },
+  "recommendedHeight": 3.2,
+  "origin": "Centered X/Z, ground at Y=0, up +Y",
+  "geometryTask": "01a19ee4-99b3-74c9-9061-e3a4446dfc1e",
+  "textureTask": "01a19ee5-bf79-7423-bfc6-9ef31a5cca34",
+  "consumedCredits": 30,
+  "gameOnly": true,
+  "orientation": "Door faces +Z; roof equipment at top; solid closed-door structure",
+  "usage": "Solid exterior cover; not enterable. Suggested 3.2m height."
+}
