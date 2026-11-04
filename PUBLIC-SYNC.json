@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "earthbound-vehicle-loop-2026-11-02",
+  "latestRelease": "dashboard-journey-2026-11-03",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -149,6 +149,10 @@
     {
       "id": "earthbound-vehicle-loop-2026-11-02",
       "manifest": "platform-updates/earthbound-vehicle-loop-2026-11-02/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "dashboard-journey-2026-11-03",
+      "manifest": "platform-updates/dashboard-journey-2026-11-03/PUBLIC-SYNC.json"
     }
   ]
 }

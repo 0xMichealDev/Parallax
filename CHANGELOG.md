@@ -1,5 +1,9 @@
 # Changelog
 
+## Dashboard cinematic journey — v260
+
+Adds a dedicated cinematic dashboard section with scroll-controlled video, chapter navigation, and resilient motion/fallback controls. [Release notes](docs/updates/dashboard-journey-2026-11-03.md) · [Exact source snapshot](platform-updates/dashboard-journey-2026-11-03/).
+
 ## Earthbound vehicle freeze and PvP return — v258
 
 Fixes the loadout redraw loop freezing both vehicles, and adds a clear Join PvP button to Free Roam. [Release notes](docs/updates/earthbound-vehicle-loop-2026-11-02.md) · [Exact source snapshot](platform-updates/earthbound-vehicle-loop-2026-11-02/).

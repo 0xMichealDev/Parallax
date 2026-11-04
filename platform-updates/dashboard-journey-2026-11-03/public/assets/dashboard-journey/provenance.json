@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "asset": "PARALLAX dashboard orbital station journey",
+  "source": {
+    "generationId": "695d7605-0b58-4f9b-8ce7-f00db4797924",
+    "service": "VEED",
+    "provider": "Google",
+    "model": "Veo 3.1",
+    "approvedCredits": 310,
+    "spentCredits": 310,
+    "creditEvidence": "Confirmed by the generating parent task from the VEED generation workflow.",
+    "sha256": "8869b5ac8d6699540b1f2f07bb0a0cfc2a8f49a9b42a97d6189cbc4744f157a5",
+    "bytes": 9864826,
+    "width": 1280,
+    "height": 720,
+    "durationSeconds": 8,
+    "frameRate": 24,
+    "frameCount": 192,
+    "videoCodec": "H.264 High",
+    "audioCodec": "AAC LC",
+    "audioSampleRate": 48000,
+    "audioChannels": 2,
+    "fullDecode": "passed"
+  },
+  "promptSummary": "A continuous eight-second photorealistic orbital research station camera shot above a blue Earth-like planet. Slow forward dolly and outward arc from titanium structural ribs and glass windows to a wide station view. Detailed docking platforms, trusses, ceramic panels, muted cyan navigation lights, warm windows, docked shuttle, blue atmosphere and sunrise. Dark negative space at left for text. Graphite/teal palette, realistic materials, smooth camera with depth and parallax, no cuts/people/presenter/logos/text/UI overlays. Silent 16:9 background.",
+  "promptSummaryIsVerbatim": false,
+  "processing": {
+    "purpose": "Silent browser background with short closed GOPs and no B-frames for responsive forward and reverse seeking.",
+    "tool": "FFmpeg 7.1 with libx264 and libwebp",
+    "sourceAudioRemoved": true,
+    "frameRatePreserved": true,
+    "sourceResolutionPreservedForHd": true,
+    "visualReview": "Contact sheet inspected across all eight seconds. Continuous pullback from station details to a wider ring-station view above the blue cloudy planet. Four-second poster selected for composition."
+  },
+  "assets": {
+    "flight-hd.mp4": {
+      "sha256": "906094716542f7bfbf77b4c0bb039aa8152b65023cc4dab884beb03a568874e3",
+      "bytes": 11806802,
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 8,
+      "frameRate": 24,
+      "frameCount": 192,
+      "videoCodec": "H.264 High / avc1",
+      "pixelFormat": "yuv420p",
+      "audioStreams": 0,
+      "encoding": {
+        "encoder": "libx264",
+        "preset": "slow",
+        "crf": 19,
+        "closedGopFrames": 6,
+        "maxSeekDecodeSeconds": 0.25,
+        "bFrames": 0,
+        "sceneCutKeyframes": false,
+        "openGop": false,
+        "faststart": true,
+        "upscaled": false,
+        "scaling": null
+      },
+      "verification": {
+        "fullDecode": "passed",
+        "keyframeCount": 32,
+        "keyframesEveryFrames": 6,
+        "bFrameCount": 0,
+        "moovBeforeMdat": true
+      }
+    },
+    "flight-mobile.mp4": {
+      "sha256": "edea2ae67baad51f38b612998e0ccf689a60e837489c3d7e6c323fff4456c502",
+      "bytes": 3610216,
+      "width": 960,
+      "height": 540,
+      "durationSeconds": 8,
+      "frameRate": 24,
+      "frameCount": 192,
+      "videoCodec": "H.264 High / avc1",
+      "pixelFormat": "yuv420p",
+      "audioStreams": 0,
+      "encoding": {
+        "encoder": "libx264",
+        "preset": "slow",
+        "crf": 23,
+        "closedGopFrames": 12,
+        "maxSeekDecodeSeconds": 0.5,
+        "bFrames": 0,
+        "sceneCutKeyframes": false,
+        "openGop": false,
+        "faststart": true,
+        "upscaled": false,
+        "scaling": "Lanczos downscale to 960x540"
+      },
+      "verification": {
+        "fullDecode": "passed",
+        "keyframeCount": 16,
+        "keyframesEveryFrames": 12,
+        "bFrameCount": 0,
+        "moovBeforeMdat": true
+      }
+    },
+    "poster.webp": {
+      "sha256": "c7a8f58214d8f7ce2470201e40c33efdce2b38ffc7bd3cf8d3699f20c242285e",
+      "bytes": 157802,
+      "width": 1280,
+      "height": 720,
+      "format": "WebP",
+      "sourceTimeSeconds": 4,
+      "encoding": {
+        "quality": 88,
+        "compressionLevel": 6
+      },
+      "selectionReason": "The full station and Earth-like horizon are clear at four seconds; the opening frame is an extreme close-up with motion blur."
+    }
+  }
+}
