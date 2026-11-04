@@ -1,0 +1,12 @@
+/* Additive controls only. No model, terrain, or full-site theme replacement. */
+#universe .u-scope-course{margin:18px 0;padding:16px;border:1px solid #d9bd7b50;border-radius:10px;background:#d9bd7b0b}
+#universe .u-scope-course p{margin:9px 0 13px;line-height:1.65;overflow-wrap:anywhere}
+#universe #u-scope-course{width:100%;min-height:46px;white-space:normal;line-height:1.45}
+#universe .u-scope-course button:disabled{opacity:.55;cursor:not-allowed}
+#universe .u-rocket-plan-note{padding:12px 14px;border-left:2px solid #d9bd7b;background:#d9bd7b0a;line-height:1.65}
+#universe :is(.u-rocket-hud,.u-rocket-panel) button{min-height:44px;white-space:normal;overflow-wrap:anywhere}
+#universe :is(.u-rocket-resume,.u-rocket-retry){border-color:#d9bd7b;color:#e8d5ac}
+#universe :is(.u-scope-course,.u-rocket-panel,.u-rocket-hud) :is(button,select):focus-visible{outline:2px solid #dfbd78;outline-offset:3px}
+#universe :is(.u-scope,.u-rocket-panel){max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain}
+@media(max-width:600px){#universe .u-scope-course{padding:14px;margin:14px 0}#universe :is(.u-scope,.u-rocket-panel){max-width:calc(100vw - 24px);box-sizing:border-box}#universe #u-rocket-planet{font-size:16px;min-height:46px;max-width:100%;box-sizing:border-box}#universe .u-rocket-hud{max-width:calc(100vw - 24px);box-sizing:border-box}}
+@media(prefers-reduced-motion:reduce){#universe :is(.u-scope,.u-rocket-panel,.u-rocket-hud){scroll-behavior:auto}}

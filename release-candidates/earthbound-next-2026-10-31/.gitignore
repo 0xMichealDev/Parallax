@@ -1,0 +1,6 @@
+# Generated from the exact baseline by scripts/build-camp.py.
+public/camp-experience.js
+__pycache__/
+*.pyc
+# Browser test screenshots are fixtures, not production captures.
+evidence/*.png
