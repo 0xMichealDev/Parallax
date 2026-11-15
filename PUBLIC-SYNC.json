@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "dashboard-journey-2026-11-03",
+  "latestRelease": "dashboard-tour-2026-11-15",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -153,6 +153,10 @@
     {
       "id": "dashboard-journey-2026-11-03",
       "manifest": "platform-updates/dashboard-journey-2026-11-03/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "dashboard-tour-2026-11-15",
+      "manifest": "platform-updates/dashboard-tour-2026-11-15/PUBLIC-SYNC.json"
     }
   ]
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+## Nicole’s dashboard tour — v261
+
+The dashboard now offers **Watch the tour** beside **Skip to your tools**. Nicole introduces Terminal, Wallet Watch, Trenches and Replay in a video visitors can close without losing their place. [Release notes](docs/updates/dashboard-tour-2026-11-15.md) · [Exact source snapshot](platform-updates/dashboard-tour-2026-11-15/).
+
 ## Dashboard cinematic journey — v260
 
 Adds a dedicated cinematic dashboard section with scroll-controlled video, chapter navigation, and resilient motion/fallback controls. [Release notes](docs/updates/dashboard-journey-2026-11-03.md) · [Exact source snapshot](platform-updates/dashboard-journey-2026-11-03/).
