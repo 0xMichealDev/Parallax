@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PARALLAX — Your Solana workspace</title>
+<meta name="description" content="Research projects, discover and trade Solana tokens, follow wallets, and build a world of your own in the PARALLAX workspace.">
+<meta property="og:image" content="https://parallaxlaunch.live/assets/observatory-168.webp">
+<link rel="canonical" href="https://parallaxlaunch.live/">
+<link rel="icon" href="/favicon.svg">
+<link rel="preload" as="image" href="/assets/projects/parallax-horizon.webp"><link rel="stylesheet" href="/home-hub.css?v=112">
+<link rel="stylesheet" href="/official-token.css?v=126"></head>
+<body class="home-hub observatory-arrival parallax-entry">
+<main id="main" class="hub-main entry-main">
+  <section class="entry-hero" id="home-story" aria-labelledby="home-title">
+    <div class="entry-hero-inner">
+      <div class="entry-hero-copy">
+        <h1 id="home-title"><span>From token</span><br><em>to orbit.</em></h1>
+        <p>Open the $PRLX chart, board the Atlas shuttle and visit the Parallax Singularity.</p>
+        <div class="entry-hero-actions">
+          <a class="entry-primary" href="/terminal?token=8B2G4oiTKZKbSVTKPAP7Cfe6zAsEtrySCYcX9M2kpump&amp;tour=prlx">Try the $PRLX journey <span aria-hidden="true">→</span></a>
+          <a class="entry-secondary" href="/?view=dashboard">Your dashboard <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <section class="entry-console" aria-label="Explore the featured project">
+        <nav class="entry-views" aria-label="Project views">
+          <a id="project-preview-tab" href="#project-preview" aria-controls="project-preview">Project preview</a>
+          <a id="project-film-tab" href="#prlx-demo" aria-controls="prlx-demo"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 13 13"><path d="M3 1.8 11 6.5 3 11.2Z" fill="currentColor" stroke="none"/></svg>Watch Nicole</a>
+        </nav>
+        <div class="entry-view" id="project-preview" aria-labelledby="project-preview-tab">
+          <div class="entry-world-screen">
+            <img src="/assets/projects/parallax-horizon.webp" width="1000" height="1000" alt="The Parallax Singularity with a tilted, icy blue accretion disk." fetchpriority="high">
+            <canvas id="home-orbit-canvas" hidden tabindex="0" aria-label="Orbit the Parallax Singularity. Drag or use the arrow keys to rotate. Press Home to reset."></canvas>
+            <div class="entry-world-caption"><span>Project Atlas destination</span><h2>Parallax Singularity</h2></div>
+            <button type="button" id="home-orbit-toggle" hidden aria-controls="home-orbit-canvas" aria-pressed="false">Explore orbit</button>
+          </div>
+          <span id="home-orbit-status" role="status"></span>
+          <section class="official-token" id="official-token" aria-labelledby="official-token-title"><div class="official-token-heading"><h2 id="official-token-title">Official <span>$PRLX</span></h2><span class="official-token-network">SOLANA</span></div><div class="official-token-row"><div class="official-token-address"><span id="official-ca-label">Contract address</span><code id="official-ca" tabindex="0" aria-labelledby="official-ca-label">8B2G4oiTKZKbSVTKPAP7Cfe6zAsEtrySCYcX9M2kpump</code></div><button id="copy-ca" type="button" aria-label="Copy official PRLX contract address" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></svg><span>Copy CA</span></button></div><p id="copy-status" role="status" aria-live="polite"></p></section>
+          <section class="entry-market" aria-label="PRLX market snapshot">
+            <button id="prlx-market-check" type="button" hidden>Check market</button>
+            <p id="prlx-market-status" role="status" aria-live="polite"></p>
+            <div id="prlx-market-facts" hidden></div>
+          </section>
+        </div>
+        <div class="entry-view entry-film-view" id="prlx-demo" aria-labelledby="project-film-tab">
+          <video controls playsinline preload="none" poster="/assets/home/prlx-journey.webp" aria-label="Nicole’s $PRLX walkthrough from Terminal to Atlas">
+            <source src="/assets/home/prlx-journey.mp4" type="video/mp4">
+            <track kind="captions" src="/assets/home/prlx-journey.vtt" srclang="en" label="English" default>
+            <a href="/assets/home/prlx-journey.mp4">Open the $PRLX walkthrough</a>
+          </video>
+          <div class="entry-film-caption"><h2>Nicole’s walkthrough</h2><p>Follow $PRLX from the Terminal to its Atlas world.</p></div>
+        </div>
+      </section>
+    </div>
+  </section>
+  <div class="entry-content">
+    <section id="research" class="entry-lookup" aria-labelledby="lookup-title">
+      <div><h2 id="lookup-title">Find a token</h2><p>Look up a Solana contract or <a href="/terminal">browse Terminal</a>.</p></div>
+      <form id="home-token-search" action="/terminal" method="get">
+        <label class="entry-sr" for="home-token-input">Solana contract address</label>
+        <div class="entry-search-field">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.4" cy="10.4" r="6.4"/><path d="m15 15 5.5 5.5"/></svg>
+          <input id="home-token-input" name="token" type="text" placeholder="Paste a Solana contract address" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="100" pattern="[1-9A-HJ-NP-Za-km-z]{32,44}" required aria-describedby="home-token-help">
+          <button type="submit">Look up <span aria-hidden="true">→</span></button>
+        </div>
+        <p id="home-token-help" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section id="worlds" class="entry-worlds" aria-labelledby="worlds-title">
+      <h2 id="worlds-title">Explore the worlds</h2>
+      <div class="entry-world-grid">
+        <article class="entry-world entry-atlas">
+          <img src="/assets/home/examples/glacial-600.webp" srcset="/assets/home/examples/glacial-600.webp 600w, /assets/home/examples/glacial-1000.webp 1000w" sizes="(max-width: 720px) 95vw, 42vw" width="600" height="456" loading="lazy" decoding="async" alt="">
+          <div class="entry-world-copy"><h3>Project Atlas</h3><p>Board the shuttle and choose a project world to visit.</p><a href="/planets#atlas-port">Explore Atlas <span aria-hidden="true">↗</span></a></div>
+        </article>
+        <article class="entry-world entry-earth">
+          <img src="/assets/home/earthbound-arizona.webp" width="1000" height="500" loading="lazy" decoding="async" alt="">
+          <div class="entry-world-copy"><h3>Earthbound</h3><p>Join a multiplayer practice match or explore the launch site on foot.</p><div class="entry-game-links"><a href="/explore?bounty=1#walk-on-earth">Play PvP <span aria-hidden="true">↗</span></a><a href="/explore#walk-on-earth">Free Roam <span aria-hidden="true">↗</span></a></div></div>
+        </article>
+      </div>
+    </section>
+    <section id="track" class="entry-tools" aria-labelledby="entry-tools-title">
+      <div class="entry-section-head"><h2 id="entry-tools-title">Workspace tools</h2><a href="#tools">All tools <span aria-hidden="true">↓</span></a></div>
+      <div class="entry-tool-grid">
+        <a href="/control#wallet"><strong>Wallet Watch</strong><span>View balances and recent activity.</span><i aria-hidden="true">↗</i></a>
+        <a href="/replay"><strong>Trade Replay</strong><span>Trace a token’s past trades.</span><i aria-hidden="true">↗</i></a>
+        <a id="create" href="/studio"><strong>Creator Studio</strong><span>Design your project’s planet.</span><i aria-hidden="true">↗</i></a>
+      </div>
+    </section>
+    <details id="tools" class="hub-directory">
+<summary><span>All tools &amp; destinations</span><span aria-hidden="true">+</span></summary>
+<div class="hub-directory-grid">
+<div><h2>Research</h2><a href="/terminal">Terminal</a><a href="/trenches">Trenches · token discovery</a><a href="/replay">PARALLAX Replay</a><a href="/markets">Market research</a><a href="/control">Project Passports</a><a href="/control#compare">What changed?</a><a href="/control#vault">Saved reports</a><a href="/control#verify">Verify an export</a><a href="/control#wallet">Wallet Watch &amp; Telegram</a><a href="/terminal#wallet-replay">Wallet trade replay</a></div>
+<div><h2>Create &amp; explore</h2><a href="/projects">Project worlds</a><a href="/studio">Creator Studio</a><a href="/creator">My worlds</a><a href="/planets">Project Atlas</a><a href="/explore">Explore worlds</a><a href="/explore#walk-on-earth">Earthbound Free Roam</a><a href="/discover">Discovery Missions</a><a href="/premium">Premium Worlds</a><a href="/explore#scenario-heading">Launch Lab</a></div>
+<div><h2>Your workspace</h2><a href="/pro">Parallax Pro · Holder access</a><a href="/briefing">Your Briefing</a><a href="/following">Saved projects</a><a href="/?view=dashboard">Customize your dashboard</a><h2 class="hub-directory-subheading">The project</h2><a href="/meet">Meet Parallax</a><a href="/utility">$PRLX utility</a><a href="/roadmap">Roadmap</a><a href="/development">Development Fund</a></div>
+</div>
+</details>
+    <div class="entry-project" id="parallax-token">
+      <a class="entry-token-return" href="#official-token">Official $PRLX contract <span aria-hidden="true">↑</span></a>
+      <nav aria-label="Official token links"><a href="/utility">$PRLX utility</a><a href="https://dexscreener.com/solana/8B2G4oiTKZKbSVTKPAP7Cfe6zAsEtrySCYcX9M2kpump" target="_blank" rel="noopener noreferrer">DEX Screener ↗</a><a href="https://pump.fun/coin/8B2G4oiTKZKbSVTKPAP7Cfe6zAsEtrySCYcX9M2kpump" target="_blank" rel="noopener noreferrer">Pump.fun ↗</a></nav>
+    </div>
+    <footer class="entry-footer"><span>PARALLAX</span><nav aria-label="About Parallax"><a href="/meet">About</a><a href="/roadmap">Roadmap</a><a href="/development">Development Fund</a><a href="https://t.me/PRLXPortal" target="_blank" rel="noopener noreferrer">Telegram ↗</a></nav></footer>
+  </div>
+</main>
+<script src="/home-clean.js?v=126" defer></script>
+<script src="/home-market.js?v=105" defer></script>
+<script type="module" src="/prlx-market-preview.js?v=1"></script>
+<script src="/home-hub.js?v=263" defer></script>
+<script src="/home-orbit.js?v=263" defer></script>
+<script src="/site-stats.js?v=68" defer></script>
+</body></html>

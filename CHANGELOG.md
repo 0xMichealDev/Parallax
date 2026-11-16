@@ -1,5 +1,9 @@
 # Changelog
 
+## PARALLAX homepage walkthrough — v263
+
+The PARALLAX homepage follows $PRLX from its Terminal chart to Atlas Station and the Parallax Singularity. [Release notes](docs/updates/prlx-journey-2026-11-16.md) · [Exact source snapshot](platform-updates/prlx-journey-2026-11-16/).
+
 ## PARALLAX site refresh — v262
 
 The homepage brings token lookup, Project Atlas and Earthbound together. The workspace menu groups research and world destinations, and the dashboard offers direct paths to Wallet Watch, Replay and the Earthbound lobby. [Release notes](docs/updates/site-refresh-2026-11-15.md) · [Exact source snapshot](platform-updates/site-refresh-2026-11-15/).

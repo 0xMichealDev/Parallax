@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "site-refresh-2026-11-15",
+  "latestRelease": "prlx-journey-2026-11-16",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -161,6 +161,10 @@
     {
       "id": "site-refresh-2026-11-15",
       "manifest": "platform-updates/site-refresh-2026-11-15/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "prlx-journey-2026-11-16",
+      "manifest": "platform-updates/prlx-journey-2026-11-16/PUBLIC-SYNC.json"
     }
   ]
 }
