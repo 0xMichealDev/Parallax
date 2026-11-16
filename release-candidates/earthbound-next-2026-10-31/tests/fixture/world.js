@@ -1,0 +1,17 @@
+'use strict';
+const dialog=document.querySelector('#universe'),stage=document.querySelector('#u-stage'),R=window.ParallaxRocket;
+let moving=true,surface=true,walking=true;
+const events=[],arrivals=[],audioCalls=[],input={forward:0,touch:null};let arrivalMode='success',pendingResolve,pendingReject;
+window.ParallaxCampSound=class{resume(){audioCalls.push('resume');return Promise.resolve();}suspend(){audioCalls.push('suspend');}volume(){}level(...args){audioCalls.push(args);}riverLevel(){}step(){}};
+const ground={ready:true,state:{x:3.5,z:-10.6,yaw:0,pitch:.13,distance:0},flight:R.create(),boarding:{...R.BOARDING,name:'Starship boarding lift'},driving:false,camp:{fireOn:true,tentOpen:true,lanternOn:true,hands:true,flashlightOn:true,redLight:false,night:true,satellitesOn:false},points:{fire:[0,0,-8],tent:[-4.5,0,-10.5],telescope:[3.5,0,-13]},paths:[],trail:[],
+ setCamp(p){Object.assign(this.camp,p);},setHandVisible(v){this.handVisible=v;},project(){return{x:150,y:300,depth:2,distance:3};},routeTo(p){events.push({guide:p});return[p];},terrainHeight(){return 0;},riverLevel(){return .4;},watchSky(){},stoke(){this.camp.fireOn=true;},
+ visit(place){R.exit(this.flight);const positions={telescope:[3.5,-10.6],camp:[0,-2.8],fire:[0,-5.15],tent:[-4.5,-6.25]},p=positions[place];Object.assign(this.state,{x:p[0],z:p[1],seated:place==='fire'});},
+ // Same controller calls and poses as the reviewed v230 scene; rendering is deliberately absent.
+ boardRocket(){if(!R.board(this.flight,this.state,this.driving))return false;Object.assign(this.state,{x:R.BOARDING.x,z:R.BOARDING.z,yaw:2.20,pitch:-.10,seated:false});return true;},
+ launchRocket(p){return R.launch(this.flight,p);},
+ exitRocket(){R.exit(this.flight);Object.assign(this.state,{x:R.BOARDING.x,z:R.BOARDING.z+2,yaw:Math.PI,pitch:.03,seated:false});},
+ flightTick(dt){const old=this.flight.mode,result=R.tick(this.flight,dt);if(old==='lift'&&this.flight.mode==='cabin')Object.assign(this.state,{x:-110,z:-121.7,yaw:Math.PI,pitch:-.05,seated:false});return result;}
+};
+const camp=window.ParallaxCamp.create({dialog,stage,getGround:()=>ground,isSurface:()=>surface,isWalking:()=>walking,enterWalk:()=>{walking=true;},freeze:()=>{input.forward=0;input.touch=null;events.push('freeze');},draw:()=>{},status:t=>events.push(t),targets:[{name:'Andromeda',image:'PIA08787',description:'Deep-sky observation fixture.',credit:'Test fixture — image intentionally unavailable'}],depart:planet=>{arrivals.push(planet);if(arrivalMode==='throw')throw Error('fixture unavailable');if(arrivalMode==='reject')return Promise.reject(Error('fixture rejected'));if(arrivalMode==='pending')return new Promise((resolve,reject)=>{pendingResolve=resolve;pendingReject=reject;});if(arrivalMode==='false')return false;if(arrivalMode==='close'){camp.close();surface=false;}},motion:()=>moving});
+dialog.showModal();camp.update();
+window.test={ground,camp,events,arrivals,audioCalls,input,setMotion:v=>moving=v,setArrival:v=>arrivalMode=v,setSurface:v=>surface=v,resolve:v=>pendingResolve(v),reject:()=>pendingReject(Error('fixture rejected')),tick(n=1){for(let i=0;i<n;i++){camp.update();camp.tick(.1);}camp.update();},atLift(){Object.assign(ground.state,{x:R.BOARDING.x,z:R.BOARDING.z});camp.update();},close(){camp.close();dialog.close();},snapshot(){return{flight:{...ground.flight},state:{...ground.state},arrivals:[...arrivals],input:{...input},blocking:camp.blocking,observing:camp.observing,focus:document.activeElement?.id};}};

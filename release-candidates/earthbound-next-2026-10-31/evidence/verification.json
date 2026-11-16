@@ -1,0 +1,15 @@
+{
+  "status": "candidate-tested-not-deployed",
+  "nativeBaselineVersion": 230,
+  "nativeBaselineRevision": "d6a74578017735a9e10af104127157a3e0865ea7",
+  "suites": [
+    {"command": "node --test tests/journey.test.cjs", "passed": 31, "failed": 0, "scope": "Pure flight controller and journey helper tests"},
+    {"command": "python tests/patch_tests.py", "passed": 9, "failed": 0, "scope": "Baseline hashes, patch anchors, versioning and refusal on changed sources"},
+    {"command": "python tests/browser_journey.py", "passed": 48, "failed": 0, "scope": "Actual candidate camp/flight DOM controllers in Chromium; 24 scenarios at desktop width and 24 at phone width with touch emulation; simulated world, routing and audio"}
+  ],
+  "javascriptSyntaxChecks": "passed for all candidate public scripts",
+  "browserTransport": "Offline local document injection. Local HTTP navigation returned ERR_BLOCKED_BY_ADMINISTRATOR; no network or browser policy was changed.",
+  "notValidated": ["native application build", "full native source application", "real 3D scene rendering", "actual destination render/loading", "full-site CSS and CSP", "physical iPhone", "physical controller", "live GPU performance", "audio listening"],
+  "productionChanged": false,
+  "newMeshyTasks": 0
+}
