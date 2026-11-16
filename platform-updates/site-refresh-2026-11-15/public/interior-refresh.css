@@ -1,0 +1,198 @@
+/* The entry pages use the same type scale and reserve imagery for real destinations. */
+body.workspace-shell[data-workspace-page] :is(.atlas-intro, .creator-heading, .intro.editor-only, .hub-heading, .rp-heading, .research-page-copy, .projects-hero, .assistant-hero, .docs-hero) h1 {
+  margin: 0 0 10px;
+  font-family: var(--prlx-display);
+  font-size: clamp(32px, 3.5vw, 50px);
+  line-height: 1.06;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+body.workspace-shell[data-workspace-page] :is(.atlas-intro, .creator-heading, .intro.editor-only, .hub-heading, .rp-heading) {
+  padding-block: 14px 22px;
+  margin-block: 0 20px;
+}
+body.workspace-shell[data-workspace-page] :is(.atlas-intro, .creator-heading, .intro.editor-only, .rp-heading, .tr-workspace-title) > .prlx-chapter-art,
+body.workspace-shell.gold-workspace[data-workspace-page=control] .research-intro > .prlx-chapter-art {
+  display: none;
+}
+body.workspace-shell[data-workspace-page] :is(.research-page-copy, .projects-hero, .assistant-hero, .hub-heading, .creator-heading) p {
+  text-wrap: pretty;
+}
+body.workspace-shell[data-workspace-page=markets] .research-page-cover {
+  min-height: 0;
+  margin-block: 12px 18px;
+  box-shadow: none;
+}
+body.workspace-shell[data-workspace-page=markets] .research-page-copy {padding: clamp(20px, 3vw, 32px)}
+body.workspace-shell[data-workspace-page=markets] .research-page-art {min-height: 0; max-height: 210px; overflow: hidden}
+body.workspace-shell[data-workspace-page=markets] #market-search {margin-top: 0}
+body.workspace-shell[data-workspace-page=markets] .market-related {
+  margin: 16px 0 0;
+  border-block: 1px solid var(--prlx-line);
+}
+body.workspace-shell[data-workspace-page=markets] .market-related summary {
+  min-height: 44px;
+  padding: 12px 2px;
+  color: var(--prlx-secondary);
+  font: 600 14px/1.4 var(--prlx-ui);
+  cursor: pointer;
+}
+body.workspace-shell[data-workspace-page=markets] .market-related .research-subnav {margin: 0 0 14px}
+body.workspace-shell[data-workspace-page] :is(.obs-hero, .following-intro, .briefing-hero, .fund-hero, .discovery-hero, .pro-intro, .solhandle-main) h1 {
+  margin-block: 0 10px;
+  font-size: clamp(32px, 3.5vw, 50px);
+  line-height: 1.08;
+  letter-spacing: -.045em;
+}
+body.workspace-shell.gold-workspace[data-workspace-page=control] :is(#wallet, #passport, #verify, #compare, #vault) .research-intro {
+  padding-block: 18px;
+  margin-bottom: 8px;
+}
+body.workspace-shell.gold-workspace[data-workspace-page=control] :is(#wallet, #passport, #verify, #compare, #vault) .research-intro h1 {
+  font-size: clamp(31px, 3.2vw, 46px);
+  margin: 0 0 10px;
+}
+body.workspace-shell[data-workspace-page=replay] .rp-heading-actions > a {display: inline-flex}
+body.workspace-shell[data-workspace-page=replay] .rp-heading-actions {gap: 14px; padding-top: 0}
+body.workspace-shell[data-workspace-page=workspace] .hub-card h2 {margin-top: 0}
+body.workspace-shell[data-workspace-page=workspace] .hub-card {border-radius: 12px}
+body.workspace-shell[data-workspace-page=workspace] .hub-card .hub-primary {margin-top: 14px}
+body.workspace-shell[data-workspace-page=docs] .docs-prose {max-width: 75ch; font-size: 16px; line-height: 1.72}
+body.workspace-shell[data-workspace-page=docs] .docs-card p {max-width: 45ch; font-size: 14px; line-height: 1.55}
+body.workspace-shell[data-workspace-page=docs] .docs-card h3 {margin-top: 9px}
+body.workspace-shell[data-workspace-page=docs] .docs-hero {padding-block: 10px 22px}
+body.workspace-shell[data-workspace-page=projects] .projects-hero {padding-block: 18px 28px; gap: 22px}
+body.workspace-shell[data-workspace-page=projects] .projects-hero-art {min-height: 0; max-height: 225px; overflow: hidden}
+body.workspace-shell[data-workspace-page=projects] .projects-hero-art img {height: 100%; object-fit: cover}
+
+body.workspace-shell[data-workspace-page=planets] .atlas-intro {flex-wrap: wrap}
+body.workspace-shell[data-workspace-page=planets] .atlas-intro-actions {display: flex; flex-wrap: wrap; align-items: center; gap: 8px 15px}
+body.workspace-shell[data-workspace-page=planets] .atlas-intro-actions > :is(a, button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding-inline: 3px;
+  color: var(--prlx-secondary);
+  background: transparent;
+  border: 0;
+  font: 550 13px/1.35 var(--prlx-ui);
+  text-decoration: none;
+  cursor: pointer;
+}
+body.workspace-shell[data-workspace-page=planets] .atlas-intro-actions > .atlas-departure-link {
+  flex: 0 1 auto;
+  padding-inline: 16px;
+  color: #17212b;
+  border-radius: 8px;
+  background: #d0e4e2;
+  font-weight: 700;
+}
+body.workspace-shell[data-workspace-page=planets] .atlas-intro-actions > :is(a,button):hover {text-decoration: underline; text-underline-offset: 3px}
+body.workspace-shell[data-workspace-page=planets] :is(#port-departures, #community-atlas) {scroll-margin-top: 6rem}
+body.workspace-shell[data-workspace-page=planets] .port-booking {min-width: 0}
+body.workspace-shell[data-workspace-page=planets] #port-destination {width: 100%; max-width: 100%}
+body.workspace-shell[data-workspace-page=planets] #port-world-query {min-width: 0}
+body.workspace-shell[data-workspace-page=planets] .port-booking-actions {flex-wrap: wrap}
+.atlas-port[data-preview-only=true] .atlas-port-controls button:disabled,
+.atlas-port[data-preview-only=true] .atlas-port-stage canvas {visibility: hidden}
+.atlas-port[data-preview-only=true] .atlas-port-controls button:disabled {display: none}
+.atlas-port[data-preview-only=true] #port-retry {
+  min-height: 44px;
+  background: #cee7dd;
+  color: #132620;
+  border-color: #cee7dd;
+}
+
+body.workspace-shell[data-workspace-page=explore] #explore.research-explore-band {
+  display: block;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+body.workspace-shell[data-workspace-page=explore] #explore > .explore-entry {width: 100%; max-width: none}
+body.workspace-shell[data-workspace-page=explore] #explore-heading {
+  margin: 0 0 18px;
+  font: 550 clamp(33px, 4vw, 52px)/1.08 var(--prlx-display);
+  letter-spacing: -.045em;
+}
+.explore-destinations {display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px}
+.explore-destination {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  min-width: 0;
+  min-height: clamp(240px, 23vw, 320px);
+  padding: clamp(20px, 2.5vw, 34px);
+  border: 1px solid #8ea7b54d;
+  border-radius: 14px;
+  background-color: #0d1a22;
+  background-size: cover;
+  background-position: center;
+}
+.earthbound-destination {background-image: linear-gradient(0deg, #081015 1%, #081015dc 32%, #08101520 90%), url('/assets/home/earthbound-arizona.webp')}
+.atlas-destination {background-image: linear-gradient(0deg, #090e18 1%, #090e18d9 32%, #090e1824 90%), url('/assets/destinations/creator-planet.webp')}
+.explore-destination h3 {margin: 0 0 8px; color: #f4f8fb; font: 600 clamp(25px, 2.6vw, 35px)/1.1 var(--prlx-display); letter-spacing: -.045em}
+body.workspace-shell[data-workspace-page=explore] #explore .explore-destination p {margin: 0; max-width: 42ch; color: #deebee; font-size: 15px; line-height: 1.5; text-wrap: pretty}
+.explore-destination-actions, .explore-more {display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px}
+.explore-destination-actions {margin-top: 18px}
+.explore-destination-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 9px 15px;
+  border-radius: 7px;
+  border: 1px solid #788e99;
+  background: #0d1b23;
+  color: #eff8fa;
+  font: 600 14px/1.3 var(--prlx-ui);
+  text-decoration: none;
+}
+.explore-destination-actions a.explore-primary {background: #c8e5d7; border-color: #c8e5d7; color: #102822}
+.explore-destination-actions a:hover, .explore-more :is(a,button):hover {text-decoration: underline; text-underline-offset: 3px}
+.explore-more {gap: 0 24px; margin-top: 10px}
+.explore-more :is(a,button) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0;
+  color: var(--prlx-secondary);
+  background: transparent;
+  border: 0;
+  font: 550 13px/1.3 var(--prlx-ui);
+  text-decoration: none;
+  cursor: pointer;
+}
+@media (max-width: 720px) {
+  body.workspace-shell[data-workspace-page=explore] > footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px 18px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 22px 18px 96px;
+  }
+  body.workspace-shell[data-workspace-page=explore] > footer > * {
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .explore-destinations {grid-template-columns: 1fr; gap: 10px}
+  .explore-destination {min-height: 212px; padding: 20px}
+  .explore-more {gap: 0 18px}
+  body.workspace-shell[data-workspace-page=replay] .rp-heading {align-items: flex-start; flex-direction: column}
+  body.workspace-shell[data-workspace-page=planets] .atlas-intro {align-items: flex-start; flex-direction: column; gap: 15px}
+  body.workspace-shell[data-workspace-page=markets] .research-page-art {max-height: 140px}
+  body.workspace-shell[data-workspace-page=projects] .projects-hero-art {max-height: 170px}
+  body.workspace-shell[data-workspace-page] :is(#port-world-query, #port-destination, #docs-search, #market-address) {font-size: 16px}
+}

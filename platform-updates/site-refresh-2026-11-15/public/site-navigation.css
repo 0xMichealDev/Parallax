@@ -1,0 +1,40 @@
+/* Shared navigation on workspace pages. The trading rail keeps its compact layout. */
+body.prlx-system .dashboard-sidebar .brand {margin-bottom:22px}
+body.prlx-system .dashboard-sidebar nav a {min-height:40px;font-size:13px;line-height:1.35;color:#b0bdc9}
+body.prlx-system .dashboard-sidebar nav a svg {opacity:.9}
+body.prlx-system .dashboard-sidebar nav a[aria-current=page]::after {display:none}
+body.prlx-system .prlx-nav-group h2 {margin-bottom:5px;color:#92a2b1;font:550 11px/1.5 var(--prlx-ui);letter-spacing:.035em;text-transform:none}
+body.prlx-system .prlx-gold-link {background:none;margin-bottom:9px;padding-block:11px}
+body.prlx-system .prlx-gold-link span {font-size:12px;letter-spacing:0}
+body.prlx-system .prlx-footer-links {gap:2px 15px}
+body.prlx-system .prlx-footer-links a {padding-block:6px;color:#b0bdc9;font:500 12px/1.4 var(--prlx-ui)}
+body.prlx-system .prlx-footer-links a:last-child {color:#c5e9da}
+body.prlx-system .dashboard-breadcrumb span:first-child {font:500 11px/1.3 var(--prlx-ui);letter-spacing:.035em;color:#98a7b6;text-transform:capitalize}
+body.prlx-system .dashboard-breadcrumb span:last-child {font-size:14px;color:#e7eff4}
+body.prlx-system .workspace-header .dashboard-search {min-height:38px;font-size:13px;color:#c1ccd5}
+body.prlx-system .workspace-header :is(.account-link,#session-link) {min-height:38px;font-size:12px}
+body.prlx-system .dashboard-command {width:min(600px,calc(100% - 24px));overflow-y:auto;background:#121920}
+body.prlx-system .dashboard-command .command-heading {align-items:center;padding-bottom:12px;border:0}
+body.prlx-system .dashboard-command .command-heading h2 {margin:0;font:550 clamp(22px,3vw,29px)/1.15 var(--prlx-display);letter-spacing:-.035em}
+body.prlx-system .dashboard-command .command-search-label {color:#bccbd3;font:500 12px/1.4 var(--prlx-ui);letter-spacing:0;text-transform:none}
+body.prlx-system .dashboard-command input[type=search] {font:400 16px/1.5 var(--prlx-ui);color:#f3f7fa}
+body.prlx-system .dashboard-command #directory-scope {display:block;margin:10px 0 0 auto;padding:6px 2px;border:0;background:transparent;color:#ade8d4;font:550 13px/1.45 var(--prlx-ui);cursor:pointer}
+body.prlx-system .dashboard-command #directory-scope:hover {text-decoration:underline}
+body.prlx-system .dashboard-command .tool-directory {margin-top:6px;overscroll-behavior:contain}
+body.prlx-system .dashboard-command .tool-category>h3 {color:#a9b9c6;background:#162029;font:600 12px/1.45 var(--prlx-ui);letter-spacing:0;text-transform:none}
+body.prlx-system .dashboard-command .tool-directory[data-view=quick] .tool-category>h3 {display:none}
+body.prlx-system .dashboard-command .tool-directory[data-view=quick] .tool-category {margin:0;padding:0;border:0}
+body.prlx-system .dashboard-command .tool-category>a {min-height:52px;padding:8px 10px}
+body.prlx-system .dashboard-command .tool-category>a strong {font:550 14px/1.4 var(--prlx-ui);color:#edf4f7}
+body.prlx-system .dashboard-command .tool-category>a small {font:400 12px/1.4 var(--prlx-ui);color:#a9b9c5}
+body.prlx-system .dashboard-command [hidden] {display:none!important}
+body.prlx-system :is(.dashboard-sidebar,.dashboard-command,.mobile-dock,.workspace-header) :is(a,button):focus-visible {outline:2px solid #acf1d9;outline-offset:2px}
+@media (max-height:720px) {
+  body.prlx-system .dashboard-sidebar .brand {margin-bottom:10px}
+  body.prlx-system .dashboard-sidebar nav a {min-height:34px}
+}
+@media (max-width:900px) {
+  body.prlx-system>.mobile-dock a {font-size:11px;color:#a2b3c0}
+  body.prlx-system:not(.parallax-market-workspace):has(>.mobile-dock) .workspace-header .dashboard-search {display:none}
+  body.prlx-system .dashboard-command .command-heading>button {min-height:42px;min-width:42px}
+}

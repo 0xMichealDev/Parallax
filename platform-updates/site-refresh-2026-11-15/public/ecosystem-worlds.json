@@ -1,0 +1,109 @@
+[
+  {
+    "id": "solana", "name": "Solana", "label": "SOL / NETWORK", "category": "Blockchain & native token", "world": "Aurora Nexus", "accent": "#14f195", "secondary": "#9945ff",
+    "design": "p-0-earth-wide-clear", "style": {"realism":"terrain-v209","surface":"biolume","rings":"double","atmosphere":"ion","lighting":"studio","accent":"#9945ff","palette":{"primary":"#14f195","secondary":"#9945ff","ring":"#9945ff"}},
+    "image": "/assets/ecosystem/solana-v209.webp", "icon": "/assets/ecosystem/icons/solana-v209.webp", "shareImage": "/assets/ecosystem/share/solana-v209.png", "shareUrl": "https://parallaxlaunch.live/share/solana-v209", "map": "2k_earth_daymap.jpg",
+    "description": "Solana is a blockchain for applications and payments. SOL is its native token, used for network transaction fees and staking.",
+    "concept": "A natural ocean world with detailed coastlines, soft cloud systems, mint auroral light and restrained violet orbital rings.",
+    "facts": [{"title":"The network","text":"Applications and wallets interact with the Solana blockchain."},{"title":"The asset","text":"SOL is the network’s native token. It is used to pay transaction fees."},{"title":"Explore further","text":"Learn how SOL transfers work, then use the official documentation to understand the network."}],
+    "url": "https://solana.com/", "x": "https://x.com/solana", "source": "https://solana.com/learn/sending-and-receiving-sol", "sourceLabel": "Solana: sending and receiving SOL", "checkedAt": "2026-10-27",
+    "nextLabel": "Explore PARALLAX research", "nextUrl": "/markets"
+  },
+  {
+    "id": "solflare", "name": "Solflare", "label": "SOLANA WALLET", "category": "Self-custody wallet", "world": "Ember Vault", "accent": "#ff8b20", "secondary": "#ff4b00",
+    "design": "p-4-rocky-none-clear", "style": {"realism":"terrain-v209","surface":"volcanic","rings":"inherit","atmosphere":"vivid","lighting":"sunrise","accent":"#ff8b20","palette":{"primary":"#ff8b20","secondary":"#ff4b00","ring":"#ff8b20"}},
+    "image": "/assets/ecosystem/solflare-v209.webp", "icon": "/assets/ecosystem/icons/solflare-v209.webp", "shareImage": "/assets/ecosystem/share/solflare-v209.png", "shareUrl": "https://parallaxlaunch.live/share/solflare-v209", "map": "2k_mars.jpg",
+    "description": "Solflare is a self-custody wallet for Solana. It lets people manage assets, connect to Solana applications, and stake SOL.",
+    "concept": "A rugged volcanic world with dark basalt terrain, glowing orange fissures and a thin warm atmosphere.",
+    "facts": [{"title":"What it does","text":"A wallet provides an interface for managing assets and interacting with blockchain applications."},{"title":"Where it fits","text":"Solflare focuses on the Solana ecosystem, with mobile apps and a browser extension."},{"title":"Explore further","text":"Visit Solflare’s official site to learn about its wallet. This planet is an educational concept, not a wallet connection."}],
+    "url": "https://www.solflare.com/", "x": "https://x.com/solflare", "source": "https://docs.solflare.com/solflare", "sourceLabel": "Solflare: wallet introduction", "checkedAt": "2026-10-27",
+    "nextLabel": "Explore Wallet watch", "nextUrl": "/control#wallet"
+  },
+  {
+    "id": "phantom", "name": "Phantom", "label": "MULTICHAIN WALLET", "category": "Self-custody wallet", "world": "Violet Haven", "accent": "#ab9ff2", "secondary": "#6443c4",
+    "design": "p-20-rocky-thin-clear", "style": {"realism":"terrain-v209","surface":"glacial","rings":"dust","atmosphere":"ion","lighting":"studio","accent":"#ab9ff2","palette":{"primary":"#ab9ff2","secondary":"#6443c4","ring":"#ab9ff2"}},
+    "image": "/assets/ecosystem/phantom-v209.webp", "icon": "/assets/ecosystem/icons/phantom-v209.webp", "shareImage": "/assets/ecosystem/share/phantom-v209.png", "shareUrl": "https://parallaxlaunch.live/share/phantom-v209", "map": "2k_mars.jpg",
+    "description": "Phantom is a self-custody wallet that supports Solana and other networks. It provides tools for managing assets and exploring blockchain applications.",
+    "concept": "A textured glacial world with pale lavender ice, deep violet terrain and fine translucent dust rings.",
+    "facts": [{"title":"What it does","text":"Phantom brings assets and blockchain activity into a wallet interface."},{"title":"Where it fits","text":"Its supported networks include Solana. A wallet and a blockchain serve different roles."},{"title":"Explore further","text":"Use the official Phantom website to learn about the product and its supported networks."}],
+    "url": "https://phantom.com/", "x": "https://x.com/phantom", "source": "https://phantom.com/download", "sourceLabel": "Phantom: supported networks and apps", "checkedAt": "2026-10-27",
+    "nextLabel": "Explore Wallet watch", "nextUrl": "/control#wallet"
+  },
+  {
+    "id": "jupiter", "name": "Jupiter", "label": "SOLANA DEFI", "category": "Swaps & DeFi tools", "world": "Verdant Exchange", "accent": "#c7f284", "secondary": "#438b73",
+    "design": "p-15-gas-wide-clear", "style": {"realism":"terrain-v209","surface":"original","rings":"inherit","atmosphere":"vivid","lighting":"studio","accent":"#c7f284","palette":{"primary":"#c7f284","secondary":"#438b73","ring":"#c7f284"}},
+    "image": "/assets/ecosystem/jupiter-v209.webp", "icon": "/assets/ecosystem/icons/jupiter-v209.webp", "shareImage": "/assets/ecosystem/share/jupiter-v209.png", "shareUrl": "https://parallaxlaunch.live/share/jupiter-v209", "map": "2k_jupiter.jpg",
+    "description": "Jupiter offers token swaps and other DeFi tools on Solana. Its swap routing compares available routes for exchanging one token for another. JUP is its Solana governance token.",
+    "concept": "A physical gas giant with layered cream and jade cloud bands, turbulent storms and broad softly lit rings.",
+    "facts": [{"title":"What it does","text":"A token swap exchanges one asset for another. Jupiter provides tools for these exchanges on Solana."},{"title":"Where it fits","text":"Routing connects available sources of liquidity. This showcase does not execute swaps."},{"title":"Explore further","text":"Read Jupiter’s official product information and routing documentation. This is the project Jupiter, imagined as a world."}],
+    "url": "https://jup.ag/", "x": "https://x.com/JupiterExchange", "source": "https://developers.jup.ag/docs/swap", "sourceLabel": "Jupiter: swap routing documentation", "checkedAt": "2026-10-27",
+    "contractAddress": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN", "mintSource": "https://docs.jup.ag/user-docs/more/jup-token", "mintSourceLabel": "Jupiter: JUP governance token mint",
+    "nextLabel": "Research JUP in Terminal", "nextUrl": "/terminal?token=JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN"
+  },
+  {
+    "id": "bonk", "name": "BONK", "ticker": "BONK", "label": "BONK / SOLANA COMMUNITY", "category": "Solana community token", "sector": "token", "showcase": "community-showcase", "world": "Ember Frontier", "accent": "#ff9a4a", "secondary": "#9a3f22",
+    "design": "p-4-rocky-none-clear", "style": {"identity":"bonk","surface":"volcanic","rings":"none","atmosphere":"soft","lighting":"studio","accent":"#ff9a4a","palette":{"primary":"#ff9a4a","secondary":"#9a3f22","ring":"#f7bd83"}},
+    "image": "/assets/ecosystem/bonk-v209.webp", "icon": "/assets/ecosystem/icons/bonk-v209.webp", "shareImage": "/assets/ecosystem/share/bonk-v209.png", "shareUrl": "https://parallaxlaunch.live/share/bonk-v209", "map": "2k_mars.jpg",
+    "description": "A Solana community token with a dog-themed identity and an ecosystem spanning applications, digital art and community initiatives.",
+    "concept": "A realistic orange-and-cream Shiba-inspired world with fine fur, cream brow markings, natural eyes, a detailed muzzle and upright ears.",
+    "facts": [{"title":"The community","text":"BONK brings a dog-themed identity to projects and communities across the Solana ecosystem."},{"title":"The token","text":"This showcase follows BONK’s Solana mint. Use the full address below to open the same token in PARALLAX tools."},{"title":"The world","text":"Ember Frontier brings BONK’s orange-and-cream Shiba identity into orbit with fine fur, natural eyes and a detailed muzzle. The realistic world is an independent PARALLAX interpretation."}],
+    "url": "https://www.bonkcoin.com/", "x": "https://x.com/bonk_inu", "source": "https://www.bonkcoin.com/about", "sourceLabel": "BONK: project overview", "checkedAt": "2026-10-27",
+    "contractAddress": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263", "mintSource": "https://x.com/bonk_inu/status/1918333747684126747", "mintSourceLabel": "BONK’s official account: Solana mint",
+    "nextLabel": "Research BONK in Terminal", "nextUrl": "/terminal?token=DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+  },
+  {
+    "id": "pengu", "name": "Pudgy Penguins", "ticker": "PENGU", "label": "PENGU / SOLANA COMMUNITY", "category": "Solana community token", "sector": "token", "showcase": "community-showcase", "world": "Polar Haven", "accent": "#a8daee", "secondary": "#164b75",
+    "design": "p-22-rocky-none-clear", "style": {"identity":"pengu","surface":"glacial","rings":"none","atmosphere":"soft","lighting":"studio","accent":"#9cd8ef","palette":{"primary":"#d8f1fa","secondary":"#164b75","ring":"#b6e6f8"}},
+    "image": "/assets/ecosystem/pengu-v209.webp", "icon": "/assets/ecosystem/icons/pengu-v209.webp", "shareImage": "/assets/ecosystem/share/pengu-v209.png", "shareUrl": "https://parallaxlaunch.live/share/pengu-v209", "map": "2k_mars.jpg",
+    "description": "The community token of Pudgy Penguins, a character brand spanning digital collectibles, toys and entertainment. This showcase follows its Solana token.",
+    "concept": "A realistic penguin-inspired world with fine blue-gray feathers, a soft white face, dark reflective eyes, rounded flippers and a small orange beak.",
+    "facts": [{"title":"The community","text":"Pudgy Penguins brings its penguin characters to digital collectibles, physical products and entertainment."},{"title":"The token","text":"PENGU is the community’s token. This page links to the Solana mint, separately from the brand’s digital collectibles."},{"title":"The world","text":"Polar Haven gives the penguin-inspired world fine blue-gray feathers, a soft white face, reflective eyes and rounded flippers. It is an independent PARALLAX creation."}],
+    "url": "https://pengu.pudgypenguins.com/", "x": "https://x.com/pudgypenguins", "source": "https://pengu.pudgypenguins.com/", "sourceLabel": "Pudgy Penguins: PENGU", "checkedAt": "2026-10-27",
+    "contractAddress": "2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv", "mintSource": "https://x.com/pudgypenguins/status/1869004982328213543", "mintSourceLabel": "Pudgy Penguins’ official account: PENGU launch",
+    "nextLabel": "Research PENGU in Terminal", "nextUrl": "/terminal?token=2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv"
+  },
+  {
+    "id": "wif", "name": "dogwifhat", "ticker": "WIF", "label": "WIF / SOLANA COMMUNITY", "category": "Solana meme token", "sector": "token", "showcase": "community-showcase", "world": "Rose Dunes", "accent": "#d6a0ad", "secondary": "#bca88c",
+    "design": "p-23-rocky-none-clear", "style": {"identity":"wif","surface":"original","rings":"none","atmosphere":"soft","lighting":"studio","accent":"#d6a0ad","palette":{"primary":"#e1cfaf","secondary":"#956b76","ring":"#d6a0ad"}},
+    "image": "/assets/ecosystem/wif-v209.webp", "icon": "/assets/ecosystem/icons/wif-v209.webp", "shareImage": "/assets/ecosystem/share/wif-v209.png", "shareUrl": "https://parallaxlaunch.live/share/wif-v209", "map": "2k_mars.jpg",
+    "description": "A Solana meme token centered on the image of a dog wearing a knitted hat.",
+    "concept": "A realistic tan Shiba-inspired world with fine fur, calm eyes, a cream muzzle and a salmon-pink knitted hat with a textured rolled brim.",
+    "facts": [{"title":"The community","text":"dogwifhat centers on a familiar image: a dog wearing a knitted hat."},{"title":"The token","text":"WIF is a meme token on Solana. The official project site links to the mint used throughout this showcase."},{"title":"The world","text":"Rose Dunes pairs a realistic tan Shiba face with a salmon-pink knitted hat. Fine fur, calm eyes and the textured brim retain the familiar identity in this independent PARALLAX world."}],
+    "url": "https://dogwifcoin.org/", "x": "https://x.com/dogwifcoin", "source": "https://dogwifcoin.org/", "sourceLabel": "dogwifhat: official project site", "checkedAt": "2026-10-27",
+    "contractAddress": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm", "mintSource": "https://dogwifcoin.org/", "mintSourceLabel": "dogwifhat: official contract link",
+    "nextLabel": "Research WIF in Terminal", "nextUrl": "/terminal?token=EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
+  },
+  {
+    "id": "popcat", "name": "Popcat", "ticker": "POPCAT", "label": "POPCAT / SOLANA COMMUNITY", "category": "Solana meme token", "sector": "token", "showcase": "community-showcase", "world": "Copper Echo", "accent": "#e6b387", "secondary": "#8f4e34",
+    "design": "p-23-rocky-none-clear", "style": {"identity":"popcat","surface":"original","rings":"none","atmosphere":"soft","lighting":"studio","accent":"#e6b387","palette":{"primary":"#e6d5ba","secondary":"#a75b37","ring":"#e6a064"}},
+    "image": "/assets/ecosystem/popcat-v209.webp", "icon": "/assets/ecosystem/icons/popcat-v209.webp", "shareImage": "/assets/ecosystem/share/popcat-v209.png", "shareUrl": "https://parallaxlaunch.live/share/popcat-v209", "map": "2k_mars.jpg",
+    "description": "A Solana meme token inspired by Popcat, the internet meme featuring a cat whose mouth opens into an O shape.",
+    "concept": "A realistic cream-and-taupe cat world with fine fur, detailed ears and whiskers, a pink nose and the familiar wide open-mouth expression.",
+    "facts": [{"title":"The community","text":"Popcat takes its identity from the internet cat meme and its recognizable open-mouth expression."},{"title":"The token","text":"This showcase follows the Solana token address published on the Popcat project site."},{"title":"The world","text":"Copper Echo keeps the familiar open-mouth expression with realistic cream-and-taupe fur, detailed ears and fine whiskers. The cat world is an independent PARALLAX creation."}],
+    "url": "https://www.popcatsolana.xyz/", "source": "https://about.popcatsolana.xyz/", "sourceLabel": "Popcat: project background", "checkedAt": "2026-10-27",
+    "contractAddress": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr", "mintSource": "https://www.popcatsolana.xyz/", "mintSourceLabel": "Popcat: published Solana mint",
+    "nextLabel": "Research POPCAT in Terminal", "nextUrl": "/terminal?token=7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr"
+  },
+  {
+    "id": "sheeple", "name": "Sheeple", "ticker": "SHEEPLE", "label": "SHEEPLE / SOLANA COMMUNITY", "category": "Solana community token", "sector": "token", "showcase": "community-showcase", "world": "Flock Haven", "accent": "#a8d49a", "secondary": "#194d3d", "pairedWorld": "trump",
+    "design": "p-14-earth-none-clouds", "style": {"identity":"sheeple","surface":"original","rings":"none","atmosphere":"soft","lighting":"studio","accent":"#a8d49a","palette":{"primary":"#a8cfa0","secondary":"#163f35","ring":"#e7dfc7"}},
+    "image": "/assets/ecosystem/sheeple-v209.webp", "icon": "/assets/ecosystem/icons/sheeple-v209.webp", "shareImage": "/assets/ecosystem/share/sheeple-v209.png", "shareUrl": "https://parallaxlaunch.live/share/sheeple-v209", "map": "sheeple-fleece-v194.png",
+    "description": "A Solana community built around a camera-headed sheep and a watchful flock. Its official site identifies a primary SHEEPLE / OFFICIAL TRUMP pool while describing the projects as independent.",
+    "concept": "A realistic ivory sheep world with dense curled fleece, a detailed black security-camera head, a red collar, dark split hooves and a tilted solar panel.",
+    "facts": [{"title":"The flock","text":"Sheeple’s camera-headed sheep gives its flock a watchful identity. Explore its own website and community account below."},{"title":"The token","text":"The Solana mint below comes from Sheeple’s official token page. Its stated primary pool pairs SHEEPLE with OFFICIAL TRUMP; the projects are independent."},{"title":"The world","text":"Flock Haven brings Sheeple’s camera-headed sheep into orbit with realistic curled fleece, a detailed black CCTV head, a red collar, dark split hooves and a tilted solar panel. This world is an independent PARALLAX creation."}],
+    "url": "https://www.thesheepleflock.com/", "x": "https://x.com/TheSheepleFlock", "source": "https://www.thesheepleflock.com/token/", "sourceLabel": "Sheeple: token and pool information", "checkedAt": "2026-10-27",
+    "contractAddress": "TVvnJTedD3WgAPede2xUmRjweJqNdhCEgyjtKv3rCq4", "mintSource": "https://www.thesheepleflock.com/token/", "mintSourceLabel": "Sheeple: published Solana mint",
+    "nextLabel": "Research SHEEPLE in Terminal", "nextUrl": "/terminal?token=TVvnJTedD3WgAPede2xUmRjweJqNdhCEgyjtKv3rCq4"
+  },
+  {
+    "id": "trump", "name": "OFFICIAL TRUMP", "ticker": "TRUMP", "label": "TRUMP / SOLANA COMMUNITY", "category": "Solana meme token", "sector": "token", "showcase": "community-showcase", "world": "Gilded Frontier", "accent": "#d1b77d", "secondary": "#142641", "pairedWorld": "sheeple",
+    "design": "p-6-rocky-thin-clear", "style": {"identity":"trump","surface":"original","rings":"inherit","atmosphere":"soft","lighting":"studio","accent":"#d1b77d","palette":{"primary":"#526d8e","secondary":"#142641","ring":"#d1b77d"}},
+    "image": "/assets/ecosystem/trump-v209.webp", "icon": "/assets/ecosystem/icons/trump-v209.webp", "shareImage": "/assets/ecosystem/share/trump-v209.png", "shareUrl": "https://parallaxlaunch.live/share/trump-v209", "map": "2k_mars.jpg",
+    "description": "The Solana meme token identified as OFFICIAL TRUMP on gettrumpmemes.com. This showcase follows that exact mint, also named by Sheeple as its primary pool’s paired token.",
+    "concept": "A realistic portrait world with swept blond hair, natural skin detail, blue eyes, a navy suit, white collar, red tie and a slender champagne-gold orbit.",
+    "facts": [{"title":"The project","text":"The name OFFICIAL TRUMP identifies the token on its issuer’s website. The PARALLAX planet is independently created."},{"title":"The token","text":"Research links use the complete Solana mint published at gettrumpmemes.com. Sheeple identifies this token as its primary liquidity-pool pair."},{"title":"The world","text":"Gilded Frontier pairs a realistic portrait and swept blond hair with a navy suit, white collar, red tie and a slender gold orbit. This independent PARALLAX world neighbors Sheeple based on its published market pairing."}],
+    "url": "https://gettrumpmemes.com/", "source": "https://gettrumpmemes.com/", "sourceLabel": "OFFICIAL TRUMP: project website", "checkedAt": "2026-10-27",
+    "contractAddress": "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN", "mintSource": "https://gettrumpmemes.com/", "mintSourceLabel": "OFFICIAL TRUMP: published Solana mint",
+    "nextLabel": "Research TRUMP in Terminal", "nextUrl": "/terminal?token=6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN"
+  }
+]

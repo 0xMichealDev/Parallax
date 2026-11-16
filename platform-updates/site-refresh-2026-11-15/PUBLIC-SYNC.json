@@ -1,0 +1,628 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "site-refresh-2026-11-15",
+  "source": {
+    "repository": "native-sites",
+    "baselineCommit": "ff6cb770127eb8d455ddc2494ab5b2c1b963398d",
+    "commit": "1cd0a4cdd4adf56a15ce0386d5fe96149befd091",
+    "hostedVersion": 262
+  },
+  "reviewedPresentationSources": [
+    "app/docs-render.ts",
+    "app/explore/route.ts",
+    "app/workspace-shell.ts"
+  ],
+  "approvedExports": [
+    {
+      "source": "app/assistant.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/assistant.html",
+      "sha256": "7a9b959402ae2d4c5886af6201fea875b89c28c5ae88bbf26945e74caa8a40bc",
+      "bytes": 12377
+    },
+    {
+      "source": "app/briefing.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/briefing.html",
+      "sha256": "4505a7bdd39e9b372f752decf25860b1dc0c4a58fa35c76b9f39da826ff8abe7",
+      "bytes": 7401
+    },
+    {
+      "source": "app/control.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/control.html",
+      "sha256": "f19f9ff33a3d2a59373f3981a7067c079001981a9315f02177705ef3e5f51991",
+      "bytes": 24579
+    },
+    {
+      "source": "app/creator.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/creator.html",
+      "sha256": "7ad5f8dc6eb7860341ea4371833a61dc35fdffe886f3e3315f8f78a2332b9922",
+      "bytes": 14781
+    },
+    {
+      "source": "app/dashboard.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/dashboard.html",
+      "sha256": "5200b08ea56e937444b12f06c651c7b977c15a169b5574ff9298b091a18e8af2",
+      "bytes": 52363
+    },
+    {
+      "source": "app/development.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/development.html",
+      "sha256": "af87754cb98e908fc3939930f85fd72878af77fc52cf715315673d95dfb05a19",
+      "bytes": 5714
+    },
+    {
+      "source": "app/discover.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/discover.html",
+      "sha256": "b427e82c462f26825d4430db1204f4d61611c1d150665e7b69fa3d860a989513",
+      "bytes": 6156
+    },
+    {
+      "source": "app/docs-render.ts",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/docs-render.ts",
+      "sha256": "6c492442ef9f52b92d925df7f4a8d12534cf93db3f41a76d6e0c1b5aa31449b1",
+      "bytes": 6386
+    },
+    {
+      "source": "app/explore/route.ts",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/explore/route.ts",
+      "sha256": "5c4d814fd309363f175d7210d2d8a281f9b1acc830f9a796ebcd985f59783f52",
+      "bytes": 1655
+    },
+    {
+      "source": "app/following.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/following.html",
+      "sha256": "231b0c0f5e8bf6bed4bc7062e47c0370512f11406e4460c1c2b94b6782424412",
+      "bytes": 6622
+    },
+    {
+      "source": "app/home.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/home.html",
+      "sha256": "0317633d3e7cd68d928922b9f14f192ca8a106e9a8cd0b2fc04f1b5dfe66b91c",
+      "bytes": 7916
+    },
+    {
+      "source": "app/markets.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/markets.html",
+      "sha256": "a061770821b23a2ec6cb966f33fdc7f595fd1fe8622013cfff382f59ee81384e",
+      "bytes": 6294
+    },
+    {
+      "source": "app/meet.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/meet.html",
+      "sha256": "14a1a1e09455b60425c8ca2e1458fcea7117fea97993cbd6c5e64750dabbb6e5",
+      "bytes": 10249
+    },
+    {
+      "source": "app/observatory.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/observatory.html",
+      "sha256": "872215242cccbf6c9c0ca7fb7edd2932a6222ccfbf84e463141bf78df9dc3e43",
+      "bytes": 9935
+    },
+    {
+      "source": "app/planets.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/planets.html",
+      "sha256": "409bad9612efac4ef7328f17fbbbcbc4c6d9183ccf2a950ce89edd2f410fb737",
+      "bytes": 29133
+    },
+    {
+      "source": "app/premium.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/premium.html",
+      "sha256": "d84622b1330ef66b6decae7cfce3e8eaebaf0a1925b13d021d2609281f087d2d",
+      "bytes": 25435
+    },
+    {
+      "source": "app/pro.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/pro.html",
+      "sha256": "ac6a4821b9695ac35fcdeda1c187aad5daa8695a308b71b7eeee1639151ac8d1",
+      "bytes": 13106
+    },
+    {
+      "source": "app/projects.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/projects.html",
+      "sha256": "b24dd6b36ca3cc9913a23c8e81910c821dcbc11312c923a1da00f85b8042cccf",
+      "bytes": 10584
+    },
+    {
+      "source": "app/replay.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/replay.html",
+      "sha256": "08d8ea2b3bb18b2f4b90b3ee727c903e7c1a7fcb8080eb22be88595c256ed0da",
+      "bytes": 10653
+    },
+    {
+      "source": "app/roadmap.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/roadmap.html",
+      "sha256": "ec063ce9bcf9bef76f6068aa83baefa8a0176ca143297e8bd9305a5f960ba9ca",
+      "bytes": 13438
+    },
+    {
+      "source": "app/singularity.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/singularity.html",
+      "sha256": "62fa968fb1e98c4cd88243e209c5b682b3afe138d67e5c23a3a2cd2ef024df82",
+      "bytes": 9781
+    },
+    {
+      "source": "app/site.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/site.html",
+      "sha256": "6ac9de803a5d66ee1681322b804210ad989df22cfece8a6cac26dc687001dca7",
+      "bytes": 76233
+    },
+    {
+      "source": "app/solhandle.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/solhandle.html",
+      "sha256": "9fa9af7ede40dfe799dc6914053317276f976dcbfbf83d7b0b89f4861bf95b3c",
+      "bytes": 4167
+    },
+    {
+      "source": "app/studio.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/studio.html",
+      "sha256": "1ba985a8b455763078924342ea879787824c75ddfb78abb6ed032fa3f98c5e05",
+      "bytes": 16954
+    },
+    {
+      "source": "app/workspace-shell.ts",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/workspace-shell.ts",
+      "sha256": "2693febc0a7fed68896d84d91a43f5e2c8135fc02944a6e0bb2ccf6211198c6a",
+      "bytes": 24356
+    },
+    {
+      "source": "app/workspace.html",
+      "destination": "platform-updates/site-refresh-2026-11-15/app/workspace.html",
+      "sha256": "1cd1bdf5f58fb7e4247c994b7982260a94a97ffd72e90a493d3b0c98582e138f",
+      "bytes": 3064
+    },
+    {
+      "source": "public/assets/atlas-port/docking-platform/preview.webp",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/docking-platform/preview.webp",
+      "sha256": "5042f38ed60c41fe80bead0cea70e7470dc5b8a6ad8c61b481b96f068217cd30",
+      "bytes": 23040
+    },
+    {
+      "source": "public/assets/atlas-port/docking-platform/web.glb",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/docking-platform/web.glb",
+      "sha256": "75005b2295a741b4b9595c11e4be1f5dcdf7ba22fe1d3c2922de97ba0d83ef4e",
+      "bytes": 3191328
+    },
+    {
+      "source": "public/assets/atlas-port/habitat/preview.webp",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/habitat/preview.webp",
+      "sha256": "14ff444210c04d1b406707c81efcafb189accd3d4d7481a25e5c6da9f2102242",
+      "bytes": 34378
+    },
+    {
+      "source": "public/assets/atlas-port/habitat/web.glb",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/habitat/web.glb",
+      "sha256": "2f50e4b18caa448fabf0af44a2d564f06f4a58f2dd5a652177e28ddf28d111bd",
+      "bytes": 3157184
+    },
+    {
+      "source": "public/assets/atlas-port/observatory/preview.webp",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/observatory/preview.webp",
+      "sha256": "af9c35b1100e20f17f5796e720aa68ded4ae1bd01c3f24f61281e815b1790a62",
+      "bytes": 33564
+    },
+    {
+      "source": "public/assets/atlas-port/observatory/web.glb",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/observatory/web.glb",
+      "sha256": "f1667c89423028d7bb24ac6541b99c4d1a2c090ce37e0fe286447d83f58db373",
+      "bytes": 3018272
+    },
+    {
+      "source": "public/assets/atlas-port/satellite/preview.webp",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/satellite/preview.webp",
+      "sha256": "2eea7ce8ce98b41819bf333418e22f35132dc20d53130c4c9210b752fcecdd44",
+      "bytes": 26170
+    },
+    {
+      "source": "public/assets/atlas-port/satellite/web.glb",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/satellite/web.glb",
+      "sha256": "c787f1198e9cd62cf7d2fc26e36ecd13c8dd5e7a818c0f813b4572f3d3a194c0",
+      "bytes": 2814348
+    },
+    {
+      "source": "public/assets/atlas-port/shuttle/preview.webp",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/shuttle/preview.webp",
+      "sha256": "2c92ac25d5674bed5599d9cdcff990ee8e9cddced62ea1a6924fa69702d734c6",
+      "bytes": 10830
+    },
+    {
+      "source": "public/assets/atlas-port/shuttle/web.glb",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/shuttle/web.glb",
+      "sha256": "2fd5328c366f18620df1d43ae64765f701779684dd640c5772fdda53e045a6dc",
+      "bytes": 2662932
+    },
+    {
+      "source": "public/assets/atlas-port/station/preview.webp",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/station/preview.webp",
+      "sha256": "5c4444e766db35a15e0bb44a5d8f83ff339f860580063e58818044a71ad54293",
+      "bytes": 31406
+    },
+    {
+      "source": "public/assets/atlas-port/station/web.glb",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/atlas-port/station/web.glb",
+      "sha256": "e57197d32da9d4f089e116ca73412c2c1f81eb2dc2b40ac6160f36cf73b27857",
+      "bytes": 4100296
+    },
+    {
+      "source": "public/assets/home/earthbound-arizona.webp",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/assets/home/earthbound-arizona.webp",
+      "sha256": "3959d301773c1664f181bf695b037e7c14ade8302a8e17277a8f0c5cd172a703",
+      "bytes": 47122
+    },
+    {
+      "source": "public/atlas-port-core.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/atlas-port-core.js",
+      "sha256": "d8011c22d997747102c7ca286848838f0d305116178fbfabff9a5b4b148ff91f",
+      "bytes": 2342
+    },
+    {
+      "source": "public/atlas-port.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/atlas-port.js",
+      "sha256": "fa3d1fa9acc071f328fa9d2419bac88b3c441d3f480e9d3368cadb8ff7256114",
+      "bytes": 12979
+    },
+    {
+      "source": "public/community-atlas-core.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/community-atlas-core.js",
+      "sha256": "4c85f7a06417ff903c5b69cedfb41908dbbe79fb16cbf8c4969e6fba5b062445",
+      "bytes": 9670
+    },
+    {
+      "source": "public/community-atlas-scene.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/community-atlas-scene.js",
+      "sha256": "f6194cea17c3369fea8d2d50b7d19af6648afdbacfb9ffd3ea3bb8a7813517ae",
+      "bytes": 14099
+    },
+    {
+      "source": "public/community-atlas.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/community-atlas.js",
+      "sha256": "99aa1e5f98a85ca86c56d606668dd5ce71428a98dd9c18273ddf61718d192c19",
+      "bytes": 19918
+    },
+    {
+      "source": "public/dashboard-pro.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/dashboard-pro.js",
+      "sha256": "7cc6c553f81f5868d1a8c94279cd61ab73589edc3a9d844f5553e54023327695",
+      "bytes": 9429
+    },
+    {
+      "source": "public/ecosystem-worlds.json",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/ecosystem-worlds.json",
+      "sha256": "2b436b8b19f41b8bbfd0eb49f336428181ee8cb3baa9ccfa0b98731f628ca6c6",
+      "bytes": 19263
+    },
+    {
+      "source": "public/explore-clean.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/explore-clean.js",
+      "sha256": "4001983a70589d931f5e0c69a84101d62ad6e33306f30bb05ca495e3bd6ddcd5",
+      "bytes": 1979
+    },
+    {
+      "source": "public/gatto-world.json",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/gatto-world.json",
+      "sha256": "8f5efffb2732937a2075e0bf5df5b4b2e98c53aa98270feccd244a819cc29b7a",
+      "bytes": 2278
+    },
+    {
+      "source": "public/home-living.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/home-living.js",
+      "sha256": "e3039d90b46db5b6e970df1792c26c37beb839919039fd423be87409198b1751",
+      "bytes": 7686
+    },
+    {
+      "source": "public/interior-refresh.css",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/interior-refresh.css",
+      "sha256": "01b7bafc6cd606172d286643f863fd28ff6ecd9847add16beb233f5df10b6a75",
+      "bytes": 9363
+    },
+    {
+      "source": "public/parallax-system.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/parallax-system.js",
+      "sha256": "fb6cf74ac4d36ef1fad52431b694e0a5a29fd38e2bcd3929924561e5ed06d4b5",
+      "bytes": 3685
+    },
+    {
+      "source": "public/planet-atlas-scene.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/planet-atlas-scene.js",
+      "sha256": "a5ffe124b4cdad3209cb1757ef3b315b5ff71eb58262534daecf4adb0e59b476",
+      "bytes": 12014
+    },
+    {
+      "source": "public/planet-design.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/planet-design.js",
+      "sha256": "f21c5f99719ff866024e9c53a593f672a31b3dde9837695e3cfab44d139ce552",
+      "bytes": 4999
+    },
+    {
+      "source": "public/planet-renderer.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/planet-renderer.js",
+      "sha256": "6c562193f2d64793c05da8ae9838991fbdcd61e2339d8136d93d3fce4f5570af",
+      "bytes": 66806
+    },
+    {
+      "source": "public/premium-scene.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/premium-scene.js",
+      "sha256": "65da99fec7c789369793a62b923302c8cd15f4bb9a615e2fcfbbdfa956348e5d",
+      "bytes": 8491
+    },
+    {
+      "source": "public/rocket-model.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/rocket-model.js",
+      "sha256": "867976f8ab6c5f27422506f9961e9eb685874836a9dcbaa7d8cd3c41d3151430",
+      "bytes": 32508
+    },
+    {
+      "source": "public/site-navigation.css",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/site-navigation.css",
+      "sha256": "7d734fd3081ac84c787025207a0ae2e1047926cc8d15207f7f77bbf53c640736",
+      "bytes": 3739
+    },
+    {
+      "source": "public/solhandle-world.json",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/solhandle-world.json",
+      "sha256": "3e98aac4cb87ce271fc6d49e48665b733ec769b5b3f7bc55f1227fa6b6aaf6ab",
+      "bytes": 1288
+    },
+    {
+      "source": "public/studio.js",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/studio.js",
+      "sha256": "617c84277f5fc6fe7134b45612c7f73a04631fab1094ee500f5ef7412af2cce0",
+      "bytes": 37861
+    },
+    {
+      "source": "public/workspace-entry.css",
+      "destination": "platform-updates/site-refresh-2026-11-15/public/workspace-entry.css",
+      "sha256": "0a2fc0d6274cf412bc1751585d0256207c492cb9a802d32d6cd55ec7d153c714",
+      "bytes": 14368
+    },
+    {
+      "source": "tests/atlas-port.test.cjs",
+      "destination": "platform-updates/site-refresh-2026-11-15/tests/atlas-port.test.cjs",
+      "sha256": "cba1ec48557ad273304d4d640bb58f8c1e7169c70f58fd59c1853f3b30c7cf75",
+      "bytes": 5379
+    },
+    {
+      "source": "tests/community-atlas.test.cjs",
+      "destination": "platform-updates/site-refresh-2026-11-15/tests/community-atlas.test.cjs",
+      "sha256": "c4d77460a23a8fd0a28dcc6cd0a0da6c1c1dd88a9e795b0abf6e4dc36a7764d1",
+      "bytes": 37170
+    },
+    {
+      "source": "tests/helpers/premium-scene.cjs",
+      "destination": "platform-updates/site-refresh-2026-11-15/tests/helpers/premium-scene.cjs",
+      "sha256": "42e062cc88dd0271314a34184a5cfa523e9f880e41d1e38daab01437ddd316e8",
+      "bytes": 1117
+    },
+    {
+      "source": "tests/parallax-shell-interactions.test.cjs",
+      "destination": "platform-updates/site-refresh-2026-11-15/tests/parallax-shell-interactions.test.cjs",
+      "sha256": "d05b7b78fe8f18f0f3d5acee3f936797de3654c08a4543a6e93adc1afa147a0a",
+      "bytes": 16398
+    },
+    {
+      "source": "tests/studio.test.cjs",
+      "destination": "platform-updates/site-refresh-2026-11-15/tests/studio.test.cjs",
+      "sha256": "6db90850e8e4413746f517dbf46139c23923442e48f118d675d660c9d8fa19b1",
+      "bytes": 23067
+    }
+  ],
+  "sourceOnlyChanges": [],
+  "generatedFiles": [
+    {
+      "path": "platform-updates/site-refresh-2026-11-15/README.md",
+      "bytes": 498,
+      "sha256": "1bfbede228b8382fd5dbb6381e751c96a75738769c779322fea3a1401ee28156",
+      "purpose": "Site refresh release and verification guide"
+    }
+  ],
+  "retainedSnapshots": [
+    {
+      "path": "historical-platform",
+      "treeSha256": "2c409a5173aaa9c9288fa189e501c71dfe3012beb90d02e82cceb602c6f0b6df",
+      "fileCount": 210
+    },
+    {
+      "path": "platform-updates/gold-workspace-2026-10-29",
+      "treeSha256": "9e86abc3c9726f082645792425829e9ef99366a76ae5797e96a125da8e5153fe",
+      "fileCount": 68
+    },
+    {
+      "path": "platform-updates/market-data-recovery-2026-10-29",
+      "treeSha256": "d92414c8753e550654f0e451ae268e94a678a56f7bac95114e856fbc86b24adb",
+      "fileCount": 55
+    },
+    {
+      "path": "platform-updates/replay-2026-10-28",
+      "treeSha256": "5b0b57406958d3e48a97f8924bbd11f78acdcf073429813fa32427fc898f0a6f",
+      "fileCount": 40
+    },
+    {
+      "path": "platform-updates/terminal-2026-10-24",
+      "treeSha256": "77fc70000762864c2c176c1503e2ead5cfeab8bb74590e36e14863f567d25eef",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/terminal-trenches-2026-10-29",
+      "treeSha256": "8a64cd6bd0089da9571963111fbb4e245f957dcb601cc1902dff7c5ca37ef1d4",
+      "fileCount": 52
+    },
+    {
+      "path": "platform-updates/terminal-trenches-validation-2026-10-29",
+      "treeSha256": "09b13d652805b4fb7cda890bc8976db4d360c763e3ab7597728e2f73df2f2c14",
+      "fileCount": 6
+    },
+    {
+      "path": "platform-updates/terminal-trenches-workspace-2026-10-29",
+      "treeSha256": "58febbfa0a2b415ea00582463e5c32e84fcf59e341045b62372d24bd42752855",
+      "fileCount": 53
+    },
+    {
+      "path": "platform-updates/workspace-2026-10-25",
+      "treeSha256": "8fc3b0e32badd2b47e9431523fd8d9e32c9dfe22219b361b6b665ac0ed1c888d",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/worlds-expeditions-2026-10-28",
+      "treeSha256": "0bb245bb15e0f31a7fe6a8686950c6cf4491c608fe1bb1c48e7aada77c67db4b",
+      "fileCount": 457
+    },
+    {
+      "path": "platform-updates/earthbound-rocket-2026-10-30",
+      "treeSha256": "8c15c4a0e4fb1c9bcc4556654d427eb4a1356324eacab848d507f85e24c8dffc",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-rover-2026-10-31",
+      "treeSha256": "f752fbb066506c978612b6a36b584258ac2b0e176f04bf4146a1418591cab3af",
+      "fileCount": 17
+    },
+    {
+      "path": "platform-updates/earthbound-rover-validation-2026-10-31",
+      "treeSha256": "981bb09552316bea859cb833ce5d14ff7b1dc9702c008647450250749475ab4e",
+      "fileCount": 18
+    },
+    {
+      "path": "platform-updates/earthbound-realism-2026-10-31",
+      "treeSha256": "5265301cc6543fc9b6aba97dbcc07e041dc571128620276b7486c5f5ad9f6927",
+      "fileCount": 19
+    },
+    {
+      "path": "platform-updates/earthbound-camp-river-2026-10-31",
+      "treeSha256": "9fc6e75549634434f8440c56fd489d194d3849a997cebef61c4d2e9e18ffbd6f",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-compound-crash-2026-10-31",
+      "treeSha256": "75ee105ee942426e64d10c209c2f336687dd1cdca799d33b17dc9cd38d38e105",
+      "fileCount": 72
+    },
+    {
+      "path": "platform-updates/earthbound-entry-2026-10-31",
+      "treeSha256": "50254cc29f997b2c54f11168157a50d93e436249011041e44129ecbefbb9b5ca",
+      "fileCount": 33
+    },
+    {
+      "path": "platform-updates/starship-cabin-2026-10-31",
+      "treeSha256": "6a0e0c58ebb4d65f2568da072d83d9857eeab5139f5281db16d9dfb6915e6e86",
+      "fileCount": 34
+    },
+    {
+      "path": "platform-updates/starship-ascent-2026-10-31",
+      "treeSha256": "c0a8bee0419c7c1763d74cf3791a223ab0fe80b05c3f53cdabf6838f183632b9",
+      "fileCount": 36
+    },
+    {
+      "path": "platform-updates/atlas-port-2026-10-31",
+      "treeSha256": "73af2dc022dc7a990df32dd75064cd2f492be49cf7df5f1ee67db68746df9226",
+      "fileCount": 54
+    },
+    {
+      "path": "platform-updates/atlas-departures-2026-11-01",
+      "treeSha256": "5527a31fe50bffdc158e943f90a09ff3d1098c88690b6abf43079d79d1a678d1",
+      "fileCount": 47
+    },
+    {
+      "path": "platform-updates/home-command-2026-11-01",
+      "treeSha256": "1c9a25209b467ea49f4b3df1dbe52961d39c4ec643d651764ade270ddc3477e0",
+      "fileCount": 28
+    },
+    {
+      "path": "platform-updates/renderer-lights-2026-11-01",
+      "treeSha256": "d3d9c90cf3595c358d733cec9d81061482a9865d2430c2951a9f9077791210b2",
+      "fileCount": 10
+    },
+    {
+      "path": "platform-updates/atlas-cinematic-2026-11-01",
+      "treeSha256": "8a5089a14e9bbb349d52ad6630e90a34f1fd01778087c2ffb7f5c3a6c062e0f2",
+      "fileCount": 14
+    },
+    {
+      "path": "platform-updates/earthbound-detail-2026-11-01",
+      "treeSha256": "628f0aad6ab41ec0f6922d4620e8253c7321ebdc85a3777d704399cdd7737e56",
+      "fileCount": 23
+    },
+    {
+      "path": "platform-updates/earthbound-gaea-2026-11-01",
+      "treeSha256": "69f31e4dbbbce6f3bf45a0e6b0096f276af549d40d0fa35e9329f232332d6360",
+      "fileCount": 11
+    },
+    {
+      "path": "platform-updates/atlas-recovery-2026-11-01",
+      "treeSha256": "219b366ada58e554f8bd21c83da75e86beefb7fb1f9a8da79e2841bccba37885",
+      "fileCount": 7
+    },
+    {
+      "path": "platform-updates/earthbound-range-2026-11-01",
+      "treeSha256": "09501a4690dded975b8fb93d1e09019f6f32ca64887f279505a5228ef130c713",
+      "fileCount": 22
+    },
+    {
+      "path": "platform-updates/earthbound-pvp-2026-11-01",
+      "treeSha256": "2b5d464c7f3c4f4278e0ea2e01df8e64f21e9c3d6b00e551285057f0717235af",
+      "fileCount": 30
+    },
+    {
+      "path": "platform-updates/earthbound-tracers-2026-11-01",
+      "treeSha256": "ac8fb49696f27ada516a4125215c4b4bf1028103ec1ed2dc6a1e94e852fb1b43",
+      "fileCount": 31
+    },
+    {
+      "path": "platform-updates/earthbound-tactical-2026-11-01",
+      "treeSha256": "37ffc14b9a77a1573e4e393e30ccdfdd7d474661cddf9434a92c6fbcf3c51eb4",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-welcome-2026-11-01",
+      "treeSha256": "1524d2dffa4fc9443f2e9222438596a4eed528f6dc4102f7fd9df3064670f508",
+      "fileCount": 35
+    },
+    {
+      "path": "platform-updates/earthbound-mouse-menu-2026-11-02",
+      "treeSha256": "527659dd7e5b20568c88e400e90b65033fb125611ab8f377278d9182eaf51bc0",
+      "fileCount": 38
+    },
+    {
+      "path": "platform-updates/earthbound-ads-2026-11-02",
+      "treeSha256": "d90f8cabce888d2a793b6c3181ef85fc394dd7cf1272ab5794314ae72bfe7fdc",
+      "fileCount": 37
+    },
+    {
+      "path": "platform-updates/earthbound-bounty-2026-11-02",
+      "treeSha256": "ec7de1e1631d7857dba647df75d4b3a95df99b4da677b39da8c7a8aa8f397ce6",
+      "fileCount": 42
+    },
+    {
+      "path": "platform-updates/earthbound-weapons-2026-11-02",
+      "treeSha256": "1a367d78dd0e647e51e65b0b53ed688636c05716cf3db94223cf48ce9a23756d",
+      "fileCount": 50
+    },
+    {
+      "path": "platform-updates/earthbound-pvp-lobby-2026-11-02",
+      "treeSha256": "44363899077b4d7b266e44f317f9b587ced2ce9cae4785209a451715cda99517",
+      "fileCount": 86
+    },
+    {
+      "path": "platform-updates/earthbound-traversal-2026-11-02",
+      "treeSha256": "3efd00aa6d0fc0b4b5b9300dbede1a45c3775551be5437046894bd331605a76e",
+      "fileCount": 84
+    },
+    {
+      "path": "platform-updates/earthbound-save-rematch-2026-11-02",
+      "treeSha256": "5e8b25040070410d092e5c6fcde46d90a05f0343bdfea332bf0642718d09bc4b",
+      "fileCount": 98
+    },
+    {
+      "path": "platform-updates/earthbound-vehicle-loop-2026-11-02",
+      "treeSha256": "1583bf05758aa3f063a0ad3bd94e0013a9daf34c92801379e99e2265defe72ce",
+      "fileCount": 96
+    },
+    {
+      "path": "platform-updates/dashboard-journey-2026-11-03",
+      "treeSha256": "378dd1072b2bacc7d0f95810119231a222ab2eff6084ac7a021d02ba87c67e13",
+      "fileCount": 26
+    },
+    {
+      "path": "platform-updates/dashboard-tour-2026-11-15",
+      "treeSha256": "bb1c8b121dab6e5d9d6f7f35f56c34f7a668f00e2836a9dbefa552f6d6d354b8",
+      "fileCount": 8
+    }
+  ]
+}

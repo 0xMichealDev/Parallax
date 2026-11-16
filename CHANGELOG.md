@@ -1,5 +1,9 @@
 # Changelog
 
+## PARALLAX site refresh — v262
+
+The homepage brings token lookup, Project Atlas and Earthbound together. The workspace menu groups research and world destinations, and the dashboard offers direct paths to Wallet Watch, Replay and the Earthbound lobby. [Release notes](docs/updates/site-refresh-2026-11-15.md) · [Exact source snapshot](platform-updates/site-refresh-2026-11-15/).
+
 ## Nicole’s dashboard tour — v261
 
 The dashboard now offers **Watch the tour** beside **Skip to your tools**. Nicole introduces Terminal, Wallet Watch, Trenches and Replay in a video visitors can close without losing their place. [Release notes](docs/updates/dashboard-tour-2026-11-15.md) · [Exact source snapshot](platform-updates/dashboard-tour-2026-11-15/).

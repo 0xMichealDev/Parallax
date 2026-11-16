@@ -1,0 +1,27 @@
+{
+  "id": "c8710130-3e0d-4488-9417-d25e211dd49f",
+  "creatorWallet": "J74MG4iquJiMnQXfDQkm3g57ZDPWQNGqvGZM126ZVR2y",
+  "name": "SolHandle",
+  "world": "The Identity World",
+  "label": "@HANDLE / IDENTITY ON SOLANA",
+  "tagline": "Your identity. Yours.",
+  "design": "p-8-rocky-thin-clear",
+  "style": {
+    "realism": "terrain-v209", "theme": "orbit", "accent": "#5cdff7", "moons": 0,
+    "identity": "solhandle", "surface": "obsidian", "rings": "double",
+    "atmosphere": "ion", "lighting": "studio",
+    "palette": {"primary": "#5cdff7", "secondary": "#b894f9", "ring": "#b894f9"}
+  },
+  "logo": "/assets/globe/solhandle-emblem-v198.png",
+  "image": "/assets/ecosystem/solhandle-v209.webp",
+  "icon": "/assets/ecosystem/icons/solhandle-v209.webp",
+  "shareImage": "/assets/ecosystem/share/solhandle-v209.png",
+  "shareUrl": "https://parallaxlaunch.live/share/solhandle-v209",
+  "imageAlt": "SolHandle’s cyan and violet identity emblem on a textured obsidian world with physically shaded terrain and two fine orbital rings.",
+  "url": "https://solhandle.io",
+  "x": "https://x.com/Solhandle",
+  "developers": "https://solhandle.io/developers",
+  "source": "https://solhandle.io/faq",
+  "integrationSource": "https://solhandle.io/integrations/parallax",
+  "reviewedAt": "2026-10-26"
+}

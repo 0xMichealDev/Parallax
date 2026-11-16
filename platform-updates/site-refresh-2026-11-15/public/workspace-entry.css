@@ -1,0 +1,305 @@
+/* Public home */
+.parallax-entry #main {
+  --entry-ink: #eff4f4;
+  --entry-muted: #acbac4;
+  --entry-mint: #bcf1d9;
+  --entry-line: #29353c;
+  --entry-gutter: clamp(20px, 5vw, 84px);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: #0b1015;
+  color: var(--entry-ink);
+  font-family: var(--prlx-ui, Inter, system-ui, sans-serif);
+}
+.parallax-entry .entry-hero {
+  display: grid;
+  align-items: center;
+  position: relative;
+  min-height: clamp(390px, 49vw, 540px);
+  isolation: isolate;
+  overflow: hidden;
+  background: #111d27;
+  border-bottom: 1px solid #35434c;
+}
+.parallax-entry .entry-hero-image,
+.parallax-entry .entry-world img {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.parallax-entry .entry-hero-image { object-position: 50% 53%; }
+.parallax-entry .entry-hero::after,
+.parallax-entry .entry-world::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+}
+.parallax-entry .entry-hero::after {
+  background: linear-gradient(90deg, #071019ef 0%, #071019bc 29%, #07101933 61%, transparent 80%),
+    linear-gradient(0deg, #08101877, transparent 38%);
+}
+.parallax-entry .entry-hero-inner,
+.parallax-entry .entry-content {
+  width: min(100%, 1460px);
+  margin-inline: auto;
+  padding-inline: var(--entry-gutter);
+}
+.parallax-entry .entry-hero-inner { padding-block: 56px; }
+.parallax-entry .entry-hero-copy h1 {
+  margin: 0;
+  color: var(--entry-ink);
+  font-size: clamp(62px, 6.2vw, 105px);
+  font-weight: 530;
+  line-height: .99;
+  letter-spacing: -.069em;
+  text-transform: none;
+}
+.parallax-entry .entry-hero-copy h1 em,
+.immersive-dashboard .journey-copy em { font-style: normal; color: #c2ecd9; }
+.parallax-entry .entry-hero-copy p {
+  max-width: 37ch;
+  margin: 24px 0 0;
+  color: #d4dee1;
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.48;
+  text-wrap: pretty;
+}
+.parallax-entry .entry-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.parallax-entry .entry-hero-actions a,
+.parallax-entry .entry-search-field button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  min-height: 46px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: 600 14px/1.4 var(--prlx-ui, Inter, system-ui, sans-serif);
+  text-decoration: none;
+}
+.parallax-entry .entry-primary,
+.parallax-entry .entry-search-field button { color: #09231b; background: var(--entry-mint); }
+.parallax-entry .entry-primary:hover,
+.parallax-entry .entry-search-field button:hover { background: #dcffec; }
+.parallax-entry .entry-hero-actions .entry-secondary { color: #e0e9e8; background: #0b151dd9; border-color: #627279; }
+.parallax-entry .entry-hero-actions .entry-secondary:hover { border-color: var(--entry-mint); }
+.parallax-entry .entry-content h2,
+.immersive-dashboard .entry-panel-heading h2,
+.immersive-dashboard .journey-section-heading h2 {
+  margin: 0;
+  color: #e9f0ef;
+  font: 550 clamp(24px, 2.3vw, 36px)/1.16 var(--prlx-ui, Inter, system-ui, sans-serif);
+  letter-spacing: -.05em;
+}
+.parallax-entry .entry-content :is(section, details, [id]) { scroll-margin-top: 95px; }
+.parallax-entry .entry-lookup {
+  display: grid;
+  grid-template-columns: minmax(210px, 3fr) minmax(300px, 5fr);
+  align-items: center;
+  gap: 20px;
+  padding: 25px 0;
+  border-bottom: 1px solid var(--entry-line);
+}
+.parallax-entry .entry-lookup h2 { font-size: clamp(21px, 1.9vw, 28px); }
+.parallax-entry .entry-lookup p { margin: 6px 0 0; font-size: 14px; line-height: 1.5; color: var(--entry-muted); }
+.parallax-entry .entry-lookup #home-token-help:empty { display: none; }
+.parallax-entry .entry-lookup form { width: 100%; margin: 0; }
+.parallax-entry .entry-search-field {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  padding: 5px 5px 5px 16px;
+  border: 1px solid #46555f;
+  border-radius: 10px;
+  background: #121a21;
+}
+.parallax-entry .entry-search-field:focus-within { border-color: var(--entry-mint); }
+.parallax-entry .entry-search-field svg { flex: none; color: #a8bec4; }
+.parallax-entry .entry-search-field input {
+  flex: 1 1 12rem;
+  min-width: 0;
+  width: 100%;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--entry-ink);
+  font: 400 16px/1.5 var(--prlx-ui, Inter, system-ui, sans-serif);
+}
+.parallax-entry .entry-search-field input::placeholder { color: #a7b7c0; opacity: 1; }
+.parallax-entry .entry-search-field button { min-height: 44px; white-space: nowrap; cursor: pointer; }
+.parallax-entry .entry-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.parallax-entry .entry-worlds,
+.parallax-entry .entry-tools { padding-top: clamp(32px, 4vw, 57px); }
+.parallax-entry .entry-world-grid,
+.parallax-entry .entry-tool-grid { display: grid; gap: 16px; margin-top: 20px; }
+.parallax-entry .entry-world-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.parallax-entry .entry-world {
+  display: flex;
+  align-items: end;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-width: 0;
+  min-height: clamp(222px, 22vw, 304px);
+  border: 1px solid #3a4951;
+  border-radius: 13px;
+  background: #101a22;
+}
+.parallax-entry .entry-world::after { background: linear-gradient(0deg, #071017f5, #071017bf 32%, #07101708 88%); }
+.parallax-entry .entry-atlas img { object-position: center 39%; }
+.parallax-entry .entry-world-copy { padding: clamp(18px, 2vw, 30px); }
+.parallax-entry .entry-world h3 { margin: 0; color: #f2f7f6; font-size: clamp(24px, 2.2vw, 33px); letter-spacing: -.045em; font-weight: 550; line-height: 1.15; }
+.parallax-entry .entry-world p { margin: 6px 0 1px; max-width: 40ch; color: #d2dcdf; font-size: 14px; line-height: 1.45; text-wrap: pretty; }
+.parallax-entry .entry-world a,
+.parallax-entry .entry-section-head a,
+.parallax-entry .entry-project nav a,
+.parallax-entry .entry-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  color: #c4f1dd;
+  font-size: 14px;
+  font-weight: 550;
+}
+.parallax-entry .entry-world a:hover,
+.parallax-entry .entry-section-head a:hover,
+.parallax-entry .entry-project nav a:hover,
+.parallax-entry .entry-footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.parallax-entry .entry-game-links,
+.parallax-entry .entry-project nav,
+.parallax-entry .entry-footer nav { display: flex; flex-wrap: wrap; gap: 0 22px; }
+.parallax-entry .entry-section-head,
+.parallax-entry .entry-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.parallax-entry .entry-tool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.parallax-entry .entry-tool-grid a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px 15px;
+  padding: 18px 20px;
+  border: 1px solid var(--entry-line);
+  border-radius: 9px;
+  background: #11191f;
+  text-decoration: none;
+}
+.parallax-entry .entry-tool-grid a:hover { background: #172329; border-color: #75988c; }
+.parallax-entry .entry-tool-grid strong { color: var(--entry-ink); font-size: 17px; font-weight: 570; line-height: 1.3; }
+.parallax-entry .entry-tool-grid a>span { grid-column: 1/3; color: var(--entry-muted); font-size: 14px; line-height: 1.45; }
+.parallax-entry .entry-tool-grid i { grid-area: 1/2; color: var(--entry-mint); font-size: 18px; line-height: 1; font-style: normal; }
+.parallax-entry .entry-content .hub-directory {
+  margin: 18px 0 36px;
+  padding: 0;
+  border: 1px solid var(--entry-line);
+  border-radius: 9px;
+  background: #10171d;
+  box-shadow: none;
+}
+.parallax-entry .hub-directory summary { min-height: 52px; padding: 12px 19px; color: #dde7e6; font: 550 15px/1.4 var(--prlx-ui, Inter, system-ui, sans-serif); }
+.parallax-entry .hub-directory summary>span:last-child { margin-left: auto; }
+.parallax-entry .hub-directory-grid { padding: 22px; }
+.parallax-entry .hub-directory-grid h2 { color: #d4e6df; font-size: 16px; letter-spacing: -.02em; }
+.parallax-entry .hub-directory-grid a { color: #bcc9ce; font-size: 14px; min-height: 40px; }
+.parallax-entry .entry-project { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; border-block: 1px solid var(--entry-line); padding: 18px 0; }
+.parallax-entry .entry-project .official-token { margin: 0; max-width: 580px; border: 0; padding: 0; background: none; box-shadow: none; }
+.parallax-entry .entry-project .official-token-heading { justify-content: start; gap: 8px; margin: 0 0 7px; }
+.parallax-entry .entry-project .official-token-heading h2 { font: 560 16px/1.4 var(--prlx-ui, Inter, system-ui, sans-serif); letter-spacing: -.01em; }
+.parallax-entry #copy-status:empty { display: none; }
+.parallax-entry .entry-project nav a,
+.parallax-entry .entry-footer a { font-size: 13px; }
+.parallax-entry .entry-footer { padding: 22px 0 34px; }
+.parallax-entry .entry-footer>span { color: #c3cfd0; font-size: 13px; font-weight: 650; letter-spacing: .12em; }
+.parallax-entry .entry-footer a { color: #b3c2c7; }
+
+/* Personal dashboard */
+body.immersive-dashboard #dashboard-journey[data-journey-mode="scroll"] { height: 200svh; }
+body.immersive-dashboard .journey-topline>span { color: #c1d3d7; font: 550 13px/1.5 var(--prlx-ui, system-ui); letter-spacing: .02em; }
+body.immersive-dashboard .journey-topline a,
+body.immersive-dashboard .journey-actions a { min-height: 44px; font-size: 14px; }
+body.immersive-dashboard .journey-chapters { top: 28%; }
+body.immersive-dashboard .journey-copy :is(h1,h2) { font-weight: 530; }
+body.immersive-dashboard .journey-lead { max-width: 39ch; font-size: 16px; line-height: 1.55; color: #d0dcdf; margin-block: 20px 25px; text-wrap: pretty; }
+body.immersive-dashboard .journey-actions .journey-primary,
+body.immersive-dashboard #watch-dashboard-tour { border-radius: 8px; }
+body.immersive-dashboard .journey-steps button { min-height: 44px; font-size: 14px; color: #afc1c8; }
+body.immersive-dashboard .journey-media-controls button { min-height: 44px; font-size: 12px; }
+body.immersive-dashboard .dashboard-destinations { padding: 34px 0 28px; scroll-margin-top: 74px; }
+body.immersive-dashboard .journey-section-heading { align-items: center; margin-bottom: 17px; }
+body.immersive-dashboard .journey-section-heading>a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; color: #c5edda; }
+body.immersive-dashboard .journey-section-heading>a span { margin-left: 9px; }
+body.immersive-dashboard .journey-destination-grid { gap: 10px; }
+body.immersive-dashboard .journey-destination-grid a {
+  padding: 16px!important;
+  gap: 6px;
+  border: 1px solid #2d3a41!important;
+  border-radius: 9px;
+  background: #121a20;
+}
+body.immersive-dashboard .journey-destination-grid a:hover { border-color: #749789!important; background: #18252a; }
+body.immersive-dashboard .journey-destination-grid strong { font-size: 18px; font-weight: 550; }
+body.immersive-dashboard .journey-destination-grid a>span:last-child { font-size: 14px; line-height: 1.45; color: #acbbc3; }
+body.immersive-dashboard .entry-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 30px 0 16px; }
+body.immersive-dashboard .entry-panel-heading .layout-summary { min-height: 0; margin: 4px 0 0; padding: 0; color: #a6b8bc; font-size: 13px; }
+body.immersive-dashboard .entry-panel-heading .layout-customize { min-height: 44px; border-radius: 8px; white-space: normal; font-size: 14px; }
+body.immersive-dashboard .dashboard-disclosure>summary { min-height: 62px; }
+body.immersive-dashboard #dashboard-panels .dashboard-hero { min-height: 0; display: grid; align-content: center; }
+body.immersive-dashboard #dashboard-panels .dashboard-hero .hero-copy { align-self: center; }
+body.immersive-dashboard .home-market-top { justify-content: flex-end; }
+
+@media (max-width: 800px) {
+  .parallax-entry .entry-lookup { grid-template-columns: 1fr; gap: 13px; }
+  .parallax-entry .entry-tool-grid { gap: 10px; }
+  .parallax-entry .entry-project { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (max-width: 720px) {
+  .parallax-entry .entry-hero { min-height: 355px; }
+  .parallax-entry .entry-hero-image { object-position: 59% 50%; }
+  .parallax-entry .entry-hero::after { background: linear-gradient(90deg, #071019de, #07101980 47%, #07101912), linear-gradient(0deg, #071019af, transparent 74%); }
+  .parallax-entry .entry-hero-inner { padding-block: 42px; }
+  .parallax-entry .entry-hero-copy h1 { font-size: clamp(52px, 11vw, 75px); }
+  .parallax-entry .entry-hero-copy p { max-width: 29ch; margin: 16px 0 0; }
+  .parallax-entry .entry-hero-actions { margin-top: 22px; gap: 8px; }
+  .parallax-entry .entry-hero-actions a { gap: 9px; padding: 10px 13px; }
+  .parallax-entry .entry-world-grid, .parallax-entry .entry-tool-grid { grid-template-columns: 1fr; }
+  .parallax-entry .entry-world { min-height: 211px; }
+  .parallax-entry .entry-atlas img { object-position: center 42%; }
+  .parallax-entry .entry-footer { align-items: start; flex-direction: column; gap: 2px; }
+  .parallax-entry .entry-footer nav { gap: 0 15px; }
+  body.immersive-dashboard .journey-topline { align-items: start; flex-wrap: wrap; gap: 6px; }
+  body.immersive-dashboard .journey-topline>span { display: none; }
+  body.immersive-dashboard .journey-tour-links { white-space: normal; }
+  body.immersive-dashboard .journey-topline a,
+  body.immersive-dashboard .journey-actions a,
+  body.immersive-dashboard .journey-steps button { font-size: 13px; }
+  body.immersive-dashboard .journey-chapters { top: 23%; }
+  body.immersive-dashboard .journey-lead { margin-block: 16px; font-size: 15px; }
+  body.immersive-dashboard [data-journey-mode="static"] .journey-chapters { top: auto; }
+  body.immersive-dashboard .journey-destination-grid strong { font-size: 16px; }
+  body.immersive-dashboard .journey-destination-grid a { padding: 12px!important; }
+  body.immersive-dashboard .entry-panel-heading { gap: 9px; }
+}
+@media (max-width: 430px) {
+  .parallax-entry .entry-search-field { padding-left: 10px; gap: 5px; }
+  .parallax-entry .entry-search-field svg { display: none; }
+  .parallax-entry .entry-search-field button { padding: 8px 11px; gap: 5px; }
+  .parallax-entry .hub-directory-grid { grid-template-columns: 1fr; }
+}
