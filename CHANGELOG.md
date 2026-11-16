@@ -1,5 +1,9 @@
 # Changelog
 
+## PARALLAX Multicam — v264
+
+PARALLAX Multicam lets creators align two recordings by sound, cut between cameras and export a highlight on their own device. [Release notes](docs/updates/multicam-2026-11-16.md) · [Exact source snapshot](platform-updates/multicam-2026-11-16/).
+
 ## PARALLAX homepage walkthrough — v263
 
 The PARALLAX homepage follows $PRLX from its Terminal chart to Atlas Station and the Parallax Singularity. [Release notes](docs/updates/prlx-journey-2026-11-16.md) · [Exact source snapshot](platform-updates/prlx-journey-2026-11-16/).
