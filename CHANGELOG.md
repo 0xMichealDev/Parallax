@@ -1,5 +1,9 @@
 # Changelog
 
+## PARALLAX Creator Tools navigation — v265
+
+Multicam is available in the Creator Tools section of Creator Studio. [Release notes](docs/updates/creator-tools-2026-11-16.md) · [Exact source snapshot](platform-updates/creator-tools-2026-11-16/).
+
 ## PARALLAX Multicam — v264
 
 PARALLAX Multicam lets creators align two recordings by sound, cut between cameras and export a highlight on their own device. [Release notes](docs/updates/multicam-2026-11-16.md) · [Exact source snapshot](platform-updates/multicam-2026-11-16/).

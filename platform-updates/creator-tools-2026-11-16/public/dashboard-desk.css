@@ -1,0 +1,124 @@
+/* Personal dashboard. The shared shell supplies the sidebar, navigation and page gutters. */
+body.workspace-shell.dashboard-desk {
+  --desk-bg: #0b1020;
+  --desk-panel: #131b2d;
+  --desk-rule: #354158;
+  --desk-ice: #edf3ff;
+  --desk-muted: #b6c3d9;
+  --desk-blue: #bdd1ff;
+  --desk-amber: #ffcb83;
+  color: var(--desk-ice);
+  background: var(--desk-bg) !important;
+}
+.dashboard-desk #main { background: var(--desk-bg); }
+.dashboard-desk .desk-heading,
+.dashboard-desk #dashboard-destinations,
+.dashboard-desk #dashboard-panel-heading,
+.dashboard-desk #dashboard-panels {
+  width: min(100%, 1500px);
+  margin-inline: auto;
+}
+.dashboard-desk .desk-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 28px;
+  padding-block: clamp(24px, 3.3vw, 52px) 24px;
+}
+.dashboard-desk .desk-heading h1 {
+  margin: 0;
+  color: var(--desk-ice);
+  font: 550 clamp(38px, 4.3vw, 70px)/1.07 var(--prlx-ui, Inter, system-ui, sans-serif);
+  letter-spacing: -.065em;
+}
+body.dashboard-desk .desk-heading .journey-topline {
+  position: static;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px clamp(12px, 1.4vw, 24px);
+}
+body.dashboard-desk .desk-heading .journey-topline a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  color: var(--desk-blue);
+  padding: 4px 0;
+  font: 550 14px/1.4 var(--prlx-ui, Inter, system-ui, sans-serif);
+  text-decoration: none;
+}
+body.dashboard-desk .desk-heading .journey-topline a:hover { color: white; text-decoration: underline; }
+body.dashboard-desk .desk-heading #watch-dashboard-tour {
+  gap: 8px;
+  padding-inline: 12px;
+  color: var(--desk-ice);
+  border: 1px solid #52607a;
+  border-radius: 5px;
+  background: #172137;
+}
+body.dashboard-desk #dashboard-destinations { padding: 24px 0 28px; border-color: var(--desk-rule); }
+body.dashboard-desk .journey-section-heading h2,
+body.dashboard-desk .entry-panel-heading h2 { color: var(--desk-ice); }
+body.dashboard-desk .journey-section-heading > a,
+body.dashboard-desk .journey-destination-grid b { color: var(--desk-blue); }
+body.dashboard-desk .journey-destination-grid a {
+  border-color: var(--desk-rule) !important;
+  background: var(--desk-panel);
+  color: var(--desk-ice);
+}
+body.dashboard-desk .journey-destination-grid a:hover {
+  border-color: #8ca4d0 !important;
+  background: #1d2940;
+}
+body.dashboard-desk .journey-destination-grid a > span:last-child,
+body.dashboard-desk .entry-panel-heading .layout-summary { color: var(--desk-muted); }
+body.dashboard-desk #layout-customize { color: var(--desk-blue); border-color: #536789; background: #16233c; }
+body.dashboard-desk #dashboard-panels :is(.dashboard-hero, .home-market, .dashboard-disclosure) {
+  border-color: var(--desk-rule) !important;
+  background-color: var(--desk-panel) !important;
+}
+body.dashboard-desk #dashboard-panels .dashboard-disclosure > summary { color: var(--desk-ice); }
+body.dashboard-desk #dashboard-panels .hero-research-field button { color: #15203a; background: var(--desk-blue); }
+.dashboard-desk :is(#dashboard-panel-heading, #dashboard-journey, #official-token) { scroll-margin-top: 76px; }
+.dashboard-desk :is(.desk-heading, .desk-flight-navigation) a:focus-visible,
+.dashboard-desk :is(#dashboard-panel-heading, #dashboard-journey, #dashboard-destinations):focus-visible {
+  outline: 3px solid var(--desk-amber);
+  outline-offset: 3px;
+}
+body.dashboard-desk #dashboard-journey { margin-top: 32px; border-block: 1px solid var(--desk-rule); }
+body.dashboard-desk #dashboard-journey[data-journey-mode="scroll"] { height: 170svh; }
+body.dashboard-desk [data-journey-mode="scroll"] .journey-stage { height: clamp(520px, 74svh, 740px); }
+.dashboard-desk .desk-flight-navigation {
+  position: absolute;
+  z-index: 1;
+  inset: 18px 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.dashboard-desk .desk-flight-navigation a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  color: #e6efff;
+  font: 550 13px/1.4 var(--prlx-ui, Inter, system-ui, sans-serif);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+body.dashboard-desk .journey-copy em { color: var(--desk-blue); }
+body.dashboard-desk [data-journey-mode="scroll"] .journey-chapters { top: 19%; }
+body.dashboard-desk .journey-actions .journey-primary { color: #162139; background: var(--desk-blue); border-color: var(--desk-blue); }
+body.dashboard-desk .journey-progress span { background: var(--desk-amber); }
+
+@media (max-width: 720px) {
+  .dashboard-desk .desk-heading { gap: 3px 18px; padding-block: 21px 14px; }
+  body.dashboard-desk .desk-heading .journey-topline { gap: 2px 13px; }
+  body.dashboard-desk .desk-heading .journey-topline a { font-size: 13px; }
+}
+@media (max-width: 540px) {
+  .dashboard-desk .desk-flight-navigation { inset: 12px 22px auto; }
+  body.dashboard-desk .journey-section-heading h2 { font-size: 24px; }
+}

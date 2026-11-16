@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101119">
+<title>Multicam — PARALLAX</title>
+<meta name="description" content="Sync two recordings of the same moment by sound. Cut between cameras and export your edit in your browser.">
+<meta property="og:title" content="PARALLAX Multicam">
+<meta property="og:description" content="Two cameras. One cut. Sync by sound and edit a two-angle highlight on your device.">
+<meta property="og:image" content="https://parallaxlaunch.live/assets/multicam/still.webp">
+<meta property="og:url" content="https://parallaxlaunch.live/multicam">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://parallaxlaunch.live/multicam">
+<link rel="icon" href="/favicon.svg">
+<link rel="stylesheet" href="/multicam.css?v=1">
+</head>
+<body>
+<a class="workspace-skip" href="#main">Skip to editor</a>
+<header class="mast"><div class="mast-inner"><a href="/" class="brand" aria-label="Parallax home"><img alt="" src="/favicon.svg" width="29" height="29"> PARALLAX</a><span class="mast-slash" aria-hidden="true">/</span><span>Multicam</span><a href="/studio#creator-tools" class="dash-link">Creator tools <span aria-hidden="true">↗</span></a></div></header>
+<main id="main" tabindex="-1">
+  <header class="titlebar">
+    <div><h1>Multicam<span aria-hidden="true">.</span></h1><p>Two cameras. One soundtrack. Cut a highlight from two recordings of the same moment.</p></div>
+    <div class="start-actions"><button id="mc-sample" type="button" class="sample primary">Try the rendered gong demo <span aria-hidden="true">↗</span></button><a href="#sources">Use my clips</a></div>
+  </header>
+  <noscript><p class="notice">Enable JavaScript to use the video editor.</p></noscript>
+  <div class="edit-grid">
+    <section class="program pane" aria-labelledby="mc-program-title">
+      <div class="pane-head"><h2 id="mc-program-title">Program monitor</h2><span id="mc-current-angle">Camera A</span></div>
+      <div class="monitor-well"><div id="mc-monitor" data-format="landscape">
+        <img class="monitor-poster" src="/assets/multicam/still.webp" width="480" height="270" alt="Rendered sample footage for the two-camera demo">
+        <video id="mc-video-a" playsinline preload="metadata" hidden aria-label="Camera A preview"></video>
+        <video id="mc-video-b" playsinline preload="metadata" hidden aria-label="Camera B preview"></video>
+      </div></div>
+      <div class="transport"><button type="button" id="mc-play" disabled>Play</button><label class="sr" for="mc-scrub">Playhead</label><input id="mc-scrub" type="range" min="0" max="0" step="0.01" value="0" disabled><output id="mc-clock" for="mc-scrub">0:00</output></div>
+      <div class="switch-head"><h3>Cut to camera</h3><span>At the playhead</span></div>
+      <div class="switches"><button type="button" id="mc-cut-a" disabled><b aria-hidden="true">A</b>Camera A</button><button type="button" id="mc-cut-b" disabled><b aria-hidden="true">B</b>Camera B</button></div>
+    </section>
+    <section class="sources pane" id="sources" tabindex="-1" aria-labelledby="mc-source-title"><div class="pane-head"><h2 id="mc-source-title">Source clips</h2></div>
+      <p>Choose two videos with sound from the same event. Files stay on this device.</p>
+      <label class="source"><span class="letter">A</span><span class="source-meta"><strong>Camera A</strong><small id="mc-name-a">Main soundtrack</small></span><span class="choose">Choose clip</span><input type="file" accept="video/*" id="mc-file-a" aria-label="Choose Camera A clip"></label>
+      <label class="source"><span class="letter">B</span><span class="source-meta"><strong>Camera B</strong><small id="mc-name-b">Second angle</small></span><span class="choose">Choose clip</span><input type="file" accept="video/*" id="mc-file-b" aria-label="Choose Camera B clip"></label>
+      <button type="button" id="mc-sync" class="sync" disabled>Sync by sound</button>
+      <p id="mc-sync-status" role="status" class="feedback"></p>
+      <details class="fine"><summary>Adjust sync manually</summary><label for="mc-offset">Camera B start relative to A (seconds)</label><input type="number" step=".01" value="0" id="mc-offset"><p>Use a positive value when B started later.</p></details>
+      <p class="feedback" role="status" id="mc-status"></p>
+    </section>
+    <section class="edl pane" aria-labelledby="mc-edits-title"><div class="pane-head"><h2 id="mc-edits-title">Cut list</h2><div class="cut-actions"><button type="button" id="mc-undo" disabled>Undo</button><button type="button" id="mc-reset" disabled>Reset cuts</button></div></div>
+      <ol id="mc-cuts" aria-label="Cuts in playback order"></ol>
+    </section>
+    <section class="export pane" aria-labelledby="mc-export-title"><div class="pane-head"><h2 id="mc-export-title">Export clip</h2><span id="mc-duration">Up to 30 seconds</span></div>
+      <div class="output-fields"><label>Frame<select id="mc-format"><option value="landscape">Landscape · 16:9</option><option value="portrait">Portrait · 9:16</option></select></label><label>Start (s)<input id="mc-clip-start" type="number" min="0" step=".1" value="0"></label><label>Length (s)<input id="mc-clip-length" type="number" min=".1" max="30" step=".1" value="30"></label></div>
+      <div class="export-actions"><button type="button" id="mc-export" class="primary" disabled>Export video</button><button type="button" id="mc-cancel" hidden>Cancel export</button><a id="mc-download" hidden download>Download clip</a></div>
+      <p id="mc-export-status" role="status" class="feedback"></p>
+    </section>
+  </div>
+</main>
+<script type="module" src="/multicam-editor.mjs?v=1"></script>
+</body></html>

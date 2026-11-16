@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "latestRelease": "multicam-2026-11-16",
+  "latestRelease": "creator-tools-2026-11-16",
   "releases": [
     {
       "id": "worlds-expeditions-2026-10-28",
@@ -169,6 +169,10 @@
     {
       "id": "multicam-2026-11-16",
       "manifest": "platform-updates/multicam-2026-11-16/PUBLIC-SYNC.json"
+    },
+    {
+      "id": "creator-tools-2026-11-16",
+      "manifest": "platform-updates/creator-tools-2026-11-16/PUBLIC-SYNC.json"
     }
   ]
 }
